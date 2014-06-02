@@ -97,12 +97,12 @@ function! s:convert(f) abort
   let fname = "_posts/" . date . "-" . short . ".html"
   let fname = substitute(fname, '--*', '-', "g")
   let fname = substitute(fname, '-\.html$', '.html', "g")
-  let title = substitute(title, ': ', '', 'g')
-  let title = substitute(title, '[#\[\]]', '\="&#".char2nr(submatch(0)).";"', 'g')
+  "let title = substitute(title, ': ', '', 'g')
+  "let title = substitute(title, '[#\[\]]', '\="&#".char2nr(submatch(0)).";"', 'g')
   let lines = [
   \  "---",
   \  "layout: post",
-  \  printf("title: %s", title),
+  \  printf("title: \"%s\"", title),
   \  printf("date: %s", date),
   \  printf("author: %s", author),
   \  "---",
