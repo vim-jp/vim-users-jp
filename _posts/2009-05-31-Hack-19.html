@@ -1,0 +1,55 @@
+---
+layout: post
+title: Hack #19:#58; Command-line mode補完　導入編
+date: 2009-05-31
+author: Shougo
+---
+<p>Insert mode補完をマスターした後は、Command-line modeにおける補完機能についても習熟しましょう。導入編の本Hackでは、基本的なCommand-line mode補完について解説します。Command-line mode補完についての詳しい解説は<code class="vim-script">:help cmdline-completion</code>を参照してください。</p>
+
+<dl>
+<dt>Command-line modeで補完できる要素</dt>
+<dd>Command-line modeでは状況に応じ、次のような要素を補完することができます。ちなみに補完できないときは、<kbd>^I</kbd>が入力されます。
+<li>コマンド名
+<ul>Command-line modeの先頭で補完した場合。現在定義されているもののみが有効です。</ul>
+</li>
+<li>コマンドの引数
+<ul>コマンドの後で補完した場合。補完される要素はコマンドにより異なります。</ul>
+</li>
+<li>ファイル名
+<ul><code class="vim-script">:edit</code>コマンドの後で補完した場合。</ul>
+</li>
+<li>オプション名
+<ul><code class="vim-script">:set</code>や<code class="vim-script">:setlocal</code>コマンドの後で補完した場合。</ul>
+</li>
+<li>Key-mappings
+<ul><code class="vim-script">:map</code>系のコマンドの後で補完した場合。</ul>
+</li>
+<li>変数名や関数名
+<ul><code class="vim-script">:if</code>や<code class="vim-script">:call</code>などのコマンドの後で補完した場合。ただし、<code class="vim-script">hoge#piyo</code>のように、名前に#が含まれていると、うまく補完できません。</ul>
+</li>
+<li>シェルコマンド名
+<ul><code class="vim-script">:!cmd</code>など、シェルを使用するコマンドの後で補完した場合。$PATH中のファイルをすべて認識しているようです。</ul>
+</li>
+<li>ヘルプ
+<ul><code class="vim-script">:help</code>コマンドの後で補完した場合。日本語版のヘルプなら後ろに@ja、英語版のヘルプなら後ろに@enが付きます。</ul>
+</li>
+<li>タグ名
+<ul><code class="vim-script">:tag</code>コマンドの後で補完した場合。</ul>
+</li>
+<li>オプションの設定された値
+<ul><code class="vim-script">:set option_name=</code>の後で補完した場合。</ul>
+</li>
+</dd>
+
+<dd>また、Command-line mode補完では以下のキー操作が有効になります。<dl>
+<dt><kbd>&lt;C-d&gt;</kbd></dt> <dd>カーソル位置より前のパターンに一致する名前を一覧表示します。ディレクトリがマッチするときは強調表示されます。</dd>
+<dt><code class="option">'wildchar'</code>で指定されたキー</dt> <dd>カーソル位置より前にあるパターンに一致する単語を検索し、最初にマッチするものを挿入します。再度押すと、次にマッチするものを挿入します。最後のマッチの後には、最初のマッチが使われます。<code class="option">'wildchar'</code>の規定値は<kbd>&lt;TAB&gt;</kbd>です。</dd>
+<dt><kbd>&lt;C-n&gt;</kbd></dt> <dd><code class="option">'wildchar'</code>を使った場合は次のマッチを挿入します。それ以外の時は、より次に使ったコマンドラインの履歴を呼び出します。</dd>
+<dt><kbd>&lt;C-p&gt;</kbd>または<kbd>&lt;S-Tab&gt;</kbd></dt> <dd><code class="option">'wildchar'</code>を使った場合は前のマッチを挿入します。それ以外の時は、より前に使ったコマンドラインの履歴を呼び出します。</dd>
+<dt><kbd>&lt;C-a&gt;</kbd></dt> <dd>カーソル前のパターンに一致する名前を全て挿入します。</dd>
+<dt><kbd>&lt;C-l&gt;</kbd></dt> <dd>カーソル位置より前のパターンに一致する単語の共通部分を挿入します。マッチするものが1個の場合はそれが挿入されます。</dd>
+</dl></dd>
+<dd>パターン内ではワイルドカードとして &#8216;*&#8217; と &#8216;?&#8217; が使用できます。&#8217;*&#8217; はあらゆる文字に一致し、&#8217;?&#8217; は一文字に一致します。</dd>
+</dl>
+
+<address class="hack-author">Shougo</address>

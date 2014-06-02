@@ -1,0 +1,40 @@
+---
+layout: post
+title: Hack #107:#58; Vimでマウスを使用する
+date: 2009-12-07
+author: Shougo
+---
+<p>Vimはキーボードから手を外さずに操作が行えるので、慣れると大変便利です。しかし、時にはマウスを使いたいときもあることでしょう。ここではVimでマウスを使用するための設定法を説明します。</p>
+
+<h2>設定</h2>
+
+<pre>
+" Enable mouse support.
+set mouse=a
+
+" For screen.
+if &amp;term =~ "^screen"
+augroup MyAutoCmd
+autocmd VimLeave * :set mouse=
+augroup END
+
+" screenでマウスを使用するとフリーズするのでその対策
+set ttymouse=xterm2
+endif
+
+if has('gui_running')
+" Show popup menu if right click.
+set mousemodel=popup
+
+" Don't focus the window when the mouse pointer is moved.
+set nomousefocus
+" Hide mouse pointer on insert mode.
+set mousehide
+endif
+</pre>
+
+<p>
+<code class="vim-script">set mouse=a</code>の記述により、マウスが使用できる全てのモードでマウスサポートを有効にします。これはGVimだけでなく、Vimでも有効です。GUIのVimでは右クリックでポップアップメニューを表示できるため、その設定もしています。
+</p>
+
+<address class="hack-author">Shougo</address>

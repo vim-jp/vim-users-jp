@@ -1,0 +1,57 @@
+---
+layout: post
+title: Hack #64:#58; 256色ターミナルでVimを使用する
+date: 2009-08-29
+author: Shougo
+---
+<p>ターミナル上のVimはGVimよりも機能が制限される上に、動作が重くて使いにくいものです。しかしリモートログインでVimを使用している、screenと連携できる、シェル呼び出しが使いやすいなどの理由でGVimを使っていない人も数多くいると思います。ここではターミナルのVimを使いやすくするために、Vimを256色ターミナルに対応させる方法を解説します。</p>
+
+<h2>ターミナル上のVimの色数制限</h2>
+
+<p>
+GVimは24ビットカラーでハイライトすることができるので画面が美しいのですが、ターミナル上のVimは何も設定しないと16色しか扱えないので見劣りします。これはターミナルが従来16色しかサポートしていなかったためです。しかし最近ではGNOME TerminalやKonsole、Putty、TeraTermを筆頭として、256色扱えるターミナルが登場しています。その他のターミナルでも、パッチを当てると256色に対応できるものもあります。残念ながらWindowsのターミナルは対応していません。
+</p>
+
+<h2>Vimに追加する設定</h2>
+
+<p>
+Vimへの設定は簡単で、<code class="vim-script">set t_Co=256</code>を追加するだけです。ただし、<code class="vim-script">colorscheme</code>コマンドを実行する前に設定する必要があります。
+</p>
+
+<h2>GNU Screenを併用している場合</h2>
+
+<p>
+GNU Screen上でVimを256色対応させたい場合、少しややこしくなります。.screenrcに以下のような設定を追加しなければなりません。さらにGNU Screenが256色対応でコンパイルされている必要もあります。Ubuntu 9.04などでは標準配布のscreenをインストールすれば大丈夫ですが、ディストリビューションで配布されているscreenが256色対応でコンパイルされていない場合、自分でコンパイル・インストールしなければなりません。
+<pre>
+attrcolor b ".I"
+termcapinfo xterm 'Co#256:AB=\E[48;5;%dm:AF=\E[38;5;%dm'
+defbce on
+</pre>
+Macだと上記の設定ではうまく動作しないので、次のように設定します。
+<pre>
+term xterm-256color
+termcapinfo xterm-256color 'is=^[r^[mJ^[H^[?7h^[?1;4;6l'
+</pre>
+Macの場合、screenの256色対応のためにコンパイルする必要がありますが、パッチを当てないとエラーになるので、かなりややこしいです。<a href="http://d.hatena.ne.jp/milk1000cc/20090205/1233792728">次のサイト</a>を参考にすると良いでしょう。
+ターミナルやscreenが256色に対応できるようになったかどうかは、<a href="http://frexx.de/xterm-256-notes/data/256colors2.pl">256colors2.pl</a>を実行すると楽に確認できます。
+</p>
+
+<h2>256色対応のColorSchemeを手に入れる</h2>
+
+<p>
+256色対応の設定をしたとしても、VimのColorSchemeが16色だったら今までと何ら表示が変わりません。これでは悲しいので、www.vim.orgから256色対応のColorSchemeファイルを手に入れましょう。しかし、いちいちColorSchemeを検索するのは面倒です。そのような場合、<a href="http://www.vim.org/scripts/script.php?script_id=1809">guicolorscheme</a>や<a href="http://www.vim.org/scripts/script.php?script_id=2390">CSApprox.vim</a>といったGVim用のColorSchemeを256色に変換してくれるプラグインを併用すると便利です。CSApprox.vimは+GUIの環境でしか動きませんが、実際に適用されたハイライト情報を解析するので、guicolorschemeより断然美しいです。
+</p>
+
+<h2>guicolorscheme.vimの使い方</h2>
+
+<p>
+使い方は簡単で、<code class="vim-script">:colorscheme {color_name}</code>の代わりに<code class="vim-script">:GuiColorScheme {color_name}</code>を使うだけです。ただし、ColorSchemeによっては動かないこともあります。
+</p>
+
+<h2>CSApprox.vimの使い方</h2>
+
+<p>
+こちらはさらに簡単で、普通に<code class="vim-script">:colorscheme {color_name}</code>を使うだけです。autocmdでフックをかけているので、ColorSchemeが自動的に変換され、Vimに適用されます。
+</p>
+
+<address class="hack-author">Shougo</address>

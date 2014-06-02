@@ -1,0 +1,118 @@
+---
+layout: post
+title: Hack #49:#58; 自動補完を活用する　後編
+date: 2009-07-30
+author: Shougo
+---
+<p>自動補完の後編では、究極の自動補完環境であるneocomplcacheについて解説します。何でもできるエディタとしてはEmacsが有名ですが、スクリプトファイルで拡張すれば、Vimにも無限の可能性があるということを知ってもらいたいです。</p>
+
+<h2>neocomplcacheを用いた自動補完</h2>
+
+<p><a href="http://www.vim.org/scripts/script.php?script_id=2620">neocomplcache</a>という自動補完プラグインを紹介します。このプラグインはAutoComplPopに不満が出てきたので、最強の自動補完環境を作ろうと、私Shougoが作成したプラグインです。補完処理を全て自前で実装しているので、AutoComplPopと比較して動作が重いですが、AutoComplPopにはない究極のカスタマイズ性や、文脈を読む補完、プラグインにより独自拡張が可能なことが特徴となっています。最新版はVer.4.00です（2009年12月12日現在）。</p>
+
+<h2>neocomplcacheのインストール</h2>
+
+<p>githubにある<a href="http://github.com/Shougo/neocomplcache/tarball/master">配布ファイル</a>をVimのユーザディレクトリにインストールします。Windowsの場合は$VIM/vimfiles/、MacやLinuxの場合は$HOME/.vim/が一般的です。最近はファイルが増えてきたため、フォルダごとコピーした方がよいでしょう。<a href="http://www.vim.org/scripts/script.php?script_id=2620">vim.org</a>にもneocomplcacheは登録されていますが、最新版はgithubにあります。</p>
+
+<h2>neocomplcacheの使い方</h2>
+
+<p>neocomplcacheはAutoComplPopと競合するので、AutoComplPopをインストールしている場合には、まず<code class="option">g:acp_enableAtStartup</code>を1に設定し、AutoComplPopの自動起動を無効にしてください。自動起動を無効にした場合も、<code class="vim-script">:ACPEnable</code>コマンドを実行すれば、AutoComplPopを使用することができます。不具合を避けるため、neocomplcacheは自動的に起動しません。<code class="vim-script">let g:NeoComplCache_EnableAtStartup = 1 </code>と設定すると、Vimの起動時に自動的に有効になります。 手動で有効にしたいときには、<code class="vim-script">:NeoComplCacheEnable</code>を実行してください。<code class="vim-script">:NeoComplCacheDisable</code>で無効になります。</p>
+
+<h2>neocomplcacheの代表的機能</h2>
+
+<p>neocomplcacheは後発なだけあって、多数の機能を統合しています。ここでは特に便利だと思われる機能に絞って紹介します。</p>
+
+<h3>多数の言語に対応</h3>
+
+<p>VimScript, Perl, Ruby, C/C++, D, Lispなど、標準的に多数の言語のキーワードに対応しています。特にVimScriptは作者が日常的に使用していることもあり、細かな補完ができます。設定すれば、他の言語に対応させることももちろん可能です。<code class="option">'iskeyword'</code>には依存しないので、他のプラグインに影響を与えることもありません。</p>
+
+<h3>文脈を解析する補完</h3>
+
+<p>最近のかな漢字変換システムのように、あるワードの後に何が来るかを細かく判定して、補完候補の順番に反映させます。例えばcallの後には関数名が来やすいと言うことを判定するので、補完効率が上がります。</p>
+
+<h3>拡張されたオムニ補完</h3>
+
+<p>AutoComplPopのように、ファイルタイプに応じてオムニ補完を自動的に呼び出すことができます。AutoComplPopとは違い、C/C++, Java, PHPのオムニ補完にも対応。設定を変更することで、他のオムニ補完プラグインに対応することも可能です。</p>
+
+<h3>ファイル名補完</h3>
+
+<p>AutoComplPopのように、自動的に呼び出すファイル名補完に対応しています。しかも自前で実装しているので、連続した補完や時間がかかるときに補完をスキップするといった機能も搭載しています。
+<br /><a href="http://vim-users.jp/wp-content/uploads/filename_completion.PNG"><img /vim-users-jp/assets/images/filename_completion.PNG" alt="filename_completion" title="filename_completion" width="354" height="383" class="alignnone size-full wp-image-729" /></a></p>
+
+<h3>クイックマッチ</h3>
+
+<p>-記号を入力すると、補完候補の横に英数字が出てくるので、それを入力することによって、簡単に候補を選択できます。<kbd>&lt;C-n&gt;</kbd>を連打する必要がないので便利です。</p>
+
+<h3>ワイルドカードによる補完</h3>
+
+<p>&#8220;h＊ge&#8221;のように、＊を使って候補を絞り込むことができます。候補が多数出てくるときに便利です。</p>
+
+<h3>スニペット補完</h3>
+
+<p>snipMateライクなスニペット補完に対応しています。自動的に補完が出てくるので、他のプラグインのようにスニペットをいちいち覚える必要がありません。スニペットを追加することも簡単です。<br />
+<a href="http://vim-users.jp/wp-content/uploads/snippet_complete.PNG"><img /vim-users-jp/assets/images/snippet_complete.PNG" alt="snippet_complete" title="snippet_complete" width="657" height="328" class="alignnone size-full wp-image-691" /></a></p>
+
+<h3>シンタックス補完</h3>
+
+<p>標準的に付属しているautoload/syntaxcomplete.vimのように、シンタックスキーワードを自動的に収集、補完候補として加える機能があります。辞書ファイルを用意しなくても補完ができるので便利です。<br /><a href="http://vim-users.jp/wp-content/uploads/syntax_complete.PNG"><img /vim-users-jp/assets/images/syntax_complete.PNG" alt="syntax_complete" title="syntax_complete" width="416" height="502" class="alignnone size-full wp-image-692" /></a></p>
+
+<h3>ATOK X3やuimにも対応</h3>
+
+<p>AutoComplPopにはATOK X3やuimをGVim上で使用すると暴走するバグがありますが、neocomplcacheでは対策されているので、そのような問題は発生しません。VimをATOK X3に対応させる方法については、<em>[Hack #79]: ATOK X3をGVimで使用する</em>を参照してください。</p>
+
+<h3>ストレスにならない動作</h3>
+
+<p>自動補完は候補が出てくる速度が遅いと、大変なストレスになります。neocomplcacheでは自動補完に時間がかかりすぎるようなら計算をストップします。これによりストレスが軽減されます。</p>
+
+<h3>プラグインによる拡張</h3>
+
+<p>機能が分離されているので、Emacsのanything.elやauto-complete.elのように、プラグインで簡単に拡張することができます。実際にスニペット補完やシンタックス補完はプラグインで実装されています。自作プラグインによる拡張方法については、<em>[Hack #93: ]neocomplcacheを拡張する　前編</em>を参照してください。</p>
+
+<h3>VimScriptの補完</h3>
+
+<p>VimScriptのオムニ補完を自前で実装しています。ローカル変数を動的に解析する機能も備え、標準のVimScript補完と比べても便利です。</p>
+
+<h2>neocomplcacheの設定</h2>
+
+<p>以下に私の設定ファイルを紹介します。neocomplcacheには多数の設定オプションがあるので、ここで一つずつ解説することはしません。詳しくはヘルプを参照してください。</p>
+
+<pre>
+" Use neocomplcache.
+let g:NeoComplCache_EnableAtStartup = 1
+" Use smartcase.
+let g:NeoComplCache_SmartCase = 1
+" Use camel case completion.
+let g:NeoComplCache_EnableCamelCaseCompletion = 1
+" Use underbar completion.
+let g:NeoComplCache_EnableUnderbarCompletion = 1
+" Set minimum syntax keyword length.
+let g:NeoComplCache_MinSyntaxLength = 3
+" Set manual completion length.
+let g:NeoComplCache_ManualCompletionStartLength = 0
+
+" Print caching percent in statusline.
+"let g:NeoComplCache_CachingPercentInStatusline = 1
+
+" Define dictionary.
+let g:NeoComplCache_DictionaryFileTypeLists = {
+\ 'default' : '',
+\ 'vimshell' : $HOME.'/.vimshell_hist',
+\ 'scheme' : $HOME.'/.gosh_completions',
+\ 'scala' : $DOTVIM.'/dict/scala.dict',
+\ 'ruby' : $DOTVIM.'/dict/ruby.dict'
+\ }
+
+" Define keyword.
+if !exists('g:NeoComplCache_KeywordPatterns')
+let g:NeoComplCache_KeywordPatterns = {}
+endif
+let g:NeoComplCache_KeywordPatterns['default'] = '\v\h\w*'
+
+let g:NeoComplCache_SnippetsDir = $HOME.'/snippets'
+</pre>
+
+<h2>neocomplcacheをさらに使いこなすために:</h2>
+
+<p>neocomplcacheには日本語のヘルプが付属しています。<code class="vim-script">:help neocomplcache</code>をすれば設定可能なオプション等が一覧できます。体系的な解説が欲しい場合は、<a href="http://github.com/Shougo/neocomplcache/tree/master">プレゼンテーションファイル</a>を参照してください。新機能が追加された場合、こまめに更新しています。</p>
+
+<address class="hack-author">Shougo</address>

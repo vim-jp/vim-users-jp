@@ -1,0 +1,78 @@
+---
+layout: post
+title: Hack #89:#58; 自動補完をさらに使いこなす
+date: 2009-10-18
+author: Shougo
+---
+<p><em>[Hack #49: ]自動補完を活用する　後編</em>ではneocomplcacheの基本的な特徴について解説しました。ここではneocomplcacheの良くある質問について簡単に回答しようと思います。設定の参考になれば幸いです。</p>
+
+<h2>neocomplcacheで辞書補完をするには？</h2>
+
+<p>辞書ファイルへのパスは、変数<code class="vim-script">g:NeoComplCache_DictionaryFileTypeLists</code>に格納されています。
+パスを設定すれば、ファイルを開いたときに自動的に読み込まれます。
+例えば、私は次のように設定しています。defaultはファイルタイプに関係なく参照される辞書ファイルです。</p>
+
+<pre>
+let g:NeoComplCache_DictionaryFileTypeLists = {
+\ 'default' : '',
+\ 'vimshell' : $HOME.'/.vimshell_hist',
+\ 'scheme' : $HOME.'/.gosh_completions'
+\ }
+</pre>
+
+<p></p></p>
+
+<h2>自動補完が重い</h2>
+
+<p><code class="vim-script">g:NeoComplCache_KeywordCompletionStartLength</code>の値を増やすか、<code class="vim-script">g:NeoComplCache_SkipCompletionTime</code>を増やす（例えば&#8217;0.3&#8242;）と少しイライラが解消されるでしょう。あまりやりすぎると、なかなか自動補完の候補が出なくなります。基本的には自動補完は重い処理なので、あまり性能の低いPCで有効にするものではありません。</p>
+
+<h2>Insertmodeでカーソル移動すると補完されて大変</h2>
+
+<p>この現象は、autocomplpop.vimでも起こります。neocomplcacheやautocomplpopは挿入モードでのカーソル位置移動をトリガーとして、補完候補をポップアップするようになっているからです。計算中にキー入力が続くと、neocomplcacheは補完をスキップしますが、挿入モードでカーソルキーを使うこと自体、Vimの使用方法として間違っています。</p>
+
+<h2>neocomplcacheでスニペット補完を使用するには？</h2>
+
+<p>まずはスニペットの展開にKey-mappingを割り当ててください。初期状態ではどのキーにも割り当てられていません。
+スニペットのトリガーを補完するか直接入力してから、割り当てたスニペットの展開キーを押すことで展開されます。
+展開キーを連打すると、プレースホルダの移動になります。</p>
+
+<pre>
+imap &lt;silent&gt;L     &lt;Plug&gt;(neocomplcache_snippets_expand)
+smap &lt;silent&gt;L     &lt;Plug&gt;(neocomplcache_snippets_expand)
+</pre>
+
+<h2>オムニ補完が重い</h2>
+
+<p>オムニ補完のためのキーワード設定は、変数<code class="vim-script">g:NeoComplCache_OmniPatterns</code>に格納されています。
+ファイルタイプをキーとしているので、無効にしたいファイルタイプの正規表現を空にするとオムニ補完が呼ばれなくなります。
+例えば、htmlのオムニ補完を無効にするためには、次のようにします。</p>
+
+<pre>
+let g:NeoComplCache_OmniPatterns['html'] = ''
+</pre>
+
+<h2>他のプログラミング言語にも対応させたい</h2>
+
+<p>補完するためのキーワードの設定は、変数<code class="vim-script">g:NeoComplCache_KeywordPatterns</code>に格納されています。
+ファイルタイプをキーとして、キーワードにマッチする正規表現を設定すれば、任意のプログラミング言語に対応します。</p>
+
+<h2>Vimのファイル名補完やオムニ補完の呼び出しをneocomplcache組み込みのものに置き換えたい</h2>
+
+<p>neocomplcacheに組み込まれているファイル名補完やオムニ補完は、クイックマッチや補完スキップに対応するなど、細かな部分で改良されています。
+Vim標準の補完呼び出しを置き換えるためには、次のようにKey-mappingを定義します。</p>
+
+<pre>
+inoremap &lt;expr&gt;&lt;C-x&gt;&lt;C-f&gt;  neocomplcache#manual_filename_complete()
+inoremap &lt;expr&gt; &lt;C-j&gt;  &amp;filetype == 'vim' ? "\&lt;C-x&gt;\&lt;C-v&gt;\&lt;C-p&gt;" : neocomplcache#manual_omni_complete()
+</pre>
+
+<h2>Vimで巨大なファイルを開くと、キャッシュ生成で待たされる</h2>
+
+<p>neocomplcacheはファイル読み込みを監視し、新たなファイルを開くと、自動的にキーワードをキャッシュするようになっています。
+巨大なファイルの場合、このキャッシュを生成する動作が邪魔になることがあります。<code class="vim-script">g:NeoComplCache_CachingLimitFileSize</code>の値を調節することで、巨大なファイルはキャッシュしないように設定することが可能です。初期値は1000000となっているので、約1メガバイト以上のファイルはキャッシュしません。手動でキャッシュさせるには、<code class="vim-script">:NeoComplCacheCachingBuffer</code>コマンドを使用します。</p>
+
+<h2>補完がおかしい、クイックマッチが効かない</h2>
+
+<p><code class="vim-script">completeopt</code>に問題があるのだと思います。補完動作がおかしくなるので、longestやmenuは指定しないでください。お勧めはmenuoneを指定することです。クイックマッチが正しく動作するようになります。previewを追加するかどうかはお好みで。</p>
+
+<address class="hack-author">Shougo</address>

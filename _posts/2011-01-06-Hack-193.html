@@ -1,0 +1,63 @@
+---
+layout: post
+title: Hack #193:#58; neocomplcacheの設定について知る　後編
+date: 2011-01-06
+author: Shougo
+---
+<p>後編では残りの設定について解説をします。</p>
+
+<h2>設定例</h2>
+
+<pre>
+" Shell like behavior(not recommended).
+"set completeopt+=longest
+"let g:neocomplcache_enable_auto_select = 1
+"let g:neocomplcache_disable_auto_complete = 1
+"inoremap &lt;expr&gt;&lt;TAB&gt;  pumvisible() ? "\&lt;Down&gt;" : "\&lt;TAB&gt;"
+"inoremap &lt;expr&gt;&lt;CR&gt;  neocomplcache#smart_close_popup() . "\&lt;CR&gt;"
+
+" Enable omni completion.
+autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+
+" Enable heavy omni completion.
+if !exists('g:neocomplcache_omni_patterns')
+let g:neocomplcache_omni_patterns = {}
+endif
+let g:neocomplcache_omni_patterns.ruby = '[^. *\t]\.\w*\|\h\w*::'
+"autocmd FileType ruby setlocal omnifunc=rubycomplete#Complete
+</pre>
+
+<h2>Shell like behavior(not recommended).</h2>
+
+<h3>set completeopt+=longest</h3>
+
+<h3>let g:neocomplcache_enable_auto_select = 1</h3>
+
+<h3>let g:neocomplcache_disable_auto_complete = 1</h3>
+
+<h3>inoremap &lt;expr&gt;&lt;TAB&gt;  pumvisible() ? &#8220;\&lt;Down&gt;&#8221; : &#8220;\&lt;TAB&gt;&#8221;</h3>
+
+<h3>inoremap &lt;expr&gt;&lt;CR&gt;  neocomplcache#smart&#95;close&#95;popup() . &#8220;\&lt;CR&gt;&#8221;</h3>
+
+<p>neocomplcacheをShellのような手動補完をするようにする設定です。
+(not recommended)という文面からも分かる通り、オススメの設定ではありません。
+要望が来たので対応させて、設定例として書いたものです。
+これを設定すると自動補完が無効になる点に注意してください。</p>
+
+<h2>&#8221; Enable omni completion.</h2>
+
+<p>ここは、Vimに用意されているオムニ補完を有効化するものです。すでに設定されている場合は必要ありません。
+neocomplcacheからオムニ補完を呼びたい場合には必要になります。
+オムニ補完関数を設定するだけでは実際にはだめで、後述する<code>g:neocomplcache_omni_patterns</code>も同時に設定する必要があります。</p>
+
+<h2>&#8221; Enable heavy omni completion.</h2>
+
+<p><code>g:neocomplcache_omni_patterns</code>は、neocomplcacheがオムニ補完の関数を呼び出すためのキーワードパターンを設定します。
+主な言語にはデフォルトで対応していますが、RubyやPHPなど重いものは無効化されています。
+設定例のようにすれば有効化できますが、Vimがフリーズする可能性もあります。自己責任で使用してください。</p>
+
+<address class="hack-author">Shougo</address>
