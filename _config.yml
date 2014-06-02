@@ -1,0 +1,5 @@
+markdown: rdiscount
+base-url: /vim-users-jp/
+encoding: utf-8
+exclude:
+  - 'scripts'
