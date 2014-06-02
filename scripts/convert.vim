@@ -85,6 +85,7 @@ function! s:convert(f) abort
   \ ['新年あけましておめでとうございます', 'a-happy-new-year'],
   \ ['&#8212;', '-'],
   \ ['&#8220;', '-'],
+  \ ['http://vim-users.jp/vim-users-jp-official-lingr-chat-room/', 'http://lingr.com/room/vim'],
   \]
   for item in dict
     let short = substitute(short, item[0], item[1], 'g')
