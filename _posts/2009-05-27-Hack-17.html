@@ -1,0 +1,58 @@
+---
+layout: post
+title: Hack #17:#58; Vimを終了することなく編集中ファイルのファイル名を変更する
+date: 2009-05-27
+author: ujihisa
+---
+<p>編集対象ファイル名を変更するには、シェルで</p>
+
+<pre><code>$ vim aaa.txt
+(編集作業)
+$ mv aaa.txt bbb.txt
+$ vim bbb.txt
+</code></pre>
+
+<p>のように一旦Vimを終了して開きなおすという方法がありつつも、多くのVim使いはおそらくVimを一旦終了するという行為に強い反感を抱くでしょう。</p>
+
+<h2>ファイル名を変更し、新しいファイルを開く</h2>
+
+<p>Vimにはシェルの<code>mv</code>に対応する関数<code>rename()</code>があります。これを使い、編集中ファイルをカレントディレクトリの<code>newfilename.txt</code>というファイル名に変更してみましょう。</p>
+
+<pre><code>:call rename(expand('%'), 'newfilename.txt')
+:e newfilename.txt
+</code></pre>
+
+<p><code>expand('%')</code>で編集中ファイルのファイル名を得て、<code>rename()</code>で新しいファイル名に変更しています。コマンド<code>mv</code>を持つ環境では、一行目は<code>:!mv % newfilename.txt</code>とほぼ等価です。</p>
+
+<p>この手法には、事前に古いファイルに編集中のデータを保存しておかなければ、新しいファイルに編集分が反映されないという問題点があります。
+また、新しいファイル名を二度正確に入力しなければならないという問題点もあります。</p>
+
+<h2>新しい名前で保存し、古いファイルを削除する</h2>
+
+<p>一旦新しい名前で保存し、古いファイルを削除することで名前の変更を実現します。Vim内で</p>
+
+<pre><code>:w newfilename.txt
+:call delete(expand('#'))
+</code></pre>
+
+<p>とすることで、まず編集中ファイルの中身を新しいファイル<code>newfilename.txt</code>に書き込み、その後古いファイル名を<code>expand('#')</code>で参照し、削除しています。UNIX環境では、上記二行目は<code>:!rm #</code>とほぼ等価です。</p>
+
+<p>この手法には、ファイル名の変更の副作用として編集中ファイルが保存されるという問題点があります。大抵の場合それは問題とならないのですが、ファイルの保存時に特別なイベントをフックしているようなケースに問題となります。</p>
+
+<h2>ファイル保存先を指定し、古いファイルを削除する</h2>
+
+<pre><code>:file newfilename.txt
+:call delete(expand('#'))
+</code></pre>
+
+<p><code>:file {filename}</code>は編集中バッファのファイル保存先を<code>{filename}</code>に変更します。これ以後、<code>:w</code>するだけで新しいファイル名に保存されます。
+また、これまでに述べた二つの手法が持つ問題点の全てを同時に解決しています。</p>
+
+<p>さて、二行目の削除処理を忘れないため、この二行をまとめて一つのコマンドとして定義しましょう。<code>.vimrc</code>に以下の設定を記述します:</p>
+
+<pre><code>command! -nargs=1 -complete=file Rename f &lt;args&gt;|call delete(expand('#'))
+</code></pre>
+
+<p>これで、以後<code>:Rename newfilename.txt</code>とすることでファイル名を変更することができます。</p>
+
+<address class="hack-author">ujihisa</address>

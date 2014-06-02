@@ -1,0 +1,68 @@
+---
+layout: post
+title: Hack #57:#58; 空行を挿入する
+date: 2009-08-15
+author: ujihisa
+---
+<h2>問題</h2>
+
+<p>一旦書き上げたソースコードを整理するとき、空行を挿入する機会が比較的多くあります。
+空行を挿入する一般的な方法は以下の二つです。</p>
+
+<ol>
+<li>挿入モードで<kbd>&lt;Cr&gt;</kbd>を打鍵</li>
+<li>ノーマルモードで<kbd>o</kbd>を打鍵 (<kbd>O</kbd>ならば現在行の上に空行を挿入)</li>
+</ol>
+
+<p>しかしながら、上記二つの方法の両方には、以下に述べる二つの副作用があります。</p>
+
+<ol>
+<li>動作実行後必ず挿入モードに入ります。ノーマルモードに戻るためには<kbd>&lt;Esc&gt;</kbd>などを打鍵する必要があります</li>
+<li>インデントやコメントなどが自動的に挿入</li>
+</ol>
+
+<p>ソースコード全体を俯瞰して一気に整形するときなど、これらの副作用は望ましくない場合が多いです。
+動作実行後もノーマルモードを維持し、なおかつ必ず空行が挿入されるようにする簡単な方法が望まれます。</p>
+
+<h2>解決</h2>
+
+<p><code>~/.vimrc</code>に以下の一行を書きます。</p>
+
+<pre><code>nnoremap O :&lt;C-u&gt;call append(expand('.'), <code class="option">''</code>)&lt;Cr&gt;j
+</code></pre>
+
+<p>以後、<kbd>O</kbd>を打鍵するだけでカーソル位置の次の行に空行を挿入します。
+その際、動作実行後もノーマルモードを維持し、なおかつ必ず無駄な文字が入ることなく空行が挿入されます。</p>
+
+<h2>議論</h2>
+
+<p>コメント行で挿入モードで改行した場合、コメントが継続されるよう設定している方は多いと思います。
+例えばRubyで</p>
+
+<pre><code>#_
+</code></pre>
+
+<p>という状態で (<code>_</code>はカーソルを示す) 、挿入モードでの<kbd>&lt;Cr&gt;</kbd>やノーマルモードでの<kbd>o</kbd>などで改行文字を挿入すると、</p>
+
+<pre><code>#
+#_
+</code></pre>
+
+<p>となります。
+上記<code>~/.vimrc</code>への設定では、この自動挿入を避けるため<code>append()</code>関数を用いました。</p>
+
+<p>先ほど紹介した</p>
+
+<pre><code>nnoremap O :&lt;C-u&gt;call append(expand('.'), <code class="option">''</code>)&lt;Cr&gt;j
+</code></pre>
+
+<p>はまず<code>append()</code>で現在の行<code>expand('.')</code>の直後に空文字列<code><code class="option">''</code></code>だけの行を挿入し、そしてその挿入した行に<code>j</code>で移動するという一連の操作を<kbd>O</kbd>に割り当てています。</p>
+
+<p>逆に、この自動挿入を行いたい場合は、通常の改行を行なえばよいため</p>
+
+<pre><code>nnoremap O o&lt;Esc&gt;
+</code></pre>
+
+<p>とすることで実現できます。</p>
+
+<address class="hack-author">ujihisa</address>

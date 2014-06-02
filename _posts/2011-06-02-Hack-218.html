@@ -1,0 +1,55 @@
+---
+layout: post
+title: Hack #218:#58; Vimでsshに接続する
+date: 2011-06-02
+author: ujihisa
+---
+<h2>問題</h2>
+
+<p>最も普及しているシェル<a href="https://github.com/Shougo/vimshell">vimshell</a>を用いて、ローカルなマシン上で快適な環境を堪能していることと思います。<a href="https://github.com/Shougo/neocomplcache">neocomplcache</a>などのもつファイル名補完などと見事な連携を遂げています。またvimshellの内部コマンド<code>vim</code>は、vimshellを動作させているVim上の別バッファにファイルを開くというつくりになっておりますが、これがまた見事に、昔懐かしのzshやbashなどと似た動作をすることで、非常に容易に移行できたことに感動した方は多いでしょう。</p>
+
+<p>しかしこれらはsshを介することで本来の実力を活かすことができず、残念な思いをすることになります。sshを使うためにはvimshellのiexeコマンドを用いることになります。あとはもうvimshellはiexeでssh経由先のサーバのシェルであるbashやzshを叩くだけの存在になってしまいます。そして接続先で誤ってvimコマンドなどを発行してしまうと・・・あとはもう悲惨の一言です。</p>
+
+<h2>解決</h2>
+
+<p>vimshell-sshという、今日完成したばかりのプラギンを用います。</p>
+
+<ul>
+<li>vimshell-ssh <a href="https://github.com/ujihisa/vimshell-ssh">https://github.com/ujihisa/vimshell-ssh</a></li>
+</ul>
+
+<p>このプラギンはコマンドも関数も提供せず、ただ、あなたがvimshellのiexeでsshコマンドを用いたときの、接続先でのvimコマンドの挙動のみを上書きします。</p>
+
+<ul>
+<li>従来のiexe ssh上でのvimコマンド:
+<ul>
+<li>接続先サーバでvimのプロセスを立ち上げ、その出力をvimshell上で表示しようとする。</li>
+</ul>
+</li>
+<li>上書きされたiexe ssh上でのvimコマンド:
+<ul>
+<li>コマンド発行時点では接続先サーバでは何もおこらない</li>
+<li>こっそりとscpでいま接続しているサーバに新規接続、引数のファイルを取得する</li>
+<li>ファイルをダウンロードできればそれを、なければ空のものを、別バッファに分割して表示する</li>
+<li>そのバッファで保存を行うと、こっそりとscpで中身をアップロードする</li>
+</ul>
+</li>
+</ul>
+
+<p>いかがでしょうか。また、隠れたメリットとして、</p>
+
+<ul>
+<li>接続先サーバにvimがインストールされている必要がない</li>
+<li>そのため<code>~/.vimrc</code>のコピーは不要。プラギンのインストールも不要。</li>
+<li>vim自体が手元で動作するため、補完などで画面描画書き換えが頻繁に発生するものの、通信速度に関係なく快適な操作が可能</li>
+</ul>
+
+<p>ということが挙げられます。</p>
+
+<h2>今後の課題</h2>
+
+<p>vimshellのiexe ssh上で、neocomplcacheのファイル名補完が行われません。これは将来誰かが開発するであろうneocomplcache-vimshell-sshによって解決されるでしょう。また、vimshell-sshへのパッチという形で解決するかもしれません。</p>
+
+<p>vimとsshの連携の今後に期待されます。</p>
+
+<address class="hack-author">ujihisa</address>

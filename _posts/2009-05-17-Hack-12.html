@@ -1,0 +1,33 @@
+---
+layout: post
+title: Hack #12:#58; 条件にマッチする行を削除する
+date: 2009-05-17
+author: ujihisa
+---
+<p>デバッグ用に一時的に埋め込んだ命令文を一度に削除する、などといった編集作業を簡単に行なう方法を紹介します。</p>
+
+<h2><code>:s[ubstitute]</code> を使う</h2>
+
+<p><code>:s</code>, <code>:substitute</code> は正規表現による文字列の置換を行なうコマンドで、<code>:%s/old/new/</code> は編集中バッファの各行に出てくる最初のoldという文字列をnewという文字列に置換します。
+置換文字列に空文字を与えることで削除と同様の働きをします。つまり、<code>:%s/old//</code> は編集中バッファの各行に出てくる最初のoldという文字列を削除します。なおこの場合<code>:%s/old</code>のように、置換文字列を省略することができます。</p>
+
+<p><code>:%s/.*trash.*//</code> はtrashという文字列を含む行を削除し、そこに空行を残します。
+そこで、<code>:%s/.*trash.*\n//</code>と行末の<code>&lt;NL&gt;</code>も含めて削除するようにすれば、空行が残りません。</p>
+
+<h2><code>:g[lobal]</code> を使う</h2>
+
+<p><code>:%g/trash/d</code>とすることで、編集中バッファから、trashという文字列を含む行そのものを削除します。
+<code>:[range]g[lobal]/{pattern}/[cmd]</code>は、<code>[range]</code>中の<code>{pattern}</code>にマッチする行それぞれにEx command <code>[cmd]</code>を適用します。
+今回はバッファ内の全ての行である<code>%</code>に対して、trashという正規表現文字列にマッチする行それぞれに<code>d</code>を適用することで、目的を達成しました。</p>
+
+<h2>発展 &#8212; 条件にマッチする行をコメントアウトする</h2>
+
+<p>例えばRubyのソースコードを編集中に<kbd>I# &lt;Esc&gt;</kbd>とタイプすることで現在の行をコメントアウトすることができます。
+<kbd>I</kbd>でインデントを考慮した現在行の行頭で挿入モードに入り、<kbd>#</kbd>と入力しています。同様にHaskellの場合は<kbd>I-- &lt;Esc&gt;</kbd>で実現できます。</p>
+
+<p><kbd>I# &lt;Esc&gt;</kbd>をEx command表現すると<code class="vim-script">:normal! I# ^[</code>または<code class="vim-script">:execute 'normal!' "I# \&lt;Esc&gt;"</code>となります。<kbd>^[</kbd>は<kbd>&lt;C-v&gt;&lt;Esc&gt;</kbd>とタイプすることで入力できます。見た目のまま<kbd>^[</kbd>と入力すると別の意味になりますので注意してください。</p>
+
+<p>前節で説明した<code>:g[lobal]</code>と組み合わせ、trashという文字列を含む行をコメントアウトするには
+<code>:%g/trash/normal I# ^[</code>とすることで実現できます。</p>
+
+<address class="hack-author">ujihisa</address>

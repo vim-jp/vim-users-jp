@@ -1,0 +1,90 @@
+---
+layout: post
+title: Hack #230:#58; Markdown形式の文書を書く2 (quickrun0.5.0対応版)
+date: 2011-09-15
+author: ujihisa
+---
+<p>こんにちは、ujihisaです。11月くらいに来日する予定で、そのときに大規模なVimの勉強会などを開催したいと思っています。発表をしてみたい方は、気軽に @ujm などに英語で連絡ください(*1) 。</p>
+
+<h2>問題</h2>
+
+<p>VimでMarkdown形式の文書を書くための記事を2年ほど前に執筆し、こちらで公開していました。</p>
+
+<ul>
+<li><a href="http://vim-users.jp/2009/08/hack52/">Hack #52: Markdown形式の文書を書く</a></li>
+</ul>
+
+<p>ところで先月<a href="https://github.com/thinca/vim-quickrun">quickrun</a> version 0.5.0 がリリースされました。その際大きな仕様変更がありました。それについては下記の記事に詳しく掲載されています。</p>
+
+<ul>
+<li><a href="http://vim-users.jp/2011/07/release-note-quickrun-05/">quickrun 0.5.0がリリースされました</a></li>
+</ul>
+
+<p>先ほどのHack #52の記事に掲載されている情報のままでは、Markdown形式で執筆中のバッファの内容をHTMLに変換してブラウザで開くことができません。どのようにすればよいのでしょうか。</p>
+
+<h2>解決 (1/2)</h2>
+
+<p>quickrun 0.5.0はデフォルトで4種類のmarkdown変換機をサポートしています。</p>
+
+<ul>
+<li>Markdown.pl (Perl. <code>cpan install Markdown</code>かな?)</li>
+<li>kramdown (Ruby. <code>gem install kramdown</code>)</li>
+<li>bluecloth (Ruby. <code>gem install bluecloth</code>)</li>
+<li>redcarpet (GitHubなどで使われている悪評高いMarkdownエンジン)</li>
+<li>pandoc (Haskell. <code>cabal install pandoc</code>)</li>
+</ul>
+
+<p>もしも<code>$PATH</code>に上記のコマンドがあれば、それを用いて変換します。優先順位はこの一覧と同じです。</p>
+
+<p>したがって<code>'filetype'</code>が<code>markdown</code>であるようなバッファを編集中に<code>:QuickRun</code>すると、上記コマンドのいずれかが呼ばれ、そして編集中バッファをhtmlに変換したものをquickrunウインドウに表示します。なので、この出力先をbufferではなくbrowserにすればそれで問題が解決されます。</p>
+
+<p><code>~/.vimrc</code>に以下の設定を記述します。</p>
+
+<pre><code>let g:quickrun_config['markdown'] = {
+\ 'outputter': 'browser'
+\ }
+</code></pre>
+
+<p>ただし、もしもこれまで<code>g:quickrun_config</code>を全く使った事がない自信があるならば、以下の行をその前に記述してください。</p>
+
+<pre><code>let g:quickrun_config = {}
+</code></pre>
+
+<p>続いて<a href="https://github.com/tyru/open-browser.vim">open-browser.vim</a>がインストール済みかどうか確認します。インストールしていなければ、すぐにいれましょう。</p>
+
+<p>これで<code>'filetype'</code>が<code>markdown</code>なバッファから<code>:QuickRun</code> (あるいはデフォルトのキーマッピングである<kbd>\r</kbd>の打鍵) で、新しいウインドウが分割されてHTMLが出力されるかわりに、ブラウザが立ち上がってそちらにHTMLがきれいに表示されるはずです。</p>
+
+<h2>解決 (2/2)</h2>
+
+<p>大抵の方は(1/2)の時点で大丈夫なのですが、しかしASCIIの範囲内に収まらない文書を書く一部の人は、<code>pandoc</code>でMarkdownをHTMLに変換した後に、文字化けしたHTMLを見てしまったのではないでしょうか。</p>
+
+<p>この場合はpandocの-sオプションを用います。</p>
+
+<pre><code>let g:quickrun_config['markdown'] = {
+\ 'outputter': 'browser',
+\ 'cmdopt': '-s'
+\ }
+</code></pre>
+
+<p>おっとしかしpandoc以外でも-sを使われると困ります。間違って<code>redcarpet</code>などをインストールしてしまうと、なぜかそちらの方が高い優先度をもっているため、そちらを使われてしまうのです。ここはpandocを使用するよう強制してみましょう。</p>
+
+<pre><code>let g:quickrun_config['markdown'] = {
+\ 'type': 'markdown/pandoc',
+\ 'outputter': 'browser',
+\ 'cmdopt': '-s'
+\ }
+</code></pre>
+
+<p>実はこのあたりは詳しくはquickrun公式ヘルプに掲載されています。詳しくは<code>:h quickrun-examples</code>をご覧ください。</p>
+
+<h2>補足</h2>
+
+<p>現在開発中のquickrun 0.5.1では新機能”hook”というものがつくそうです。いまから楽しみですね!</p>
+
+<p>脚注</p>
+
+<ul>
+<li>*1 スペイン語も勉強中ですので、対応可能です。</li>
+</ul>
+
+<address class="hack-author">ujihisa</address>

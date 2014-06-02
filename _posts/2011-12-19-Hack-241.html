@@ -1,0 +1,66 @@
+---
+layout: post
+title: Hack #241:#58; Haskellで使いたい関数を使ってからそのモジュールをimportする
+date: 2011-12-19
+author: ujihisa
+---
+<p><a href="http://partake.in/events/eaea52c2-61ef-46d5-a855-3a2dde459e3a">Haskell Advent Calendar 2011</a>への寄稿記事です。</p>
+
+<h2>問題</h2>
+
+<p>Haskellを書いていて、長いソースコードの末尾の方にて、急にとあるモジュールのとある関数を使いたい、そんなときはよくあります。ありがちなのがApplicativeの演算子いくつかと、Data.Function.onと、Data.Listのアレとコレと・・・。いくらでもあります。</p>
+
+<p>Haskellでは一般的に、モジュールのimportはソースコードのかなりはじめの方にまとめて記述します。importしたい関数を一度しか使わず、しかもソースコードの末尾の方に位置していようと、おかまい無しです。このとき、<kbd>gg</kbd>などでソースコード上部まで移動し、<a href="http://vim-users.jp/2011/04/hack211/">neco-ghc</a>などを駆使してmoduleとその関数を的確にimportし、そして<kbd>&lt;C-o&gt;</kbd>などでもといた場所に戻ることになると思います。<code>:sp</code>などで画面分割してから行ったり、あるいはmarkをつけるという方法もありますが、いずれにせよこれらの作業のため脳内の作業メモリがスタックオーバーフローするのは明らかでしょう。</p>
+
+<h2>解決</h2>
+
+<p>unite-haskellimportを用います。</p>
+
+<p><a href="https://github.com/ujihisa/unite-haskellimport">https://github.com/ujihisa/unite-haskellimport</a></p>
+
+<p>まずは上記プラギンをインストールします。依存プラギンはunite.vim、依存ツールは<code>hoogle</code>です。</p>
+
+<pre><code>$ cabal update &amp;&amp; cabal install hoogle &amp;&amp; hoogle data
+</code></pre>
+
+<p>たとえば急に<code>==&gt;</code>という関数を使いたくなったとしましょう。</p>
+
+<pre><code>:Unite haskellimport
+</code></pre>
+
+<p>としてunite窓を開き、<code>==&gt;</code>と打鍵しましょう。</p>
+
+<pre><code>Test.QuickCheck.Property (==&gt;) :: Testable prop =&gt; Bool -&gt; prop -&gt; Property
+Test.QuickCheck (==&gt;) :: Testable prop =&gt; Bool -&gt; prop -&gt; Property
+</code></pre>
+
+<p>インストールしているcabalパッケージにもよりますが、たとえば上記のような項目が選択肢にでてくることでしょう。実際にimportしたい側を選択します。</p>
+
+<p>候補を選択すると、unite-haskellimportはdefaultのactionとして:Haskellimportコマンドを発行します。これは、対象を、ソースコードのそれらしい場所に挿入するものです。既に他のimport文がある場合は、最後のimportのあとに挿入します。</p>
+
+<p>Before</p>
+
+<pre><code>import qualified Data.Text as T
+
+f x = ...
+</code></pre>
+
+<p>After</p>
+
+<pre><code>import qualified Data.Text as T
+import Test.QuickCheck ((==&gt;))
+
+f x = ...
+</code></pre>
+
+<p>今回importしたのは記号からなる関数でした。が、もしも記号ではない関数、つまりVimの<code>&lt;cword&gt;</code>になるようなものならば、<code>:Unite</code>のかわりに</p>
+
+<pre><code>:UniteWithCursorWord haskellimport
+</code></pre>
+
+<p>とするとよいでしょう。これを頻繁に行うようならば、適切なキーにマッピングしておくべきです。たとえば以下を <code>~/.vim/ftplugin/haskell.vim</code>に記述すると、<kbd>&lt;space&gt;I</kbd>と打鍵するだけでカーソル以下にある単語の関数をimportしてくれます。</p>
+
+<pre><code>nnoremap &lt;buffer&gt; &lt;space&gt;I :&lt;C-u&gt;UniteWithCursorWord haskellimport&lt;Cr&gt;
+</code></pre>
+
+<address class="hack-author">ujihisa</address>

@@ -1,0 +1,56 @@
+---
+layout: post
+title: Hack #110:#58; Vimでプレゼンをする (Mac OS X編)
+date: 2009-12-19
+author: ujihisa
+---
+<p>Vimというプレゼンツールソフトウェアは、ソフトウェア開発にも用いることができるということで知られています。
+本HackではVimをMac OS Xでプレゼンツールとして便利に使うための手法を公開します。</p>
+
+<h2>iTerm + Vim</h2>
+
+<p>定番の組み合わせはiTermとターミナル上で動作する素のVimです。
+特別なことがなければ、この組み合わせを選択するのがもっとも無難でしょう。</p>
+
+<p>利点</p>
+
+<ul>
+<li>文字の大きさの変更が柔軟で容易 (単に<kbd>Cmd+</kbd>や<kbd>Cmd-</kbd>を連打するだけ)</li>
+<li>screenを用いることにより、Vimからシェルへの移動をスムーズに行なうことができる</li>
+<li>フルスクリーンなので無駄なスペースがない</li>
+</ul>
+
+<p>欠点</p>
+
+<ul>
+<li>画像を表示することができない</li>
+<li>等幅フォント固定</li>
+<li>部分的にフォントサイズを変更することができない</li>
+</ul>
+
+<p><object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" width="480" height="386" id="utv172868" name="utv_n_800707"><param name="flashvars" value="loc=%2F&amp;autoplay=false&amp;vid=2459758" /><param name="allowfullscreen" value="true" /><param name="allowscriptaccess" value="always" /><param name="src" value="http://www.ustream.tv/flash/video/2459758" /><embed flashvars="loc=%2F&amp;autoplay=false&amp;vid=2459758" width="480" height="386" allowfullscreen="true" allowscriptaccess="always" id="utv172868" name="utv_n_800707" src="http://www.ustream.tv/flash/video/2459758" type="application/x-shockwave-flash" /></object></p>
+
+<p>(KeyNoteと組み合わせて使うこともできます)</p>
+
+<h2>MacVim</h2>
+
+<p>ターミナルではなく、単独のGUIアプリケーションであるMacVimを使う方法もあります。
+フォントサイズの変更が柔軟でない一方、<a href="http://ujihisa.blogspot.com/2009/09/beautiful-and-functional-english.html">このパッチ</a>を適用することにより、プロポーショナルフォントを使うことができるという利点があります。</p>
+
+<p>ただし、フルスクリーンにできない、文字のサイズ変更が容易でないなどデメリットが多過ぎますので、あまりお勧めしません。</p>
+
+<p>シェルを使うときは<a href="http://github.com/Shougo/vimshell">vimshell</a>を用いるとよいでしょう。</p>
+
+<h2>:TOHtml + Opera</h2>
+
+<p>もはやVimではないですが、見た目はVimですので、多くの観客を騙すことができます。
+フルスクリーンにすることのできるブラウザならば何でも良いのですが、Operaが最も手っ取り早いでしょう。</p>
+
+<p><code>:TOHtml</code>した結果のHTMLに対して画像のタグを貼付けることによって、Vimの素晴らしい見た目でかつ画像を表示でき、最高のプレゼン環境と言えるでしょう。
+文字のサイズも柔軟に変更できます。</p>
+
+<p>唯一の問題点は、Vim上で動作しているわけではないので、その場でquickrunやvimshellを動かすことができない点です。</p>
+
+<p><script type="text/javascript" src="http://ext.nicovideo.jp/thumb_watch/sm8331942"></script><noscript><a href="http://www.nicovideo.jp/watch/sm8331942">【ニコニコ動画】Rubyにおける生産性を高めるための開発環境を考察する (1/2) &#8211; ujihisa</a></noscript></p>
+
+<address class="hack-author">ujihisa</address>

@@ -1,0 +1,44 @@
+---
+layout: post
+title: Hack #151:#58; 編集中のファイルがあるディレクトリを開く
+date: 2010-06-01
+author: ujihisa
+---
+<h2>問題</h2>
+
+<p>Vimの<code>:e</code>や<code>:new</code>などはカレントディレクトリにあるファイルを開きます。また補完対象もカレントディレクトリからのファイルです。</p>
+
+<pre><code>:e a&lt;tab&gt;
+</code></pre>
+
+<p>このようにするとカレントディレクトリのaからはじまるファイル名を対象にファイル名補完を行ないます。</p>
+
+<p>編集中ファイルと同じディレクトリにある他のファイルを開く機会は多いものの、深いディレクトリに潜っているときは厄介です。
+編集中ファイルのディレクトリは<code>%:h</code>で指定でき、なおかつ<kbd>&lt;tab&gt;</kbd>キーで展開できるものの、毎回<code>%:h</code>…とくに<code>%</code>という文字を打鍵するのかなかなか腰の折れる作業です。</p>
+
+<h2>解決法1</h2>
+
+<p>一度カレントディレクトリを編集中ファイルのディレクトリに移動するか、あるいはnetrwで編集中ファイルのディレクトリを開くかが良いでしょう。<code>tabpagecd</code>などのプラグインを使用している場合、編集中ファイルのディレクトリにカレントディレクトリを移動させるのは副作用が大きすぎるため、後者の方法が好ましいでしょう。</p>
+
+<pre><code>:e %:h
+</code></pre>
+
+<p>で編集中ファイルのディレクトリをnetrwで開き、ファイル一覧を取得できます。この作業を頻繁に行なうならば、あいているキーにマッピングしましょう。例えば<code>-</code>に割り当てるならば、以下の一行を<code>~/.vimrc</code>に記述します。</p>
+
+<pre><code>nnoremap - :&lt;C-u&gt;e %:h&lt;Cr&gt;
+</code></pre>
+
+<h2>解決法2</h2>
+
+<p>あるいは<kbd>&lt;tab&gt;</kbd>キーでの展開までを一つのキーに割り当てる方法も考えられます。</p>
+
+<pre><code>nnoremap - :&lt;C-u&gt; %:h&lt;Tab&gt;
+</code></pre>
+
+<p>このまま<kbd>&lt;Cr&gt;</kbd>を打鍵するとnetrwでディレクトリを開くので、こちらの解決法の方がより選択の幅が広がるといえます。</p>
+
+<h2>補足</h2>
+
+<p>netrwよりもモダンな<a href="http://github.com/Shougo/vimfiler">vimfiler</a>プラグインを用いる、あるいは<a href="http://github.com/Shougo/vimshell">vimshell</a>に全てを委ねるなど、他にもさまざまなアプローチがあります。</p>
+
+<address class="hack-author">ujihisa</address>

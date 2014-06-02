@@ -1,0 +1,33 @@
+---
+layout: post
+title: Hack #97:#58; 同じコマンドを実行する
+date: 2009-11-03
+author: ujihisa
+---
+<h2>問題</h2>
+
+<p>zshなど、多くのシェルでは<code>r</code>コマンドで一つ直前に実行したコマンドを再実行することができます (正確にはコマンドではなくシェル組み込みの機能かもしれません)。
+さて、Vimではどのようにして再実行させるのでしょうか。</p>
+
+<h2>解決</h2>
+
+<p>Vim組み込みの機能、例えば一行削除する<code>dd</code>など、これらについては<kbd>.</kbd>で再実行できます。</p>
+
+<p>コマンドについては、<kbd>q:</kbd>でコマンド履歴を開き、直前のコマンドである一つ上の行に<kbd>k</kbd>で移動し、<kbd>&lt;Cr&gt;</kbd>で動作を確定させることで再実行できます。</p>
+
+<p><kbd>q:k&lt;Cr&gt;</kbd>などをより少ない打鍵数で入力できるようキーマッピングを与えることで更にラクに実現できます。</p>
+
+<pre><code>nnoremap c. q:k&lt;Cr&gt;
+</code></pre>
+
+<h2>参考</h2>
+
+<ul>
+<li>repeat.vim <a href="http://www.vim.org/scripts/script.php?script_id=2136">http://www.vim.org/scripts/script.php?script_id=2136</a>
+
+<ul>
+<li>一部のプラグインで<kbd>.</kbd>で再実行させるためのプラグイン</li>
+</ul></li>
+</ul>
+
+<address class="hack-author">ujihisa</address>

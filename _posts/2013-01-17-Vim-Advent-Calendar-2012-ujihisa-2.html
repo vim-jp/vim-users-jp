@@ -1,0 +1,37 @@
+---
+layout: post
+title: Vim Advent Calendar 2012 ujihisa 2
+date: 2013-01-17
+author: ujihisa
+---
+<p>本記事はujihisaさん担当の<a href="http://atnd.org/events/33746">Vim Advent Calendar 2012</a>の48日目です。 先日の記事は @toyamarinyonさんによる <a href="http://toyamarinyon.hatenablog.jp/entry/2013/01/16/231651">http://toyamarinyon.hatenablog.jp/entry/2013/01/16/231651</a> でした。</p>
+
+<h2>if_lua</h2>
+
+<p>Vim scriptプログラマの皆様が普段もっとも頻繁に利用しているプログラミング言語はVim scriptだと思います。Vim script以外には、<a href="https://github.com/shougo/vinarise">Vinarise</a>などでも使われているPythonが比較的よく利用されているのではないでしょうか。一方、プログラミング言語Luaをお使いになったことのあるVim scriptプログラマはどのくらいいらっしゃるのでしょうか。</p>
+
+<p>Luaはこのような言語です。 <a href="http://ujihisa.blogspot.ca/2012/09/quicksort-in-lua.html">http://ujihisa.blogspot.ca/2012/09/quicksort-in-lua.html</a></p>
+
+<p><img src="http://www.lua.org/images/lua.gif" alt="Lua" /></p>
+
+<p>Vimが標準でサポートする外部プログラミング言語インタフェースとして、<code>if_python</code>, <code>if_ruby</code>, <code>if_mzscheme</code>, <code>if_perl</code>などがあります。標準以外では<code>if_gauche</code>なども人気ですね。実は<code>if_lua</code>というものもあるのですが、僕の知る限りでは、まだあまり普及していないようです。Luaという言語は他の環境に組み込まれることを強く意識されたものであるという背景から考えるに、この状況はあまり好ましくないのではないかと危惧しています。</p>
+
+<p><code>if_lua</code>があまり普及していない原因の一つとして、たいていのVimパッケージが<code>if_lua</code>を搭載していないからというのが挙げられます。パッケージとそのオプションの選択肢の豊富さに定評ある、Vim使いに人気のLinuxディストリビューションであるGentoo Linuxですら、<code>if_lua</code>ることができません。</p>
+
+<p><img src="http://www.gentoo.org/images/glogo-small.png" alt="Gentoo" /></p>
+
+<h2>解決</h2>
+
+<p>昨年10月、有志によりGentoo LinuxのVimで<code>if_lua</code>るためのパッチを本家にて提出なされたようです。</p>
+
+<p><a href="https://bugs.gentoo.org/show_bug.cgi?id=436744">https://bugs.gentoo.org/show_bug.cgi?id=436744</a></p>
+
+<p>これが採択されれば、誰でも簡単に<code>if_lua</code>入りのVimをインストールできるようになります。</p>
+
+<p>採択されるまでの間でも、上記パッチを適用することで、すぐにでも<code>if_lua</code>入りのVimを導入することができます。</p>
+
+<h2>次回</h2>
+
+<p>明日は@tyruさんです。</p>
+
+<address class="hack-author">ujihisa</address>

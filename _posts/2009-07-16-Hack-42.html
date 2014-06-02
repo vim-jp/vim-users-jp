@@ -1,0 +1,84 @@
+---
+layout: post
+title: Hack #42:#58; 縦分割で画面が狭くなりすぎないようにする
+date: 2009-07-16
+author: ujihisa
+---
+<h2>問題</h2>
+
+<p><code>:vsp</code>や<code>:vnew</code>などで画面を縦に分割し、Vimの中で左右にウインドウが配置されます。
+<kbd>&lt;C-w&gt;h</kbd>と<kbd>&lt;C-w&gt;l</kbd>でウインドウ間を左右に渡り歩きながらバッファを編集することが可能です。</p>
+
+<p>しかしVimのヘルプ文書など、画面横幅が80字以上であることを仮定した文書は多数あり、これを縦分割によって狭くなった横幅の画面で閲覧すると非常に読みにくくなります。</p>
+
+<p><img src="http://gyazo.com/ed5c657bc13b7b726e2c320e8242d5e5.png" alt="例" style="width: 100%;" /></p>
+
+<h2>解決</h2>
+
+<p>以下の設定を<code>~/.vimrc</code>に記述します。</p>
+
+<pre><code>nnoremap &lt;C-w&gt;h &lt;C-w&gt;h:call &lt;SID&gt;good_width()&lt;Cr&gt;
+nnoremap &lt;C-w&gt;l &lt;C-w&gt;l:call &lt;SID&gt;good_width()&lt;Cr&gt;
+nnoremap &lt;C-w&gt;H &lt;C-w&gt;H:call &lt;SID&gt;good_width()&lt;Cr&gt;
+nnoremap &lt;C-w&gt;L &lt;C-w&gt;L:call &lt;SID&gt;good_width()&lt;Cr&gt;
+function! s:good_width()
+if winwidth(0) &lt; 84
+vertical resize 84
+endif
+endfunction
+</code></pre>
+
+<p>これで、今後<kbd>&lt;C-w&gt;h</kbd>などでウインドウ間の移動を行なうと、自動的にウインドウ横幅を修正してくれます。</p>
+
+<p>また、横幅指定を80ではなく84とすこし多めにしているのは、行番号部分に対応するためです。</p>
+
+<h2>議論</h2>
+
+<p><kbd>&lt;C-w&gt;h</kbd>の挙動を上書きせずとも、<code>'winminwidth'</code>を設定した方が良いのでは、と勘ぐった人も多いのではないでしょうか。
+具体的には以下のように指定します。</p>
+
+<pre><code>set winminwidth=84
+</code></pre>
+
+<p>あるいは、以下のように<code>WinEnter</code>イベントにウインドウ幅の変更を指定するという方法もあります。
+具体的には以下のように指定します。</p>
+
+<pre><code>augroup MyWinEnterWidth
+autocmd!
+autocmd WinEnter * if winwidth(0) &lt; 84 | vertical resize 84 | endif
+augroup END
+</code></pre>
+
+<p>しかし本Hackではこの手法を意図的に避けました。
+ウインドウの新規生成時や、自動的なウインドウの移動のときにはデフォルトの挙動のままにしておきたいためです。</p>
+
+<p>もちろん、全てのウインドウのフォーカスの移り変わりに対して横幅の再設定を行ないたい場合には上記<code>autocmd</code>を使った設定の方が好ましいでしょう。</p>
+
+<p>なお、著者は<kbd>CTRL</kbd>キーを回避するため、以下のように<kbd>s</kbd>をプレフィックスにしたウインドウの移動キーを割り当てています。</p>
+
+<pre><code>nnoremap sh &lt;C-w&gt;h:call &lt;SID&gt;good_width()&lt;Cr&gt;
+nnoremap sj &lt;C-w&gt;j
+nnoremap sk &lt;C-w&gt;k
+nnoremap sl &lt;C-w&gt;l:call &lt;SID&gt;good_width()&lt;Cr&gt;
+nnoremap sH &lt;C-w&gt;H:call &lt;SID&gt;good_width()&lt;Cr&gt;
+nnoremap sJ &lt;C-w&gt;J
+nnoremap sK &lt;C-w&gt;K
+nnoremap sL &lt;C-w&gt;L:call &lt;SID&gt;good_width()&lt;Cr&gt;
+function! s:good_width()
+if winwidth(0) &lt; 84
+vertical resize 84
+endif
+endfunction
+</code></pre>
+
+<p>そして、ウインドウの大きさを変えずに移動したいときには、<kbd>sh</kbd>などではなく<kbd>&lt;C-w&gt;h</kbd>として本来のウインドウ移動キーを使用するようにしています。</p>
+
+<h2>参考</h2>
+
+<ul>
+<li><code>:h 'winminwidth'</code></li>
+<li><code>:h WinEnter</code></li>
+<li>Hack #35: ex コマンドを実行するキーマッピングを定義する <a href="http://vim-users.jp/2009/07/hack35/">http://vim-users.jp/2009/07/hack35/</a></li>
+</ul>
+
+<address class="hack-author">ujihisa</address>

@@ -1,0 +1,40 @@
+---
+layout: post
+title: Hack #127:#58; !を含む外部コマンドを実行する
+date: 2010-02-25
+author: ujihisa
+---
+<h2>問題</h2>
+
+<p>UNIXの<code>echo</code>コマンドで&quot;hello!&quot;と表示させる必要があるとします。Vimの<code>:!</code>を使えば出来そうな気がします。試してみましょう。</p>
+
+<pre><code>:!echo helloecho 'echo echo 1'
+[No write since last change]
+helloecho echo echo 1
+</code></pre>
+
+<p>なにやら狂ったような返答がきました。これは一体…。</p>
+
+<p>※ 実行結果は人によって異なります。</p>
+
+<h2>解決</h2>
+
+<p>次のようにして<code>!</code>をエスケープします。</p>
+
+<pre><code>:!echo hello\!
+[No write since last change]
+hello!
+</code></pre>
+
+<p>次のようにしても、エスケープされませんのでご注意ください。</p>
+
+<p>:!&#8217;echo hello!&#8217;</p>
+
+<h2>解説</h2>
+
+<p>ヘルプ<code>:h :!</code>によると、<code>:!</code>の中での<code>!</code>は前回実行した<code>:!</code>の引数になるそうです。
+迷惑でしかない恐ろしい仕様です。(<code><code class="option">'cpoptions'</code></code>に依存するようです)</p>
+
+<p>プラギンを作るときにハマる仕様です。<code>:!</code>を使うときによくわからない挙動があれば、まずは<code>!</code>のエスケープ漏れがないか確認してみましょう。</p>
+
+<address class="hack-author">ujihisa</address>

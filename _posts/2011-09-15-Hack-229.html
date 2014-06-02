@@ -1,0 +1,110 @@
+---
+layout: post
+title: Hack #229:#58; 動的型付け言語Rubyでメソッド名などを自動補完する
+date: 2011-09-15
+author: ujihisa
+---
+<h2>問題</h2>
+
+<p><img src="http://cache.gyazo.com/071b7fd4b985ad3d71e4ebb36c2ddea5.png" alt="" /></p>
+
+<p>静的型付け言語Haskellでの自動補完は<a href="http://vim-users.jp/2011/04/hack211/">Hack #211</a>で紹介しました。このときは補完候補の取得に<code>ghc-mod</code>という外部コマンドを用いました。補完候補を自動的に出力するために<code>neocomplcache</code>というVimプラギンを用いました。</p>
+
+<p>動的型付け言語Rubyにおける自動補完はどのようにすれば達成できるでしょうか。Rubyのように非常に静的な解析が難しい言語では、メソッド名などの候補の取得が非常に困難であることが知られています。そもそも現在参照している式あるいは変数がどのクラスに属しているか、ほとんどのケースでは静的に決定することができません。クラスが分かったとしても、その変数のみが特異メソッドを持っているかもしれません。</p>
+
+<h2>解決(1/2)</h2>
+
+<p>Rubyでメソッド名を手動補完するために使えるものは、標準添付の<code>vim-ruby</code>というVimプラギンと、m2ymさんによって開発された<a href="http://cx4a.org/software/rsense/">RSense</a>があります。</p>
+
+<p><code>vim-ruby</code>は、<code>+ruby</code>であるVim環境(*1)における補完機能を提供します。
+Ruby組み込み定数・クラス・グローバル関数(*2)などが補完できます。
+詳しくは<code>:h ft-ruby-omni</code>を参照してください(*3)。
+補完関数はオムニ補完として定義されているので、デフォルトの設定では、挿入モードで<code>&lt;C-x&gt;&lt;C-o&gt;</code>と打鍵することで補完機能を実行することができます。</p>
+
+<p><code>vim-ruby</code>が諦めた部分は</p>
+
+<ul>
+<li>編集中ファイル内で定義された定数・クラス・メソッドなどへの補完</li>
+<li>文脈に応じたメソッド名の補完 (例えば1という数値オブジェクトに対しては<code>Fixnum</code>クラスに定義されたメソッドのみが補完されるべき)</li>
+</ul>
+
+<p>です。これらに対応するためには、Rubyのパーサなどを実装する必要があり、かなり大変です。またそもそも処理に時間がかかりすぎ、補完機構としはやりすぎと判断したのかもしれません(*4)。</p>
+
+<p><img src="http://cache.gyazo.com/466b12454d1a8213b9826455f7e1b0d7.png" alt="図1: vim-rubyが正しく補完候補を生成している例" /></p>
+
+<p><img src="http://cache.gyazo.com/f933e019f0ae6dc10226f88a2f7b7274.png" alt="図2: vim-rubyが正しくない補完候補を生成してしまっている例" /></p>
+
+<p>一方RSenseは、<code>vim-ruby</code>が提供している機能にさらに加えて、上記の諦めた部分にも対応しています。</p>
+
+<p><img src="http://cache.gyazo.com/4643f4c15db03bc34aa91269c7fd0630.png" alt="図3: RSenseが正しく補完候補を生成している例" /></p>
+
+<p>RSenseの補完関数もオムニ補完として定義されています。デフォルトでは、挿入モード時に<code>&lt;C-x&gt;&lt;C-o&gt;</code>と打鍵することで補完のポップアップがでてきます。なお、初回起動時は若干時間がかかりますが、二回目からは非常にすばやいです(*5)。</p>
+
+<h2>解決(2/2)</h2>
+
+<p>手動補完がいかに実用的でないかは過去のVim Hacksで散々と述べられてきました。</p>
+
+<blockquote>
+<p>通常の補完ではユーザーが明示的に補完のためのキーを押す必要がありました。つま
+り、「頭が補完をする」と考えなければ補完ができないのです。これにより、作業効
+率が落ちてしまいます。それならばシステムが自動的に判断して、補完のためのキー
+を押したらどうでしょうか。これでユーザーはやらなければならない作業のみに集中
+することができます。Vim7よりオムニ補完が実装されたので、Visual Studioのように
+「関数やメンバを補完」は実現できるようになりました。しかし、そこには「自動的
+に」が欠けているのです。</p>
+
+<p>Shougo 2009 <a href="http://vim-users.jp/2009/07/hack-44/">http://vim-users.jp/2009/07/hack-44/</a></p>
+</blockquote>
+
+<p>自動補完を用いましょう。RSenseは<a href="https://github.com/Shougo/neocomplcache">neocomplcache</a>と連携することで自動補完として使うことができます。</p>
+
+<p>RSenseを公式ドキュメントに従ってインストールした上で、<code>~/.vimrc</code>に以下の記述を行ないましょう。</p>
+
+<pre><code>if !exists('g:neocomplcache_omni_patterns')
+let g:neocomplcache_omni_patterns = {}
+endif
+let g:rsenseUseOmniFunc = 1
+if filereadable(expand('~/git/rsense/bin/rsense'))
+let g:rsenseHome = expand('~/git/rsense')
+
+let g:neocomplcache_omni_patterns.ruby = '[^. *\t]\.\w*\|\h\w*::'
+endif
+</code></pre>
+
+<p>ただし、<code>'~/git/rsense/bin/rsense'</code>と<code>'~/git/rsense'</code>の部分を自身の環境に合致する内容にしてください。</p>
+
+<p>なお、この設定は、neocomplcache作者により書かれた以下の記事を参考にしています。</p>
+
+<p><a href="http://vinarian.blogspot.com/2010/03/rsenseneocomplcache.html">http://vinarian.blogspot.com/2010/03/rsenseneocomplcache.html</a></p>
+
+<h2>補足</h2>
+
+<p>RSenseですら、特異メソッドには対応していないようです。</p>
+
+<pre><code>a = Object.new
+def a.hello
+:world
+end
+a.
+</code></pre>
+
+<p>ここから<code>hello</code>を補完することはできません。(*6)</p>
+
+<p>脚注</p>
+
+<ul>
+<li>*1 <code>:version</code>して<code>+ruby</code>があるかどうか調べてみてください。まあ、不必要です。</li>
+<li>*2 本記事の読者がRuby使いには限らないことを考慮して”グローバル関数”と記述しましたが、実際にはRubyに関数は存在しません。<code>Kernel</code>などに定義されている<code>p</code>などのメソッドを便宜的にそのように読んでみました。</li>
+<li>*3 なお、ドキュメントに書かれているからといって実際に動作するとは限りません。私の環境では実際に試してみると動作しないものがたくさんありました…。</li>
+<li>*4 <code>g:rubycomplete_buffer_loading</code>や<code>g:rubycomplete_classes_in_global</code>を設定し、かつ<code>+ruby</code>な環境であればそれらにも対応しているとドキュメントに書かれています。お試しください。常用するのはかなり難しいようです。</li>
+<li>*5 初回起動時にこっそりと補完サーバを立ち上げるためです。なお、Windows環境の場合は特別な設定が必要なようです。詳しくは公式ドキュメントを参照ください。</li>
+<li>*6 この例だとhelloメソッドが同じバッファで定義されているのでneocomplcacheのバッファ内キーワード補完が働き、<code>hello</code>が補完対象にあらわれます。が、これはオブジェクト<code>a</code>だけでなくすべての対象に働いてしまいます。また、<code>hello</code>の定義がそのバッファ内でないなら、当然ながらお手上げです。</li>
+</ul>
+
+<h2>参考文献</h2>
+
+<p><a href="http://ujihisa.blogspot.com/2011/06/vanrb-lightning-talk-slides-ruby-and.html">Vanrb Lightning Talk Slides: Ruby and Vim</a></p>
+
+<p>非常にわかりやすい図がたくさんあります。</p>
+
+<address class="hack-author">ujihisa</address>

@@ -1,0 +1,56 @@
+---
+layout: post
+title: Vim Advent Calendar 2012 ujihisa 3
+date: 2013-02-20
+author: ujihisa
+---
+<p>Vim Advent Calendar の 82 日目の記事です。
+昨日はthincaさんによる<a href="http://d.hatena.ne.jp/thinca/20130219/1361203824">Live Coding で painter.vim(仮) 作った</a>で、業界に衝撃が走りました。僕も勤務先の会社で「友達が作ったんだぜ、すごいだろ」とどや顔で披露しました。</p>
+
+<p>本記事はpainter.vimとはまるで違う、地味なトピックです。</p>
+
+<h2>unite-file_rec</h2>
+
+<p><a href="https://github.com/shougo/unite.vim">unite.vim</a>標準のsourceである<code>file_rec</code>は以下の正規表現にマッチする候補を無視します。</p>
+
+<pre><code> \%(^\|/\)\.$\|\~$\|\.\%(o\|exe\|dll\|bak\|sw[po]\|class\)$\|\%(^\|/\)\%(\.hg\|\.git\|\.bzr\|\.svn\|tags\%(-.*\)\?\)\%($\|/\)
+</code></pre>
+
+<p>たとえば.gitというディレクトリを見つけると、それ以下のファイル/ディレクトリを探索しないようになります。このおかげで探索、つまりキャッシュ作成がとても速くなります。</p>
+
+<h2>無視するパターンの変更</h2>
+
+<p>上記無視リストを別のパターンで上書きしたいときは、<code>unite#custom_source()</code>を使います。
+たとえば&#8221;target&#8221;という名前に完全一致するディレクトリがあるときはそれ以下のファイルをすべて無視したいときは、<code>~/.vimrc</code>に以下のように記述します。</p>
+
+<pre><code>call unite#custom_source('file_rec', 'ignore_pattern', '\&lt;target\&gt;')
+</code></pre>
+
+<p>この場合、前述のデフォルトの無視リスト(.gitなど)は上書きされるため、<code>:Unite file_rec</code>は.git以下の膨大量のファイルも探索します。</p>
+
+<h2>無視するパターンの追加</h2>
+
+<p>デフォルトのパターンを用いつつ、無視するパターンを新たに追加したい場合、以下のように一つの大きな別の正規表現を作ることで対処できます。</p>
+
+<pre><code>call unite#custom_source('file_rec', 'ignore_pattern', '\%(^\|/\)\.$\|\~$\|\.\%(o\|exe\|dll\|bak\|sw[po]\|class\)$\|\%(^\|/\)\%(\.hg\|\.git\|\.bzr\|\.svn\|tags\%(-.*\)\?\)\%($\|/\)\|\&lt;target\&gt;')
+</code></pre>
+
+<p>しかし</p>
+
+<ul>
+<li>可読性に問題あり</li>
+<li>unite本家のデフォルトの<code>file_rec</code>の<code>ignore_pattern</code>が変更されたときにいちいち手動で追従しないといけないのが大変</li>
+</ul>
+
+<p>などの問題点があります</p>
+
+<h2>解決</h2>
+
+<p>デフォルトの<code>ignore_pattern</code>を取得して、その後文字列として結合します。以下のように<code>~/.vimrc</code>に記述します。</p>
+
+<pre><code>call unite#custom_source('file_rec', 'ignore_pattern', (unite#sources#file_rec#define()[0]['ignore_pattern']) . '\|\&lt;target\&gt;')
+</code></pre>
+
+<p>まず前提として、Vimが<code>~/.vimrc</code>を読み込んで実行しているときには、まだuniteそのものも、<code>file_rec</code> sourceも初期化されていません。なのでまず<code>unite#sources#file_rec#define()</code>を用いて強制的に初期化させ、デフォルトの<code>ignore_pattern</code>を生成させます。次にその返り値をそのまま使います。</p>
+
+<address class="hack-author">ujihisa</address>

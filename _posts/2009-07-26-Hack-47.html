@@ -1,0 +1,31 @@
+---
+layout: post
+title: Hack #47:#58; 大文字を連続で入力する
+date: 2009-07-26
+author: ujihisa
+---
+<h2>問題</h2>
+
+<p>VimではEmacsなど他のエディタに比べて<kbd>Ctrl</kbd>キーをあまり使わなくてすむものの、それでもVim以外を使用時に<kbd>Ctrl</kbd>キーの出番は多いです。多くの人が<kbd>A</kbd>の左に<kbd>Ctrl</kbd>キーを配置し、さらに<kbd>Z</kbd>の左下も<kbd>Ctrl</kbd>にすることで、元来のCapsLockの機能をなくしています。
+しかしながらプログラミングにおいて、ときには大文字を連続で入力する必要があり、<kbd>Shift</kbd>キーを抑えたまま続けてキーを打鍵していく行為は容易にあなたのFPを削り取ります。かといって、入力後に打鍵した文字をまとめて大文字に変換しなおすのは直感に反する上に煩雑だと主張する人が多いでしょう。</p>
+
+<h2>解決</h2>
+
+<p>プラグインcapslock.vimを使用します。
+このプラグインはVim内で仮想的なCapsLock機能を提供します。</p>
+
+<p>capslock.vim <a href="http://www.vim.org/scripts/script.php?script_id=1725">http://www.vim.org/scripts/script.php?script_id=1725</a></p>
+
+<p>以下の設定を<code>~/.vimrc</code>に記述します。</p>
+
+<pre><code>imap &lt;C-a&gt; &lt;C-O&gt;&lt;Plug&gt;CapsLockToggle
+</code></pre>
+
+<p>これで、今後挿入モードで<kbd>&lt;C-a&gt;</kbd>と打鍵するとCapsLockされ、もう一度打鍵すると元に戻ります。
+OSなどが提供するCapsLockと同様、アルファベットは大文字になり、数字はそのまま出力されます。</p>
+
+<h2>議論</h2>
+
+<p>capslock.vimはrails.vimと同じくTim Popeさんの作品です。capslock.vimのすこし前にcobol.vimを開発していることから、cobolプログラミングのために作られたプラグインなのではないかと著者は推測しています。</p>
+
+<address class="hack-author">ujihisa</address>

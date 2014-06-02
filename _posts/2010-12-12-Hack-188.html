@@ -1,0 +1,75 @@
+---
+layout: post
+title: Hack #188:#58; 見た目を気軽に変更する
+date: 2010-12-12
+author: ujihisa
+---
+<p>VimにはColorSchemeという概念があり、端末で利用可能な色のうちどの色をどの構文要素に割り当てるかのセットを取り扱うことができます。さらにGUIのVim実装であるgVimやMacVimでは、端末の制約を超えて256もの膨大な数の色を駆使することができ、編集対象のテキストの配色を大幅に変更することができます。</p>
+
+<pre><code>:colorscheme dessert
+</code></pre>
+
+<p>人気のあるcolorschemeは<a href="http://www.google.ca/images?q=vim+dessert&amp;um=1&amp;ie=UTF-8&amp;source=og&amp;sa=N&amp;hl=en&amp;tab=wi&amp;biw=1015&amp;bih=745">dessert</a>, <a href="http://www.google.ca/images?um=1&amp;hl=en&amp;biw=1015&amp;bih=745&amp;tbs=isch:1&amp;sa=1&amp;q=vim+mrkn256&amp;aq=f&amp;aqi=&amp;aql=&amp;oq=&amp;gs_rfai=">mrkn256</a>, <a href="http://www.google.ca/images?um=1&amp;hl=en&amp;biw=1015&amp;bih=745&amp;tbs=isch:1&amp;sa=1&amp;q=vim+zenburn&amp;aq=f&amp;aqi=&amp;aql=&amp;oq=&amp;gs_rfai=">zenburn</a>などでしょう。筆者のイチオシは<a href="http://www.google.ca/images?um=1&amp;hl=en&amp;biw=1015&amp;bih=745&amp;tbs=isch:1&amp;sa=1&amp;q=vim+lucius&amp;aq=f&amp;aqi=&amp;aql=&amp;oq=&amp;gs_rfai=">lucius</a>です。</p>
+
+<p>また、GUI版に限定されるが、Vimが使用するフォントを動的に変更することも可能です。</p>
+
+<pre><code>:set guifont=Inconsolata:h20
+</code></pre>
+
+<blockquote>
+<p>“GUIの9割はフォント”</p>
+
+<p><em>T. Ujihisa 2006</em></p>
+</blockquote>
+
+<p>という格言もあるように、フォントが生産性に与える影響力は無視できないものです。筆者は、Javaなど低レイヤ言語を取り扱うときは、その冗長な表現に耐えうるよう、フォントサイズを小さくし、なおかつ小さいサイズでもよく読めるフォントに変更します。逆にRubyなど簡潔な言語を取り扱うときは、筆記体なども含めてダイナミックに様々なフォントを試しています。</p>
+
+<h2>問題</h2>
+
+<p><code>:colorscheme</code>コマンドは引数の補完ができません。そのため、ColorSchemeを変更する以前から、あなたがどのようなColorSchemeを持っているかすべて把握している必要があります。</p>
+
+<p><code>'guifont'</code>の指定に関しても同様で、フォントを変更する以前から、あなたがどのようなフォントを持っているか把握すること、またその正式名を完全に暗記することは非常に困難です。さらにつけくわえるならば、フォント名に空白を含んでいるときに空白文字をエスケープする必要があり、かなり煩雑です。</p>
+
+<h2>解決</h2>
+
+<p><a href="https://github.com/ujihisa/unite-colorscheme">unite-colorscheme</a>と<a href="https://github.com/ujihisa/unite-font">unite-font</a>を使用します。</p>
+
+<p><a href="https://github.com/Shougo/unite.vim">unite.vim</a>をまだインストールしていない場合、事前にこちらをインストールしておきましょう。</p>
+
+<p>インストール後、以下のコマンドを実行することで、容易にColorSchemeを変更できるようになります。</p>
+
+<pre><code>:Unite colorscheme
+</code></pre>
+
+<p><img src="http://gyazo.com/0f5924c6b930b2354e8544c0752a9e35.png" alt="colorscheme" /></p>
+
+<p>同様に、以下のコマンドでFontを変更できるようになります。</p>
+
+<pre><code>:Unite font
+</code></pre>
+
+<p><img src="http://gyazo.com/0b68d3b73dd806277b8b723a9d67bf9c.png" alt="font" /></p>
+
+<p>これらは頻繁に使用されるので、なにかしらのキーマッピングを与えておくとよいでしょう。たとえば<code>sc</code>というキーに割り当てたい場合、<code>~/.vimrc</code>に以下を記述しましょう。</p>
+
+<pre><code>let g:unite_enable_start_insert = 1
+let g:unite_enable_split_vertically = 1
+if globpath(&amp;rtp, 'plugin/unite.vim') != ''
+nnoremap sc :&lt;C-u&gt;Unite colorscheme font&lt;Cr&gt;
+endif
+</code></pre>
+
+<p>順を追って説明します。</p>
+
+<ul>
+<li><code>g:unite_enable_start_insert</code>: Uniteを挿入モードで開始します</li>
+<li><code>g:unite_enable_split_vertically</code>: Uniteを縦分割で開始します</li>
+<li><code>if</code>の行: unite.vimがインストールされているときのみ以下のキーマッピングを行う</li>
+<li><code>nnoremap</code>の行: <code>sc</code>で<code>:Unite colorscheme font</code>を実行するようにします。このように、<code>:Unite</code>コマンドには複数のsourceを指定することができます</li>
+</ul>
+
+<h2>参考</h2>
+
+<p>neocomplcacheはcolorscheme補完が可能です。また、tabpagecolorschemeというさらに便利なプラギンも存在します。これについてはのちのち説明します。</p>
+
+<address class="hack-author">ujihisa</address>

@@ -1,0 +1,88 @@
+---
+layout: post
+title: Hack #200:#58; 候補を選択し、実行する
+date: 2011-02-10
+author: ujihisa
+---
+<p>200番目のHackです。これまであなたは199ものHackを習得してきました。さらなる高みを目指して、日々修練を怠らないようにしましょう。</p>
+
+<h2>概要</h2>
+
+<p>Vimでは多くの操作が「何を行うか決め、その後候補を指定する」というものになっています。たとえばファイル<code>a.txt</code>を別のバッファに開くならば、<code>:new a.txt</code>などというコマンドを実行することになります。まず先に<code>:new</code>を打鍵し、つまり「別のバッファに開く」という動作を決め、その後対象となるファイルを入力します。このとき、Vim組み込みの補完は、<code>:new</code>という先立つ入力をもとに、後に入力されるものはファイル名と分かりきっていることから、ファイル名のための補完を行ってくれます。かゆいところに手が届く支援もあり、また無駄な操作が存在せず、非常に効率的かつ快適です。</p>
+
+<p>一方、近年Vim業界で幅を利かせつつある<a href="http://github.com/shougo/unite.vim">unite</a>というプラギンが存在します。全てを統合し破壊するフレームワークなどと呼ばれていて、なんのことかよくわからずとりあえず見送っている方も多いのではないでしょうか。</p>
+
+<p>uniteはこのような視点で見てみることで理解が容易になるかもしれません。従来のVimの多くの操作とと違い、「候補を選択し、それから実行する」ための機能を提供するためのフレームワークだ、という見方です。</p>
+
+<p>uniteコアは枠組みを提供するのみで、実際にユーザが触れるのは個別のuniteプラギンでしょう。uniteというとuniteコアを指し、unite-fileというとuniteのfileプラギンのことを指します。uniteコアをインストールすると、特に意識することなく標準添付のプラギンがいくつか何の設定もなしに動作します。</p>
+
+<p>以下の各セクションで、対象の種類に大雑把にわけてuniteプラギンの使い方について説明します。</p>
+
+<h2>ファイルを操作するuniteプラギン</h2>
+
+<p>標準添付のunite-fileというプラギンがあります。</p>
+
+<pre><code>:edit a.txt
+</code></pre>
+
+<p>のかわりに、まず以下のコマンドでunite窓を開きます。</p>
+
+<pre><code>:Unite file
+</code></pre>
+
+<p>カレントディレクトリのファイル一覧がでてきます。</p>
+
+<p><img src="http://gyazo.com/9b9a9cb261ed8b219dbcfb3023af2dd8.png" alt="" /></p>
+
+<p>つづいて、<code>j</code>や<code>k</code>で項目間を移動し、今回対象として取り扱いたい<code>a.txt</code>のところにカーソルを移動します。つづいて、<kbd>&lt;tab&gt;</kbd>を打鍵します。</p>
+
+<p><img src="http://gyazo.com/c5c000170f28926aaf83d0c47bc5fcbb.png" alt="" /></p>
+
+<p>そのファイルに対して「何ができるか」の一覧がでてきました。今回行いたいのはそのファイルを開くことですので、openと打鍵して<kbd>&lt;cr&gt;</kbd>します。なお、他のコマンドとかぶらない程度に省略することができます。<code>o</code>で十分です。</p>
+
+<p>以上でunite上でファイルの操作を行うことができることがわかりました。この説明だけを聞くと、「単に手順が増えただけじゃないか」と思うかもしれません。著者もそうでした。</p>
+
+<p>また、<code>j</code>, <code>k</code>で項目間を移動するだけでなく、<code>i</code>を打鍵してInsert mode(*1)に入ってから適当な文字列を入力することで、その文字列で候補を絞り込むことができます。今回対象は<code>a.txt</code>と<code>b.txt</code>の二つのみですので、<code>a</code>と一文字打鍵するだけで候補が完全に<code>a.txt</code>のみに絞られます。</p>
+
+<p>カレントディレクトリにあるファイルを<code>:Unite file</code>で開くだけならば、<code>:edit</code>の方が良いでしょう。しかし、もうすこし複雑な例になると、uniteの優位性がじわじわと上回ってきます。</p>
+
+<p>標準添付にunite-file_recというプラギンがあります。これはカレントディレクトリ以下のファイルを再帰的にすべて探索するという点を除いてunite-fileとほぼ全く同等です。</p>
+
+<p>unite-file_recはかなり強力で、筆者は一日に少なくとも1000回は使用しています。<code>:edit</code>でいちいち深いディレクトリをもぐってファイルを開く必要はありません。また、カレントディレクトリ以下のファイル数が非常に多くとも、探索が非同期で行われるため、Vimが固まることはありません。</p>
+
+<p>さらに、previewモードというものが存在します。<code>:Unite</code>コマンド時に<code>-auto-preview</code>というオプションを指定すると、カーソルを移動するたびにunite窓の少ししたに小さなウインドウが現れ、そこにファイルの中身の一部が表示されます。</p>
+
+<h2>ファイル以外のものを操作するuniteプラギン</h2>
+
+<p>筆者が頻繁に使うものの例は<code>unite-colorscheme</code>です。これについて詳しくは <a href="http://vim-users.jp/2011/01/hack196/">Hack #196: カラースキームは開発支援ツール</a> を参照ください。なお、<code>-auto-preview</code>オプション付きで起動することにより、カーソル移動するたびに実際にそのVimのcolorschemeがチラチラ変わります。(キャンセルすると元のcolorschemeに戻ります)</p>
+
+<p>また、unite-refを用いることで、ruby, haskell, perl, python, php, erlang, clojureのドキュメントをひくことができます。英和辞書、manもついていてお買い得です(*2)。これは<a href="https://github.com/thinca/vim-ref">ref.vim</a>というVimプラギンが既に存在し、そのプラギンがuniteで利用可能になっているという構造になっています。以下の図は例としてrefで<code>&gt;&gt;=</code>で検索してみたところです。Haskellの例がいくつか見つかっていますね。</p>
+
+<p><img src="http://gyazo.com/4f1a7c4c48beee85371dc1695ccbde41.png" alt="" /></p>
+
+<p>他にも参考になるプラギンと対応する記事を羅列します。</p>
+
+<ul>
+<li>unite-help <a href="http://vim-users.jp/2011/02/hack199/">Hack #199: :helpに慣れ親しむ</a>
+<ul>
+<li><code>:help</code>コマンドの説明をしていますが、<code>:help</code>そのものを使わずとも、unite-helpで気楽にhelpをひきましょう。</li>
+</ul>
+</li>
+</ul>
+
+<h2>類似のフレームワークとの比較</h2>
+
+<p>候補を選択し、何かを実行するためのフレームワークは他にもいくつかあります。これについて詳しくは <a href="http://vim-users.jp/2010/12/hack189/">Hack #189 : Emacsのプラグインに対応するVimプラグイン</a>を参照ください。uniteの作者自らによる解説があり、必見です。</p>
+
+<h2>新たなuniteプラギンの開発</h2>
+
+<p>これについて詳しくは <a href="http://vim-users.jp/2011/01/hack197/">Hack #197: unite.vim の source を作成する</a> を参照ください。</p>
+
+<h2>脚注</h2>
+
+<ul>
+<li>(*1) 厳密にはInsert modeではなくNarrowing modeと呼ばれるunite独自の特殊な疑似モードです</li>
+<li>(*2) いまなら送料無料です</li>
+</ul>
+
+<address class="hack-author">ujihisa</address>

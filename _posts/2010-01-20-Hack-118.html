@@ -1,0 +1,47 @@
+---
+layout: post
+title: Hack #118:#58; ホームディレクトリをラクに入力する
+date: 2010-01-20
+author: ujihisa
+---
+<h2>問題</h2>
+
+<p>Vimのコマンドラインでホームディレクトリを入力する機会は比較的多いものの、<code>~/</code>という文字列を見ただけで小指に疲労が走ってくるのは、ほとんどのVimユーザに共通するのではないでしょうか。
+もしも入力しやすいキー、例えばバックスラッシュなどで一発で<code>~/</code>が入力できれば、どんなに素晴らしいことでしょうか。</p>
+
+<h2>解決</h2>
+
+<p>以下のコードを<code>~/.vimrc</code>に記述することで、コマンドラインモードでバックスラッシュで<code>~/</code>が入力できる上、<code>~/</code>が来て欲しくなさそうなところではそのままバックスラッシュが入力されます。</p>
+
+<pre><code>function! HomedirOrBackslash()
+if getcmdtype() == ':' &amp;&amp; (getcmdline() =~# '^e ' || getcmdline() =~? '^r\?!' || getcmdline() =~? '^cd ')
+return '~/'
+else
+return '\'
+endif
+endfunction
+cnoremap &lt;expr&gt; &lt;Bslash&gt; HomedirOrBackslash()
+</code></pre>
+
+<p>この設定を有効にしたVimで<kbd>:e \</kbd>と打鍵すると、ただちに<code>:e ~/</code>に展開されます。
+また、<kbd>:s/\</kbd>と打鍵した場合は、<code>:s/\</code>とそのままになります。(<code>:s/~/</code>のように展開されません)</p>
+
+<h2>発展</h2>
+
+<p>本Hackは<a href="http://twitter.com/cho45">cho45</a>さんの<code>.zshrc</code>へのハックへのアナロジーで考案されました。
+残念ながら現在cho45さんの最新版の<code>.zshrc</code>にはそのコードは存在していないようですが、
+<a href="http://github.com/cho45/dotfiles/blob/9bc3ecc93d2c67d3500ee3655f3a709787fe35d0/.zshrc#L239">少し古いところ</a>に残っています。
+著者の手元の<code>.zshrc</code>から引用すると、以下のようなコードでした。</p>
+
+<pre><code>expand-to-home-or-insert () {
+if [ &quot;$LBUFFER&quot; = &quot;&quot; -o &quot;$LBUFFER[-1]&quot; = &quot; &quot; ]; then
+LBUFFER+=&quot;~/&quot;
+else
+zle self-insert
+fi
+}
+zle -N expand-to-home-or-insert
+bindkey &quot;\\&quot;  expand-to-home-or-insert
+</code></pre>
+
+<address class="hack-author">ujihisa</address>

@@ -1,0 +1,91 @@
+---
+layout: post
+title: Hack #135:#58; ]で補完する
+date: 2010-03-29
+author: ujihisa
+---
+<p>多くの方は<kbd>Tab</kbd>キーを補完のために使うため、以下のような設定をしていると思います。</p>
+
+<pre><code>inoremap &lt;Tab&gt; &lt;C-n&gt;
+</code></pre>
+
+<p><kbd>Tab</kbd>キーを打鍵し続けると、左手小指が破壊されます。公平のため、右手小指も使うべきではないでしょうか。<kbd>Tab</kbd>キーと対称な位置にあるキーは<kbd>[</kbd>または<kbd>]</kbd>です。後述する理由のため、<kbd>]</kbd>を<kbd>Tab</kbd>キーのかわりに補完用のキーに設定してみましょう。</p>
+
+<p>まずは素直に、先ほどの<kbd>Tab</kbd>キーと同様の方法で設定します。</p>
+
+<pre><code>inoremap ] &lt;C-n&gt;
+</code></pre>
+
+<p>これは便利なのですが、本当に<kbd>]</kbd>を入力したいときに、<kbd>&lt;C-v&gt;]</kbd>と打鍵しなければならないのがつらいです。</p>
+
+<h2>解決法1</h2>
+
+<p>そもそも<kbd>]</kbd>を入力しないで済むように、自動で入力するようにします。</p>
+
+<pre><code>inoremap [ []&lt;Left&gt;
+</code></pre>
+
+<p><kbd>[</kbd>を入力した時点で自動的に<kbd>]</kbd>が入力されるので、<kbd>]</kbd>を手動で入力する必要がなくなります。
+大抵の場合は<kbd>]</kbd>は対応する<kbd>[</kbd>があってこそ意味があるので、この解決方法でうまくいくことでしょう。</p>
+
+<h2>解決法2</h2>
+
+<p>実際には、勝手に<kbd>]</kbd>が入力されてしまうのは直感に反するとして嫌悪する方が多いのではないでしょうか。私がまさにそうです。
+すこし複雑ですが、以下のような対処法はどうでしょうか。</p>
+
+<ol>
+<li>通常は<kbd>]</kbd>が<kbd>&lt;C-n&gt;</kbd>として動作する</li>
+<li>カーソル位置より手前に閉じていない<kbd>[</kbd>があれば、<kbd>]</kbd>は<kbd>]</kbd>として動作する</li>
+</ol>
+
+<p>これを実現するには、<code>~/.vimrc</code>に以下を記述します。</p>
+
+<pre><code>inoremap &lt;expr&gt; ] searchpair('\[', '', '\]', 'nbW', 'synIDattr(synID(line(&quot;.&quot;), col(&quot;.&quot;), 1), &quot;name&quot;) =~? &quot;String&quot;') ? ']' : &quot;\&lt;C-n&gt;&quot;
+</code></pre>
+
+<p>ちょっとややこしいので、具体例で動作を説明します。</p>
+
+<p>カーソル位置を<kbd>_</kbd>とします。まず、</p>
+
+<pre><code>aaa[bbb_
+</code></pre>
+
+<p>この状態で<kbd>]</kbd>を打鍵すると、</p>
+
+<pre><code>aaa[bbb]_
+</code></pre>
+
+<p>となります。いっぽう、</p>
+
+<pre><code>aaa bbb_
+</code></pre>
+
+<p>この状態で<kbd>]</kbd>を打鍵すると、</p>
+
+<pre><code>aaa bbba
+|bbbb|
+|bbbc|
+|bbbd|
++----+
+</code></pre>
+
+<p>このように補完のポップアップメニューが出てきます。</p>
+
+<p>また、&quot;&quot;で囲まれた部分は無視します。</p>
+
+<pre><code>&quot;[&quot;.t_
+</code></pre>
+
+<p>この状態で<kbd>]</kbd>を打鍵すると、</p>
+
+<pre><code>&quot;[&quot;.t]_
+</code></pre>
+
+<p>ではなく、補完がはじまります。</p>
+
+<h2>謝辞</h2>
+
+<p>thincaさんの添削により、オリジナルで32行だった実装が1行になりました。そのときの履歴はこちらを参照ください。
+<a href="https://gist.github.com/24e46f72cc08e53c59a1">https://gist.github.com/24e46f72cc08e53c59a1</a></p>
+
+<address class="hack-author">ujihisa</address>

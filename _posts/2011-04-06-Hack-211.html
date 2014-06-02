@@ -1,0 +1,56 @@
+---
+layout: post
+title: Hack #211:#58; Haskellでimportするモジュールや関数をその場で調べつつ入力する
+date: 2011-04-06
+author: ujihisa
+---
+<h2>問題</h2>
+
+<p>Haskellで、標準添付ライブラリを含むなんらかの外部モジュールを利用するためにはimport文を記述する必要があります。例えばData.ListモジュールのunionとunionByという関数を使用するためには、</p>
+
+<pre><code>import Data.List (union, unionBy)
+</code></pre>
+
+<p>と記述します。また、Data.Listの全ての関数をLという名前に限定してimportするには、import qualified ~ as文を使います。</p>
+
+<pre><code>import qualified Data.List as L
+</code></pre>
+
+<p>いずれにせよ、importするためには事前に</p>
+
+<ul>
+<li>importするモジュール名</li>
+<li>(必要に応じて) そのモジュールからimportする関数名</li>
+</ul>
+
+<p>を知っておく必要があります。非常に面倒な作業です。</p>
+
+<h2>解決</h2>
+
+<p><a href="http://twitter.com/eagletmt">eagletmt</a>さんの開発した、neco-ghcというVimプラギンを導入します。</p>
+
+<ul>
+<li>安定版 <a href="http://www.vim.org/scripts/script.php?script_id=3423">http://www.vim.org/scripts/script.php?script_id=3423</a></li>
+<li>開発版 <a href="http://github.com/ujihisa/neco-ghc">http://github.com/ujihisa/neco-ghc</a></li>
+</ul>
+
+<p><img src="http://gyazo.com/17a8bf08f3a6d5e123346f5f1c74c5f9.png" alt="Auto completion with neco-ghc" /></p>
+
+<p><img src="http://gyazo.com/d3698892a40ffb8e4bef970a02198715.png" alt="Auto completion with neco-ghc" /></p>
+
+<p><img src="http://gyazo.com/bc168a8aad5f38c6a83b8aa1b0fb14f6.png" alt="Auto completion with neco-ghc" /></p>
+
+<p>上記画像を見ていただければ、説明するまでもないでしょう。</p>
+
+<pre><code>import&lt;space&gt;
+</code></pre>
+
+<p>まで打鍵した時点で、自動でモジュールの一覧が補完候補に現れます。括弧を書くと、自動でそのモジュールの関数一覧が補完候補に現れます。これらの動作はかなり高速です。</p>
+
+<p>また、importした関数が地の文で補完可能となります。このとき、どのモジュール由来の関数なのかも分かります。至れりつくせりです。</p>
+
+<h2>参考</h2>
+
+<p>Haskellのimport文についての仕様は<a href="http://www.haskell.org/onlinereport/haskell2010/">Haskell 2010 Language Report</a>をご覧ください。なお、neco-ghcがこの仕様のすべてを満たしている保証はありませんが、問題を発見し次第github上でpull requestを送っていただけたりすると大変助かります。</p>
+
+<address class="hack-author">ujihisa</address>

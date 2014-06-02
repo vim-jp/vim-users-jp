@@ -1,0 +1,66 @@
+---
+layout: post
+title: Hack #235:#58; リストの要素の総和や総乗を簡単に求める
+date: 2011-10-10
+author: ujihisa
+---
+<p>こんにちは、ujihisaです。無事引っ越しが完了しましたが、インターネット回線の確保にはもうしばらく時間がかかるらしく、しばらく家でオフラインな状態です。ちなみに来日することが決まりました。<a href="http://atnd.org/events/20567">こんな</a>カンファレンスや、<a href="http://cotocoto.jp/event/46351">勉強会</a>を企画してみました。いずれも来月です。ふるってプレゼンに応募ください。</p>
+
+<h2>問題</h2>
+
+<p>リスト<code>list</code>の和は、他の言語ならば以下のようにして求めることが一般的です。</p>
+
+<ul>
+<li>Ruby
+<ul>
+<li><code>list.inject(:+)</code></li>
+<li>これは <code>list.inject {|i, j| i + j }</code>の意。<code>Enumerable#inject</code>の特殊用法</li>
+<li><code>list.inject(0, :+)</code></li>
+<li>同じくこれは <code>list.inject(0) {|i, j| i + j }</code>の意。</li>
+</ul>
+</li>
+<li>Haskell
+<ul>
+<li><code>foldl1 (+) list</code></li>
+<li>これは<code>foldl1 (\i j -&gt; i + j) list</code>の意。言語仕様として演算子は括弧でくくるだけで2引数関数のような振る舞いになる(*1)。</li>
+<li><code>sum list</code></li>
+</ul>
+</li>
+<li>Python
+<ul>
+<li><code>reduce(lambda a, b: a + b, list)</code></li>
+<li><code>sum(list)</code>
+と、<code>sum</code>といった直接的な方法がサポートされているかは別にして、なんらかの「リストと関数を受け取り、(リストに限らない)なんらかの値を返す」関数が提供されるのが一般的であることがわかります。</li>
+</ul>
+</li>
+</ul>
+
+<p>Vim scriptには残念ながらそういった関数が標準では提供されていないようです。どうすればよいでしょうか。</p>
+
+<h2>解決</h2>
+
+<p>vital.vimという、プラギン埋め込み型の汎用ライブラリを使います。</p>
+
+<ul>
+<li><a href="https://github.com/ujihisa/vital.vim">https://github.com/ujihisa/vital.vim</a></li>
+<li><a href="http://d.hatena.ne.jp/thinca/20110310/1299768323">http://d.hatena.ne.jp/thinca/20110310/1299768323</a></li>
+</ul>
+
+<p>前述の問題を解決するには、vitalのData.Listモジュールを用いるのがよいでしょう。Data.Listの上記要件を満たす関数は以下の4つで、意味はそれぞれHaskellのPreludeに定義されているものと同じです。</p>
+
+<ul>
+<li>foldl</li>
+<li>foldl1</li>
+<li>foldr</li>
+<li>foldr1</li>
+</ul>
+
+<p>たとえば<code>foldl1</code>を用いると、以下のようにしてリストlistの要素の値の総和を求めることができます。</p>
+
+<pre><code>let L = vital#of('プラギン名').import('Data.List')
+echo L.foldl1('v:memo + v:val', list)
+</code></pre>
+
+<p>非常に書きやすく読みやすく、理想的です。なお、実験的にvitalを用いる場合は、vitalを<code>&amp;rtp</code>に入れた上で<code>vital#of('vital')</code>とするとそのvitalを読み込むことができます。</p>
+
+<address class="hack-author">ujihisa</address>

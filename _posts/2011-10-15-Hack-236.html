@@ -1,0 +1,92 @@
+---
+layout: post
+title: Hack #236:#58; 短期間でVim script力を向上する
+date: 2011-10-15
+author: ujihisa
+---
+<p>こんにちは、ujihisaです。この記事はGentoo上で執筆しています。ちなみに来日することが決まりました。<a href="http://atnd.org/events/20567">こんな</a>カンファレンスや、<a href="http://cotocoto.jp/event/46351">勉強会</a>を企画してみました。いずれも来月です。</p>
+
+<h2>問題</h2>
+
+<p>Vim scriptというプログラミング言語の能力を高める効率的な方法はあるのでしょうか?</p>
+
+<p><a href="http://www.amazon.co.jp/Vim%E3%83%86%E3%82%AF%E3%83%8B%E3%83%83%E3%82%AF%E3%83%90%E3%82%A4%E3%83%96%E3%83%AB-%EF%BD%9E%E4%BD%9C%E6%A5%AD%E5%8A%B9%E7%8E%87%E3%82%92%E3%82%AB%E3%82%A4%E3%82%BC%E3%83%B3%E3%81%99%E3%82%8B150%E3%81%AE%E6%8A%80-Vim%E3%82%B5%E3%83%9D%E3%83%BC%E3%82%BF%E3%83%BC%E3%82%BA/dp/4774147958">Vimテクニックバイブル</a>も既に完読してしまい、次にやるべきことを見失っている読者も多いかもしれません。</p>
+
+<h2>解決</h2>
+
+<p>Project Eulerというオンラインの問題集があります。オンラインで答え合わせもできます。</p>
+
+<ul>
+<li><a href="http://projecteuler.net/">http://projecteuler.net/</a></li>
+</ul>
+
+<p>ぜひこれにVim scriptで挑戦してみましょう。以下に問1の回答例を示します。</p>
+
+<p>(もっと良い回答を思いついた、という方はぜひコメントやトラックバックで示してください。楽しみにしています!)</p>
+
+<h2>問1</h2>
+
+<p><a href="http://projecteuler.net/problem=1">http://projecteuler.net/problem=1</a></p>
+
+<blockquote>
+<p>If we list all the natural numbers below 10 that are multiples of 3 or 5, we get 3, 5, 6 and 9. The sum of these multiples is 23.</p>
+
+<p>Find the sum of all the multiples of 3 or 5 below 1000.</p>
+</blockquote>
+
+<p>回答例1</p>
+
+<p><code>range()</code>で1から1000までの数値の配列を作り、それをもとに<code>for</code>で加算していきます。</p>
+
+<pre><code>function! s:p1()
+let memo = 0
+for i in range(1, 999)
+if i % 3 == 0 || i % 5 == 0
+let memo += i
+endif
+endfor
+return memo
+endfunction
+
+echo s:p1()
+</code></pre>
+
+<p>これを<code>filetype=vim</code>なバッファで作成し、最後にquickrunしましょう。そこには答えがでているはずです。</p>
+
+<p>回答例1</p>
+
+<p><code>filter()</code>を使います。</p>
+
+<pre><code>function! s:p1()
+let memo = 0
+let list = filter(range(1, 999), 'v:val % 3 == 0 || v:val % 5 == 0')
+for i in list
+let memo += i
+endfor
+return memo
+endfunction
+
+echo s:p1()
+</code></pre>
+
+<p>さっきよりも見通しのよいコードになったでしょう。lambdaがなくて文字列になってしまうのがちょっと困りものですが…。</p>
+
+<p>さて、この調子で<code>for</code>を消せると考えた人も多くいるかもしれません。そうです、つい5日前に読んだ<a href="http://vim-users.jp/2011/10/hack235/">Hack #235</a>を思い出しましょう。vitalを使います。</p>
+
+<pre><code>function! s:p1()
+let L = vital#of('vital').import('Data.List')
+let list = filter(range(1, 999), 'v:val % 3 == 0 || v:val % 5 == 0')
+return L.foldl1('v:memo + v:val', list)
+endfunction
+
+echo s:p1()
+</code></pre>
+
+<p>もうここまできたら一行にしたくなるのが人情ですよね。</p>
+
+<pre><code>echo vital#of('vital').import('Data.List').foldl1('v:memo + v:val', filter(range(1, 999), 'v:val % 3 == 0 || v:val % 5 == 0'))
+</code></pre>
+
+<p>ほかにも多くの解法があると思います。読みやすくかつ短いコードを高速で書くことができるよう、日々鍛錬あるのみです。</p>
+
+<address class="hack-author">ujihisa</address>

@@ -1,0 +1,83 @@
+---
+layout: post
+title: Hack #196:#58; カラースキームは開発支援ツール
+date: 2011-01-21
+author: ujihisa
+---
+<p>センター試験も終わり、受験生の方々はマークシート上でVimが使えればどんなに良いだろうと夢想にふける時期は過ぎ、もはや春の暖かさすら感じる今日このごろです。こちらVancouverは気温が異常に高まっており、既にTシャツで外を歩けるくらいです。</p>
+
+<p>さて、春が近づいているにも関わらず、ひょっとしてあなたのVimのcolorschemeは冬の寒々とした配色のままになっているのではないでしょうか? 私もです。</p>
+
+<h2>概要</h2>
+
+<p><a href="http://vim-users.jp/2010/12/hack188/">Hack #188: 見た目を気軽に変更する</a>にて、Vimのフォントとカラースキームを変更する方法について議論しました。ここではさらに一歩進み、カラースキームを用いていかに開発効率を高めるかについて議論します。</p>
+
+<h2>黒背景vsその他の配色</h2>
+
+<p>多くの方は<code>desert</code>などの黒背景のカラースキームを用いていると思います。私もです。</p>
+
+<p><img src="http://gyazo.com/c3a8d543228b3c82af9fd879756b8b88.png" alt="" /></p>
+
+<p>黒背景のカラースキームが好まれるのは以下の3つの理由が挙げられます。</p>
+
+<ul>
+<li>長時間見つめていても目が疲れない (EP消費の節約)</li>
+<li>ターミナルの背景が黒だった。Vimはもともとターミナルで動いていた (歴史的事情)</li>
+<li>なんとなくテンションがあがる (どや)</li>
+</ul>
+
+<p>しかしながら、多くの他のGUIアプリケーションは黒背景ではないです。特にウェブページなどは、白背景の方がモダンでイケている印象を与えるとさえいわれています(<em>1)。
+いずれにせよVim以外の他のほとんどのアプリケーションが白背景であるのならば、フォーカスを変更するたびにダイナミックに視界全体の色使いが変わるため、かえって目が疲れるのではないかという問題点も指摘されています(</em>2)。</p>
+
+<p>思い切って先入観を捨て、黒背景以外のカラースキームも試してみると、長い目でみての開発効率の向上がみられるかもしれません。著者のおすすめの明るいカラースキームは、<code>newspaper</code>と<code>pyte</code>です。</p>
+
+<p><img src="http://gyazo.com/257c1f9fae6e7ac0198f583b1caeb685.png" alt="newspaper" />
+<img src="http://gyazo.com/cef2aecfa95affca69c3f034a63e7733.png" alt="pyte" /></p>
+
+<h2>tabpagecolorscheme</h2>
+
+<p>読者のほとんどの方は<code>TabpageCD</code>などを用いていると思います。Vimのタブごとにディレクトリ情報を持たせ、このタブではこのディレクトリ、またこちらのタブではこちらのディレクトリ、といったようにタブごとに別のカレントディレクトリを保持させたままにすることで、複数のプロジェクトを容易に並行していじることができます。</p>
+
+<p>同様に、タブごとにカラースキーム情報を保持させる<code>tabpagecolorscheme</code>というプラギンがあります。</p>
+
+<ul>
+<li><a href="http://www.vim.org/scripts/script.php?script_id=3358">http://www.vim.org/scripts/script.php?script_id=3358</a></li>
+</ul>
+
+<p>通常は</p>
+
+<pre><code>:colorscheme ujihisa
+</code></pre>
+
+<p>などとしてカラースキームを指定するところを、</p>
+
+<pre><code>:Tcolorscheme ujihisa
+</code></pre>
+
+<p>とすることによって、カレントタブのためのカラースキームを指定することができます。</p>
+
+<p>もっとも、わざわざ上記のようなコマンドを直接打鍵することは稀でしょう。
+このプラギンと<code>unite-colorscheme</code>を連携させることで、<code>:Unite colorscheme</code>からカレントタブのためのカラースキームを指定することができます。</p>
+
+<h2>補足: unite-beautiful-attack</h2>
+
+<p>カラースキームの無限の可能性を示してくれる実験的プラギン<code>unite-beautiful-attack</code>というものがあります。</p>
+
+<p><object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" width="480" height="296" id="utv373242" name="utv_n_204421"><param name="flashvars" value="loc=%2F&amp;autoplay=false&amp;vid=11358539&amp;locale=en_US&amp;hasticket=false&amp;id=11358539&amp;v3=1" /><param name="allowfullscreen" value="true" /><param name="allowscriptaccess" value="always" /><param name="src" value="http://www.ustream.tv/flash/viewer.swf" /><embed flashvars="loc=%2F&amp;autoplay=false&amp;vid=11358539&amp;locale=en_US&amp;hasticket=false&amp;id=11358539&amp;v3=1" width="480" height="296" allowfullscreen="true" allowscriptaccess="always" id="utv373242" name="utv_n_204421" src="http://www.ustream.tv/flash/viewer.swf" type="application/x-shockwave-flash" /></object></p>
+
+<ul>
+<li>unite-beautiful-attack <a href="https://github.com/ujihisa/config/blob/master/_vimrc#L1204">https://github.com/ujihisa/config/blob/master/_vimrc#L1204</a></li>
+</ul>
+
+<p>uniteで項目間を移動するたびにカラースキームがかわり、画面がキラキラし、大変便利です。</p>
+
+<p>一時的にカラースキームを変更し、またすぐもとに戻すというテクニックは汎用的に使えます。あなたのプラギンがもつユーザインタフェースの可能性を無限に拡大するために第一歩となるでしょう。</p>
+
+<h2>脚注</h2>
+
+<ul>
+<li>(*1) 要出典</li>
+<li>(*2) 要出典</li>
+</ul>
+
+<address class="hack-author">ujihisa</address>
