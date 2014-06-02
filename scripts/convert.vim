@@ -60,8 +60,13 @@ function! s:convert(f) abort
   let author = s:author(a:f, lines)
   let text = s:text(a:f, lines)
   let text = substitute(text, '\(src\|href\)=''\([^'']\+\)''', '\1="\2"', 'g')
-  let text = substitute(text, '\(src\|href\)="/web/.\{-}\(http://[^"]\+\)"', '\1="\2"', 'g')
-  let text = substitute(text, '\(src\|href\)="/web/.\{-}\(https://[^"]\+\)"', '\1="\2"', 'g')
+  let text = substitute(text, '\(src\|href\)="/web/[^"]\+/\(http://[^"]\+\)"', '\1="\2"', 'g')
+  let text = substitute(text, '\(src\|href\)="/web/[^"]\+/\(https://[^"]\+\)"', '\1="\2"', 'g')
+  let text = substitute(text, '{{{', '\\{\\{\\{', 'g')
+  let text = substitute(text, '{{', '\\{\\{', 'g')
+  let text = substitute(text, '}}}', '\\}\\}\\}', 'g')
+  let text = substitute(text, '}}', '\\}\\}', 'g')
+  let text = substitute(text, 'src="http://vim-users.jp/wp-content/uploads/', '/vim-users-jp/assets/images/', 'g')
   let short = substitute(title, ':.*', '', 'g')
   let dict = [
   \ ['東京都渋谷', 'tokyo-shibuya'],
@@ -85,26 +90,26 @@ function! s:convert(f) abort
     let short = substitute(short, item[0], item[1], 'g')
   endfor
   let short = substitute(short, '[^a-zA-Z0-9_]\+', '-', "g")
-  let fname = "_posts/" . date . "-" . short . ".md"
+  let fname = "_posts/" . date . "-" . short . ".html"
   let fname = substitute(fname, '--*', '-', "g")
-  let fname = substitute(fname, '-\.md$', '.md', "g")
+  let fname = substitute(fname, '-\.html$', '.html', "g")
   let lines = [
   \  "---",
   \  "layout: post",
-  \  "category: vim-users-jp",
-  \  printf("title: %s", title),
+  \  "category: vimusersjp",
+  \  printf("title: %s", substitute(title, ':', '&#58;', 'g')),
   \  printf("date: %s", date),
   \  printf("author: %s", author),
   \  "---",
   \] + split(text, "\n")
-  call writefile(lines, fname)
+  call writefile(map(lines, 'iconv(v:val, &encoding, "utf-8")'), fname)
 endfunction
 
 function! s:scan() abort
-  for f in split(glob("_posts/*.md"), "\n")
+  for f in split(glob("_posts/*.html"), "\n")
     call delete(f)
   endfor
-  for f in split(glob("index.html*"), "\n")
+  for f in split(glob("_original/index.html*"), "\n")
     call s:convert(f)
   endfor
 endfunction

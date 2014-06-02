@@ -1,0 +1,420 @@
+body {
+  padding: 1em;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  color: #000;
+}
+
+h1 {
+  font-size: 2.0em;
+  font-weight: bold;
+  margin: 0em 0em 1.2em 0em;
+}
+
+h2 {
+  font-size: 1.3em;
+  margin: 1.2em 0em 1.2em 0em;
+  font-weight: bold;
+}
+
+h3 {
+  font-size: 1.0em;
+  margin: 1.2em 0em 1.2em 0em;
+  font-weight: bold;
+}
+
+h4 {
+  font-size: 0.95em;
+  margin: 1.2em 0em 1.2em 0em;
+  font-weight: bold;
+}
+
+h5 {
+  font-size: 0.9em;
+  margin: 1.2em 0em 1.2em 0em;
+  font-weight: bold;
+}
+
+h6 {
+  font-size: 0.85em;
+  margin: 1.2em 0em 1.2em 0em;
+  font-weight: bold;
+}
+
+img {
+  border: 0;
+}
+
+ol, ul, li {
+  font-size: 1.0em;
+  line-height: 1.3em;
+  margin-top: 0.2em;
+  margin-bottom: 0.1em;
+}
+
+p {
+  font-size: 1.0em;
+  line-height: 1.5em;
+  margin: 1.2em 0em 1.2em 0em;
+}
+
+li > p {
+  margin: 0.2em 0 0.2em 0;
+}
+
+pre {
+  font-family: monospace;
+  font-size: 1.4em;
+  overflow: auto;
+}
+
+strong, b {
+  font-weight: bold;
+}
+
+form textarea {
+  text-align: left;
+}
+
+#content {
+  float: left;
+  clear: left;
+  margin: 0px -400px 0px 0px;
+  width: 100%;
+}
+
+.entry {
+  padding-right: 290px;
+}
+
+.links>div {
+  float: right;
+  clear: right;
+  width: 250px;
+  background: #eee;
+  padding: 10px;
+  margin-bottom: 20px;
+  -webkit-border-radius: 8px;
+  -moz-border-radius: 8px;
+  border-radius: 8px;
+  border: 1px solid #aaa;
+}
+
+#footer {
+  text-align: center;
+}
+
+.body {
+  overflow:hidden;
+}
+
+a, a:link {
+  color: #6699cc;
+  text-decoration: none;
+}
+a:active, a:hover {
+  color: #669933;
+  text-decoration: underline;
+}
+a:visited {
+  color: #8899aa;
+}
+
+code {
+ margin: 1px;
+ padding: 2px;
+ line-height: 1.4em;
+ border: solid 1px #ccc;
+}
+pre>code {
+ border: 0px;
+}
+pre {
+ color: white;
+ background-color: black;
+ padding: 0.5em;
+}
+
+.entry-logo {
+  float: left;
+  margin-right: 10px;
+  margin-bottom: 10px;
+}
+
+br.clear {
+ clear: both;
+}
+
+.linkList dt {
+ margin: 0 0 0.8em;
+ width: 7.5em;
+ border-left: solid 8px #aaa;
+ padding-left: 5px;
+ white-space: nowrap;
+}
+.linkList dt a {
+ color: #0000aa;
+ font-weight: bold;
+}
+.linkList dd {
+ margin: 0 0 1em 0.5em;
+}
+
+#about span a {
+ border-left: solid 8px #aaa;
+ padding-left: 5px;
+ white-space: nowrap;
+ color: #0000aa;
+ font-weight: bold;
+}
+
+/*
+ * For starting_vim area.
+ */
+
+div.links > div > h2 {
+  margin: 0.5em 0em;
+}
+
+#starting_vim dt {
+  margin: 0.8em 0 0.4em;
+  border-left: solid 8px #aaa;
+  padding-left: 5px;
+  white-space: nowrap;
+  font-weight: bold;
+}
+
+#starting_vim dt a {
+ color: #0000aa;
+}
+
+#starting_vim dd {
+  margin: 0 0 0 0.5em;
+}
+
+#starting_vim ul {
+  -webkit-padding-start: 0px;
+  -moz-padding-start: 0px;
+  padding-start: 0px;
+  padding: 0;
+}
+
+#starting_vim li {
+  display: block;
+  margin-bottom: 10px;
+}
+
+div#VimdocJaSearch {
+  height: 28px;
+}
+
+/* Most of styles are imported from github-button. */
+.download_button,
+.download_button:link,
+.download_button:visited {
+  display: block;
+  padding: 10px;
+  border: 1px solid black;
+  /* From github-button */
+  text-decoration: none; 
+  font-weight: bold;
+  color: #fff;
+  white-space: normal; 
+  cursor: pointer; 
+  outline: none; 
+  background-color: #50bb50;
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#50bb50), to(#80cc66));
+  background-image: -moz-linear-gradient(#50bb50, #80cc66);
+  background-image: -o-linear-gradient(#50bb50, #80cc66);
+  background-image: linear-gradient(#50bb50, #80cc66);
+  filter: progid:DxImageTransform.Microsoft.Gradient(Enabled=1,GradientType=0,StartColorStr=#FF50BB50,EndColorStr=#FF80CC66);
+  -webkit-background-clip: padding;
+  -moz-background-clip: padding;
+  -o-background-clip: padding-box; 
+  /*background-clip: padding-box;*/ /* commented out due to Opera 11.10 bug */
+  -webkit-border-radius: 0.5em; 
+  -moz-border-radius: 0.5em; 
+  border-radius: 0.5em; 
+  /* IE hacks */
+  zoom: 1; 
+}
+
+.download_button:hover,
+.download_button:focus,
+.download_button:active,
+.download_button.active {
+  border-color: #30b372;
+  border-bottom-color: #2aa065;
+  text-decoration: none; 
+  font-weight: bold;
+  color: #fff; 
+  background-color: #70dd70;
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#70dd70), to(#80cc66));
+  background-image: -moz-linear-gradient(#70dd70, #80cc66);
+  background-image: -o-linear-gradient(#70dd70, #80cc66);
+  background-image: linear-gradient(#70dd70, #80cc66);
+  filter: progid:DxImageTransform.Microsoft.Gradient(Enabled=1,GradientType=0,StartColorStr=#FF70DD70,EndColorStr=#FF80CC66);
+}
+
+.download_button .info {
+  font-size: 0.75em;
+}
+
+/* @override */
+.fb_iframe_widget iframe {
+  vertical-align: baseline !important;
+}
+
+.news {
+  text-align: center;
+  font-weight: bold;
+  color: red;
+}
+
+.news a, .news a:link {
+  color: red;
+  text-decoration: none;
+}
+.news a:active, .news a:hover {
+  color: red;
+  text-decoration: underline;
+}
+.news a:visited {
+  color: red;
+}
+
+ul.entry-list li {
+  list-style-type: none;
+  font-weight: bold;
+}
+
+ul.entry-list div {
+  margin: 0.5em 1em 1em 1em;
+}
+
+ul.entry-list {
+  padding-left: 1em;
+}
+
+ul.entry-list2 {
+  padding-left: 1em;
+}
+ul.entry-list2 > li {
+  list-style-type: none;
+  font-weight: bold;
+}
+ul.entry-list2 > li > div.entry-head > div.entry-label {
+  float: left;
+}
+ul.entry-list2 > li > div.entry-head > div.entry-title {
+  padding-left: 6em;
+}
+ul.entry-list2 > li > div.entry-digest {
+  clear: both;
+  margin: 0.5em 1em 1em 1em;
+  font-weight: normal;
+}
+
+h1>a, h1>a:visited {
+  color: #454545;
+  text-decoration: none;
+}
+h1>a:active, h1>a:hover {
+  color: #777777;
+  text-decoration: none;
+}
+
+h2 {
+  color: #555555;
+  border-bottom: 2px solid #ddd;
+}
+
+div.posts h2 {
+  clear: both;
+}
+
+h2>a {
+  text-decoration: none;
+}
+
+#disqus_thread {
+  margin-top: 20px;
+  padding: 10px;
+  border: 1px #aaa solid;
+
+  -moz-border-radius: 8px;
+  -webkit-border-radius: 8px;
+  border-radius: 8px;
+}
+
+iframe.twitter-timeline {
+  width: 100%;
+}
+
+ul#patches-list {
+  padding-left: 1.5em;
+}
+
+/*
+ * for persons
+ */
+
+div.persons {
+  padding-left: 1em;
+  height: auto;
+}
+.persons:after {
+  content: "";
+  clear: both;
+  height: 0;
+  display: block;
+  visibility: hidden;
+}
+.persons div.person {
+  display: inline-block;
+  min-width: 256px;
+  max-width: 256px;
+  border: 1px solid #aaa;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+  margin: 6px;
+  padding: 6px;
+}
+.persons .person ul {
+  padding: 0px;
+  margin: 0px;
+  min-height: 50px;
+  overflow: hidden;
+}
+.persons .person ul > li {
+  list-style-type: none;
+  padding: 0px;
+  margin: 0px;
+}
+.persons .person li.link {
+  display: inline;
+  margin-left: 4px;
+  white-space: nowrap;
+}
+.persons .person .faceicon {
+  float: left;
+}
+.persons .person .faceicon img {
+  width: 48px;
+  height: 48px;
+  margin-right: 0.5em;
+  margin-bottom: 2px;
+}
+.persons .person li.name {
+  white-space: nowrap;
+}
+.persons .person li.clear {
+  clear: both;
+  height: 0;
+  display: block;
+}
+#vimmers-container .ajax-loading {
+  text-align: center;
+}
+
+/* vim:set ts=8 sts=2 sw=2 noet: */
