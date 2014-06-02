@@ -68,6 +68,7 @@ function! s:convert(f) abort
   let text = substitute(text, '}}', '\\}\\}', 'g')
   let text = substitute(text, 'src="http://vim-users.jp/wp-content/uploads/', '/vim-users-jp/assets/images/', 'g')
   let text = substitute(text, 'http://vim-users.jp/vim-users-jp-official-lingr-chat-room/', 'http://lingr.com/room/vim', 'g')
+  let text = substitute(text, 'http://rst.gsfc.nasa.gov/Sect16/full-20earth2.jpg', 'http://vaidehiparikh.files.wordpress.com/2012/08/full-20earth2.jpg', 'g')
   let short = title
   let dict = [
   \ ['東京都渋谷', 'tokyo-shibuya'],
