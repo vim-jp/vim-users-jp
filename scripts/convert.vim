@@ -67,7 +67,7 @@ function! s:convert(f) abort
   let text = substitute(text, '}}}', '\\}\\}\\}', 'g')
   let text = substitute(text, '}}', '\\}\\}', 'g')
   let text = substitute(text, 'src="http://vim-users.jp/wp-content/uploads/', '/vim-users-jp/assets/images/', 'g')
-  let short = substitute(title, ':.*', '', 'g')
+  let short = title
   let dict = [
   \ ['東京都渋谷', 'tokyo-shibuya'],
   \ ['東京', 'tokyo'],
@@ -90,13 +90,17 @@ function! s:convert(f) abort
     let short = substitute(short, item[0], item[1], 'g')
   endfor
   let short = substitute(short, '[^a-zA-Z0-9_]\+', '-', "g")
+  if short =~ '^Hack-[0-9]\+'
+    let short = matchstr(short, 'Hack-[0-9]\+')
+  endif
+  "let short = substitute(title, ':.*', '', 'g')
   let fname = "_posts/" . date . "-" . short . ".html"
   let fname = substitute(fname, '--*', '-', "g")
   let fname = substitute(fname, '-\.html$', '.html', "g")
   let lines = [
   \  "---",
   \  "layout: post",
-  \  printf("title: %s", substitute(title, ':', '&#58;', 'g')),
+  \  printf("title: %s", substitute(title, ':', '\&#58;', 'g')),
   \  printf("date: %s", date),
   \  printf("author: %s", author),
   \  "---",
