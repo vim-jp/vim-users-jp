@@ -1,0 +1,78 @@
+---
+layout: post
+title: Hack #105:#58; surroundをより便利に使う
+date: 2009-11-29
+author: kana
+---
+<h3>問題</h3>
+
+<p><a href="http://www.vim.org/scripts/script.php?script_id=1697">Tim Pope作のsurround</a>は
+便利なのですが、実は以下のような問題点を抱えています:</p>
+
+<p>ユーザー独自の
+<a href="http://kana.github.com/config/vim/surround.html#surround-replacements">replacements</a>
+が定義できるものの、
+それを利用できるのは<code>ys</code>などの「追加」操作のみで、
+<code>cs</code>や<code>ds</code>などの
+<a href="http://kana.github.com/config/vim/surround.html#surround-targets">targets</a>
+には利用できません。
+例えば以下の設定を行なった場合、</p>
+
+<pre><code>let g:surround_{char2nr('j')} = "「\r」"
+</code></pre>
+
+<p><code>ysiwj</code>などとして「」を追加することはできるのですが、
+<code>dsj</code>で「」を削除したり、
+<code>csjb</code>で「」を別のものに置き換えることはできません。</p>
+
+<p>また、ユーザー定義のreplacementsには2キー以上のストロークを割り当てることができません。
+上記では設定例として「」を挙げましたが、
+合わせて『』や【】なども定義しておくと便利です。</p>
+
+<p>ところがユーザー定義のreplacementsには
+1キーのストロークしか割り当てることができません。
+このような設定を追加しようとすると割り当てられるキーはすぐになくなりますし、
+割り当てられたとしても覚え易く使い易いキーばかりとは限りません。</p>
+
+<p>surroundを使えば使うほど上記の2点が不便に感じられてきます。
+どうにかして解決できないでしょうか。</p>
+
+<h3>解決方法</h3>
+
+<p><a href="http://github.com/kana/vim-surround">kana版surround</a>
+を使います。</p>
+
+<p>例えばキーストロークについては以下のようにして
+2キー以上のものを割り当てることができます
+(<a href="http://kana.github.com/config/vim/surround.html#surrounding-customizing-difference">実装の都合でオリジナルとは設定方法が異なります</a>):</p>
+
+<pre><code>call SurroundRegister('g', 'jk', "「\r」")
+call SurroundRegister('g', 'jK', "『\r』")
+call SurroundRegister('g', 'js', "【\r】")
+</code></pre>
+
+<p>また、ユーザー定義のreplacementsもtargetsとして扱えます。
+例えば上記の設定をしておいた場合、
+以下のように標準のものと同様に各種操作を行なうことができます:</p>
+
+<pre><code>ujihisa
+↓         ysjk
+「ujihisa」
+↓         csjkjK
+『ujihisa』
+↓         csjKjs
+【ujihisa】
+↓         dsjs
+ujihisa
+</code></pre>
+
+<h3>参考資料</h3>
+
+<ul>
+<li><a href="http://www.vim.org/scripts/script.php?script_id=1697">surround (オリジナル)</a></li>
+<li><a href="http://github.com/kana/config/tree/vim-surround/vim/dot.vim/">surround (kana版)</a></li>
+<li><a href="http://kana.github.com/config/vim/surround.html#surround-changelog">オリジナルとの相違点</a></li>
+<li><a href="http://vimdoc.sourceforge.net/htmldoc/motion.html#text-objects">:help text-objects</a></li>
+</ul>
+
+<address class="hack-author">kana</address>
