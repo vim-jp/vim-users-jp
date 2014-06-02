@@ -1,0 +1,47 @@
+---
+layout: post
+title: Hack #159:#58; オプションの値を気にせずsplit, vsplitする
+date: 2010-07-03
+author: tyru
+---
+<p>Vimの標準のコマンドである<code>:split</code>や<code>:vsplit</code>、
+またはそのマッピング版である<code>&lt;C-w&gt;s</code>と<code>&lt;C-w&gt;v</code>は
+それぞれ<code>&amp;splitbelow</code>と<code>&amp;splitright</code>に依存しており、
+自分の思った通りの方向にウインドウを開いてくれない場合があります。</p>
+
+<p>そこで、このようなマッピングを定義します。</p>
+
+<pre><code>nmap spj &lt;SID&gt;(split-to-j)
+nmap spk &lt;SID&gt;(split-to-k)
+nmap sph &lt;SID&gt;(split-to-h)
+nmap spl &lt;SID&gt;(split-to-l)
+
+nnoremap &lt;SID&gt;(split-to-j) :&lt;C-u&gt;execute 'belowright' (v:count == 0 ? '' : v:count) 'split'&lt;CR&gt;
+nnoremap &lt;SID&gt;(split-to-k) :&lt;C-u&gt;execute 'aboveleft'  (v:count == 0 ? '' : v:count) 'split'&lt;CR&gt;
+nnoremap &lt;SID&gt;(split-to-h) :&lt;C-u&gt;execute 'topleft'    (v:count == 0 ? '' : v:count) 'vsplit'&lt;CR&gt;
+nnoremap &lt;SID&gt;(split-to-l) :&lt;C-u&gt;execute 'botright'   (v:count == 0 ? '' : v:count) 'vsplit'&lt;CR&gt;
+</code></pre>
+
+<p>こうすることでいつでも自分の思った通りの方向にウインドウを開くことができます。</p>
+
+<p>また</p>
+
+<pre><code>nmap spj &lt;SID&gt;(split-to-j)
+nmap spk &lt;SID&gt;(split-to-k)
+nmap sph &lt;SID&gt;(split-to-h)
+nmap spl &lt;SID&gt;(split-to-l)
+</code></pre>
+
+<p>の部分は自分の好きなように変えてください。
+筆者は上のようにそれぞれ<code>spj</code>, <code>spk</code>, <code>sph</code>, <code>spl</code>に割り当てています。</p>
+
+<p>追記:
+kana氏の指摘によりコードを大幅修正しました。</p>
+
+<p>追記2:
+[count]を取れるようにしました。30sphなどとすると30の幅を持つウインドウが左に開きます。
+ちなみに現在筆者はマッピングを<code>&lt;Space&gt;sj</code>, <code>&lt;Space&gt;sk</code>, <code>&lt;Space&gt;sh</code>, <code>&lt;Space&gt;sl</code>に変更しました。
+押しやすいマッピングはVimmerの数だけあるので、各人押しやすいマッピングを常に追求しましょう。
+ちょっとでも押しにくいと感じたら積極的に他のマッピングを検討すべきです。</p>
+
+<address class="hack-author">tyru</address>

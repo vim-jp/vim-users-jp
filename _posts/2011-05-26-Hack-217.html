@@ -1,0 +1,40 @@
+---
+layout: post
+title: Hack #217:#58; 横幅が長いコードをハイライトする
+date: 2011-05-26
+author: tyru
+---
+<p>表示幅に入りきらないコードは読む人に必要以上にストレスを与えます。<br />
+プログラミングの70割は読む時間だといいます。<br />
+読む人にストレスを与えないよう、<br />
+横幅が長いコードを書かないようにするにはどうすればいいでしょうか？</p>
+
+<h2>解決</h2>
+
+<p>Vim 7.3 <em>*1</em> では
+以下を.vimrcに入れると80文字以上長い列をハイライトしてくれます。</p>
+
+<pre><code>set textwidth=80
+if exists('&amp;colorcolumn')
+set colorcolumn=+1
+endif
+</code></pre>
+
+<p>どのファイルに対してもハイライトされてしまうため多少うっとうしいです。<br />
+この問題は.vimrcで<code>'textwidth'</code>を0に指定しておき、<br />
+コードを書く時のみ<code>:setlocal textwidth=80</code>とすることで回避できます。</p>
+
+<pre><code>set textwidth=0
+if exists('&amp;colorcolumn')
+set colorcolumn=+1
+" sh,cpp,perl,vim,...の部分は自分が使う
+" プログラミング言語のfiletypeに合わせてください
+autocmd FileType sh,cpp,perl,vim,ruby,python,haskell,scheme setlocal textwidth=80
+endif
+</code></pre>
+
+<ul>
+<li><em>*1</em> 7.3.175以上推奨 (<a href="http://groups.google.com/group/vim_dev/browse_thread/thread/bd3e4a5eb6d3ee8a">:setlocal cc=+1しても:newした後ハイライトが残るバグ</a>があるため)</li>
+</ul>
+
+<address class="hack-author">tyru</address>

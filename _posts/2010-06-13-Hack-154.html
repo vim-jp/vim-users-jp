@@ -1,0 +1,122 @@
+---
+layout: post
+title: Hack #154:#58; タグジャンプをさらに活用する
+date: 2010-06-13
+author: tyru
+---
+<h1>タグジャンプをさらに活用する</h1>
+
+<p><a href="http://vim-users.jp/2009/07/hack43/">Hack #43</a>ではタグについての基本的な使用方法をまとめました。
+本稿ではさらに踏み込んだタグジャンプの活用法をまとめます。</p>
+
+<h2>親ディレクトリにあるタグファイルを指定</h2>
+
+<p>もし自分が<code>/project/a/src/</code>というディレクトリにいた場合に、できれば<code>/project/a/tags</code>や、
+または全てのプロジェクト用のタグファイル(ライブラリの関数など)もタグジャンプに使いたいとします。</p>
+
+<pre><code>/project/a/src/ (現在のディレクトリ)
+/project/a/tags (指定したいタグファイル)
+/project/tags   (指定したいライブラリ関数のタグファイル)
+</code></pre>
+
+<p>その場合、.vimrcには以下のように書くことで可能になります。</p>
+
+<pre><code>if has('path_extra')
+set tags+=tags;
+endif
+</code></pre>
+
+<p>こうすることで、もしタグファイルが存在するなら
+<code>/project/a/tags</code>や<code>/project/tags</code>にある関数も<code>&lt;C-]&gt;</code>で飛ぶことが可能になります。
+また<code>;</code>は<code>+path_extra</code>機能がサポートされていない場合では使えないため、
+<code>has('path_extra')</code>で機能の有無をチェックしています。</p>
+
+<h3>階層数を指定</h3>
+
+<p>ただ<code>;</code>をつけただけではルートディレクトリまでさかのぼってしまいます。
+そこで<code>;</code>の後に上限となる親ディレクトリを指定することができます。</p>
+
+<pre><code>if has('path_extra')
+set tags+=tags;/project/a
+endif
+</code></pre>
+
+<p>こうすることで<code>/project/a</code>までで検索を終了し、<code>/project/tags</code>は見つかりません。</p>
+
+<h2>子ディレクトリにあるタグファイルを指定</h2>
+
+<p>前項では親ディレクトリのtagsを指定しましたが、
+今度はある特定のディレクトリにあるタグファイルを
+現在のディレクトリから指定したい場合はどうすればいいでしょう。</p>
+
+<pre><code>/project/a/src/          (現在のディレクトリ)
+/project/a/src/libA/tags (指定したいタグファイル)
+/project/a/src/libB/tags (指定したいタグファイル2)
+</code></pre>
+
+<p>その場合、以下を.vimrcに書けばいいでしょう。</p>
+
+<pre><code>if has('path_extra')
+set tags+=./*/tags;
+endif
+</code></pre>
+
+<p>また、<code>/project/a/src/libA/tags</code>などの1階層下のディレクトリにあるタグファイルだけではなく
+<code>/project/a/src/libA/src/tags</code>などの何階層か下のタグファイルを指定するには以下のようにできます。</p>
+
+<pre><code>if has('path_extra')
+set tags+=./**/tags;
+endif
+</code></pre>
+
+<h3>階層数を指定</h3>
+
+<p>ただ<code>**</code>は30階層までの深さのディレクトリにマッチするということになっています。
+なので場合によっては非常に重くなるかもしれません。
+その場合は階層の深さの最大値を次のように指定することができます。
+(この例では3階層下のディレクトリまでマッチするように設定しています)</p>
+
+<pre><code>if has('path_extra')
+set tags+=./**3/tags;
+endif
+</code></pre>
+
+<h2>親ディレクトリから<code>**</code>を使う</h2>
+
+<p>これは前項と前々項の合わせ技です。
+現在のディレクトリが<code>/project/a/src</code>の時に</p>
+
+<pre><code>set tags=**;
+</code></pre>
+
+<p>とすると、</p>
+
+<pre><code>/project/tags
+/project/a/tags
+/project/a/libA/src/tags
+/project/a/libB/src/tags
+/project/b/tags
+/project/c/tags
+</code></pre>
+
+<p>これら全てが指定されることになります。
+つまり<code>**;</code>とは、現在のディレクトリが<code>/project/a/src</code>の時には</p>
+
+<pre><code>/project/a/src/**
+/project/a/**
+/project/**
+/**
+</code></pre>
+
+<p>という場合に展開され、それぞれの場所から検索されます。
+またこの指定は上記全ての場所から検索されるので重い処理となります。</p>
+
+<h2>その他色々</h2>
+
+<ol>
+<li>この設定は<a href="http://vim-users.jp/2009/12/hack112/">Hack #112: 場所ごとに設定を用意する</a>と組み合わせると非常に相性がいいです。ぜひ合わせて使いましょう。また必ず:setでなく:setlocalを使いましょう。</li>
+<li>これらの指定方法は&#8217;path&#8217;, &#8216;cdpath&#8217;などでも使うことができます。</li>
+<li>詳しくは:help file-searchingを当たってください。</li>
+</ol>
+
+<address class="hack-author">tyru</address>

@@ -1,0 +1,42 @@
+---
+layout: post
+title: Hack #138:#58; ファイルタイプのエイリアスを作る
+date: 2010-04-10
+author: tyru
+---
+<pre><code>set filetype=c
+</code></pre>
+
+<p>と入力すると現在のバッファにシンタックスハイライトやftpluginなどの設定をロードすることができます。<br />
+また<code>:setfiletype</code>というコマンドも用意されていて、これを使うと前述のファイルタイプがいくらか楽に指定できます。</p>
+
+<pre><code>:setf c
+</code></pre>
+
+<p>ただファイルタイプの中には「javascript」などといった長い名前のものがしばしばあります。<br />
+そこでautocmdを使い</p>
+
+<pre><code>autocmd FileType js setlocal ft=javascript
+</code></pre>
+
+<p>とすると</p>
+
+<pre><code>setf js
+</code></pre>
+
+<p>のように少ないタイプ数でファイルタイプの設定ができます。</p>
+
+<p>他にも<a href="http://www.vim.org/scripts/script.php?script_id=2675">altercmd.vim</a>を使って更に短いsetfiletypeのエイリアスを作ったり</p>
+
+<pre><code>AlterCommand sf setf
+</code></pre>
+
+<p>マッピングで:setfを入力してしまうのもいいでしょう。</p>
+
+<pre><code>nnoremap gs :&lt;C-u&gt;setf&lt;Space&gt;
+</code></pre>
+
+<p>ファイルタイプの指定はコードを書く作業に取りかかる上でとても重要です。<br />
+素早くファイルタイプの指定ができるとコードを書く意欲が上がります。</p>
+
+<address class="hack-author">tyru</address>

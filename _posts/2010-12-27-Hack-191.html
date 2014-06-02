@@ -1,0 +1,40 @@
+---
+layout: post
+title: Hack #191:#58; Vimで続けてインデント/デインデントするいくつかの方法
+date: 2010-12-27
+author: tyru
+---
+<p><!-- 今日はGIGAZINEスタイルでお届けするよ！ -->
+Vimではインデントに関する様々な設定(オプション、コマンド、マッピング、&#8230;)があります。
+それゆえにインデント/デインデントする方法についてもいくつかの方法があります。</p>
+
+<h2>指定した範囲をインデント/デインデントした後に<code>.</code>を必要な回数実行する</h2>
+
+<p>自分はこのやり方が好きです。
+余計な設定がいらないのも魅力です。</p>
+
+<h2>ヴィジュアルモードでのマッピング</h2>
+
+<p>この設定を好きな人は一定数いるようです。</p>
+
+<pre><code>vnoremap &lt; &lt;gv
+vnoremap &gt; &gt;gv
+</code></pre>
+
+<h3>個人的にこのやり方を使わない理由</h3>
+
+<p>しかし<code>&lt;</code>と<code>&gt;</code>はoperatorなので、ヴィジュアルモードでしか使わないのはもったいないです。
+よって自分はヴィジュアルモード以外で<code>&gt;</code>を使うことが多いのであまり使いません。
+たとえば、<a href="http://www.vim.org/scripts/script.php?script_id=2484">textobj-indent</a>をインストールしていれば
+<code>&gt;ii</code>や<code>&gt;ia</code>で現在行のインデントと同じインデント数の続いた行に対してインデント/デインデントします。
+これは「使ってみるとわかる」類いのプラグインで、非常に便利です。
+また<code>ii</code>と<code>ia</code>の違いについてはhelpを見てください。</p>
+
+<h2>指定した回数 + <code>&lt;</code> or <code>&gt;</code></h2>
+
+<p>つまり<code>&lt;</code>か<code>&gt;</code>というoperatorに<code>[count]</code>を渡す方法です。
+これでインデントする段階を指定することができますが、
+数字キーに手を伸ばすより一度実行したあと<code>.</code>を実行する方が
+自分にとっては速いのでそうしています。</p>
+
+<address class="hack-author">tyru</address>

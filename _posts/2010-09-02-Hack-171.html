@@ -1,0 +1,65 @@
+---
+layout: post
+title: Hack #171:#58; 編集している関数名を表示する
+date: 2010-09-02
+author: tyru
+---
+<p>数あるエディタの中には現在編集中の関数名をステータスバーに表示させたりできるものがあります。<br />
+Vimでもできないでしょうか。</p>
+
+<h2>解決</h2>
+
+<p><a href="http://www.vim.org/scripts/script.php?script_id=3197">current-func-info.vim</a>を使います。<br />
+インストールしたあとstatuslineを次のように設定しましょう。</p>
+
+<pre><code>let &amp;statusline = '[%{cfi#get_func_name()}()]'
+</code></pre>
+
+<p>こうすると現在編集中の関数名が</p>
+
+<pre><code>[func()]
+</code></pre>
+
+<p>のように表示されます。</p>
+
+<p><code>cfi#get_func_name()</code>は関数の外側にいる時は空文字を返すので<br />
+外側にいる時は「no function」と表示させたい場合は以下のようにします。</p>
+
+<pre><code>let &amp;statusline = '%{cfi#get_func_name() == "" ? "no function" : "[" . cfi#get_func_name() . "()]"}'
+</code></pre>
+
+<p>これは少し面倒です。<br />
+<code>cfi#format()</code>というヘルパー関数を使うとこのように書けます。</p>
+
+<pre><code>let &amp;statusline = '%{cfi#format("[%s()]", "no function")}'
+</code></pre>
+
+<p>current-func-infoは現在C, Perl, Ruby, Python, PHP, Vimスクリプトに対応しています。</p>
+
+<h2>ちなみに</h2>
+
+<p>statuslineは</p>
+
+<pre><code>set statusline=...
+</code></pre>
+
+<p>という風にセットすることもできますが</p>
+
+<pre><code>let &amp;statusline = '...'
+</code></pre>
+
+<p>としたほうが空白を含む文字列をセットする時にエスケープする必要がなく便利です。</p>
+
+<pre><code>set statusline=this\ is\ my\ statusline
+
+let &amp;statusline = 'this is my statusline'
+</code></pre>
+
+<p>また</p>
+
+<pre><code>set statusline=%!...
+</code></pre>
+
+<p>のようにすることもできます。(<code>:help 'statusline'</code> 参照)</p>
+
+<address class="hack-author">tyru</address>

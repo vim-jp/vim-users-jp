@@ -1,0 +1,104 @@
+---
+layout: post
+title: Hack #203:#58; 定義されているマッピングを調べる
+date: 2011-02-27
+author: tyru
+---
+<p>定義されているマッピングを調べたくなった時はないでしょうか。</p>
+
+<ol>
+<li>このプラグインが作ったバッファではどんなマッピングが定義されているのか</li>
+<li>変なマッピングが定義されていないか</li>
+<li>Vimプラグインの作者と会話していてマッピングを調べるように言われた</li>
+<li>etc.</li>
+</ol>
+
+<p>様々なケースで必要になってきます。(大半の人にとっては1のケースでしょうが)<br />
+どうやって調べればいいでしょうか。</p>
+
+<h2>:AllMaps</h2>
+
+<p><code>:AllMaps</code>を使います。<br />
+次のコードを.vimrcに貼り付けましょう。</p>
+
+<pre><code>command!
+\   -nargs=* -complete=mapping
+\   AllMaps
+\   map &lt;args&gt; | map! &lt;args&gt; | lmap &lt;args&gt;
+</code></pre>
+
+<p>kana氏の.vimrcに定義されていた<code>:Allmap</code>にインスパイアされたのでそちらも興味があれば参照してください。</p>
+
+<ul>
+<li><a href="https://github.com/kana/config">kana/config &#8211; Github</a></li>
+<li><a href="https://github.com/kana/config/blob/master/vim/personal/dot.vimrc">kana氏の.vimrc</a></li>
+</ul>
+
+<h2>使い方</h2>
+
+<pre><code>" 全てのマッピングを表示
+:AllMaps
+" 冒頭で言った1のケースのように現在のバッファで定義されたマッピングのみ表示
+:AllMaps &lt;buffer&gt;
+" どのスクリプトで定義されたかの情報も含め表示
+:verbose AllMaps &lt;buffer&gt;
+</code></pre>
+
+<p>短くシンプルながらも他のExコマンドと組み合わせることで効果を無限大に発揮できるExコマンドです。</p>
+
+<h2>:Capture</h2>
+
+<p>また作者が作った<code>:Capture</code>というExコマンドがあります。<br />
+引数に指定したExコマンドを実行し、<br />
+コマンドラインへの出力をバッファに表示するというものです。<br />
+出力から検索したい場合などに便利です。<br />
+(<a href="http://d.hatena.ne.jp/tyru/20100427/vim_capture_command">筆者のブログの記事</a>も参照してください)</p>
+
+<pre><code>command!
+\   -nargs=+ -complete=command
+\   Capture
+\   call s:cmd_capture(&lt;q-args&gt;)
+
+function! s:cmd_capture(q_args) "\{\{\{
+redir =&gt; output
+silent execute a:q_args
+redir END
+let output = substitute(output, '^\n\+', '', '')
+
+belowright new
+
+silent file `=printf('[Capture: %s]', a:q_args)`
+setlocal buftype=nofile bufhidden=unload noswapfile nobuflisted
+call setline(1, split(output, '\n'))
+endfunction "\}\}\}
+</code></pre>
+
+<p>このExコマンドを使えば次のようにしてバッファに出力を書き込むことができます。</p>
+
+<pre><code>" 全てのマッピングをバッファに書き込む (/コマンドで検索できる)
+:Capture AllMaps &lt;buffer&gt;
+</code></pre>
+
+<h2>もう少し:Captureについて (vimshell)</h2>
+
+<p>vimshellではコマンドラインでの入力で先頭に<code>:</code>をつけるとVimスクリプトのExコマンドだと解釈してくれます。<br />
+これは<code>vexe</code>という内部コマンドを使っているので興味があればそちらも参照してください。<br />
+(以下<code>$</code>がvimshellのプロンプトだとします)</p>
+
+<pre><code>$ cd    # ホームディレクトリに移動
+$ ls    # /bin/lsを実行 (実際にはlsは内部コマンドで、それが/bin/lsを呼び出しているようです)
+bin git
+$ :ls   # :lsを実行。バッファリストを表示
+1  a   "~/memo/todo.txt"      line 0
+3  a   "~/.vimrc"             line 0
+</code></pre>
+
+<p>とても便利でクールですね。</p>
+
+<h2>もう少し:Captureについて (unite.vim)</h2>
+
+<p>unite.vimのunite-outputというsource(<code>:help unite-sources</code>)を使えば<br />
+Vimスクリプトの出力をuniteバッファに取り込み、絞り込むことができます。<br />
+詳しくは<code>:help unite-source-output</code>を参照してください。</p>
+
+<address class="hack-author">tyru</address>

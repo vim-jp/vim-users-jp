@@ -1,0 +1,46 @@
+---
+layout: post
+title: Hack #149:#58; コーディングスタイルを切り替える
+date: 2010-05-24
+author: tyru
+---
+<p>プログラミングでは様々なコーディングスタイルがあり、Vimにはそれに沿った編集をするための様々なオプションがあります。<br />
+他人のソースコードを編集する時はそれらのオプションを切り替えられると便利です。</p>
+
+<h2>解決</h2>
+
+<p>このようなコマンド:CodingStyleを定義します。</p>
+
+<pre><code>let s:coding_styles = {}
+let s:coding_styles['My style']      = 'set expandtab   tabstop=4 shiftwidth=4 softtabstop&amp;'
+let s:coding_styles['Short indent']  = 'set expandtab   tabstop=2 shiftwidth=2 softtabstop&amp;'
+let s:coding_styles['GNU']           = 'set expandtab   tabstop=8 shiftwidth=2 softtabstop=2'
+let s:coding_styles['BSD']           = 'set noexpandtab tabstop=8 shiftwidth=4 softtabstop&amp;'    " XXX
+let s:coding_styles['Linux']         = 'set noexpandtab tabstop=8 shiftwidth=8 softtabstop&amp;'
+
+command!
+\   -bar -nargs=1 -complete=customlist,s:coding_style_complete
+\   CodingStyle
+\   execute get(s:coding_styles, &lt;f-args&gt;, '')
+
+function! s:coding_style_complete(...) "\{\{\{
+return keys(s:coding_styles)
+endfunction "\}\}\}
+</code></pre>
+
+<p>するとこのようにコーディングスタイルを切り替えられます。(もちろん引数は補完が効きます)</p>
+
+<pre><code>CodingStyle Short indent
+# または
+CodingStyle My style
+</code></pre>
+
+<p>宣言的に記述できるので.vimrcが見やすくなります。<br />
+<a href="http://vim-users.jp/2009/12/hack112/">Hack #112: 場所ごとに設定を用意する</a>と組み合わせて場所ごとのファイルに書くといいでしょう。</p>
+
+<h2>関連リンク</h2>
+
+<p><a href="http://www.vim.org/scripts/script.php?script_id=2633">coding_style.vim</a>
+<a href="http://www.vim.org/scripts/script.php?script_id=3096">yaifa.vim</a></p>
+
+<address class="hack-author">tyru</address>
