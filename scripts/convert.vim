@@ -96,6 +96,7 @@ function! s:convert(f) abort
   let lines = [
   \  "---",
   \  "layout: post",
+  \  "category: vim-users-jp",
   \  printf("title: %s", substitute(title, ':', '&#58;', 'g')),
   \  printf("date: %s", date),
   \  printf("author: %s", author),
