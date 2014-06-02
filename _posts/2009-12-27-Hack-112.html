@@ -1,0 +1,41 @@
+---
+layout: post
+category: vimusersjp
+title: Hack #112:#58; 場所ごとに設定を用意する
+date: 2009-12-27
+author: thinca
+---
+<p>Vim はファイルの種類によって独自の設定を自動的に読み込むことができます。しかしそれとは別に、ファイルの置いてある場所に応じて何かしら設定を行ないたい場合もあるでしょう。そのための方法を紹介します。</p>
+
+<h3>設定</h3>
+
+<p>以下の記述を vimrc ファイルに追記します。これは、ファイルを開いた際に、開いたファイルとその上位階層にある設定ファイルを探してそれを読み込むための設定です。
+ここでは設定ファイルとして .vimrc.local と言うファイル名を使っていますが、ここは何でも構いません。ワイルドカードも使用可能です。</p>
+
+<pre><code>&quot; Load settings for each location.
+augroup vimrc-local
+autocmd!
+autocmd BufNewFile,BufReadPost * call s:vimrc_local(expand('&lt;afile&gt;:p:h'))
+augroup END
+
+function! s:vimrc_local(loc)
+let files = findfile('.vimrc.local', escape(a:loc, ' ') . ';', -1)
+for i in reverse(filter(files, 'filereadable(v:val)'))
+source `=i`
+endfor
+endfunction
+</code></pre>
+
+<h3>使用例</h3>
+
+<p>設定ファイルには、例えば以下のようなことを書いておきます。</p>
+
+<pre><code>lcd &lt;sfile&gt;:h
+</code></pre>
+
+<p>この例ではカレントディレクトリを設定ファイルがある階層に移動しています。これによってこの設定ファイルが置いてあるより下の階層のファイルのカレントディレクトリが統一できます。</p>
+
+<p>他にもプロジェクト用にインデントの設定を変更したり、バッファローカルな Key mapping を定義したり、プラグインの設定用にバッファローカルな変数を定義したりと、応用範囲はかなり広いです。
+また、この例の設定では複数の設定ファイルが見つかった場合ファイルシステムのルートに近いファイルから順に読み込むので、より深い階層で設定を上書きする、と言ったこともできます。</p>
+
+<address class="hack-author">thinca</address>

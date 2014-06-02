@@ -1,0 +1,44 @@
+---
+layout: post
+category: vimusersjp
+title: Hack #60:#58; 検索、マッチング時の大文字と小文字の区別を制御する
+date: 2009-08-21
+author: thinca
+---
+<p>Vim では検索や文字列のマッチングをする際、ローマ字の大文字と小文字を区別するかどうかを様々な方法で制御できます。</p>
+
+<h2><code class="option">'ignorecase'</code></h2>
+
+<p><code class="option">'ignorecase'</code> オプションが on の時、大文字と小文字の違いは無視されます。
+このオプションは通常の検索時以外にも文字列のマッチングが行われる箇所で参照されます。</p>
+
+<h2><code class="option">'smartcase'</code></h2>
+
+<p><code class="option">'ignorecase'</code> オプションが on の時、検索文字列に大文字が含まれている場合のみ、大文字と小文字を区別します。
+これは「わざわざ大文字を指定したのなら区別して欲しいに違いない」という考えから来ています。
+<code class="option">'ignorecase'</code> が on の時でも有効です。</p>
+
+<h2>\c と \C</h2>
+
+<p>パターン中に \c や \C を含めることで大文字小文字の区別を制御できます。
+これらが指定された場合、 <code class="option">'ignorecase'</code> <code class="option">'smartcase'</code> の値は無視されます。</p>
+
+<p>\c を指定すると大文字小文字を無視、\C を指定すると大文字小文字を区別するようになります。
+指定する場所は関係なく、パターン内のどこかで指定するとパターン全体に適用されます。</p>
+
+<h2>文字列比較</h2>
+
+<p>Vim script で文字列を比較する際、比較演算子を使用しますが、使う演算子によって大文字小文字の区別を制御できます。
+比較演算子の最後に # を付けると大文字小文字を区別し、? を付けると大文字小文字を無視するような比較になります。</p>
+
+<table>
+<tr><th>比較の種類</th><th><code class="option">'ignorecase'</code> を使う</th><th>大文字小文字を区別する</th><th>大文字小文字を無視する</th></tr>
+<tr><td>同値</td>            <td>==</td><td>==#</td><td>==?</td></tr>
+<tr><td>異値</td>            <td>!=</td><td>!=#</td><td>!=?</td></tr>
+<tr><td>正規表現マッチ</td>  <td>=~</td><td>=~#</td><td>=~?</td></tr>
+<tr><td>正規表現非マッチ</td><td>!~</td><td>!~#</td><td>!~?</td></tr>
+</table>
+
+<p>この表では省略しましたが、文字列比較には大小関係を比較する &gt; &gt;= &lt; &lt;= もあります。これらにも # と ? を付けたものがそれぞれあります。</p>
+
+<address class="hack-author">thinca</address>

@@ -1,0 +1,126 @@
+---
+layout: post
+category: vimusersjp
+title: Hack #158:#58; ユーザコマンドを定義する
+date: 2010-06-29
+author: thinca
+---
+<p>: でコマンドラインモードに入ると使えるコマンドは、ユーザが自由に定義することができます。</p>
+
+<h3>定義方法</h3>
+
+<p><code>:command</code> コマンドを使用します。書式は以下のようになります。</p>
+
+<pre><code>:command[!] [{属性}...] {コマンド名} {実行するコマンド}
+</code></pre>
+
+<p>これを見てわかるように、コマンドを定義すると言うことは誤解を恐れずに言うと別のコマンドに対するショートカットを定義しているに過ぎません。
+複雑なことをしたい場合、ここは大抵関数の呼び出しになります。
+<code>:command</code> 自体に ! を付けた場合、同名のコマンドが定義済みだった場合に上書きします。通常はエラーになります。</p>
+
+<h4>コマンド名</h4>
+
+<p>コマンド名は、組み込みコマンドと区別が付くように大文字で始めなくてはいけません。また、コマンド名には英数字のみ使用できます。</p>
+
+<h4>属性</h4>
+
+<p>属性は、<code>-{属性名}</code> もしくは <code>-{属性名}={引数}</code> の形式で指定します。詳細な説明は :help に譲るとして、ここでは概要を紹介します。
+<dl>
+<dt>-nargs</dt>
+<dd>
+コマンドの引数の数を指定します。
+<table>
+<tr><td>-nargs=0</td><td>0 個</td></tr>
+<tr><td>-nargs=1</td><td>1 個</td></tr>
+<tr><td>-nargs=*</td><td>0 個以上</td></tr>
+<tr><td>-nargs=?</td><td>0 個もしくは 1 個</td></tr>
+<tr><td>-nargs=+</td><td>1 個以上</td></tr>
+</table>
+記号は正規表現と同じと考えれば覚えやすいでしょう。この属性を指定しなかった場合、0 (引数なし) を指定したことになります。
+</dd>
+<dt>-complete</dt>
+<dd>
+コマンドの補完方法を指定します。
+<table>
+<tr><td>-complete=augroup</td><td>オートコマンドのグループ</td></tr>
+<tr><td>-complete=buffer</td><td>バッファ</td></tr>
+<tr><td>-complete=command</td><td>Ex コマンド(と、引数)</td></tr>
+<tr><td>-complete=dir</td><td>ディレクトリ</td></tr>
+<tr><td>-complete=environment</td><td>環境変数</td></tr>
+<tr><td>-complete=event</td><td>オートコマンドのイベント</td></tr>
+<tr><td>-complete=expression</td><td>Vimの式</td></tr>
+<tr><td>-complete=file</td><td>ファイルとディレクトリ</td></tr>
+<tr><td>-complete=shellcmd</td><td>シェルコマンド</td></tr>
+<tr><td>-complete=function</td><td>関数</td></tr>
+<tr><td>-complete=help</td><td>ヘルプの主題</td></tr>
+<tr><td>-complete=highlight</td><td>強調グループ</td></tr>
+<tr><td>-complete=mapping</td><td>マップ</td></tr>
+<tr><td>-complete=menu</td><td>メニュー</td></tr>
+<tr><td>-complete=option</td><td>オプション</td></tr>
+<tr><td>-complete=tag</td><td>タグ</td></tr>
+<tr><td>-complete=tag_listfiles</td><td>CTRL-D を押した時にタグ、ファイル名を表示</td></tr>
+<tr><td>-complete=var</td><td>ユーザ変数</td></tr>
+<tr><td>-complete=custom,{func}</td><td>{func}によるユーザ定義の補完</td></tr>
+<tr><td>-complete=customlist,{func}</td><td>{func}によるユーザ定義の補完</td></tr>
+</table>
+custom や customlist では関数を指定できますが、ここでは割愛します。
+</dd>
+<dt>-range</dt>
+<dd>
+コマンドに範囲(<code>:[range]Command</code>)を指定できるようにします。この属性がない場合、範囲の指定はできません。属性の引数で無指定時の初期値を指定します。
+<table>
+<tr><td>-range</td><td>範囲指定。無指定時は現在行</td></tr>
+<tr><td>-range=%</td><td>範囲指定。無指定時はファイル全体(1,$)</td></tr>
+<tr><td>-range=N</td><td>範囲指定。無指定時は任意の数字 N</td></tr>
+</table>
+</dd>
+<dt>-count</dt>
+<dd>
+コマンドにカウント(<code>:[N]Command [N]</code>) を指定できるようにします。この属性がない場合、カウントの指定はできません。属性の引数で無指定時の初期値を指定します。
+<table>
+<tr><td>-count</td><td>カウント指定。無指定時は 0</td></tr>
+<tr><td>-count=N</td><td>カウント指定。無指定時は任意の数字 N</td></tr>
+</table>
+コマンドにカウントを両方(コマンドの前と後)に指定した場合、後に指定したものが有効になります。
+</dd>
+<dt>-bang</dt>
+<dd>コマンドに ! を付けられるようになります。</dd>
+<dt>-bar</dt>
+<dd>
+コマンドの後ろに | を付けることで別のコマンドを実行することができます。また、&quot; はコメントの開始になります。
+コマンドの引数に | や &quot; を含めたい場合は、| や &quot; とします。
+別の言い方をすると、普通に定義したコマンドの引数は <code>:map</code> 系のコマンドのように扱われますが、-bar を付けることでその他のコマンドのような扱いになります。
+</dd>
+<dt>-register</dt>
+<dd><code>:delete</code> や <code>:yank</code> のように、1つ目の引数にレジスタ名を指定できます。</dd>
+<dt>-buffer</dt>
+<dd>バッファローカルなコマンドになります。</dd>
+</dl></p>
+
+<h4>{実行するコマンド}で使える書式</h4>
+
+<p>実行するコマンドを指定する箇所では、以下の &lt;&#8230;&gt; の形式の特別な文字列を使用できます。
+<dl>
+<dt>&lt;line1&gt;</dt>
+<dd>指定された範囲の最初の行</dd>
+<dt>&lt;line2&gt;</dt>
+<dd>指定された範囲の最後の行</dd>
+<dt>&lt;count&gt;</dt>
+<dd>与えられたカウント</dd>
+<dt>&lt;bang&gt;</dt>
+<dd>-bang がある場合で、コマンドが ! 付きで実行された場合は &#8216;!&#8217; と言う 1 文字に、それ以外は空文字列になります。</dd>
+<dt>&lt;reg&gt; &lt;register&gt;</dt>
+<dd>レジスタ名に置換されます。指定なしの場合は空文字列になります。</dd>
+<dt>&lt;args&gt;</dt>
+<dd>与えられた通りのコマンド引数。カウントやレジスタは含まれません。</dd>
+<dt>&lt;lt&gt;</dt>
+<dd>&#8216;&lt;&#8217;文字。特別な文字列をそのままの意味で使用したい場合に使います。</dd>
+</dl></p>
+
+<p>特別な文字列の最初に q- を加えると、式の文字列として扱えるようにクォートされます。
+例えば、&lt;args&gt; の代わりに &lt;q-args&gt; を指定すると abc は &quot;abc&quot; に、a&quot;bc は &quot;a\&quot;bc&quot; に置き換えられます。引数がない場合は空文字列になります。</p>
+
+<p>&lt;f-args&gt; を使うと、引数を空白で区切ったものを関数の引数として渡せるようにそれぞれをクォートしてカンマで区切ったものに展開します。
+実際のルールはもう少し複雑です。詳細は :help &lt;f-args&gt; を参照してください。</p>
+
+<address class="hack-author">thinca</address>

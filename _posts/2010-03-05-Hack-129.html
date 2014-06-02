@@ -1,0 +1,57 @@
+---
+layout: post
+category: vimusersjp
+title: Hack #129:#58; 複数のファイルから検索する
+date: 2010-03-05
+author: thinca
+---
+<p>時折、大量にあるテキストファイルから特定のテキストを検索したい場合があります。grep などのプログラムが有名ですが、やはり検索結果から直接該当のファイルにジャンプできると便利です。</p>
+
+<h3>:grep コマンド</h3>
+
+<p>:grep コマンドは、<code class="option">'grepprg'</code> オプションで指定された外部プログラムを実行してテキストの検索を行い、結果を <code class="option">'errorformat'</code> オプションに従って解釈したあと、quickfix ウィンドウへ出力します。quickfix 上で結果を選択して <kbd>&lt;Enter&gt;</kbd> を押すことで目的のファイルの目的の行にジャンプすることができます。
+各オプションにはデフォルトで適切な値が設定されており、通常はいじる必要はありません。</p>
+
+<p>:grepadd と言うコマンドもあり、これは quickfix ウィンドウの中身を置き代えずに追記します。複数の grep の結果を見るのに便利です。</p>
+
+<h3>:vimgrep コマンド</h3>
+
+<p>:grep コマンドは外部のプログラムに依存するため、その実装によって挙動が異なることがあります。例えば、Windows では標準では findstr が使用されます。これは grep とはまったく異なるものなので、指定する引数も使える正規表現も違います。</p>
+
+<p>そういう経緯もあってかどうかは知りませんが、Vim には :vimgrep と言う自力で grep を行う組み込みコマンドがあります。基本的な使い方は :grep と同じです。</p>
+
+<pre><code>:vimgrep /pattern/ {file}...
+:vimgrepadd /pattern/ {file}...
+</code></pre>
+
+<p>pattern には Vim の正規表現が使えます。単純な単語の場合、前後の / は省略可能です。</p>
+
+<p>{file} の部分に検索対象のファイルを指定します。指定にはワイルドカードが使えます(:help wildcard)。これは <code>**</code> による再帰的な探索に対応しています。</p>
+
+<pre><code>:vimgrep /\&lt;variable\&gt;/ **/*.c
+</code></pre>
+
+<p>パターンの後ろにフラグを付けることで挙動を変更できます。</p>
+
+<table>
+<tr><th>フラグ</th><th>意味</th></tr>
+<tr><th>g</th><td>1 つの行に複数のマッチが見つかった場合、同じ行を複数回列挙します。</td></tr>
+<tr><th>j</th><td>通常、検索対象が見つかった場合は最初の候補にジャンプしますが、このジャンプを抑制します。</td></tr>
+</table>
+
+<pre><code>:vimgrep /\&lt;variable\&gt;/j **/*.c
+</code></pre>
+
+<p>コマンドの前に数字を置くことで、検索件数の上限を指定できます。これにより検索時間を短縮できます。例えば、最初に見つかった 1 件だけを表示するには以下のようにします。</p>
+
+<pre><code>:1vimgrep /\&lt;variable\&gt;/ **/*.c
+</code></pre>
+
+<p><code class="option">'grepprg'</code> に &quot;internal&quot; と設定すると、:grep で :vimgrep が使われるようになります。</p>
+
+<pre><code>set grepprg=internal
+</code></pre>
+
+<p>:vimgrep は挙動が統一されているので、様々な環境で同じように grep を行いたい場合に非常に便利です。</p>
+
+<address class="hack-author">thinca</address>

@@ -1,0 +1,29 @@
+---
+layout: post
+category: vimusersjp
+title: Hack #94:#58; 開くファイル、保存するファイルのエンコーディングを指定する
+date: 2009-10-28
+author: thinca
+---
+<p>日本語には様々なエンコーディング方式があるので、扱う際には気を付ける必要があります。Vim が +multi_byte 機能付きでコンパイルされていれば、これらを正しく扱うことができます。</p>
+
+<h2>エンコーディングを指定してファイルを開き直す</h2>
+
+<p>開いたファイルが文字化けしていて、かつ正しいエンコーディングがわかっている場合は次のようにすることでエンコーディングを指定してファイルを開き直すことができます。</p>
+
+<pre><code>:edit ++enc=<var>{encoding-name}</var>
+</code></pre>
+
+<p><var>{encoding-name}</var> にはエンコーディング名が入ります。日本語だと、&quot;utf-8&quot; &quot;cp932&quot;(≒Shift_JIS) &quot;euc-jp&quot; &quot;iso-2022-jp&quot; などがあります。</p>
+
+<h2>編集しているファイルのエンコーディングを設定する</h2>
+
+<p>現在編集しているファイル(バッファ)のエンコーディングは <code class="option">'fileencoding'</code> オプションで決まります。ファイルを保存する際にこのエンコーディングに変換して保存されます。つまり、この値を変更すれば保存するファイルのエンコーディングを変更できます。</p>
+
+<pre><code>:setlocal fileencoding=<var>{encoding-name}</var>
+</code></pre>
+
+<p><var>{encoding-name}</var> は ++enc= に設定するのと同じものです。
+<code class="vim-script">:setlocal</code> を使っているのに注意してください。<code class="vim-script">:set</code> を使うと新しく作成するファイルのデフォルトエンコーディングも変わってしまいます。詳しくは <a href="http://vim-users.jp/2009/05/hack15/">Hack #15: ローカルオプション</a> を参照してください。</p>
+
+<address class="hack-author">thinca</address>

@@ -1,0 +1,26 @@
+---
+layout: post
+category: vimusersjp
+title: Hack #80:#58; 単語境界にマッチさせる
+date: 2009-09-30
+author: thinca
+---
+<p><a href="http://vim-users.jp/2009/08/hack51/">Hack #51: カーソル下のキーワードを検索する</a> で紹介されているキーワードの検索方法は * と g* で結果が異なります。検索パターンとしての両者の違いはなんでしょうか。</p>
+
+<h2>\&lt; \&gt;</h2>
+
+<p>\&lt; は単語の始まりに、\&gt; は単語の終わりにマッチするパターンです。
+例えば、</p>
+
+<pre><code>\&lt;set
+</code></pre>
+
+<p>は、&quot;set&quot; や &quot;setValue&quot; にはマッチしますが &quot;unset&quot; にはマッチしません。</p>
+
+<p>つまり、* で検索した場合は \&lt; と \&gt; が付いたパターンが、g* で検索した場合は付かないパターンが生成されることで挙動が制御されています。</p>
+
+<h2>単語境界の定義</h2>
+
+<p>単語境界は <code class="option">'iskeyword'</code> オプションで定義されています。これはキーワードとして扱う文字を定義していて、これに含まれている文字の列が単語として扱われます。</p>
+
+<address class="hack-author">thinca</address>

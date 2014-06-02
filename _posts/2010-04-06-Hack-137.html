@@ -1,0 +1,91 @@
+---
+layout: post
+category: vimusersjp
+title: Hack #137:#58; タブとインデントの設定を理解する
+date: 2010-04-06
+author: thinca
+---
+<p>Vim にはタブやインデントの挙動を制御するオプションが多数あり、細かい指定ができます。</p>
+
+<p>本 Hack ではこれらに関するオプションについて簡単に紹介します。一部説明を省略している箇所もあります。より詳しい説明が知りたい場合は <code>:help</code> で各オプションの項目を見てみてください。</p>
+
+<p>また、ここで紹介しているもので全てではありません。より高度なオプションについては省略しています。</p>
+
+<h3><code class="option">'tabstop'</code> <code class="option">'ts'</code></h3>
+
+<p>バッファについてローカルなオプションです。</p>
+
+<p>タブ文字が何文字分として表示されるかの設定です。</p>
+
+<h3><code class="option">'expandtab'</code> <code class="option">'et'</code></h3>
+
+<p>バッファについてローカルなオプションです。</p>
+
+<p>このオプションが on だと、インデントが生成される際やタブキーを押した際にタブ文字の代わりに同じ見た目になるようにスペースを挿入します。
+インデントが生成される際とは、<kbd>&lt;</kbd> や <kbd>&gt;</kbd>、Insert-mode での <kbd>&lt;C-d&gt;</kbd> や <kbd>&lt;C-t&gt;</kbd> でインデントを変更した際、新しい行を挿入した際、<kbd>=</kbd> でインデントを調節した際などが該当します。</p>
+
+<p>本当のタブ文字を挿入したい場合は <kbd>&lt;C-v&gt;&lt;Tab&gt;</kbd> とすることで入力できます。</p>
+
+<p>以下のオプションの説明で「空白を挿入する」とあった場合、このオプションが on の場合はスペースを、off の場合はタブ文字(と、場合によっては合わせてスペース)を挿入することになります。</p>
+
+<h3><code class="option">'shiftwidth'</code> <code class="option">'sw'</code></h3>
+
+<p>バッファについてローカルなオプションです。</p>
+
+<p>インデントを変更する際に何文字分ずらすかの設定です。</p>
+
+<p>これは <code class="option">'tabstop'</code> とは独立しています。つまり、<code class="option">'tabstop'</code> と <code class="option">'shiftwidth'</code> を別の値に設定することができます。</p>
+
+<p>この場合を含み、<code class="option">'expandtab'</code> が off の場合、タブ文字だけではインデントが行えない場合があります。その場合は、半端な部分はスペースになります。</p>
+
+<pre><code>&quot; :set tabstop=8 shiftwidth=4 noexpandtab の場合
+&quot; わかりやすくするためにタブ文字を &gt;------- で、スペースを _ で表示している
+hoge
+____hoge
+&gt;-------hoge
+&gt;-------____hoge
+</code></pre>
+
+<h3><code class="option">'softtabstop'</code> <code class="option">'sts'</code></h3>
+
+<p>バッファについてローカルなオプションです。</p>
+
+<p>このオプションに 0 以外が設定されていると、 <kbd>&lt;Tab&gt;</kbd> や <kbd>&lt;BS&gt;</kbd> を入力した際にその文字数分空白を入力したり削除したりします。つまり、<code class="option">'tabstop'</code> の値とは関係なくあたかもタブ文字がこのオプションの値の文字数であるかのように振舞います。</p>
+
+<h3><code class="option">'smarttab'</code> <code class="option">'sta'</code></h3>
+
+<p>グローバルなオプションです。</p>
+
+<p>このオプションが on のとき、行頭の連続した空白に限り、<kbd>&lt;Tab&gt;</kbd> は <code class="option">'shiftwidth'</code> 分だけ空白を挿入します。また、同様に行頭の空白の部分のみ、<kbd>&lt;BS&gt;</kbd> は <code class="option">'shiftwidth'</code> 分のスペースを削除します。これによりインデントがタブ文字かスペースかをあまり意識する必要がなくなります。</p>
+
+<h3><code class="option">'autoindent'</code> <code class="option">'ai'</code></h3>
+
+<p>バッファについてローカルなオプションです。</p>
+
+<p>新しい行を挿入する際に、新しい行のインデントを直前にいた行と同じになるようにします。</p>
+
+<p>この自動で挿入されたインデントは、何も入力せずに Insert-mode の抜けたりさらに新しい行を作ったりした場合削除されます。
+この動作を望まない場合は、新しい行を挿入した際に何かを入力してすぐ消すような Key mapping を定義するといいでしょう。</p>
+
+<pre><code>nnoremap o oX&lt;C-h&gt;
+nnoremap O OX&lt;C-h&gt;
+inoremap &lt;CR&gt; &lt;CR&gt;X&lt;C-h&gt;
+</code></pre>
+
+<h3><code class="option">'copyindent'</code> <code class="option">'ci'</code></h3>
+
+<p>バッファについてローカルなオプションです。</p>
+
+<p>新しい行にインデントを自動挿入する際、既存行のインデント構造をコピーします。</p>
+
+<p>これはつまり、既存行のインデントがタブ文字で構成されていれば <code class="option">'expandtab'</code> が on でも自動挿入されるインデントはタブ文字になるということです。既存行がタブ文字とスペースが混ざって構成されていた場合も、同じになるようにコピーされます。</p>
+
+<h3><code class="option">'preserveindent'</code> <code class="option">'pi'</code></h3>
+
+<p>バッファについてローカルなオプションです。</p>
+
+<p>現在行のインデント量を変更する際、すでにある部分に関してはインデント構造を保とうとします。</p>
+
+<p>例えばタブ文字で構成されている行があり、その行を <kbd>&lt;&lt;</kbd> でインデント量を減らそうとした場合、通常 <code class="option">'expandtab'</code> が on の場合は行のインデントを構成する文字がスペースに変換されてしまいますが、このオプションが on の場合はタブ文字はそのままに保たれます。</p>
+
+<address class="hack-author">thinca</address>

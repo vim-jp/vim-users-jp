@@ -1,0 +1,17 @@
+---
+layout: post
+category: vimusersjp
+title: Hack #90:#58; 流れてしまったメッセージを再表示する
+date: 2009-10-20
+author: thinca
+---
+<p>Vim を使っているとたまにエラーメッセージが表示されます。大抵は何か間違った操作をした場合なので是非ともメッセージを確認して原因を究明したいところですが、あまりに速くメッセージが流れてしまい読めない場合もあります。</p>
+
+<h2><code class="vim-script">:messages</code> コマンド</h2>
+
+<p><code class="vim-script">:messages</code> コマンドを使うことで過去に表示されたメッセージを再表示することができます。ただし、記録されるメッセージ数は tiny 版の Vim で 20 行、その他は 100 行で固定されているので、これを超えるメッセージが表示された場合は見ることはできません。とはいえ、大抵はこれで十分です。
+省略形は <code class="vim-script">:mes</code> ですので、普段はこちらを使えば良いでしょう。</p>
+
+<p>また、<code class="vim-script">:messages</code> にはシステムメッセージの他、<code class="vim-script">:echomsg</code> と <code class="vim-script">:echoerr</code> で表示されたメッセージも記録されています。</p>
+
+<address class="hack-author">thinca</address>
