@@ -31,7 +31,7 @@ function! s:text(f, lines) abort
     endif
     if intext
       let text .= line . "\n"
-	elseif stridx(line, '<div class="textBody">') >= 0
+    elseif stridx(line, '<div class="textBody">') >= 0
       let intext = 1
     endif
   endfor
