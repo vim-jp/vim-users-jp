@@ -1,0 +1,31 @@
+---
+layout: post
+title: Hack #222:#58; カーソル位置を目立たせる
+date: 2011-07-04
+author: Sixeight
+---
+<p>あるファイルを編集中に全く関係のない別の作業をすると、カーソルの位置を見失ってしまうことが多々あります。<br />
+そんな場合に少しでも見失い難くするために、カーソル位置を目立たせることが有用です。</p>
+
+<p>&#8216;cursorline&#8217; と &#8216;cursorcolumn&#8217; を設定することで、現在のカーソル位置をハイライトすることが出来ます。</p>
+
+<pre><code>:set cursorline
+:set cursorcolumn
+</code></pre>
+
+<p>それぞれ、以下の様にすることで、highlight の指定が行なえます。</p>
+
+<pre><code>:highlight CursorLine     xxx term=underline cterm=underline guibg=Grey90
+:highlight CursorColumn   xxx term=reverse ctermbg=7 guibg=Grey90
+</code></pre>
+
+<h2>参照資料</h2>
+
+<ul>
+<li><a href="http://vimdoc.sourceforge.net/cgi-bin/help?tag='cursorline'">:help cursorline</a></li>
+<li><a href="http://vimdoc.sourceforge.net/cgi-bin/help?tag='cursorcolumn'">:help cursorcolumn</a></li>
+<li><a href="http://vimdoc.sourceforge.net/cgi-bin/help?tag=hl-Cursorline">:help hl-Cursorline</a></li>
+<li><a href="http://vimdoc.sourceforge.net/cgi-bin/help?tag=hl-CursorColumn">:help hl-CursorColumn</a></li>
+</ul>
+
+<address class="hack-author">Sixeight</address>

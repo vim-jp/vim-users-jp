@@ -1,0 +1,41 @@
+---
+layout: post
+title: Hack #212:#58; コマンドライン引数を活用する
+date: 2011-04-11
+author: Sixeight
+---
+<p>今回は Vim 起動後のあれこれや、Plugin のあれこれではなく、便利なコマンドライン引数を紹介します。</p>
+
+<p>紹介するもの以外にも沢山のコマンドライン引数が用意されています。さらに知るには :help vim-arguments を参照してください。</p>
+
+<dl>
+<dt>&#8211;startuptime {fname}</dt><dd>{fname} で指定したファイルに、起動に要した時間が記録されます。<br />.vimrc の読み込みに何秒というように細かく出ますので、起動が遅い時の原因調査に利用出来ます。</dd>
+<dt>&#8211;noplugin</dt><dd>Plugin を読み込まずに起動します</dd>
+<dt>+[num]</dt><dd>起動直後に [num] 行目に移動します。</dd>
+<dt>+/{pattern}</dt><dd>起動直後に {pattern} に最初にマッチする箇所に移動します。</dd>
+<dt>-c {command}</dt><dd>起動直後に {command} を実行します。</dd>
+<dt>-S {fname}</dt><dd>起動直後に {fname} を :source {fname} で読み込みます。</dd>
+<dt>-R</dt><dd>Readonly モードで起動します。このモードではファイルへの書き込みを禁止します。</dd>
+<dt>-Z</dt><dd>Restricted モードで起動します。このモードでは外部シェルの実行 (:shell など) を禁止します。</dd>
+<dt>-b</dt><dd>Binary モードで起動します。</dd>
+<dt>-l</dt><dd>Lisp モードで起動します</dd>
+<dt>-C</dt><dd>Compatible モードで起動します。</dd>
+<dt>-n</dt><dd>:set updatecount=0 として、Swap ファイルの生成を禁止した状態となります。</dd>
+<dt>-o[n]</dt><dd>水平に 分割した状態で起動します。</dd>
+<dt>-p[n]</dt><dd>[n] 個のタブを開いた状態で起動します。</dd>
+<dt>-d</dt><dd>Diff モードで起動します。</dd>
+<dt>-x</dt><dd>ファイルを暗号化したうえに、パスワードでロックします。</dd>
+</dl>
+
+<h2>参照資料</h2>
+
+<ul>
+<li>コマンドライン引数について <a href="http://vimdoc.sourceforge.net/cgi-bin/help?tag=vim-arguments">:help vim-arguments</a></li>
+<li>Readonly モード <a href="http://vimdoc.sourceforge.net/cgi-bin/help?tag='readonly'">:help &#8216;readonly&#8217;</a></li>
+<li>Binary モード <a href="http://vimdoc.sourceforge.net/cgi-bin/help?tag=edit-binary">:help edit-binary</a></li>
+<li>List モード <a href="http://vimdoc.sourceforge.net/cgi-bin/help?tag='lisp'">:help &#8216;lisp&#8217;</a></li>
+<li>Compatible モード <a href="http://vimdoc.sourceforge.net/cgi-bin/help?tag='compatible'">:help &#8216;compatible&#8217;</a></li>
+<li>ファイルの暗号化 <a href="http://vimdoc.sourceforge.net/cgi-bin/help?tag=encryption">:help encryption</a></li>
+</ul>
+
+<address class="hack-author">Sixeight</address>

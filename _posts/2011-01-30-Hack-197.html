@@ -1,0 +1,82 @@
+---
+layout: post
+title: Hack #197:#58; unite.vim の source を作成する
+date: 2011-01-30
+author: Sixeight
+---
+<p>大変便利な plugin であるところの <a href="http://www.vim.org/scripts/script.php?script_id=3396">unite.vim</a> ですが、自分で source (表示する候補) を作成出来ると更に便利になることは疑いようがありません。</p>
+
+<h2>source を作成する</h2>
+
+<p>source の定義に最低限必要なのは、名前と、辞書変数のリストを返す関数を持ったオブジュクトです
+例えば以下の様に書きます</p>
+
+<pre><code>let s:unite_hacks = {'name': 'hacks'}
+function! s:unite_hacks.gather_candidates(args, context)
+# 辞書変数のリストを返す処理
+endfunction
+</code></pre>
+
+<p>あとはこれを登録する必要があります。</p>
+
+<h2>source を登録する</h2>
+
+<p>作成した source を登録する方法は2種類あります。</p>
+
+<p>1つ目の方法は unite#define_source を使用する方法です。
+先程の source を登録するには以下の様にします。</p>
+
+<pre><code>call unite#define_source(s:unite_hacks)
+</code></pre>
+
+<p>2つ目の方法は autoload/unite/sources/ に配置する方法です。
+例えば先程の sources を登録するには、 hacks.vim と言う名前で上記ディレクトリに保存します。
+そして以下のコードを hacks.vim に加えます。</p>
+
+<pre><code>function! unite#sources#hacks#define() "\{\{\{
+return s:unite_hacks
+endfunction "\}\}\}
+</code></pre>
+
+<h2>candidate のリストって何</h2>
+
+<p>肝になる gather_candidates の返り値について説明します。</p>
+
+<p>candidate とは候補ウィンドウ (unite が表示するリスト表示画面) に表示するリストの要素です。
+1 つの candidate は以下の情報を持ちます。</p>
+
+<dl>
+<dt>word</dt><dd>画面に表示される候補を表す文字列。候補の絞り込みに使われる</dd>
+<dt>addr</dt><dd>画面に表示される候補を表す文字列。word より優先されるが、候補の絞り込みには使われない</dd>
+<dt>source</dt><dd>候補が所属する source 名</dd>
+<dt>kind</dt><dd>候補が所属する kind 名。省略すると&#8221;common&#8221;となる</dd>
+<dt>source__{name}</dt><dd>source 独自の付加情報。source 側で自由に使用できる</dd>
+<dt>action__{name}</dt><dd>action が使用する付加情報</dd>
+</dl>
+
+<p>平たく言うと、word に指定した文字列がリストに表示され、その candidate を選択した時の動作を kind で指定します。</p>
+
+<p>具体的には以下のように書きます。</p>
+
+<pre><code>function! s:unite_hacks.gather_candidates(args, context)
+return [
+\   { 'word': 'Hack#1', 'source': 'hacks', 'kind': 'word' },
+\   { 'word': 'Hack#2', 'source': 'hacks', 'kind': 'word' },
+\ ]
+endfunction
+</code></pre>
+
+<h2>使う</h2>
+
+<p>作成した source は</p>
+
+<pre><code>:Unite hacks
+</code></pre>
+
+<p>として標準添付の source と同様に使用出来ます。l</p>
+
+<p>詳しくは :help unite-create-source を参照してください</p>
+
+<p>source をたくさん書いて新学期はモテモテですね。</p>
+
+<address class="hack-author">Sixeight</address>

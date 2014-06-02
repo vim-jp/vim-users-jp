@@ -1,0 +1,115 @@
+---
+layout: post
+title: Hack #215:#58; Vundle で plugin をモダンに管理する
+date: 2011-04-30
+author: Sixeight
+---
+<p>みなさんは増え続ける plugin のどのように管理されていますか。
+<a href="http://www.vim.org/scripts/script.php?script_id=2332">pathogen</a>+submodule を使う方法でしょうか。それとも未来に生き VimJolt を使用されているのでしょうか。</p>
+
+<p>今回はモダンな plugin 管理方法として、Vundle を使った方法をご紹介します。</p>
+
+<p>Vundle は Ruby on Rails 3 で採用されている、Gem 管理システム Bundler に影響を受けた、plugin 管理システムです。</p>
+
+<p>開発は Github 上で行われています。
+<a href="https://github.com/gmarik/vundle">https://github.com/gmarik/vundle</a></p>
+
+<h2>導入</h2>
+
+<p>導入は以下の様に ~/.vim にリポジトリを clone すると完了します。</p>
+
+<pre><code>$ git clone http://github.com/gmarik/vundle.git ~/.vim/vundle.git
+</code></pre>
+
+<p>ドットファイルを git で管理されている方は、submodule として取り込んで下さい。</p>
+
+<h2>plugin の管理</h2>
+
+<p>plugin の管理は以下の様に .vimrc に Bundle &#8216;plugin name&#8217; と記述することで行います。</p>
+
+<pre><code>set nocompatible
+filetype off                   " (1)
+
+set rtp+=~/.vim/vundle.git/    " (2)
+call vundle#rc()               " (3)
+
+" original repos on github
+Bundle 'tpope/vim-fugitive'
+
+" vim-scripts repos
+Bundle 'rails.vim'
+
+" non github repos
+Bundle 'git://git.wincent.com/command-t.git'
+
+filetype plugin indent on     " (5)
+</code></pre>
+
+<p>特徴的なのは (1) で filetype を一度 off にしている点です。
+Vundle の処理が終り次第、(5) で ftplugin と indent を読み込むように指定しています。</p>
+
+<p>(2), (3) で Vundle を初期化し、Bundle &#8216;plugin name&#8217; を書くことで、plugin を読み込む準備が完了します。</p>
+
+<h2>Bundle コマンド</h2>
+
+<h4>Github 上のリポジトリから取得する場合</h4>
+
+<pre><code>Bundle 'user_name/repository_name'
+</code></pre>
+
+<p>の様に、Github のユーザ名とリポジトリ名を指定します。</p>
+
+<h4>vim-scripts 上のリポジトリから取得する場合</h4>
+
+<pre><code>Bundle 'script_name'
+</code></pre>
+
+<p>の様に、plugin の名前を指定します。</p>
+
+<h4>それ以外の git リポジトリから取得する場合</h4>
+
+<pre><code>Bundle 'git://repository_url'
+</code></pre>
+
+<p>の様に、Git リポジトリ のフルパスを指定します。</p>
+
+<h2>plugin の管理</h2>
+
+<p>plugin のインストールには、:BundleInstall コマンドを使用します。
+先程、.vimrc に Bundle &#8216;name&#8217; と記述した plugin が自動的に取得され、インストールまで行われます。</p>
+
+<pre><code>:BundleInstall
+</code></pre>
+
+<p>また、既にインストールされている plugin をアップデートするには、 :BundleInstall! コマンドを利用します。</p>
+
+<pre><code>:BundleInstall!
+</code></pre>
+
+<p>plugin を検索して、インタラクティブに管理することも出来ます。</p>
+
+<pre><code>:Bundles unite
+</code></pre>
+
+<p>上記のコマンドを実行すると、検索結果が split されて表示されます。リストから目的の plugin を選択し、インストール、削除などが行えます。</p>
+
+<h2>ドキュメント</h2>
+
+<p>以下のようにしてヘルプを生成します。</p>
+
+<pre><code>:helptags ~/.vim/vundle.git/doc
+</code></pre>
+
+<p>生成したヘルプは通常通り以下のように引くことが出来ます</p>
+
+<pre><code>:help vundle
+</code></pre>
+
+<h2>参照</h2>
+
+<ul>
+<li><a href="https://github.com/gmarik/vundle">gmarik/vundle</a></li>
+<li>:help vundle</li>
+</ul>
+
+<address class="hack-author">Sixeight</address>

@@ -1,0 +1,60 @@
+---
+layout: post
+title: Hack #201:#58; バックアップを作成する
+date: 2011-02-19
+author: Sixeight
+---
+<p>バックアップには 2 種類あります。
+1 つは編集中のファイルのバックアップ、これをスワップファイルと呼びます。
+もう 1 つは既に存在しているファイルを上書きする際に作成されるものです。</p>
+
+<h2>スワップファイル</h2>
+
+<p>スワップファイルを作成するには &#8216;swapfile&#8217; をオンにします。
+オフにするとスワップファイルは作成されなくなります。</p>
+
+<p>スワップファイルは &#8216;directory&#8217; で指定したディレクトリに作成されます。
+全てのプラットフォームでの規定値は Unix の場合 &#8216;.,~/tmp,/var/tmp,/tmp&#8217; と指定れているため、
+カレントディレクトリ、つまり編集中のファイルと同じディレクトリに作成されます。</p>
+
+<p>スワップファイルは &#8216;updatecount&#8217; で指定している文字数を入力することで書き込まれます。
+&#8216;updatecount&#8217; を 0 に指定するとスワップファイルは作成されなくなります。</p>
+
+<h3>設定例</h3>
+
+<p>保存場所からカレントディレクトリを除き、~/tmp にして、更新の間隔を 500 文字にするには以下の様に指定します。</p>
+
+<pre><code>set swapfile
+set directory-=.
+set updatecount=500
+</code></pre>
+
+<h2>バックアップ</h2>
+
+<p>同名のファイルを上書きする前にバックアップを取るには、&#8217;backup&#8217; もしくは &#8216;writebackup&#8217; をオンにします。</p>
+
+<p>&#8216;backup&#8217; をオンにしておくと、上書きに成功した場合にもバックアップを残します。
+&#8216;backup&#8217; をオフにしておくと &#8216;writebackup&#8217; をオンしておくと上書きが成功した場合はバックアップを破棄するようになります。
+どちらもオフにした場合にはバックアップを取らなくなります。</p>
+
+<p>バックアップ先を指定するには &#8216;backupdir&#8217; を指定します。既定値ではカレントディレクトリにバックアップが作成されます。
+&#8216;backupext&#8217; を指定すると、バックアップファイル名の最後に指定した文字列を追加することが出来ます。
+例えば、ファイル名の最後にタイムスタンプを追加するには、以下のように指定します。(HELP からの引用)</p>
+
+<pre><code>:au BufWritePre * let &amp;bex = '-' . strftime("%Y%b%d%X") . '~'`
+</code></pre>
+
+<p>また、バックアップを作成しないファイル名のパターンを &#8216;backupskip&#8217; に指定することが出来ます。</p>
+
+<h2>参照資料</h2>
+
+<ul>
+<li><a href="http://vimdoc.sourceforge.net/htmldoc/options.html#'swapfile'">:help swapfile</a></li>
+<li><a href="http://vimdoc.sourceforge.net/htmldoc/options.html#'directory'">:help directory</a></li>
+<li><a href="http://vimdoc.sourceforge.net/htmldoc/options.html#'updatecount'">:help updatecount</a></li>
+<li><a href="http://vimdoc.sourceforge.net/htmldoc/options.html#'writebackup'">:help writebackup</a></li>
+<li><a href="http://vimdoc.sourceforge.net/htmldoc/options.html#'backupdir'">:help backupdir</a></li>
+<li><a href="http://vimdoc.sourceforge.net/htmldoc/options.html#'backupext'">:help backupext</a></li>
+</ul>
+
+<address class="hack-author">Sixeight</address>
