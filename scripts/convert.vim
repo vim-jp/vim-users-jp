@@ -99,7 +99,7 @@ function! s:convert(f) abort
   let lines = [
   \  "---",
   \  "layout: post",
-  \  printf("title: %s", substitute(title, ':', ' ', 'g')),
+  \  printf("title: %s", substitute(substitute(title, ': ', '', 'g'), '#', '&#35;', 'g')),
   \  printf("date: %s", date),
   \  printf("author: %s", author),
   \  "---",
