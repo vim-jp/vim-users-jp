@@ -12,6 +12,31 @@
 <link rel="canonical" href="http://vim-jp.org/vim-users-jp{{ page.url }}" />
 <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
 <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>
+	(function(doc, script) {
+		window.___gcfg = {lang: 'ja'};
+		//Async Social Buttons
+		var js,
+	fjs = doc.getElementsByTagName(script)[0],
+	add = function(url, id) {
+		if (doc.getElementById(id)) {return;}
+		js = doc.createElement(script);
+		js.src = url;
+		id && (js.id = id);
+		fjs.parentNode.insertBefore(js, fjs);
+	};
+
+	// Twitter SDK
+	add('//platform.twitter.com/widgets.js', 'twitter-wjs');
+	// Google+ button
+	add('//apis.google.com/js/plusone.js');
+	// Facebook SDK
+	add('//connect.facebook.net/ja_JP/all.js#xfbml=1', 'facebook-jssdk');
+	// Hatena
+	add('//b.st-hatena.com/js/bookmark_button_wo_al.js');
+	}(document, 'script'));
+</script>
 </head>
 <body>
 	<div class="header">
