@@ -1,0 +1,767 @@
+
+
+<script type="text/javascript" src="/static/js/analytics.js" ></script>
+<link type="text/css" rel="stylesheet" href="/static/css/banner-styles.css"/>
+
+
+
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<link rel="alternate" type="application/rss+xml" title="Vim-users.jp &raquo; Hack #184: MacVimでCommand-line windowを使いこなす のコメントのフィード" href="/web/20130118124206/http://vim-users.jp/2010/11/hack184/feed/" />
+<link rel='stylesheet' id='openid-css'  href='/web/20130118124206cs_/http://vim-users.jp/wp-content/plugins/openid/f/openid.css?ver=519' type='text/css' media='all' />
+<script type='text/javascript' src='/web/20130118124206js_/http://vim-users.jp/wp-includes/js/jquery/jquery.js?ver=1.7.1'></script>
+<script type='text/javascript' src='/web/20130118124206js_/http://vim-users.jp/wp-content/plugins/openid/f/openid.js?ver=519'></script>
+<script type='text/javascript' src='/web/20130118124206js_/http://vim-users.jp/wp-content/plugins/google-analyticator/external-tracking.min.js?ver=6.2'></script>
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="/web/20130118124206/http://vim-users.jp/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="/web/20130118124206/http://vim-users.jp/wp-includes/wlwmanifest.xml" /> 
+<link rel='prev' title='Hack #183: Vim日本語ドキュメントを更新しよう' href='/web/20130118124206/http://vim-users.jp/2010/11/hack183-2/' />
+<link rel='next' title='Hack #185: neocomplcacheの設定について知る　中編' href='/web/20130118124206/http://vim-users.jp/2010/11/hack185/' />
+<meta name="generator" content="WordPress 3.3.1" />
+<link rel='canonical' href='/web/20130118124206/http://vim-users.jp/2010/11/hack184/' />
+<link rel='shortlink' href='/web/20130118124206/http://vim-users.jp/?p=2007' />
+	<link href="/web/20130118124206cs_/http://vim-users.jp/wp-content/plugins/google-syntax-highlighter/Styles/SyntaxHighlighter.css" type="text/css" rel="stylesheet" />
+	<meta http-equiv="X-XRDS-Location" content="http://vim-users.jp/?xrds" />
+<meta http-equiv="X-Yadis-Location" content="http://vim-users.jp/?xrds" />
+<!-- BEGIN: WP Social Bookmarking Light -->
+<style type="text/css">
+div.wp_social_bookmarking_light{border:0 !important;padding:0px 0 0px 0 !important;margin:0 !important;}
+div.wp_social_bookmarking_light div{float:left !important;border:0 !important;padding:0 4px 0px 0 !important;margin:0 !important;height:21px !important;text-indent:0 !important;}
+div.wp_social_bookmarking_light img{border:0 !important;padding:0;margin:0;vertical-align:top !important;}
+.wp_social_bookmarking_light_clear{clear:both !important;}
+</style>
+<!-- END: WP Social Bookmarking Light -->
+<!-- Google Analytics Tracking by Google Analyticator 6.2: /web/20130118124206/http://ronaldheft.com/code/analyticator/ -->
+<script type="text/javascript">window.google_analytics_uacct = "pub-4444897972419065";</script>
+<script type="text/javascript">
+	var analyticsFileTypes = [''];
+	var analyticsEventTracking = 'enabled';
+</script>
+<script type="text/javascript">
+	var _gaq = _gaq || [];
+	_gaq.push(['_setAccount', 'UA-2159054-3']);
+	_gaq.push(['_trackPageview']);
+	_gaq.push(['_trackPageLoadTime']);
+
+	(function() {
+		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? '/web/20130118124206/https://ssl' : '/web/20130118124206/http://www') + '.google-analytics.com/ga.js';
+		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	})();
+</script>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ja" xml:lang="ja">
+<head profile="http://purl.org/net/ns/metaprof">
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta http-equiv="Content-Script-Type" content="text/javascript" />
+	<meta name="generator" content="WordPress 3.3.1" />
+	<meta name="author" content="Vim-users.jp" />
+	<link rel="alternate" type="application/rss+xml" href="/web/20130118124206/http://vim-users.jp/feed/" title="RSS 2.0" />
+	<link rel="alternate" type="application/atom+xml" href="/web/20130118124206/http://vim-users.jp/feed/atom/" title="Atom cite contents" />
+	<link rel="start" href="/web/20130118124206/http://vim-users.jp/" title="Vim-users.jp Home" />
+	<link rel="stylesheet" type="text/css" href="/web/20130118124206cs_/http://vim-users.jp/wp-content/themes/wp.vicuna/style.css" />
+	<meta name="description" content="日本の Vim ユーザのためのハブサイト" />
+	<link rel="pingback" href="/web/20130118124206/http://vim-users.jp/xmlrpc.php" />
+	<script type="text/javascript" charset="utf-8" src="/web/20130118124206js_/http://vim-users.jp/wp-content/themes/wp.vicuna/script.js"></script>
+<link rel="alternate" type="application/rss+xml" title="Vim-users.jp &raquo; Hack #184: MacVimでCommand-line windowを使いこなす のコメントのフィード" href="/web/20130118124206/http://vim-users.jp/2010/11/hack184/feed/" />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="/web/20130118124206/http://vim-users.jp/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="/web/20130118124206/http://vim-users.jp/wp-includes/wlwmanifest.xml" /> 
+<link rel='prev' title='Hack #183: Vim日本語ドキュメントを更新しよう' href='/web/20130118124206/http://vim-users.jp/2010/11/hack183-2/' />
+<link rel='next' title='Hack #185: neocomplcacheの設定について知る　中編' href='/web/20130118124206/http://vim-users.jp/2010/11/hack185/' />
+<meta name="generator" content="WordPress 3.3.1" />
+<link rel='canonical' href='/web/20130118124206/http://vim-users.jp/2010/11/hack184/' />
+<link rel='shortlink' href='/web/20130118124206/http://vim-users.jp/?p=2007' />
+	<link href="/web/20130118124206cs_/http://vim-users.jp/wp-content/plugins/google-syntax-highlighter/Styles/SyntaxHighlighter.css" type="text/css" rel="stylesheet" />
+	<meta http-equiv="X-XRDS-Location" content="http://vim-users.jp/?xrds" />
+<meta http-equiv="X-Yadis-Location" content="http://vim-users.jp/?xrds" />
+<!-- BEGIN: WP Social Bookmarking Light -->
+<style type="text/css">
+div.wp_social_bookmarking_light{border:0 !important;padding:0px 0 0px 0 !important;margin:0 !important;}
+div.wp_social_bookmarking_light div{float:left !important;border:0 !important;padding:0 4px 0px 0 !important;margin:0 !important;height:21px !important;text-indent:0 !important;}
+div.wp_social_bookmarking_light img{border:0 !important;padding:0;margin:0;vertical-align:top !important;}
+.wp_social_bookmarking_light_clear{clear:both !important;}
+</style>
+<!-- END: WP Social Bookmarking Light -->
+<!-- Google Analytics Tracking by Google Analyticator 6.2: /web/20130118124206/http://ronaldheft.com/code/analyticator/ -->
+<script type="text/javascript">window.google_analytics_uacct = "pub-4444897972419065";</script>
+<script type="text/javascript">
+	var analyticsFileTypes = [''];
+	var analyticsEventTracking = 'enabled';
+</script>
+<script type="text/javascript">
+	var _gaq = _gaq || [];
+	_gaq.push(['_setAccount', 'UA-2159054-3']);
+	_gaq.push(['_trackPageview']);
+	_gaq.push(['_trackPageLoadTime']);
+
+	(function() {
+		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? '/web/20130118124206/https://ssl' : '/web/20130118124206/http://www') + '.google-analytics.com/ga.js';
+		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	})();
+</script>
+	<link rel="prev" href="/web/20130118124206/http://vim-users.jp/2010/11/hack183-2/" title="Hack #183: Vim日本語ドキュメントを更新しよう" />
+	<link rel="next" href="/web/20130118124206/http://vim-users.jp/2010/11/hack185/" title="Hack #185: neocomplcacheの設定について知る　中編" />
+	<title>Vim-users.jp - Hack #184: MacVimでCommand-line windowを使いこなす</title>
+</head>
+<body class="individual single" id="entry2007">
+<!-- BEGIN WAYBACK TOOLBAR INSERT -->
+<script> if (window.archive_analytics) { window.archive_analytics.values['server_name']="wwwb-app14.us.archive.org";}; </script>
+
+<script type="text/javascript" src="/static/js/disclaim-element.js" ></script>
+<script type="text/javascript" src="/static/js/graph-calc.js" ></script>
+<script type="text/javascript" src="/static/jflot/jquery.min.js" ></script>
+<script type="text/javascript">
+//<![CDATA[
+var firstDate = 820454400000;
+var lastDate = 1420070399999;
+var wbPrefix = "/web/";
+var wbCurrentUrl = "http:\/\/vim-users.jp\/2010\/11\/hack184\/";
+
+var curYear = -1;
+var curMonth = -1;
+var yearCount = 18;
+var firstYear = 1996;
+var imgWidth = 475;
+var yearImgWidth = 25;
+var monthImgWidth = 2;
+var trackerVal = "none";
+var displayDay = "18";
+var displayMonth = "Jan";
+var displayYear = "2013";
+var prettyMonths = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+
+function showTrackers(val) {
+	if(val == trackerVal) {
+		return;
+	}
+	if(val == "inline") {
+		document.getElementById("displayYearEl").style.color = "#ec008c";
+		document.getElementById("displayMonthEl").style.color = "#ec008c";
+		document.getElementById("displayDayEl").style.color = "#ec008c";		
+	} else {
+		document.getElementById("displayYearEl").innerHTML = displayYear;
+		document.getElementById("displayYearEl").style.color = "#ff0";
+		document.getElementById("displayMonthEl").innerHTML = displayMonth;
+		document.getElementById("displayMonthEl").style.color = "#ff0";
+		document.getElementById("displayDayEl").innerHTML = displayDay;
+		document.getElementById("displayDayEl").style.color = "#ff0";
+	}
+   document.getElementById("wbMouseTrackYearImg").style.display = val;
+   document.getElementById("wbMouseTrackMonthImg").style.display = val;
+   trackerVal = val;
+}
+function getElementX2(obj) {
+	var thing = jQuery(obj);
+	if((thing == undefined) 
+			|| (typeof thing == "undefined") 
+			|| (typeof thing.offset == "undefined")) {
+		return getElementX(obj);
+	}
+	return Math.round(thing.offset().left);
+}
+function trackMouseMove(event,element) {
+
+   var eventX = getEventX(event);
+   var elementX = getElementX2(element);
+   var xOff = eventX - elementX;
+	if(xOff < 0) {
+		xOff = 0;
+	} else if(xOff > imgWidth) {
+		xOff = imgWidth;
+	}
+   var monthOff = xOff % yearImgWidth;
+
+   var year = Math.floor(xOff / yearImgWidth);
+	var yearStart = year * yearImgWidth;
+   var monthOfYear = Math.floor(monthOff / monthImgWidth);
+   if(monthOfYear > 11) {
+       monthOfYear = 11;
+   }
+   // 1 extra border pixel at the left edge of the year:
+   var month = (year * 12) + monthOfYear;
+   var day = 1;
+	if(monthOff % 2 == 1) {
+		day = 15;
+	}
+	var dateString = 
+		zeroPad(year + firstYear) + 
+		zeroPad(monthOfYear+1,2) +
+		zeroPad(day,2) + "000000";
+
+	var monthString = prettyMonths[monthOfYear];
+	document.getElementById("displayYearEl").innerHTML = year + 1996;
+	document.getElementById("displayMonthEl").innerHTML = monthString;
+	// looks too jarring when it changes..
+	//document.getElementById("displayDayEl").innerHTML = zeroPad(day,2);
+
+	var url = wbPrefix + dateString + '/' +  wbCurrentUrl;
+	document.getElementById('wm-graph-anchor').href = url;
+
+   //document.getElementById("wmtbURL").value="evX("+eventX+") elX("+elementX+") xO("+xOff+") y("+year+") m("+month+") monthOff("+monthOff+") DS("+dateString+") Moy("+monthOfYear+") ms("+monthString+")";
+   if(curYear != year) {
+       var yrOff = year * yearImgWidth;
+       document.getElementById("wbMouseTrackYearImg").style.left = yrOff + "px";
+       curYear = year;
+   }
+   if(curMonth != month) {
+       var mtOff = year + (month * monthImgWidth) + 1;
+       document.getElementById("wbMouseTrackMonthImg").style.left = mtOff + "px";
+       curMonth = month;
+   }
+}
+//]]>
+</script>
+
+<style type="text/css">body{margin-top:0!important;padding-top:0!important;min-width:800px!important;}#wm-ipp a:hover{text-decoration:underline!important;}</style>
+<div id="wm-ipp" lang="en" class="__wb_banner_div" style="display:none; position:relative;padding:0 5px;min-height:70px;min-width:800px">
+
+
+<div id="wm-ipp-inside" class="__wb_banner_div" style="position:fixed;padding:0!important;margin:0!important;width:97%;min-width:780px;border:5px solid #000;border-top:none;background-image:url(/static/images/toolbar/wm_tb_bk_trns.png);text-align:center;-moz-box-shadow:1px 1px 3px #333;-webkit-box-shadow:1px 1px 3px #333;box-shadow:1px 1px 3px #333;font-size:11px!important;font-family:'Lucida Grande','Arial',sans-serif!important;">
+   <table style="border-collapse:collapse;margin:0;padding:0;width:100%;"><tbody><tr>
+   <td style="padding:10px;vertical-align:top;min-width:110px;">
+   <a href="/web/" title="Wayback Machine home page" style="background-color:transparent;border:none;"><img src="/static/images/toolbar/wayback-toolbar-logo.png" alt="Wayback Machine" width="110" height="39" border="0"/></a>
+   </td>
+   <td style="padding:0!important;text-align:center;vertical-align:top;width:100%;">
+
+       <table style="border-collapse:collapse;margin:0 auto;padding:0;width:570px;"><tbody><tr>
+       <td style="padding:3px 0;" colspan="2">
+       <form target="_top" method="get" action="/web/form-submit.jsp" name="wmtb" id="wmtb" style="margin:0!important;padding:0!important;"><input type="text" name="url" id="wmtbURL" value="http://vim-users.jp/2010/11/hack184/" style="width:400px;font-size:11px;font-family:'Lucida Grande','Arial',sans-serif;" onfocus="javascript:this.focus();this.select();" /><input type="hidden" name="type" value="replay" /><input type="hidden" name="date" value="20130118124206" /><input type="submit" value="Go" style="font-size:11px;font-family:'Lucida Grande','Arial',sans-serif;margin-left:5px;width: inherit !important" /><span id="wm_tb_options" style="display:block;"></span></form>
+       </td>
+       <td style="vertical-align:bottom;padding:5px 0 0 0!important;" rowspan="2">
+           <table style="border-collapse:collapse;width:110px;color:#99a;font-family:'Helvetica','Lucida Grande','Arial',sans-serif;"><tbody>
+			
+           <!-- NEXT/PREV MONTH NAV AND MONTH INDICATOR -->
+           <tr style="width:110px;height:16px;font-size:10px!important;">
+           	<td style="padding-right:9px;font-size:11px!important;font-weight:bold;text-transform:uppercase;text-align:right;white-space:nowrap;overflow:visible;" nowrap="nowrap">
+               
+		                <a href="/web/20121128193515/http://vim-users.jp/2010/11/hack184/" style="text-decoration:none;color:#33f;font-weight:bold;background-color:transparent;border:none;" title="28 Nov 2012"><strong>NOV</strong></a>
+		                
+               </td>
+               <td id="displayMonthEl" style="background:#000;color:#ff0;font-size:11px!important;font-weight:bold;text-transform:uppercase;width:34px;height:15px;padding-top:1px;text-align:center;" title="You are here: 12:42:06 Jan 18, 2013">JAN</td>
+				<td style="padding-left:9px;font-size:11px!important;font-weight:bold;text-transform:uppercase;white-space:nowrap;overflow:visible;" nowrap="nowrap">
+               
+                       Feb
+                       
+               </td>
+           </tr>
+
+           <!-- NEXT/PREV CAPTURE NAV AND DAY OF MONTH INDICATOR -->
+           <tr>
+               <td style="padding-right:9px;white-space:nowrap;overflow:visible;text-align:right!important;vertical-align:middle!important;" nowrap="nowrap">
+               
+		                <a href="/web/20121128193515/http://vim-users.jp/2010/11/hack184/" title="19:35:15 Nov 28, 2012" style="background-color:transparent;border:none;"><img src="/static/images/toolbar/wm_tb_prv_on.png" alt="Previous capture" width="14" height="16" border="0" /></a>
+		                
+               </td>
+               <td id="displayDayEl" style="background:#000;color:#ff0;width:34px;height:24px;padding:2px 0 0 0;text-align:center;font-size:24px;font-weight: bold;" title="You are here: 12:42:06 Jan 18, 2013">18</td>
+				<td style="padding-left:9px;white-space:nowrap;overflow:visible;text-align:left!important;vertical-align:middle!important;" nowrap="nowrap">
+               
+                       <img src="/static/images/toolbar/wm_tb_nxt_off.png" alt="Next capture" width="14" height="16" border="0"/>
+                       
+			    </td>
+           </tr>
+
+           <!-- NEXT/PREV YEAR NAV AND YEAR INDICATOR -->
+           <tr style="width:110px;height:13px;font-size:9px!important;">
+				<td style="padding-right:9px;font-size:11px!important;font-weight: bold;text-align:right;white-space:nowrap;overflow:visible;" nowrap="nowrap">
+               
+		                <a href="/web/20111010074941/http://vim-users.jp/2010/11/hack184/" style="text-decoration:none;color:#33f;font-weight:bold;background-color:transparent;border:none;" title="10 Oct 2011"><strong>2011</strong></a>
+		                
+               </td>
+               <td id="displayYearEl" style="background:#000;color:#ff0;font-size:11px!important;font-weight: bold;padding-top:1px;width:34px;height:13px;text-align:center;" title="You are here: 12:42:06 Jan 18, 2013">2013</td>
+				<td style="padding-left:9px;font-size:11px!important;font-weight: bold;white-space:nowrap;overflow:visible;" nowrap="nowrap">
+               
+                       2014
+                       
+				</td>
+           </tr>
+           </tbody></table>
+       </td>
+
+       </tr>
+       <tr>
+       <td style="vertical-align:middle;padding:0!important;">
+           <a href="/web/20130118124206*/http://vim-users.jp/2010/11/hack184/" style="color:#33f;font-size:11px;font-weight:bold;background-color:transparent;border:none;" title="See a list of every capture for this URL"><strong>10 captures</strong></a>
+           <div class="__wb_banner_div" style="margin:0!important;padding:0!important;color:#666;font-size:9px;padding-top:2px!important;white-space:nowrap;" title="Timespan for captures of this URL">23 Nov 10 - 18 Jan 13</div>
+       </td>
+       <td style="padding:0!important;">
+       <a style="position:relative; white-space:nowrap; width:475px;height:27px;" href="" id="wm-graph-anchor">
+       <div class="__wb_banner_div" id="wm-ipp-sparkline" style="position:relative; white-space:nowrap; width:475px;height:27px;background-color:#fff;cursor:pointer;border-right:1px solid #ccc;" title="Explore captures for this URL">
+			<img id="sparklineImgId" style="position:absolute; z-index:9012; top:0px; left:0px;"
+				onmouseover="showTrackers('inline');" 
+				onmouseout="showTrackers('none');"
+				onmousemove="trackMouseMove(event,this)"
+				alt="sparklines"
+				width="475"
+				height="27"
+				border="0"
+				src="/web/jsp/graph.jsp?graphdata=475_27_1996:-1:000000000000_1997:-1:000000000000_1998:-1:000000000000_1999:-1:000000000000_2000:-1:000000000000_2001:-1:000000000000_2002:-1:000000000000_2003:-1:000000000000_2004:-1:000000000000_2005:-1:000000000000_2006:-1:000000000000_2007:-1:000000000000_2008:-1:000000000000_2009:-1:000000000000_2010:-1:000000000011_2011:-1:100110010100_2012:-1:000000010010_2013:0:100000000000_2014:-1:000000000000"></img>
+			<img id="wbMouseTrackYearImg" 
+				style="display:none; position:absolute; z-index:9010;"
+				width="25" 
+				height="27"
+				border="0"
+				src="/static/images/toolbar/transp-yellow-pixel.png"></img>
+			<img id="wbMouseTrackMonthImg"
+				style="display:none; position:absolute; z-index:9011; " 
+				width="2"
+				height="27" 
+				border="0"
+				src="/static/images/toolbar/transp-red-pixel.png"></img>
+       </div>
+		</a>
+
+       </td>
+       </tr></tbody></table>
+   </td>
+   <td style="text-align:right;padding:5px;width:65px;font-size:11px!important;">
+       <a href="javascript:;" onclick="document.getElementById('wm-ipp').style.display='none';" style="display:block;padding-right:18px;background:url(/static/images/toolbar/wm_tb_close.png) no-repeat 100% 0;color:#33f;font-family:'Lucida Grande','Arial',sans-serif;margin-bottom:23px;background-color:transparent;border:none;" title="Close the toolbar">Close</a>
+       <a href="http://faq.web.archive.org/" style="display:block;padding-right:18px;background:url(/static/images/toolbar/wm_tb_help.png) no-repeat 100% 0;color:#33f;font-family:'Lucida Grande','Arial',sans-serif;background-color:transparent;border:none;" title="Get some help using the Wayback Machine">Help</a>
+   </td>
+   </tr></tbody></table>
+
+</div>
+</div>
+<script type="text/javascript">
+ var wmDisclaimBanner = document.getElementById("wm-ipp");
+ if(wmDisclaimBanner != null) {
+   disclaimElement(wmDisclaimBanner);
+ }
+</script>
+<!-- END WAYBACK TOOLBAR INSERT -->
+
+<div id="header">
+	<p class="siteName"><a href="/web/20130118124206/http://vim-users.jp/" title="Vim-users.jp Indexへ戻る"><img src="/web/20130118124206im_/http://vim-users.jp/images/logo.gif" alt="Vim-users.jp" border="0"></a></p>
+	<p class="description">日本の Vim ユーザのためのハブサイト</p></div>
+
+<div id="content">
+	<div id="main">
+<article>
+		<p class="topicPath"><a href="/web/20130118124206/http://vim-users.jp/">Home</a> &gt; <a href="/web/20130118124206/http://vim-users.jp/category/vim-hacks/" title="Vim Hacks の投稿をすべて表示" rel="category tag">Vim Hacks</a> &gt; <span class="current">Hack #184: MacVimでCommand-line windowを使いこなす</span></p>
+		<ul class="flip" id="flip1">
+		<li class="newer"><a href="/web/20130118124206/http://vim-users.jp/2010/11/hack185/" title="Hack #185: neocomplcacheの設定について知る　中編" rel="nofollow">Newer</a></li>
+		<li class="older"><a href="/web/20130118124206/http://vim-users.jp/2010/11/hack183-2/" title="Hack #183: Vim日本語ドキュメントを更新しよう" rel="nofollow">Older</a></li>
+		</ul>
+		<h1>Hack #184: MacVimでCommand-line windowを使いこなす</h1>
+		<div class="entry">
+			<ul class="info">
+				<li class="date">2010-11-22 (月) 0:00</li>
+				<li class="category"><a href="/web/20130118124206/http://vim-users.jp/category/vim-hacks/" title="Vim Hacks の投稿をすべて表示" rel="category tag">Vim Hacks</a></li>
+				<li class="tags"><a href="/web/20130118124206/http://vim-users.jp/tag/lv2/" rel="tag">lv2</a> | <a href="/web/20130118124206/http://vim-users.jp/tag/vim-hacks/" rel="tag">Vim Hacks</a></li>							</ul>
+			<div class="textBody">
+				<p><a href="/web/20130118124206/http://vim-users.jp/2010/07/hack161/">Hack #161: Command-line windowを使いこなす</a>
+				という記事を参考に、<code>:</code>キーに<code>q:</code>相当の機能を割り当てた人が相当数いると思います。
+				しかし、この設定はMacVim上でうまく動作しません。</p>
+				
+				<p>MacVimはGUIで動作するVimとして最も評判が悪いものですが、しかしながらMac OS X上で最も高速で動作するVimであり、泣く泣く使用し続ける方も多くいらっしゃることだと思います。(*1)</p>
+				
+				<p>具体的にはMacVimで<code>q:</code>してCommand-line windowを開いた状態で、何か一行だけの結果を出力するコマンドを実行するとします。</p>
+				
+				<pre><code>echo 1
+</code></pre>
+				
+				<p>ターミナルのVim、あるいはGVimでは画面下部に1と出力されたままになるのですが、MacVimのみ、何も表示されません。</p>
+				
+				<pre><code>echo &amp;filetype
+</code></pre>
+				
+				<p>などが完全に使えなくなってしまいます。</p>
+				
+				<h2>解決</h2>
+				
+				<p>Command-line windowでの<kbd>&lt;Cr&gt;</kbd>キーの挙動を上書きし、(1) 一旦入力コマンドを別のところに保存し、(2) Command-line windowを閉じ、(3) 通常の<code>:</code>を打鍵、(4) 先ほど入力したコマンドを展開、(5) 実行、という手順をとることにします。</p>
+				
+				<p>前提として、<a href="/web/20130118124206/http://vim-users.jp/2010/07/hack161/">Hack #161の設定</a> が既になされているものとします。その上で、以下のコードを<code>~/.vimrc</code>に記述します。</p>
+				
+				<pre><code>autocmd CmdwinEnter * nnoremap &lt;buffer&gt;&lt;expr&gt; &lt;Cr&gt; CmdwinRun()
+autocmd CmdwinEnter * inoremap &lt;buffer&gt;&lt;expr&gt; &lt;Cr&gt; CmdwinRun()
+function! CmdwinRun()
+  let a = getline(line('.'))
+  return &quot;\&lt;Esc&gt;\&lt;C-c&gt;\&lt;C-c&gt;:&quot; . a . &quot;\&lt;Cr&gt;&quot;
+endfunction
+</code></pre>
+				
+				<p>なお、他にもいろいろあって、最終的に著者の<code>~/.vimrc</code>のCommand-line window関係の設定は以下のようになっています。</p>
+				
+				<pre><code>&quot; No Command-line window by Shougo http://vim-users.jp/2010/07/hack161/ {{{
+nnoremap &lt;sid&gt;(command-line-enter) q:
+xnoremap &lt;sid&gt;(command-line-enter) q:
+nnoremap &lt;sid&gt;(command-line-norange) q:&lt;C-u&gt;
+
+nmap :  &lt;sid&gt;(command-line-enter)
+xmap :  &lt;sid&gt;(command-line-enter)
+
+&quot; I added
+nnoremap q: q:&lt;Esc&gt;
+
+autocmd MyAutoCmd CmdwinEnter * call s:init_cmdwin()
+
+&quot; MacVim is shit
+autocmd CmdwinEnter * nnoremap &lt;buffer&gt;&lt;expr&gt; &lt;Cr&gt; CmdwinRun()
+autocmd CmdwinEnter * inoremap &lt;buffer&gt;&lt;expr&gt; &lt;Cr&gt; CmdwinRun()
+function! CmdwinRun()
+  let a = getline(line('.'))
+  return &quot;\&lt;Esc&gt;\&lt;C-c&gt;\&lt;C-c&gt;:&quot; . a . &quot;\&lt;Cr&gt;&quot;
+endfunction
+
+function! s:init_cmdwin()
+  nnoremap &lt;buffer&gt; q :&lt;C-u&gt;quit&lt;CR&gt;
+  nnoremap &lt;buffer&gt; &lt;TAB&gt; :&lt;C-u&gt;quit&lt;CR&gt;
+  inoremap &lt;buffer&gt;&lt;expr&gt;&lt;CR&gt; pumvisible() ? &quot;\&lt;C-y&gt;\&lt;CR&gt;&quot; : &quot;\&lt;CR&gt;&quot;
+  inoremap &lt;buffer&gt;&lt;expr&gt;&lt;C-h&gt; pumvisible() ? &quot;\&lt;C-y&gt;\&lt;C-h&gt;&quot; : &quot;\&lt;C-h&gt;&quot;
+  &quot;inoremap &lt;buffer&gt;&lt;expr&gt;&lt;BS&gt; pumvisible() ? &quot;\&lt;C-y&gt;\&lt;C-h&gt;&quot; : &quot;\&lt;C-h&gt;&quot;
+  &quot;I added
+  inoremap &lt;buffer&gt;&lt;expr&gt;&lt;BS&gt; col('.') == 1 ? &quot;\&lt;ESC&gt;:quit\&lt;CR&gt;&quot; : pumvisible() ? &quot;\&lt;C-y&gt;\&lt;C-h&gt;&quot; : &quot;\&lt;C-h&gt;&quot;
+  inoremap &lt;buffer&gt;&lt;expr&gt;: col('.') == 1 ? &quot;VimProcBang &quot; : &quot;:&quot;
+  inoremap &lt;buffer&gt;&lt;expr&gt; \  smartchr#one_of('~/', '\')
+
+  &quot; Completion.
+  inoremap &lt;buffer&gt;&lt;expr&gt;&lt;TAB&gt;  pumvisible() ? &quot;\&lt;C-n&gt;&quot; : &quot;\&lt;TAB&gt;&quot;
+
+  &quot; HootSuite
+  inoreabbrev &lt;buffer&gt; c: ./core/mvc/controllers/mobile/
+  inoreabbrev &lt;buffer&gt; v: ./core/mvc/views/mobile/
+
+  startinsert!
+endfunction
+&quot; }}}
+</code></pre>
+				
+				<p>MacVim固有のバグ回避コードが入っていますが、MacVim以外のVimでも正常に動作するはずです。</p>
+				
+				<h2>参考</h2>
+				
+				<ul>
+				  <li>(*1) <a href="/web/20130118124206/http://h.hatena.ne.jp/ujihisa/9234098453983077319">http://h.hatena.ne.jp/ujihisa/9234098453983077319</a> MacVimの恐るべき数々の罠については、後日おいおい語っていくことにしましょう。</li>
+				</ul>
+				<div class='wp_social_bookmarking_light'><div><a href='/web/20130118124206/http://b.hatena.ne.jp/add?mode=confirm&amp;url=http%3A%2F%2Fvim-users.jp%2F2010%2F11%2Fhack184%2F&amp;title=Hack%20%23184%3A%20MacVim%E3%81%A7Command-line%20window%E3%82%92%E4%BD%BF%E3%81%84%E3%81%93%E3%81%AA%E3%81%99' title='このエントリーをはてなブックマークに追加' rel=nofollow class='wp_social_bookmarking_light_a' target=_blank><img src='/web/20130118124206im_/http://vim-users.jp/wp-content/plugins/wp-social-bookmarking-light/images/hatena.gif' alt='このエントリーをはてなブックマークに追加' title='このエントリーをはてなブックマークに追加' width='16' height='12' class='wp_social_bookmarking_light_img' /></a></div><div><a href='/web/20130118124206/http://b.hatena.ne.jp/entry/http://vim-users.jp/2010/11/hack184/' title='はてなブックマーク - Hack #184: MacVimでCommand-line windowを使いこなす' rel=nofollow class='wp_social_bookmarking_light_a' target=_blank><img src='/web/20130118124206im_/http://b.hatena.ne.jp/entry/image/http://vim-users.jp/2010/11/hack184/' alt='はてなブックマーク - Hack #184: MacVimでCommand-line windowを使いこなす' title='はてなブックマーク - Hack #184: MacVimでCommand-line windowを使いこなす'   class='wp_social_bookmarking_light_img' /></a></div><div><a href='/web/20130118124206/http://www.facebook.com/share.php?u=http%3A%2F%2Fvim-users.jp%2F2010%2F11%2Fhack184%2F&amp;t=Hack%20%23184%3A%20MacVim%E3%81%A7Command-line%20window%E3%82%92%E4%BD%BF%E3%81%84%E3%81%93%E3%81%AA%E3%81%99' title='Share on Facebook' rel=nofollow class='wp_social_bookmarking_light_a' target=_blank><img src='/web/20130118124206im_/http://vim-users.jp/wp-content/plugins/wp-social-bookmarking-light/images/facebook.png' alt='Share on Facebook' title='Share on Facebook' width='16' height='16' class='wp_social_bookmarking_light_img' /></a></div><div><a href='/web/20130118124206/http://www.google.com/buzz/post?url=http%3A%2F%2Fvim-users.jp%2F2010%2F11%2Fhack184%2F&amp;message=Hack%20%23184%3A%20MacVim%E3%81%A7Command-line%20window%E3%82%92%E4%BD%BF%E3%81%84%E3%81%93%E3%81%AA%E3%81%99' title='Post to Google Buzz' rel=nofollow class='wp_social_bookmarking_light_a' target=_blank><img src='/web/20130118124206im_/http://vim-users.jp/wp-content/plugins/wp-social-bookmarking-light/images/google-buzz.png' alt='Post to Google Buzz' title='Post to Google Buzz' width='16' height='16' class='wp_social_bookmarking_light_img' /></a></div><div><a href='/web/20130118124206/http://www.google.com/bookmarks/mark?op=add&amp;bkmk=http%3A%2F%2Fvim-users.jp%2F2010%2F11%2Fhack184%2F&amp;title=Hack%20%23184%3A%20MacVim%E3%81%A7Command-line%20window%E3%82%92%E4%BD%BF%E3%81%84%E3%81%93%E3%81%AA%E3%81%99' title='Bookmark this on Google Bookmarks' rel=nofollow class='wp_social_bookmarking_light_a' target=_blank><img src='/web/20130118124206im_/http://vim-users.jp/wp-content/plugins/wp-social-bookmarking-light/images/google.png' alt='Bookmark this on Google Bookmarks' title='Bookmark this on Google Bookmarks' width='16' height='16' class='wp_social_bookmarking_light_img' /></a></div><div><a href='/web/20130118124206/http://bookmarks.yahoo.co.jp/bookmarklet/showpopup?t=Hack%20%23184%3A%20MacVim%E3%81%A7Command-line%20window%E3%82%92%E4%BD%BF%E3%81%84%E3%81%93%E3%81%AA%E3%81%99&amp;u=http%3A%2F%2Fvim-users.jp%2F2010%2F11%2Fhack184%2F&amp;ei=UTF-8' title='Bookmark this on Yahoo Bookmark' rel=nofollow class='wp_social_bookmarking_light_a' target=_blank><img src='/web/20130118124206im_/http://vim-users.jp/wp-content/plugins/wp-social-bookmarking-light/images/yahoo.gif' alt='Bookmark this on Yahoo Bookmark' title='Bookmark this on Yahoo Bookmark' width='16' height='16' class='wp_social_bookmarking_light_img' /></a></div><div><a href='/web/20130118124206/http://clip.livedoor.com/redirect?link=http%3A%2F%2Fvim-users.jp%2F2010%2F11%2Fhack184%2F&amp;title=Vim-users.jp%20-%20Hack%20%23184%3A%20MacVim%E3%81%A7Command-line%20window%E3%82%92%E4%BD%BF%E3%81%84%E3%81%93%E3%81%AA%E3%81%99&amp;ie=utf-8' title='Bookmark this on Livedoor Clip' rel=nofollow class='wp_social_bookmarking_light_a' target=_blank><img src='/web/20130118124206im_/http://vim-users.jp/wp-content/plugins/wp-social-bookmarking-light/images/livedoor.gif' alt='Bookmark this on Livedoor Clip' title='Bookmark this on Livedoor Clip' width='16' height='16' class='wp_social_bookmarking_light_img' /></a></div><div><a href='/web/20130118124206/http://friendfeed.com/?url=http%3A%2F%2Fvim-users.jp%2F2010%2F11%2Fhack184%2F&amp;title=Hack%20%23184%3A%20MacVim%E3%81%A7Command-line%20window%E3%82%92%E4%BD%BF%E3%81%84%E3%81%93%E3%81%AA%E3%81%99' title='Share on FriendFeed' rel=nofollow class='wp_social_bookmarking_light_a' target=_blank><img src='/web/20130118124206im_/http://vim-users.jp/wp-content/plugins/wp-social-bookmarking-light/images/friendfeed.png' alt='Share on FriendFeed' title='Share on FriendFeed' width='16' height='16' class='wp_social_bookmarking_light_img' /></a></div><div><script type='text/javascript'>tweetmeme_style = 'compact';tweetmeme_url='/web/20130118124206/http://vim-users.jp/2010/11/hack184/';</script><script type='text/javascript' src='/web/20130118124206js_/http://tweetmeme.com/i/scripts/button.js'></script></div></div><br class='wp_social_bookmarking_light_clear' /><p style="text-align: center;"><script type="text/javascript"><!--
+				google_ad_client = "pub-4444897972419065";
+				/* vim-users.jp 個別エントリ用 728x90 */
+				google_ad_slot = "5341751190";
+				google_ad_width = 728;
+				google_ad_height = 90;
+				//-->
+				</script>
+				<script type="text/javascript"
+				src="/web/20130118124206js_/http://pagead2.googlesyndication.com/pagead/show_ads.js">
+				</script></p>
+			</div>
+
+			<ul class="flip" id="flip2">
+				<li class="newer">Newer: <a href="/web/20130118124206/http://vim-users.jp/2010/11/hack185/" title="1つ新しい記事">Hack #185: neocomplcacheの設定について知る　中編</a></li>
+				<li class="older">Older: <a href="/web/20130118124206/http://vim-users.jp/2010/11/hack183-2/" title="1つ古い記事">Hack #183: Vim日本語ドキュメントを更新しよう</a></li>
+			</ul>
+
+			<div class="section" id="comments">
+				<h2>Comments:<span class="count">1</span></h2>
+				<dl class="log">
+<dt id="comment4983"><span class="name">sakamoto</span> <span class="date">10-11-22 (月) 13:01</span> </dt>
+				<dd>
+							<p>Mac OS X上で最速のVimは、
+							おそらくvim-cocoa <a href="/web/20130118124206/https://github.com/jjgod/vim-cocoa" rel="nofollow">https://github.com/jjgod/vim-cocoa</a> ではないかと思います。</p>
+							
+							<p>また、MacVimの不具合と思わしき挙動に出会いましたら、泣く前に
+							<a href="/web/20130118124206/http://code.google.com/p/macvim-kaoriya/issues/list" rel="nofollow">http://code.google.com/p/macvim-kaoriya/issues/list</a> に報告していただければ、
+							可能な限り調査/修正しますので、ご協力していただければ幸いです。</p>
+				</dd>
+				</dl>
+				<form class="post" method="post" action="/web/20130118124206/http://vim-users.jp/wp-comments-post.php" id="commentsForm" onsubmit="if (this.bakecookie[0].checked) rememberMe(this)">
+					<fieldset>
+					<legend>Comment Form</legend>
+					<div>
+						<input type="hidden" name="comment_post_ID" value="2007" />
+					</div>
+					<dl id="name-email">
+						<dt><label for="comment-author">Name (必須)</label></dt>
+						<dd><input type="text" class="inputField" id="comment-author" name="author" size="20" value="" /></dd>
+						<dt><label for="comment-email">Mail address (非公開) (必須)</label></dt>
+						<dd><input type="text" class="inputField" size="20" id="comment-email" name="email" value="" /></dd>
+					</dl>
+					<dl>
+						<dt><label for="comment-url"><abbr title="Uniform Resource Identifer">URI</abbr></label></dt>
+						<dd><input type="text" class="inputField" id="comment-url" name="url" size="20" value="http://" /></dd>
+						<dt>Remember personal info</dt>
+						<dd><input type="radio" class="radio" id="bakecookie" name="bakecookie" /> <label for="bakecookie">Yes</label><input type="radio" class="radio" id="forget" name="bakecookie" onclick="forgetMe(this.form)" onkeypress="forgetMe(this.form)" value="Forget Info" /> <label for="forget">No</label></dd>
+						<dt><label for="comment-text">Comment<span>スタイル指定用の一部の <abbr title="Hyper Text Markup Language">HTML</abbr>タグが使用できます。</span></label></dt>
+						<dd><textarea id="comment-text" name="comment" rows="8" cols="50" onfocus="if (this.value == 'Add Your Comment') this.value = '';" onblur="if (this.value == '') this.value = 'Add Your Comment';">Add Your Comment</textarea></dd>
+					</dl>
+					<div class="action">
+						<input type="submit" class="submit post" id="comment-post" name="post" value="Post" />
+					</div>
+					</fieldset>
+					<script type="text/javascript">
+						applyCookie('comments_form', '/', 'vim-users.jp');
+					</script>
+				</form>
+			</div><!-- end div#comment -->
+			<div class="section" id="trackback">
+				<h2>Trackbacks:<span class="count">0</span></h2>
+				<dl class="info">
+				<dt>Trackback URL for this entry</dt>
+				<dd class="URL">http://vim-users.jp/2010/11/hack184/trackback/</dd>
+				<dt>Listed below are links to weblogs that reference</dt>
+				<dd><a href="/web/20130118124206/http://vim-users.jp/2010/11/hack184/">Hack #184: MacVimでCommand-line windowを使いこなす</a> from <a href="/web/20130118124206/http://vim-users.jp/">Vim-users.jp</a></dd>
+				</dl>
+			</div><!-- end div#trackback -->
+
+		</div><!--end entry-->
+		<p class="topicPath"><a href="/web/20130118124206/http://vim-users.jp/">Home</a> &gt; <a href="/web/20130118124206/http://vim-users.jp/category/vim-hacks/" title="Vim Hacks の投稿をすべて表示" rel="category tag">Vim Hacks</a> &gt; <span class="current">Hack #184: MacVimでCommand-line windowを使いこなす</span></p>
+</article>
+	</div><!-- end main-->
+
+<div id="utilities">
+	<dl class="navi">
+
+		<dt>Pages</dt>
+		<dd>
+			<ul class="pages">
+<li class="page_item page-item-2"><a href="/web/20130118124206/http://vim-users.jp/about/">このサイトについて</a></li>
+<li class="page_item page-item-34"><a href="/web/20130118124206/http://vim-users.jp/announce_vim_community/">Vimコミュニティ等を運営されている方々へ</a></li>
+<li class="page_item page-item-54"><a href="/web/20130118124206/http://vim-users.jp/mail_address/">vim-users.jp ドメインのメールアドレス発行について</a></li>
+<li class="page_item page-item-67"><a href="/web/20130118124206/http://vim-users.jp/vim-hacks-project/">Vim Hacks Project</a></li>
+<li class="page_item page-item-194"><a href="/web/20130118124206/http://vim-users.jp/irc-channel/">IRC channel(test)</a></li>
+<li class="page_item page-item-1084"><a href="/web/20130118124206/http://vim-users.jp/vim-users-jp-official-lingr-chat-room/">vim-users.jp official lingr chat room.</a></li>
+<li class="page_item page-item-1658"><a href="/web/20130118124206/http://vim-users.jp/real-vim-hacks-project/">Real Vim Hacks Project</a></li>
+<li class="page_item page-item-2636"><a href="/web/20130118124206/http://vim-users.jp/%e4%bf%ae%e6%ad%a3%e3%81%97%e3%81%be%e3%81%97%e3%81%9f/">修正しました</a></li>
+			</ul>
+		</dd>
+
+		<dt>Recent Entries</dt>
+		<dd>
+			<ul class="recentEntries">
+	<li><a href='/web/20130118124206/http://vim-users.jp/2013/01/vim-advent-calendar-2012-ujihisa-2/' title='Vim Advent Calendar 2012 ujihisa 2'>Vim Advent Calendar 2012 ujihisa 2</a></li>
+	<li><a href='/web/20130118124206/http://vim-users.jp/2012/12/vim-advent-2012-ujihisa-1/' title='Vim Advent Calendar 2012 ujihisa 1'>Vim Advent Calendar 2012 ujihisa 1</a></li>
+	<li><a href='/web/20130118124206/http://vim-users.jp/2012/12/neco-ruby-to-neocomplcache/' title='neco-rubyがneocomplcacheに統合されました'>neco-rubyがneocomplcacheに統合されました</a></li>
+	<li><a href='/web/20130118124206/http://vim-users.jp/2012/11/vim11/' title='Vim勉強会#11 が尼崎市で開催されました'>Vim勉強会#11 が尼崎市で開催されました</a></li>
+	<li><a href='/web/20130118124206/http://vim-users.jp/2012/11/ujihisa-vim-3-pre-2/' title='ujihisa.vim#3が開催されます！'>ujihisa.vim#3が開催されます！</a></li>
+			</ul>
+		</dd>
+		<dt>Categories</dt>
+		<dd>
+			<ul class="category">
+	<li class="cat-item cat-item-19"><a href="/web/20130118124206/http://vim-users.jp/category/vim-hacks/" title="Vim Hacks に含まれる投稿をすべて表示">Vim Hacks</a>
+</li>
+	<li class="cat-item cat-item-16"><a href="/web/20130118124206/http://vim-users.jp/category/vimscript/" title="Vim script に含まれる投稿をすべて表示">Vim script</a>
+</li>
+	<li class="cat-item cat-item-1"><a href="/web/20130118124206/http://vim-users.jp/category/etc/" title="その他 に含まれる投稿をすべて表示">その他</a>
+</li>
+	<li class="cat-item cat-item-5"><a href="/web/20130118124206/http://vim-users.jp/category/event/" title="イベント に含まれる投稿をすべて表示">イベント</a>
+</li>
+	<li class="cat-item cat-item-6"><a href="/web/20130118124206/http://vim-users.jp/category/announce/" title="告知 に含まれる投稿をすべて表示">告知</a>
+</li>
+			</ul>
+		</dd>
+
+		<dt>Archives</dt>
+		<dd>
+			<ul class="archive">
+	<li><a href="/web/20130118124206/http://vim-users.jp/2013/01/" title="1" rel="nofollow">2013-01</a></li>
+	<li><a href="/web/20130118124206/http://vim-users.jp/2012/12/" title="2" rel="nofollow">2012-12</a></li>
+	<li><a href="/web/20130118124206/http://vim-users.jp/2012/11/" title="2" rel="nofollow">2012-11</a></li>
+	<li><a href="/web/20130118124206/http://vim-users.jp/2012/10/" title="1" rel="nofollow">2012-10</a></li>
+	<li><a href="/web/20130118124206/http://vim-users.jp/2012/09/" title="1" rel="nofollow">2012-09</a></li>
+	<li><a href="/web/20130118124206/http://vim-users.jp/2012/02/" title="1" rel="nofollow">2012-02</a></li>
+	<li><a href="/web/20130118124206/http://vim-users.jp/2012/01/" title="1" rel="nofollow">2012-01</a></li>
+	<li><a href="/web/20130118124206/http://vim-users.jp/2011/12/" title="2" rel="nofollow">2011-12</a></li>
+	<li><a href="/web/20130118124206/http://vim-users.jp/2011/11/" title="1" rel="nofollow">2011-11</a></li>
+	<li><a href="/web/20130118124206/http://vim-users.jp/2011/10/" title="6" rel="nofollow">2011-10</a></li>
+	<li><a href="/web/20130118124206/http://vim-users.jp/2011/09/" title="8" rel="nofollow">2011-09</a></li>
+	<li><a href="/web/20130118124206/http://vim-users.jp/2011/08/" title="4" rel="nofollow">2011-08</a></li>
+	<li><a href="/web/20130118124206/http://vim-users.jp/2011/07/" title="4" rel="nofollow">2011-07</a></li>
+	<li><a href="/web/20130118124206/http://vim-users.jp/2011/06/" title="4" rel="nofollow">2011-06</a></li>
+	<li><a href="/web/20130118124206/http://vim-users.jp/2011/05/" title="6" rel="nofollow">2011-05</a></li>
+	<li><a href="/web/20130118124206/http://vim-users.jp/2011/04/" title="6" rel="nofollow">2011-04</a></li>
+	<li><a href="/web/20130118124206/http://vim-users.jp/2011/03/" title="7" rel="nofollow">2011-03</a></li>
+	<li><a href="/web/20130118124206/http://vim-users.jp/2011/02/" title="5" rel="nofollow">2011-02</a></li>
+	<li><a href="/web/20130118124206/http://vim-users.jp/2011/01/" title="7" rel="nofollow">2011-01</a></li>
+	<li><a href="/web/20130118124206/http://vim-users.jp/2010/12/" title="6" rel="nofollow">2010-12</a></li>
+	<li><a href="/web/20130118124206/http://vim-users.jp/2010/11/" title="6" rel="nofollow">2010-11</a></li>
+	<li><a href="/web/20130118124206/http://vim-users.jp/2010/10/" title="6" rel="nofollow">2010-10</a></li>
+	<li><a href="/web/20130118124206/http://vim-users.jp/2010/09/" title="4" rel="nofollow">2010-09</a></li>
+	<li><a href="/web/20130118124206/http://vim-users.jp/2010/08/" title="9" rel="nofollow">2010-08</a></li>
+	<li><a href="/web/20130118124206/http://vim-users.jp/2010/07/" title="7" rel="nofollow">2010-07</a></li>
+	<li><a href="/web/20130118124206/http://vim-users.jp/2010/06/" title="8" rel="nofollow">2010-06</a></li>
+	<li><a href="/web/20130118124206/http://vim-users.jp/2010/05/" title="5" rel="nofollow">2010-05</a></li>
+	<li><a href="/web/20130118124206/http://vim-users.jp/2010/04/" title="8" rel="nofollow">2010-04</a></li>
+	<li><a href="/web/20130118124206/http://vim-users.jp/2010/03/" title="8" rel="nofollow">2010-03</a></li>
+	<li><a href="/web/20130118124206/http://vim-users.jp/2010/02/" title="7" rel="nofollow">2010-02</a></li>
+	<li><a href="/web/20130118124206/http://vim-users.jp/2010/01/" title="13" rel="nofollow">2010-01</a></li>
+	<li><a href="/web/20130118124206/http://vim-users.jp/2009/12/" title="9" rel="nofollow">2009-12</a></li>
+	<li><a href="/web/20130118124206/http://vim-users.jp/2009/11/" title="10" rel="nofollow">2009-11</a></li>
+	<li><a href="/web/20130118124206/http://vim-users.jp/2009/10/" title="15" rel="nofollow">2009-10</a></li>
+	<li><a href="/web/20130118124206/http://vim-users.jp/2009/09/" title="16" rel="nofollow">2009-09</a></li>
+	<li><a href="/web/20130118124206/http://vim-users.jp/2009/08/" title="17" rel="nofollow">2009-08</a></li>
+	<li><a href="/web/20130118124206/http://vim-users.jp/2009/07/" title="16" rel="nofollow">2009-07</a></li>
+	<li><a href="/web/20130118124206/http://vim-users.jp/2009/06/" title="19" rel="nofollow">2009-06</a></li>
+	<li><a href="/web/20130118124206/http://vim-users.jp/2009/05/" title="17" rel="nofollow">2009-05</a></li>
+	<li><a href="/web/20130118124206/http://vim-users.jp/2009/04/" title="4" rel="nofollow">2009-04</a></li>
+	<li><a href="/web/20130118124206/http://vim-users.jp/2009/03/" title="1" rel="nofollow">2009-03</a></li>
+	<li><a href="/web/20130118124206/http://vim-users.jp/2008/11/" title="1" rel="nofollow">2008-11</a></li>
+	<li><a href="/web/20130118124206/http://vim-users.jp/2008/10/" title="2" rel="nofollow">2008-10</a></li>
+	<li><a href="/web/20130118124206/http://vim-users.jp/2008/09/" title="1" rel="nofollow">2008-09</a></li>
+	<li><a href="/web/20130118124206/http://vim-users.jp/2008/08/" title="4" rel="nofollow">2008-08</a></li>
+			</ul>
+		</dd>
+		<dt>Tag Cloud</dt>
+		<dd>
+<ul class="tagCloud">
+	<li class="level6"><a href="/web/20130118124206/http://vim-users.jp/tag/%e3%82%a4%e3%83%99%e3%83%b3%e3%83%88/" title="11 Entries" rel="tag">イベント</a></li>
+	<li class="level6"><a href="/web/20130118124206/http://vim-users.jp/tag/link/" title="1 Entries" rel="tag">リンク</a></li>
+	<li class="level6"><a href="/web/20130118124206/http://vim-users.jp/tag/%e5%ad%90%e3%83%8d%e3%82%bf/" title="1 Entries" rel="tag">子ネタ</a></li>
+	<li class="level6"><a href="/web/20130118124206/http://vim-users.jp/tag/announcement/" title="3 Entries" rel="tag">announcement</a></li>
+	<li class="level6"><a href="/web/20130118124206/http://vim-users.jp/tag/book/" title="2 Entries" rel="tag">book</a></li>
+	<li class="level6"><a href="/web/20130118124206/http://vim-users.jp/tag/iex/" title="1 Entries" rel="tag">iex</a></li>
+	<li class="level6"><a href="/web/20130118124206/http://vim-users.jp/tag/jishin/" title="1 Entries" rel="tag">jishin</a></li>
+	<li class="level4"><a href="/web/20130118124206/http://vim-users.jp/tag/lv1/" title="98 Entries" rel="tag">lv1</a></li>
+	<li class="level4"><a href="/web/20130118124206/http://vim-users.jp/tag/lv2/" title="113 Entries" rel="tag">lv2</a></li>
+	<li class="level6"><a href="/web/20130118124206/http://vim-users.jp/tag/lv3/" title="29 Entries" rel="tag">lv3</a></li>
+	<li class="level6"><a href="/web/20130118124206/http://vim-users.jp/tag/neobundle-vim/" title="1 Entries" rel="tag">neobundle.vim</a></li>
+	<li class="level6"><a href="/web/20130118124206/http://vim-users.jp/tag/neocomplcache/" title="13 Entries" rel="tag">neocomplcache</a></li>
+	<li class="level6"><a href="/web/20130118124206/http://vim-users.jp/tag/plugin/" title="8 Entries" rel="tag">plugin</a></li>
+	<li class="level6"><a href="/web/20130118124206/http://vim-users.jp/tag/python/" title="2 Entries" rel="tag">Python</a></li>
+	<li class="level6"><a href="/web/20130118124206/http://vim-users.jp/tag/quickrun/" title="2 Entries" rel="tag">quickrun</a></li>
+	<li class="level6"><a href="/web/20130118124206/http://vim-users.jp/tag/remote_expr/" title="1 Entries" rel="tag">remote_expr</a></li>
+	<li class="level6"><a href="/web/20130118124206/http://vim-users.jp/tag/ujihisa/" title="2 Entries" rel="tag">ujihisa</a></li>
+	<li class="level6"><a href="/web/20130118124206/http://vim-users.jp/tag/unite/" title="3 Entries" rel="tag">unite</a></li>
+	<li class="level6"><a href="/web/20130118124206/http://vim-users.jp/tag/vim/" title="1 Entries" rel="tag">vim</a></li>
+	<li class="level6"><a href="/web/20130118124206/http://vim-users.jp/tag/vim%e3%83%86%e3%82%af%e3%83%8b%e3%83%83%e3%82%af%e3%83%90%e3%82%a4%e3%83%96%e3%83%ab/" title="1 Entries" rel="tag">Vimテクニックバイブル</a></li>
+	<li class="level6"><a href="/web/20130118124206/http://vim-users.jp/tag/vim-advent-calendar/" title="1 Entries" rel="tag">Vim&nbsp;Advent&nbsp;Calendar</a></li>
+	<li class="level1"><a href="/web/20130118124206/http://vim-users.jp/tag/vim-hacks/" title="232 Entries" rel="tag">Vim&nbsp;Hacks</a></li>
+	<li class="level6"><a href="/web/20130118124206/http://vim-users.jp/tag/vimm/" title="7 Entries" rel="tag">VimM</a></li>
+	<li class="level6"><a href="/web/20130118124206/http://vim-users.jp/tag/vimproc/" title="3 Entries" rel="tag">vimproc</a></li>
+	<li class="level6"><a href="/web/20130118124206/http://vim-users.jp/tag/vimscript/" title="5 Entries" rel="tag">Vim&nbsp;script</a></li>
+	<li class="level6"><a href="/web/20130118124206/http://vim-users.jp/tag/vimshell/" title="3 Entries" rel="tag">vimshell</a></li>
+	<li class="level6"><a href="/web/20130118124206/http://vim-users.jp/tag/vundle/" title="1 Entries" rel="tag">Vundle</a></li>
+	<li class="level6"><a href="/web/20130118124206/http://vim-users.jp/tag/vws/" title="1 Entries" rel="tag">vws</a></li>
+	<li class="level6"><a href="/web/20130118124206/http://vim-users.jp/tag/zsh/" title="1 Entries" rel="tag">zsh</a></li>
+</ul>
+		</dd>
+	</dl><!--end navi-->
+	<dl class="others">
+		<dt>Search</dt>
+		<dd>
+			<form method="get" action="/web/20130118124206/http://vim-users.jp/">
+				<fieldset>
+					<legend><label for="searchKeyword">Vim-users.jp内の検索</label></legend>
+					<div>
+						<input type="text" class="inputField" id="searchKeyword"  name="s" size="10" onfocus="if (this.value == 'Keyword(s)') this.value = '';" onblur="if (this.value == '') this.value = 'Keyword(s)';" value="Keyword(s)" />
+						<input type="submit" class="submit" id="submit" value="Search" />
+					</div>
+				</fieldset>
+			</form>
+		</dd>
+		<dt>Feeds</dt>
+		<dd>
+			<ul class="feeds">
+				<li class="rss"><a href="/web/20130118124206/http://vim-users.jp/feed/">All Entries(RSS2.0)</a></li>
+				<li class="atom"><a href="/web/20130118124206/http://vim-users.jp/feed/atom/">All Entries(Atom)</a></li>
+				<li class="rss"><a href="/web/20130118124206/http://vim-users.jp/comments/feed/">All Comments(RSS2.0)</a></li>
+			</ul>
+		</dd>
+		<dt>Links</dt>
+	    <li id="linkcat-2" class="linkcat">公式
+	<ul class='xoxo blogroll'>
+<li><a href="/web/20130118124206/http://github.com/ujihisa/mdv" title="Extended Markdown for Vim Hacks">mdv</a></li>
+<li><a href="/web/20130118124206/http://ujihisa.blogspot.com/2009/06/draft-extended-markdown-for-vim-hacks.html">mdvの解説 (英語)</a></li>
+<li><a href="/web/20130118124206/http://ujihisa.blogspot.com/">Standards</a></li>
+<li><a href="/web/20130118124206/http://www.kaoriya.net/vimdoc_j/">Vim日本語ドキュメント (help)</a></li>
+<li><a href="/web/20130118124206/http://www.vim.org/">welcome home: vim online</a></li>
+
+	</ul>
+</li>
+<li id="linkcat-11" class="linkcat">勉強会
+	<ul class='xoxo blogroll'>
+<li><a href="/web/20130118124206/http://wiki.livedoor.jp/biowithit/">VimM (Vim Movement)</a></li>
+
+	</ul>
+</li>
+<li id="linkcat-12" class="linkcat">情報
+	<ul class='xoxo blogroll'>
+<li><a href="/web/20130118124206/http://vimwiki.net/">VimWiki</a></li>
+<li><a href="/web/20130118124206/http://nanasi.jp/">名無しのvim使い</a></li>
+<li><a href="/web/20130118124206/http://vim-users-jp.tumblr.com/" target="_blank">名言集</a></li>
+
+	</ul>
+</li>
+<li id="linkcat-13" class="linkcat">コミュニティ
+	<ul class='xoxo blogroll'>
+<li><a href="/web/20130118124206/http://lingr.com/room/vim">vim-users.jp (at Lingr)</a></li>
+<li><a href="/web/20130118124206/http://vim.g.hatena.ne.jp/">vimグループ</a></li>
+<li><a href="/web/20130118124206/http://vim-users-jp.tumblr.com/" target="_blank">名言集</a></li>
+
+	</ul>
+</li>
+		<dd>
+      <!--
+			<ul>
+        <li><a href="/web/20130118124206/http://www.vim.org/" title="welcome home: vim online" >welcome home: vim online</a></li>
+        <li><a href="/web/20130118124206/http://www.kaoriya.net/" title="KaoriYa.net" >KaoriYa.net</a></li>
+        <li><a href="/web/20130118124206/http://ujihisa.nowa.jp/tag/vim" title="rubyneko" >rubyneko</a></li>
+        <li><a href="/web/20130118124206/http://nanasi.jp/" title="名無しのvim使い" >名無しのvim使い</a></li>
+        <li><a href="/web/20130118124206/http://vimwiki.net" title="VimWiki" >VimWiki</a></li>
+        <li><a href="/web/20130118124206/http://wiki.livedoor.jp/biowithit/" title="VimM (Vim Movement)">VimM (Vim Movement)</a></li>
+        <li><a href="/web/20130118124206/http://nagasaki.vim-users.jp/" title="nagasaki.vim">nagasaki.vim -Vim勉強会@長崎</a></li>
+        <li><a href="/web/20130118124206/http://kansai.vim-users.jp/" title="nagasaki.vim">Vim勉強会@関西</a></li>
+        <li><a href="/web/20130118124206/http://www.lingr.com/room/vim-users.jp" title="vim-users.jp (at Lingr)">vim-users.jp (at Lingr)</a></li>
+			</ul>
+      -->
+		</dd>
+		<dt>Meta</dt>
+		<dd>
+			<ul class="meta">
+				<li><a href="/web/20130118124206/http://validator.w3.org/check/referer" title="This page validates as XHTML 1.0 Strict" rel="nofollow">Valid <abbr title="eXtensible HyperText Markup Language">XHTML</abbr></a></li>
+<li><a href="/web/20130118124206/http://vim-users.jp/wp-login.php?action=register">登録</a></li>				<li><a href="/web/20130118124206/http://vim-users.jp/wp-login.php">ログイン</a></li>
+      </ul>
+    </dd>
+    <dt>Etc</dt>
+    <dd>
+      <div>
+        <a href="/web/20130118124206/http://creativecommons.org/licenses/by/2.1/jp/"><img alt="Creative Commons License" src="/web/20130118124206im_/http://i.creativecommons.org/l/by/2.1/jp/88x31.png" border="0"></a><br>
+        This blog is licensed under a <a href="/web/20130118124206/http://creativecommons.org/licenses/by/2.1/jp/">Creative Commons License</a>.
+      </div>
+    </dd>
+	</dl><!--end others-->
+</div><!--end utilities-->
+
+	<p class="return"><a href="/web/20130118124206/http://vim-users.jp/2010/11/hack184/#header">Return to page top</a></p>
+</div><!--end content-->
+
+<div id="footer">
+	<ul class="support">
+		<li>Powered by <a href="/web/20130118124206/http://wordpress.org/">WordPress 3.3.1</a></li>
+		<li class="template"><a href="/web/20130118124206/http://vicuna.jp/">vicuna CMS</a> - <a href="/web/20130118124206/http://wp.vicuna.jp/" title="ver.1.5.8">WordPress Theme</a></li>
+	</ul>
+	<address>This blog is licensed under a <a href="/web/20130118124206/http://creativecommons.org/licenses/by/2.1/jp/">Creative Commons License</a>.</address>
+</div>
+<script class="javascript" src="/web/20130118124206js_/http://vim-users.jp/wp-content/plugins/google-syntax-highlighter/Scripts/shCore.js"></script>
+<script class="javascript" src="/web/20130118124206js_/http://vim-users.jp/wp-content/plugins/google-syntax-highlighter/Scripts/shBrushCSharp.js"></script>
+<script class="javascript" src="/web/20130118124206js_/http://vim-users.jp/wp-content/plugins/google-syntax-highlighter/Scripts/shBrushPhp.js"></script>
+<script class="javascript" src="/web/20130118124206js_/http://vim-users.jp/wp-content/plugins/google-syntax-highlighter/Scripts/shBrushJScript.js"></script>
+<script class="javascript" src="/web/20130118124206js_/http://vim-users.jp/wp-content/plugins/google-syntax-highlighter/Scripts/shBrushJava.js"></script>
+<script class="javascript" src="/web/20130118124206js_/http://vim-users.jp/wp-content/plugins/google-syntax-highlighter/Scripts/shBrushVb.js"></script>
+<script class="javascript" src="/web/20130118124206js_/http://vim-users.jp/wp-content/plugins/google-syntax-highlighter/Scripts/shBrushSql.js"></script>
+<script class="javascript" src="/web/20130118124206js_/http://vim-users.jp/wp-content/plugins/google-syntax-highlighter/Scripts/shBrushXml.js"></script>
+<script class="javascript" src="/web/20130118124206js_/http://vim-users.jp/wp-content/plugins/google-syntax-highlighter/Scripts/shBrushDelphi.js"></script>
+<script class="javascript" src="/web/20130118124206js_/http://vim-users.jp/wp-content/plugins/google-syntax-highlighter/Scripts/shBrushPython.js"></script>
+<script class="javascript" src="/web/20130118124206js_/http://vim-users.jp/wp-content/plugins/google-syntax-highlighter/Scripts/shBrushRuby.js"></script>
+<script class="javascript" src="/web/20130118124206js_/http://vim-users.jp/wp-content/plugins/google-syntax-highlighter/Scripts/shBrushCss.js"></script>
+<script class="javascript" src="/web/20130118124206js_/http://vim-users.jp/wp-content/plugins/google-syntax-highlighter/Scripts/shBrushCpp.js"></script>
+<script class="javascript">
+dp.SyntaxHighlighter.ClipboardSwf = '/web/20130118124206/http://vim-users.jp/wp-content/plugins/google-syntax-highlighter/Scripts/clipboard.swf';
+dp.SyntaxHighlighter.HighlightAll('code');
+</script>
+<!-- BEGIN: WP Social Bookmarking Light -->
+<!-- END: WP Social Bookmarking Light -->
+</body>
+</html>
+
+
+
+
+
+<!--
+     FILE ARCHIVED ON 12:42:06 Jan 18, 2013 AND RETRIEVED FROM THE
+     INTERNET ARCHIVE ON 7:04:02 Jun 3, 2014.
+     JAVASCRIPT APPENDED BY WAYBACK MACHINE, COPYRIGHT INTERNET ARCHIVE.
+
+     ALL OTHER CONTENT MAY ALSO BE PROTECTED BY COPYRIGHT (17 U.S.C.
+     SECTION 108(a)(3)).
+-->
