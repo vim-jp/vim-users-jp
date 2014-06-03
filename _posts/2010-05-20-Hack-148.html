@@ -1,0 +1,63 @@
+---
+layout: post
+title: "Hack #148: Key mappingの設定を確認する"
+date: 2010-05-20
+author: thinca
+---
+<p>Vim を操作していると、たまにキー操作に対して意図しない挙動が発生することがあります。これは多くの場合、把握していない Key mapping が設定されているからです。
+例えば、プラグインによって知らないうちに設定されていたり、自分で設定していて忘れてしまっていたり、自分で間違えて設定していた場合などです。
+こういう時は Key mapping の設定を確認すると解決することが多いです。</p>
+
+<h3>:map コマンド</h3>
+
+<p><code>:map</code> 系のコマンドは Key mapping を定義するコマンドですが、設定の確認にも使えます。引数なしで実行すると、コマンドに対応するモードで定義されている Key mapping の一覧が表示されます。例えば、</p>
+
+<pre><code>:imap
+</code></pre>
+
+<p>を実行すると Insert mode で定義されている Key mapping の一覧が表示されます。</p>
+
+<h3>一覧表示の見方</h3>
+
+<p>一覧表示は 1 行に 1 つの設定が書かれています。
+最初の 3 文字は設定されているモードです。以下の文字のうち最大で 3 文字が表示されます。</p>
+
+<table>
+<tr><th>文字</th><th>モード</th></tr>
+<tr><td>(空白)</td><td>ノーマル、ビジュアル、セレクト、演算待ち状態モード</td></tr>
+<tr><td>n</td><td>ノーマルモード</td></tr>
+<tr><td>v</td><td>ビジュアルモード、セレクトモード</td></tr>
+<tr><td>s</td><td>セレクトモード</td></tr>
+<tr><td>x</td><td>ビジュアルモード</td></tr>
+<tr><td>o</td><td>演算待ち状態モード</td></tr>
+<tr><td>!</td><td>挿入モード、コマンドラインモード</td></tr>
+<tr><td>i</td><td>挿入モード</td></tr>
+<tr><td>l</td><td>Lang-Argモード</td></tr>
+<tr><td>c</td><td>コマンドラインモード</td></tr>
+</table>
+
+<p>続いて、展開前の文字列と展開後の文字列が書かれています。展開後の文字列の前には記号が表示されている場合があり、それらは以下の意味になります。</p>
+
+<table>
+<tr><th>文字</th><th>意味</th></tr>
+<tr><td>*</td><td>再マップされません。つまり、noremap 系で定義された Key mapping です。</td></tr>
+<tr><td>@</td><td>バッファローカルなマップです。&lt;buffer&gt; 付きで定義された Key mapping です。</td></tr>
+<tr><td>&amp;</td><td>スクリプトローカルなマップだけが再マップされます。&lt;script&gt; 付きで定義された Key mapping です。</td></tr>
+</table>
+
+<h3>特定のキーの設定を調べる</h3>
+
+<p><code>:map</code> 系のコマンドに 1 つだけ引数を与えると、そのキーシーケンスで始まる Key mapping のみを表示します。</p>
+
+<h3>定義された場所を調べる</h3>
+
+<p><code>:verbose</code> 付きで <code>:map</code> コマンドを実行すると、その設定を定義したファイルが確認できます。例えば以下のように表示されます。</p>
+
+<pre><code>:verbose map gj
+gj          * j
+Last set from ~/.vimrc
+</code></pre>
+
+<p>これにより、意図しない設定を行った元凶を調べることができます。</p>
+
+<address class="hack-author">thinca</address>

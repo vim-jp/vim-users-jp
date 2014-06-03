@@ -1,0 +1,162 @@
+---
+layout: post
+title: "Hack #174: テキストを折り畳む &#8211; 設定編"
+date: 2010-10-03
+author: thinca
+---
+<p>折り畳みには様々な要素があり、それらを制御するためのオプションが多くあります。ここでは、それらのオプションの一部を紹介します。
+なお、ここで紹介している fold 関係のオプションは全てウィンドウローカルです。</p>
+
+<h3><code class="option">'foldmethod'</code></h3>
+
+<p>折り畳みの種類を指定します。</p>
+
+<p>最も重要なオプションです。これによりバッファがどのように折り畳まれるかが決まります。
+値に関しては <a href="http://vim-users.jp/2010/08/hack170/">Hack #170: テキストを折り畳む – 基本編</a> で紹介しましたが、再掲します。</p>
+
+<table>
+<thead>
+<tr>
+<th>値</th>
+<th>概要</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>manual</td>
+<td>手動で折り畳みを作成します。</td>
+</tr>
+<tr>
+<td>marker</td>
+<td>特定の印により折り畳みを作成します。</td>
+</tr>
+<tr>
+<td>indent</td>
+<td>インデントによって折り畳みを作成します。</td>
+</tr>
+<tr>
+<td>expr</td>
+<td>式を使って柔軟に折り畳みを作成します。</td>
+</tr>
+<tr>
+<td>syntax</td>
+<td>syntax での指定により折り畳みを作成します。</td>
+</tr>
+<tr>
+<td>diff</td>
+<td>diff の際に変更されていないテキストを折り畳みます。</td>
+</tr>
+</tbody>
+</table>
+
+<p>これらの個々の詳細は今後の Hacks で取り扱う予定です。</p>
+
+<h3><code class="option">'foldenable'</code></h3>
+
+<p>真偽値のオプションです。このオプションが off の時、全ての折り畳みは無効化されます。</p>
+
+<p>これは折り畳みの使用/不使用を素早く切り替えるのに便利です。例えば、いくつかの折り畳みを折り畳んでいる時に、
+全てを表示するのに実際に折り畳みを開いてしまうと元の状態に戻すのが大変ですが、このオプションを切り替えることで一時的に折り畳みを開いた状態にできます。</p>
+
+<h3><code class="option">'foldlevel'</code></h3>
+
+<p>このオプションを設定すると、ウィンドウ全体の折り畳みが指定レベルまで開いた状態になります。</p>
+
+<p>つまり、0 を指定すると全て閉じた状態になります。99 などの大きな数値を指定すると全て開いた状態になります。</p>
+
+<p>このオプションで折り畳み状態を変更した後でも手動で各々の折り畳みの状態の操作が可能です。</p>
+
+<h3><code class="option">'foldcolumn'</code></h3>
+
+<p>指定した幅だけウィンドウの左端にカラムを追加して、そこに折り畳み情報を表示します。</p>
+
+<p><a href="http://vim-users.jp/wp-content/uploads/foldcolumn.png"><img /vim-users-jp/assets/images/foldcolumn.png" alt="setlocal foldcolumn=4 を設定した例" title="foldcolumn" width="267" height="394" class="alignnone size-full wp-image-1955" /></a></p>
+
+<p>カラムの幅が狭い場合は入れ子のレベルの数字が表示されます。</p>
+
+<h3><code class="option">'foldopen'</code></h3>
+
+<p>折り畳まれている行にカーソルが移動した際、このオプションで指定した種類の移動だった場合は折り畳みを開きます。
+以下の種類があります。カンマ区切りで複数指定できます。</p>
+
+<table>
+<thead>
+<tr>
+<th>キーワード</th>
+<th>種類</th>
+<th>例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>all</td>
+<td>あらゆる移動(以下にないものも含む)</td>
+<td>&nbsp;</td>
+</tr>
+<tr>
+<td>block</td>
+<td>ブロック単位の移動</td>
+<td><kbd>(</kbd> <kbd>{</kbd> <kbd>[[</kbd> <kbd>[{</kbd></td>
+</tr>
+<tr>
+<td>hor</td>
+<td>水平移動</td>
+<td><kbd>l</kbd> <kbd>w</kbd> <kbd>fx</kbd></td>
+</tr>
+<tr>
+<td>insert</td>
+<td>Insert modeの全てのコマンド</td>
+<td>&nbsp;</td>
+</tr>
+<tr>
+<td>jump</td>
+<td>大きな移動</td>
+<td><kbd>G</kbd> <kbd>gg</kbd></td>
+</tr>
+<tr>
+<td>mark</td>
+<td>マークへのジャンプ</td>
+<td><kbd>'m</kbd> <kbd>&lt;C-o&gt;</kbd> <kbd>&lt;C-i&gt;</kbd></td>
+</tr>
+<tr>
+<td>percent</td>
+<td>対応するカッコへの移動</td>
+<td><kbd>%</kbd></td>
+</tr>
+<tr>
+<td>quickfix</td>
+<td>quickfix 関連による移動</td>
+<td><code>:cnext</code> <code>:crewind</code> <code>:make</code></td>
+</tr>
+<tr>
+<td>search</td>
+<td>検索による移動</td>
+<td><kbd>/</kbd> <kbd>n</kbd> <kbd>*</kbd> <kbd>gd</kbd></td>
+</tr>
+<tr>
+<td>tag</td>
+<td>タグへのジャンプ</td>
+<td><code>:tag</code> <kbd>&lt;C-]&gt;</kbd> <kbd>&lt;C-t&gt;</kbd></td>
+</tr>
+<tr>
+<td>undo</td>
+<td>アンドゥ/リドゥ</td>
+<td><kbd>u</kbd> <kbd>&lt;C-r&gt;</kbd></td>
+</tr>
+</tbody>
+</table>
+
+<p>オペレータとして使った場合にはこのオプションは使われません。</p>
+
+<h3><code class="option">'foldclose'</code></h3>
+
+<p>&#8220;all&#8221; を指定した場合、カーソルが折り畳みから出るとその折り畳みが <code class="option">'foldlevel'</code> より大きかった場合は自動で閉じます。</p>
+
+<p>つまり、<code class="option">'foldlevel'</code> より大きなレベルの折り畳みはカーソルがある位置のもの以外全て閉じられることになります。</p>
+
+<h3><code class="option">'foldminlines'</code></h3>
+
+<p>このオプションで設定した行数より少ない行の折り畳みは表示上折り畳まれません。
+折り畳まれないのは表示上だけで、折り畳まれているかの状態は保持されています。</p>
+
+<address class="hack-author">thinca</address>

@@ -1,0 +1,69 @@
+---
+layout: post
+title: "Hack #195: virtualedit tip"
+date: 2011-01-16
+author: tyru
+---
+<p>virtualeditはすばらしいものです。
+文字が存在しない部分にもカーソルを移動させることができる、
+それだけなのですが筆者はこのオプションを知った時ずいぶんと移動が楽になったように感じました。
+ちなみにTeraPadやApsalyなどのエディタでも「フリーカーソル」として実装されているようです。
+またvirtualeditについては<a href="http://vim-users.jp/2010/02/hack125/">Hack #125</a>も参照してください。</p>
+
+<p>ちなみに自分は.vimrcで</p>
+
+<pre><code>set virtualedit=all
+</code></pre>
+
+<p>のように設定しています。</p>
+
+<h2>問題</h2>
+
+<p>しかし、<code>set virtualedit=all</code>をしていると<code>p</code>でのペーストで
+もし右端(<code>$</code>で移動できる場所です)よりも右にいた場合に、
+現在いる場所にテキストが挿入されてしまいます。</p>
+
+<pre><code>hello,$      |
+</code></pre>
+
+<p><code>$</code>は行末の位置であり、<code>|</code>はカーソルです。
+ここで無名レジスタ(<code>:help registers</code>)には「world」が入っているとします。種類はcharacterwise(<code>:help characterwise</code>)とします。
+ここでpを押すと</p>
+
+<pre><code>hello,      world
+</code></pre>
+
+<p>このようになってしまいます。
+私が望んだのは</p>
+
+<pre><code>hello,world
+</code></pre>
+
+<p>であり、余計な空白は入れてほしくありません。
+<code>set virtualedit=all</code>だといともたやすく存在しない場所へカーソルを動かすことができるので、
+ただ末尾に付け加えたいだけの場合に余計な神経を使ってしまうのです。なんとかできないでしょうか。</p>
+
+<h2>解決</h2>
+
+<p>以下のコードを.vimrcに貼り付ければ無事解決です。</p>
+
+<pre><code>if has('virtualedit') &amp;&amp; &amp;virtualedit =~# '\&lt;all\&gt;'
+nnoremap &lt;expr&gt; &lt;SID&gt;($-if-right-of-$)  (col('.') &gt;= col('$') ? '$' : '')
+nnoremap        &lt;SID&gt;(noremap-p)        p
+nmap p &lt;SID&gt;($-if-right-of-$)&lt;SID&gt;(noremap-p)
+endif
+</code></pre>
+
+<p>一行で書いてもいいでしょう。</p>
+
+<pre><code>if has('virtualedit') &amp;&amp; &amp;virtualedit =~# '\&lt;all\&gt;'
+nnoremap &lt;expr&gt; p (col('.') &gt;= col('$') ? '$' : '') . 'p'
+endif
+</code></pre>
+
+<p><code>&lt;SID&gt;</code>マッピングや<code>&lt;expr&gt;</code>を使うとマッピングを関数のように定義できます。<br />
+また<code>&lt;expr&gt;</code>の中では式であればよく、関数も使えるのでぐんと表現力が上がります。<br />
+しかし一行で書ける範囲であれば一行で書いた方が可読性は高いでしょう。<br />
+また<code>&lt;SID&gt;</code>マッピングを使うなら最低限mapとnoremapの違いは把握してないと使えません。</p>
+
+<address class="hack-author">tyru</address>

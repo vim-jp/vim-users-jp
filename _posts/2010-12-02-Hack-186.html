@@ -1,0 +1,94 @@
+---
+layout: post
+title: "Hack #186: テキストを折り畳む &#8211; 自作編"
+date: 2010-12-02
+author: thinca
+---
+<p><code class="option">'foldmethod'</code> に &#8220;expr&#8221; を指定すると、折り畳みの定義を式で指定することができます。</p>
+
+<h3>設定方法</h3>
+
+<p><code class="option">'foldmethod'</code> が &#8220;expr&#8221; の場合、<code class="option">'foldexpr'</code> オプションに折り畳みレベルを計算するための式を設定します。
+この式の中では <code>v:lnum</code> に行番号が格納されているので、その行の折り畳みレベルを計算します。</p>
+
+<p>大抵の場合、関数を定義してその関数を呼び出すような式を設定します。</p>
+
+<pre><code>setlocal foldexpr=MyFold(v:lnum)
+</code></pre>
+
+<h3>式の返す値</h3>
+
+<p>式は、その行の折り畳みレベルを以下のうちの1つの形式で返す必要があります。</p>
+
+<table>
+<thead>
+<tr>
+<th>値</th>
+<th>例</th>
+<th>意味</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>数字</td>
+<td>0, 1, 2</td>
+<td>折り畳みレベルです。0 の場合、その行は折り畳みに含まれません。</td>
+</tr>
+<tr>
+<td>-1</td>
+<td>-1</td>
+<td>直前か直後の行のうち低い方の行のレベルを使います。</td>
+</tr>
+<tr>
+<td>&#8220;=&#8221;</td>
+<td>&#8220;=&#8221;</td>
+<td>直前の行と同じレベルを使います。</td>
+</tr>
+<tr>
+<td>&#8220;a&#8221; + 数字 / &#8220;s&#8221; + 数字</td>
+<td>&#8220;a1&#8243;, &#8220;a2&#8243;, &#8220;s1&#8243;, &#8220;s2&#8243;</td>
+<td>直前の行のレベルからの相対値でレベルを指定します。a が + で s が &#8211; です。</td>
+</tr>
+<tr>
+<td>&#8220;&lt;&#8221; + 数字</td>
+<td>&#8220;&lt;1&#8243;, &#8220;&lt;2&#8243;</td>
+<td>指定したレベルの折り畳みを終了します。</td>
+</tr>
+<tr>
+<td>&#8220;&gt;&#8221; + 数字</td>
+<td>&#8220;&gt;1&#8243;, &#8220;&gt;2&#8243;</td>
+<td>指定したレベルの折り畳みを開始します。</td>
+</tr>
+</tbody>
+</table>
+
+<p>式の評価中に副作用があってはいけません。また、この式の評価はバッファ内の各行に対して行われるので、なるべく軽い処理で済ませる必要があります。</p>
+
+<h3>具体例</h3>
+
+<p>ここでは簡単な具体例を紹介します。</p>
+
+<pre><code>setlocal foldmethod=expr foldexpr=MyHelpFold(v:lnum)
+
+function! MyHelpFold(lnum)
+let line = getline(a:lnum)
+let next = getline(a:lnum + 1)
+if line =~ '^=\{78}$'
+return 1
+elseif next =~ '^=\{78}$'
+return '&lt;1'
+elseif line =~ '^-\{78}$'
+return 2
+elseif next =~ '^-\{78}$'
+return '&lt;2'
+endif
+return '='
+endfunction
+</code></pre>
+
+<p>これは Vim の help を折り畳む設定の例です。</p>
+
+<p>&#8220;=&#8221; が 78 個並ぶ行を目印として、その行以降をレベル 1、同じように &#8220;-&#8221; が 78 個並ぶ行以降をレベル 2 として定義しています。
+また、同じレベルが連続した場合に別々の折り畳みになるように、次の行が新しい目印の行だった場合はその行で折り畳みを終了するようにしています。</p>
+
+<address class="hack-author">thinca</address>

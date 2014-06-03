@@ -1,0 +1,51 @@
+---
+layout: post
+title: "Hack #187: Vimのインサートモードをより安全にする"
+date: 2010-12-07
+author: tyru
+---
+<p>たとえば、Vimでインサートモードに移り、テキストを入力します。
+そしてインサートモードを抜けます。
+間違った部分があったので<code>u</code>を押します。
+するとVimはインサートモード中に入力した全てのテキストを削除してしまいます。
+これはインサートモードで入力した文字はまとめてundoされるというVimの仕様で、
+Emacsではundoした場合20文字ごとにテキストが削除されます。
+なんとかできないでしょうか？</p>
+
+<h2>解決</h2>
+
+<p>以下のコードをvimrcに貼り付けます。
+するとEmacsと同じく20文字ごとに文字が削除されます。
+(<code>&lt;C-g&gt;u</code>というコマンドを使っています。詳しくは<code>:help i_CTRL-g_u</code>を参照してください)</p>
+
+<pre><code>function! s:is_changed() "\{\{\{
+try
+" When no `b:vimrc_changedtick` variable
+" (first time), not changed.
+return exists('b:vimrc_changedtick')
+\   &amp;&amp; b:vimrc_changedtick &lt; b:changedtick
+finally
+let b:vimrc_changedtick = b:changedtick
+endtry
+endfunction "\}\}\}
+autocmd vimrc CursorMovedI * if s:is_changed() | doautocmd User changed-text | endif
+
+let s:current_changed_times = 0
+let s:max_changed_times = 20
+function! s:changed_text() "\{\{\{
+if s:current_changed_times &gt;= s:max_changed_times - 1
+call feedkeys("\&lt;C-g&gt;u", 'n')
+let s:current_changed_times = 0
+else
+let s:current_changed_times += 1
+endif
+endfunction "\}\}\}
+autocmd vimrc User changed-text call s:changed_text()
+</code></pre>
+
+<p>Vimではモードがあり、dやv、テキストオブジェクトを組み合わせた
+高い編集能力があるのであまり問題とされていないのでしょう。
+EmacsはVimで言えばインサートモードしか存在しないので、
+undoした場合どこまで削除すればいいのか明確な基準がなかったために20文字としたのでしょう。</p>
+
+<address class="hack-author">tyru</address>

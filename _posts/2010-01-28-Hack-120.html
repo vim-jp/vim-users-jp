@@ -1,0 +1,48 @@
+---
+layout: post
+title: "Hack #120: gVim でウィンドウの位置とサイズを記憶する"
+date: 2010-01-28
+author: thinca
+---
+<p>GUI アプリケーションではよく終了時にウィンドウの位置とサイズを記憶し、次回起動時に復元するものを見かけます。Vim でも設定次第で同様のことが可能です。</p>
+
+<h3>設定</h3>
+
+<p>.gvimrc に以下のように書きます。</p>
+
+<pre><code>let g:save_window_file = expand('~/.vimwinpos')
+augroup SaveWindow
+autocmd!
+autocmd VimLeavePre * call s:save_window()
+function! s:save_window()
+let options = [
+\ 'set columns=' . &amp;columns,
+\ 'set lines=' . &amp;lines,
+\ 'winpos ' . getwinposx() . ' ' . getwinposy(),
+\ ]
+call writefile(options, g:save_window_file)
+endfunction
+augroup END
+
+if filereadable(g:save_window_file)
+execute 'source' g:save_window_file
+endif
+</code></pre>
+
+<h3>解説</h3>
+
+<h4>g:save_window_file</h4>
+
+<p>この変数で指定するファイルにウィンドウの位置やサイズを保存します。<code>expand()</code> は ~ を $HOME に展開するのに必要で、その必要がない場合はなくても問題ありません。</p>
+
+<h4>設定の書き出し</h4>
+
+<p>augroup SaveWindow 〜 augroup END で、Vim の終了時に発生するイベントを登録しています。</p>
+
+<p>ここでは Vim の終了時に <code>s:save_window()</code> と言う関数を呼ぶようにしています。そしてこの関数のなかで、<code>g:save_window_file</code> にウィンドウの位置とサイズの情報を Vim スクリプトの形式で書き出しています。</p>
+
+<h4>設定の読み出し</h4>
+
+<p>最後の if でウィンドウ情報ファイルが存在するかをチェックし、存在した場合はそのファイルを <code>:source</code> で読み込みます。情報ファイルは Vim スクリプトとして書き出されているので、<code>:source</code> するだけで位置とサイズが復元されます。</p>
+
+<address class="hack-author">thinca</address>

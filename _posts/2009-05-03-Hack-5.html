@@ -1,0 +1,135 @@
+---
+layout: post
+title: "Hack #5: Vim のオプションの値"
+date: 2009-05-03
+author: thinca
+---
+<dl>
+<dt>オプションの形式</dt>
+<dd>
+Vim には非常に多くのオプションがあり、その値を変更することで Vim の挙動を変更することができます。オプションは <code class="vim-script">:set</code> コマンドを使うことで設定、及び設定値の確認が可能です。オプションは取る値の形式によって boolean、number、string の 3 つに分類できます。
+</dd>
+<dt>全ての形式で共通の操作</dt>
+
+<dd>
+<dl>
+<dt>オプションの値を表示するには、</dt>
+<dd>
+<code class="vim-script">:set {option}?</code>
+</dd>
+<dt>とします。ここで {option} にはオプション名が入ります。また、詳細な情報を表示するためのコマンド <code class="vim-script">:verbose</code> と組み合わせて</dt>
+<dd>
+<code class="vim-script">:verbose set {option}?</code>
+</dd>
+<dt>とすることができます。こうすると、このオプションが最後にどのファイルによって設定されたのかが表示されます。オプションの値が意図せず変更されてしまった場合に、変更した箇所を特定するのに便利です。</dt>
+<dt>オプションの値を初期値に戻すには</dt>
+<dd>
+<code class="vim-script">:set {option}&amp;</code>
+</dd>
+<dt>とします。ただし、<code class="vim-option">'compatible'</code> オプションの値、すなわち、Vim が Vi 互換モードで動いている場合とそうでない場合とでは、オプションの初期値が異なります。明示的に Vi もしくは Vim の初期値に設定するには以下のようにします。</dt>
+<dd>
+<code class="vim-script">
+:set {option}&amp;vi<br />
+:set {option}&amp;vim
+</code>
+</dd>
+<dt><code class="vim-script">:set</code> コマンドは、スペースで区切ることで複数のオプションを 1 度に設定、もしくは表示することができます。以下のようにすることで、設定と表示を同時に行うこともできます。</dt>
+<dd><code class="vim-script">:set number! number?</code></dd>
+</dl>
+</dd>
+
+<dt>オプションの設定方法</dt>
+<dd>
+<dl>
+<dt>boolean</dt>
+<dd>on か off の値を取るオプションです。<code class="vim-option">'number'</code> や <code class="vim-option">'ignorecase'</code> などがこの形式です。
+<dl>
+<dt>on にするには</dt>
+<dd>
+<code class="vim-script">:set {option}</code>
+</dd>
+<dt>off にするには</dt>
+<dd>
+<code class="vim-script">:set no{option}</code>
+</dd>
+<dt>とします。また、値を交互に切り替える(トグルする)には、</dt>
+<dd>
+<code class="vim-script">:set {option}!</code>
+</dd>
+<dt>もしくは</dt>
+<dd>
+<code class="vim-script">:set inv{option}</code>
+</dd>
+<dt>とします。</dt>
+</dl>
+</dd>
+
+<dt>number</dt>
+<dd>整数値を取るオプションです。<code class="vim-option">'textwidth'</code> や <code class="vim-option">'history'</code> などがこの形式です。
+<dl>
+<dd>
+<code class="vim-script">:set {option}={value}</code>
+</dd>
+<dt>で値を設定します。このとき、=の前後に空白を入れてはいけません。オプションによっては設定できる値に制限があるものもあります。</dt>
+<dt>また、</dt>
+<dd>
+<code class="vim-script">
+:set {option}+={value}<br />
+:set {option}^={value}<br />
+:set {option}-={value}
+</code>
+</dd>
+<dt>とすることでそれぞれオプション値を加算、乗算、減算することができます。</dt>
+</dl>
+</dd>
+
+<dt>string</dt>
+<dd>
+文字列を取るオプションです。string 形式のオプションはいくつかのパターンに分けられます。
+この分類は筆者独自のもので help に直接書いてあるわけではありませんが、これらのうちのいずれかのタイプに当てはまります。
+<dl>
+<dt>任意の文字列</dt>
+<dd>基本的に好きな文字列を設定できます。</dd>
+<dd>例: <code class="vim-option">'statusline'</code> <code class="vim-option">'filetype'</code></dd>
+<dt>アルファベットのフラグ</dt>
+<dd>アルファベットの各文字に意味を持たせて、それらをフラグとして組み合わせて設定します。</dd>
+<dd>例: <code class="vim-option">'cpoptions'</code> <code class="vim-option">'guioptions'</code></dd>
+<dt>カンマ区切りのリスト</dt>
+<dd>複数の値をカンマ区切りで指定するパターンです。値自体にカンマを含めたい場合は、バックスラッシュでエスケープします。</dd>
+<dd>例: <code class="vim-option">'runtimepath'</code> <code class="vim-option">'complete'</code></dd>
+<dt>定められたいずれかの値</dt>
+<dd>値として入る文字列の候補が決まっていて、それら以外の文字列はエラーになるか無視されます。</dd>
+<dd>例: <code class="vim-option">'background'</code> <code class="vim-option">'ambiwidth'</code></dd>
+</dl>
+</dd>
+<dd>
+<dl>
+<dt>値を設定するには、number 形式のオプションと同じように</dt>
+<dd>
+<code class="vim-script">:set {option}={value}</code>
+</dd>
+<dt>とします。</dt>
+<dd>
+<code class="vim-script">
+:set {option}+={value}<br />
+:set {option}^={value}<br />
+:set {option}-={value}
+</code>
+</dd>
+<dt>
+も使用できますが意味が異なり、それぞれ、末尾に文字列を追加、先頭に文字列を追加、指定文字列が存在した場合にその文字列を削除、となります。この挙動は、値としてアルファベットのフラグを設定するオプションで便利です。
+</dt>
+<dt>
+また、カンマ区切りのリストを指定するオプションの場合、自動的に項目単位で追加や削除が行われ、カンマは必要に応じて追加、削除されます。ただし、複数の値を同時に削除しようとするとうまくいかないので注意してください。これは指定された値を1つの値と認識するからです。以下の例は、<code class="vim-option">'complete'</code> 内にu,i が連続で入っていない限りうまく動きません。
+</dt>
+<dd>
+<code class="vim-script">:set complete-=u,i</code>
+</dd>
+</dl>
+</dd>
+<dd>string 形式のオプションには一部制限のあるものを除き基本的に任意の文字列を設定できますが、&#8217; &#8216;(半角スペース) &#8216;|&#8217; &#8216;&#8221;&#8216; の 3 文字は別の意味を持つので、バックスラッシュでエスケープする必要があります。</dd>
+</dl>
+</dd>
+</dl>
+
+<address class="hack-author">thinca</address>

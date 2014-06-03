@@ -1,0 +1,102 @@
+---
+layout: post
+title: "Hack #45: help を引く"
+date: 2009-07-22
+author: thinca
+---
+<p>
+Vim には膨大な量のヘルプが付属しており、大抵のことはヘルプを見れば解決します。Vim を使っていて何か分からないことがあったとき、まず最初にすべきことは、help を引くことです。
+</p>
+
+<h3><code class="vim-script">:help</code> コマンド</h3>
+
+<p>
+<code class="vim-script">:help</code> コマンドを使うことでヘルプを引くことができます。引数を指定せずにコマンドを実行すると、目次にあたるページが表示されます。キーワードを指定して実行すると、キーワードに関連したヘルプページを開くことができます。
+</p>
+
+<h4>キーワードのルール</h4>
+
+<p>
+キーワードにはある程度ルールがあるので、これらを把握しておくと格段にヘルプが引きやすくなります。
+</p>
+
+<table>
+<tr><th>種類</th><th>接頭子</th><th>例</th></tr>
+<tr><th>Normal mode</th><td>(無し)</td><td><code class="vim-script">:help</code> j</td></tr>
+<tr><th>Insert mode</th><td><code class="vim-script">i_</code></td><td><code class="vim-script">:help i_&lt;Esc&gt;</code></td></tr>
+<tr><th>Visual mode</th><td><code class="vim-script">v_</code></td><td><code class="vim-script">:help v_x</code></td></tr>
+<tr><th>Command-line mode</th><td><code class="vim-script">c_</code></td><td><code class="vim-script">:help c_&lt;Tab&gt;</code></td></tr>
+<tr><th>ex コマンド</th><td><code class="vim-script">:</code></td><td><code class="vim-script">:help :write</code></td></tr>
+<tr><th>オプション</th><td><code class="vim-script">'</code></td><td><code class="vim-script">:help 'tabstop'</code></td></tr>
+</table>
+
+<p>
+また、キーシーケンスを調べる際、修飾キーが必要なキーや特殊なキーのキーワードには以下のようなルールがあります。
+</p>
+
+<table>
+<tr><th>種類</th><th>ルール</th><th>例</th></tr>
+<tr><th>Ctrl キー</th><td>接頭子 CTRL- を付ける</td><td><code class="vim-script">:help CTRL-U</code></td></tr>
+<tr><th>Shift キー</th><td>大文字を使用する</td><td><code class="vim-script">:help J</code></td></tr>
+<tr><th>特殊なキー</th><td>&lt;<var>キー名</var>&gt;</td><td><code class="vim-script">:help &lt;Space&gt;</code></td></tr>
+<tr><th>キーシーケンス</th><td>そのまま</td><td><code class="vim-script">:help gg</code></td></tr>
+<tr><th>特殊キーなどを含むキーシーケンス</th><td>アンダースコアで区切る</td><td><code class="vim-script">:help g_CTRL-G</code></td></tr>
+</table>
+
+<p>
+ちなみに、Meta キー(Alt キー) に対しては Vim はデフォルトの機能を一切割り当てていないので、ヘルプにキーシーケンスは登場しません。
+</p>
+
+<p>
+Insert mode などの接頭子が必要な場合はそのまま <code class="vim-script">:help i_CTRL-X</code> などとします。
+</p>
+
+<p>
+その他、よく見そうなリファレンス的な項目についてはキーワードを覚えておくと良いでしょう。キーワードはアスタリスクで囲まれた部分です。
+</p>
+
+<p>
+キーワードを打ち込んでいる途中で <kbd>&lt;C-d&gt;</kbd> を押すと、打ち込んでいるキーワードにマッチするヘルプ項目の一覧が表示されます。これを使えば知りたい項目に辿り着きやすくなります。
+</p>
+
+<h3><code class="vim-script">:helpgrep</code> コマンド</h3>
+
+<p>
+どうしても目的の内容が見付からない場合は、<code class="vim-script">:helpgrep</code> コマンドを使います。これはヘルプの全文検索を行うコマンドです。結果は <code class="vim-script">:grep</code> コマンドと同じように扱えます。
+</p>
+
+<h3>ヘルプの項目間をジャンプする</h3>
+
+<p>
+ヘルプページには tags ファイルが用意してあり、これによって通常の tags を用いたようにヘルプの項目間をジャンプできます。すなわち、キーワード上で <kbd>&lt;C-]&gt;</kbd> をタイプすることによりキーワードにジャンプし、<kbd>&lt;C-t&gt;</kbd> によって前の位置へ戻ります。パイプ文字(|)で囲まれた部分がキーワードですが、それ以外の箇所でもキーワードにマッチした場合はジャンプします。
+</p>
+
+<h3>ヘルプファイルを更新した場合</h3>
+
+<p>
+前述の通り、ヘルプ内のジャンプは tags ファイルによって実現しています。よって、プラグインを追加、削除したり、runtime を更新したりしてヘルプファイルが更新された場合は、tags ファイルを更新する必要があります。
+</p>
+
+<p>
+そのためのコマンドが <code class="vim-script">:helptags</code> コマンドです。ヘルプファイルのあるディレクトリを指定して、以下のように使います。
+</p>
+
+<pre><code class="vim-script">
+:helptags ~/.vim/doc
+</code></pre>
+
+<h3><code class="vim-script">:help</code> のススメ</h3>
+
+<p>
+ヘルプは Vim 使いの友です。どれだけ長くの時間ヘルプを読んでいたかが Vim の熟練度に比例すると言っても過言ではありません。暇を見つけたらヘルプを読むと良いでしょう。
+</p>
+
+<p>
+それに伴い、<code class="vim-script">:help</code> は素早く引けるようにしておくと便利です。
+</p>
+
+<pre><code class="vim-script">
+:nnoremap &lt;C-h&gt; :&lt;C-u&gt;h&lt;Space&gt;
+</code></pre>
+
+<address class="hack-author">thinca</address>

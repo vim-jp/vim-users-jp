@@ -1,0 +1,51 @@
+---
+layout: post
+title: "Hack #183: Vim日本語ドキュメントを更新しよう"
+date: 2010-11-17
+author: tyru
+---
+<p>読者の中には<a href="http://www.kaoriya.net/">kaoriya様</a>が作成している<a href="http://www.kaoriya.net/vimdoc_j/">Vim日本語ドキュメント</a>(以下ドキュメント)の存在を知っている方が多いでしょう。
+しかし一度ダウンロードして.vim以下にコピーしてそれっきりという方も多いと思います。
+ドキュメントは毎朝リポジトリ(svnで管理されており、ブラウザから見るだけしかできません)からスナップショットが更新されており、
+頻繁に更新されているようなのでなるべく早く追従したいものです。</p>
+
+<h2>更新状況のチェック</h2>
+
+<p>はてなアンテナやLDRではフィードのないページの更新状況もチェックすることができるので、
+<a href="http://www.kaoriya.net/vimdoc_j/status_ja.html">翻訳状況のページ</a>を登録しておくといいでしょう。</p>
+
+<h2>pathogen.vimでアップデートを楽にする</h2>
+
+<p><code>~/.vim</code>以下にベタにコピーしてしまうと以下のような構成になります。</p>
+
+<ul>
+<li><code>.vim/doc/*.jax</code></li>
+<li><code>.vim/syntax/help_ja.vim</code></li>
+</ul>
+
+<p>こうすると他のファイルと混ざってしまい、アップデート時に
+どれがコピーしたものなのかわからなくなってしまいます。
+pathogen.vimはそれぞれ独立したディレクトリにプラグインを置くことで管理を楽にするプラグインです。</p>
+
+<p>まず<code>.vim/bundle/vimdoc_ja</code>に全てのファイルをコピーします。
+ファイルの構成は以下のようになっています。</p>
+
+<ul>
+<li><code>.vim/bundle/vimdoc_ja/doc/*.jax</code></li>
+<li><code>.vim/bundle/vimdoc_ja/syntax/help_ja.vim</code></li>
+</ul>
+
+<p>そしてpathogen.vimを<code>.vim/autoload/pathogen.vim</code>にインストールし、
+.vimrcに次の2行を追加します。</p>
+
+<pre><code>call pathogen#runtime_append_all_bundles()
+call pathogen#helptags()
+</code></pre>
+
+<p>1行目は<code>'runtimepath'</code>中のディレクトリにある<code>bundle</code>というディレクトリの下にあるディレクトリを<code>'runtimepath'</code>に追加します。
+2行目は<code>'runtimepath'</code>中の<code>doc</code>ディレクトリに対して<code>:helptags</code>を実行します。
+これによって<code>.vim/bundle</code>以下にプラグインをディレクトリごとコピーすれば
+いちいち<code>:helptags</code>を実行する必要がなくなります。
+つまり<code>:help</code>で日本語ドキュメントがひけることを意味します。</p>
+
+<address class="hack-author">tyru</address>
