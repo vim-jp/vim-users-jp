@@ -1,0 +1,7 @@
+#!/bin/bash
+
+URL="$1"
+
+NAME=`echo $URL | sed 's/[^a-zA-Z0-9]/_/g'`
+echo "$URL to $NAME"
+wget -nc "$URL" -O $NAME && sleep 1
