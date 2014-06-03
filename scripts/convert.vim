@@ -95,9 +95,9 @@ function! s:convert(f) abort
     let short = substitute(short, item[0], item[1], 'g')
   endfor
   let short = substitute(short, '[^a-zA-Z0-9_]\+', '-', "g")
-  "if short =~ '^Hack-[0-9]\+'
-  "  let short = matchstr(short, 'Hack-[0-9]\+')
-  "endif
+  if short =~ '^Hack-[0-9]\+'
+    let short = matchstr(short, 'Hack-[0-9]\+')
+  endif
   let fname = "_posts/" . date . "-" . short . ".html"
   let fname = substitute(fname, '--*', '-', "g")
   let fname = substitute(fname, '-\.html$', '.html', "g")
