@@ -1,5 +1,8 @@
 scriptencoding utf-8
 
+let s:fmap = {}
+let s:clean_dup = 0
+
 function! s:author(f, lines) abort
   for line in a:lines
     if stridx(line, '<address class="hack-author">') >= 0
@@ -108,10 +111,19 @@ function! s:convert(f) abort
   \  printf("author: %s", author),
   \  "---",
   \] + split(text, "\n")
-  if filereadable(fname)
-    throw "file duplicate error!: " . fname
+  if s:clean_dup
+    if has_key(s:fmap, fname)
+      call add(s:fmap[fname], a:f)
+    else
+      let s:fmap[fname] = [a:f]
+      call writefile(map(lines, 'iconv(v:val, &encoding, "utf-8")'), fname)
+    endif
+  else
+    if filereadable(fname)
+      throw "file duplicate error!: " . fname
+    endif
+    call writefile(map(lines, 'iconv(v:val, &encoding, "utf-8")'), fname)
   endif
-  call writefile(map(lines, 'iconv(v:val, &encoding, "utf-8")'), fname)
 endfunction
 
 function! s:scan() abort
@@ -125,6 +137,20 @@ function! s:scan() abort
 	  redraw
       echo v:exception
     endtry
+  endfor
+  if s:clean_dup
+    call s:clean()
+  endif
+endfunction
+
+function! s:clean()
+  for fs in values(s:fmap)
+    if len(fs) > 1
+      let fs = sort(fs)
+      for f in fs[:-2]
+        call delete(f)
+      endfor
+    endif
   endfor
 endfunction
 
