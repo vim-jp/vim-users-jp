@@ -1,0 +1,44 @@
+---
+layout: post
+title: "Hack #139: screenのカレントディレクトリにcdする"
+date: 2010-04-14
+author: Sora Harakami
+---
+<h2>問題</h2>
+
+<p>screen+zshで別スクリーンのカレントディレクトリに簡単にcdできる<code>cdd</code>というzshスクリプトがあります。</p>
+
+<p>cdd依存者はこれをvimでも使いたいと思った人は何人もいるかと思います。</p>
+
+<h2>解決</h2>
+
+<p><a href="http://github.com/sorah/cdd-vim/">cdd.vim</a>を使います。</p>
+
+<p>まずcdd.vimをインストールし、<code>:Cdd {スクリーン番号}</code>を実行することで、
+そのスクリーンのカレントディレクトリにcdできます。</p>
+
+<h2>使いやすくする</h2>
+
+<p>通常では<code>:Cdd</code>はCをShift-Cで入力しなければならず、非常に小指破壊的です。</p>
+
+<p>そのため、<code>cabbrev</code>で略称を登録すると非常に快適になります。</p>
+
+<p>以下を<code>.vimrc</code>に追記することにより、<code>:cdd</code>と入力しスペースを入れると自動的に<code>:Cdd</code>に変換されます。</p>
+
+<pre><code>cabbrev Cdd cdd
+</code></pre>
+
+<h2>To-Do</h2>
+
+<ul>
+<li>vimからcddに登録できるようにする</li>
+</ul>
+
+<h2>参考</h2>
+
+<ul>
+<li><a href="http://d.hatena.ne.jp/secondlife/20080218/1203303528">cdd(解説)</a></li>
+<li><a href="http://svn.coderepos.org/share/lang/zsh/cdd/cdd">cdd(zshスクリプト)</a></li>
+</ul>
+
+<address class="hack-author">Sora Harakami</address>
