@@ -1,6 +1,7 @@
 scriptencoding utf-8
 
 let s:fmap = {}
+let s:index = []
 let s:clean_dup = 0
 
 function! s:author(f, lines) abort
@@ -98,9 +99,13 @@ function! s:convert(f) abort
   if short =~ '^Hack-[0-9]\+'
     let short = matchstr(short, 'Hack-[0-9]\+')
   endif
+  let short = substitute(short, '--*', '-', "g")
+  let short = substitute(short, '^-*', '', "g")
+  let short = substitute(short, '-$', '', "g")
   let fname = "_posts/" . date . "-" . short . ".html"
-  let fname = substitute(fname, '--*', '-', "g")
-  let fname = substitute(fname, '-\.html$', '.html', "g")
+  if short =~ '^Hack-[0-9]\+'
+    call add(s:index, {"hack": 0+matchstr(short, '[0-9]\+'), "title":title, "url":printf("http://vim-jp.org/vim-users-jp/%s/%s.html", substitute(date, '-', '/', 'g'), short)})
+  endif
   "let title = substitute(title, ': ', '', 'g')
   "let title = substitute(title, '[#\[\]]', '\="&#".char2nr(submatch(0)).";"', 'g')
   let lines = [
@@ -130,7 +135,7 @@ function! s:scan() abort
   for f in split(glob("_posts/*.html"), "\n")
     call delete(f)
   endfor
-  for f in split(glob("_original/http_*"), "\n")
+  for f in sort(split(glob("_original/http_*"), "\n"))
     try
       call s:convert(f)
     catch
@@ -155,3 +160,10 @@ function! s:clean()
 endfunction
 
 call s:scan()
+
+function! s:sortcmp(lhs, rhs)
+  return (0+a:lhs["hack"]) > (0+a:rhs["hack"])
+endfunction
+
+call sort(s:index, 's:sortcmp')
+call writefile(split(webapi#json#encode(s:index),"\n"), 'hack.json')
