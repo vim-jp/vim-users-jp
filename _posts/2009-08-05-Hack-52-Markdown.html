@@ -1,0 +1,56 @@
+---
+layout: post
+title: "Hack #52: Markdown形式の文書を書く"
+date: 2009-08-05
+author: ujihisa
+---
+<h2>問題</h2>
+
+<p>HTMLやTeXを直接書かずに、より人間にとって読み書きしやすい他の高水準マークアップ言語を用いて記述することがあります。
+Markdownはその一つで、広く一般に使われています。</p>
+
+<p>Markdown形式の文書をVimで容易に取り扱うためには、</p>
+
+<ol>
+<li>構文ハイライト</li>
+<li>コンパイル結果を容易に確認できること</li>
+</ol>
+
+<p>が望まれます。</p>
+
+<h2>解決</h2>
+
+<p>Vimは標準ではMarkdown形式のシンタックスハイライトを提供していません。
+以下のURLからmkd.vimを取得し、<code>~/.vim/syntax/</code>以下に配置しましょう。</p>
+
+<p>mkd.vim <a href="http://www.vim.org/scripts/script.php?script_id=1242">http://www.vim.org/scripts/script.php?script_id=1242</a></p>
+
+<p>次に、拡張子.mkdまたは.mdファイルをMarkdownに関連づけます。
+<code>~/.vim/ftdetect/mkd.vim</code>というファイルを作り、以下の二行を記述します。</p>
+
+<pre><code>autocmd BufRead,BufNewFile *.mkd  setfiletype mkd
+autocmd BufRead,BufNewFile *.md  setfiletype mkd
+</code></pre>
+
+<p>これでMarkdown形式の文書を執筆時、以下のようにハイライトされ、
+構文に誤りがある場合などすぐに分かるようになります。</p>
+
+<p><img src="http://gyazo.com/95142309e47d7156043cdb94d486d367.png" alt="mkd" /></p>
+
+<p>さらに、実際にMarkdown形式の文書をHTMLに変換してブラウザで確認しましょう。
+幸いにもquickrun.vimがMarkdown形式に対応しているため、これを用いてみましょう。
+(quickrun.vimについては <a href="http://vim-users.jp/2009/05/hack7/">[Hack #7: 編集中ファイルを実行し、結果を表示したままにする]</a> を参照ください)</p>
+
+<p>quickrun.vimがインストールされているVimでMarkdown文書を編集中に<kbd>\r</kbd>などのキーでquickrunを呼び出すと、即座に編集中ファイルをHTMLに変換し、ブラウザで開きます。</p>
+
+<p><img src="http://gyazo.com/3f381dd95152def12a78815d3fc8a7e0.png" alt="browser" /></p>
+
+<p>事前にpandocをインストールする必要があります。pandocはHaskellで記述されたMarkdown文書などの変換ツールで、MacPortsやCabalなどで容易にインストールすることができます。</p>
+
+<h2>議論</h2>
+
+<p>2009-08-05現在、mkd.vimには数多くのバグがあるようで、よくシンタックスハイライトが狂います。発見し次第、mkd.vimにパッチを書いて本家に投稿すると良いでしょう。</p>
+
+<p>なお、著者は本Vim Hacksの記事自体をMarkdownの拡張文法である<a href="http://github.com/ujihisa/mdv/tree/master">mdv (Markdown for Vim Hacks)</a>を用いて記述されています。</p>
+
+<address class="hack-author">ujihisa</address>

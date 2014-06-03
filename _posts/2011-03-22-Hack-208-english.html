@@ -1,0 +1,25 @@
+---
+layout: post
+title: "Hack #208: 英語を正確に素早く入力する"
+date: 2011-03-22
+author: ujihisa
+---
+<h2>問題</h2>
+
+<p>コミットログを書く、メールを書く、仕様を記述する、その他一般の自然言語で文書を記述するとき、もっとも頻繁に使われる言語は英語でしょう。英語を正確にかつ素早く入力することができれば、間接的にあなたの開発速度を高めることにつながるでしょう。これをVimでどのように支援できるのでしょうか。</p>
+
+<p><a href="http://vim-users.jp/2009/09/hack72/">Hack #72: 英語の誤入力を防ぐ</a>で、一旦英単語を入力してから、その英単語が正しかったか誤っていたかを判別し、そして容易に訂正する方法を紹介しました。今回はこれに加えて、どのようにして <em>速く</em> 入力できるようにするかということについてに焦点をあてます。</p>
+
+<h2>解決</h2>
+
+<p>neco-lookというVimプラギンを導入します。</p>
+
+<p><a href="http://www.vim.org/scripts/script.php?script_id=3440">http://www.vim.org/scripts/script.php?script_id=3440</a></p>
+
+<p><img src="http://gyazo.com/c21c8201fa7a571c7665bc7455d88631.png" alt="Auto completion with neco-look" /></p>
+
+<p>入力途中の英単語から得られる補完候補を出します。かなり速くサクサク動きます。</p>
+
+<p>neco-lookは<a href="https://github.com/Shougo/neocomplcache">neocomplcache</a>とlookコマンドに依存しています。lookコマンドは、Mac OS XのようなBSD系OSなら最初から<code>/usr/bin/look</code>などにあるはずです。</p>
+
+<address class="hack-author">ujihisa</address>

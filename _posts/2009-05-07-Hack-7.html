@@ -1,0 +1,64 @@
+---
+layout: post
+title: "Hack #7: 編集中ファイルを実行し、結果を表示したままにする"
+date: 2009-05-07
+author: ujihisa
+---
+<p><a class="hack" href="http://vim-users.jp/2009/04/hack3/">Hack #3: Vimから外部コマンドを呼び出す</a>で紹介した手法を用いることで、あるプログラミング言語で書かれたソースコードをインタプリタに通した結果をVim上で一時的に出力したり、結果を編集中バッファに書き込むことができます。しかし日常的なプログラミングの作業において、以下の点が煩雑です。</p>
+
+<ul>
+<li>Rubyのファイル*.rbを編集中ならば<code class="vim-script">:!ruby %</code>、Haskellのファイル.hsを編集中ならば<code class="vim-script">:!runghc %</code>を実行するなど、ファイルタイプに対応してほとんど一意に定まる実行コマンドをいちいち明示的に呼び出さなければなりません。</li>
+<li>コマンド実行結果を見ながらファイルの編集を継続するためには、<code class="vim-script">:r!ruby %</code>で現在のバッファに直接書き込むか、または<code class="vim-script">:!ruby % &gt; buffer.txt</code>などとして結果を別ファイルに保存した上でそのファイルを開くか、または空のバッファを生成して直前のファイルを指定して実行する<code class="vim-script">:new | r!ruby #</code>を実行する必要があります。</li>
+</ul>
+
+<p>上記の問題を解決し、簡単に実行させることのできるVim pluginであるquickrun.vimを紹介します。</p>
+
+<h3>quickrun.vimの特徴</h3>
+
+<p>編集中ファイルのファイルタイプに対応するインタプリタを呼び出し、その出力結果を別バッファに表示します。編集中ファイルが実際には存在しなくても、同様に実行することができます。このことにより、書き捨ての動作確認のためのプログラムも容易に実行して結果を確認することができ、該当するプログラミング言語への正確な理解と、作成するプログラムのバグの数を少なくすることに貢献します。</p>
+
+<p>似て非なるVim標準機能として<code class="vim-script">:make</code>で呼び出すquickfixがありますが、こちらは対応する言語のシンタックスあるいは実行結果のエラーに基づくデバッグを支援するもので、quickrunとは手段と目的が異なります。手軽にプログラムを実行するためのquickrunと、込み入ったデバッグのためのquickfixは直交する概念であり、目的に応じて併用することができます。</p>
+
+<p>2009年5月時点で対応しているファイルタイプは awk, c, cpp, objc, haskell, io, javascript, perl, php, python, ruby, scala, scheme, sed, sh, gnuplot, eruby, rの18種類です。 </p>
+
+<h3>インストール</h3>
+
+<p>quickrun.vimをダウンロードし、~/.vim/plugin/以下に配置することで使用することができます。.vimrcを修正することなく動作します。</p>
+
+<dl>
+<dt>安定版:</dt>
+<dd>http://www.vim.org/scripts/script.php?script_id=2419</dd>
+<dt>開発版:</dt>
+<dd>http://github.com/ujihisa/quickrun/tree/master</dd>
+</dl>
+
+<p>本書執筆時点の安定版最新バージョンは1.1です。</p>
+
+<h3>使い方</h3>
+
+<p>Normal modeで<kbd>&lt;Space&gt;r</kbd>とタイプすると、別windowが開き、実行結果が出力されます。</p>
+
+<p>このとき、編集中ファイルには適切なFileTypeが設定されている必要があります。適切な拡張子のついたファイルを編集中は大抵は大丈夫なのですが、無名バッファを編集時には通常FileTypeが設定されておりません。この場合、<code class="vim-script">:setfiletype ruby</code>などとして明示的にFileTypeを指定するか、または一行目に<code>#!/usr/bin/env ruby</code>などとShebangを書く必要があります。</p>
+
+<p>無名バッファにHaskellでフィボナッチ数列を計算するコードを書いて実行した結果のサンプルをここに示します。</p>
+
+<p><img src="http://gyazo.com/56e87168305f8a2652cec195d9b46972.png" style="width: 100%;"/></p>
+
+<p>以下にquickrun.vimの機能とそのデフォルト設定におけるキーを示します。</p>
+
+<dl>
+<dt><kbd>&lt;Space&gt;r</kbd></dt>
+<dd>編集中ファイルを実行し、実行結果ウインドウにその結果を出力します。もし既にそのウインドウが存在するならば、中身を上書きします。</dd>
+<dt><kbd>&lt;Space&gt;R</kbd></dt>
+<dd>まず<kbd>&lt;Space&gt;r</kbd>を実行した後、元の編集中ファイルに再びフォーカスを戻します。</dd>
+<dt>(実行結果ウィンドウ上で)<kbd>q</kbd></dt>
+<dd>実行結果ウインドウを閉じます。</dd>
+</dl>
+
+<h3>まとめ</h3>
+
+<p>編集中ファイルをquickrun.vimを用いて簡単に実行する手法を紹介しました。この手法は、プログラミングサイクルを細かく高速にすることを支援します。</p>
+
+<p>quickrun.vimは数多くのファイルタイプに対応するインタプリタの呼び出しを提供していますが、あなたがプログラミングを行なっていく中で未対応のファイルタイプに遭遇する可能性があります。開発版のquickrun.vimでも対応していなければ、その旨を開発者に報告することをお薦めします。</p>
+
+<address class="hack-author">ujihisa</address>
