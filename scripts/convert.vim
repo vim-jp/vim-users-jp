@@ -104,7 +104,7 @@ function! s:convert(f) abort
   let short = substitute(short, '-$', '', "g")
   let fname = "_posts/" . date . "-" . short . ".html"
   if short =~ '^Hack-[0-9]\+'
-    call add(s:index, {"hack": 0+matchstr(short, '[0-9]\+'), "title":title, "url":printf("http://vim-jp.org/vim-users-jp/%s/%s.html", substitute(date, '-', '/', 'g'), short)})
+    call add(s:index, {"hack": 0+matchstr(short, '[0-9]\+'), "title":title, "date":substitute(date, '-', '/', 'g'), "url":printf("http://vim-jp.org/vim-users-jp/%s/%s.html", substitute(date, '-', '/', 'g'), short)})
   endif
   "let title = substitute(title, ': ', '', 'g')
   "let title = substitute(title, '[#\[\]]', '\="&#".char2nr(submatch(0)).";"', 'g')
