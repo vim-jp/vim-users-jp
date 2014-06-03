@@ -1,0 +1,84 @@
+---
+layout: post
+title: "Hack #95: .vimrc / .gvimrc を共有したり、他人の.vimrc / .gvimrcを参考にする"
+date: 2009-10-30
+author: Sora Harakami
+---
+<p>Vimを使っている人の大半は.vimrcを編集して自分好みにカスタマイズしていることかと思われます。</p>
+
+<p>Vimを使い始めた人や、Vimを使いこなしている人たちにもレビューしてもらったりできる用に.vimrcを共有してみてはいかがでしょうか。</p>
+
+<h2>問題</h2>
+
+<p>.vimrcを共有する際に、</p>
+
+<ul>
+<li>.vimrcを共有する固定的な場所がないこと</li>
+<li>.vimrcをアップデートするための作業が必要なこと</li>
+</ul>
+
+<p>こういう問題があります。</p>
+
+<h2>解決</h2>
+
+<p>これを解決するために.vimrcboxというサービスを作成しました。</p>
+
+<p>Vimrcboxは.vimrcや.gvimrcを共有するためのサービスです。</p>
+
+<p>vimrcbox.vimというpluginを用いて、簡単にvimrcboxにアップロードすることができます。</p>
+
+<p><a href="http://github.com/sorah/sandbox/blob/master/vim/vimrcbox.vim">vimrcbox.vim</a> をインストールします。</p>
+
+<p>また、curlが必要です。必要に応じてインストールを行ってください。</p>
+
+<p>その後 :RcbVimrc や :RcbGVimrc でアップロードできます。</p>
+
+<p>この時訪ねられるパスワードの認証は簡易的な物なので、普段使うパスワードとは別にしておくといいと思います。</p>
+
+<p>また、アップロードの際訪ねられるユーザー名とパスワードは、
+g:vimrcbox&#95;user や g:vimrcbox&#95;pass を.vimrcに設定して省略することも可能ですが、
+セキュリティ上の問題もあるため別ファイルに書き込み.vimrcからsourceで読み込むとよいと思います。</p>
+
+<p>投稿した.vimrcは、</p>
+
+<pre><code>http://soralabo.net/s/vrcb/s/ユーザー名
+</code></pre>
+
+<p>から閲覧できます。削除メニューなどもそこから可能です。</p>
+
+<p>.gvimrcは</p>
+
+<pre><code>http://soralabo.net/s/vrcb/sg/ユーザー名
+</code></pre>
+
+<p>から閲覧できます。</p>
+
+<h2>自動でアップロードする</h2>
+
+<p>.vimrcに以下を記述します。</p>
+
+<pre><code>augroup VimRcBox
+autocmd!
+autocmd BufWritePost $MYVIMRC RcbVimrc
+autocmd BufWritePost $MYGVIMRC RcbGVimrc
+augroup END
+</code></pre>
+
+<p>これで自動アップデートできます。</p>
+
+<h2>既知の問題</h2>
+
+<ul>
+<li>行番号がズレている</li>
+<li>レビューのための機能がない</li>
+</ul>
+
+<p>こちらの機能や問題は近日中に修正します。</p>
+
+<h2>参考</h2>
+
+<ul>
+<li><a href="http://soralabo.net/s/vrcb/">vimrcbox</a></li>
+</ul>
+
+<address class="hack-author">Sora Harakami</address>
