@@ -1,0 +1,58 @@
+---
+layout: post
+title: "Hack #50: バッファの変更や保存を制限する"
+date: 2009-08-01
+author: thinca
+---
+<p>
+Vim ではバッファの変更や保存を制限することができます。これにより、誤ってファイルを上書きするのを防いだり、閲覧専用のバッファを作ることができます。
+</p>
+
+<h3>バッファの変更や保存を制限するオプション</h3>
+
+<dl>
+<dt><code class="vim-option">'readonly'</code></dt>
+<dd>
+このオプションが on のバッファは読み込み専用になります。ただし、<code  class="vim-script">:write!</code> のように ! を付ければ保存可能です。この場合 <code class="vim-option">'readonly'</code> は変更されて無効になります。
+</dd>
+<dt><code class="vim-option">'write'</code></dt>
+<dd>
+このオプションが off にされると、ファイルへの書き込みは一切できなくなります。 ! による強制書き込みも無効です。<code class="vim-option">'readonly'</code> とは違い、グローバルオプションです。
+</dd>
+<dt><code class="vim-option">'modifiable'</code></dt>
+<dd>
+このオプションが off のバッファは編集できません。デフォルトは on です。<code class="vim-script">:help</code> で開かれるバッファなどはこのオプションをセットしないことで閲覧専用にしています。
+</dd>
+</dl>
+
+<p>
+書き込み権限のないファイルを開いた場合は自動的に <code class="vim-option">'readonly'</code> がセットされます。
+</p>
+
+<p>
+これらのオプションによりバッファの変更や保存を制限できますが、オプション自体の変更は制限されません。つまり、オプションを手動で変更してしまえばバッファの変更や保存は可能になります。誤操作を防ぐのが目的であり強制力はありません。
+</p>
+
+<h3>読み込み専用モード</h3>
+
+<p>
+コマンドラインで以下のように Vim を起動します。
+</p>
+
+<pre>
+$ vim -R <var>filename</var>
+</pre>
+
+<p>
+もしくは以下のようにします。
+</p>
+
+<pre>
+$ view <var>filename</var>
+</pre>
+
+<p>
+これらの方法で起動された Vim は読み込み専用モードになり、開くファイルは全て <code class="vim-option">'readonly'</code> が on に設定されます。
+</p>
+
+<address class="hack-author">thinca</address>
