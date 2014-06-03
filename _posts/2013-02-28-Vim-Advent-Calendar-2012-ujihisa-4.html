@@ -1,0 +1,95 @@
+---
+layout: post
+title: "Vim Advent Calendar 2012 ujihisa 4"
+date: 2013-02-28
+author: ujihisa
+---
+<p><a href="http://atnd.org/events/33746">Vim Advent Calendar 2012</a> の 90 日目の記事です。 昨日はthincaさんによる<a href="http://d.hatena.ne.jp/thinca/20130227">魔改造</a>でした。ちなみにcleverは大人が子供に「デキる子だねえ」というときや、大人同士が皮肉でずるがしこいなにかを褒めるときに使える便利な単語らしいです。</p>
+
+<h2>Scalaとsbt</h2>
+
+<p>RubyにおけるRake, HaskellにおけるCabal, ClojureにおけるLeiningen, CにおけるMakeがScalaにおける<a href="http://www.scala-sbt.org/">SBT</a> (Simple Build Tool)で、これは挙動が他のほとんどのビルドツールよりも複雑なことで有名なデキる子です。毎日愛用しています。</p>
+
+<p>sbt (SBTのコマンド) を起動するには果てしない時間がかかるため、一般にはsbtコマンドを対話モードで起動して、そのプロセスを使い続けるというスタイルが一般的です。つまり、sbtとvimは本質的に同じです。</p>
+
+<p><img src="http://cache.gyazo.com/ee9a4163be1afc807d55b6cb49b1e7b3.png" alt="sbt" /></p>
+
+<h2>:VimShellSendString</h2>
+
+<p>VimShellの<code>iexe</code>ならびに<code>:VimShellInteractive</code>で立ち上げた外部プロセスにメッセージを投げる便利な方法として<code>:VimShellSendString</code>コマンドがあります。これは引数として与えられた文字列または選択範囲を&#8221;background buffer&#8221;に投げます。</p>
+
+<p>たとえばfiletypeがscalaであるファイルを編集中は、</p>
+
+<ol>
+<li>ファイルを保存する</li>
+<li>sbtに<code>compile</code>メッセージを送って適切にコンパイルできるかどうか確認する</li>
+</ol>
+
+<p>を順にまとめて行う必要がかなり頻繁にあります。</p>
+
+<pre><code>nnoremap &lt;Space&gt;m :&lt;C-u&gt;update&lt;Cr&gt;:VimShellSendString compile&lt;Cr&gt;
+</code></pre>
+
+<p>などと設定することでワンキーで保存・コンパイルを行うことができ、便利です。quickrunやsyntasticやwatchdogsなどのプラギンと違い、すでにライブラリの読み込みなどが完了して起動しているプロセスを再利用するので、10~30倍くらい高速で動作します。</p>
+
+<p>しかしながら、シェルとしてのVimShellと対話環境としてのiexe窓の両方を開いていると、どちらが&#8221;background buffer&#8221;なのかが曖昧になるという問題があります。</p>
+
+<p><img src="http://cache.gyazo.com/3622e1df2607c62a7edbc5a94e106517.png" alt="1" />
+<img src="http://cache.gyazo.com/692f677c79e974b6f6dea05abe6149ba.png" alt="2" /></p>
+
+<p>失敗している様子:</p>
+
+<p><img src="http://cache.gyazo.com/3e88fc2c7ad795b32317153c66ebacc0.png" alt="3" /></p>
+
+<p>成功している様子:</p>
+
+<p><img src="http://cache.gyazo.com/7aa433848b032615ddea485e39a5ab86.png" alt="4" /></p>
+
+<h2>解決</h2>
+
+<p><code>t:</code>スコープの変数、<code>vimshell#interactive#set_send_buffer()</code>, <code>vimshell#interactive#send()</code>の合わせ技で対処します。</p>
+
+<pre><code>function! s:ujihisa_start_sbt()
+execute 'VimShellInteractive sbt'
+stopinsert
+let t:sbt_bufname = bufname('%')
+if !has_key(t:, 'sbt_cmds')
+let t:sbt_cmds = [input('t:sbt_cmds[0] = ')]
+endif
+wincmd p
+endfunction
+
+command! -nargs=0 StartSBT call &lt;SID&gt;ujihisa_start_sbt()
+
+function! s:sbt_run()
+let cmds = get(t:, 'sbt_cmds', 'run')
+
+let sbt_bufname = get(t:, 'sbt_bufname')
+if sbt_bufname !=# ''
+call vimshell#interactive#set_send_buffer(sbt_bufname)
+call vimshell#interactive#send(cmds)
+else
+echoerr 'try StartSBT'
+endif
+endfunction
+
+function! s:vimrc_scala()
+nnoremap &lt;buffer&gt; &lt;Space&gt;m :&lt;C-u&gt;write&lt;Cr&gt;:call &lt;SID&gt;sbt_run()&lt;Cr&gt;
+endfunction
+
+augroup vimrc_scala
+autocmd!
+autocmd FileType scala call s:vimrc_scala()
+autocmd FileType scala nnoremap &lt;buffer&gt; &lt;Space&gt;st :&lt;C-u&gt;StartSBT
+augroup END
+</code></pre>
+
+<p>上記のように<code>~/.vimrc</code>に記述し、scalaのファイルを編集するときに<code>iexe sbt</code>や<code>:VimShellInteractive sbt</code>のかわりに<code>:StartSBT</code>コマンドを使います。以後、コンパイルなど行いたいときには<code>&lt;Space&gt;m</code>を打鍵します。なお<code>compile</code>以外のコマンドにも対応するため、<code>t:sbt_cmds</code>という変数を用意しています。ここに実行させたいコマンド列を指定します。なお初回起動などでそのタブにこの変数がセットされていないときは、入力を求められます。</p>
+
+<p>これで<code>&lt;Space&gt;m</code>を打鍵するだけでファイルの保存・コンパイルができ、しかも30倍高速化しました。Scalaにおける開発がはかどります。</p>
+
+<h2>余談</h2>
+
+<p><a href="http://hootsuite.com/">HootSuite</a>という会社はHootSuiteの実装に一部Scalaを用いています。Scala開発チームの約50%の人が上記テクニックを用いて<code>|&lt;Space&gt;m|</code>だけで保存・コンパイルなどの定形操作を自動化かつ高速化しています。</p>
+
+<address class="hack-author">ujihisa</address>
