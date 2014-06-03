@@ -1,0 +1,73 @@
+---
+layout: post
+title: "Hack #209: Vim で Ruby on Rails の開発を行なう"
+date: 2011-03-28
+author: Sixeight
+---
+<p>今回は <a href="http://rails.vim.tpope.net/|http://rails.vim.tpope.net/">rails.vim</a> を紹介します。
+rails.vim は Ruby on Rails 開発者には必須の Plugin です。<br />
+各所で紹介されている有名な Plugin ですが、導入されていない方は 、4 月からの仕事に向けて是非導入を検討してください。</p>
+
+<p><a href="http://www.vim.org/scripts/script.php?script_id=1567">http://www.vim.org/scripts/script.php?script_id=1567</a></p>
+
+<p>用途は主に 3 種類あります。</p>
+
+<h4>rails コマンド、Rake の代用</h4>
+
+<p>例えば、Ruby on Rails のプロジェクトディレクトリで、以下のように打鍵すると Controller の作成が行えます。</p>
+
+<p><kbd>:Rgenerate controller names index new create</kbd></p>
+
+<p>他にも :Rake や :Rserver, :Rlog, :Rails などが定義されています。</p>
+
+<h4>ファイラとしての rails.vim</h4>
+
+<p>rails.vim では、Alternate Files, Related Files という概念が導入されています。<br />
+以下にhelp (:help rails) から例を引用します。</p>
+
+<table>
+<tr><td>Current file</td><td> Alternate file</td><td>Related file ~</td></tr>
+<tr><td>model</td><td> unit test</td><td>schema definition</td></tr>
+<tr><td>controller (in method)  </td><td> functional test</td><td>template (view)</td></tr>
+<tr><td>template (view)</td><td> functional test</td><td>controller (jump to method)</td></tr>
+<tr><td>migration</td><td> previous migration</td><td>next migration</td></tr>
+<tr><td>config/database.yml</td><td> config/routes.rb</td><td>config/environments/*.rb</td></tr>
+</table>
+
+<p>現在開いているファイルが Model だった場合、Alternate file は Unit Test、Related file は schema definition (db/schema.rb) という意味です。</p>
+
+<p>移動には :A, :R というコマンドを使用します。:A は Alternate file への移動、:R は Related file への移動が行えます。<br />
+また、ファイルの開き方によって以下の5種類のコマンドが定義されています。:A, :R 共通です。</p>
+
+<table>
+<tr><td>:AE</td><td>:A と等価、現在の Window に開く</td></tr>
+<tr><td>:AS</td><td>Window を分割して開く</td></tr>
+<tr><td>:AV</td><td>Window を縦に分割して開く</td></tr>
+<tr><td>:AT</td><td>新しい Tab に開く</td></tr>
+<tr><td>:AD</td><td>現在の Buffer に展開する</td></tr>
+</table>
+
+<p>ほかにも、:find や、:Rfind といった便利なコマンドがたくさん用意されています。</p>
+
+<h4>Syntax highlight や、略語の追加</h4>
+
+<p>Ruby on Rails での開発を助ける様々な設定が追加されます。<br />
+Syntax highlight に始まり、便利な略語、gf の拡張など、かゆいところに手の届く Plugin と言えます。</p>
+
+<p>以下に help より略語の一部を引用します。</p>
+
+<table>
+<tr><td>rp(</td><td>render :partial => </td></tr>
+<tr><td>rp(</td><td>render :partial => </td></ttr>
+<tr><td>vs(</td><td>validates_size_of</td></ttr>
+<tr><td>pa[</td><td>params</td></ttr>
+<tr><td>AR::</td><td>ActionRecord</td></ttr>
+<tr><td>:a</td><td>:action => </td></ttr>
+</table>
+
+<h3>まとめ</h3>
+
+<p>優れた Plugin には優れたドキュメントが用意されています。<br />
+:help rails に全てが集約されていますので、使用される方は通読することをお勧めします。</p>
+
+<address class="hack-author">Sixeight</address>
