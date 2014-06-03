@@ -15,7 +15,7 @@ function! s:date(f, lines) abort
       return matchstr(line, '[0-9]\{4}-[0-9]\{2}-[0-9]\{2}')
     endif
   endfor
-  throw "error!: " . a:f
+  throw "date parse error!: " . a:f
 endfunction
 
 function! s:trim(line) abort
@@ -35,7 +35,7 @@ function! s:text(f, lines) abort
       let intext = 1
     endif
   endfor
-  throw "error!: " . a:f
+  throw "text parse error!: " . a:f
 endfunction
 
 function! s:index(lines, str) abort
@@ -52,7 +52,7 @@ function! s:convert(f) abort
   let pos1 = s:index(lines, '<h1>')
   let pos2 = s:index(lines, '</div><!--end entry-->')
   if pos1 < 0 || pos2 < 0
-    throw "error!: " . a:f
+    throw "body parse error!: " . a:f
   endif
   let lines = lines[pos1 : pos2]
   let title = matchstr(lines[0], '<h1>\zs.\+\ze</h1>')
@@ -108,6 +108,9 @@ function! s:convert(f) abort
   \  printf("author: %s", author),
   \  "---",
   \] + split(text, "\n")
+  if filereadable(fname)
+    throw "file duplicate error!: " . fname
+  endif
   call writefile(map(lines, 'iconv(v:val, &encoding, "utf-8")'), fname)
 endfunction
 
@@ -115,8 +118,13 @@ function! s:scan() abort
   for f in split(glob("_posts/*.html"), "\n")
     call delete(f)
   endfor
-  for f in split(glob("_original/index.html*"), "\n")
-    call s:convert(f)
+  for f in split(glob("_original/http_*"), "\n")
+    try
+      call s:convert(f)
+    catch
+	  redraw
+      echo v:exception
+    endtry
   endfor
 endfunction
 
