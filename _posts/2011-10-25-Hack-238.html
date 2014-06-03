@@ -1,0 +1,179 @@
+---
+layout: post
+title: "Hack #238: neobundle.vim で plugin をモダンに管理する"
+date: 2011-10-25
+author: Shougo
+---
+<p>こんにちは。Shougoです。Vimテクニックバイブルの執筆で長らくお休みを頂いていました。
+執筆が終わってからも、プラグインの更新で忙しいのが難点です。
+とはいえ、あまりに間隔が空いているのは執筆者としてまずいと感じたため、久しぶりに復帰します。</p>
+
+<p>みなさん、Vimプラグイン管理には何をお使いでしょうか。残念ながら、Vimのプラグイン管理には良い方法がなく、
+各々が「自分の考える最強のプラグイン管理プラグイン」を作ってきました。
+つまり、長らくプラグイン管理プラグインは戦国時代の様相を呈していたわけです。
+実装が存在しないVimJoltsもその一つです:-)。
+しかし最近、Vimのプラグイン管理はVundleに一元化されることが多くなってきました。
+<a href="http://vim-users.jp/2011/04/hack215/">「Hack #215: Vundleでプラグインをモダンに管理する」</a>やVimテクニックバイブルでも紹介されています。
+私も最初はpathogenを使っていましたが、アップデートが簡単なVundleに乗り換えた経緯があります。
+ただしVundleにもいくつか不満があったため、自分でforkしたVundleをしばらく使用していました。
+しかし、最終的にVundleの仕様変更に追随できなくなったため、forkしたVundleを元にneobundle.vimを開発することにしました。
+変更点をVundleにマージするには、変更点が多すぎたということもあります。
+今回はneobundle.vimについて紹介します。</p>
+
+<h2>neobundle.vimとVundleの違い</h2>
+
+<p>Vundleをベースにしたため、基本的な機能は同じです。
+Vundleを知っているなら、すぐに乗り換えることも可能でしょう。
+変更点は幾つかありますが、主なものは以下の通りです。</p>
+
+<h3>コマンド名が改善されている</h3>
+
+<p>VundleはBundleを意識して付けられたコマンド名になっているため、コマンド名とプラグイン名が対応していません。
+例えば、プラグインをインストールするコマンド名は<code>:VundleInstall</code>ではなく、<code>:BundleInstall</code>です。
+この辺りは、議論がされているようですが、まだ結論は出ていません。
+neobundle.vimはプラグイン名をプレフィクスとした、<code>:NeoBundleInstall</code>となっています。
+BundleをNeoBundleに改名するだけで、基本的に使用することができます。</p>
+
+<h3>vital化されている</h3>
+
+<p>ルーチンを他のプラグインと共通化するために、vital.vimを使用しています。
+プラグインの開発が楽になります。</p>
+
+<h3>shellslashがオンでも動作する</h3>
+
+<p><code>shellescape()</code>を使用していますが、shellslashオプションがオンの場合、クオートが&#8221;になってしまうという問題があります。
+つまりWindows環境で、cmd.exeをshellとして使用している場合、shellslashを有効にしていると動きません。
+neobundle.vimでは<code>shellescape()</code>を使用していません。</p>
+
+<h3>vimprocに対応している</h3>
+
+<p>vimprocが利用できる環境では、アップデートにvimprocを使用します。
+Windows環境では、DOS窓が出ないという利点につながります。</p>
+
+<h3>unite.vimインタフェースの実装</h3>
+
+<p>実は、これがneobundle.vimで一番やりたかった機能です。
+neobundle.vimはunite.vimのインタフェースを実装しているため、unite.vimからVimプラグインをアップデートすることができます。
+非同期でアップデートを行うため、使用にはvimprocが必要です。
+neobundle.vimはunite.vimやvimprocがない環境でも動作しなくてはならないため、従来のインタフェースも残っています。
+ただし、従来のインタフェースは緊急用のため重視していません。</p>
+
+<h3>Subversion, Mercurialへの対応</h3>
+
+<p>tsukkeeさんがVundleに追加していた機能をマージし、Subversion, Mercurialに試験的な対応をしました。
+まだ実験段階ですが、試していただければと思います。</p>
+
+<h3>リビジョン指定</h3>
+
+<p><code>:NeoBundle {repository} {revision}</code>という構文でリビジョン指定ができます。まだ実験段階の機能です。
+不具合のあるプラグインのバージョンを固定する時に便利だと思います。</p>
+
+<h2>neobundle.vimの導入</h2>
+
+<p>neobundle.vimの開発は、github上で行われています。<a href="https://github.com/Shougo/neobundle.vim">https://github.com/Shougo/neobundle.vim</a>
+導入する場合、~/.vimにリポジトリをcloneすると楽でしょう。</p>
+
+<pre><code>$ git clone https://github.com/Shougo/neobundle.vim ~/.vim/neobundle.vim.git
+</code></pre>
+
+<h2>plugin の管理</h2>
+
+<p>plugin の管理は以下の様に .vimrc に <code>NeoBundle 'plugin name'</code> と記述することで行います。
+極端な話、<code>Bundle</code>を<code>NeoBundle</code>に変更するだけです。</p>
+
+<pre><code>set nocompatible
+filetype off
+
+if has('vim_starting')
+set runtimepath+='path to neobundle directory'
+
+call neobundle#rc(expand('~/.bundle'))
+endif
+
+NeoBundle 'git://github.com/Shougo/clang_complete.git'
+NeoBundle 'git://github.com/Shougo/echodoc.git'
+NeoBundle 'git://github.com/Shougo/neocomplcache.git'
+NeoBundle 'git://github.com/Shougo/neobundle.vim.git'
+NeoBundle 'git://github.com/Shougo/unite.vim.git'
+NeoBundle 'git://github.com/Shougo/vim-vcs.git'
+NeoBundle 'git://github.com/Shougo/vimfiler.git'
+NeoBundle 'git://github.com/Shougo/vimshell.git'
+NeoBundle 'git://github.com/Shougo/vinarise.git'
+
+filetype plugin on
+filetype indent on
+</code></pre>
+
+<p>Vundleと同様、先にfiletypeをoffにしてから、neobundle.vimの設定を行います。
+最初、neobudle.vimの関数を呼べるよう、neobundle.vimのパスを<code>&amp;runtimepath</code>に追加します。
+そして<code>neobundle#rc(expand('~/.bundle'))</code>で初期化します。
+<code>neobudle#rc()</code>の引数はプラグインをインストールする基準となるパスです。
+<code>NeoBundle</code>コマンドで設定をしたあと、最後にfiletype pluginをオンにします。</p>
+
+<h2>NeoBundle コマンドの使い方</h2>
+
+<p>Vundleと全く同じです。基本的にBundleコマンドがNeoBundleコマンドに変わっただけです。</p>
+
+<h4>Github 上のリポジトリから取得する</h4>
+
+<pre><code>NeoBundle 'user_name/repository_name'
+</code></pre>
+
+<h4>vim-scripts 上のリポジトリから取得する</h4>
+
+<pre><code>NeoBundle 'script_name'
+</code></pre>
+
+<h4>それ以外のリポジトリから取得する</h4>
+
+<pre><code>NeoBundle 'git://repository_url'
+NeoBundle 'http://svn.macports.org/repository/macports/contrib/mpvim/'
+NeoBundle 'https://bitbucket.org/ns9tks/vim-fuzzyfinder'
+</code></pre>
+
+<p>Gitリポジトリのフルパスを指定します。
+MercurialやSubversionにも試験的に対応しています。</p>
+
+<h2>pluginの管理</h2>
+
+<p>plugin のインストールには、<code>:NeoBundleInstall</code> コマンドを使用します。
+.vimrcで設定したplugin が自動的に取得され、インストールまで行われます。
+ただし、アップデートしたプラグインを使用するには、Vimを再起動したほうが良いです。</p>
+
+<pre><code>:NeoBundleInstall
+</code></pre>
+
+<p>既にインストールされている plugin をアップデートするには、 <code>:NeoBundleInstall!</code> コマンドを利用します。
+通常の<code>NeoBundleInstall</code>では、アップデートが行われないからです。</p>
+
+<pre><code>:NeoBundleInstall!
+</code></pre>
+
+<p>不要になったプラグインを削除するには、<code>:NeoBundle</code>の設定を.vimrcから削除した後、
+<code>:NeoBundleClean</code>コマンドを実行します。</p>
+
+<p>neobundle.vimはplugin検索には対応していません。</p>
+
+<p>neobudle.vimはneobundle/install sourceを使用することで、
+unite.vimインタフェースによりアップデートを行うことができます。
+アップデートは非同期に行われます。
+neobundle/install sourceの引数に!を与えると、<code>:NeoBundleInstall!</code>相当になります。
+プラグイン名を引数に与えることで、個別にアップデートをすることも可能です。</p>
+
+<pre><code>:Unite neobundle/install:!
+:Unite neobundle/install:neocomplcache
+:Unite neobundle/install:neocomplcache:unite.vim
+</code></pre>
+
+<h2>ドキュメントの更新</h2>
+
+<p>プラグインのインストール時に、自動的に<code>:helptags</code>コマンドが実行されるため、
+ユーザーは何もする必要がありません。</p>
+
+<h2>参考</h2>
+
+<ul>
+<li>:help neobundle</li>
+</ul>
+
+<address class="hack-author">Shougo</address>

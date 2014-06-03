@@ -1,0 +1,39 @@
+---
+layout: post
+title: "Hack #69: 簡単にカレントディレクトリを変更する"
+date: 2009-09-08
+author: Shougo
+---
+<p>Vimは独自のカレントディレクトリを持っていて、タグファイルを参照するときにはカレントディレクトリにあるタグファイルを利用します。</p>
+
+<h2><code class="option">'autochdir'</code>の問題点</h2>
+
+<p>
+<dd>Vimには<code class="option">'autochdir'</code>というオプションがあり、バッファを移動したとき、自動的にカレントディレクトリを変更することができます。しかし、このオプションはお薦めできません。なぜならば、タグジャンプでバッファを移動したときにもカレントディレクトリが変更されてしまい、タグファイルを辿れなくなってしまうからです。カレントディレクトリの移動は手動で行うようにしましょう。</dd>
+</p>
+
+<h2>カレントディレクトリ移動のためのキーマッピングを定義する</h2>
+
+<p>
+<dd>とはいえ、いちいちcdコマンドを入力するのは大変です。カレントディレクトリ移動はほとんどの場合、Vimで開いているファイルと同じディレクトリに移動したいことが多いです。よって単純なコマンドを作り、それに専用のキーマッピングを割り当てると便利でしょう。私は次のように設定しています。</dd>
+<pre>
+command! -nargs=? -complete=dir -bang CD  call s:ChangeCurrentDir('&lt;args&gt;', '&lt;bang&gt;')
+function! s:ChangeCurrentDir(directory, bang)
+if a:directory == ''
+lcd %:p:h
+else
+execute 'lcd' . a:directory
+endif
+
+if a:bang == ''
+pwd
+endif
+endfunction
+
+" Change current directory.
+nnoremap &lt;silent&gt; &lt;Space&gt;cd :&lt;C-u&gt;CD&lt;CR&gt;
+</pre>
+<dd>簡単に解説すると、CDというコマンドを定義し、&lt;Space&gt;cdに割り当てています。コマンドが引数なしで呼び出されたときは、現在開いているファイルと同じディレクトリに移動し、そうでない場合は引数のディレクトリに移動します。:CD!として呼び出された場合、移動先のカレントディレクトリを表示し、どこに移動したのかを分かり易くしています。</dd>
+</p>
+
+<address class="hack-author">Shougo</address>

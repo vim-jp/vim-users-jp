@@ -1,0 +1,28 @@
+---
+layout: post
+title: "Hack #165: neocomplcache Hacks(6)　インクルード補完"
+date: 2010-08-03
+author: Shougo
+---
+<p>今回はインクルード補完です。neocomplcacheに実装されたインクルード補完はあらかじめ設定しておく必要がありますが、使いこなせばタグ補完を越えた使い勝手となります。</p>
+
+<h2>インクルード補完とは</h2>
+
+<p>インクルード補完とは、バッファ中のインクルード文を解析して、補完候補に加える補完のことです。Vim自体にもインクルード補完が備わっていますが、Perlなど<code class="option">'path'</code>が多数のディレクトリに設定されている言語では重すぎて使いものになりません。neocomplcacheのインクルード補完は結果をキャッシュすることで、Vim標準のインクルード補完に存在する欠点を補うために開発されました。タグ補完と比較すると、インクルードしているファイルだけ解析するので補完候補が多すぎる問題が発生しにくい、あらかじめタグファイルを生成する必要がない、といった利点があります。</p>
+
+<h2>インクルード補完の制限</h2>
+
+<p>インクルード補完は強力ですが、万能ではありません。<code class="option">'path'</code>や<code class="option">'includeexpr'</code>, <code class="option">'include'</code>といったオプションが適切に設定されている必要があります。特にWindows環境では、ftpluginなどで設定する必要があるかもしれません。インクルード補完ではctagsを利用するので、システムにインストールされている必要があります。ctagsが存在しなかったり、ctagsに対応していない言語の場合(D言語など)はバッファをそのまま解析するので、<code>buffer_complete</code>と動作が同じになります。</p>
+
+<h2>今後のインクルード補完</h2>
+
+<p>現在実装されているインクルード補完はまだ実験的な意味合いが強いです。
+今後は、gtagsへの対応や<a href="http://github.com/Shougo/echodoc">echodoc</a>への対応、遅延キャッシュなどを考えています。
+ただしgtagsはカレントディレクトリにタグファイルを作るらしく、ctagsのように簡単に解析するのは難しそうです。</p>
+
+<h2>参考文献</h2>
+
+<p><a href="http://d.hatena.ne.jp/thinca/20091026/1256569191">neocomplcache.vim のインクルード補完の使い方</a>
+thincaさんのインクルード補完解説記事。neocomplcache Ver.3.06を対象としていて、neocomplcache Ver.5.0がリリースされた現在では変数名等が古くなっていますが、参考になると思います。</p>
+
+<address class="hack-author">Shougo</address>

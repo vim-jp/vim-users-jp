@@ -1,0 +1,93 @@
+---
+layout: post
+title: "Hack #29: Command-line mode補完　自作編"
+date: 2009-06-20
+author: Shougo
+---
+<p>Command-line modeの補完はinput()による入力や、自分が定義したコマンドにも有効です。ここではCommand-line modeにおける補完の設定方法についてレクチャーします。さらに、標準では用意されていない補完関数を自作する方法まで解説します。</p>
+
+<dl>
+<dt>自作コマンドに補完を定義する:</dt>
+<dd>自作コマンドに引数の補完を定義する場合、-complete=に続けて補完関数の名前を指定します。指定できる補完関数には、次のようなものがあります。</dd>
+<dd>
+
+<li>augroup <ul>autocmdのグループ名を補完します。</ul> </li>
+<li>buffer <ul>バッファ名を補完します。</ul> </li>
+<li>command <ul>VimのExコマンド名と、その引数を補完します。</ul> </li>
+<li>dir <ul>ディレクトリ名を補完します。</ul> </li>
+<li>event <ul>autocmdイベント名を補完します。</ul> </li>
+<li>expression <ul>Vimの式を補完します。</ul> </li>
+<li>file <ul>ファイル名を補完します。</ul> </li>
+<li>shellcmd <ul>シェルコマンド名を補完します。</ul> </li>
+<li>function <ul>関数名を補完します。</ul> </li>
+<li>help <ul>ヘルプのタグを補完します。</ul> </li>
+<li>highlight <ul>シンタックスハイライト名を補完します。</ul> </li>
+<li>mapping <ul>キーマッピング名を補完します。</ul> </li>
+<li>menu <ul>メニュー名を補完します。</ul> </li>
+<li>option <ul>オプション名を補完します。</ul> </li>
+<li>tag <ul>タグ名を補完します。</ul> </li>
+<li>tag_listfiles <ul>タグと<kbd>&lt;C-d&gt;</kbd>でリスト表示されるファイル名を補完します。</ul> </li>
+<li>var <ul>Vimユーザ変数を補完します。</ul> </li>
+<li>custom,{func} <ul>関数名funcで与えられる自作補完を行います。</ul> </li>
+<li>customlist,{func} <ul>関数名funcで与えられる自作リスト補完を行います。</ul> </li>
+
+<dd>設定例</dd>
+<dd><code class="vim-script">command! -nargs=? -complete=dir -bang CD  call s:ChangeCurrentDir('&lt;args&gt;', '&lt;bang&gt;')</code></dd>
+
+</dd>
+<dd>補完関数についての詳しい解説は<code class="vim-script">:help command-completion</code>を参照してください。</dd>
+
+<dt>input()に補完を定義する:</dt>
+<dd>input()に補完を定義するのは簡単です。オプション引数であるcompletionが補完関数の名前となっているので、ここを自作コマンドの時と同様に設定すればよいです。例えばバッファ名を補完したいときには、次のように記述します。</dd>
+<dd><code class="vim-script">let bname = input("Select buffer: ", "", "buffer")</code></dd>
+</dl>
+
+<dl>
+<dt>補完関数に求められる仕様:</dt>
+<dd>補完を自作するためには、まず補完関数を作成しなければなりません。補完関数はArgLead, CmdLine, CursorPosという三つの引数を持ちます。</dd>
+
+<dd>
+<li>ArgLead
+<ul>補完対象の文字列です。補完候補をフィルタリングするときに使います。</ul>
+</li>
+
+<li>CmdLine
+<ul>現在入力中のCommand-line modeです。これをsplitで区切ることで、何番目の引数を補完しているのかを得ることができます。</ul>
+
+<li>CursorPos
+<ul>現在カーソルがある場所です。</ul>
+</li>
+</dd>
+<dd>補完関数はこれらの引数より状況を分析して、有効な補完候補のリストを返却します。customの場合は候補を\nで区切ります。customは候補の絞り込みをVim側で行いますが、customlistでは補完関数側で行わなければなりません。</dd>
+
+<dd>自作補完関数についての詳しい解説は<code class="vim-script">:help command-completion-custom</code>を参照してください。</dd>
+</dl>
+
+<dl>
+<dt>補完関数のサンプル:</dt>
+<pre>
+command! -nargs=+ -complete=customlist,CompletionGitCommands Git call GitCommand(<q-args>)
+function! CompletionGitCommands(ArgLead, CmdLine, CusorPos)
+let l:cmd = split(a:CmdLine)
+let l:len_cmd = len(l:cmd)
+
+if l:len_cmd <= 1
+" Commands name completion.
+let l:filter_cmd = printf('v:val =~ "^%s"', a:ArgLead)
+return filter(['add', 'bisect', 'branch', 'checkout', 'clone', 'commit', 'diff', 'fetch',
+\'grep', 'init', 'log', 'merge', 'mv', 'pull', 'push', 'rebase', 'reset', 'rm',
+\'show', 'status', 'tag'], l:filter_cmd)
+else
+" Commands argments completion.
+let l:cmdname = l:cmd[1]
+if l:cmdname == 'add' || l:cmdname == 'mv' || l:cmdname == 'rm'
+let l:arg = get(l:cmd, 2, '')
+return split(glob(l:arg.'*'), '\n')
+else
+return []
+endfunction
+</pre>
+<dd>最後にまとめとして、補完関数のサンプルを紹介しておきます。gitのコマンドを補完するサンプルです。それだけでは面白くないので、第二引数に'mv'や'add', 'rm'といったコマンド名が与えられるとファイル名を補完するようになっています。</dd>
+</dl>
+
+<address class="hack-author">Shougo</address>

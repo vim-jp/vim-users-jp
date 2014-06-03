@@ -1,0 +1,77 @@
+---
+layout: post
+title: "Hack #4: Insert mode補完　導入編"
+date: 2009-05-01
+author: Shougo
+---
+<p>Vimが他のエディタと比較して優れている点の一つとして、豊富な補完機能が挙げられます。本Hackでは特にInsert modeで使用できる補完について解説します。ほとんどの補完機能は<kbd>&lt;C-x&gt;</kbd>で始まるキーに割り当てられています。よく使う補完機能には、各々が押し易いキーに割り当てると良いでしょう。Insert mode補完についての詳しい解説は<code class="vim-script">:help ins-completion</code>を参照してください。</p>
+
+<dl>
+<dt><kbd>&lt;C-n&gt;</kbd>または<kbd>&lt;C-p&gt;</kbd>: 様々なソースからのキーワード補完</dt>
+<dd><kbd>&lt;C-x&gt;&lt;C-n&gt;</kbd>と似ていますが、オプション<code class="option">'complete'</code>で指定された場所からキーワードを検索する点が異なります。プログラミングでは同じ単語を何度も使用することが多いうえ、キーバインドが押し易いこともあって、一番便利な補完です。<code class="option">'complete'</code>を調整することで、辞書補完などの他の補完をも同時に行うことができますが、その分補完処理に時間がかかります。</dd>
+
+<dt><kbd>&lt;C-x&gt;&lt;C-p&gt;</kbd>または<kbd>&lt;C-x&gt;&lt;C-n&gt;</kbd>: カレントバッファからのキーワード補完</dt>
+<dd>カーソルより前の文字列と一致するキーワードを補完候補とします。ここで「キーワード」とはオプション<code class="option">'iskeyword'</code>で指定された文字が2個以上連続する文字列です。EmacsにおけるDynamic Abbrev Expansion (動的略語展開)と同等の機能です。</dd>
+<dd><code class="option">'iskeyword'</code>の値はバッファ毎にカスタマイズでき、編集するファイルの種類に応じて適宜設定されます。例えばLisp系言語では多くの文字が識別子として利用可能なため、<code class="option">'iskeyword'</code>には<code>-</code>、<code>+</code>、<code>?</code>、<code>!</code>なども含まれています。</dd>
+<dd>他の補完と比較しても高速ですが、補完候補が大量にある場合、補完候補の表示に時間がかかります。</dd>
+
+<dt><kbd>&lt;C-x&gt;&lt;C-f&gt;</kbd>: ファイル名補完</dt>
+<dd>カーソル前にある文字列をパスとして、ファイル名を補完します。ファイル名を指定するときに便利です。環境変数やホームディレクトリも認識します。</dd>
+
+<dt><kbd>&lt;C-x&gt;&lt;C-v&gt;</kbd>: Vimコマンド補完</dt>
+<dd>Command-line modeと同様にVimのコマンドを補完します。組み込みの関数やコマンドだけでなく、現在読み込まれているユーザー定義の関数やコマンド、変数なども補完することができます。</dd>
+
+<dt><kbd>&lt;C-x&gt;&lt;C-u&gt;</kbd>: ユーザー定義補完</dt>
+<dd>オプション<code class="option">'completefunc'</code>に設定された関数を用いて補完を行います。補完関数の作成については<em class="not-written-yet">Hack #?</em>で詳しく解説します。</dd>
+
+<dt><kbd>&lt;C-x&gt;&lt;C-o&gt;</kbd>: オムニ補完</dt>
+<dd>いわゆるintellisenseのような賢い補完を行います。オプション<code class="option">'omnifunc'</code>に設定された関数を用いて補完を行います。</dd>
+<dd>オムニ補完とユーザー定義補完は機構としては全く同じですが使用目的が異なります。オムニ補完は<code class="option">'filetype'</code>に応じた賢い補完を提供するためにある一方、ユーザー定義補完はユーザーが任意の補完を行うことができるよう提供されています。</dd>
+<dd>標準ではC、C++、Python、XMLなどに対応しています。内部で構文解析をしているのである程度賢いですが、完璧ではありません。<code class="option">'omnifunc'</code>によっては事前にタグファイルを作成する必要があったり、構文解析にRuby interfaceなどを利用するためVimを適切にコンパイルしておく必要があります。</dd>
+
+<dt><kbd>&lt;C-x&gt;&lt;C-k&gt;</kbd>: 辞書補完</dt>
+<dd>オプション<code class="option">'dictionary'</code>で指定された辞書ファイルから単語を補完します。よく使う言語の予約語や標準ライブラリ関数名などをまとめた辞書ファイルを作成しておくと便利でしょう。またwww.vim.orgを始めとして、インターネット上で配布されている辞書ファイルを利用させてもらうのも良いでしょう。</dd>
+
+<dt><kbd>&lt;C-x&gt;&lt;C-]&gt;</kbd>: タグ補完</dt>
+<dd>オプション<code class="option">'tags'</code>で指定された場所にあるタグファイルからキーワードを検索し、補完を行います。この補完を利用するためには予めctagsなどのツールを用いてタグファイルを作成しておく必要があります。</dd>
+
+<dt><kbd>&lt;C-x&gt;&lt;C-i&gt;</kbd>: インクルードファイルからのキーワード補完</dt>
+<dd>カレントバッファに加えインクルードファイルからもキーワードを検索し、補完を行います。例えばC言語では<code>#include</code>で他のファイルの内容を取り込むことができますが、「インクルードファイル」とはそのような記述により参照されている外部ファイルのことです。Perlでは<code>use</code>や<code>require</code>、Rubyでは<code>require</code>や<code>load</code>などを認識します。インクルードファイルについては<code class="option">'include'</code>で指定することができます。</dd>
+
+<dt><kbd>&lt;C-x&gt;&lt;C-d&gt;</kbd>: 定義/マクロ名補完</dt>
+<dd>カレントバッファとインクルードファイルからマクロ名などの各種定義を補完します。例えばC言語では<code>#define</code>によりマクロを定義することができますが、そのような記述で定義されたものを補完することができます。</dd>
+
+<dt><kbd>&lt;C-x&gt;&lt;C-t&gt;</kbd>: シソーラス補完</dt>
+<dd>オプション<code class="option">'thesaurus'</code>で指定された辞書ファイルから単語を補完します。辞書補完とは異なり、カーソル付近の文字列にマッチする単語だけではなく、その類義語も補完することができます。</dd>
+
+<dt><kbd>&lt;C-x&gt;&lt;C-s&gt;</kbd>または<kbd>&lt;C-x&gt;s</kbd>: スペルチェック</dt>
+<dd>カーソル付近の単語に対して正しいであろう単語の候補を補完します。英文を書く際に有用でしょう。オプション<code class="option">'spell'</code>をセットしていないと動作しません。</dd>
+
+<dt><kbd>&lt;C-x&gt;&lt;C-l&gt;</kbd>: 行補完</dt>
+<dd>カーソルより前の文字列と一致する行を検索し、該当する行全体を補完します。検索するバッファの種類はオプション<code class="option">'complete'</code>で指定することができます。Normal modeに戻る必要がないため、行をコピーする際に便利です。</dd>
+
+</dl>
+
+<dl>
+<dt>補完中のキー操作</dt>
+<dd>補完中では以下のキーで補完操作を行うことができます。<dl>
+<dt><kbd>&lt;C-n&gt;</kbd></dt> <dd>次の候補を選択し、カーソル位置に挿入します。</dd>
+<dt><kbd>&lt;C-p&gt;</kbd></dt> <dd>前の候補を選択し、カーソル位置に挿入します。</dd>
+<dt><kbd>&lt;C-y&gt;</kbd></dt> <dd>現在選択している補完候補を挿入し、補完を終了します。</dd>
+<dt><kbd>&lt;C-e&gt;</kbd></dt> <dd>補完をキャンセルします。</dd>
+</dl></dd>
+
+<dd>また、補完のポップアップメニューが表示されている場合は以下のキー操作が有効になります。<dl>
+<dt><kbd>&lt;BS&gt;</kbd>または<kbd>&lt;C-h&gt;</kbd></dt> <dd>一文字削除して、候補を再検索します。</dd>
+<dt><kbd>&lt;PageDown&gt;</kbd></dt> <dd>ポップアップメニューを順方向に改ページします。</dd>
+<dt><kbd>&lt;PageUp&gt;</kbd></dt> <dd>ポップアップメニューを逆方向に改ページします。</dd>
+<dt><kbd>&lt;Down&gt;</kbd></dt> <dd>次の候補を選択しますが、<kbd>&lt;C-p&gt;</kbd>とは違って候補を挿入しません。</dd>
+<dt><kbd>&lt;Up&gt;</kbd></dt> <dd>前の候補を選択しますが、<kbd>&lt;C-n&gt;</kbd>とは違って候補を挿入しません。</dd>
+<dt><kbd>&lt;C-l&gt;</kbd></dt> <dd>マッチするものから一文字追加し、補完を絞り込みます。</dd>
+<dt><kbd>&lt;Space&gt;</kbd>または<kbd>&lt;Tab&gt;</kbd></dt> <dd>候補選択を終了し、タイプした文字を挿入します。</dd>
+</dl></dd>
+
+<dd><kbd>&lt;Enter&gt;</kbd>だけは少々特殊です。候補を選択している場合はその候補を挿入し、それ以外の場合は改行します。この動作が煩わしい場合は、<code class="vim-script">:inoremap</code>でキーをカスタマイズするべきです。補完時のkey mappingを設定する方法は<em>[Hack #9: Insert mode補完　設定編]</em>を参照してください。</dd>
+</dl>
+
+<address class="hack-author">Shougo</address>

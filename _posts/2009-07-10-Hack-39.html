@@ -1,0 +1,53 @@
+---
+layout: post
+title: "Hack #39: Vimの戦闘力を計測する"
+date: 2009-07-10
+author: Shougo
+---
+<p>Vimmerにとって、自分の戦闘力は.vimrcの行数で表されます。しかし普通に計測したのでは、空行やコメント行も戦闘力に含まれることになってしまい、本当の実力を表さず不公平です。そこで、このHackでは空行やコメント行を除いたVimmerの正味戦闘力を計測する方法を提案します。</p>
+
+<h2>戦闘力の計測方法</h2>
+
+<p>
+<dd>戦闘力の計算方法は単純です。以下のコードを.vimrc中に記述し、Command-line modeで<code lang="vim-script">:Scouter</code>を実行するだけです。<code lang="vim-script">:GScouter</code>は.gvimrcの戦闘力を計測する場合に使用します。</dd>
+<pre>
+function! Scouter(file, ...)
+let pat = '^\s*$\|^\s*"'
+let lines = readfile(a:file)
+if !a:0 || !a:1
+let lines = split(substitute(join(lines, "\n"), '\n\s*\\', '', 'g'), "\n")
+endif
+return len(filter(lines,'v:val !~ pat'))
+endfunction
+command! -bar -bang -nargs=? -complete=file Scouter
+\        echo Scouter(empty(&lt;q-args&gt;) ? $MYVIMRC : expand(&lt;q-args&gt;), &lt;bang&gt;0)
+command! -bar -bang -nargs=? -complete=file GScouter
+\        echo Scouter(empty(&lt;q-args&gt;) ? $MYGVIMRC : expand(&lt;q-args&gt;), &lt;bang&gt;0)
+</pre>
+<dd>注意：正味戦闘力が1000を超えてくると、.vimrcが飽和状態となるので、.vimrcだけで戦闘力を計測するのは無意味になってきます。もはやVimScriptに精通しているのは明白なので、自分の作ったVimプラグインの行数も戦闘力に含めるべきでしょう。</dd>
+<dd>ちなみに、Shougoの戦闘力は1537です（2009年11月3日現在）。空行やコメントを含めると2663なので、行数が多いと思えても、ずいぶんコメント等で占められていることが分かります。</dd>
+<dd>追記：thincaさんが考案した、<a href="http://d.hatena.ne.jp/thinca/20091031/1257001194">新型戦闘力計測器</a>にバージョンアップしました。ありがとうございます。ちなみに、<code lang="vim-script">:Scouter!</code>で、旧式の動作をします。</dd>
+</p>
+
+<h2>戦闘力の目安</h2>
+
+<p>
+<dd>現在の戦闘力によって、Vimmerは次の５レベルに分類されます。</dd>
+<li>100行以下：初心者
+<ul>もはやVimとViの違いがよく分かっていないレベルです。.vimrcも最小限の設定しかしていません。</ul>
+</li>
+<li>500行以下：初級者
+<ul>.vimrcにどこかからコピーアンドペーストした設定を加え始めます。ただし、設定の意味はよく分かっていないことが多いです。Vimのプラグインをインストールすることもこの辺りから始めます。しかし、自分ではVimScriptを上手く作れません。自分から見て遠い存在である中級者以上にあこがれます。数年Vimを使用していても、初級者レベルにとどまっている人は多いことでしょう。中級者になりたかったら、kana氏の書いた「<a href="http://whileimautomaton.net/2008/08/vimworkshop3-kana-presentation">Vimの極め方</a>」を参照すると良いです。</ul>
+</li>
+<li>1000行以下：中級者
+<ul>.vimrcに独自の設定が増えてきます。何か分からないことがあると、:helpを引き始めます。VimScriptを本格的に組み始め、キーバインドを自分流にカスタマイズするのもこの頃からです。自分が使うVimスクリプトを細々と作ったりすることもあります。</ul>
+</li>
+<li>1000行以上：上級者
+<ul>Vimを手足のように使いこなし、思い立ったら.vimrcのカスタマイズを始めてしまいます。Vim以外のソフトを扱うのが苦痛でしょうがなくなり、全てをVim内で完結したいと思うようになります。気に入らないプラグインは即改造され、自分オリジナルのVimプラグインが.vim内に増えてきます。高度にカスタマイズされすぎた彼のVimは他の誰も扱うことができません。彼が素のVimを使用すると、あまりの不便さに発狂してしまうでしょう。もはや完全にVimに毒されています。治療法はありません。</ul>
+<li>計測不能：神
+<ul>VimScriptには飽きたらず、ついにVimの内部構造にまで踏み込んでしまいました。彼のVimには自分で作ったパッチが当てられています。Vimのことで疑問があれば彼に質問すると、大抵答えが返ってきます。別名は「歩く:help」。いくら一流のVimmerであっても、このレベルに該当するのはごく少数しかいません。</ul>
+</dd>
+初心者から上級者になるのは大変だと思うかもしれませんが、コツコツと実力を付けていけばそんなことはありません。あのkana氏でさえ、<a href="http://whileimautomaton.net/2008/01/01/00/50/00/diary">一年間で.vimrcを十倍にしました</a>。私も半年で五倍になりました。要するにやる気の問題なのです。ただし、一度レベルが上昇すると他のエディタに移行できなくなります。注意してください。
+</p>
+
+<address class="hack-author">Shougo</address>

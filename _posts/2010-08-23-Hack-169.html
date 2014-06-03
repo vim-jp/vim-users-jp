@@ -1,0 +1,127 @@
+---
+layout: post
+title: "Hack #169: neocomplcacheを拡張する　後編"
+date: 2010-08-23
+author: Shougo
+---
+<p>前編からかなり間が空いてしまいましたが、ここではneocomplcacheのプラグインの記述方法を解説します。neocomplcache Ver.5.1ではプラグインの構成がかなり変化したので、この記事を参考にしてください。</p>
+
+<h2>プラグインの仕様</h2>
+
+<p>プラグインはautoload/neocomplcache/sourcesにインストールしたものが自動的に読み込まれます。
+プラグインには、neocomplcache#sources#プラグイン名#define()が絶対必要です。
+これはneocomplcacheが初期化するときに呼ばれ、neocomplcacheにディクショナリ変数を渡します。
+ここではディクショナリ変数に必要な要素について説明をします。</p>
+
+<h3>name</h3>
+
+<p>プラグインの名前です。</p>
+
+<h3>kind</h3>
+
+<p>プラグインの種類を現します。plugin, ftplugin, complfuncの三種類があります。これらの違いについては後述します。</p>
+
+<h3>filetypes</h3>
+
+<p>ftpluginにのみ存在します。どのファイルタイプで補完するかを表すディクショナリ変数です。</p>
+
+<h3>initialize()</h3>
+
+<p>プラグインの初期化時に呼ばれます。コマンドの登録等を行います。ftpluginの場合、これが呼ばれるのはfiletypesに対応するバッファで補完されたときです。</p>
+
+<h3>finalize()</h3>
+
+<p>neocomplcacheの無効化されるときに呼ばれます。ここで不要になったコマンドやautocmdを削除します。</p>
+
+<h3>get_keyword_list(cur_keyword_str)</h3>
+
+<p>pluginにのみ存在します。<code>a:cur_keyword_str</code>にマッチするリストを返すために呼ばれる関数です。<code>get_keyword_list()</code>が返す補完リストは、特定のキーを含むディクショナリのリストとなっています。詳しくは「補完リストの仕様」の項を参照してください。</p>
+
+<h3>get_keyword_pos(cur_text)</h3>
+
+<p>ftpluginとcomplfuncに存在します。<code>cur_text</code>にマッチする補完位置を返します。</p>
+
+<h3>get_complete_words(cur_keyword_pos, cur_keyword_str)</h3>
+
+<p>ftpluginとcomplfuncに存在します。<code>a:cur_keyword_str</code>にマッチするリストを返すために呼ばれます。<code>get_complete_words()</code>が返す補完リストは、特定のキーを含むディクショナリのリストとなっています。詳しくは「補完リストの仕様」の項を参照してください。</p>
+
+<h2>補完リストの仕様</h2>
+
+<p><code>get_keyword_list()</code>や<code>get_complete_words()</code>が返す補完リストは、特定のキーを含むディクショナリのリストとなっています。一部のキー以外はVim標準の補完で使用するものと同じです。</p>
+
+<h3>word, abbr, menu, info, icase, dup</h3>
+
+<p>Vim標準の補完で使用するものと同じです。word以外は省略することができます。詳しい解説は、<em>[Hack #14: ]Insert mode補完 自作編</em>を参照してください。
+menuはどのプラグインの候補で補完しているかを[B]のような記号で表す習慣になっています。ftpluginは[vim]や[ghc]のように、長めの文字列を使います。</p>
+
+<h2>プラグイン用ヘルパ関数</h2>
+
+<p>autoload/neocomplcache.vimには、プラグインから呼び出せるようにヘルパ関数が実装されています。ここでは、よく使われる関数について解説します。</p>
+
+<h3>neocomplcache#<code>keyword_filter(list, cur_keyword_str)</code></h3>
+
+<p><code>get_keyword_list()</code>で使用できる、単純なフィルターです。<code>a:list</code>の中から、<code>a:cur_keyword_str</code>にマッチするリストを返します。<code>filter()</code>とは違って、listは変更されるとは限りません。</p>
+
+<h3>neocomplcache#<code>unpack_dictionary(dict)</code></h3>
+
+<p>リストの辞書をリスト化して返します。</p>
+
+<h3>neocomplcache#<code>unpack_dictionary_dictionary(dict)</code></h3>
+
+<p>辞書の辞書をリスト化して返します。</p>
+
+<h3>neocomplcache#<code>keyword_escape(cur_keyword_str)</code></h3>
+
+<p><code>a:cur_keyword_str</code>をマッチングに使えるようにエスケープします。</p>
+
+<h3>neocomplcache#<code>get_cur_text()</code></h3>
+
+<p>現在のカーソル文字列を取得します。</p>
+
+<h3>neocomplcache#<code>get_completion_length(plugin_name)</code></h3>
+
+<p><code>plugin_name</code>の自動補完する文字列長を返します。</p>
+
+<h3>neocomplcache#<code>set_completion_length(plugin_name)</code></h3>
+
+<p><code>plugin_name</code>の自動補完する文字列長を設定します。ただし、これはプラグイン側で初期値を設定するためのもので、ユーザーが補完文字列長を設定している場合、そちらが優先されます。</p>
+
+<h3>neocomplcache#<code>get_keyword_pattern_end(filetype)</code></h3>
+
+<p>文字列の最後にマッチする<code>filetype</code>のキーワードパターンを返します。<code>filetype</code>は省略可能で、省略すると現在のバッファの<code>filetype</code>を参照します。</p>
+
+<h3>neocomplcache#<code>get_keyword_pattern(filetype)</code></h3>
+
+<p>文字列にマッチする<code>filetype</code>のキーワードパターンを返します。<code>filetype</code>は省略可能で、省略すると現在のバッファの<code>filetype</code>を参照します。</p>
+
+<h3>neocomplcache#<code>is_auto_complete()</code></h3>
+
+<p>自動補完の時に1を返します。</p>
+
+<h3>neocomplcache#<code>print_caching(string)</code></h3>
+
+<p>キャッシュ時のメッセージを表示します。</p>
+
+<h3>neocomplcache#<code>print_error(string)</code></h3>
+
+<p>エラーメッセージを表示します。</p>
+
+<h2>キャッシュ用ヘルパ関数</h2>
+
+<p><code>autoload/neocomplcache/cache.vim</code>には、プラグインから呼び出せるキャッシュのヘルパ関数が含まれます。
+量が多いので、ここでは詳しく説明することは避けますが、うまく利用すると簡単にキャッシュを使ったプラグインを記述できます。
+ちなみに、neocomplcache Ver.4以降では、ほとんどのプラグインがキャッシュ用ヘルパ関数を使うように書き直されています。</p>
+
+<h2>プラグインのサンプル</h2>
+
+<p>neocomplcacheに標準添付のプラグインを参考にしても良いのですが、機能が複雑化しているため、プラグイン作りの勉強のために見るのは大変です。
+eagletmtさんが作成した<a href="http://gist.github.com/489268">ghc_complete</a>はfiletype pluginでほどよい長さなので、勉強に最適でしょう。</p>
+
+<h2>plugin, ftplugin, complfuncの違い</h2>
+
+<p>neocomplcache Ver.3.00より、complfuncが実装され、より自由度の高い補完が実装できるようになりました。
+pluginとcomplfuncの違いは、pluginはカーソル前のキーワードから補完しますが、complfuncは独自に補完位置を決定できるというところです。
+ftpluginとはneocomplcacheのオムニ補完です。
+基本的な仕様はcomplfuncと同じです。ただし、必要な時にのみ初期化や呼び出しされるというところが違います。</p>
+
+<address class="hack-author">Shougo</address>

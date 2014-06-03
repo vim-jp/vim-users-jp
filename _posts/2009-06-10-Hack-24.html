@@ -1,0 +1,78 @@
+---
+layout: post
+title: "Hack #24: Command-line mode補完　設定編"
+date: 2009-06-10
+author: Shougo
+---
+<p>Command-line mode補完には豊富な設定項目があります。ここではCommand-line mode補完における代表的な設定項目を紹介します。</p>
+
+<dl>
+<dt><code class="option">'wildmode'</code>:</dt>
+<dd>Command-line mode補完の設定を行います。&#8217;,'区切りで次のような値を指定できます。&#8217;,'で区切ると、連続して補完されたときの動作が変化します。</dd>
+<dd>初期値は&#8221;longest,full&#8221;です。</dd>
+<dd>
+<li>&#8220;&#8221;
+<ul>最初に見つかったマッチのみを挿入します。</ul>
+</li>
+<li>&#8220;full&#8221;
+<ul>次にマッチしたものを挿入します。最後のマッチだった場合、元々のテキストに戻ります。</ul>
+</li>
+<li>&#8220;longest&#8221;
+<ul>候補に共通する部分までを挿入します。</ul>
+</li>
+<li>&#8220;longest:full&#8221;
+<ul>&#8220;longest&#8221;に似ていますが、<code class="option">'wildmenu'</code>が有効の場合、<code class="option">'wildmenu'</code>を呼び出します。</ul>
+</li>
+<li>&#8220;list&#8221;
+<ul>複数の候補がマッチする場合、マッチするもののリストを表示します。</ul>
+</li>
+<li>&#8220;list:full&#8221;
+<ul>複数の候補がマッチする場合、マッチするもののリストを表示して、最初にマッチする候補を挿入します</ul>
+</li>
+<li>&#8220;list:longest&#8221;
+<ul>複数の候補がマッチする場合、マッチするもののリストを表示して、共通する部分を挿入します。</ul>
+</li>
+</dd>
+
+<dd>設定例</dd>
+<dd><code class="vim-script">set wildmode=list:longest,full</code></dd>
+
+<dt><code class="option">'wildmenu'</code>:</dt>
+<dd>このオプションをonにすると、Command-line mode補完が変化します。最初にマッチされ候補がハイライトされ、挿入されます。その状態で<kbd>&lt;TAB&gt;</kbd>か<kbd>&lt;C-p&gt;</kbd>または<kbd>&lt;C-n&gt;</kbd>を押すと、次のマッチへ候補が移動します。</dd>
+<dd>初期値は&#8221;off&#8221;です。</dd>
+
+<dt><code class="option">'wildchar'</code>:</dt>
+<dd>Command-line modeにて、カーソル前にワイルドカードがあると、ワイルドカードの展開を行います。それ以外ではCommand-line mode補完を行い、補完が行えないときは設定された文字そのものを挿入します。<code class="option">'wildchar'</code>をマクロ内で使用しても補完はできないので注意してください。</dd>
+<dd>初期値は<kbd>&lt;TAB&gt;</kbd>です。</dd>
+
+<dt><code class="option">'wildcharm'</code>:</dt>
+<dd><code class="option">'wildchar'</code>の様に動作しますが、こちらはマクロ内でも動作します。<code class="vim-script">cnoremap</code>等で、Command-line mode補完を自動的に呼び出したいときに使用します。</dd>
+<dd>初期値は設定されていません。</dd>
+
+<dt><code class="option">'wildignore'</code>:</dt>
+<dd>ファイル名補完時に無視したいファイルパターンを指定します。一時ファイルが補完リストに表示されて煩雑になってしまう場合に使用します。</dd>
+<dd>初期値は&#8221;"です。</dd>
+
+<dd>設定例</dd>
+<dd><code class="vim-script">set wildignore=*.o,*.obj</code></dd>
+
+<dt><code class="option">'wildoptions'</code>:</dt>
+<dd>Command-line mode補完リストの追加設定です。現在は&#8221;tagfile&#8221;のみが有効です。</dd>
+<dd>初期値は&#8221;"です。</dd>
+
+<dd>
+<li>tagfile
+<ul><kbd>&lt;C-d&gt;</kbd>による補完リストがタグとマッチするとき、タグの種類とタグをリスト表示します。</ul>
+</li>
+</dd>
+
+<dd>設定例</dd>
+<dd><code class="vim-script">set wildoptions=tagfile</code></dd>
+
+<dt><code class="option">'suffixes'</code>:</dt>
+<dd>ファイル名補完で、ワイルドカードに優先してマッチしないファイルのリストを指定します。詳しい解説は<code class="vim-script">:help suffixes</code>を参照してください。あまり重要でない一時ファイルの拡張子を指定することが多いでしょう。</dd>
+<dd>初期値は&#8221;.bak,~,.o,.h,.info,.swp,.obj&#8221;です。</dd>
+
+</dl>
+
+<address class="hack-author">Shougo</address>

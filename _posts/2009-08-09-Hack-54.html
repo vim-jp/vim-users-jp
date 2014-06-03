@@ -1,0 +1,52 @@
+---
+layout: post
+title: "Hack #54: VimでSticky Shiftを実現する"
+date: 2009-08-09
+author: Shougo
+---
+<p>Vimを使いこなすためには、自分でキーバインドを変更するのが第一歩です。ここではキーバインドの応用として、Sticky ShiftをVim上で再現する方法について考えます。</p>
+
+<h2>Sticky Shiftとは</h2>
+
+<p>
+<dd>普通の人にとって、Sticky Shiftは聞き慣れない用語かもしれません。Sticky Shiftとは、シフトキーを他のキーとの組み合わせで代用することです。よく使われるパターンとしては、ホームポジション上にある<kbd>;</kbd>をシフトキーにして、<kbd>;a</kbd>でAを入力するようにします。こんな面倒なことをして、メリットがあるのが疑問をお持ちの方も多いことでしょう。メリットとしては、Hoge Piyoのように、シフトキーを時々入力するような場合に、シフトキーを押したり離したりする必要がないので、小指に優しいことです。特にかな漢字変換でShiftキーを多用するskkユーザーはSticky Shiftを設定していることが多いようです。エディタの使いすぎで小指が痛くなるのはEmacsユーザーだけだという偏見が多いですが、そんなことはありません。我々Vimmerは確かにCtrlキーを押すことは少ないですが、Shiftキーを押すことが多く、知らず知らずのうちにFPを消費しています。小指の負担を和らげるためにも、VimにSticky Shiftを設定してみましょう。Shiftキーを組み合わせたキーマッピングが空くので、キーマッピングを増やすことができるという思わぬ副作用もあります。</dd>
+</p>
+
+<h2>Sticky Shiftの設定法</h2>
+
+<p>
+<dd>基本的に、キーマッピングの.vimrcに設定をするだけです。一つずつ設定すると煩雑になるので、配列を使って評価するようにすると簡単でしょう。私は次のように設定し、Insert mode, Command-line mode, Select modeでSticky Shiftが有効になるようにしています。これは英語キーボード用の設定です。日本語キーボードを使用している場合、適時設定を変更してください。</dd>
+<pre>
+inoremap &lt;expr&gt; ;  &lt;SID&gt;sticky_func()
+cnoremap &lt;expr&gt; ;  &lt;SID&gt;sticky_func()
+snoremap &lt;expr&gt; ;  &lt;SID&gt;sticky_func()
+
+function! s:sticky_func()
+let l:sticky_table = {
+\',' : '&lt;', '.' : '&gt;', '/' : '?',
+\'1' : '!', '2' : '@', '3' : '#', '4' : '$', '5' : '%',
+\'6' : '^', '7' : '&#038;', '8' : '*', '9' : '(', '0' : ')', '-' : '_', '=' : '+',
+\';' : ':', '[' : '{', ']' : '}', '`' : '~', "'" : "\"", '\' : '|',
+\}
+let l:special_table = {
+\"\&lt;ESC&gt;" : "\&lt;ESC&gt;", "\&lt;Space&gt;" : ';', "\&lt;CR&gt;" : ";\&lt;CR&gt;"
+\}
+
+let l:key = getchar()
+if nr2char(l:key) =~ '\l'
+return toupper(nr2char(l:key))
+elseif has_key(l:sticky_table, nr2char(l:key))
+return l:sticky_table[nr2char(l:key)]
+elseif has_key(l:special_table, nr2char(l:key))
+return l:special_table[nr2char(l:key)]
+else
+return ''
+endif
+endfunction
+</pre>
+<dd>私の場合、<kbd>;</kbd>をShiftのための修飾キーとして使い、;そのものを入力したいときは<kbd>;&lt;Space&gt;</kbd>を使用するようにしています。</dd>
+<dd>追記：thincaさんのアイデアにより、&lt;expr&gt;を使うようにしました。マッピングも減って、すっきりしますね。</dd>
+<dd>慣れるととても便利なSticky Shiftですが、デメリットもあります。なんといっても大きいのは、Sticky Shiftが設定されていないアプリケーションがほぼ使用不能になることです。特に普通のシェルが使いにくくなってしまいます。シェルでもSticky Shiftが使えると良いのですが、キーバインドを設定するのはなかなか大変です。プラグイン等を駆使して、Vimを使用する時間を増やすしかないでしょう。</dd>
+</p>
+
+<address class="hack-author">Shougo</address>

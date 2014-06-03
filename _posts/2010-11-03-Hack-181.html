@@ -1,0 +1,46 @@
+---
+layout: post
+title: "Hack #181: Vimで使い捨てのファイルを作成する"
+date: 2010-11-03
+author: Shougo
+---
+<p>ちょっとしたメモを取ったりしたいとき、いちいちファイル名を付けていられません。ここでは簡単に使い捨てのファイルを作成する方法について検討をします。</p>
+
+<h2>:enewを使う</h2>
+
+<p>まず考えられるのが、<code>:enew</code>コマンドを用いることです。何も特別な設定はいらず、任意のキーにマッピングをしておけば、便利に使えるのですが、バッファを切り換えてしまったときに内容が失われてしまうという欠点があります。これのおかげでよく事故が起こったため、私は使用していません。</p>
+
+<h2>scratch.vimを使う</h2>
+
+<p>次に考えられるのは、kanaさんの作成した<a href="http://www.vim.org/scripts/script.php?script_id=2107">scratch.vim</a>を用いることです。
+これはEmacsライクなscratchバッファをVim上に実装したものです。しかしfiletypeがvimに固定されてしまうため、Vim scriptの実験には良いのですが、ちょっとしたスクリプトを書くのには向きません。</p>
+
+<h2>howmを使う</h2>
+
+<p><a href="http://sworddancer.funkyboy.jp/howm_vim/">howm-mode.vim</a>を用いるという手もあります。ただし、これはメモ書き専用なので、スクリプトを書くのには向きません。</p>
+
+<h2>:JunkFileを用いる</h2>
+
+<p>私は次の<code>:JunkFile</code>コマンドを使っています。このコマンドを実行すると、<code>~/.vim_junk</code>ディレクトリに日付の名前が付いたファイルを自動生成します。
+ファイルには拡張子を与えることができるので、使い捨てのスクリプトを書く際にも有用です。もちろん、<code>:setfiletype</code>を用いて手動でfiletypeを設定することもできます。thincaさんの作成した<a href="http://github.com/thinca/vim-quickrun">quickrun</a>を用いれば、スクリプトの実行も簡単です。ファイルは保存されているので、ちょっとしたメモ書きにも使えます。
+私は<a href="http://github.com/Shougo/unite.vim">unite.vim</a>の<code>file_mru</code>で以前のメモを参照する、ということをよくやります。何かのキーにマッピングしておくと良いでしょう。</p>
+
+<pre>
+" Open junk file."\{\{\{
+command! -nargs=0 JunkFile call s:open_junk_file()
+function! s:open_junk_file()
+let l:junk_dir = $HOME . '/.vim_junk'. strftime('/%Y/%m')
+if !isdirectory(l:junk_dir)
+call mkdir(l:junk_dir, 'p')
+endif
+
+let l:filename = input('Junk Code: ', l:junk_dir.strftime('/%Y-%m-%d-%H%M%S.'))
+if l:filename != ''
+execute 'edit ' . l:filename
+endif
+endfunction"\}\}\}
+</pre>
+
+<p>このスクリプトはるびきちさんの<a href="http://www.emacswiki.org/emacs/open-junk-file.el">open-junk-file.el</a>にインスパイアされました。</p>
+
+<address class="hack-author">Shougo</address>

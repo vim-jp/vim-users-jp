@@ -1,0 +1,73 @@
+---
+layout: post
+title: "Hack #119: neocomplcache Hacks(2) 　オムニ補完"
+date: 2010-01-24
+author: Shougo
+---
+<p>二回目の今回はオムニ補完です。AutoComplPopでも自動呼び出しが可能ですが、neocomplcacheでは、それに改良を加え、設定しやすくなっています。</p>
+
+<h2>オムニ補完とは</h2>
+
+<p>オムニ補完とは、Vim組み込みで用意されている補完とは違い、文脈を解析して行う補完です。関数を<code>'omnifunc'</code>に設定し、<code>&lt;C-x&gt;&lt;C-o&gt;</code>のキーシーケンスを入力することで呼び出されます。標準でもいくつかの言語のオムニ補完関数が用意されていますが、ユーザーが自分で定義することができます。</p>
+
+<p><code>inoremap &lt;expr&gt;&lt;C-x&gt;&lt;C-o&gt;  &amp;filetype == 'vim' ? "\&lt;C-x&gt;&lt;C-v&gt;&lt;C-p&gt;" : neocomplcache#manual_omni_complete()</code></p>
+
+<p>私はこのようにキーマッピングを設定し、Vim組み込みのオムニ補完を置き換えています。</p>
+
+<h2>拡張機能</h2>
+
+<p>neocomplcacheのオムニ補完には次のような拡張機能があります。</p>
+
+<h3>自動補完の文脈定義</h3>
+
+<p><code>g:NeoComplCache_OmniPatterns[filetype]</code>を設定すれば、呼び出し条件をカスタマイズしたり、呼び出しを無効化することができます。</p>
+
+<h3>多数の言語に対応</h3>
+
+<p>AutoComplPopでは標準でPerl/Ruby/html/CSS/Pythoのオムニ補完が可能です。neocomplcacheではPerl以外の確認できたすべての言語に対応しています。キーワードパターンに追加するだけなので、新たな言語に対応させることが容易です。</p>
+
+<h3>補完スキップ</h3>
+
+<p><code>g:NeoComplCache_EnableSkipCompletion</code>が1ならば（デフォルト）、候補の取得に時間がかかりすぎる場合、補完をスキップすることができます。</p>
+
+<h3>ワイルドカード</h3>
+
+<p>ほかの補完と同様、ワイルドカードによる絞り込みに対応しています。</p>
+
+<h3>エラーを出さない</h3>
+
+<p>特定のオムニ補完では、変な場所で呼び出すとエラーを出したりすることがあります。neocomplcacheではエラーをcatchしているので、neocomplcache内部にバグがない限り、オムニ補完中にエラーになることはありません。</p>
+
+<h3>補完環境の厳密な判定</h3>
+
+<p>PythonやRubyのオムニ補完は<code>:python</code>や<code>:ruby</code>が正常に動作する環境でなければ動作しません。よって、内部で判定しています。</p>
+
+<h3>ファイル名補完やバッファ名補完との同時呼び出し</h3>
+
+<p>オムニ補完とほかの補完を同時に呼び出せないAutoComplPopとは違い、neocomplcacheのオムニ補完はほかの補完と統合されています。
+よって、同時に候補を出すことができるので、さらに便利に使えます。
+ただし、オムニ補完の開始パターンが先にマッチした場合、オムニ補完の候補のみが計算されて表示されます。
+これはVim自体の仕様です。これを防ぐためには、一度補完のポップアップを閉じて、補完を再呼び出しするしかありません。</p>
+
+<h3>キーワードの収集</h3>
+
+<p>空文字列でオムニ補完を呼び出してキーワードを収集してキャッシュし、オムニ補完候補として利用することができます。</p>
+
+<h2>neocomplcacheからオムニ補完関数を呼び出すときの注意</h2>
+
+<p>neocomplcacheは大抵のオムニ補完関数に対応していますが、オムニ補完関数を内部で無理矢理呼んで変換するという動作を行っているので、呼び出す関数によっては補完がうまく働かないことがあります。現在、<code>complete_add()</code>関数を内部で呼んでいる場合には動作がおかしくなることがわかっています。これはオムニ補完関数側が<code>complete_add()</code>を呼ばないようにするしかありません。
+他に、Rubyのオムニ補完は時々フリーズする現象があることが報告されています。
+これはRubyのオムニ補完が外部インタフェースを内部で使用しているためだと思われます。
+Vimの外部インタフェース機能は不安定なので、時々エラーをはいたりフリーズすることがあります。
+無効にしたい場合は.vimrcで</p>
+
+<pre>
+if !exists('g:NeoComplCache_OmniPatterns')
+let g:NeoComplCache_OmniPatterns = {}
+endif
+let g:NeoComplCache_OmniPatterns['ruby'] = ''
+</pre>
+
+<p>と設定すると、無効にできます。これでは不便なので、Rubyのオムニ補完を書き直してくれる人を現在募集中です。</p>
+
+<address class="hack-author">Shougo</address>

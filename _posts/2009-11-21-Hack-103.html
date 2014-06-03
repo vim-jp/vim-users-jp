@@ -1,0 +1,35 @@
+---
+layout: post
+title: "Hack #103: シェルをNYACUSに設定する"
+date: 2009-11-21
+author: Shougo
+---
+<p>Vimはシェルの機能を呼び出すことができます。しかし、WindowsではデフォルトのシェルがCMD.exeになっており、UNIX系のシェルと比較して見劣りがします。特に貧弱なエスケープシーケンスやリダイレクトの処理が致命的です。そのようなときはNYACUSをVimのシェルとして設定すれば、だいぶ使いやすくなるのでお薦めです。Vimは標準的なシェルを認識するようになっていますが、このHackは独自のシェルをVimに設定するときにも便利だと思います。</p>
+
+<h2>NYACUSとは？</h2>
+
+<p>
+<a href="http://nyaos.org/">NYACUS</a>はWindows上で動作する、tcshライクなシェルです。キーバインドがtcshに似ており、lsコマンドを内蔵しています。パスは/を\に自動変換、補完も有効です。簡単なスクリプト処理も記述できますが、制御構文はまだ実装が不十分のようです。
+</p>
+
+<h2>NYACUSのシェル設定</h2>
+
+<p>
+NYACUSをシェルとして使用するため、私は次のように設定しています。
+</p>
+
+<pre>
+" Shell settings.
+" Use NYACUS.
+set shell=nyacus.exe
+set shellcmdflag=-e
+set shellpipe=\|&amp;\ tee
+set shellredir=&gt;%s\ 2&gt;&amp;1
+set shellxquote=\"
+</pre>
+
+<p>
+<code class="option">shell</code>には、使用するシェルへのパスを設定します。<code class="option">shellcmdflag</code>には、Vimからシェルを起動するときのオプションを設定します。例えばnyacusの場合、オプションなしで直接起動すると、対話モードになってしまいます。よってVimはオプションを設定し、シェルを非対話モードで起動します。<code class="option">shellpipe</code>や<code class="option">shellredir</code>は、パイプやリダイレクト記号をどのように処理するかの設定です。これは好みに応じて設定して良いです。上記のように設定すると、シェルが出力した標準エラー出力もリダイレクトして、Vimが受け取ることになります。<code class="option">shellxquote</code>はシェルに引数を渡すためにクオートする記号です。<code class="option">shellquote</code>とは違い、リダイレクト記号もクオートします。Windows環境では&#8221;で囲まないと、リダイレクト記号が解釈されてしまうので、こちらを使用しなければなりません。
+</p>
+
+<address class="hack-author">Shougo</address>

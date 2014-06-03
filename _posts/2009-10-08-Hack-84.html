@@ -1,0 +1,26 @@
+---
+layout: post
+title: "Hack #84: バッファの表示設定を保存する"
+date: 2009-10-08
+author: Shougo
+---
+<p>Vimには折りたたみやカーソルの状態をファイルに保存し、次に開くときに設定を読み込む機能があります。以前編集していた場所がすぐ判るので便利です。</p>
+
+<h2>表示設定を保存・読み込む設定</h2>
+
+<p>
+<code class="vim-script">:mkview</code>や<code class="vim-script">:loadview</code>を使うと、バッファの表示設定を保存・読み込みできます。いちいちコマンドを実行するのは煩雑になるので、autocmdを利用して自動的にコマンドを実行させましょう。私は次のように設定しています。
+<pre>
+" Save fold settings.
+autocmd BufWritePost * if expand('%') != '' &amp;&amp; &amp;buftype !~ 'nofile' | mkview | endif
+autocmd BufRead * if expand('%') != '' &amp;&amp; &amp;buftype !~ 'nofile' | silent loadview | endif
+" Don't save options.
+set viewoptions-=options
+</pre>
+ifで分岐をさせているのは、無名バッファの場合に<code class="vim-script">:mkview</code>や<code class="vim-script">:loadview</code>がエラーになるからです。
+バッファのオプションを保存すると後々面倒になるので、<code class="option">'viewoptions'</code>を変更して、オプションは保存しないようにしています。
+バッファの設定は<code class="option">'viewdir'</code>に保存されます。初期値はWindowsの場合は&#8221;$VIM/vimfiles/view&#8221;, Linux等の場合は&#8221;~/.vim/view&#8221;となっています。
+詳しくは<code class="vim-script">:help :mkview</code>を参照してください。
+</p>
+
+<address class="hack-author">Shougo</address>

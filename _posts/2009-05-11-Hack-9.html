@@ -1,0 +1,117 @@
+---
+layout: post
+title: "Hack #9: Insert mode補完　設定編"
+date: 2009-05-11
+author: Shougo
+---
+<p>Insert modeの補完を使いこなすには、.vimrcで適切に設定することが不可欠です。ここではInsert mode補完における代表的な設定項目を紹介します。</p>
+
+<dl>
+<dt><code class="option">'completeopt'</code>:</dt>
+<dd>Insert mode補完の設定を行います。&#8217;,'区切りでmenuone, menu, preview, longestを指定できます。</dd>
+<dd>初期値は&#8221;menu,preview&#8221;です。</dd>
+<dd>
+<li>menu
+<ul>ポップアップメニューを使った補完を有効にします。</ul>
+</li>
+
+<li>menuone
+<ul>補完候補が一つしかなくてもポップアップメニューを表示します。補完候補の情報を見るのに便利です。</ul>
+</li>
+
+<li>longest
+<ul>マッチする一番長いテキストのみ補完します。<kbd>&lt;C-l&gt;</kbd>を使うことで、補完する文字を増やすことができます。大文字・小文字の区別がどうなるかは、補完に依存します。</ul>
+</li>
+
+<li>preview
+<ul>補完関数が対応していれば、プレビューウインドウに追加情報を表示します。<code class="option">'completeopt'</code>にmenuかmenuoneがないと動作しません。この処理は一部の補完関数でしか有効にならず、しかも重いです。</ul>
+</li>
+</dd>
+
+<dd>設定例</dd>
+<dd><code class="vim-script">set completeopt=menuone,preview</code></dd>
+
+<dt><code class="option">'complete'</code>:</dt>
+<dd><kbd>&lt;C-p&gt;</kbd>または<kbd>&lt;C-n&gt;</kbd>で呼び出されるキーワード補完のスキャン動作を, 区切りの文字列で指定します。たくさん指定すると、他の補完を呼び出さなくて良いので便利ですが、その分動作が遅くなります。</dd>
+<dd>初期値は&#8221;.,w,b,u,t,i&#8221;です。</dd>
+<dd>設定できる値は、<code class="vim-script">:help 'complete'</code>を参照してください。</dd>
+
+<dd>設定例</dd>
+<dd><code class="vim-script">set complete=.,w,b,t</code></dd>
+
+<dt><code class="option">'infercase'</code>:</dt>
+<dd>このオプションがonで、オプション<code class="option">'ignorecase'</code>もonのとき、補完候補となる文字列の大文字・小文字はカーソル前の文字列によって変化します。もしカーソル前の文字列がすべて大文字の場合、補完候補をすべて大文字にします。逆にすべて小文字ならば小文字に変換されます。つまり、&#8221;Ho&#8221; と入力して &#8220;hoge&#8221; がマッチしたとき、結果は&#8221;Hoge&#8221; になります。大文字小文字が混在している場合、補完候補も大文字小文字が混在するように変換されます。英文を補完するとき、大文字小文字を無視して補完するときに便利です。</dd>
+<dd>初期値はoffです。</dd>
+
+<dt><code class="option">'pumheight'</code>:</dt>
+<dd>ポップアップメニューの最大高さを制御します。補完候補の数がこれを超えた場合、ポップアップメニューにはスクロールバーが表示されます。0を指定すると、表示できる最大値まで画面を占有します。ポップアップメニューがあまり画面を占有しなくなるのと、描画領域が減るため、若干補完が高速になるという効果があります。</dd>
+<dd>初期値は0です。</dd>
+
+<dd>設定例</dd>
+<dd><code class="vim-script">set pumheight=20</code></dd>
+
+<dt><code class="option">'previewheight'</code>:</dt>
+<dd>プレビューウインドウの最大高さを制御します。この値があまりに大きいと、プレビューウインドウが画面を占有するため、適切な値に設定した方がよいでしょう。</dd>
+<dd>初期値は12です。</dd>
+
+<dd>設定例</dd>
+<dd><code class="vim-script">set previewheight=5</code></dd>
+
+<dt><code class="option">'showfulltag'</code>:</dt>
+<dd>このオプションをonにすると、タグ補完の時にタグがマッチしたパターンを表示します。これは普通変数や関数の宣言部分となるので、Visual StudioでいうIntellisenseのように使うことができます。このオプションは<code class="option">'completeopt'</code>に&#8221;longest&#8221;が含まれているときは、上手く動作しません。</dd>
+<dd>初期値はoffです。</dd>
+
+<dt><code class="option">'iskeyword'</code>:</dt>
+<dd>キーワード補完などでキーワードとみなす文字の種類を定義します。set iskeyword+=で文字を付け加えることによって、他の記号類もキーワードに含めることができます。</dd>
+<dd>初期値はプラットフォームやファイルタイプによって異なります。典型的には、Windowsならば&#8221;@,48-57,_,128-167,224-235&#8243;、UnixやLinuxならば&#8221;@,48-57,_,192-255&#8243;という値となります。</dd>
+
+<dt><code class="option">'completefunc'</code>:</dt>
+<dd>ユーザ定義補完を行うためにVimが呼び出す関数名を文字列形式でセットします。補完関数に求められる仕様については<em>[Hack #14: Insert mode補完　自作編]</em>で詳しく解説します。</dd>
+<dd>初期値は空です。</dd>
+
+<dt><code class="option">'omnifunc'</code>:</dt>
+<dd>オムニ補完を行うためにVimが呼び出す関数名を文字列形式でセットします。補完関数の仕様は<code class="option">'completefunc'</code>と変わりません。</dd>
+<dd>初期値はファイルタイプやインストールしているプラグインによって異なります。</dd>
+
+</dl>
+
+<dl>
+<dt>key mappingの設定例：</dt>
+<dd>ここでは、key mappingの設定例をInsert mode補完に絞って紹介します。</dd>
+<dd><code class="vim-script">inoremap &lt;C-j&gt; &lt;Down&gt;</code></dd>
+<dd>これは<kbd>&lt;C-j&gt;</kbd>を補完候補移動に割り当てるkey mappingです。正常に動作しますが、ポップアップメニューが開かれていないときにも<kbd>&lt;Down&gt;</kbd>へのkey mappingが有効であるため、別の機能を割り当てることができません。それを回避するために、&lt;expr&gt;と<code class="vim-script">pumvisible()</code>を利用します。</dd>
+<dd>&lt;expr&gt;はkey mappingをコマンドを表す文字列で置き換えます。例えば、先ほどのkey mappingは次のものと等価です。</dd>
+<dd><code class="vim-script">inoremap &lt;C-j&gt; "\&lt;Down&gt;"</code></dd>
+<dd>文字列の中でspecial key mappingを利用するには、&lt;の前に\を付けてエスケープしなければならないことに注意してください。</dd>
+<dd>pumvisible()はポップアップメニューが開いているときに、0でない値を返します。この関数と三項演算子を組み合わせることで、次のように記述できます。</dd>
+<dd><code class="vim-script">inoremap &lt;expr&gt; &lt;C-j&gt;  pumvisible() ? "\&lt;Down&gt;" : "\&lt;C-x&gt;\&lt;C-o&gt;"</code></dd>
+<dd>これを実行すると、<kbd>&lt;C-j&gt;</kbd>はポップアップメニューが開いているときに補完候補移動として動作し、開いていないときにはオムニ補完を起動します。</dd>
+<dd>いちいちpumvisible()を用いて条件分岐をしなければならないのは非常に不便ですが、残念ながらVimにはPopupmenu modeというものは存在しないので、仕方がありません。</dd>
+</dl>
+
+<dl>
+<dt>ポップアップメニューの見た目を変更する：</dt>
+<dd>ポップアップメニューの強調色はcolorschemeによって設定されています。しかし、その色づかいは見にくいものが多いため、.vimrcで設定した方がよいでしょう。次に紹介するのがポップアップメニュー用の強調色です。</dd>
+
+<dd>
+<li>Pmenu
+<ul>ポップアップメニューのアイテムの色です。</ul>
+</li>
+<li>PmenuSel
+<ul>ポップアップメニューの現在選択しているアイテムの色です。</ul>
+</li>
+<li>PmenuSbar
+<ul>ポップアップメニューのスクロールバーの色です。</ul>
+</li>
+<li>PmenuThumb
+<ul>スクロールバーの現在位置を表す色です。</ul>
+</li>
+</dd>
+
+<dd>設定例</dd>
+<dd><code class="vim-script">hi Pmenu ctermbg=8</code></dd>
+<dd><code class="vim-script">hi PmenuSel ctermbg=1</code></dd>
+<dd><code class="vim-script">hi PmenuSbar ctermbg=0</code></dd>
+</dl>
+
+<address class="hack-author">Shougo</address>

@@ -1,0 +1,43 @@
+---
+layout: post
+title: "Hack #115: Vimのバージョンや拡張機能をチェックする"
+date: 2010-01-08
+author: Shougo
+---
+<p>自分でプラグインを書く場合、プラグインが動作しているVimのバージョンやVimで有効になっている機能を確認したい場合があります。ここでは、そんなときに役立つ関数について解説します。</p>
+
+<h2>Vimのバージョンをチェックする方法</h2>
+
+<p>Vimのバージョンをチェックするには、<code>v:version</code>変数をチェックすればよいです。百の位がVimのメジャーバージョン、十の位と一の位がマイナーバージョンを表します。例えばVim 7.2で<code>:echo v:version</code>すると、<code>702</code>が表示されます。<code>720</code>ではありません。Vimがバージョン7以上であることをチェックするには次のようにします。</p>
+
+<pre>
+if v:version < 700
+echoerr 'Does not work this version of Vim "' . v:version . '".'
+finish
+endif
+</pre>
+
+<p>ちなみに、パッチレベルは<code>has('patch100')</code>などでチェックします。詳しくは、<code>:help has-patch</code>を参照してください。</p>
+
+<h2>有効になっている拡張機能をチェックする方法</h2>
+
+<p>自分のVimがどのような拡張機能を持っているかは、<code>:version</code>を実行するのが早いですが、
+プラグインがチェックする場合には使えません。スクリプトでチェックするには、<code>has()</code>を用います。
+たとえば、Windowsかどうかをチェックするには、</p>
+
+<pre>
+if has('win32') || has('win64')
+" Windowsの場合の処理
+endif
+</pre>
+
+<p>です。GVimかどうかをチェックするには、<code>has('gui_running')</code>です。これは<code>has('gui')</code>と間違えやすいので気をつけてください。<code>has('gui')</code>はGUI機能付きでコンパイルされているかどうかをチェックします。<code>has('gui_running')</code>でうまく条件を切り分ければ、.gvimrcを用いずにGVim用の設定を.vimrcだけで完結させることも可能です。
+ただし、最初vimで起動して:guiでGUIになる場合は.vimrcの<code>has('gui_running')</code>設定は読み込まれません。注意してください。（mattnさん情報）</p>
+
+<h2>使用上の注意</h2>
+
+<p>Vim6以下の場合はスクリプト機能が全然違うので、切り捨てても良いですが、Vim7以降の差異はそこまでありません。
+本当にそのバージョンをチェックするべきなのかをよく考えましょう。
+拡張機能も本当に必要なものだけを使うようにしましょう。</p>
+
+<address class="hack-author">Shougo</address>
