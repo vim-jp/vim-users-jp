@@ -74,9 +74,14 @@ function! s:convert(f) abort
   let text = substitute(text, '{{', '\\{\\{', 'g')
   let text = substitute(text, '}}}', '\\}\\}\\}', 'g')
   let text = substitute(text, '}}', '\\}\\}', 'g')
-  let text = substitute(text, 'http://vim-users.jp/wp-content/uploads/', '/vim-users-jp/assets/images/', 'g')
-  let text = substitute(text, 'http://vim-users.jp/vim-users-jp-official-lingr-chat-room/', 'http://lingr.com/room/vim', 'g')
-  let text = substitute(text, 'http://rst.gsfc.nasa.gov/Sect16/full-20earth2.jpg', 'http://vaidehiparikh.files.wordpress.com/2012/08/full-20earth2.jpg', 'g')
+  let text = substitute(text, '\vhttp://vim-users.jp/wp-content/uploads/', '/vim-users-jp/assets/images/', 'g')
+  let text = substitute(text, '\vhttp://vim-users.jp/', '/vim-users-jp/', 'g')
+  let text = substitute(text, '\vhttp://vim-users.jp', '/vim-users-jp/', 'g')
+  let text = substitute(text, 'http://lingr.vim-users.jp/\?', 'http://lingr.com/room/vim', 'g')
+  let text = substitute(text, '>\([a-z]\+\).vim-users.jp<', '><del>\1.vim-users.jp</del><', 'g')
+  let text = substitute(text, '\vhttp://vim-users.jp/vim-users-jp-official-lingr-chat-room/', 'http://lingr.com/room/vim', 'g')
+  let text = substitute(text, '\vhttp://rst.gsfc.nasa.gov/Sect16/full-20earth2.jpg', 'http://vaidehiparikh.files.wordpress.com/2012/08/full-20earth2.jpg', 'g')
+  let text = substitute(text, '/web/[0-9]\+/', '', 'g')
   let short = title
   let dict = [
   \ ['東京都渋谷', 'tokyo-shibuya'],
