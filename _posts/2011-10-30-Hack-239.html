@@ -23,7 +23,7 @@ author: ujihisa
 <p>Vim scriptを読んでいると以下のようなコードを比較的頻繁に見かけるのではないでしょうか。</p>
 
 <pre><code>if !exists('g:aaa_bbb')
-let g:aaa_bbb = 'something default'
+  let g:aaa_bbb = 'something default'
 endif
 </code></pre>
 
@@ -52,7 +52,7 @@ echo (g:)['hello']
 <p>したがって、元々の問題は、</p>
 
 <pre><code>if !exists('g:aaa_bbb')
-let g:aaa_bbb = 'something default'
+  let g:aaa_bbb = 'something default'
 endif
 </code></pre>
 

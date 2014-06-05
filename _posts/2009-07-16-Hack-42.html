@@ -22,9 +22,9 @@ nnoremap &lt;C-w&gt;l &lt;C-w&gt;l:call &lt;SID&gt;good_width()&lt;Cr&gt;
 nnoremap &lt;C-w&gt;H &lt;C-w&gt;H:call &lt;SID&gt;good_width()&lt;Cr&gt;
 nnoremap &lt;C-w&gt;L &lt;C-w&gt;L:call &lt;SID&gt;good_width()&lt;Cr&gt;
 function! s:good_width()
-if winwidth(0) &lt; 84
-vertical resize 84
-endif
+  if winwidth(0) &lt; 84
+    vertical resize 84
+  endif
 endfunction
 </code></pre>
 
@@ -35,22 +35,22 @@ endfunction
 <h2>議論</h2>
 
 <p><kbd>&lt;C-w&gt;h</kbd>の挙動を上書きせずとも、<code>'winminwidth'</code>を設定した方が良いのでは、と勘ぐった人も多いのではないでしょうか。
-具体的には以下のように指定します。</p>
+				具体的には以下のように指定します。</p>
 
 <pre><code>set winminwidth=84
 </code></pre>
 
 <p>あるいは、以下のように<code>WinEnter</code>イベントにウインドウ幅の変更を指定するという方法もあります。
-具体的には以下のように指定します。</p>
+				具体的には以下のように指定します。</p>
 
 <pre><code>augroup MyWinEnterWidth
-autocmd!
-autocmd WinEnter * if winwidth(0) &lt; 84 | vertical resize 84 | endif
+  autocmd!
+  autocmd WinEnter * if winwidth(0) &lt; 84 | vertical resize 84 | endif
 augroup END
 </code></pre>
 
 <p>しかし本Hackではこの手法を意図的に避けました。
-ウインドウの新規生成時や、自動的なウインドウの移動のときにはデフォルトの挙動のままにしておきたいためです。</p>
+				ウインドウの新規生成時や、自動的なウインドウの移動のときにはデフォルトの挙動のままにしておきたいためです。</p>
 
 <p>もちろん、全てのウインドウのフォーカスの移り変わりに対して横幅の再設定を行ないたい場合には上記<code>autocmd</code>を使った設定の方が好ましいでしょう。</p>
 
@@ -65,9 +65,9 @@ nnoremap sJ &lt;C-w&gt;J
 nnoremap sK &lt;C-w&gt;K
 nnoremap sL &lt;C-w&gt;L:call &lt;SID&gt;good_width()&lt;Cr&gt;
 function! s:good_width()
-if winwidth(0) &lt; 84
-vertical resize 84
-endif
+  if winwidth(0) &lt; 84
+    vertical resize 84
+  endif
 endfunction
 </code></pre>
 

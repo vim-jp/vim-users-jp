@@ -22,7 +22,7 @@ author: ujihisa
 <p>PHPのFiletype Pluginファイルに以下のコードを追加します。</p>
 
 <pre><code>function! s:last_char()
-return matchstr(getline('.'), '.', col('.')-2)
+  return matchstr(getline('.'), '.', col('.')-2)
 endfunction
 inoremap &lt;buffer&gt;&lt;expr&gt; [ a:last_char =~ '\w\\|]' ? '[' : 'array(')
 </code></pre>
@@ -84,17 +84,17 @@ inoremap &lt;buffer&gt;&lt;expr&gt; [ a:last_char =~ '\w\\|]' ? '[' : 'array(')
 <p>いろいろあって、いま著者の<code>~/.vim/ftplugin/php.vim</code>の該当部分以下のようになっています。</p>
 
 <pre><code>function! s:last_char()
-return matchstr(getline('.'), '.', col('.')-2)
+  return matchstr(getline('.'), '.', col('.')-2)
 endfunction
 
 function! s:php_smart_bracket(last_char)
-if a:last_char == '['
-return &quot;\&lt;BS&gt;(&quot;
-elseif a:last_char =~ '\w\|]'
-return '['
-else
-return 'array('
-endif
+  if a:last_char == '['
+    return &quot;\&lt;BS&gt;(&quot;
+  elseif a:last_char =~ '\w\|]'
+    return '['
+  else
+    return 'array('
+  endif
 endfunction
 
 inoremap &lt;buffer&gt;&lt;expr&gt; [ &lt;SID&gt;php_smart_bracket(&lt;SID&gt;last_char())

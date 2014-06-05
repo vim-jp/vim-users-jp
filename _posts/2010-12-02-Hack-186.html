@@ -9,7 +9,7 @@ author: thinca
 <h3>設定方法</h3>
 
 <p><code class="option">'foldmethod'</code> が &#8220;expr&#8221; の場合、<code class="option">'foldexpr'</code> オプションに折り畳みレベルを計算するための式を設定します。
-この式の中では <code>v:lnum</code> に行番号が格納されているので、その行の折り畳みレベルを計算します。</p>
+				この式の中では <code>v:lnum</code> に行番号が格納されているので、その行の折り畳みレベルを計算します。</p>
 
 <p>大抵の場合、関数を定義してその関数を呼び出すような式を設定します。</p>
 
@@ -71,24 +71,24 @@ author: thinca
 <pre><code>setlocal foldmethod=expr foldexpr=MyHelpFold(v:lnum)
 
 function! MyHelpFold(lnum)
-let line = getline(a:lnum)
-let next = getline(a:lnum + 1)
-if line =~ '^=\{78}$'
-return 1
-elseif next =~ '^=\{78}$'
-return '&lt;1'
-elseif line =~ '^-\{78}$'
-return 2
-elseif next =~ '^-\{78}$'
-return '&lt;2'
-endif
-return '='
+  let line = getline(a:lnum)
+  let next = getline(a:lnum + 1)
+  if line =~ '^=\{78}$'
+    return 1
+  elseif next =~ '^=\{78}$'
+    return '&lt;1'
+  elseif line =~ '^-\{78}$'
+    return 2
+  elseif next =~ '^-\{78}$'
+    return '&lt;2'
+  endif
+  return '='
 endfunction
 </code></pre>
 
 <p>これは Vim の help を折り畳む設定の例です。</p>
 
 <p>&#8220;=&#8221; が 78 個並ぶ行を目印として、その行以降をレベル 1、同じように &#8220;-&#8221; が 78 個並ぶ行以降をレベル 2 として定義しています。
-また、同じレベルが連続した場合に別々の折り畳みになるように、次の行が新しい目印の行だった場合はその行で折り畳みを終了するようにしています。</p>
+				また、同じレベルが連続した場合に別々の折り畳みになるように、次の行が新しい目印の行だった場合はその行で折り畳みを終了するようにしています。</p>
 
 <address class="hack-author">thinca</address>

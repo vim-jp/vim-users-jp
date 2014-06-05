@@ -14,22 +14,22 @@ set mouse=a
 
 " For screen.
 if &amp;term =~ "^screen"
-augroup MyAutoCmd
-autocmd VimLeave * :set mouse=
-augroup END
+    augroup MyAutoCmd
+        autocmd VimLeave * :set mouse=
+     augroup END
 
-" screenでマウスを使用するとフリーズするのでその対策
-set ttymouse=xterm2
+    " screenでマウスを使用するとフリーズするのでその対策
+    set ttymouse=xterm2
 endif
 
 if has('gui_running')
-" Show popup menu if right click.
-set mousemodel=popup
+    " Show popup menu if right click.
+    set mousemodel=popup
 
-" Don't focus the window when the mouse pointer is moved.
-set nomousefocus
-" Hide mouse pointer on insert mode.
-set mousehide
+    " Don't focus the window when the mouse pointer is moved.
+    set nomousefocus
+    " Hide mouse pointer on insert mode.
+    set mousehide
 endif
 </pre>
 

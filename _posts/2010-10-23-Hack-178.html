@@ -55,7 +55,7 @@ author: thinca
 <dt><kbd>zX</kbd></dt>
 <dd>折り畳みを更新します。
 <code class="option">'foldlevel'</code> が再適用され、全ての折り畳みが <code class="option">'foldlevel'</code> まで折り畳まれた状態になります。
-また、<code class="option">'foldexpr'</code> を使っている場合は各行の折り畳みレベルが再計算されます。</dd>
+				また、<code class="option">'foldexpr'</code> を使っている場合は各行の折り畳みレベルが再計算されます。</dd>
 <dt><kbd>zx</kbd></dt>
 <dd>zX を実行してから zv を行います。</dd>
 <dt><code>:[range]foldopen[!]</code></dt>
@@ -82,17 +82,17 @@ author: thinca
 </dl>
 
 <p>特に &#8220;manual&#8221; の場合は、これらの方法で手動で折り畳みを生成する必要があります。
-また、&#8221;marker&#8221; の場合は直接マーカー文字列が挿入、削除されるため、バッファが変更されます。</p>
+				また、&#8221;marker&#8221; の場合は直接マーカー文字列が挿入、削除されるため、バッファが変更されます。</p>
 
 <h3>折り畳みを有効化/無効化する</h3>
 
 <p>これらは <code class="option">'foldenable'</code> オプションの値を切り替えます。</p>
 
 <p><kbd>zn</kbd>
-： 折り畳みを無効にします。</p>
+				： 折り畳みを無効にします。</p>
 
 <p><kbd>zN</kbd>
-： 折り畳みを有効にします。</p>
+				： 折り畳みを有効にします。</p>
 
 <dl>
 <dt><kbd>zi</kbd></dt>
@@ -122,7 +122,7 @@ author: thinca
 <dt><code>:[range]folddoopen {cmd}</code></dt>
 <dt><code>:[range]folddoclose {cmd}</code></dt>
 <dd>バッファ全体、もしくは指定した範囲にある、折り畳まれていない、もしくは折り畳まれている行に対して {cmd} を実行します。これは <code>:global</code> に似ていて、実行する行を正規表現ではなく折り畳みの状態で指定しているのとほぼ同じです。
-折り畳まれていない行には、折り畳み自体が存在しない行も含みます。</dd>
+				折り畳まれていない行には、折り畳み自体が存在しない行も含みます。</dd>
 </dl>
 
 <address class="hack-author">thinca</address>

@@ -19,11 +19,11 @@ author: ujihisa
 <p>上記のような簡素な例だと単純に<a href="http://vim-users.jp/2009/04/hack2/">FP</a>の消費量のみの問題なのですが、しかし以下のようにセミコロンが必要な場合と必要でない場合がすぐに判別しないときもあり、このとき若干の面倒さが残ります。</p>
 
 <pre><code>function f1() {
-return 1;
+  return 1;
 }
 
 var f2 = function() {
-return 1;
+  return 1;
 };
 </code></pre></li>
 <li><p>括弧</p>
@@ -54,43 +54,43 @@ f(x);
 <p>例を挙げます。0から2までの数字を出力するコードをCoffeeScriptで記述してみましょう。</p>
 
 <pre><code>f: -&gt;
-memo: 0
--&gt;
-memo++
+  memo: 0
+  -&gt;
+    memo++
 
 Number.prototype.times: (f) -&gt;
-f i for i in [1..this]
+  f i for i in [1..this]
 
 g: f()
 
 3.times (i) -&gt;
-p g()
+  p g()
 </code></pre>
 
 <p><code>coffee -cp</code>コマンドで、上記コードが以下のようなJavaScriptにコンパイルされます。</p>
 
 <pre><code>(function(){
-var f, g;
-f = function() {
-var memo;
-memo = 0;
-return function() {
-return memo++;
-};
-};
-Number.prototype.times = function(f) {
-var _a, _b, i;
-_a = []; (_b = (1));
+  var f, g;
+  f = function() {
+    var memo;
+    memo = 0;
+    return function() {
+      return memo++;
+    };
+  };
+  Number.prototype.times = function(f) {
+    var _a, _b, i;
+    _a = []; (_b = (1));
 
-for (i = _b; i &lt;= this; i += 1) {
-_a.push(f(i));
-}
-return _a;
-};
-g = f();
-(3).times(function(i) {
-return p(g());
-});
+    for (i = _b; i &lt;= this; i += 1) {
+      _a.push(f(i));
+    }
+    return _a;
+  };
+  g = f();
+  (3).times(function(i) {
+    return p(g());
+  });
 })();
 </code></pre>
 
@@ -134,11 +134,11 @@ return p(g());
 <li><p><code>~/.vim/ftplugin/coffee.vim</code>に以下を記述する</p>
 
 <pre><code>function! JavaScriptUnderScoreBecomesCamelCase()
-if matchstr(getline('.'), '.', col('.')-2) =~ '\w'
-return &quot;\&lt;Plug&gt;(stickykey-shift)&quot;
-else
-return '_'
-endif
+  if matchstr(getline('.'), '.', col('.')-2) =~ '\w'
+    return &quot;\&lt;Plug&gt;(stickykey-shift)&quot;
+  else
+    return '_'
+  endif
 endfunction!
 
 imap &lt;buffer&gt;&lt;expr&gt; _ JavaScriptUnderScoreBecomesCamelCase()

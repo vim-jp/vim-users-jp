@@ -19,25 +19,25 @@ author: Shougo
 <h2>タイマー機能の模倣</h2>
 
 <p>タイマー機能の模倣はInsert modeとNormal modeで微妙に方法が異なります。
-基本的にはCursorHold, CursorHoldIのautocmdに関数の呼び出しのイベントを設定します。
-CursorHoldI, CursorHoldは新たにキーが押されない限り連続して発生することがないので、処理の後にダミーの<code>feedkeys()</code>を呼び出し、関数が連続して呼ばれるようにします。
-任意の時間でイベントを発生させるためには、&#8217;updatetime&#8217;を保存・復元する必要があります。</p>
+				基本的にはCursorHold, CursorHoldIのautocmdに関数の呼び出しのイベントを設定します。
+				CursorHoldI, CursorHoldは新たにキーが押されない限り連続して発生することがないので、処理の後にダミーの<code>feedkeys()</code>を呼び出し、関数が連続して呼ばれるようにします。
+				任意の時間でイベントを発生させるためには、&#8217;updatetime&#8217;を保存・復元する必要があります。</p>
 
 <pre>
 autocmd CursorHold <buffer> call s:foo()
 
 function s:foo()
-"  何か処理をする
+  "  何か処理をする
 
-call feedkeys("g\<ESC>", 'n')
+  call feedkeys("g\<ESC>", 'n')
 endfunction
 
 autocmd CursorHoldI <buffer> call s:bar()
 
 function s:bar()
-"  何か処理をする
+  "  何か処理をする
 
-call feedkeys("\<C-r>\<ESC>", 'n')
+  call feedkeys("\<C-r>\<ESC>", 'n')
 endfunction
 </pre>
 
@@ -48,8 +48,8 @@ endfunction
 <h3>コマンドごとにタイムアウトを指定できない</h3>
 
 <p>&#8216;updatetime&#8217;は一つしか設定できないため、複数のプラグインが同時に書きかえようとすると干渉します。
-しかもグローバルなオプションなので、値の復元を忘れると影響が大きくなります。
-&#8216;updatetime&#8217;は本来スワップファイルの書き出しのための時間です。todoには&#8217;holdtime&#8217;を新設し、この変数を分離しようという記述がありますが、まだ実現される見こみはありません。Vim 7.3でも実装されていません。</p>
+				しかもグローバルなオプションなので、値の復元を忘れると影響が大きくなります。
+				&#8216;updatetime&#8217;は本来スワップファイルの書き出しのための時間です。todoには&#8217;holdtime&#8217;を新設し、この変数を分離しようという記述がありますが、まだ実現される見こみはありません。Vim 7.3でも実装されていません。</p>
 
 <h3>CursorHoldIはポップアップメニューが出てくると動作しない</h3>
 
@@ -69,7 +69,7 @@ endfunction
 
 <p><code>autocmd CursorHoldI &lt;timer=1000&gt; call foo()</code>
 <code>&lt;timer=xxx&gt;</code>というのがイベントの実行時間を表します。単位はms。CursorHoldI, CursorHoldでのみ有効なオプションです。
-省略されると今までと同様にholdtimeかupdatetimeを使います。当然、ポップアップメニューが消えても動作します。
+				省略されると今までと同様にholdtimeかupdatetimeを使います。当然、ポップアップメニューが消えても動作します。
 <a href="http://vim-users.jp/real-vim-hacks-project/">Real Vim Hacksプロジェクト</a>でどうにか実現したいものです。</p>
 
 <address class="hack-author">Shougo</address>

@@ -22,26 +22,26 @@ cnoremap &lt;expr&gt; ;  &lt;SID&gt;sticky_func()
 snoremap &lt;expr&gt; ;  &lt;SID&gt;sticky_func()
 
 function! s:sticky_func()
-let l:sticky_table = {
-\',' : '&lt;', '.' : '&gt;', '/' : '?',
-\'1' : '!', '2' : '@', '3' : '#', '4' : '$', '5' : '%',
-\'6' : '^', '7' : '&#038;', '8' : '*', '9' : '(', '0' : ')', '-' : '_', '=' : '+',
-\';' : ':', '[' : '{', ']' : '}', '`' : '~', "'" : "\"", '\' : '|',
-\}
-let l:special_table = {
-\"\&lt;ESC&gt;" : "\&lt;ESC&gt;", "\&lt;Space&gt;" : ';', "\&lt;CR&gt;" : ";\&lt;CR&gt;"
-\}
+    let l:sticky_table = {
+                \',' : '&lt;', '.' : '&gt;', '/' : '?',
+                \'1' : '!', '2' : '@', '3' : '#', '4' : '$', '5' : '%',
+                \'6' : '^', '7' : '&#038;', '8' : '*', '9' : '(', '0' : ')', '-' : '_', '=' : '+',
+                \';' : ':', '[' : '{', ']' : '}', '`' : '~', "'" : "\"", '\' : '|',
+                \}
+    let l:special_table = {
+                \"\&lt;ESC&gt;" : "\&lt;ESC&gt;", "\&lt;Space&gt;" : ';', "\&lt;CR&gt;" : ";\&lt;CR&gt;"
+                \}
 
-let l:key = getchar()
-if nr2char(l:key) =~ '\l'
-return toupper(nr2char(l:key))
-elseif has_key(l:sticky_table, nr2char(l:key))
-return l:sticky_table[nr2char(l:key)]
-elseif has_key(l:special_table, nr2char(l:key))
-return l:special_table[nr2char(l:key)]
-else
-return ''
-endif
+    let l:key = getchar()
+    if nr2char(l:key) =~ '\l'
+        return toupper(nr2char(l:key))
+    elseif has_key(l:sticky_table, nr2char(l:key))
+        return l:sticky_table[nr2char(l:key)]
+    elseif has_key(l:special_table, nr2char(l:key))
+        return l:special_table[nr2char(l:key)]
+    else
+        return ''
+    endif
 endfunction
 </pre>
 <dd>私の場合、<kbd>;</kbd>をShiftのための修飾キーとして使い、;そのものを入力したいときは<kbd>;&lt;Space&gt;</kbd>を使用するようにしています。</dd>

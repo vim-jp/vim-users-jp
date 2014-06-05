@@ -5,7 +5,7 @@ date: 2013-02-20
 author: ujihisa
 ---
 <p>Vim Advent Calendar の 82 日目の記事です。
-昨日はthincaさんによる<a href="http://d.hatena.ne.jp/thinca/20130219/1361203824">Live Coding で painter.vim(仮) 作った</a>で、業界に衝撃が走りました。僕も勤務先の会社で「友達が作ったんだぜ、すごいだろ」とどや顔で披露しました。</p>
+				昨日はthincaさんによる<a href="http://d.hatena.ne.jp/thinca/20130219/1361203824">Live Coding で painter.vim(仮) 作った</a>で、業界に衝撃が走りました。僕も勤務先の会社で「友達が作ったんだぜ、すごいだろ」とどや顔で披露しました。</p>
 
 <p>本記事はpainter.vimとはまるで違う、地味なトピックです。</p>
 
@@ -21,7 +21,7 @@ author: ujihisa
 <h2>無視するパターンの変更</h2>
 
 <p>上記無視リストを別のパターンで上書きしたいときは、<code>unite#custom_source()</code>を使います。
-たとえば&#8221;target&#8221;という名前に完全一致するディレクトリがあるときはそれ以下のファイルをすべて無視したいときは、<code>~/.vimrc</code>に以下のように記述します。</p>
+				たとえば&#8221;target&#8221;という名前に完全一致するディレクトリがあるときはそれ以下のファイルをすべて無視したいときは、<code>~/.vimrc</code>に以下のように記述します。</p>
 
 <pre><code>call unite#custom_source('file_rec', 'ignore_pattern', '\&lt;target\&gt;')
 </code></pre>

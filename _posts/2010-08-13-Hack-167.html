@@ -7,11 +7,11 @@ author: tyru
 <h2>無名関数</h2>
 
 <pre><code>function! s:foo()
-let foo = {}
-function foo.funcall() dict
-echo 'lambda'
-endfunction
-return foo
+    let foo = {}
+    function foo.funcall() dict
+        echo 'lambda'
+    endfunction
+    return foo
 endfunction
 
 call s:foo().funcall()
@@ -20,12 +20,12 @@ call s:foo().funcall()
 <h2>クロージャ</h2>
 
 <pre><code>function! s:foo(num)
-let foo = {'i': a:num}
-function foo.funcall() dict
-let self.i += 1
-return self.i
-endfunction
-return foo
+    let foo = {'i': a:num}
+    function foo.funcall() dict
+        let self.i += 1
+        return self.i
+    endfunction
+    return foo
 endfunction
 
 echo s:foo(1).funcall()
@@ -41,9 +41,9 @@ echo s:clos.funcall()
 <h2>説明</h2>
 
 <p>Vimスクリプトでは辞書型に関数をキーとして代入することができます。<br />
-その場合関数はほぼ無名のような存在になります。<br />
-また辞書型に格納した「dict」つきの関数からはその辞書を「self」という変数で参照できるので<br />
-辞書に関数内で使う変数などを辞書に保存しておけば関数内からその変数を参照できる、いわば疑似的なクロージャを実現することができます。</p>
+				その場合関数はほぼ無名のような存在になります。<br />
+				また辞書型に格納した「dict」つきの関数からはその辞書を「self」という変数で参照できるので<br />
+				辞書に関数内で使う変数などを辞書に保存しておけば関数内からその変数を参照できる、いわば疑似的なクロージャを実現することができます。</p>
 
 <ol>
 <li>自分で変数を渡す必要がある</li>
@@ -53,6 +53,6 @@ echo s:clos.funcall()
 <p>などなど他言語と比べかなりプリミティブですが、これを駆使すればVimスクリプトでも現実的に無名関数やクロージャが扱えることがわかるでしょう。</p>
 
 <p>またVimスクリプトでは辞書型を使ったプロトタイプ指向によりクラスなども扱うことができます。<br />
-そこまでしなくても辞書型を活用することでモジュールを分けられるのでいろんな活用方法があります。</p>
+				そこまでしなくても辞書型を活用することでモジュールを分けられるのでいろんな活用方法があります。</p>
 
 <address class="hack-author">tyru</address>

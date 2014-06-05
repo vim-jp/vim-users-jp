@@ -9,7 +9,7 @@ author: thinca
 <h2>Visual mode の * に機能を割り当てる</h2>
 
 <p>Visual mode での * は Normal mode と同様カーソル下の単語を検索して次の単語出現位置にカーソルを動かしますが、選択範囲の文字列で検索をしてくれた方がNormal modeでの動作と対比して直感的でしょう。このキーに検索を行う機能を割り当てることで、Visual mode で選択中のテキストを検索することができます。
-割り当てる方法はいくつかありますが、ここではなるべくシンプルなものを紹介します。</p>
+				割り当てる方法はいくつかありますが、ここではなるべくシンプルなものを紹介します。</p>
 
 <pre><code>vnoremap &lt;silent&gt; * &quot;vy/\V&lt;C-r&gt;=substitute(escape(@v,'\/'),&quot;\n&quot;,'\\n',<code class="option">'g'</code>)&lt;CR&gt;&lt;CR&gt;
 </code></pre>
@@ -34,7 +34,7 @@ author: thinca
 </code></pre>
 
 <p>Command-line mode でこのキーをタイプするとネストするように新しいプロンプトに切り替わり、ここで入力した式の結果を前のプロンプトに挿入することができます。
-余談ですが、この機能自体はネストすることはできません。</p>
+				余談ですが、この機能自体はネストすることはできません。</p>
 
 <pre><code>escape(@v,'\/')
 </code></pre>

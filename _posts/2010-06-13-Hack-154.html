@@ -7,12 +7,12 @@ author: tyru
 <h1>タグジャンプをさらに活用する</h1>
 
 <p><a href="http://vim-users.jp/2009/07/hack43/">Hack #43</a>ではタグについての基本的な使用方法をまとめました。
-本稿ではさらに踏み込んだタグジャンプの活用法をまとめます。</p>
+				本稿ではさらに踏み込んだタグジャンプの活用法をまとめます。</p>
 
 <h2>親ディレクトリにあるタグファイルを指定</h2>
 
 <p>もし自分が<code>/project/a/src/</code>というディレクトリにいた場合に、できれば<code>/project/a/tags</code>や、
-または全てのプロジェクト用のタグファイル(ライブラリの関数など)もタグジャンプに使いたいとします。</p>
+				または全てのプロジェクト用のタグファイル(ライブラリの関数など)もタグジャンプに使いたいとします。</p>
 
 <pre><code>/project/a/src/ (現在のディレクトリ)
 /project/a/tags (指定したいタグファイル)
@@ -22,22 +22,22 @@ author: tyru
 <p>その場合、.vimrcには以下のように書くことで可能になります。</p>
 
 <pre><code>if has('path_extra')
-set tags+=tags;
+    set tags+=tags;
 endif
 </code></pre>
 
 <p>こうすることで、もしタグファイルが存在するなら
 <code>/project/a/tags</code>や<code>/project/tags</code>にある関数も<code>&lt;C-]&gt;</code>で飛ぶことが可能になります。
-また<code>;</code>は<code>+path_extra</code>機能がサポートされていない場合では使えないため、
+				また<code>;</code>は<code>+path_extra</code>機能がサポートされていない場合では使えないため、
 <code>has('path_extra')</code>で機能の有無をチェックしています。</p>
 
 <h3>階層数を指定</h3>
 
 <p>ただ<code>;</code>をつけただけではルートディレクトリまでさかのぼってしまいます。
-そこで<code>;</code>の後に上限となる親ディレクトリを指定することができます。</p>
+				そこで<code>;</code>の後に上限となる親ディレクトリを指定することができます。</p>
 
 <pre><code>if has('path_extra')
-set tags+=tags;/project/a
+    set tags+=tags;/project/a
 endif
 </code></pre>
 
@@ -46,8 +46,8 @@ endif
 <h2>子ディレクトリにあるタグファイルを指定</h2>
 
 <p>前項では親ディレクトリのtagsを指定しましたが、
-今度はある特定のディレクトリにあるタグファイルを
-現在のディレクトリから指定したい場合はどうすればいいでしょう。</p>
+				今度はある特定のディレクトリにあるタグファイルを
+				現在のディレクトリから指定したい場合はどうすればいいでしょう。</p>
 
 <pre><code>/project/a/src/          (現在のディレクトリ)
 /project/a/src/libA/tags (指定したいタグファイル)
@@ -57,7 +57,7 @@ endif
 <p>その場合、以下を.vimrcに書けばいいでしょう。</p>
 
 <pre><code>if has('path_extra')
-set tags+=./*/tags;
+    set tags+=./*/tags;
 endif
 </code></pre>
 
@@ -65,26 +65,26 @@ endif
 <code>/project/a/src/libA/src/tags</code>などの何階層か下のタグファイルを指定するには以下のようにできます。</p>
 
 <pre><code>if has('path_extra')
-set tags+=./**/tags;
+    set tags+=./**/tags;
 endif
 </code></pre>
 
 <h3>階層数を指定</h3>
 
 <p>ただ<code>**</code>は30階層までの深さのディレクトリにマッチするということになっています。
-なので場合によっては非常に重くなるかもしれません。
-その場合は階層の深さの最大値を次のように指定することができます。
-(この例では3階層下のディレクトリまでマッチするように設定しています)</p>
+				なので場合によっては非常に重くなるかもしれません。
+				その場合は階層の深さの最大値を次のように指定することができます。
+				(この例では3階層下のディレクトリまでマッチするように設定しています)</p>
 
 <pre><code>if has('path_extra')
-set tags+=./**3/tags;
+    set tags+=./**3/tags;
 endif
 </code></pre>
 
 <h2>親ディレクトリから<code>**</code>を使う</h2>
 
 <p>これは前項と前々項の合わせ技です。
-現在のディレクトリが<code>/project/a/src</code>の時に</p>
+				現在のディレクトリが<code>/project/a/src</code>の時に</p>
 
 <pre><code>set tags=**;
 </code></pre>
@@ -100,7 +100,7 @@ endif
 </code></pre>
 
 <p>これら全てが指定されることになります。
-つまり<code>**;</code>とは、現在のディレクトリが<code>/project/a/src</code>の時には</p>
+				つまり<code>**;</code>とは、現在のディレクトリが<code>/project/a/src</code>の時には</p>
 
 <pre><code>/project/a/src/**
 /project/a/**
@@ -109,7 +109,7 @@ endif
 </code></pre>
 
 <p>という場合に展開され、それぞれの場所から検索されます。
-またこの指定は上記全ての場所から検索されるので重い処理となります。</p>
+				またこの指定は上記全ての場所から検索されるので重い処理となります。</p>
 
 <h2>その他色々</h2>
 

@@ -36,11 +36,11 @@ author: ujihisa
 
 <pre><code>let s:L = vital#of('vital').import('Text.Lexer')
 let s:rule = [
-\ ['id','\d\+'], ['whitespace','\s\+'],
-\ ['pls', '+'], ['ast', '*'],
-\ ['l_pare', '('], ['r_pare', ')']]
+      \ ['id','\d\+'], ['whitespace','\s\+'],
+      \ ['pls', '+'], ['ast', '*'],
+      \ ['l_pare', '('], ['r_pare', ')']]
 function! s:lex(str)
-return s:L.lexer(s:rule).parse(a:str)
+  return s:L.lexer(s:rule).parse(a:str)
 endfunction
 </code></pre>
 
@@ -52,9 +52,9 @@ endfunction
 <p>を行うと</p>
 
 <pre><code>[{'label': 'id', 'col': 0, 'matched_text': '1'},
-{'label': 'whitespace', 'col': 1, 'matched_text': ' '},
-{'label': 'pls', 'col': 2, 'matched_text': '+'},
-... ]
+ {'label': 'whitespace', 'col': 1, 'matched_text': ' '},
+ {'label': 'pls', 'col': 2, 'matched_text': '+'},
+ ... ]
 </code></pre>
 
 <p>といった辞書のリストが得られます。無事字句解析ができているようです。</p>
@@ -90,21 +90,21 @@ endfunction
 <p><code>parser.vim.kpg</code></p>
 
 <pre><code>&lt;token_desc&gt; token{
-&lt;left&gt;{
-ast;
-pls;
-}
-l_pare, r_pare;
-id&lt;type_expr&gt;;
+    &lt;left&gt;{
+        ast;
+        pls;
+    }
+    l_pare, r_pare;
+    id&lt;type_expr&gt;;
 }
 
 &lt;grammar&gt; grammar{
-E&lt;type_expr&gt;
-: [make_pls] E(0) pls E(1)
-| [make_mlt] E(0) ast E(1)
-| [make_exp] l_pare E(0) r_pare
-| [make_id]  id(0)
-;
+    E&lt;type_expr&gt;
+        : [make_pls] E(0) pls E(1)
+        | [make_mlt] E(0) ast E(1)
+        | [make_exp] l_pare E(0) r_pare
+        | [make_id]  id(0)
+        ;
 }
 </code></pre>
 
@@ -117,23 +117,23 @@ E&lt;type_expr&gt;
 
 <pre><code>let s:semantic_action = {}
 function! s:semantic_action.make_mlt(arg_0, arg_1)
-return a:arg_0 * a:arg_1
+    return a:arg_0 * a:arg_1
 endfunction
 
 function! s:semantic_action.make_pls(arg_0, arg_1)
-return a:arg_0 + a:arg_1
+    return a:arg_0 + a:arg_1
 endfunction
 
 function! s:semantic_action.make_id(arg_0)
-return a:arg_0
+    return a:arg_0
 endfunction
 
 function! s:semantic_action.make_exp(arg_0)
-return a:arg_0
+    return a:arg_0
 endfunction
 
 function! s:semantic_action.syntax_error()
-echo 'error!'
+    echo 'error!'
 endfunction
 </code></pre>
 
@@ -154,12 +154,12 @@ call s:p.ctor(s:semantic_action)
 let xs = s:lex('1 + 2 * (3 + 4)')
 call filter(xs, 'v:val.label !=# "whitespace"')
 for x in xs
-call s:p.post(s:token[x.label], x.matched_text)
+  call s:p.post(s:token[x.label], x.matched_text)
 endfor
 call s:p.post(s:token.token_0, 0)
 
 if s:p.accept()
-echo s:p.accepted_value
+  echo s:p.accepted_value
 endif
 </code></pre>
 

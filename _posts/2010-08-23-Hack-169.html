@@ -9,9 +9,9 @@ author: Shougo
 <h2>プラグインの仕様</h2>
 
 <p>プラグインはautoload/neocomplcache/sourcesにインストールしたものが自動的に読み込まれます。
-プラグインには、neocomplcache#sources#プラグイン名#define()が絶対必要です。
-これはneocomplcacheが初期化するときに呼ばれ、neocomplcacheにディクショナリ変数を渡します。
-ここではディクショナリ変数に必要な要素について説明をします。</p>
+				プラグインには、neocomplcache#sources#プラグイン名#define()が絶対必要です。
+				これはneocomplcacheが初期化するときに呼ばれ、neocomplcacheにディクショナリ変数を渡します。
+				ここではディクショナリ変数に必要な要素について説明をします。</p>
 
 <h3>name</h3>
 
@@ -52,7 +52,7 @@ author: Shougo
 <h3>word, abbr, menu, info, icase, dup</h3>
 
 <p>Vim標準の補完で使用するものと同じです。word以外は省略することができます。詳しい解説は、<em>[Hack #14: ]Insert mode補完 自作編</em>を参照してください。
-menuはどのプラグインの候補で補完しているかを[B]のような記号で表す習慣になっています。ftpluginは[vim]や[ghc]のように、長めの文字列を使います。</p>
+				menuはどのプラグインの候補で補完しているかを[B]のような記号で表す習慣になっています。ftpluginは[vim]や[ghc]のように、長めの文字列を使います。</p>
 
 <h2>プラグイン用ヘルパ関数</h2>
 
@@ -109,19 +109,19 @@ menuはどのプラグインの候補で補完しているかを[B]のような�
 <h2>キャッシュ用ヘルパ関数</h2>
 
 <p><code>autoload/neocomplcache/cache.vim</code>には、プラグインから呼び出せるキャッシュのヘルパ関数が含まれます。
-量が多いので、ここでは詳しく説明することは避けますが、うまく利用すると簡単にキャッシュを使ったプラグインを記述できます。
-ちなみに、neocomplcache Ver.4以降では、ほとんどのプラグインがキャッシュ用ヘルパ関数を使うように書き直されています。</p>
+				量が多いので、ここでは詳しく説明することは避けますが、うまく利用すると簡単にキャッシュを使ったプラグインを記述できます。
+				ちなみに、neocomplcache Ver.4以降では、ほとんどのプラグインがキャッシュ用ヘルパ関数を使うように書き直されています。</p>
 
 <h2>プラグインのサンプル</h2>
 
 <p>neocomplcacheに標準添付のプラグインを参考にしても良いのですが、機能が複雑化しているため、プラグイン作りの勉強のために見るのは大変です。
-eagletmtさんが作成した<a href="http://gist.github.com/489268">ghc_complete</a>はfiletype pluginでほどよい長さなので、勉強に最適でしょう。</p>
+				eagletmtさんが作成した<a href="http://gist.github.com/489268">ghc_complete</a>はfiletype pluginでほどよい長さなので、勉強に最適でしょう。</p>
 
 <h2>plugin, ftplugin, complfuncの違い</h2>
 
 <p>neocomplcache Ver.3.00より、complfuncが実装され、より自由度の高い補完が実装できるようになりました。
-pluginとcomplfuncの違いは、pluginはカーソル前のキーワードから補完しますが、complfuncは独自に補完位置を決定できるというところです。
-ftpluginとはneocomplcacheのオムニ補完です。
-基本的な仕様はcomplfuncと同じです。ただし、必要な時にのみ初期化や呼び出しされるというところが違います。</p>
+				pluginとcomplfuncの違いは、pluginはカーソル前のキーワードから補完しますが、complfuncは独自に補完位置を決定できるというところです。
+				ftpluginとはneocomplcacheのオムニ補完です。
+				基本的な仕様はcomplfuncと同じです。ただし、必要な時にのみ初期化や呼び出しされるというところが違います。</p>
 
 <address class="hack-author">Shougo</address>

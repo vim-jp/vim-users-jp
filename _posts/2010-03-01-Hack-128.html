@@ -9,18 +9,18 @@ author: Shougo
 <h2>キーワード補完とは</h2>
 
 <p>neocomplcacheのキーワード補完は、<code>&lt;C-n&gt;</code>や<code>&lt;C-p&gt;</code>で呼び出すことのできるVim組み込みのキーワード補完を模倣して設計されています。
-言語ごとにキーワードパターンを定義して、一括して候補を検索できるのが最大の特徴です。
-使用するキーワードパターンは<code>g:NeoComplCache_KeywordPatterns</code>で定義されています。</p>
+				言語ごとにキーワードパターンを定義して、一括して候補を検索できるのが最大の特徴です。
+				使用するキーワードパターンは<code>g:NeoComplCache_KeywordPatterns</code>で定義されています。</p>
 
 <h2>pluginとcomplfuncの違い</h2>
 
 <p>neocomplcacheには補完候補を収集するために、pluginとcomplfuncという二つの拡張プラグインが存在します。
-それぞれ、<code>autoload/neocomplcache/plugin</code>と<code>autoload/neocomplcache/complfunc</code>に配置します。
-pluginは<code>keyword_complete.vim</code>から一括して呼びだされる拡張プラグインで、単純なため実装が比較的簡単です。
-complfuncは補完開始位置を拡張プラグイン側で計算しないといけません。
-その代わり、補完開始位置は自由に決定できるので、ファイル名補完のような複雑な補完を実装できます。
-初期のneocomplcacheでは、complfuncは一つのプラグインしか呼べないという制限がありました。
-現在のバージョンでは、complfuncの候補も統合できるように改良されているため、そのような制限はありません。</p>
+				それぞれ、<code>autoload/neocomplcache/plugin</code>と<code>autoload/neocomplcache/complfunc</code>に配置します。
+				pluginは<code>keyword_complete.vim</code>から一括して呼びだされる拡張プラグインで、単純なため実装が比較的簡単です。
+				complfuncは補完開始位置を拡張プラグイン側で計算しないといけません。
+				その代わり、補完開始位置は自由に決定できるので、ファイル名補完のような複雑な補完を実装できます。
+				初期のneocomplcacheでは、complfuncは一つのプラグインしか呼べないという制限がありました。
+				現在のバージョンでは、complfuncの候補も統合できるように改良されているため、そのような制限はありません。</p>
 
 <h2>標準添付のplugin</h2>
 
@@ -53,7 +53,7 @@ complfuncは補完開始位置を拡張プラグイン側で計算しないと�
 <h3>completefunc_complete.vim</h3>
 
 <p>補完関数を登録することで、自動呼び出しするプラグインです。neocomplcacheは<code>completefunc</code>を上書きしてしまうので、その対策に使えます。
-手動補完として補完関数を個別に呼び出しすることもできます。</p>
+				手動補完として補完関数を個別に呼び出しすることもできます。</p>
 
 <h3>filename_complete.vim</h3>
 

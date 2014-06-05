@@ -50,22 +50,22 @@ author: Shougo
 <dt>補完関数のサンプル:</dt>
 <pre>
 function! CompleteFiles(findstart, base)
-if a:findstart
-" Get cursor word.
-let cur_text = strpart(getline('.'), 0, col('.') - 1)
+    if a:findstart
+        " Get cursor word.
+        let cur_text = strpart(getline('.'), 0, col('.') - 1)
 
-return match(cur_text, '\f*$')
-endif
+        return match(cur_text, '\f*$')
+    endif
 
-let words = split(expand(a:base . '*'), '\n')
-let list = []
-let cnt = 0
-for word in words
-call add(list, { 'word' : word, 'abbr' : printf('%3d: %s', cnt, word), 'menu' : 'file_complete' })
-let cnt += 1
-endfor
+    let words = split(expand(a:base . '*'), '\n')
+    let list = []
+    let cnt = 0
+    for word in words
+        call add(list, { 'word' : word, 'abbr' : printf('%3d: %s', cnt, word), 'menu' : 'file_complete' })
+        let cnt += 1
+    endfor
 
-return list
+    return list
 endfunction
 </pre>
 <dd>最後にまとめとして、補完関数のサンプルを紹介しておきます。これはカレントディレクトリに存在するファイルを補完するサンプルです。&#8217;abbr&#8217;や&#8217;menu&#8217;も使用しています。一番最初にファイル名としてマッチする部分を返し、次に呼び出されたときにファイル名にマッチする補完リストを返します。<code class="vim-script">:setlocal completefunc=CompleteFiles</code>とすると使えます。</dd>
@@ -75,7 +75,7 @@ endfunction
 <dl>
 <dt>注意:</dt>
 <dd>補完関数が呼び出されるのは補完を行うキーが押されたときだけです。
-Vimは英字を入力したときに、ポップアップの絞り込みを自動で行いますが、補完関数を再度呼び出すことはありません。自動で補完を行うためには、CursorMovedIにautocmdを設定し、カーソルが移動したら自動で補完関数を呼び出す必要があります。自動補完は処理が複雑になるので、この章では解説しません。ちなみに<kbd>&lt;C-h&gt;</kbd>を押したときは例外で、補完関数が再度呼び出されます。この動作が気になるようなら、
+				    Vimは英字を入力したときに、ポップアップの絞り込みを自動で行いますが、補完関数を再度呼び出すことはありません。自動で補完を行うためには、CursorMovedIにautocmdを設定し、カーソルが移動したら自動で補完関数を呼び出す必要があります。自動補完は処理が複雑になるので、この章では解説しません。ちなみに<kbd>&lt;C-h&gt;</kbd>を押したときは例外で、補完関数が再度呼び出されます。この動作が気になるようなら、
 <dd><code class="vim-script">inoremap &lt;expr&gt;&lt;C-h&gt; pumvisible() ? "\&lt;C-y&gt;\&lt;C-h&gt;" : "\&lt;C-h&gt;"</code></dd>
 <dd>と.vimrcで設定した方がよいかもしれません。</dd>
 <dd>またポップアップメニューを生成する処理は重いため、巨大なリストを返却した場合、Vimの動作が止まってしまうことがあります。その点Vim標準の補完はよく考えられていて、処理が重いときには先頭の候補のみをポップアップメニューに表示します。そしてしばらく待っていると、全ての補完候補が表示されます。自作の補完関数でこのような動作を行うためには、<code class="vim-script">complete_check()</code>でキー入力を監視し、<code class="vim-script">complete_add()</code>で少しずつ要素を追加するようにしてください。</dd>

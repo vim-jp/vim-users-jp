@@ -12,20 +12,20 @@ author: thinca
 
 <pre><code>let g:save_window_file = expand('~/.vimwinpos')
 augroup SaveWindow
-autocmd!
-autocmd VimLeavePre * call s:save_window()
-function! s:save_window()
-let options = [
-\ 'set columns=' . &amp;columns,
-\ 'set lines=' . &amp;lines,
-\ 'winpos ' . getwinposx() . ' ' . getwinposy(),
-\ ]
-call writefile(options, g:save_window_file)
-endfunction
+  autocmd!
+  autocmd VimLeavePre * call s:save_window()
+  function! s:save_window()
+    let options = [
+      \ 'set columns=' . &amp;columns,
+      \ 'set lines=' . &amp;lines,
+      \ 'winpos ' . getwinposx() . ' ' . getwinposy(),
+      \ ]
+    call writefile(options, g:save_window_file)
+  endfunction
 augroup END
 
 if filereadable(g:save_window_file)
-execute 'source' g:save_window_file
+  execute 'source' g:save_window_file
 endif
 </code></pre>
 
@@ -37,7 +37,7 @@ endif
 
 <h4>設定の書き出し</h4>
 
-<p>augroup SaveWindow 〜 augroup END で、Vim の終了時に発生するイベントを登録しています。</p>
+<p>augroup SaveWindow ? augroup END で、Vim の終了時に発生するイベントを登録しています。</p>
 
 <p>ここでは Vim の終了時に <code>s:save_window()</code> と言う関数を呼ぶようにしています。そしてこの関数のなかで、<code>g:save_window_file</code> にウィンドウの位置とサイズの情報を Vim スクリプトの形式で書き出しています。</p>
 

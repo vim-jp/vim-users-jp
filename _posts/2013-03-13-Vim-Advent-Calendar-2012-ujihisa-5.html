@@ -63,8 +63,8 @@ author: ujihisa
 <p>参考までに著者のunite-buildのrepoman用の設定を記述しておきます。これは<code>&lt;Space&gt;m</code>で編集中ebuildファイルを保存し、repomanで外部リソース取得・ハッシュ値の計算、そしてebuildファイルの検査を行います。</p>
 
 <pre><code>augroup vimrc-ebuild
-autocmd!
-autocmd FileType ebuild nnoremap &lt;buffer&gt; &lt;space&gt;m :&lt;C-u&gt;write&lt;Cr&gt;:Unite -buffer-name=build build:repoman:manifest build:repoman:full -horizontal&lt;Cr&gt;
+  autocmd!
+  autocmd FileType ebuild nnoremap &lt;buffer&gt; &lt;space&gt;m :&lt;C-u&gt;write&lt;Cr&gt;:Unite -buffer-name=build build:repoman:manifest build:repoman:full -horizontal&lt;Cr&gt;
 augroup END
 </code></pre>
 

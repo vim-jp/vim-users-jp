@@ -17,9 +17,9 @@ author: ujihisa
 <p>Rubyでメソッド名を手動補完するために使えるものは、標準添付の<code>vim-ruby</code>というVimプラギンと、m2ymさんによって開発された<a href="http://cx4a.org/software/rsense/">RSense</a>があります。</p>
 
 <p><code>vim-ruby</code>は、<code>+ruby</code>であるVim環境(*1)における補完機能を提供します。
-Ruby組み込み定数・クラス・グローバル関数(*2)などが補完できます。
-詳しくは<code>:h ft-ruby-omni</code>を参照してください(*3)。
-補完関数はオムニ補完として定義されているので、デフォルトの設定では、挿入モードで<code>&lt;C-x&gt;&lt;C-o&gt;</code>と打鍵することで補完機能を実行することができます。</p>
+				Ruby組み込み定数・クラス・グローバル関数(*2)などが補完できます。
+				詳しくは<code>:h ft-ruby-omni</code>を参照してください(*3)。
+				補完関数はオムニ補完として定義されているので、デフォルトの設定では、挿入モードで<code>&lt;C-x&gt;&lt;C-o&gt;</code>と打鍵することで補完機能を実行することができます。</p>
 
 <p><code>vim-ruby</code>が諦めた部分は</p>
 
@@ -46,12 +46,12 @@ Ruby組み込み定数・クラス・グローバル関数(*2)などが補完で
 
 <blockquote>
 <p>通常の補完ではユーザーが明示的に補完のためのキーを押す必要がありました。つま
-り、「頭が補完をする」と考えなければ補完ができないのです。これにより、作業効
-率が落ちてしまいます。それならばシステムが自動的に判断して、補完のためのキー
-を押したらどうでしょうか。これでユーザーはやらなければならない作業のみに集中
-することができます。Vim7よりオムニ補完が実装されたので、Visual Studioのように
-「関数やメンバを補完」は実現できるようになりました。しかし、そこには「自動的
-に」が欠けているのです。</p>
+				り、「頭が補完をする」と考えなければ補完ができないのです。これにより、作業効
+				率が落ちてしまいます。それならばシステムが自動的に判断して、補完のためのキー
+				を押したらどうでしょうか。これでユーザーはやらなければならない作業のみに集中
+				することができます。Vim7よりオムニ補完が実装されたので、Visual Studioのように
+				「関数やメンバを補完」は実現できるようになりました。しかし、そこには「自動的
+				に」が欠けているのです。</p>
 
 <p>Shougo 2009 <a href="http://vim-users.jp/2009/07/hack-44/">http://vim-users.jp/2009/07/hack-44/</a></p>
 </blockquote>
@@ -61,13 +61,13 @@ Ruby組み込み定数・クラス・グローバル関数(*2)などが補完で
 <p>RSenseを公式ドキュメントに従ってインストールした上で、<code>~/.vimrc</code>に以下の記述を行ないましょう。</p>
 
 <pre><code>if !exists('g:neocomplcache_omni_patterns')
-let g:neocomplcache_omni_patterns = {}
+  let g:neocomplcache_omni_patterns = {}
 endif
 let g:rsenseUseOmniFunc = 1
 if filereadable(expand('~/git/rsense/bin/rsense'))
-let g:rsenseHome = expand('~/git/rsense')
+  let g:rsenseHome = expand('~/git/rsense')
 
-let g:neocomplcache_omni_patterns.ruby = '[^. *\t]\.\w*\|\h\w*::'
+  let g:neocomplcache_omni_patterns.ruby = '[^. *\t]\.\w*\|\h\w*::'
 endif
 </code></pre>
 
@@ -83,7 +83,7 @@ endif
 
 <pre><code>a = Object.new
 def a.hello
-:world
+  :world
 end
 a.
 </code></pre>

@@ -7,10 +7,10 @@ author: Sixeight
 <h3>問題</h3>
 
 <p>普段のコーディングにおいて、ある程度のコードの塊をまとめてコメントアウトしたくなることがありせんか。
-コメントアウトしたコードは大抵不要となり捨てることになるのですが、一時的にリファクタリング前のコードを残したり、デバッグなどの際に止めを得ずコメントの付け外しを行うことがあるかと思います。</p>
+				コメントアウトしたコードは大抵不要となり捨てることになるのですが、一時的にリファクタリング前のコードを残したり、デバッグなどの際に止めを得ずコメントの付け外しを行うことがあるかと思います。</p>
 
 <p>コードのコメントアウトと聞いてすぐに思い浮ぶのは, <a href="http://vim-users.jp/2009/05/hack12/">Hack #12: 条件にマッチする行を削除する</a> にあるような <kbd>I# &lt;Esc&gt;</kbd> とする方法です。
-しかしながら、この方法では複数行をコメントアウトするのに時間がかかり、気がつけば Fibonacci 数列を求めるコードを 3 パターンほど記述出来る程度の時間を浪費していることもあります。</p>
+				しかしながら、この方法では複数行をコメントアウトするのに時間がかかり、気がつけば Fibonacci 数列を求めるコードを 3 パターンほど記述出来る程度の時間を浪費していることもあります。</p>
 
 <p>別解として <kbd>^&lt;C-v&gt;jjjI# &lt;Esc&gt;</kbd> などとして、コメントアウトする方法もありますが、行頭がずれていたりすると大変面倒です。</p>
 
@@ -19,42 +19,42 @@ author: Sixeight
 <p>もっとも手頃な方法として commentout.vim を使用する方法が挙げられます。 これは <a href="http://vim.wikia.com/wiki/VimTip271">vim online Tip #271: easy (un)commenting out of source code</a> として掲載されていたもので 参照資料1 に詳しい解説があります。</p>
 
 <p>また <a href="http://vim.wikia.com/wiki/Commenting_with_opfunc">Tip 1570 Commenting with opfunc</a> で紹介されているスクリプトを利用する方法もあります。
-オリジナルは Ruby に対応していなかったため、一部修正を加えています。</p>
+				オリジナルは Ruby に対応していなかったため、一部修正を加えています。</p>
 
 <pre><code>" Comment or uncomment lines from mark a to mark b.
 function! CommentMark(docomment, a, b)
-if !exists('b:comment')
-let b:comment = CommentStr() . ' '
-endif
-if a:docomment
-exe "normal! '" . a:a . "_\&lt;C-V&gt;'" . a:b . 'I' . b:comment
-else
-exe "'".a:a.",'".a:b . 's/^\(\s*\)' . escape(b:comment,'/') . '/\1/e'
-endif
+  if !exists('b:comment')
+    let b:comment = CommentStr() . ' '
+  endif
+  if a:docomment
+    exe "normal! '" . a:a . "_\&lt;C-V&gt;'" . a:b . 'I' . b:comment
+  else
+    exe "'".a:a.",'".a:b . 's/^\(\s*\)' . escape(b:comment,'/') . '/\1/e'
+  endif
 endfunction
 
 " Comment lines in marks set by g@ operator.
 function! DoCommentOp(type)
-call CommentMark(1, '[', ']')
+  call CommentMark(1, '[', ']')
 endfunction
 
 " Uncomment lines in marks set by g@ operator.
 function! UnCommentOp(type)
-call CommentMark(0, '[', ']')
+  call CommentMark(0, '[', ']')
 endfunction
 
 " Return string used to comment line for current filetype.
 function! CommentStr()
-if &amp;ft == 'cpp' || &amp;ft == 'java' || &amp;ft == 'javascript'
-return '//'
-elseif &amp;ft == 'vim'
-return '"'
-elseif &amp;ft == 'python' || &amp;ft == 'perl' || &amp;ft == 'sh' || &amp;ft == 'R' || &amp;ft == 'ruby'
-return '#'
-elseif &amp;ft == 'lisp'
-return ';'
-endif
-return ''
+  if &amp;ft == 'cpp' || &amp;ft == 'java' || &amp;ft == 'javascript'
+    return '//'
+  elseif &amp;ft == 'vim'
+    return '"'
+  elseif &amp;ft == 'python' || &amp;ft == 'perl' || &amp;ft == 'sh' || &amp;ft == 'R' || &amp;ft == 'ruby'
+    return '#'
+  elseif &amp;ft == 'lisp'
+    return ';'
+  endif
+  return ''
 endfunction
 
 nnoremap &lt;Leader&gt;c &lt;Esc&gt;:set opfunc=DoCommentOp&lt;CR&gt;g@
@@ -64,7 +64,7 @@ vnoremap &lt;Leader&gt;C &lt;Esc&gt;:call CommentMark(0,'&lt;','&gt;')&lt;CR&gt;
 </code></pre>
 
 <p>コメントアウトしたい箇所を Visual mode で選択し、<kbd>&lt;leader&gt;c</kbd> を打鍵することで Filetype に沿ってコメントアウトされます。
-逆に、コメントアウトされた箇所を Visual mode で選択し <kbd>&lt;leader&gt;C</kbd> を打鍵することでコメントを外すことも出来ます。</p>
+				逆に、コメントアウトされた箇所を Visual mode で選択し <kbd>&lt;leader&gt;C</kbd> を打鍵することでコメントを外すことも出来ます。</p>
 
 <p>また、<kbd>&lt;leader&gt;cip</kbd> などと打鍵することで、text-objects の単位でのコメントアウトも可能です。コメントを外す際は <kbd>&lt;leader&gt;Cip</kbd> と打鍵します。</p>
 

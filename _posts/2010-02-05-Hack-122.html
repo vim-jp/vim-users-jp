@@ -7,14 +7,14 @@ author: ujihisa
 <h2>問題</h2>
 
 <p>カーソル位置から行末まで削除するには<kbd>D</kbd>します。
-カーソル位置から行末まで編集する(削除して挿入モードに入る)には<kbd>C</kbd>します。</p>
+				カーソル位置から行末まで編集する(削除して挿入モードに入る)には<kbd>C</kbd>します。</p>
 
 <p>さて、カーソル位置から行末までヤンクするにはどうすればいいでしょうか。
-答えは<kbd>Y</kbd>ではなく、<kbd>y$</kbd>です。</p>
+				答えは<kbd>Y</kbd>ではなく、<kbd>y$</kbd>です。</p>
 
 <p>Vimの<kbd>Y</kbd>の挙動は、「カーソル行をヤンク」です。カーソル位置より左もまとめてヤンクされてしまいます。
-オリジナルのviとの互換性のためか、このような仕様になっているみたいです。
-オリジナルのviがなぜこのような仕様になっているかは不明です。</p>
+				オリジナルのviとの互換性のためか、このような仕様になっているみたいです。
+				オリジナルのviがなぜこのような仕様になっているかは不明です。</p>
 
 <h2>解決</h2>
 
@@ -24,7 +24,7 @@ author: ujihisa
 </code></pre>
 
 <p>これで、<kbd>Y</kbd>の挙動が<kbd>D</kbd>や<kbd>C</kbd>と同様に、「カーソル位置から行末までヤンクする」になります。
-一貫性がとれる上に、<code>$</code>というとても人間には入力不可能な記号の入力を省略することができ、開発効率の大幅な向上が期待されます。</p>
+				一貫性がとれる上に、<code>$</code>というとても人間には入力不可能な記号の入力を省略することができ、開発効率の大幅な向上が期待されます。</p>
 
 <h2>解説</h2>
 
@@ -33,8 +33,8 @@ author: ujihisa
 <blockquote>
 <p><code>[&quot;x]Y</code> yank <code>[count]</code> lines <code>[into register x]</code> (synonym for
 <code>yy, |linewise|</code>). If you like <code>&quot;Y&quot;</code> to work from the
-cursor to the end of line (which is more logical,
-but not Vi-compatible) use <code>&quot;:map Y y$&quot;</code>.</p>
+				cursor to the end of line (which is more logical,
+				 but not Vi-compatible) use <code>&quot;:map Y y$&quot;</code>.</p>
 </blockquote>
 
 <p>しかし、このやりかたは2点留意事項があります。</p>

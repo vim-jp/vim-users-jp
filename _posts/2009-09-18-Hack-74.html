@@ -9,21 +9,21 @@ author: Shougo
 <h2>.vimrcや.gvimrcを編集するためのKey-mappingを定義する</h2>
 
 <p>
-まずはすぐに.vimrcや.gvimrcを編集できるように、.vimrcにKey-mappingを定義しましょう。
+				まずはすぐに.vimrcや.gvimrcを編集できるように、.vimrcにKey-mappingを定義しましょう。
 <pre>
 nnoremap &lt;silent&gt; &lt;Space&gt;ev  :&lt;C-u&gt;edit $MYVIMRC&lt;CR&gt;
 nnoremap &lt;silent&gt; &lt;Space&gt;eg  :&lt;C-u&gt;edit $MYGVIMRC&lt;CR&gt;
 </pre>
-$MYVIMRCというのは特殊な環境変数で、現在使用している.vimrcへのパスが含まれています。$MYGVIMRCも同様に、.gvimrcへのパスが含まれています。
-環境によって.vimrcや.gvimrcへのパスは異なるため、これを利用することで確実に.vimrcや.gvimrcを編集することができます。
+				$MYVIMRCというのは特殊な環境変数で、現在使用している.vimrcへのパスが含まれています。$MYGVIMRCも同様に、.gvimrcへのパスが含まれています。
+				環境によって.vimrcや.gvimrcへのパスは異なるため、これを利用することで確実に.vimrcや.gvimrcを編集することができます。
 </p>
 
 <h2>.vimrcや.gvimrcの変更を反映するためのKey-mappingを定義する</h2>
 
 <p>
-即座に.vimrcや.gvimrcを編集できるように設定しても、設定を反映させるためにはVimをいったん再起動しなければならず不便です。
-sourceコマンドを用いれば.vimrcや.gvimrcを再度読み込むことができるので、.vimrcや.gvimrcに行った変更を現在のVimに反映できるように、
-.vimrcにKey-mappingを定義しましょう。
+				即座に.vimrcや.gvimrcを編集できるように設定しても、設定を反映させるためにはVimをいったん再起動しなければならず不便です。
+				sourceコマンドを用いれば.vimrcや.gvimrcを再度読み込むことができるので、.vimrcや.gvimrcに行った変更を現在のVimに反映できるように、
+				.vimrcにKey-mappingを定義しましょう。
 <pre>
 " Load .gvimrc after .vimrc edited at GVim.
 nnoremap &lt;silent&gt; &lt;Space&gt;rv :&lt;C-u&gt;source $MYVIMRC \| if has('gui_running') \| source $MYGVIMRC \| endif &lt;CR&gt;
@@ -34,21 +34,21 @@ nnoremap &lt;silent&gt; &lt;Space&gt;rg :&lt;C-u&gt;source $MYGVIMRC&lt;CR&gt;
 <h2>.vimrcや.gvimrcを変更すると、自動的に変更が反映されるようにする</h2>
 
 <p>
-しかし変更を適用するたびに、いちいちキーを入力するのは面倒です。自動的に変更が反映されるように.vimrcに設定してしまいましょう。
+				しかし変更を適用するたびに、いちいちキーを入力するのは面倒です。自動的に変更が反映されるように.vimrcに設定してしまいましょう。
 <pre>
 " Set augroup.
 augroup MyAutoCmd
-autocmd!
+    autocmd!
 augroup END
 
 if !has('gui_running') &amp;&amp; !(has('win32') || has('win64'))
-" .vimrcの再読込時にも色が変化するようにする
-autocmd MyAutoCmd BufWritePost $MYVIMRC nested source $MYVIMRC
+    " .vimrcの再読込時にも色が変化するようにする
+    autocmd MyAutoCmd BufWritePost $MYVIMRC nested source $MYVIMRC
 else
-" .vimrcの再読込時にも色が変化するようにする
-autocmd MyAutoCmd BufWritePost $MYVIMRC source $MYVIMRC |
-\if has('gui_running') | source $MYGVIMRC
-autocmd MyAutoCmd BufWritePost $MYGVIMRC if has('gui_running') | source $MYGVIMRC
+    " .vimrcの再読込時にも色が変化するようにする
+    autocmd MyAutoCmd BufWritePost $MYVIMRC source $MYVIMRC |
+                \if has('gui_running') | source $MYGVIMRC
+    autocmd MyAutoCmd BufWritePost $MYGVIMRC if has('gui_running') | source $MYGVIMRC
 endif
 </pre>
 </p>
@@ -56,16 +56,16 @@ endif
 <h2>記述の注意</h2>
 
 <p>
-.vimrcや.gvimrcを何度も読み込む設定にしていると、記述の仕方によってはエラーが発生したり動作がおかしくなったりします。
-ここでは、それらへの対策を解説します。
+				.vimrcや.gvimrcを何度も読み込む設定にしていると、記述の仕方によってはエラーが発生したり動作がおかしくなったりします。
+				ここでは、それらへの対策を解説します。
 <h4>関数やコマンドの定義</h4>
 <p>
-普通関数やコマンドを定義するときには、<code class="vim-script">command</code>や<code class="vim-script">function</code>を使うことがあるかも知れませんが、これらはすでにある関数やコマンドを上書きできないため、設定ファイルを何度も読み込ませるとエラーとなります。上書きできるように、<code class="vim-script">command!</code>や<code class="vim-script">function!</code>を使用しましょう。
+				普通関数やコマンドを定義するときには、<code class="vim-script">command</code>や<code class="vim-script">function</code>を使うことがあるかも知れませんが、これらはすでにある関数やコマンドを上書きできないため、設定ファイルを何度も読み込ませるとエラーとなります。上書きできるように、<code class="vim-script">command!</code>や<code class="vim-script">function!</code>を使用しましょう。
 </p>
 <h4>autocmdの定義</h4>
 <p>
-autocmdは常に追加されます。設定ファイルを何度も読み込むとautocmdが頻繁に追加され、Vimの動作がおかしくなる原因となります。
-これを防ぐためには、.vimrcの先頭で一度autocmdをリセットします。
+				autocmdは常に追加されます。設定ファイルを何度も読み込むとautocmdが頻繁に追加され、Vimの動作がおかしくなる原因となります。
+				これを防ぐためには、.vimrcの先頭で一度autocmdをリセットします。
 <pre>
 autocmd!
 
@@ -73,10 +73,10 @@ autocmd!
 autocmd FileType * set textwidth=0
 autocmd FileType * set formatoptions-=ro
 </pre>
-autocmdを全部削除するのに抵抗があるのならば、augroupを設定するとさらに便利になります。詳しくは<code class="vim-script">:help augroup</code>を参照してください。
+				autocmdを全部削除するのに抵抗があるのならば、augroupを設定するとさらに便利になります。詳しくは<code class="vim-script">:help augroup</code>を参照してください。
 <pre>
 augroup MyAutoCmd
-autocmd!
+    autocmd!
 augroup END
 
 ・・・・
@@ -86,11 +86,11 @@ autocmd MyAutoCmd FileType * set formatoptions-=ro
 </p>
 <h4>オプションの設定</h4>
 <p>
-オプションの初期値に値を追加する場合、次のように設定することがあると思います。
+				オプションの初期値に値を追加する場合、次のように設定することがあると思います。
 <pre>
 set hoge_option+=piyo
 </pre>
-しかし設定ファイルを何度も読み込ませる場合、前の値が追加されてしまい、動作がおかしくなります。.vimrcには次のように設定し、一度初期値をロードするようにしましょう。
+				しかし設定ファイルを何度も読み込ませる場合、前の値が追加されてしまい、動作がおかしくなります。.vimrcには次のように設定し、一度初期値をロードするようにしましょう。
 <pre>
 set hoge_option&amp;
 set hoge_option+=piyo
@@ -99,7 +99,7 @@ set hoge_option+=piyo
 </p>
 
 <p>
-ここに挙げたことは、「<a href="http://whileimautomaton.net/2008/08/vimworkshop3-kana-presentation">Vimの極め方</a>」やWEB +DB PRESS Vol.52の特集「Vimの流儀」にも詳しく書いてあります。どちらもkana氏の書いた必読の資料なので、参考にすると良いでしょう。
+				ここに挙げたことは、「<a href="http://whileimautomaton.net/2008/08/vimworkshop3-kana-presentation">Vimの極め方</a>」やWEB +DB PRESS Vol.52の特集「Vimの流儀」にも詳しく書いてあります。どちらもkana氏の書いた必読の資料なので、参考にすると良いでしょう。
 </p>
 
 <address class="hack-author">Shougo</address>

@@ -5,7 +5,7 @@ date: 2010-05-04
 author: tyru
 ---
 <p><a href="http://vim-users.jp/2009/08/hack-59/">Hack #59: 分かりやすいKey-mappingsを定義する</a>の方法だとグローバルなマッピング空間を使ってしまうのが玉に瑕です。<br />
-そのせいで、例えば</p>
+				そのせいで、例えば</p>
 
 <pre><code>nnoremap [tag] &lt;Nop&gt;
 nmap     t     [tag]
@@ -17,12 +17,12 @@ nnoremap [t    &lt;C-]&gt;
 </code></pre>
 
 <p>としている場合に<code>[t</code>と押しても<code>[tag]</code>がまだ候補にあるために<br />
-（<code>&amp;timeout</code>や<code>&amp;timeoutlen</code>などの値によりますが）すぐには実行されずに<br />
-キー入力を一瞬待たされるようになります。</p>
+				（<code>&amp;timeout</code>や<code>&amp;timeoutlen</code>などの値によりますが）すぐには実行されずに<br />
+				キー入力を一瞬待たされるようになります。</p>
 
 <p>この場合は[tを[Tに変えるなどすれば問題は解決しますが、<br />
-こうした副作用を気にかけながらマッピングを定義するのは少々面倒です。<br />
-なんとかして副作用のないマッピングを定義できないでしょうか。</p>
+				こうした副作用を気にかけながらマッピングを定義するのは少々面倒です。<br />
+				なんとかして副作用のないマッピングを定義できないでしょうか。</p>
 
 <h1>解決</h1>
 
@@ -53,6 +53,6 @@ nmap ,Y &lt;SID&gt;[register-*]&lt;SID&gt;[yank-$]
 </code></pre>
 
 <p>複雑なマッピングを定義する時は<code>&lt;SID&gt;</code>マッピングを使うことで<br />
-見通しがよく副作用のないマッピングを定義することができます。</p>
+				見通しがよく副作用のないマッピングを定義することができます。</p>
 
 <address class="hack-author">tyru</address>

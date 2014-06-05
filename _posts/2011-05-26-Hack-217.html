@@ -5,31 +5,31 @@ date: 2011-05-26
 author: tyru
 ---
 <p>表示幅に入りきらないコードは読む人に必要以上にストレスを与えます。<br />
-プログラミングの70割は読む時間だといいます。<br />
-読む人にストレスを与えないよう、<br />
-横幅が長いコードを書かないようにするにはどうすればいいでしょうか？</p>
+				プログラミングの70割は読む時間だといいます。<br />
+				読む人にストレスを与えないよう、<br />
+				横幅が長いコードを書かないようにするにはどうすればいいでしょうか？</p>
 
 <h2>解決</h2>
 
 <p>Vim 7.3 <em>*1</em> では
-以下を.vimrcに入れると80文字以上長い列をハイライトしてくれます。</p>
+				以下を.vimrcに入れると80文字以上長い列をハイライトしてくれます。</p>
 
 <pre><code>set textwidth=80
 if exists('&amp;colorcolumn')
-set colorcolumn=+1
+    set colorcolumn=+1
 endif
 </code></pre>
 
 <p>どのファイルに対してもハイライトされてしまうため多少うっとうしいです。<br />
-この問題は.vimrcで<code>'textwidth'</code>を0に指定しておき、<br />
-コードを書く時のみ<code>:setlocal textwidth=80</code>とすることで回避できます。</p>
+				この問題は.vimrcで<code>'textwidth'</code>を0に指定しておき、<br />
+				コードを書く時のみ<code>:setlocal textwidth=80</code>とすることで回避できます。</p>
 
 <pre><code>set textwidth=0
 if exists('&amp;colorcolumn')
-set colorcolumn=+1
-" sh,cpp,perl,vim,...の部分は自分が使う
-" プログラミング言語のfiletypeに合わせてください
-autocmd FileType sh,cpp,perl,vim,ruby,python,haskell,scheme setlocal textwidth=80
+    set colorcolumn=+1
+    " sh,cpp,perl,vim,...の部分は自分が使う
+    " プログラミング言語のfiletypeに合わせてください
+    autocmd FileType sh,cpp,perl,vim,ruby,python,haskell,scheme setlocal textwidth=80
 endif
 </code></pre>
 

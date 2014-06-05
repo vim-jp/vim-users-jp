@@ -36,12 +36,12 @@ cnoremap &lt;C-p&gt;          &lt;Up&gt;
 <h2>Command-line window</h2>
 
 <p>そこで、本HackではCommand-line modeの代わりに、Command-line windowという機能を使うことを提案します。
-Command-line windowとは何かというと、Vimに組み込まれている、Ex commandを実行できるバッファのことです。
-Command-line windowは<code class="option">'filetype'</code>がvimであるため、Vimのvim filetype pluginがすべて使えます。
-特にneocomplcacheはVimのオムニ補完を搭載し、ユーザー定義のコマンドも解析できるため、併用するとneocomplcacheのパワーを存分に発揮することができます。
-neocomplcacheは補完だけでなく、コマンドの引数情報をエコー領域に表示することもできます。
-neocomplcacheに実装されている、Vimのオムニ補完は仕組みが複雑なので、今後のVim Hacksで詳しく解説する予定です。
-Command-line windowについて詳しい情報は、<code>:help cmdwin</code>を参照してください。</p>
+				Command-line windowとは何かというと、Vimに組み込まれている、Ex commandを実行できるバッファのことです。
+				Command-line windowは<code class="option">'filetype'</code>がvimであるため、Vimのvim filetype pluginがすべて使えます。
+				特にneocomplcacheはVimのオムニ補完を搭載し、ユーザー定義のコマンドも解析できるため、併用するとneocomplcacheのパワーを存分に発揮することができます。
+				neocomplcacheは補完だけでなく、コマンドの引数情報をエコー領域に表示することもできます。
+				neocomplcacheに実装されている、Vimのオムニ補完は仕組みが複雑なので、今後のVim Hacksで詳しく解説する予定です。
+				Command-line windowについて詳しい情報は、<code>:help cmdwin</code>を参照してください。</p>
 
 <h2>Command-line windowを設定する</h2>
 
@@ -57,26 +57,26 @@ xmap :  &lt;sid&gt;(command-line-enter)
 
 autocmd MyAutoCmd CmdwinEnter * call s:init_cmdwin()
 function! s:init_cmdwin()
-nnoremap &lt;buffer&gt; q :&lt;C-u&gt;quit&lt;CR&gt;
-nnoremap &lt;buffer&gt; &lt;TAB&gt; :&lt;C-u&gt;quit&lt;CR&gt;
-inoremap &lt;buffer&gt;&lt;expr&gt;&lt;CR&gt; pumvisible() ? "\&lt;C-y&gt;\&lt;CR&gt;" : "\&lt;CR&gt;"
-inoremap &lt;buffer&gt;&lt;expr&gt;&lt;C-h&gt; pumvisible() ? "\&lt;C-y&gt;\&lt;C-h&gt;" : "\&lt;C-h&gt;"
-inoremap &lt;buffer&gt;&lt;expr&gt;&lt;BS&gt; pumvisible() ? "\&lt;C-y&gt;\&lt;C-h&gt;" : "\&lt;C-h&gt;"
+  nnoremap &lt;buffer&gt; q :&lt;C-u&gt;quit&lt;CR&gt;
+  nnoremap &lt;buffer&gt; &lt;TAB&gt; :&lt;C-u&gt;quit&lt;CR&gt;
+  inoremap &lt;buffer&gt;&lt;expr&gt;&lt;CR&gt; pumvisible() ? "\&lt;C-y&gt;\&lt;CR&gt;" : "\&lt;CR&gt;"
+  inoremap &lt;buffer&gt;&lt;expr&gt;&lt;C-h&gt; pumvisible() ? "\&lt;C-y&gt;\&lt;C-h&gt;" : "\&lt;C-h&gt;"
+  inoremap &lt;buffer&gt;&lt;expr&gt;&lt;BS&gt; pumvisible() ? "\&lt;C-y&gt;\&lt;C-h&gt;" : "\&lt;C-h&gt;"
 
-" Completion.
-inoremap &lt;buffer&gt;&lt;expr&gt;&lt;TAB&gt;  pumvisible() ? "\&lt;C-n&gt;" : "\&lt;TAB&gt;"
+  " Completion.
+  inoremap &lt;buffer&gt;&lt;expr&gt;&lt;TAB&gt;  pumvisible() ? "\&lt;C-n&gt;" : "\&lt;TAB&gt;"
 
-startinsert!
+  startinsert!
 endfunction
 </pre>
 
 <p>追記： Command-line windowでは、<a href="http://www.vim.org/scripts/script.php?script_id=2675">altercmd</a>が使用できません。これでは不便なので、tyruさんがCommand-line windowでも使えるように改造したものを公開しているので、<a href="http://github.com/tyru/vim-altercmd">こちら</a>を使ってください。
-私は次のように設定しています。</p>
+				私は次のように設定しています。</p>
 
 <pre>
 function! s:init_cmdwin()
-call altercmd#define('b', 'gr[ep]', 'Grep', 'i')
-" AlterCommand &lt;buffer&gt;&lt;mode:i&gt; gr[ep] Grepでも可
+        call altercmd#define('b', 'gr[ep]', 'Grep', 'i')
+        " AlterCommand &lt;buffer&gt;&lt;mode:i&gt; gr[ep] Grepでも可
 endfunction
 </pre>
 

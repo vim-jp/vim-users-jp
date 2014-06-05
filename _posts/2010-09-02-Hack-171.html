@@ -5,12 +5,12 @@ date: 2010-09-02
 author: tyru
 ---
 <p>数あるエディタの中には現在編集中の関数名をステータスバーに表示させたりできるものがあります。<br />
-Vimでもできないでしょうか。</p>
+				Vimでもできないでしょうか。</p>
 
 <h2>解決</h2>
 
 <p><a href="http://www.vim.org/scripts/script.php?script_id=3197">current-func-info.vim</a>を使います。<br />
-インストールしたあとstatuslineを次のように設定しましょう。</p>
+				インストールしたあとstatuslineを次のように設定しましょう。</p>
 
 <pre><code>let &amp;statusline = '[%{cfi#get_func_name()}()]'
 </code></pre>
@@ -23,7 +23,7 @@ Vimでもできないでしょうか。</p>
 <p>のように表示されます。</p>
 
 <p><code>cfi#get_func_name()</code>は関数の外側にいる時は空文字を返すので<br />
-外側にいる時は「no function」と表示させたい場合は以下のようにします。</p>
+				外側にいる時は「no function」と表示させたい場合は以下のようにします。</p>
 
 <pre><code>let &amp;statusline = '%{cfi#get_func_name() == "" ? "no function" : "[" . cfi#get_func_name() . "()]"}'
 </code></pre>

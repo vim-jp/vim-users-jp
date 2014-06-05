@@ -17,10 +17,10 @@ autocmd BufRead * if expand('%') != '' &amp;&amp; &amp;buftype !~ 'nofile' | sil
 " Don't save options.
 set viewoptions-=options
 </pre>
-ifで分岐をさせているのは、無名バッファの場合に<code class="vim-script">:mkview</code>や<code class="vim-script">:loadview</code>がエラーになるからです。
-バッファのオプションを保存すると後々面倒になるので、<code class="option">'viewoptions'</code>を変更して、オプションは保存しないようにしています。
-バッファの設定は<code class="option">'viewdir'</code>に保存されます。初期値はWindowsの場合は&#8221;$VIM/vimfiles/view&#8221;, Linux等の場合は&#8221;~/.vim/view&#8221;となっています。
-詳しくは<code class="vim-script">:help :mkview</code>を参照してください。
+				ifで分岐をさせているのは、無名バッファの場合に<code class="vim-script">:mkview</code>や<code class="vim-script">:loadview</code>がエラーになるからです。
+				バッファのオプションを保存すると後々面倒になるので、<code class="option">'viewoptions'</code>を変更して、オプションは保存しないようにしています。
+				バッファの設定は<code class="option">'viewdir'</code>に保存されます。初期値はWindowsの場合は&#8221;$VIM/vimfiles/view&#8221;, Linux等の場合は&#8221;~/.vim/view&#8221;となっています。
+				詳しくは<code class="vim-script">:help :mkview</code>を参照してください。
 </p>
 
 <address class="hack-author">Shougo</address>

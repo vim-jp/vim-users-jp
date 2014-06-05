@@ -5,7 +5,7 @@ date: 2010-05-24
 author: tyru
 ---
 <p>プログラミングでは様々なコーディングスタイルがあり、Vimにはそれに沿った編集をするための様々なオプションがあります。<br />
-他人のソースコードを編集する時はそれらのオプションを切り替えられると便利です。</p>
+				他人のソースコードを編集する時はそれらのオプションを切り替えられると便利です。</p>
 
 <h2>解決</h2>
 
@@ -24,7 +24,7 @@ command!
 \   execute get(s:coding_styles, &lt;f-args&gt;, '')
 
 function! s:coding_style_complete(...) "\{\{\{
-return keys(s:coding_styles)
+    return keys(s:coding_styles)
 endfunction "\}\}\}
 </code></pre>
 

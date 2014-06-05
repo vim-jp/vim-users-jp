@@ -5,17 +5,17 @@ date: 2011-06-21
 author: tyru
 ---
 <p>コマンドラインに何か赤いハイライトで出力されたけど
-見えなくなってしまった場合、<code>:messages</code>あるいは
-短縮形である<code>:mes</code>と入力すれば見ることができます。
-しかしそのエラーを何か別の場所(twitter,gist,&#8230;)に
-コピペするにはどうすればいいのでしょうか？</p>
+				見えなくなってしまった場合、<code>:messages</code>あるいは
+				短縮形である<code>:mes</code>と入力すれば見ることができます。
+				しかしそのエラーを何か別の場所(twitter,gist,&#8230;)に
+				コピペするにはどうすればいいのでしょうか？</p>
 
 <h2>解決策1: gvimでマウスで選択し<code>&lt;C-y&gt;</code>を使う</h2>
 
 <p>gvimでのみ使える技です。</p>
 
 <p><code>:mes</code>と入力したあと、
-図のようにマウスで選択して<code>&lt;C-y&gt;</code>を押します。
+				図のようにマウスで選択して<code>&lt;C-y&gt;</code>を押します。
 <a href="/vim-users-jp/assets/images/selected.png"><img src="/vim-users-jp/assets/images/selected.png" alt="something wrong" title="selected" width="954" height="699" class="alignnone size-full wp-image-2452" /></a></p>
 
 <h2>解決策2: <code>:redir &gt; {file}</code>を使う</h2>
@@ -23,8 +23,8 @@ author: tyru
 <p>gvimでも端末版vimでも使えます。</p>
 
 <p><code>:redir</code>というExコマンドを使うと、
-Exコマンドの出力をキャプチャーし、
-ファイルや変数に保存できます。</p>
+				Exコマンドの出力をキャプチャーし、
+				ファイルや変数に保存できます。</p>
 
 <pre><code>:redir &gt; messages
 :silent messages
@@ -33,7 +33,7 @@ Exコマンドの出力をキャプチャーし、
 
 <p>これで<code>messages</code>というファイルに出力結果が保存されます。
 <code>:silent</code>はつけると<code>:messages</code>の出力をコマンドラインに出力しません。
-つけなくてもファイルの中身に変わりはありませんが、
-今回はコマンドラインに出力されてもうっとうしいだけなので付けただけです。</p>
+				つけなくてもファイルの中身に変わりはありませんが、
+				今回はコマンドラインに出力されてもうっとうしいだけなので付けただけです。</p>
 
 <address class="hack-author">tyru</address>

@@ -9,16 +9,16 @@ author: ujihisa
 <h2><code>:s[ubstitute]</code> を使う</h2>
 
 <p><code>:s</code>, <code>:substitute</code> は正規表現による文字列の置換を行なうコマンドで、<code>:%s/old/new/</code> は編集中バッファの各行に出てくる最初のoldという文字列をnewという文字列に置換します。
-置換文字列に空文字を与えることで削除と同様の働きをします。つまり、<code>:%s/old//</code> は編集中バッファの各行に出てくる最初のoldという文字列を削除します。なおこの場合<code>:%s/old</code>のように、置換文字列を省略することができます。</p>
+				置換文字列に空文字を与えることで削除と同様の働きをします。つまり、<code>:%s/old//</code> は編集中バッファの各行に出てくる最初のoldという文字列を削除します。なおこの場合<code>:%s/old</code>のように、置換文字列を省略することができます。</p>
 
 <p><code>:%s/.*trash.*//</code> はtrashという文字列を含む行を削除し、そこに空行を残します。
-そこで、<code>:%s/.*trash.*\n//</code>と行末の<code>&lt;NL&gt;</code>も含めて削除するようにすれば、空行が残りません。</p>
+				そこで、<code>:%s/.*trash.*\n//</code>と行末の<code>&lt;NL&gt;</code>も含めて削除するようにすれば、空行が残りません。</p>
 
 <h2><code>:g[lobal]</code> を使う</h2>
 
 <p><code>:%g/trash/d</code>とすることで、編集中バッファから、trashという文字列を含む行そのものを削除します。
 <code>:[range]g[lobal]/{pattern}/[cmd]</code>は、<code>[range]</code>中の<code>{pattern}</code>にマッチする行それぞれにEx command <code>[cmd]</code>を適用します。
-今回はバッファ内の全ての行である<code>%</code>に対して、trashという正規表現文字列にマッチする行それぞれに<code>d</code>を適用することで、目的を達成しました。</p>
+				今回はバッファ内の全ての行である<code>%</code>に対して、trashという正規表現文字列にマッチする行それぞれに<code>d</code>を適用することで、目的を達成しました。</p>
 
 <h2>発展 &#8212; 条件にマッチする行をコメントアウトする</h2>
 

@@ -34,46 +34,46 @@ author: ujihisa
 <pre><code>#!/usr/bin/env ruby
 # flip('(aaa, bbb)') #=&gt; '(bbb, aaa)'
 def flip(str)
-stack = []
-tmp = ''
-tokens = []
-str.each_char.to_a[1..-2].each do |c|
-case c
-when '('
-stack &lt;&lt; ')'
-when ')'
-stack.pop == ')' or abort 'Syntax Error'
-when '&quot;'
-if stack.last == '&quot;'
-stack.pop
-else
-stack &lt;&lt; '&quot;'
-end
-when &quot;'&quot;
-if stack.last == &quot;'&quot;
-stack.pop
-else
-stack &lt;&lt; &quot;'&quot;
-end
-when ','
-if stack.empty?
-tokens &lt;&lt; tmp
-tmp = ''
-next
-end
-when ' '
-if tmp.empty?
-next
-end
-end
-tmp &lt;&lt; c
-end
-tokens &lt;&lt; tmp
-'(' + tokens.reverse.join(', ') + ')'
+  stack = []
+  tmp = ''
+  tokens = []
+  str.each_char.to_a[1..-2].each do |c|
+    case c
+    when '('
+      stack &lt;&lt; ')'
+    when ')'
+      stack.pop == ')' or abort 'Syntax Error'
+    when '&quot;'
+      if stack.last == '&quot;'
+        stack.pop
+      else
+        stack &lt;&lt; '&quot;'
+      end
+    when &quot;'&quot;
+      if stack.last == &quot;'&quot;
+        stack.pop
+      else
+        stack &lt;&lt; &quot;'&quot;
+      end
+    when ','
+      if stack.empty?
+        tokens &lt;&lt; tmp
+        tmp = ''
+        next
+      end
+    when ' '
+      if tmp.empty?
+        next
+      end
+    end
+    tmp &lt;&lt; c
+  end
+  tokens &lt;&lt; tmp
+  '(' + tokens.reverse.join(', ') + ')'
 end
 
 if __FILE__ == $0
-puts flip(ARGV.shift)
+  puts flip(ARGV.shift)
 end
 </code></pre>
 
@@ -82,9 +82,9 @@ end
 <pre><code>&quot; Flip Arguments \{\{\{
 &quot;   f(a, b) to f(b, a) when your cursol is on '('.
 function! FlipArguments()
-normal! y%
-let @&quot; = split(system('flipper &quot;' . @&quot; . '&quot;'), &quot;\n&quot;)[0]
-execute &quot;normal! %p\&lt;C-o&gt;d%&quot;
+  normal! y%
+  let @&quot; = split(system('flipper &quot;' . @&quot; . '&quot;'), &quot;\n&quot;)[0]
+  execute &quot;normal! %p\&lt;C-o&gt;d%&quot;
 endfunction
 &quot; \}\}\}
 </code></pre>

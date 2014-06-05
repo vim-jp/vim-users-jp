@@ -15,7 +15,7 @@ author: thinca
 <h4><code class="option">'undodir'</code></h4>
 
 <p>まず、undo 履歴を保存するファイルが作成されるディレクトリを <code class="option">'undodir'</code> オプションに設定します。これにはディレクトリをカンマ区切りのリストで指定します。
-ディレクトリの指定に &quot;.&quot; を使うと、対象ファイルのあるディレクトリを指します。デフォルトはこれです。</p>
+				ディレクトリの指定に &quot;.&quot; を使うと、対象ファイルのあるディレクトリを指します。デフォルトはこれです。</p>
 
 <p>指定したディレクトリの中で、最初に存在したディレクトリに undo 履歴のファイルが保存されます。また、復元する際は最初に見付かったファイルから履歴を復元します。</p>
 
@@ -31,8 +31,8 @@ author: thinca
 <p>全てのファイルで有効にしたい場合は単に <code>:set undofile</code> とすれば良いでしょう。特定のファイル、例えばホームディレクトリ以下のファイルのみで設定したい場合は以下のようにします。</p>
 
 <pre><code>augroup vimrc-undofile
-autocmd!
-autocmd BufReadPre ~/* setlocal undofile
+  autocmd!
+  autocmd BufReadPre ~/* setlocal undofile
 augroup END
 </code></pre>
 
@@ -41,11 +41,11 @@ augroup END
 <p>これらの機能は <code>+persistent_undo</code> がないと利用できないので、if で囲っておくと良いでしょう。</p>
 
 <pre><code>if has('persistent_undo')
-set undodir=./.vimundo,~/.vimundo
-augroup vimrc-undofile
-autocmd!
-autocmd BufReadPre ~/* setlocal undofile
-augroup END
+  set undodir=./.vimundo,~/.vimundo
+  augroup vimrc-undofile
+    autocmd!
+    autocmd BufReadPre ~/* setlocal undofile
+  augroup END
 endif
 </code></pre>
 

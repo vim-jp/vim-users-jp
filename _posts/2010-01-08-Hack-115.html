@@ -12,8 +12,8 @@ author: Shougo
 
 <pre>
 if v:version < 700
-echoerr 'Does not work this version of Vim "' . v:version . '".'
-finish
+    echoerr 'Does not work this version of Vim "' . v:version . '".'
+    finish
 endif
 </pre>
 
@@ -22,22 +22,22 @@ endif
 <h2>有効になっている拡張機能をチェックする方法</h2>
 
 <p>自分のVimがどのような拡張機能を持っているかは、<code>:version</code>を実行するのが早いですが、
-プラグインがチェックする場合には使えません。スクリプトでチェックするには、<code>has()</code>を用います。
-たとえば、Windowsかどうかをチェックするには、</p>
+				プラグインがチェックする場合には使えません。スクリプトでチェックするには、<code>has()</code>を用います。
+				たとえば、Windowsかどうかをチェックするには、</p>
 
 <pre>
 if has('win32') || has('win64')
-" Windowsの場合の処理
+    " Windowsの場合の処理
 endif
 </pre>
 
 <p>です。GVimかどうかをチェックするには、<code>has('gui_running')</code>です。これは<code>has('gui')</code>と間違えやすいので気をつけてください。<code>has('gui')</code>はGUI機能付きでコンパイルされているかどうかをチェックします。<code>has('gui_running')</code>でうまく条件を切り分ければ、.gvimrcを用いずにGVim用の設定を.vimrcだけで完結させることも可能です。
-ただし、最初vimで起動して:guiでGUIになる場合は.vimrcの<code>has('gui_running')</code>設定は読み込まれません。注意してください。（mattnさん情報）</p>
+				ただし、最初vimで起動して:guiでGUIになる場合は.vimrcの<code>has('gui_running')</code>設定は読み込まれません。注意してください。（mattnさん情報）</p>
 
 <h2>使用上の注意</h2>
 
 <p>Vim6以下の場合はスクリプト機能が全然違うので、切り捨てても良いですが、Vim7以降の差異はそこまでありません。
-本当にそのバージョンをチェックするべきなのかをよく考えましょう。
-拡張機能も本当に必要なものだけを使うようにしましょう。</p>
+				本当にそのバージョンをチェックするべきなのかをよく考えましょう。
+				拡張機能も本当に必要なものだけを使うようにしましょう。</p>
 
 <address class="hack-author">Shougo</address>

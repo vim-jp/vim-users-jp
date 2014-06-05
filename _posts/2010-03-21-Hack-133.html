@@ -9,7 +9,7 @@ author: thinca
 <h3>xxd</h3>
 
 <p>xxd は Vim に付属しているプログラムで、バイナリファイルを16進数のテキスト形式に変換、および、そのテキスト形式のファイルをバイナリファイルに逆変換することのできるプログラムです。Vim 付属のため Windows でも利用できます。
-バイナリファイルを Vim に読み込む際と書き込む際にこのプログラムを使うことでテキストエディタ上でバイナリファイルの編集が可能になります。</p>
+				バイナリファイルを Vim に読み込む際と書き込む際にこのプログラムを使うことでテキストエディタ上でバイナリファイルの編集が可能になります。</p>
 
 <p>ただし、xxd の逆変換機能はそこまで優れていないため、できるのは値の書き換え程度で、値の挿入や削除はできません。</p>
 
@@ -20,7 +20,7 @@ author: thinca
 <p>以下のファイルを ~/.vim/ftplugin/xxd.vim (Windows の場合は ~/vimfiles/ftplugin/xxd.vim) に置きます。</p>
 
 <pre><code>if !executable('xxd')
-finish
+  finish
 endif
 
 let b:undo_ftplugin = (exists('b:undo_ftplugin') ? b:undo_ftplugin . ' | ' : '')
@@ -30,13 +30,13 @@ setlocal binary noendofline
 silent %!xxd -g 1
 %s/\r$//e
 augroup ftplugin-xxd
-autocmd! * &lt;buffer&gt;
-autocmd BufWritePre &lt;buffer&gt; let b:xxd_cursor = getpos('.')
-autocmd BufWritePre &lt;buffer&gt; silent %!xxd -r
-autocmd BufWritePost &lt;buffer&gt; silent %!xxd -g 1
-autocmd BufWritePost &lt;buffer&gt; %s/\r$//
-autocmd BufWritePost &lt;buffer&gt; setlocal nomodified
-autocmd BufWritePost &lt;buffer&gt; call setpos('.', b:xxd_cursor) | unlet b:xxd_cursor
+  autocmd! * &lt;buffer&gt;
+  autocmd BufWritePre &lt;buffer&gt; let b:xxd_cursor = getpos('.')
+  autocmd BufWritePre &lt;buffer&gt; silent %!xxd -r
+  autocmd BufWritePost &lt;buffer&gt; silent %!xxd -g 1
+  autocmd BufWritePost &lt;buffer&gt; %s/\r$//
+  autocmd BufWritePost &lt;buffer&gt; setlocal nomodified
+  autocmd BufWritePost &lt;buffer&gt; call setpos('.', b:xxd_cursor) | unlet b:xxd_cursor
 augroup END
 </code></pre>
 
@@ -52,7 +52,7 @@ augroup END
 <p>基本的な仕組みは :help hex-editing に載っているものと同じです。</p>
 
 <p>バイナリ編集モードに移行した際、バッファ全体を xxd コマンドで変換して見やすい形式にします。
-保存する際には、xxd -r で一旦バイナリ形式に戻してから保存し、保存後に再び xxd で見やすい形式に戻します。</p>
+				保存する際には、xxd -r で一旦バイナリ形式に戻してから保存し、保存後に再び xxd で見やすい形式に戻します。</p>
 
 <p>加えて、変換時に移動してしまうカーソルの位置を保存、復元しています。</p>
 
@@ -66,8 +66,8 @@ augroup END
 <p>例えば、バイナリモードのファイル(vim -b file で開いた場合など)を自動的にバイナリ編集モードにするには vimrc で以下のようにします。</p>
 
 <pre><code>augroup xxd
-autocmd!
-autocmd BufReadPost * if &amp;l:binary | setlocal filetype=xxd | endif
+  autocmd!
+  autocmd BufReadPost * if &amp;l:binary | setlocal filetype=xxd | endif
 augroup END
 </code></pre>
 

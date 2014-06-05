@@ -18,12 +18,12 @@ author: thinca
 <p>:source コマンドで外部の Vim スクリプトを読み込むことができます。例えば以下のような設定を vimrc に書いておきます。</p>
 
 <pre><code>if filereadable(expand('~/.vimrc.local'))
-source ~/.vimrc.local
+  source ~/.vimrc.local
 endif
 </code></pre>
 
 <p>これで ~/.vimrc.local と言うファイルが存在した場合、このファイルが Vim スクリプトとして読み込まれます。このファイルに環境依存の設定やパスワードの設定などを書いておくことができます。
-ちなみに expand() は ~ を $HOME に展開するために必要です。</p>
+				ちなみに expand() は ~ を $HOME に展開するために必要です。</p>
 
 <h2>その他の使い道</h2>
 

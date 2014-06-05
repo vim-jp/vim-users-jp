@@ -10,75 +10,75 @@ author: Shougo
 
 <p>anything.elとはインタフェースを統一するプラグインです。
 <a href="http://d.hatena.ne.jp/rubikitch/20100713/emacsbook">「Emacsテクニックバイブル」</a>にて大々的に紹介され、Emacsのキラープラグインとして名高いです。
-Vimにも当然それに相当するものが複数存在します。
+				Vimにも当然それに相当するものが複数存在します。
 <a href="http://www.vim.org/scripts/script.php?script_id=1984">FuzzyFinder</a>はns9tksさんが開発したプラグインで、高機能なことが特徴です。
-Fuzzyと名前についているだけに、候補の曖昧検索ができます。学習機能と複雑なアルゴリズムにより、最適な候補を簡単に選択することが可能です。
-FuzzyFinderで開けるsourceは、バッファ、最近使ったファイル、タグなどです。ただし、それぞれのsourceを同時に検索することはできません。
-一年ほど開発が止まっていたのですが、最近になって更新が再開されたようです。今後も目が離せません。
+				Fuzzyと名前についているだけに、候補の曖昧検索ができます。学習機能と複雑なアルゴリズムにより、最適な候補を簡単に選択することが可能です。
+				FuzzyFinderで開けるsourceは、バッファ、最近使ったファイル、タグなどです。ただし、それぞれのsourceを同時に検索することはできません。
+				一年ほど開発が止まっていたのですが、最近になって更新が再開されたようです。今後も目が離せません。
 <a href="http://www.vim.org/scripts/script.php?script_id=2337">ku.vim</a>はVim界の神ことkanaさんが開発したプラグインです。
-FuzzyFinderのように曖昧検索もできますが、標準ではタグ検索ができないなど、機能はFuzzyFinderよりも少ないです。
-しかし、ku.vimの魅力は豊富な拡張性とユーザーが自由にsourceを追加できることにあります。
-anything.elのように、sourceを統合できるku.vim Ver.0.3というものが開発されていて、私も以前使っていたのですが、最近は更新されていないので残念です。
+				FuzzyFinderのように曖昧検索もできますが、標準ではタグ検索ができないなど、機能はFuzzyFinderよりも少ないです。
+				しかし、ku.vimの魅力は豊富な拡張性とユーザーが自由にsourceを追加できることにあります。
+				anything.elのように、sourceを統合できるku.vim Ver.0.3というものが開発されていて、私も以前使っていたのですが、最近は更新されていないので残念です。
 <a href="http://github.com/Shougo/unite.vim">unite.vim</a>は筆者が開発したプラグインで、今までのanything系プラグインを統一することを目指しています。
-Vimの補完を使わず自前で検索などを実装していること、Normal mode/Insert modeの両方に対応、sourceの統一、豊富なカスタマイズ、複数候補のマークが特徴です。
-sourceを追加すれば<a href="https://github.com/tsukkee/unite-tags">タグ検索も可能</a>です。最近までマイナーでしたが、徐々にユーザーの数が増えてきています。</p>
+				Vimの補完を使わず自前で検索などを実装していること、Normal mode/Insert modeの両方に対応、sourceの統一、豊富なカスタマイズ、複数候補のマークが特徴です。
+				sourceを追加すれば<a href="https://github.com/tsukkee/unite-tags">タグ検索も可能</a>です。最近までマイナーでしたが、徐々にユーザーの数が増えてきています。</p>
 
 <h2>dired.el, wdired.el≒netrw, vimfiler</h2>
 
 <p>dired.elはEmacsに標準で添付されているファイラーです。
-必要十分な機能は揃っていて、情報も多いので人気があります。
-ただし、設定しないと標準では使いづらいです。
-Vimに標準添付のファイラーとしては、netrwというものがあり、<code>:Explore</code>で立ち上げることができます。
-こちらもシンプルなファイラーで、kanaさんのように普段から愛用する人もいるようです。
-しかしファイル操作という観点からいうと、netrwは使いにくいです。
-ディレクトリ毎にバッファが残ってしまうのも難点で、私は好きじゃありません。
-よって、私が開発したのが<a href="http://github.com/Shougo/vimfiler">vimfiler</a>です。
-Windowsで有名な二画面ファイラーである、<a href="http://www.h5.dion.ne.jp/~akt/akt_afxw.htm">あふ</a>のような操作感を目標にしています。
-二画面ファイラーですが、一画面でも普通に使えます。
-ただしnetrwに実装されている、リモートファイルや圧縮ファイルのアクセスはまだ実装されていません。
-ネットワークドライブへのアクセスは可能です。</p>
+				必要十分な機能は揃っていて、情報も多いので人気があります。
+				ただし、設定しないと標準では使いづらいです。
+				Vimに標準添付のファイラーとしては、netrwというものがあり、<code>:Explore</code>で立ち上げることができます。
+				こちらもシンプルなファイラーで、kanaさんのように普段から愛用する人もいるようです。
+				しかしファイル操作という観点からいうと、netrwは使いにくいです。
+				ディレクトリ毎にバッファが残ってしまうのも難点で、私は好きじゃありません。
+				よって、私が開発したのが<a href="http://github.com/Shougo/vimfiler">vimfiler</a>です。
+				Windowsで有名な二画面ファイラーである、<a href="http://www.h5.dion.ne.jp/~akt/akt_afxw.htm">あふ</a>のような操作感を目標にしています。
+				二画面ファイラーですが、一画面でも普通に使えます。
+				ただしnetrwに実装されている、リモートファイルや圧縮ファイルのアクセスはまだ実装されていません。
+				ネットワークドライブへのアクセスは可能です。</p>
 
 <h2>eldoc.el≒echodoc</h2>
 
 <p>eldoc.elはエコーエリアに関数の引数を表示させることができるプラグインです。
-これと同様なものとして、私は<a href="http://github.com/Shougo/echodoc">echodoc</a>を開発しました。
-現在neocomplcacheが対応しています。
-eldocのように対応プラグインが自由に機能を追加できるのですが、難点として、まだドキュメントがありません。</p>
+				これと同様なものとして、私は<a href="http://github.com/Shougo/echodoc">echodoc</a>を開発しました。
+				現在neocomplcacheが対応しています。
+				eldocのように対応プラグインが自由に機能を追加できるのですが、難点として、まだドキュメントがありません。</p>
 
 <h2>org-mode.el≒howm-mode.vim, QFixHowm, VimOrganizer</h2>
 
 <p>org-modeはEmacs用のドキュメント編集環境です。あの「るびきち」さんが<a href="http://d.hatena.ne.jp/rubikitch/20100713/emacsbook">Emacsテクニックバイブル</a>の執筆に使っていたほどの機能を持ちます。
-メモ書きだけなら、<a href="http://sworddancer.funkyboy.jp/howm_vim/">howm-mode.vim</a>というものがあります。<a href="http://sites.google.com/site/fudist/Home/qfixhowm">QFixHowm</a>はより高機能のようです。howm-mode.vimは更新が止まっていますが、QFixHowmはまだメンテナンスされています。
-長らく、Vimにはorg-modeのようなものは存在しなかったのですが、最近になりVimにおけるorg-modeクローンが現れました。それが<a href="https://github.com/hsitz/VimOrganizer">VimOrganizer</a>です。
-この<a href="https://github.com/hsitz/VimOrganizer/blob/master/org_mode.org">ヘルプ</a>を見れば分かるとおり、かなり高機能のようです。</p>
+				メモ書きだけなら、<a href="http://sworddancer.funkyboy.jp/howm_vim/">howm-mode.vim</a>というものがあります。<a href="http://sites.google.com/site/fudist/Home/qfixhowm">QFixHowm</a>はより高機能のようです。howm-mode.vimは更新が止まっていますが、QFixHowmはまだメンテナンスされています。
+				長らく、Vimにはorg-modeのようなものは存在しなかったのですが、最近になりVimにおけるorg-modeクローンが現れました。それが<a href="https://github.com/hsitz/VimOrganizer">VimOrganizer</a>です。
+				この<a href="https://github.com/hsitz/VimOrganizer/blob/master/org_mode.org">ヘルプ</a>を見れば分かるとおり、かなり高機能のようです。</p>
 
 <h2>auto-complete.el≒AutoComplPop, neocomplcache</h2>
 
 <p>Emacsの自動補完としては、m2ymさんが開発した<a href="http://github.com/m2ym/auto-complete">auto-complete.el</a>が有名です。これはどうやら、Vimの補完ウインドウを参考にして作られたようです。
-Vimで対応するプラグインとしては、<a href="http://www.vim.org/scripts/script.php?script_id=1879">AutoComplPop</a>と<a href="http://github.com/Shougo/neocomplcache">neocomplcache</a>が挙げられます。
-これらの詳細については、他のHacksで散々やってきたのでここでは触れません。</p>
+				Vimで対応するプラグインとしては、<a href="http://www.vim.org/scripts/script.php?script_id=1879">AutoComplPop</a>と<a href="http://github.com/Shougo/neocomplcache">neocomplcache</a>が挙げられます。
+				これらの詳細については、他のHacksで散々やってきたのでここでは触れません。</p>
 
 <h2>shell-mode.el, comint-mode.el, eshell-mode.el ≒vimproc, vimshell</h2>
 
 <p>shell-mode.elはEmacs内でシェルを起動するプラグイン、eshell-mode.elはEmacsでシェルを模倣するプラグイン、comint-mode.elは外部インタプリタと通信するプラグインです。
-eshell-mode.elは外部シェルに依存しないため、貧弱なシェルしかないWindowsでも使えます。
-残念ながら、Vimにはshell-mode.elに相当するようなものはありません。
-しかし、eshell-mode.elに相当するvimshellがあるので代用できます。当然外部のシェルに依存しないので、Windows環境でも動作します。
-iexeコマンドや<code>:VimShellInteractive</code>を使うとシェルを起動することもできます。
-vimprocは外部コマンドと通信するためのプラグインです。コマンドラインのパーサを内蔵しており、vimshellが依存しています。
-Windows環境でも動作しますが、使用するためにはコンパイルが必要です。</p>
+				eshell-mode.elは外部シェルに依存しないため、貧弱なシェルしかないWindowsでも使えます。
+				残念ながら、Vimにはshell-mode.elに相当するようなものはありません。
+				しかし、eshell-mode.elに相当するvimshellがあるので代用できます。当然外部のシェルに依存しないので、Windows環境でも動作します。
+				iexeコマンドや<code>:VimShellInteractive</code>を使うとシェルを起動することもできます。
+				vimprocは外部コマンドと通信するためのプラグインです。コマンドラインのパーサを内蔵しており、vimshellが依存しています。
+				Windows環境でも動作しますが、使用するためにはコンパイルが必要です。</p>
 
 <h2>ansi-term.el, multi-term.el ≒Conque, vimshell</h2>
 
 <p>ansi-term.elやmulti-term.elはEmacs内で端末を模倣するプラグインです。
-シェルプログラムを起動することで、shell-mode.elの代わりになります。
-動作はあまり高速ではありませんが、根強い人気があるようです。
-Vimで動作する端末のプラグインとしては、<a href="http://www.vim.org/scripts/script.php?script_id=2771">Conque</a>と<a href="http://github.com/Shougo/echodoc">vimshell</a>が挙げられます。
-Conqueは端末を模倣するためのプラグインです。EmacsやVimが内部で動作するなど、それなりに完成度が高いです。
-ただし、プラグインの構造はごちゃごちゃしています。動作にはPythonインタフェースが必要で、Windowsでは動作しません。
-vimshellは本来シェルを模倣するプラグインですが、端末機能を内蔵しているため、texeコマンドを用いてcursesプログラムを実行することができます。
-ただし、まだ動作は不完全です。
-Windowsでtexeを動作させるためには、<a href="https://github.com/Shougo/fakecygpty">fakecygpty</a>とCygwinのインストールが必要です。
-詳しくはヘルプを参照してください。</p>
+				シェルプログラムを起動することで、shell-mode.elの代わりになります。
+				動作はあまり高速ではありませんが、根強い人気があるようです。
+				Vimで動作する端末のプラグインとしては、<a href="http://www.vim.org/scripts/script.php?script_id=2771">Conque</a>と<a href="http://github.com/Shougo/echodoc">vimshell</a>が挙げられます。
+				Conqueは端末を模倣するためのプラグインです。EmacsやVimが内部で動作するなど、それなりに完成度が高いです。
+				ただし、プラグインの構造はごちゃごちゃしています。動作にはPythonインタフェースが必要で、Windowsでは動作しません。
+				vimshellは本来シェルを模倣するプラグインですが、端末機能を内蔵しているため、texeコマンドを用いてcursesプログラムを実行することができます。
+				ただし、まだ動作は不完全です。
+				Windowsでtexeを動作させるためには、<a href="https://github.com/Shougo/fakecygpty">fakecygpty</a>とCygwinのインストールが必要です。
+				詳しくはヘルプを参照してください。</p>
 
 <address class="hack-author">Shougo</address>

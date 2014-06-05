@@ -12,12 +12,12 @@ author: Shougo
 <dd>戦闘力の計算方法は単純です。以下のコードを.vimrc中に記述し、Command-line modeで<code lang="vim-script">:Scouter</code>を実行するだけです。<code lang="vim-script">:GScouter</code>は.gvimrcの戦闘力を計測する場合に使用します。</dd>
 <pre>
 function! Scouter(file, ...)
-let pat = '^\s*$\|^\s*"'
-let lines = readfile(a:file)
-if !a:0 || !a:1
-let lines = split(substitute(join(lines, "\n"), '\n\s*\\', '', 'g'), "\n")
-endif
-return len(filter(lines,'v:val !~ pat'))
+  let pat = '^\s*$\|^\s*"'
+  let lines = readfile(a:file)
+  if !a:0 || !a:1
+    let lines = split(substitute(join(lines, "\n"), '\n\s*\\', '', 'g'), "\n")
+  endif
+  return len(filter(lines,'v:val !~ pat'))
 endfunction
 command! -bar -bang -nargs=? -complete=file Scouter
 \        echo Scouter(empty(&lt;q-args&gt;) ? $MYVIMRC : expand(&lt;q-args&gt;), &lt;bang&gt;0)
@@ -47,7 +47,7 @@ command! -bar -bang -nargs=? -complete=file GScouter
 <li>計測不能：神
 <ul>VimScriptには飽きたらず、ついにVimの内部構造にまで踏み込んでしまいました。彼のVimには自分で作ったパッチが当てられています。Vimのことで疑問があれば彼に質問すると、大抵答えが返ってきます。別名は「歩く:help」。いくら一流のVimmerであっても、このレベルに該当するのはごく少数しかいません。</ul>
 </dd>
-初心者から上級者になるのは大変だと思うかもしれませんが、コツコツと実力を付けていけばそんなことはありません。あのkana氏でさえ、<a href="http://whileimautomaton.net/2008/01/01/00/50/00/diary">一年間で.vimrcを十倍にしました</a>。私も半年で五倍になりました。要するにやる気の問題なのです。ただし、一度レベルが上昇すると他のエディタに移行できなくなります。注意してください。
+				初心者から上級者になるのは大変だと思うかもしれませんが、コツコツと実力を付けていけばそんなことはありません。あのkana氏でさえ、<a href="http://whileimautomaton.net/2008/01/01/00/50/00/diary">一年間で.vimrcを十倍にしました</a>。私も半年で五倍になりました。要するにやる気の問題なのです。ただし、一度レベルが上昇すると他のエディタに移行できなくなります。注意してください。
 </p>
 
 <address class="hack-author">Shougo</address>

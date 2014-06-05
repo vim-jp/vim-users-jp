@@ -5,11 +5,11 @@ date: 2010-10-28
 author: tyru
 ---
 <p>こんにちは。<br />
-最近Twitterアカウントをうっかり削除してしまい体調が良くなり身長が2cm伸びたtyruです。<br />
-はてなランド復活しねーかな。</p>
+				最近Twitterアカウントをうっかり削除してしまい体調が良くなり身長が2cm伸びたtyruです。<br />
+				はてなランド復活しねーかな。</p>
 
 <p>さて、タイトルの&#8217;cpoptions&#8217;と&#8217;compatible&#8217;についてですが、<br />
-理由もわからず</p>
+				理由もわからず</p>
 
 <pre><code>set nocompatible
 
@@ -18,7 +18,7 @@ set nocp
 </code></pre>
 
 <p>と.vimrcに書いている方も多いことでしょう。<br />
-また</p>
+				また</p>
 
 <pre><code>set cpoptions&amp;vim
 
@@ -27,23 +27,23 @@ set cpo&amp;vim
 </code></pre>
 
 <p>というような行かもしれません。<br />
-しかしこの一行は実は必要ありません。</p>
+				しかしこの一行は実は必要ありません。</p>
 
 <p><code>:help compatible</code>するとこのように書かれています。(<a href="http://www.kaoriya.net/vimdoc_j/">日本語版</a>の記述です)</p>
 
 <pre><code>(既定では オン、ファイル|vimrc|または
-|gvimrc|が発見されたらオフ)
+                |gvimrc|が発見されたらオフ)
 </code></pre>
 
 <p>つまり、.vimrcか.gvimrcをVimが見つけられていればこの値は自動的にオフになるのです。<br />
-なので.vimrcで<code>set nocompatible</code>しても意味がありません。<br />
-しかもこのオプションがオフの時は<code>'cpoptions'</code>は自動的にVim互換の値になるので<br />
+				なので.vimrcで<code>set nocompatible</code>しても意味がありません。<br />
+				しかもこのオプションがオフの時は<code>'cpoptions'</code>は自動的にVim互換の値になるので<br />
 <code>set cpo&amp;vim</code>とする必要もありません。<br />
-ようするにユーザがこの値をいじる必要はありません。</p>
+				ようするにユーザがこの値をいじる必要はありません。</p>
 
 <p>また、この2つのオプションを変える際は<br />
-Vimの様々な挙動を変えるオプションであることを理解した上で変更してください。(特に&#8217;compatible&#8217;オプション)<br />
-上の2つの定型句なら問題はない、というか述べた通り意味がないのですが、<br />
-それ以外の値にする場合は一度と言わず何度かhelpに目を通した上で変えましょう。</p>
+				Vimの様々な挙動を変えるオプションであることを理解した上で変更してください。(特に&#8217;compatible&#8217;オプション)<br />
+				上の2つの定型句なら問題はない、というか述べた通り意味がないのですが、<br />
+				それ以外の値にする場合は一度と言わず何度かhelpに目を通した上で変えましょう。</p>
 
 <address class="hack-author">tyru</address>

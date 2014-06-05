@@ -95,16 +95,16 @@ let g:NeoComplCache_ManualCompletionStartLength = 0
 
 " Define dictionary.
 let g:NeoComplCache_DictionaryFileTypeLists = {
-\ 'default' : '',
-\ 'vimshell' : $HOME.'/.vimshell_hist',
-\ 'scheme' : $HOME.'/.gosh_completions',
-\ 'scala' : $DOTVIM.'/dict/scala.dict',
-\ 'ruby' : $DOTVIM.'/dict/ruby.dict'
-\ }
+            \ 'default' : '',
+            \ 'vimshell' : $HOME.'/.vimshell_hist',
+            \ 'scheme' : $HOME.'/.gosh_completions',
+            \ 'scala' : $DOTVIM.'/dict/scala.dict',
+            \ 'ruby' : $DOTVIM.'/dict/ruby.dict'
+            \ }
 
 " Define keyword.
 if !exists('g:NeoComplCache_KeywordPatterns')
-let g:NeoComplCache_KeywordPatterns = {}
+    let g:NeoComplCache_KeywordPatterns = {}
 endif
 let g:NeoComplCache_KeywordPatterns['default'] = '\v\h\w*'
 

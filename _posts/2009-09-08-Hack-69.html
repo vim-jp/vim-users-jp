@@ -19,15 +19,15 @@ author: Shougo
 <pre>
 command! -nargs=? -complete=dir -bang CD  call s:ChangeCurrentDir('&lt;args&gt;', '&lt;bang&gt;')
 function! s:ChangeCurrentDir(directory, bang)
-if a:directory == ''
-lcd %:p:h
-else
-execute 'lcd' . a:directory
-endif
+    if a:directory == ''
+        lcd %:p:h
+    else
+        execute 'lcd' . a:directory
+    endif
 
-if a:bang == ''
-pwd
-endif
+    if a:bang == ''
+        pwd
+    endif
 endfunction
 
 " Change current directory.

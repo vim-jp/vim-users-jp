@@ -9,7 +9,7 @@ author: thinca
 <h3><code class="option">'autoread'</code> オプション</h3>
 
 <p><code class="option">'autoread'</code> オプションを有効にすると、元のファイルの変更を Vim が検知し、かつバッファが変更されていなかった場合、バッファは自動的に再読み込みされます。
-これはグローバルまたはバッファについてローカルなオプションであり、バッファ毎に設定が可能です。</p>
+				これはグローバルまたはバッファについてローカルなオプションであり、バッファ毎に設定が可能です。</p>
 
 <h3>変更のチェックを強化する</h3>
 
@@ -21,8 +21,8 @@ author: thinca
 <p>これを autocmd を使って自動的に実行するようにすれば、再読み込みが発生する頻度が上がります。</p>
 
 <pre><code>augroup vimrc-checktime
-autocmd!
-autocmd WinEnter * checktime
+  autocmd!
+  autocmd WinEnter * checktime
 augroup END
 </code></pre>
 

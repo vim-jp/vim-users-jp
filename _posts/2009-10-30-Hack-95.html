@@ -36,8 +36,8 @@ author: Sora Harakami
 <p>この時訪ねられるパスワードの認証は簡易的な物なので、普段使うパスワードとは別にしておくといいと思います。</p>
 
 <p>また、アップロードの際訪ねられるユーザー名とパスワードは、
-g:vimrcbox&#95;user や g:vimrcbox&#95;pass を.vimrcに設定して省略することも可能ですが、
-セキュリティ上の問題もあるため別ファイルに書き込み.vimrcからsourceで読み込むとよいと思います。</p>
+				g:vimrcbox&#95;user や g:vimrcbox&#95;pass を.vimrcに設定して省略することも可能ですが、
+				セキュリティ上の問題もあるため別ファイルに書き込み.vimrcからsourceで読み込むとよいと思います。</p>
 
 <p>投稿した.vimrcは、</p>
 
@@ -58,9 +58,9 @@ g:vimrcbox&#95;user や g:vimrcbox&#95;pass を.vimrcに設定して省略する
 <p>.vimrcに以下を記述します。</p>
 
 <pre><code>augroup VimRcBox
-autocmd!
-autocmd BufWritePost $MYVIMRC RcbVimrc
-autocmd BufWritePost $MYGVIMRC RcbGVimrc
+    autocmd!
+    autocmd BufWritePost $MYVIMRC RcbVimrc
+    autocmd BufWritePost $MYGVIMRC RcbGVimrc
 augroup END
 </code></pre>
 

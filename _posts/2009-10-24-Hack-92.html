@@ -29,73 +29,73 @@ index 0d272b2..0327a8f 100644
 --- a/src/MacVim/MMTextStorage.m
 +++ b/src/MacVim/MMTextStorage.m
 @@ -656,12 +656,8 @@ static NSString *MMWideCharacterAttributeName = @&quot;MMWideChar&quot;;
-cellSize.width = ceilf(em * cellWidthMultiplier);
+         cellSize.width = ceilf(em * cellWidthMultiplier);
 
-float pointSize = [newFont pointSize];
+         float pointSize = [newFont pointSize];
 -        NSDictionary *dict = [NSDictionary
 -            dictionaryWithObject:[NSNumber numberWithFloat:cellSize.width]
 -                          forKey:NSFontFixedAdvanceAttribute];
 
-NSFontDescriptor *desc = [newFont fontDescriptor];
+         NSFontDescriptor *desc = [newFont fontDescriptor];
 -        desc = [desc fontDescriptorByAddingAttributes:dict];
-font = [NSFont fontWithDescriptor:desc size:pointSize];
-[font retain];
+         font = [NSFont fontWithDescriptor:desc size:pointSize];
+         [font retain];
 
 @@ -680,21 +676,18 @@ static NSString *MMWideCharacterAttributeName = @&quot;MMWideChar&quot;;
-boldFont = [[NSFontManager sharedFontManager]
-convertFont:font toHaveTrait:NSBoldFontMask];
-desc = [boldFont fontDescriptor];
+         boldFont = [[NSFontManager sharedFontManager]
+             convertFont:font toHaveTrait:NSBoldFontMask];
+         desc = [boldFont fontDescriptor];
 -        desc = [desc fontDescriptorByAddingAttributes:dict];
-boldFont = [NSFont fontWithDescriptor:desc size:pointSize];
-[boldFont retain];
+         boldFont = [NSFont fontWithDescriptor:desc size:pointSize];
+         [boldFont retain];
 
-italicFont = [[NSFontManager sharedFontManager]
-convertFont:font toHaveTrait:NSItalicFontMask];
-desc = [italicFont fontDescriptor];
+         italicFont = [[NSFontManager sharedFontManager]
+             convertFont:font toHaveTrait:NSItalicFontMask];
+         desc = [italicFont fontDescriptor];
 -        desc = [desc fontDescriptorByAddingAttributes:dict];
-italicFont = [NSFont fontWithDescriptor:desc size:pointSize];
-[italicFont retain];
+         italicFont = [NSFont fontWithDescriptor:desc size:pointSize];
+         [italicFont retain];
 
-boldItalicFont = [[NSFontManager sharedFontManager]
-convertFont:italicFont toHaveTrait:NSBoldFontMask];
-desc = [boldItalicFont fontDescriptor];
+         boldItalicFont = [[NSFontManager sharedFontManager]
+             convertFont:italicFont toHaveTrait:NSBoldFontMask];
+         desc = [boldItalicFont fontDescriptor];
 -        desc = [desc fontDescriptorByAddingAttributes:dict];
-boldItalicFont = [NSFont fontWithDescriptor:desc size:pointSize];
-[boldItalicFont retain];
-}
+         boldItalicFont = [NSFont fontWithDescriptor:desc size:pointSize];
+         [boldItalicFont retain];
+     }
 @@ -714,32 +707,25 @@ static NSString *MMWideCharacterAttributeName = @&quot;MMWideChar&quot;;
 
-float pointSize = [newFont pointSize];
-NSFontDescriptor *desc = [newFont fontDescriptor];
+         float pointSize = [newFont pointSize];
+         NSFontDescriptor *desc = [newFont fontDescriptor];
 -        NSDictionary *dictWide = [NSDictionary
 -            dictionaryWithObject:[NSNumber numberWithFloat:2*cellSize.width]
 -                          forKey:NSFontFixedAdvanceAttribute];
 
 -        desc = [desc fontDescriptorByAddingAttributes:dictWide];
-fontWide = [NSFont fontWithDescriptor:desc size:pointSize];
-[fontWide retain];
+         fontWide = [NSFont fontWithDescriptor:desc size:pointSize];
+         [fontWide retain];
 
-boldFontWide = [[NSFontManager sharedFontManager]
-convertFont:fontWide toHaveTrait:NSBoldFontMask];
-desc = [boldFontWide fontDescriptor];
+         boldFontWide = [[NSFontManager sharedFontManager]
+             convertFont:fontWide toHaveTrait:NSBoldFontMask];
+         desc = [boldFontWide fontDescriptor];
 -        desc = [desc fontDescriptorByAddingAttributes:dictWide];
-boldFontWide = [NSFont fontWithDescriptor:desc size:pointSize];
-[boldFontWide retain];
+         boldFontWide = [NSFont fontWithDescriptor:desc size:pointSize];
+         [boldFontWide retain];
 
-italicFontWide = [[NSFontManager sharedFontManager]
-convertFont:fontWide toHaveTrait:NSItalicFontMask];
-desc = [italicFontWide fontDescriptor];
+         italicFontWide = [[NSFontManager sharedFontManager]
+             convertFont:fontWide toHaveTrait:NSItalicFontMask];
+         desc = [italicFontWide fontDescriptor];
 -        desc = [desc fontDescriptorByAddingAttributes:dictWide];
-italicFontWide = [NSFont fontWithDescriptor:desc size:pointSize];
-[italicFontWide retain];
+         italicFontWide = [NSFont fontWithDescriptor:desc size:pointSize];
+         [italicFontWide retain];
 
-boldItalicFontWide = [[NSFontManager sharedFontManager]
-convertFont:italicFontWide toHaveTrait:NSBoldFontMask];
-desc = [boldItalicFontWide fontDescriptor];
+         boldItalicFontWide = [[NSFontManager sharedFontManager]
+             convertFont:italicFontWide toHaveTrait:NSBoldFontMask];
+         desc = [boldItalicFontWide fontDescriptor];
 -        desc = [desc fontDescriptorByAddingAttributes:dictWide];
-boldItalicFontWide = [NSFont fontWithDescriptor:desc size:pointSize];
-[boldItalicFontWide retain];
-}
+         boldItalicFontWide = [NSFont fontWithDescriptor:desc size:pointSize];
+         [boldItalicFontWide retain];
+   }
 </code></pre>
 
 <p>そしてビルドします。</p>

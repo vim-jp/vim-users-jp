@@ -50,14 +50,14 @@ author: ujihisa
 <p>より透明にする: ↑</p>
 
 <pre><code>  nnoremap &lt;up&gt; :&lt;C-u&gt;call &lt;SID&gt;relative_tranparency(5)&lt;Cr&gt;
-inoremap &lt;up&gt; &lt;C-o&gt;:call &lt;SID&gt;relative_tranparency(5)&lt;Cr&gt;
+  inoremap &lt;up&gt; &lt;C-o&gt;:call &lt;SID&gt;relative_tranparency(5)&lt;Cr&gt;
 </code></pre>
 </li>
 <li>
 <p>より不透明にする: ↓</p>
 
 <pre><code>  nnoremap &lt;down&gt; :&lt;C-u&gt;call &lt;SID&gt;relative_tranparency(-5)&lt;Cr&gt;
-inoremap &lt;down&gt; &lt;C-o&gt;:call &lt;SID&gt;relative_tranparency(-5)&lt;Cr&gt;
+  inoremap &lt;down&gt; &lt;C-o&gt;:call &lt;SID&gt;relative_tranparency(-5)&lt;Cr&gt;
 </code></pre>
 </li>
 <li>
@@ -71,8 +71,8 @@ inoremap &lt;down&gt; &lt;C-o&gt;:call &lt;SID&gt;relative_tranparency(-5)&lt;Cr
 <p>ただし以下の関数を同じファイル内で定義しておくものとします。</p>
 
 <pre><code>function! s:relative_tranparency(diff)
-let &amp;transparency = a:diff + &amp;transparency
-let g:transparency = &amp;transparency
+  let &amp;transparency = a:diff + &amp;transparency
+  let g:transparency = &amp;transparency
 endfunction
 </code></pre>
 

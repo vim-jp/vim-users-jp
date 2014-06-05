@@ -54,8 +54,8 @@ let g:quickrun_config.sql = {'cmdopt': '-u postgres -h example.com'}
 <p>例えば著者はこのような設定をしています</p>
 
 <pre><code>let g:quickrun_config['sql/postgresql'] = {
-\ 'cmdopt': '-h 0.0.0.0 mydb postgres'
-\ }
+      \ 'cmdopt': '-h 0.0.0.0 mydb postgres'
+      \ }
 </code></pre>
 
 <h2>neosnippetとの連携</h2>
@@ -67,7 +67,7 @@ let g:quickrun_config.sql = {'cmdopt': '-u postgres -h example.com'}
 <p>cとまで入力すると補完候補に&#8221;CREATE&#95;TABLE&#8221;とでてくるようになります。それを選択すると</p>
 
 <pre><code>CREATE TABLE &lt;{1:cities}&gt; (
-&lt;`0:name varchar(80), country_name text`&gt;
+  &lt;`0:name varchar(80), country_name text`&gt;
 );
 DROP TABLE &lt;|1|&gt;;
 </code></pre>

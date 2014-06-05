@@ -9,35 +9,35 @@ author: Shougo
 <h2>設定例</h2>
 
 <pre>
-" Plugin key-mappings.
-imap &lt;C-k&gt;     &lt;Plug&gt;(neocomplcache_snippets_expand)
-smap &lt;C-k&gt;     &lt;Plug&gt;(neocomplcache_snippets_expand)
-inoremap &lt;expr&gt;&lt;C-g&gt;     neocomplcache#undo_completion()
-inoremap &lt;expr&gt;&lt;C-l&gt;     neocomplcache#complete_common_string()
+    " Plugin key-mappings.
+    imap &lt;C-k&gt;     &lt;Plug&gt;(neocomplcache_snippets_expand)
+    smap &lt;C-k&gt;     &lt;Plug&gt;(neocomplcache_snippets_expand)
+    inoremap &lt;expr&gt;&lt;C-g&gt;     neocomplcache#undo_completion()
+    inoremap &lt;expr&gt;&lt;C-l&gt;     neocomplcache#complete_common_string()
 
-" SuperTab like snippets behavior.
-"imap &lt;expr&gt;&lt;TAB&gt; neocomplcache#sources#snippets_complete#expandable() ? "\&lt;Plug&gt;(neocomplcache_snippets_expand)" : pumvisible() ? "\&lt;C-n&gt;" : "\&lt;TAB&gt;"
+    " SuperTab like snippets behavior.
+    "imap &lt;expr&gt;&lt;TAB&gt; neocomplcache#sources#snippets_complete#expandable() ? "\&lt;Plug&gt;(neocomplcache_snippets_expand)" : pumvisible() ? "\&lt;C-n&gt;" : "\&lt;TAB&gt;"
 
-" Recommended key-mappings.
-" &lt;CR&gt;: close popup and save indent.
-inoremap &lt;expr&gt;&lt;CR&gt;  neocomplcache#smart_close_popup() . "\&lt;CR&gt;"
-" &lt;TAB&gt;: completion.
-inoremap &lt;expr&gt;&lt;TAB&gt;  pumvisible() ? "\&lt;C-n&gt;" : "\&lt;TAB&gt;"
-" &lt;C-h&gt;, &lt;BS&gt;: close popup and delete backword char.
-inoremap &lt;expr&gt;&lt;C-h&gt; neocomplcache#smart_close_popup()."\&lt;C-h&gt;"
-inoremap &lt;expr&gt;&lt;BS&gt; neocomplcache#smart_close_popup()."\&lt;C-h&gt;"
-inoremap &lt;expr&gt;&lt;C-y&gt;  neocomplcache#close_popup()
-inoremap &lt;expr&gt;&lt;C-e&gt;  neocomplcache#cancel_popup()
+    " Recommended key-mappings.
+    " &lt;CR&gt;: close popup and save indent.
+    inoremap &lt;expr&gt;&lt;CR&gt;  neocomplcache#smart_close_popup() . "\&lt;CR&gt;"
+    " &lt;TAB&gt;: completion.
+    inoremap &lt;expr&gt;&lt;TAB&gt;  pumvisible() ? "\&lt;C-n&gt;" : "\&lt;TAB&gt;"
+    " &lt;C-h&gt;, &lt;BS&gt;: close popup and delete backword char.
+    inoremap &lt;expr&gt;&lt;C-h&gt; neocomplcache#smart_close_popup()."\&lt;C-h&gt;"
+    inoremap &lt;expr&gt;&lt;BS&gt; neocomplcache#smart_close_popup()."\&lt;C-h&gt;"
+    inoremap &lt;expr&gt;&lt;C-y&gt;  neocomplcache#close_popup()
+    inoremap &lt;expr&gt;&lt;C-e&gt;  neocomplcache#cancel_popup()
 
-" AutoComplPop like behavior.
-"let g:neocomplcache_enable_auto_select = 1
+    " AutoComplPop like behavior.
+    "let g:neocomplcache_enable_auto_select = 1
 </pre>
 
 <h2>imap &lt;C-k&gt;     &lt;Plug&gt;(neocomplcache_snippets_expand)</h2>
 
 <p><code>&lt;C-k&gt;</code>でスニペットの展開をできるようにします。<code>&lt;C-k&gt;</code>が取られてしまうのが気に入らない場合は、
-後述する<code>neocomplcache#sources#snippets_complete#expandable()</code>を使ったほうが良いでしょう。
-smapも同時に設定しないと、デフォルト値が選択されているときに展開やジャンプがされません。</p>
+				後述する<code>neocomplcache#sources#snippets_complete#expandable()</code>を使ったほうが良いでしょう。
+				smapも同時に設定しないと、デフォルト値が選択されているときに展開やジャンプがされません。</p>
 
 <h2>inoremap &lt;expr&gt;&lt;C-g&gt;     neocomplcache#undo&#95;completion()</h2>
 
@@ -50,30 +50,30 @@ smapも同時に設定しないと、デフォルト値が選択されている�
 <h2>imap &lt;expr&gt;&lt;TAB&gt; neocomplcache#sources#snippets&#95;complete#expandable() ? &#8220;\&lt;Plug&gt;(neocomplcache&#95;snippets&#95;expand)&#8221; : pumvisible() ? &#8220;\&lt;C-n&gt;&#8221; : &#8220;\&lt;TAB&gt;&#8221;</h2>
 
 <p>SuperTabの挙動をエミュレーションしています。スニペットが展開可能なら展開を、補完中なら次の候補を選択、そうでなければ<code>&lt;Tab&gt;</code>を挿入します。
-普通の人には必要がないため、コメントアウトをしています。</p>
+				普通の人には必要がないため、コメントアウトをしています。</p>
 
 <h2>inoremap &lt;expr&gt;&lt;C-h&gt; neocomplcache#smart&#95;close&#95;popup().&#8221;\&lt;C-h&gt;&#8221;</h2>
 
 <p><code>&lt;C-h&gt;</code>や<code>&lt;BS&gt;</code>を押したときに確実にポップアップを削除します。
-これがなくてもneocomplcacheは動作しますが、このマッピングを使ったほうが確実です。
-特に、<code>g:neocomplcache_enable_auto_select</code>を有効にしている場合はこの設定をしないと確実に補完が誤爆します。</p>
+				これがなくてもneocomplcacheは動作しますが、このマッピングを使ったほうが確実です。
+				特に、<code>g:neocomplcache_enable_auto_select</code>を有効にしている場合はこの設定をしないと確実に補完が誤爆します。</p>
 
 <h2>inoremap &lt;expr&gt;&lt;C-y&gt;  neocomplcache#close&#95;popup()</h2>
 
 <p>現在選択している候補を確定します。
-これがなくてもneocomplcacheは動作しますが、このマッピングを使ったほうが確実です。</p>
+				これがなくてもneocomplcacheは動作しますが、このマッピングを使ったほうが確実です。</p>
 
 <h2>inoremap &lt;expr&gt;&lt;C-e&gt;  neocomplcache#cancel&#95;popup()</h2>
 
 <p>現在選択している候補をキャンセルし、ポップアップを閉じます。
-これがなくてもneocomplcacheは動作しますが、このマッピングを使ったほうが確実です。
-特にneocomplcacheは実装の関係で、２回<code>&lt;C-e&gt;</code>を押さなければポップアップを閉じることができません。
-よって、このマッピングは設定しておくことをお勧めします。</p>
+				これがなくてもneocomplcacheは動作しますが、このマッピングを使ったほうが確実です。
+				特にneocomplcacheは実装の関係で、２回<code>&lt;C-e&gt;</code>を押さなければポップアップを閉じることができません。
+				よって、このマッピングは設定しておくことをお勧めします。</p>
 
 <h2>let g:neocomplcache_enable_auto_select = 1</h2>
 
 <p>AutoComplPopのように最初の候補を選択するための設定です。
-便利ですが誤爆しやすいため、デフォルトでは無効化しています。
-この設定を有効化する場合、キーマッピングを工夫する必要があります。</p>
+				便利ですが誤爆しやすいため、デフォルトでは無効化しています。
+				この設定を有効化する場合、キーマッピングを工夫する必要があります。</p>
 
 <address class="hack-author">Shougo</address>

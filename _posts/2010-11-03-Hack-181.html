@@ -13,7 +13,7 @@ author: Shougo
 <h2>scratch.vimを使う</h2>
 
 <p>次に考えられるのは、kanaさんの作成した<a href="http://www.vim.org/scripts/script.php?script_id=2107">scratch.vim</a>を用いることです。
-これはEmacsライクなscratchバッファをVim上に実装したものです。しかしfiletypeがvimに固定されてしまうため、Vim scriptの実験には良いのですが、ちょっとしたスクリプトを書くのには向きません。</p>
+				これはEmacsライクなscratchバッファをVim上に実装したものです。しかしfiletypeがvimに固定されてしまうため、Vim scriptの実験には良いのですが、ちょっとしたスクリプトを書くのには向きません。</p>
 
 <h2>howmを使う</h2>
 
@@ -22,22 +22,22 @@ author: Shougo
 <h2>:JunkFileを用いる</h2>
 
 <p>私は次の<code>:JunkFile</code>コマンドを使っています。このコマンドを実行すると、<code>~/.vim_junk</code>ディレクトリに日付の名前が付いたファイルを自動生成します。
-ファイルには拡張子を与えることができるので、使い捨てのスクリプトを書く際にも有用です。もちろん、<code>:setfiletype</code>を用いて手動でfiletypeを設定することもできます。thincaさんの作成した<a href="http://github.com/thinca/vim-quickrun">quickrun</a>を用いれば、スクリプトの実行も簡単です。ファイルは保存されているので、ちょっとしたメモ書きにも使えます。
-私は<a href="http://github.com/Shougo/unite.vim">unite.vim</a>の<code>file_mru</code>で以前のメモを参照する、ということをよくやります。何かのキーにマッピングしておくと良いでしょう。</p>
+				ファイルには拡張子を与えることができるので、使い捨てのスクリプトを書く際にも有用です。もちろん、<code>:setfiletype</code>を用いて手動でfiletypeを設定することもできます。thincaさんの作成した<a href="http://github.com/thinca/vim-quickrun">quickrun</a>を用いれば、スクリプトの実行も簡単です。ファイルは保存されているので、ちょっとしたメモ書きにも使えます。
+				私は<a href="http://github.com/Shougo/unite.vim">unite.vim</a>の<code>file_mru</code>で以前のメモを参照する、ということをよくやります。何かのキーにマッピングしておくと良いでしょう。</p>
 
 <pre>
 " Open junk file."\{\{\{
 command! -nargs=0 JunkFile call s:open_junk_file()
 function! s:open_junk_file()
-let l:junk_dir = $HOME . '/.vim_junk'. strftime('/%Y/%m')
-if !isdirectory(l:junk_dir)
-call mkdir(l:junk_dir, 'p')
-endif
+  let l:junk_dir = $HOME . '/.vim_junk'. strftime('/%Y/%m')
+  if !isdirectory(l:junk_dir)
+    call mkdir(l:junk_dir, 'p')
+  endif
 
-let l:filename = input('Junk Code: ', l:junk_dir.strftime('/%Y-%m-%d-%H%M%S.'))
-if l:filename != ''
-execute 'edit ' . l:filename
-endif
+  let l:filename = input('Junk Code: ', l:junk_dir.strftime('/%Y-%m-%d-%H%M%S.'))
+  if l:filename != ''
+    execute 'edit ' . l:filename
+  endif
 endfunction"\}\}\}
 </pre>
 

@@ -22,6 +22,10 @@ function! s:date(f, lines) abort
   throw "date parse error!: " . a:f
 endfunction
 
+function! s:trim_left_for_tag(line) abort
+  return substitute(substitute(a:line, '^\s\+\ze<', '', 'g'), '\s\+$', '', 'g')
+endfunction
+
 function! s:trim(line) abort
   return substitute(substitute(a:line, '^\s\+', '', 'g'), '\s\+$', '', 'g')
 endfunction
@@ -31,7 +35,7 @@ function! s:text(f, lines) abort
   let text = ''
   for line in a:lines
     if stridx(line, 'wp_social_bookmarking_light') >= 0
-      return join(map(split(text, "\n"), 's:trim(v:val)'), "\n")
+      return join(map(split(text, "\n"), 's:trim_left_for_tag(v:val)'), "\n")
     endif
     if intext
       let text .= line . "\n"

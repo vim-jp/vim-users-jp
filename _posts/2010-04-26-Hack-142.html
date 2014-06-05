@@ -9,52 +9,52 @@ author: Shougo
 <h2>:shellの欠点</h2>
 
 <p>Vimに搭載されている<code>:shell</code>コマンドは、一時的にシェルを実行できます。しかし当然使用するシェルの設定に左右される上、実行している間はVimが止まってしまいます。
-この状態ではコマンドの出力もバッファにとれないですし、VimScriptとの連携もできません。
-さらにLinux上のGVimではエスケープシーケンスを解釈しない上、WindowsのGVimでは邪魔なDOS窓が一瞬開くという問題もあります。
-根本的な問題として、WindowsのシェルであるCMD.exeは貧弱なので、使う気になれません。
-かといって、Windowsの場合は代わりとなるシェルも選択肢が少ないです。</p>
+				この状態ではコマンドの出力もバッファにとれないですし、VimScriptとの連携もできません。
+				さらにLinux上のGVimではエスケープシーケンスを解釈しない上、WindowsのGVimでは邪魔なDOS窓が一瞬開くという問題もあります。
+				根本的な問題として、WindowsのシェルであるCMD.exeは貧弱なので、使う気になれません。
+				かといって、Windowsの場合は代わりとなるシェルも選択肢が少ないです。</p>
 
 <h2>screenの欠点</h2>
 
 <p>:shellの代わりに、<a href="http://www.gnu.org/software/screen/">GNU screen</a>やそれをforkした<a href="http://www.steve.org.uk/Software/tscreen/">tscreen</a>、GNU screenの後継である<a href="http://tmux.sourceforge.net/">tmux</a>を用いるという解決策もあります。
-しかしこれらのソフトウェアは端末を要求するため、当然Windows環境やGVimでは動作しません。
-さらにscreen上で起動しているプログラムではVimのキーバインドを使えない、Vimとのデータのやりとりが大変、などの問題点があります。</p>
+				しかしこれらのソフトウェアは端末を要求するため、当然Windows環境やGVimでは動作しません。
+				さらにscreen上で起動しているプログラムではVimのキーバインドを使えない、Vimとのデータのやりとりが大変、などの問題点があります。</p>
 
 <h2>Vim-Shellパッチについて</h2>
 
 <p><a href="http://www.wana.at/vimshell/">Vim-Shell</a>パッチとは、Vimに外部プロセスを実行させる機能を付け加える巨大パッチです。
-エスケープシーケンスもきちんと解釈するので、優れたシェル環境なのですが、
-パッチは本家に取り込まれることがなく、しかもVim 7.2には対応していません。
-Windows上では使えず、GVimでも使えないなど、欠点も多いです。</p>
+				エスケープシーケンスもきちんと解釈するので、優れたシェル環境なのですが、
+				パッチは本家に取り込まれることがなく、しかもVim 7.2には対応していません。
+				Windows上では使えず、GVimでも使えないなど、欠点も多いです。</p>
 
 <h2>そのほかのプラグインについて</h2>
 
 <p>そのほかにもシェルを模倣するプラグインはありますが、どれも提供される機能に難があったり、
-Windows環境やGVimでは使えないものばかりです。</p>
+				Windows環境やGVimでは使えないものばかりです。</p>
 
 <h2>Emacsとの比較</h2>
 
 <p>対するEmacsはどうでしょう。Emacsでは、標準的に搭載されている<code>shell-mode</code>を用いてシェルを実行できます。
-起動が遅いですが、さらに高機能な<code>eshell-mode</code>を用いて100% Emacs Lispなシェルを使うこともできます。
+				起動が遅いですが、さらに高機能な<code>eshell-mode</code>を用いて100% Emacs Lispなシェルを使うこともできます。
 <code>eshell-mode</code>は端末機能としては不完全なので、端末がほしいだけなら、<code>ansi-term</code>を用いると良いでしょう。
-この優れたシェル環境を得るためだけにEmacsへと移行した人々も多いのではないかと思います。
-最近では、<code>ansi-term</code>を改良した<code>multi-term</code>というものが人気らしいです。</p>
+				この優れたシェル環境を得るためだけにEmacsへと移行した人々も多いのではないかと思います。
+				最近では、<code>ansi-term</code>を改良した<code>multi-term</code>というものが人気らしいです。</p>
 
 <h2>vimshellについて</h2>
 
 <p>Emacsへの対抗馬になりうるのが、私が開発している<a href="http://github.com/Shougo/vimshell/tree/master">vimshell</a>です。
-完全な端末機能を目指すのではなく、純粋な対話シェルとしてeshellを目標にしています。
-自動補完プラグインである<a href="http://github.com/Shougo/neocomplcache/tree/master">neocomplcache</a>と連携させることで、自動補完のできるシェル環境になります。
+				完全な端末機能を目指すのではなく、純粋な対話シェルとしてeshellを目標にしています。
+				自動補完プラグインである<a href="http://github.com/Shougo/neocomplcache/tree/master">neocomplcache</a>と連携させることで、自動補完のできるシェル環境になります。
 <a href="http://github.com/Shougo/vimproc/tree/master">vimproc</a>と連携させれば非同期実行も可能、対話プログラムを起動できる、と開発途中の現在でもかなりの機能を誇ります。
-vimshellはzshの機能を一部取り込んでいて、コマンドラインスタックや優れた履歴検索機能もあります。</p>
+				vimshellはzshの機能を一部取り込んでいて、コマンドラインスタックや優れた履歴検索機能もあります。</p>
 
 <h2>Conqueとの比較</h2>
 
 <p>その他のライブラリとして、vimprocやvimshellをもとにNico Raffatoさんが製作している<a href="http://www.vim.org/scripts/script.php?script_id=2771">Conque</a>というプラグインがあります。まだVer.1.0がリリースされたばかりですが、現在も精力的に開発されています。
-これは内部でPythonインタフェースを用いて外部プロセスとの通信を行っているので、安定性に難があるのと、Pythonインタフェースが必須になっています。
-Emacsのansi-termを目標にしているようで、端末としてはかなりの完成度を誇ります。
-ただし日本語が使えなかったり、Windows環境で動作しないという問題があります。
-キー入力をすべて奪いとってしまうので、他のプラグインとの連携もしづらいです。
-Emacsも内部で動かせるなど、ネタとしてはかなり面白いのですが……。</p>
+				これは内部でPythonインタフェースを用いて外部プロセスとの通信を行っているので、安定性に難があるのと、Pythonインタフェースが必須になっています。
+				Emacsのansi-termを目標にしているようで、端末としてはかなりの完成度を誇ります。
+				ただし日本語が使えなかったり、Windows環境で動作しないという問題があります。
+				キー入力をすべて奪いとってしまうので、他のプラグインとの連携もしづらいです。
+				Emacsも内部で動かせるなど、ネタとしてはかなり面白いのですが……。</p>
 
 <address class="hack-author">Shougo</address>

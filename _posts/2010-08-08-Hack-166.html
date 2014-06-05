@@ -9,13 +9,13 @@ author: thinca
 <h3><kbd>~</kbd></h3>
 
 <p><kbd>~</kbd> を押すと、カーソル下のローマ字の大文字/小文字を相互に変換します。大文字は小文字に、小文字は大文字になります。この際、カーソルを右に進めます。
-[count] を指定することで複数の文字を同時に変換することができます。変換は一括で大文字/小文字にするのではなく、文字単位で作用します。つまり VimHack は vIMhACK になります。</p>
+				[count] を指定することで複数の文字を同時に変換することができます。変換は一括で大文字/小文字にするのではなく、文字単位で作用します。つまり VimHack は vIMhACK になります。</p>
 
 <h3><kbd>gu</kbd> <kbd>gU</kbd> <kbd>g~</kbd></h3>
 
 <p>これらはオペレータで、対象に対してそれぞれ、<kbd>gu</kbd> は小文字への変換を、<kbd>gU</kbd> は大文字への変換を、<kbd>g~</kbd> は大文字/小文字の相互変換を実行します。
-例えば、現在のカーソルのある単語を全て大文字にしたい場合は <kbd>gUiw</kbd> です。
-また、<kbd>yy</kbd> などと同様に行に対して動作する <kbd>gugu</kbd> <kbd>guu</kbd> <kbd>gUgU</kbd> <kbd>gUU</kbd> <kbd>g~g~</kbd> <kbd>g~~</kbd> があります。</p>
+				例えば、現在のカーソルのある単語を全て大文字にしたい場合は <kbd>gUiw</kbd> です。
+				また、<kbd>yy</kbd> などと同様に行に対して動作する <kbd>gugu</kbd> <kbd>guu</kbd> <kbd>gUgU</kbd> <kbd>gUU</kbd> <kbd>g~g~</kbd> <kbd>g~~</kbd> があります。</p>
 
 <h3>Visual mode での <kbd>u</kbd> <kbd>U</kbd> <kbd>~</kbd></h3>
 
@@ -28,7 +28,7 @@ author: thinca
 <h3>正規表現</h3>
 
 <p>もっと複雑な変換を行いたい場合もあるでしょう。正規表現で置換する際、結果の大文字/小文字を指定することができます。
-置換後のパターンに u があると、次の文字は大文字になります。l があると小文字になります。</p>
+				置換後のパターンに u があると、次の文字は大文字になります。l があると小文字になります。</p>
 
 <pre><code>:s/\w\+/\u\0/g
 &quot;bram moolenaar&quot; → &quot;Bram Moolenaar&quot;

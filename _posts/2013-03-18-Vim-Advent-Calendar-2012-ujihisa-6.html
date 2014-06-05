@@ -15,7 +15,7 @@ author: ujihisa
 </code></pre>
 
 <p>HaskellやClojureなどVim script以外の言語一般に登場する関数で、これは特に無限長のシーケンスをデータ構造としてサポートしている言語で便利です。
-上記の例の場合、<code>1 &lt; 5</code>が評価され、<code>3 &lt; 5</code>が評価され、<code>5 &lt; 5</code>が評価され、1と3を集めたものを返すわけですが、ここで大事なのは、<code>2 &lt; 5</code>以降はそもそも計算されないという点です。ですので、安心して重い処理を任せることができます。</p>
+				上記の例の場合、<code>1 &lt; 5</code>が評価され、<code>3 &lt; 5</code>が評価され、<code>5 &lt; 5</code>が評価され、1と3を集めたものを返すわけですが、ここで大事なのは、<code>2 &lt; 5</code>以降はそもそも計算されないという点です。ですので、安心して重い処理を任せることができます。</p>
 
 <p>Vim scriptでもぜひ活用しましょう。具体的なユースケースとしては、「前半に欲しい情報があって後半に不要な情報があるような出力をする外部プロセスの結果をパースする」ようなときに強さを発揮します。</p>
 
@@ -30,16 +30,16 @@ author: ujihisa
 <p><code>spec/data/list.vim</code></p>
 
 <pre><code>Context data.list.take_while()
-It creates a list from another one, it inspects the original list and takes from its elements to the moment when the condition fails, then it stops processing
-Should [1, 3] == g:L.take_while('v:val &lt; 5', [1, 3, 5, 2])
-Should [] == g:L.take_while('v:val &gt; 3', [1, 2, 3, 4, 5])
-Should [1, 2] == g:L.take_while('v:val &lt; 3', [1, 2, 3, 4, 5])
-End
+  It creates a list from another one, it inspects the original list and takes from its elements to the moment when the condition fails, then it stops processing
+    Should [1, 3] == g:L.take_while('v:val &lt; 5', [1, 3, 5, 2])
+    Should [] == g:L.take_while('v:val &gt; 3', [1, 2, 3, 4, 5])
+    Should [1, 2] == g:L.take_while('v:val &lt; 3', [1, 2, 3, 4, 5])
+  End
 
-It of course handles list of list.
-should [[1], [2, 3]] ==
-\ g:L.take_while('len(v:val) &gt; 0', [[1], [2, 3], [], [4]])
-End
+  It of course handles list of list.
+    should [[1], [2, 3]] ==
+          \ g:L.take_while('len(v:val) &gt; 0', [[1], [2, 3], [], [4]])
+  End
 End
 </code></pre>
 
@@ -50,7 +50,7 @@ End
 <p><code>autoload/vital/__latest__/data/list.vim</code></p>
 
 <pre><code>function! s:take_while(f, xs)
-return s:span(a:f, a:xs)[0]
+  return s:span(a:f, a:xs)[0]
 endfunction
 </code></pre>
 
