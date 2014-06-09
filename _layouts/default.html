@@ -9,13 +9,12 @@
 <link rel="stylesheet" href="/vim-users-jp/assets/css/site.css" type="text/css" />
 <link rel="stylesheet" href="/vim-users-jp/assets/css/table.css" type="text/css" />
 <link rel="stylesheet" href="/vim-users-jp/assets/css/syntax.css" type="text/css" />
-<link rel="stylesheet" href="http://google-code-prettify.googlecode.com/svn/trunk/styles/desert.css">
+<link rel="stylesheet" href="http://google-code-prettify.googlecode.com/svn/trunk/styles/desert.css" type="text/css" />
 <link rel="alternate" type="application/rss+xml" title="RSS" href="http://vim-jp.org/rss.xml" />
 <link rel="canonical" href="http://vim-jp.org/vim-users-jp{{ page.url }}" />
 <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
 <link rel="icon" type="image/x-icon" href="/favicon.ico" />
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-<script src="http://google-code-prettify.googlecode.com/svn/trunk/src/prettify.js"></script>
 <script src="http://google-code-prettify.googlecode.com/svn/trunk/src/prettify.js"></script>
 <script src="https://raw.githubusercontent.com/hail2u/google-code-prettify-language-handlers/master/lang-vim.js"></script>
 <script>
@@ -41,10 +40,10 @@
 	// Hatena
 	add('//b.st-hatena.com/js/bookmark_button_wo_al.js');
 
-	document.body.onload = function() {
-    prettyPrint();
-  });
-	}(document, 'script'));
+	window.onload = function() {
+		prettyPrint();
+	};
+	})(document, 'script');
 </script>
 </head>
 <body>
