@@ -41,7 +41,9 @@
 	// Hatena
 	add('//b.st-hatena.com/js/bookmark_button_wo_al.js');
 
-	prettyPrint();
+	document.body.onload = function() {
+    prettyPrint();
+  });
 	}(document, 'script'));
 </script>
 </head>
