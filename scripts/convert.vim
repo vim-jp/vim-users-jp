@@ -1,5 +1,13 @@
 scriptencoding utf-8
 
+" Usage:
+"  1. Goto the project root.
+"  2. Open this script. (vim script/convert.vim)
+"  3. :so %
+"
+" Dependency:
+"  https://github.com/mattn/webapi-vim
+
 let s:fmap = {}
 let s:index = []
 let s:clean_dup = 0
@@ -148,7 +156,7 @@ function! s:scan() abort
     try
       call s:convert(f)
     catch
-	  redraw
+      redraw
       echo v:exception
     endtry
   endfor
