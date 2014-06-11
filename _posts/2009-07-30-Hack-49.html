@@ -16,7 +16,7 @@ author: Shougo
 
 <h2>neocomplcacheの使い方</h2>
 
-<p>neocomplcacheはAutoComplPopと競合するので、AutoComplPopをインストールしている場合には、まず<code class="option">g:acp_enableAtStartup</code>を1に設定し、AutoComplPopの自動起動を無効にしてください。自動起動を無効にした場合も、<code class="vim-script">:ACPEnable</code>コマンドを実行すれば、AutoComplPopを使用することができます。不具合を避けるため、neocomplcacheは自動的に起動しません。<code class="vim-script">let g:NeoComplCache_EnableAtStartup = 1 </code>と設定すると、Vimの起動時に自動的に有効になります。 手動で有効にしたいときには、<code class="vim-script">:NeoComplCacheEnable</code>を実行してください。<code class="vim-script">:NeoComplCacheDisable</code>で無効になります。</p>
+<p>neocomplcacheはAutoComplPopと競合するので、AutoComplPopをインストールしている場合には、まず<code class="option">g:acp_enableAtStartup</code>を1に設定し、AutoComplPopの自動起動を無効にしてください。自動起動を無効にした場合も、<code class="lang-vim">:ACPEnable</code>コマンドを実行すれば、AutoComplPopを使用することができます。不具合を避けるため、neocomplcacheは自動的に起動しません。<code class="lang-vim">let g:NeoComplCache_EnableAtStartup = 1 </code>と設定すると、Vimの起動時に自動的に有効になります。 手動で有効にしたいときには、<code class="lang-vim">:NeoComplCacheEnable</code>を実行してください。<code class="lang-vim">:NeoComplCacheDisable</code>で無効になります。</p>
 
 <h2>neocomplcacheの代表的機能</h2>
 
@@ -113,6 +113,6 @@ let g:NeoComplCache_SnippetsDir = $HOME.'/snippets'
 
 <h2>neocomplcacheをさらに使いこなすために:</h2>
 
-<p>neocomplcacheには日本語のヘルプが付属しています。<code class="vim-script">:help neocomplcache</code>をすれば設定可能なオプション等が一覧できます。体系的な解説が欲しい場合は、<a href="http://github.com/Shougo/neocomplcache/tree/master">プレゼンテーションファイル</a>を参照してください。新機能が追加された場合、こまめに更新しています。</p>
+<p>neocomplcacheには日本語のヘルプが付属しています。<code class="lang-vim">:help neocomplcache</code>をすれば設定可能なオプション等が一覧できます。体系的な解説が欲しい場合は、<a href="http://github.com/Shougo/neocomplcache/tree/master">プレゼンテーションファイル</a>を参照してください。新機能が追加された場合、こまめに更新しています。</p>
 
 <address class="hack-author">Shougo</address>

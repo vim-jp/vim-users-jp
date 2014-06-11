@@ -18,16 +18,16 @@ let l:rand = reltimestr(reltime())[l:match_end : ] % (n + 1)
 </pre>
 
 <p>
-<code class="vim-script">reltimestr(reltime())</code>の部分で、3939190.694889のようにVimが起動してからの時間をマイクロ秒単位で取得します。
-				このうち、0.1秒未満の部分を乱数用に使用するため、<code class="vim-script">reltimestr(reltime())[l:match_end : ]</code>でマッチ部分を取り出しています。
+<code class="lang-vim">reltimestr(reltime())</code>の部分で、3939190.694889のようにVimが起動してからの時間をマイクロ秒単位で取得します。
+				このうち、0.1秒未満の部分を乱数用に使用するため、<code class="lang-vim">reltimestr(reltime())[l:match_end : ]</code>でマッチ部分を取り出しています。
 				あとはn+1で剰余を取ることで、0～nまでの簡単な乱数が生成されます。実用上はこの程度の精度で充分でしょう。
 </p>
 
 <h2>使用上の注意</h2>
 
 <p>
-<code class="vim-script">reltimestr()</code>や<code class="vim-script">reltime()</code>はVimが+reltimeでコンパイルされていないと動作しません。
-				大抵の環境では動作するはずですが、使用する場合には念のため、<code class="vim-script">has('reltime')</code>で検査しておくことをお薦めします。
+<code class="lang-vim">reltimestr()</code>や<code class="lang-vim">reltime()</code>はVimが+reltimeでコンパイルされていないと動作しません。
+				大抵の環境では動作するはずですが、使用する場合には念のため、<code class="lang-vim">has('reltime')</code>で検査しておくことをお薦めします。
 </p>
 
 <address class="hack-author">Shougo</address>

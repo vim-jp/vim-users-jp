@@ -8,7 +8,7 @@ author: Shougo
 
 <h2>neocomplcacheで辞書補完をするには？</h2>
 
-<p>辞書ファイルへのパスは、変数<code class="vim-script">g:NeoComplCache_DictionaryFileTypeLists</code>に格納されています。
+<p>辞書ファイルへのパスは、変数<code class="lang-vim">g:NeoComplCache_DictionaryFileTypeLists</code>に格納されています。
 				パスを設定すれば、ファイルを開いたときに自動的に読み込まれます。
 				例えば、私は次のように設定しています。defaultはファイルタイプに関係なく参照される辞書ファイルです。</p>
 
@@ -24,7 +24,7 @@ let g:NeoComplCache_DictionaryFileTypeLists = {
 
 <h2>自動補完が重い</h2>
 
-<p><code class="vim-script">g:NeoComplCache_KeywordCompletionStartLength</code>の値を増やすか、<code class="vim-script">g:NeoComplCache_SkipCompletionTime</code>を増やす（例えば&#8217;0.3&#8242;）と少しイライラが解消されるでしょう。あまりやりすぎると、なかなか自動補完の候補が出なくなります。基本的には自動補完は重い処理なので、あまり性能の低いPCで有効にするものではありません。</p>
+<p><code class="lang-vim">g:NeoComplCache_KeywordCompletionStartLength</code>の値を増やすか、<code class="lang-vim">g:NeoComplCache_SkipCompletionTime</code>を増やす（例えば&#8217;0.3&#8242;）と少しイライラが解消されるでしょう。あまりやりすぎると、なかなか自動補完の候補が出なくなります。基本的には自動補完は重い処理なので、あまり性能の低いPCで有効にするものではありません。</p>
 
 <h2>Insertmodeでカーソル移動すると補完されて大変</h2>
 
@@ -43,7 +43,7 @@ smap &lt;silent&gt;L     &lt;Plug&gt;(neocomplcache_snippets_expand)
 
 <h2>オムニ補完が重い</h2>
 
-<p>オムニ補完のためのキーワード設定は、変数<code class="vim-script">g:NeoComplCache_OmniPatterns</code>に格納されています。
+<p>オムニ補完のためのキーワード設定は、変数<code class="lang-vim">g:NeoComplCache_OmniPatterns</code>に格納されています。
 				ファイルタイプをキーとしているので、無効にしたいファイルタイプの正規表現を空にするとオムニ補完が呼ばれなくなります。
 				例えば、htmlのオムニ補完を無効にするためには、次のようにします。</p>
 
@@ -53,7 +53,7 @@ let g:NeoComplCache_OmniPatterns['html'] = ''
 
 <h2>他のプログラミング言語にも対応させたい</h2>
 
-<p>補完するためのキーワードの設定は、変数<code class="vim-script">g:NeoComplCache_KeywordPatterns</code>に格納されています。
+<p>補完するためのキーワードの設定は、変数<code class="lang-vim">g:NeoComplCache_KeywordPatterns</code>に格納されています。
 				ファイルタイプをキーとして、キーワードにマッチする正規表現を設定すれば、任意のプログラミング言語に対応します。</p>
 
 <h2>Vimのファイル名補完やオムニ補完の呼び出しをneocomplcache組み込みのものに置き換えたい</h2>
@@ -69,10 +69,10 @@ inoremap &lt;expr&gt; &lt;C-j&gt;  &amp;filetype == 'vim' ? "\&lt;C-x&gt;\&lt;C-
 <h2>Vimで巨大なファイルを開くと、キャッシュ生成で待たされる</h2>
 
 <p>neocomplcacheはファイル読み込みを監視し、新たなファイルを開くと、自動的にキーワードをキャッシュするようになっています。
-				巨大なファイルの場合、このキャッシュを生成する動作が邪魔になることがあります。<code class="vim-script">g:NeoComplCache_CachingLimitFileSize</code>の値を調節することで、巨大なファイルはキャッシュしないように設定することが可能です。初期値は1000000となっているので、約1メガバイト以上のファイルはキャッシュしません。手動でキャッシュさせるには、<code class="vim-script">:NeoComplCacheCachingBuffer</code>コマンドを使用します。</p>
+				巨大なファイルの場合、このキャッシュを生成する動作が邪魔になることがあります。<code class="lang-vim">g:NeoComplCache_CachingLimitFileSize</code>の値を調節することで、巨大なファイルはキャッシュしないように設定することが可能です。初期値は1000000となっているので、約1メガバイト以上のファイルはキャッシュしません。手動でキャッシュさせるには、<code class="lang-vim">:NeoComplCacheCachingBuffer</code>コマンドを使用します。</p>
 
 <h2>補完がおかしい、クイックマッチが効かない</h2>
 
-<p><code class="vim-script">completeopt</code>に問題があるのだと思います。補完動作がおかしくなるので、longestやmenuは指定しないでください。お勧めはmenuoneを指定することです。クイックマッチが正しく動作するようになります。previewを追加するかどうかはお好みで。</p>
+<p><code class="lang-vim">completeopt</code>に問題があるのだと思います。補完動作がおかしくなるので、longestやmenuは指定しないでください。お勧めはmenuoneを指定することです。クイックマッチが正しく動作するようになります。previewを追加するかどうかはお好みで。</p>
 
 <address class="hack-author">Shougo</address>

@@ -32,14 +32,14 @@ author: Shougo
 <li>customlist,{func} <ul>関数名funcで与えられる自作リスト補完を行います。</ul> </li>
 
 <dd>設定例</dd>
-<dd><code class="vim-script">command! -nargs=? -complete=dir -bang CD  call s:ChangeCurrentDir('&lt;args&gt;', '&lt;bang&gt;')</code></dd>
+<dd><code class="lang-vim">command! -nargs=? -complete=dir -bang CD  call s:ChangeCurrentDir('&lt;args&gt;', '&lt;bang&gt;')</code></dd>
 
 </dd>
-<dd>補完関数についての詳しい解説は<code class="vim-script">:help command-completion</code>を参照してください。</dd>
+<dd>補完関数についての詳しい解説は<code class="lang-vim">:help command-completion</code>を参照してください。</dd>
 
 <dt>input()に補完を定義する:</dt>
 <dd>input()に補完を定義するのは簡単です。オプション引数であるcompletionが補完関数の名前となっているので、ここを自作コマンドの時と同様に設定すればよいです。例えばバッファ名を補完したいときには、次のように記述します。</dd>
-<dd><code class="vim-script">let bname = input("Select buffer: ", "", "buffer")</code></dd>
+<dd><code class="lang-vim">let bname = input("Select buffer: ", "", "buffer")</code></dd>
 </dl>
 
 <dl>
@@ -60,7 +60,7 @@ author: Shougo
 </dd>
 <dd>補完関数はこれらの引数より状況を分析して、有効な補完候補のリストを返却します。customの場合は候補を\nで区切ります。customは候補の絞り込みをVim側で行いますが、customlistでは補完関数側で行わなければなりません。</dd>
 
-<dd>自作補完関数についての詳しい解説は<code class="vim-script">:help command-completion-custom</code>を参照してください。</dd>
+<dd>自作補完関数についての詳しい解説は<code class="lang-vim">:help command-completion-custom</code>を参照してください。</dd>
 </dl>
 
 <dl>

@@ -118,6 +118,7 @@ function! s:convert(f) abort
   let text = substitute(text, '>\([a-z]\+\).vim-users.jp<', '><del>\1.vim-users.jp</del><', 'g')
   let text = substitute(text, '\vhttp://vim-users.jp/vim-users-jp-official-lingr-chat-room/', 'http://lingr.com/room/vim', 'g')
   let text = substitute(text, '\vhttp://rst.gsfc.nasa.gov/Sect16/full-20earth2.jpg', 'http://vaidehiparikh.files.wordpress.com/2012/08/full-20earth2.jpg', 'g')
+  let text = substitute(text, '<code class="vim-script">', '<code class="lang-vim">', 'g')
   let text = substitute(text, '/web/[0-9]\+/', '', 'g')
   let short = title
   let dict = [

@@ -43,7 +43,7 @@ author: Shougo
 </dd>
 
 <dd>ちなみに、他のキーは存在しても無視されます。</dd>
-<dd>補完関数についての詳しい解説は<code class="vim-script">:help complete-functions</code>を参照してください。</dd>
+<dd>補完関数についての詳しい解説は<code class="lang-vim">:help complete-functions</code>を参照してください。</dd>
 </dl>
 
 <dl>
@@ -68,7 +68,7 @@ function! CompleteFiles(findstart, base)
     return list
 endfunction
 </pre>
-<dd>最後にまとめとして、補完関数のサンプルを紹介しておきます。これはカレントディレクトリに存在するファイルを補完するサンプルです。&#8217;abbr&#8217;や&#8217;menu&#8217;も使用しています。一番最初にファイル名としてマッチする部分を返し、次に呼び出されたときにファイル名にマッチする補完リストを返します。<code class="vim-script">:setlocal completefunc=CompleteFiles</code>とすると使えます。</dd>
+<dd>最後にまとめとして、補完関数のサンプルを紹介しておきます。これはカレントディレクトリに存在するファイルを補完するサンプルです。&#8217;abbr&#8217;や&#8217;menu&#8217;も使用しています。一番最初にファイル名としてマッチする部分を返し、次に呼び出されたときにファイル名にマッチする補完リストを返します。<code class="lang-vim">:setlocal completefunc=CompleteFiles</code>とすると使えます。</dd>
 <div id="attachment_406" class="wp-caption alignnone" style="width: 422px"><a href="/vim-users-jp/assets/images/sample.png"><img src="/vim-users-jp/assets/images/sample.png" alt="ファイル名補完" title="filename_completion" width="412" height="775" class="size-full wp-image-406" /></a><p class="wp-caption-text">ファイル名補完</p></div>
 </dl>
 
@@ -76,9 +76,9 @@ endfunction
 <dt>注意:</dt>
 <dd>補完関数が呼び出されるのは補完を行うキーが押されたときだけです。
 				    Vimは英字を入力したときに、ポップアップの絞り込みを自動で行いますが、補完関数を再度呼び出すことはありません。自動で補完を行うためには、CursorMovedIにautocmdを設定し、カーソルが移動したら自動で補完関数を呼び出す必要があります。自動補完は処理が複雑になるので、この章では解説しません。ちなみに<kbd>&lt;C-h&gt;</kbd>を押したときは例外で、補完関数が再度呼び出されます。この動作が気になるようなら、
-<dd><code class="vim-script">inoremap &lt;expr&gt;&lt;C-h&gt; pumvisible() ? "\&lt;C-y&gt;\&lt;C-h&gt;" : "\&lt;C-h&gt;"</code></dd>
+<dd><code class="lang-vim">inoremap &lt;expr&gt;&lt;C-h&gt; pumvisible() ? "\&lt;C-y&gt;\&lt;C-h&gt;" : "\&lt;C-h&gt;"</code></dd>
 <dd>と.vimrcで設定した方がよいかもしれません。</dd>
-<dd>またポップアップメニューを生成する処理は重いため、巨大なリストを返却した場合、Vimの動作が止まってしまうことがあります。その点Vim標準の補完はよく考えられていて、処理が重いときには先頭の候補のみをポップアップメニューに表示します。そしてしばらく待っていると、全ての補完候補が表示されます。自作の補完関数でこのような動作を行うためには、<code class="vim-script">complete_check()</code>でキー入力を監視し、<code class="vim-script">complete_add()</code>で少しずつ要素を追加するようにしてください。</dd>
+<dd>またポップアップメニューを生成する処理は重いため、巨大なリストを返却した場合、Vimの動作が止まってしまうことがあります。その点Vim標準の補完はよく考えられていて、処理が重いときには先頭の候補のみをポップアップメニューに表示します。そしてしばらく待っていると、全ての補完候補が表示されます。自作の補完関数でこのような動作を行うためには、<code class="lang-vim">complete_check()</code>でキー入力を監視し、<code class="lang-vim">complete_add()</code>で少しずつ要素を追加するようにしてください。</dd>
 </dl>
 
 <address class="hack-author">Shougo</address>

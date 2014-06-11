@@ -36,7 +36,7 @@ nnoremap &lt;silent&gt; [Tag]l  :&lt;C-u&gt;tags&lt;CR&gt;
 </pre>
 
 <p>
-				[Tag]というPrefix-keyを抽象化したものを定義し、tを[Tag]に<code class="vim-script">nmap</code>でリンクしています。よって、Prefix-keyを変更するときは<code class="vim-script">nmap t [Tag]</code>を変更するだけで済みます。ちなみに、このように設定しているとKey-mappingが入力途中の場合、Status line上の表示が[Tag]となるので、タグジャンプのキーを入力途中と言うことが分かり易くなります。
+				[Tag]というPrefix-keyを抽象化したものを定義し、tを[Tag]に<code class="lang-vim">nmap</code>でリンクしています。よって、Prefix-keyを変更するときは<code class="lang-vim">nmap t [Tag]</code>を変更するだけで済みます。ちなみに、このように設定しているとKey-mappingが入力途中の場合、Status line上の表示が[Tag]となるので、タグジャンプのキーを入力途中と言うことが分かり易くなります。
 </p>
 
 <address class="hack-author">Shougo</address>

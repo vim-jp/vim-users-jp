@@ -76,7 +76,7 @@ author: thinca
 				まずは対象をどのように目立たせるかを設定します。今回は不可視文字を目立たせるのが目的なので、対象の背景色を変更するようにします。
 </p>
 
-<pre><code class="vim-script">
+<pre><code class="lang-vim">
 highlight IdeographicSpace term=underline ctermbg=DarkGreen guibg=DarkGreen
 </code></pre>
 
@@ -86,10 +86,10 @@ highlight IdeographicSpace term=underline ctermbg=DarkGreen guibg=DarkGreen
 </p>
 
 <p>
-				なお、<code class="vim-script">:highlight</code> コマンドで作成したハイライトは <code class="vim-script">:colorscheme</code> でカラースキームを設定する際に全てクリアされます。よってこのコマンドは <code class="vim-script">:colorscheme</code> を実行した後に実行するか、もしくはカラースキームを変更した際に常に実行されるように
+				なお、<code class="lang-vim">:highlight</code> コマンドで作成したハイライトは <code class="lang-vim">:colorscheme</code> でカラースキームを設定する際に全てクリアされます。よってこのコマンドは <code class="lang-vim">:colorscheme</code> を実行した後に実行するか、もしくはカラースキームを変更した際に常に実行されるように
 </p>
 
-<pre><code class="vim-script">
+<pre><code class="lang-vim">
 autocmd Colorscheme * highlight IdeographicSpace term=underline ctermbg=DarkGreen guibg=DarkGreen
 </code></pre>
 
@@ -100,37 +100,37 @@ autocmd Colorscheme * highlight IdeographicSpace term=underline ctermbg=DarkGree
 <h4>ハイライトの対象を設定する</h4>
 
 <p>
-				ハイライト対象を設定するには、<code class="vim-script">:match</code> を用いる方法と <code class="vim-script">:syntax</code> を用いる方法の 2 つがあります。ここでは <code class="vim-script">:match</code> を用いる方法を紹介します。
+				ハイライト対象を設定するには、<code class="lang-vim">:match</code> を用いる方法と <code class="lang-vim">:syntax</code> を用いる方法の 2 つがあります。ここでは <code class="lang-vim">:match</code> を用いる方法を紹介します。
 </p>
 
 <p>
-<code class="vim-script">:match</code> コマンドは以下の様に使用します(厳密なコマンドの書式の解説は省きます)。
+<code class="lang-vim">:match</code> コマンドは以下の様に使用します(厳密なコマンドの書式の解説は省きます)。
 </p>
 
-<pre><code class="vim-script">
+<pre><code class="lang-vim">
 match IdeographicSpace /　/
 </code></pre>
 
 <p>
 				/で囲まれた部分が全角スペースです。見ての通り、対象となる正規表現と、対象をどのハイライトグループでハイライトするかを指定します。
-				ただし、<code class="vim-script">:match</code> コマンドで設定された対象はウィンドウローカルにしか設定されません。
+				ただし、<code class="lang-vim">:match</code> コマンドで設定された対象はウィンドウローカルにしか設定されません。
 				よって、ウィンドウに入り直す度にコマンドを実行するように、以下のようにします。
 </p>
 
-<pre><code class="vim-script">
+<pre><code class="lang-vim">
 autocmd VimEnter,WinEnter * match IdeographicSpace /　/
 </code></pre>
 
 <p>
-				Vim の起動直後は WinEnter イベントが発生しないので、VimEnter イベント発生時にも実行しています。BufRead,BufNew などでは不完全です。ファイルを指定せずに Vim を起動した場合や <code class="vim-script">:split</code> などで分割したウィンドウではコマンドが実行されません。
+				Vim の起動直後は WinEnter イベントが発生しないので、VimEnter イベント発生時にも実行しています。BufRead,BufNew などでは不完全です。ファイルを指定せずに Vim を起動した場合や <code class="lang-vim">:split</code> などで分割したウィンドウではコマンドが実行されません。
 </p>
 
 <p>
 				今回のように全角スペースをハイライトしたい場合、その文字自身をコマンドで指定することになります。
-				コマンドを Vim スクリプトに記述する場合、スクリプト内にマルチバイト文字を記述することになるので該当コマンドを実行するより前に <code class="vim-script">:scriptencoding</code> でスクリプトファイルのエンコーディングを指定しておく必要があります。
+				コマンドを Vim スクリプトに記述する場合、スクリプト内にマルチバイト文字を記述することになるので該当コマンドを実行するより前に <code class="lang-vim">:scriptencoding</code> でスクリプトファイルのエンコーディングを指定しておく必要があります。
 </p>
 
-<pre><code class="vim-script">
+<pre><code class="lang-vim">
 scriptencoding utf-8
 </code></pre>
 
@@ -138,7 +138,7 @@ scriptencoding utf-8
 				以上の内容をまとめると以下のようになります。
 </p>
 
-<pre><code class="vim-script">
+<pre><code class="lang-vim">
 scriptencoding utf-8
 
 augroup highlightIdegraphicSpace

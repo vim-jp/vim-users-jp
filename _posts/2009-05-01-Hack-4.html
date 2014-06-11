@@ -4,7 +4,7 @@ title: "Hack #4: Insert mode補完　導入編"
 date: 2009-05-01
 author: Shougo
 ---
-<p>Vimが他のエディタと比較して優れている点の一つとして、豊富な補完機能が挙げられます。本Hackでは特にInsert modeで使用できる補完について解説します。ほとんどの補完機能は<kbd>&lt;C-x&gt;</kbd>で始まるキーに割り当てられています。よく使う補完機能には、各々が押し易いキーに割り当てると良いでしょう。Insert mode補完についての詳しい解説は<code class="vim-script">:help ins-completion</code>を参照してください。</p>
+<p>Vimが他のエディタと比較して優れている点の一つとして、豊富な補完機能が挙げられます。本Hackでは特にInsert modeで使用できる補完について解説します。ほとんどの補完機能は<kbd>&lt;C-x&gt;</kbd>で始まるキーに割り当てられています。よく使う補完機能には、各々が押し易いキーに割り当てると良いでしょう。Insert mode補完についての詳しい解説は<code class="lang-vim">:help ins-completion</code>を参照してください。</p>
 
 <dl>
 <dt><kbd>&lt;C-n&gt;</kbd>または<kbd>&lt;C-p&gt;</kbd>: 様々なソースからのキーワード補完</dt>
@@ -71,7 +71,7 @@ author: Shougo
 <dt><kbd>&lt;Space&gt;</kbd>または<kbd>&lt;Tab&gt;</kbd></dt> <dd>候補選択を終了し、タイプした文字を挿入します。</dd>
 </dl></dd>
 
-<dd><kbd>&lt;Enter&gt;</kbd>だけは少々特殊です。候補を選択している場合はその候補を挿入し、それ以外の場合は改行します。この動作が煩わしい場合は、<code class="vim-script">:inoremap</code>でキーをカスタマイズするべきです。補完時のkey mappingを設定する方法は<em>[Hack #9: Insert mode補完　設定編]</em>を参照してください。</dd>
+<dd><kbd>&lt;Enter&gt;</kbd>だけは少々特殊です。候補を選択している場合はその候補を挿入し、それ以外の場合は改行します。この動作が煩わしい場合は、<code class="lang-vim">:inoremap</code>でキーをカスタマイズするべきです。補完時のkey mappingを設定する方法は<em>[Hack #9: Insert mode補完　設定編]</em>を参照してください。</dd>
 </dl>
 
 <address class="hack-author">Shougo</address>

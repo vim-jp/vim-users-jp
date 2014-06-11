@@ -35,7 +35,7 @@ author: Shougo
 </dd>
 
 <dd>設定例</dd>
-<dd><code class="vim-script">set wildmode=list:longest,full</code></dd>
+<dd><code class="lang-vim">set wildmode=list:longest,full</code></dd>
 
 <dt><code class="option">'wildmenu'</code>:</dt>
 <dd>このオプションをonにすると、Command-line mode補完が変化します。最初にマッチされ候補がハイライトされ、挿入されます。その状態で<kbd>&lt;TAB&gt;</kbd>か<kbd>&lt;C-p&gt;</kbd>または<kbd>&lt;C-n&gt;</kbd>を押すと、次のマッチへ候補が移動します。</dd>
@@ -46,7 +46,7 @@ author: Shougo
 <dd>初期値は<kbd>&lt;TAB&gt;</kbd>です。</dd>
 
 <dt><code class="option">'wildcharm'</code>:</dt>
-<dd><code class="option">'wildchar'</code>の様に動作しますが、こちらはマクロ内でも動作します。<code class="vim-script">cnoremap</code>等で、Command-line mode補完を自動的に呼び出したいときに使用します。</dd>
+<dd><code class="option">'wildchar'</code>の様に動作しますが、こちらはマクロ内でも動作します。<code class="lang-vim">cnoremap</code>等で、Command-line mode補完を自動的に呼び出したいときに使用します。</dd>
 <dd>初期値は設定されていません。</dd>
 
 <dt><code class="option">'wildignore'</code>:</dt>
@@ -54,7 +54,7 @@ author: Shougo
 <dd>初期値は&#8221;"です。</dd>
 
 <dd>設定例</dd>
-<dd><code class="vim-script">set wildignore=*.o,*.obj</code></dd>
+<dd><code class="lang-vim">set wildignore=*.o,*.obj</code></dd>
 
 <dt><code class="option">'wildoptions'</code>:</dt>
 <dd>Command-line mode補完リストの追加設定です。現在は&#8221;tagfile&#8221;のみが有効です。</dd>
@@ -67,10 +67,10 @@ author: Shougo
 </dd>
 
 <dd>設定例</dd>
-<dd><code class="vim-script">set wildoptions=tagfile</code></dd>
+<dd><code class="lang-vim">set wildoptions=tagfile</code></dd>
 
 <dt><code class="option">'suffixes'</code>:</dt>
-<dd>ファイル名補完で、ワイルドカードに優先してマッチしないファイルのリストを指定します。詳しい解説は<code class="vim-script">:help suffixes</code>を参照してください。あまり重要でない一時ファイルの拡張子を指定することが多いでしょう。</dd>
+<dd>ファイル名補完で、ワイルドカードに優先してマッチしないファイルのリストを指定します。詳しい解説は<code class="lang-vim">:help suffixes</code>を参照してください。あまり重要でない一時ファイルの拡張子を指定することが多いでしょう。</dd>
 <dd>初期値は&#8221;.bak,~,.o,.h,.info,.swp,.obj&#8221;です。</dd>
 
 </dl>

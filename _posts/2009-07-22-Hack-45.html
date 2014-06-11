@@ -8,10 +8,10 @@ author: thinca
 				Vim には膨大な量のヘルプが付属しており、大抵のことはヘルプを見れば解決します。Vim を使っていて何か分からないことがあったとき、まず最初にすべきことは、help を引くことです。
 </p>
 
-<h3><code class="vim-script">:help</code> コマンド</h3>
+<h3><code class="lang-vim">:help</code> コマンド</h3>
 
 <p>
-<code class="vim-script">:help</code> コマンドを使うことでヘルプを引くことができます。引数を指定せずにコマンドを実行すると、目次にあたるページが表示されます。キーワードを指定して実行すると、キーワードに関連したヘルプページを開くことができます。
+<code class="lang-vim">:help</code> コマンドを使うことでヘルプを引くことができます。引数を指定せずにコマンドを実行すると、目次にあたるページが表示されます。キーワードを指定して実行すると、キーワードに関連したヘルプページを開くことができます。
 </p>
 
 <h4>キーワードのルール</h4>
@@ -22,12 +22,12 @@ author: thinca
 
 <table>
 <tr><th>種類</th><th>接頭子</th><th>例</th></tr>
-<tr><th>Normal mode</th><td>(無し)</td><td><code class="vim-script">:help</code> j</td></tr>
-<tr><th>Insert mode</th><td><code class="vim-script">i_</code></td><td><code class="vim-script">:help i_&lt;Esc&gt;</code></td></tr>
-<tr><th>Visual mode</th><td><code class="vim-script">v_</code></td><td><code class="vim-script">:help v_x</code></td></tr>
-<tr><th>Command-line mode</th><td><code class="vim-script">c_</code></td><td><code class="vim-script">:help c_&lt;Tab&gt;</code></td></tr>
-<tr><th>ex コマンド</th><td><code class="vim-script">:</code></td><td><code class="vim-script">:help :write</code></td></tr>
-<tr><th>オプション</th><td><code class="vim-script">'</code></td><td><code class="vim-script">:help 'tabstop'</code></td></tr>
+<tr><th>Normal mode</th><td>(無し)</td><td><code class="lang-vim">:help</code> j</td></tr>
+<tr><th>Insert mode</th><td><code class="lang-vim">i_</code></td><td><code class="lang-vim">:help i_&lt;Esc&gt;</code></td></tr>
+<tr><th>Visual mode</th><td><code class="lang-vim">v_</code></td><td><code class="lang-vim">:help v_x</code></td></tr>
+<tr><th>Command-line mode</th><td><code class="lang-vim">c_</code></td><td><code class="lang-vim">:help c_&lt;Tab&gt;</code></td></tr>
+<tr><th>ex コマンド</th><td><code class="lang-vim">:</code></td><td><code class="lang-vim">:help :write</code></td></tr>
+<tr><th>オプション</th><td><code class="lang-vim">'</code></td><td><code class="lang-vim">:help 'tabstop'</code></td></tr>
 </table>
 
 <p>
@@ -36,11 +36,11 @@ author: thinca
 
 <table>
 <tr><th>種類</th><th>ルール</th><th>例</th></tr>
-<tr><th>Ctrl キー</th><td>接頭子 CTRL- を付ける</td><td><code class="vim-script">:help CTRL-U</code></td></tr>
-<tr><th>Shift キー</th><td>大文字を使用する</td><td><code class="vim-script">:help J</code></td></tr>
-<tr><th>特殊なキー</th><td>&lt;<var>キー名</var>&gt;</td><td><code class="vim-script">:help &lt;Space&gt;</code></td></tr>
-<tr><th>キーシーケンス</th><td>そのまま</td><td><code class="vim-script">:help gg</code></td></tr>
-<tr><th>特殊キーなどを含むキーシーケンス</th><td>アンダースコアで区切る</td><td><code class="vim-script">:help g_CTRL-G</code></td></tr>
+<tr><th>Ctrl キー</th><td>接頭子 CTRL- を付ける</td><td><code class="lang-vim">:help CTRL-U</code></td></tr>
+<tr><th>Shift キー</th><td>大文字を使用する</td><td><code class="lang-vim">:help J</code></td></tr>
+<tr><th>特殊なキー</th><td>&lt;<var>キー名</var>&gt;</td><td><code class="lang-vim">:help &lt;Space&gt;</code></td></tr>
+<tr><th>キーシーケンス</th><td>そのまま</td><td><code class="lang-vim">:help gg</code></td></tr>
+<tr><th>特殊キーなどを含むキーシーケンス</th><td>アンダースコアで区切る</td><td><code class="lang-vim">:help g_CTRL-G</code></td></tr>
 </table>
 
 <p>
@@ -48,7 +48,7 @@ author: thinca
 </p>
 
 <p>
-				Insert mode などの接頭子が必要な場合はそのまま <code class="vim-script">:help i_CTRL-X</code> などとします。
+				Insert mode などの接頭子が必要な場合はそのまま <code class="lang-vim">:help i_CTRL-X</code> などとします。
 </p>
 
 <p>
@@ -59,10 +59,10 @@ author: thinca
 				キーワードを打ち込んでいる途中で <kbd>&lt;C-d&gt;</kbd> を押すと、打ち込んでいるキーワードにマッチするヘルプ項目の一覧が表示されます。これを使えば知りたい項目に辿り着きやすくなります。
 </p>
 
-<h3><code class="vim-script">:helpgrep</code> コマンド</h3>
+<h3><code class="lang-vim">:helpgrep</code> コマンド</h3>
 
 <p>
-				どうしても目的の内容が見付からない場合は、<code class="vim-script">:helpgrep</code> コマンドを使います。これはヘルプの全文検索を行うコマンドです。結果は <code class="vim-script">:grep</code> コマンドと同じように扱えます。
+				どうしても目的の内容が見付からない場合は、<code class="lang-vim">:helpgrep</code> コマンドを使います。これはヘルプの全文検索を行うコマンドです。結果は <code class="lang-vim">:grep</code> コマンドと同じように扱えます。
 </p>
 
 <h3>ヘルプの項目間をジャンプする</h3>
@@ -78,24 +78,24 @@ author: thinca
 </p>
 
 <p>
-				そのためのコマンドが <code class="vim-script">:helptags</code> コマンドです。ヘルプファイルのあるディレクトリを指定して、以下のように使います。
+				そのためのコマンドが <code class="lang-vim">:helptags</code> コマンドです。ヘルプファイルのあるディレクトリを指定して、以下のように使います。
 </p>
 
-<pre><code class="vim-script">
+<pre><code class="lang-vim">
 :helptags ~/.vim/doc
 </code></pre>
 
-<h3><code class="vim-script">:help</code> のススメ</h3>
+<h3><code class="lang-vim">:help</code> のススメ</h3>
 
 <p>
 				ヘルプは Vim 使いの友です。どれだけ長くの時間ヘルプを読んでいたかが Vim の熟練度に比例すると言っても過言ではありません。暇を見つけたらヘルプを読むと良いでしょう。
 </p>
 
 <p>
-				それに伴い、<code class="vim-script">:help</code> は素早く引けるようにしておくと便利です。
+				それに伴い、<code class="lang-vim">:help</code> は素早く引けるようにしておくと便利です。
 </p>
 
-<pre><code class="vim-script">
+<pre><code class="lang-vim">
 :nnoremap &lt;C-h&gt; :&lt;C-u&gt;h&lt;Space&gt;
 </code></pre>
 

@@ -25,7 +25,7 @@ author: ujihisa
 <p>例えばRubyのソースコードを編集中に<kbd>I# &lt;Esc&gt;</kbd>とタイプすることで現在の行をコメントアウトすることができます。
 <kbd>I</kbd>でインデントを考慮した現在行の行頭で挿入モードに入り、<kbd>#</kbd>と入力しています。同様にHaskellの場合は<kbd>I-- &lt;Esc&gt;</kbd>で実現できます。</p>
 
-<p><kbd>I# &lt;Esc&gt;</kbd>をEx command表現すると<code class="vim-script">:normal! I# ^[</code>または<code class="vim-script">:execute 'normal!' "I# \&lt;Esc&gt;"</code>となります。<kbd>^[</kbd>は<kbd>&lt;C-v&gt;&lt;Esc&gt;</kbd>とタイプすることで入力できます。見た目のまま<kbd>^[</kbd>と入力すると別の意味になりますので注意してください。</p>
+<p><kbd>I# &lt;Esc&gt;</kbd>をEx command表現すると<code class="lang-vim">:normal! I# ^[</code>または<code class="lang-vim">:execute 'normal!' "I# \&lt;Esc&gt;"</code>となります。<kbd>^[</kbd>は<kbd>&lt;C-v&gt;&lt;Esc&gt;</kbd>とタイプすることで入力できます。見た目のまま<kbd>^[</kbd>と入力すると別の意味になりますので注意してください。</p>
 
 <p>前節で説明した<code>:g[lobal]</code>と組み合わせ、trashという文字列を含む行をコメントアウトするには
 <code>:%g/trash/normal I# ^[</code>とすることで実現できます。</p>

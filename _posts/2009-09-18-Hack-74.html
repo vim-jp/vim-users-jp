@@ -60,7 +60,7 @@ endif
 				ここでは、それらへの対策を解説します。
 <h4>関数やコマンドの定義</h4>
 <p>
-				普通関数やコマンドを定義するときには、<code class="vim-script">command</code>や<code class="vim-script">function</code>を使うことがあるかも知れませんが、これらはすでにある関数やコマンドを上書きできないため、設定ファイルを何度も読み込ませるとエラーとなります。上書きできるように、<code class="vim-script">command!</code>や<code class="vim-script">function!</code>を使用しましょう。
+				普通関数やコマンドを定義するときには、<code class="lang-vim">command</code>や<code class="lang-vim">function</code>を使うことがあるかも知れませんが、これらはすでにある関数やコマンドを上書きできないため、設定ファイルを何度も読み込ませるとエラーとなります。上書きできるように、<code class="lang-vim">command!</code>や<code class="lang-vim">function!</code>を使用しましょう。
 </p>
 <h4>autocmdの定義</h4>
 <p>
@@ -73,7 +73,7 @@ autocmd!
 autocmd FileType * set textwidth=0
 autocmd FileType * set formatoptions-=ro
 </pre>
-				autocmdを全部削除するのに抵抗があるのならば、augroupを設定するとさらに便利になります。詳しくは<code class="vim-script">:help augroup</code>を参照してください。
+				autocmdを全部削除するのに抵抗があるのならば、augroupを設定するとさらに便利になります。詳しくは<code class="lang-vim">:help augroup</code>を参照してください。
 <pre>
 augroup MyAutoCmd
     autocmd!

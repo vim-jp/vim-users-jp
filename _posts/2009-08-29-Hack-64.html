@@ -15,7 +15,7 @@ author: Shougo
 <h2>Vimに追加する設定</h2>
 
 <p>
-				Vimへの設定は簡単で、<code class="vim-script">set t_Co=256</code>を追加するだけです。ただし、<code class="vim-script">colorscheme</code>コマンドを実行する前に設定する必要があります。
+				Vimへの設定は簡単で、<code class="lang-vim">set t_Co=256</code>を追加するだけです。ただし、<code class="lang-vim">colorscheme</code>コマンドを実行する前に設定する必要があります。
 </p>
 
 <h2>GNU Screenを併用している場合</h2>
@@ -45,13 +45,13 @@ termcapinfo xterm-256color 'is=^[r^[mJ^[H^[?7h^[?1;4;6l'
 <h2>guicolorscheme.vimの使い方</h2>
 
 <p>
-				使い方は簡単で、<code class="vim-script">:colorscheme {color_name}</code>の代わりに<code class="vim-script">:GuiColorScheme {color_name}</code>を使うだけです。ただし、ColorSchemeによっては動かないこともあります。
+				使い方は簡単で、<code class="lang-vim">:colorscheme {color_name}</code>の代わりに<code class="lang-vim">:GuiColorScheme {color_name}</code>を使うだけです。ただし、ColorSchemeによっては動かないこともあります。
 </p>
 
 <h2>CSApprox.vimの使い方</h2>
 
 <p>
-				こちらはさらに簡単で、普通に<code class="vim-script">:colorscheme {color_name}</code>を使うだけです。autocmdでフックをかけているので、ColorSchemeが自動的に変換され、Vimに適用されます。
+				こちらはさらに簡単で、普通に<code class="lang-vim">:colorscheme {color_name}</code>を使うだけです。autocmdでフックをかけているので、ColorSchemeが自動的に変換され、Vimに適用されます。
 </p>
 
 <address class="hack-author">Shougo</address>

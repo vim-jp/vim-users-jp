@@ -4,7 +4,7 @@ title: "Hack #19: Command-line mode補完　導入編"
 date: 2009-05-31
 author: Shougo
 ---
-<p>Insert mode補完をマスターした後は、Command-line modeにおける補完機能についても習熟しましょう。導入編の本Hackでは、基本的なCommand-line mode補完について解説します。Command-line mode補完についての詳しい解説は<code class="vim-script">:help cmdline-completion</code>を参照してください。</p>
+<p>Insert mode補完をマスターした後は、Command-line modeにおける補完機能についても習熟しましょう。導入編の本Hackでは、基本的なCommand-line mode補完について解説します。Command-line mode補完についての詳しい解説は<code class="lang-vim">:help cmdline-completion</code>を参照してください。</p>
 
 <dl>
 <dt>Command-line modeで補完できる要素</dt>
@@ -16,28 +16,28 @@ author: Shougo
 <ul>コマンドの後で補完した場合。補完される要素はコマンドにより異なります。</ul>
 </li>
 <li>ファイル名
-<ul><code class="vim-script">:edit</code>コマンドの後で補完した場合。</ul>
+<ul><code class="lang-vim">:edit</code>コマンドの後で補完した場合。</ul>
 </li>
 <li>オプション名
-<ul><code class="vim-script">:set</code>や<code class="vim-script">:setlocal</code>コマンドの後で補完した場合。</ul>
+<ul><code class="lang-vim">:set</code>や<code class="lang-vim">:setlocal</code>コマンドの後で補完した場合。</ul>
 </li>
 <li>Key-mappings
-<ul><code class="vim-script">:map</code>系のコマンドの後で補完した場合。</ul>
+<ul><code class="lang-vim">:map</code>系のコマンドの後で補完した場合。</ul>
 </li>
 <li>変数名や関数名
-<ul><code class="vim-script">:if</code>や<code class="vim-script">:call</code>などのコマンドの後で補完した場合。ただし、<code class="vim-script">hoge#piyo</code>のように、名前に#が含まれていると、うまく補完できません。</ul>
+<ul><code class="lang-vim">:if</code>や<code class="lang-vim">:call</code>などのコマンドの後で補完した場合。ただし、<code class="lang-vim">hoge#piyo</code>のように、名前に#が含まれていると、うまく補完できません。</ul>
 </li>
 <li>シェルコマンド名
-<ul><code class="vim-script">:!cmd</code>など、シェルを使用するコマンドの後で補完した場合。$PATH中のファイルをすべて認識しているようです。</ul>
+<ul><code class="lang-vim">:!cmd</code>など、シェルを使用するコマンドの後で補完した場合。$PATH中のファイルをすべて認識しているようです。</ul>
 </li>
 <li>ヘルプ
-<ul><code class="vim-script">:help</code>コマンドの後で補完した場合。日本語版のヘルプなら後ろに@ja、英語版のヘルプなら後ろに@enが付きます。</ul>
+<ul><code class="lang-vim">:help</code>コマンドの後で補完した場合。日本語版のヘルプなら後ろに@ja、英語版のヘルプなら後ろに@enが付きます。</ul>
 </li>
 <li>タグ名
-<ul><code class="vim-script">:tag</code>コマンドの後で補完した場合。</ul>
+<ul><code class="lang-vim">:tag</code>コマンドの後で補完した場合。</ul>
 </li>
 <li>オプションの設定された値
-<ul><code class="vim-script">:set option_name=</code>の後で補完した場合。</ul>
+<ul><code class="lang-vim">:set option_name=</code>の後で補完した場合。</ul>
 </li>
 </dd>
 

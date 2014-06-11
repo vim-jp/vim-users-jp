@@ -38,20 +38,20 @@ author: thinca
 <h3>オプション値の設定と確認</h3>
 
 <p>
-<a class="hack" href="/vim-users-jp/2009/05/hack5/">Hack #5: Vim のオプションの値</a> でオプションの設定には <code class="vim-script">:set</code> を使うと紹介しましたが、ローカルオプションを設定する場合にはこのコマンドは不適切です。なぜならば、このコマンドを使うとローカルな値と共にグローバルな値も変更されてしまうからです。前述の通りグローバルな値を変更してしまうとその後新たに作られるバッファやウィンドウの初期値が変更されてしまいます。これは多くの場合期待しない動作となります。
+<a class="hack" href="/vim-users-jp/2009/05/hack5/">Hack #5: Vim のオプションの値</a> でオプションの設定には <code class="lang-vim">:set</code> を使うと紹介しましたが、ローカルオプションを設定する場合にはこのコマンドは不適切です。なぜならば、このコマンドを使うとローカルな値と共にグローバルな値も変更されてしまうからです。前述の通りグローバルな値を変更してしまうとその後新たに作られるバッファやウィンドウの初期値が変更されてしまいます。これは多くの場合期待しない動作となります。
 </p>
 
 <p>
-				そのために Vim にはローカルな値とグローバルな値のみを変更するコマンド <code class="vim-script">:setlocal</code> と <code class="vim-script">:setglobal</code> が用意されています。各コマンドでどのオプションの値が設定/表示されるかを表にすると以下のようになります。
+				そのために Vim にはローカルな値とグローバルな値のみを変更するコマンド <code class="lang-vim">:setlocal</code> と <code class="lang-vim">:setglobal</code> が用意されています。各コマンドでどのオプションの値が設定/表示されるかを表にすると以下のようになります。
 
 </p>
 
 <table>
 <tr><th>コマンド</th><th>グローバルな値</th><th>ローカルな値</th><th>{option}? で表示される値</th></tr>
-<tr><th><code class="vim-script">:set</code></td><td>変更される</td><td>変更される</td><td>ローカルな値</td></tr>
-<tr><th><code class="vim-script">:setlocal</code></td><td>変更されない</td><td>変更される</td><td>ローカルな値</td></tr>
+<tr><th><code class="lang-vim">:set</code></td><td>変更される</td><td>変更される</td><td>ローカルな値</td></tr>
+<tr><th><code class="lang-vim">:setlocal</code></td><td>変更されない</td><td>変更される</td><td>ローカルな値</td></tr>
 
-<tr><th><code class="vim-script">:setglobal</code></td><td>変更される</td><td>変更されない</td><td>グローバルな値</td></tr>
+<tr><th><code class="lang-vim">:setglobal</code></td><td>変更される</td><td>変更されない</td><td>グローバルな値</td></tr>
 </table>
 
 <h3>ローカルな値を持つグローバルなオプション</h3>
@@ -72,15 +72,15 @@ author: thinca
 </dl>
 
 <p>
-				このタイプのオプションでは、<code class="vim-script">:set</code> の挙動が以下のように変化します。<code class="vim-script">:setlocal</code> と <code class="vim-script">:setglobal</code> は変化しませんが、比較のために再掲します。
+				このタイプのオプションでは、<code class="lang-vim">:set</code> の挙動が以下のように変化します。<code class="lang-vim">:setlocal</code> と <code class="lang-vim">:setglobal</code> は変化しませんが、比較のために再掲します。
 </p>
 
 <table>
 <tr><th>コマンド</th><th>グローバルな値</th><th>ローカルな値</th><th>{option}? で表示される値</th></tr>
 
-<tr><th><code class="vim-script">:set</code></td><td>変更される</td><td>変更されない</td><td>普段はグローバルな値、ローカルな値が設定されている場合はローカルな値</td></tr>
-<tr><th><code class="vim-script">:setlocal</code></td><td>変更されない</td><td>変更される</td><td>ローカルな値</td></tr>
-<tr><th><code class="vim-script">:setglobal</code></td><td>変更される</td><td>変更されない</td><td>グローバルな値</td></tr>
+<tr><th><code class="lang-vim">:set</code></td><td>変更される</td><td>変更されない</td><td>普段はグローバルな値、ローカルな値が設定されている場合はローカルな値</td></tr>
+<tr><th><code class="lang-vim">:setlocal</code></td><td>変更されない</td><td>変更される</td><td>ローカルな値</td></tr>
+<tr><th><code class="lang-vim">:setglobal</code></td><td>変更される</td><td>変更されない</td><td>グローバルな値</td></tr>
 
 </table>
 
@@ -99,11 +99,11 @@ author: thinca
 <h3>ローカルなオプションの値を初期化する</h3>
 
 <p>
-				オプションの値を初期化するには <code class="vim-script">:set {option}&amp;</code> ですが、これは初期値に設定するコマンドです。これとは別に、ローカルなオプションに現在のグローバルなオプションの値と同じ値を設定する方法があります。以下のようにします。
+				オプションの値を初期化するには <code class="lang-vim">:set {option}&amp;</code> ですが、これは初期値に設定するコマンドです。これとは別に、ローカルなオプションに現在のグローバルなオプションの値と同じ値を設定する方法があります。以下のようにします。
 </p>
 
 <dl>
-<dt><code class="vim-script">:setlocal {option}&lt;</code></dt>
+<dt><code class="lang-vim">:setlocal {option}&lt;</code></dt>
 </dl>
 
 <p>
@@ -111,11 +111,11 @@ author: thinca
 </p>
 
 <dl>
-<dt><code class="vim-script">:set {option}&lt;</code></dt>
+<dt><code class="lang-vim">:set {option}&lt;</code></dt>
 </dl>
 
 <p>
-				これは global or local なオプションに対してのみ効果があります。特に文字列のオプションは <code class="vim-script">:set {option}=</code> とすることで空に設定することもできますが、文字列以外のオプションはこの方法で空にする必要があります。
+				これは global or local なオプションに対してのみ効果があります。特に文字列のオプションは <code class="lang-vim">:set {option}=</code> とすることで空に設定することもできますが、文字列以外のオプションはこの方法で空にする必要があります。
 </p>
 
 <h3>例外</h3>

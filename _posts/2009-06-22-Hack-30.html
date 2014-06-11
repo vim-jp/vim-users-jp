@@ -11,15 +11,15 @@ author: thinca
 <h3>範囲を与えられるコマンド</h3>
 
 <p>
-				まず最初に注意したいのですが、全てのコマンドに対して範囲を指定できるわけではありません。範囲が指定できるものに関しては help 内で <code class="vim-script">:{range}<var>command</var></code> や <code class="vim-script">:[range]<var>command</var></code> などと表記されています。また、<code class="vim-script">:!</code> などのように範囲を指定するかどうかで動作が変わるコマンドも一部あります。
+				まず最初に注意したいのですが、全てのコマンドに対して範囲を指定できるわけではありません。範囲が指定できるものに関しては help 内で <code class="lang-vim">:{range}<var>command</var></code> や <code class="lang-vim">:[range]<var>command</var></code> などと表記されています。また、<code class="lang-vim">:!</code> などのように範囲を指定するかどうかで動作が変わるコマンドも一部あります。
 </p>
 
 <p>
-				また、範囲ではなくカウントを与えるコマンドもあります。<code class="vim-script">:tag</code> などがそうです。が、指定方法に大差はありません。扱われ方が違うだけです。
+				また、範囲ではなくカウントを与えるコマンドもあります。<code class="lang-vim">:tag</code> などがそうです。が、指定方法に大差はありません。扱われ方が違うだけです。
 </p>
 
 <p>
-				範囲を指定できるコマンドに対して範囲指定を省略した場合、多くのコマンドは現在の 1 行のみを指定したことになります。ただし例外もあります。例えば、<code class="vim-script">:global</code> や <code class="vim-script">:sort</code> は範囲指定を省略するとファイル全体を指定したことになります。
+				範囲を指定できるコマンドに対して範囲指定を省略した場合、多くのコマンドは現在の 1 行のみを指定したことになります。ただし例外もあります。例えば、<code class="lang-vim">:global</code> や <code class="lang-vim">:sort</code> は範囲指定を省略するとファイル全体を指定したことになります。
 </p>
 
 <h3>範囲の指定方法</h3>
@@ -30,7 +30,7 @@ author: thinca
 				範囲は行単位で指定します。つまり、ある行からある行まで、ということです。最も単純な例を示します。
 </p>
 
-<pre><code class="vim-script">
+<pre><code class="lang-vim">
 :10,20<var>command</var>
 </code></pre>
 
@@ -41,7 +41,7 @@ author: thinca
 <table>
 <thead><tr><th>行指定子</th><th>説明</th></tr></thead>
 <tbody>
-<tr><td><var>{number}</var></td><td>絶対的な行番号です。0 から最終行までの範囲である必要があります。0 を指定した場合、多くのコマンドは 1 として解釈しますが、<code class="vim-script">:read</code> のような一部のコマンドや続けて検索をする行指定子を指定する場合などは「先頭行の前」として解釈します。また、カウントを与えるコマンドの場合はそのまま 0 として使われます。</td></tr>
+<tr><td><var>{number}</var></td><td>絶対的な行番号です。0 から最終行までの範囲である必要があります。0 を指定した場合、多くのコマンドは 1 として解釈しますが、<code class="lang-vim">:read</code> のような一部のコマンドや続けて検索をする行指定子を指定する場合などは「先頭行の前」として解釈します。また、カウントを与えるコマンドの場合はそのまま 0 として使われます。</td></tr>
 <tr><td>.</td><td>現在の行です。</td></tr>
 <tr><td>$</td><td>最後の行です。</td></tr>
 <tr><td>%</td><td>ファイル全体です。1,$ を指定したのと同じになります。</td></tr>
@@ -54,7 +54,7 @@ author: thinca
 
 <p>例: 現在行から最終行を html にしてファイルに出力(参考: <a class="hack" href="/vim-users-jp/2009/06/hack23/">Hack #23: Vimでハイライト表示させたコードを見た目そのままにHTML出力させる</a>)</p>
 
-<pre><code class="vim-script">
+<pre><code class="lang-vim">
 :.,$TOhtml
 </code></pre>
 
@@ -78,7 +78,7 @@ author: thinca
 
 <p>例: 次の &#8220;class&#8221; で始まる行から、その行より下にある次の &#8220;end&#8221; で始まる行までを削除</p>
 
-<pre><code class="vim-script">
+<pre><code class="lang-vim">
 :/^class/;/^end/delete
 </code></pre>
 
@@ -95,7 +95,7 @@ author: thinca
 
 <p>例: 次の &#8220;class&#8221; で始まる行の次の行から、その行より下にある次の &#8220;end&#8221; で始まる行の前の行までを削除</p>
 
-<pre><code class="vim-script">
+<pre><code class="lang-vim">
 :/^class/+1;/^end/-1delete
 </code></pre>
 
@@ -107,7 +107,7 @@ author: thinca
 
 <p>例: カーソルを移動せずに、次の &#8220;class&#8221; で始まる行から、その行より下にある次の &#8220;end&#8221; で始まる行までを削除</p>
 
-<pre><code class="vim-script">
+<pre><code class="lang-vim">
 :/^class/,/^class//^end/delete
 </code></pre>
 
@@ -123,7 +123,7 @@ author: thinca
 				Visual mode から Command-line mode に入ると、プロンプトに以下のような文字列が自動的に挿入されます。
 </p>
 
-<pre><code class="vim-script">
+<pre><code class="lang-vim">
 :'&lt;,'&gt;
 </code></pre>
 
@@ -137,18 +137,18 @@ author: thinca
 				Normal mode で数字を入力してから Command-line mode に入ると、プロンプトに以下のような文字列が自動的に挿入されます。
 </p>
 
-<pre><code class="vim-script">
+<pre><code class="lang-vim">
 :.,.+<var>(count - 1)</var>
 </code></pre>
 
 <p>
-				例えば、<kbd>5:</kbd> と入力すると <code class="vim-script">:.,.+4</code> と入力された状態になります。これはつまり、現在の行から 5 行分という意味です。
+				例えば、<kbd>5:</kbd> と入力すると <code class="lang-vim">:.,.+4</code> と入力された状態になります。これはつまり、現在の行から 5 行分という意味です。
 </p>
 
 <h3>範囲の反転</h3>
 
 <p>
-				指定した範囲の開始行が終了行より下だった場合、Vim は開始行と終了行を入れ替えても良いか訊いてきます。許可した場合のみ、コマンドは実行されます。<code class="vim-script">:silent</code> コマンドを前置してコマンドを実行することで、確認せずに入れ替えて実行させることができます。また、<code class="vim-script">:global</code> コマンドに対して指定するコマンドでも入れ替えの確認は行われません。
+				指定した範囲の開始行が終了行より下だった場合、Vim は開始行と終了行を入れ替えても良いか訊いてきます。許可した場合のみ、コマンドは実行されます。<code class="lang-vim">:silent</code> コマンドを前置してコマンドを実行することで、確認せずに入れ替えて実行させることができます。また、<code class="lang-vim">:global</code> コマンドに対して指定するコマンドでも入れ替えの確認は行われません。
 </p>
 
 <p>
