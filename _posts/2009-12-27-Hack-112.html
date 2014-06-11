@@ -11,7 +11,7 @@ author: thinca
 <p>以下の記述を vimrc ファイルに追記します。これは、ファイルを開いた際に、開いたファイルとその上位階層にある設定ファイルを探してそれを読み込むための設定です。
 				ここでは設定ファイルとして .vimrc.local と言うファイル名を使っていますが、ここは何でも構いません。ワイルドカードも使用可能です。</p>
 
-<pre class="prettyprint"><code>&quot; Load settings for each location.
+<pre class="prettyprint"><code class="lang-vim">&quot; Load settings for each location.
 augroup vimrc-local
   autocmd!
   autocmd BufNewFile,BufReadPost * call s:vimrc_local(expand('&lt;afile&gt;:p:h'))

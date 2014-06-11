@@ -133,7 +133,7 @@ g: f()
 <li><a href="http://www.vim.org/scripts/script.php?script_id=2990">http://www.vim.org/scripts/script.php?script_id=2990</a> からstickykeyをインストールする</li>
 <li><p><code>~/.vim/ftplugin/coffee.vim</code>に以下を記述する</p>
 
-<pre class="prettyprint"><code>function! JavaScriptUnderScoreBecomesCamelCase()
+<pre class="prettyprint"><code class="lang-vim">function! JavaScriptUnderScoreBecomesCamelCase()
   if matchstr(getline('.'), '.', col('.')-2) =~ '\w'
     return &quot;\&lt;Plug&gt;(stickykey-shift)&quot;
   else

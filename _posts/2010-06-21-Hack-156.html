@@ -21,7 +21,7 @@ author: ujihisa
 
 <p>PHPのFiletype Pluginファイルに以下のコードを追加します。</p>
 
-<pre class="prettyprint"><code>function! s:last_char()
+<pre class="prettyprint"><code class="lang-vim">function! s:last_char()
   return matchstr(getline('.'), '.', col('.')-2)
 endfunction
 inoremap &lt;buffer&gt;&lt;expr&gt; [ a:last_char =~ '\w\\|]' ? '[' : 'array(')
@@ -83,7 +83,7 @@ inoremap &lt;buffer&gt;&lt;expr&gt; [ a:last_char =~ '\w\\|]' ? '[' : 'array(')
 
 <p>いろいろあって、いま著者の<code>~/.vim/ftplugin/php.vim</code>の該当部分以下のようになっています。</p>
 
-<pre class="prettyprint"><code>function! s:last_char()
+<pre class="prettyprint"><code class="lang-vim">function! s:last_char()
   return matchstr(getline('.'), '.', col('.')-2)
 endfunction
 

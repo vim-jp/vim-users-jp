@@ -68,7 +68,7 @@ author: thinca
 
 <p>ここでは簡単な具体例を紹介します。</p>
 
-<pre class="prettyprint"><code>setlocal foldmethod=expr foldexpr=MyHelpFold(v:lnum)
+<pre class="prettyprint"><code class="lang-vim">setlocal foldmethod=expr foldexpr=MyHelpFold(v:lnum)
 
 function! MyHelpFold(lnum)
   let line = getline(a:lnum)

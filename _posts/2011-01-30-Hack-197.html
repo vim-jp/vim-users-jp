@@ -11,7 +11,7 @@ author: Sixeight
 <p>source の定義に最低限必要なのは、名前と、辞書変数のリストを返す関数を持ったオブジュクトです
 				例えば以下の様に書きます</p>
 
-<pre class="prettyprint"><code>let s:unite_hacks = {'name': 'hacks'}
+<pre class="prettyprint"><code class="lang-vim">let s:unite_hacks = {'name': 'hacks'}
 function! s:unite_hacks.gather_candidates(args, context)
   # 辞書変数のリストを返す処理
 endfunction
@@ -33,7 +33,7 @@ endfunction
 				例えば先程の sources を登録するには、 hacks.vim と言う名前で上記ディレクトリに保存します。
 				そして以下のコードを hacks.vim に加えます。</p>
 
-<pre class="prettyprint"><code>function! unite#sources#hacks#define() "\{\{\{
+<pre class="prettyprint"><code class="lang-vim">function! unite#sources#hacks#define() "\{\{\{
   return s:unite_hacks
 endfunction "\}\}\}
 </code></pre>
@@ -58,7 +58,7 @@ endfunction "\}\}\}
 
 <p>具体的には以下のように書きます。</p>
 
-<pre class="prettyprint"><code>function! s:unite_hacks.gather_candidates(args, context)
+<pre class="prettyprint"><code class="lang-vim">function! s:unite_hacks.gather_candidates(args, context)
     return [
     \   { 'word': 'Hack#1', 'source': 'hacks', 'kind': 'word' },
     \   { 'word': 'Hack#2', 'source': 'hacks', 'kind': 'word' },

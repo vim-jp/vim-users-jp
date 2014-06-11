@@ -49,7 +49,7 @@ author: ujihisa
 
 <p><code>t:</code>スコープの変数、<code>vimshell#interactive#set_send_buffer()</code>, <code>vimshell#interactive#send()</code>の合わせ技で対処します。</p>
 
-<pre class="prettyprint"><code>function! s:ujihisa_start_sbt()
+<pre class="prettyprint"><code class="lang-vim">function! s:ujihisa_start_sbt()
   execute 'VimShellInteractive sbt'
   stopinsert
   let t:sbt_bufname = bufname('%')

@@ -17,7 +17,7 @@ author: ujihisa
 
 <p>以下の設定を<code>~/.vimrc</code>に記述します。</p>
 
-<pre class="prettyprint"><code>nnoremap &lt;C-w&gt;h &lt;C-w&gt;h:call &lt;SID&gt;good_width()&lt;Cr&gt;
+<pre class="prettyprint"><code class="lang-vim">nnoremap &lt;C-w&gt;h &lt;C-w&gt;h:call &lt;SID&gt;good_width()&lt;Cr&gt;
 nnoremap &lt;C-w&gt;l &lt;C-w&gt;l:call &lt;SID&gt;good_width()&lt;Cr&gt;
 nnoremap &lt;C-w&gt;H &lt;C-w&gt;H:call &lt;SID&gt;good_width()&lt;Cr&gt;
 nnoremap &lt;C-w&gt;L &lt;C-w&gt;L:call &lt;SID&gt;good_width()&lt;Cr&gt;
@@ -56,7 +56,7 @@ augroup END
 
 <p>なお、著者は<kbd>CTRL</kbd>キーを回避するため、以下のように<kbd>s</kbd>をプレフィックスにしたウインドウの移動キーを割り当てています。</p>
 
-<pre class="prettyprint"><code>nnoremap sh &lt;C-w&gt;h:call &lt;SID&gt;good_width()&lt;Cr&gt;
+<pre class="prettyprint"><code class="lang-vim">nnoremap sh &lt;C-w&gt;h:call &lt;SID&gt;good_width()&lt;Cr&gt;
 nnoremap sj &lt;C-w&gt;j
 nnoremap sk &lt;C-w&gt;k
 nnoremap sl &lt;C-w&gt;l:call &lt;SID&gt;good_width()&lt;Cr&gt;

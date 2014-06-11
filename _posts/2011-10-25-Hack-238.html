@@ -29,9 +29,9 @@ author: Shougo
 <h3>コマンド名が改善されている</h3>
 
 <p>VundleはBundleを意識して付けられたコマンド名になっているため、コマンド名とプラグイン名が対応していません。
-				例えば、プラグインをインストールするコマンド名は<code>:VundleInstall</code>ではなく、<code>:BundleInstall</code>です。
+				例えば、プラグインをインストールするコマンド名は<code>:VundleInstall</code>ではなく、<code class="lang-vim">:BundleInstall</code>です。
 				この辺りは、議論がされているようですが、まだ結論は出ていません。
-				neobundle.vimはプラグイン名をプレフィクスとした、<code>:NeoBundleInstall</code>となっています。
+				neobundle.vimはプラグイン名をプレフィクスとした、<code class="lang-vim">:NeoBundleInstall</code>となっています。
 				BundleをNeoBundleに改名するだけで、基本的に使用することができます。</p>
 
 <h3>vital化されている</h3>
@@ -65,7 +65,7 @@ author: Shougo
 
 <h3>リビジョン指定</h3>
 
-<p><code>:NeoBundle {repository} {revision}</code>という構文でリビジョン指定ができます。まだ実験段階の機能です。
+<p><code class="lang-vim">:NeoBundle {repository} {revision}</code>という構文でリビジョン指定ができます。まだ実験段階の機能です。
 				不具合のあるプラグインのバージョンを固定する時に便利だと思います。</p>
 
 <h2>neobundle.vimの導入</h2>
@@ -78,10 +78,10 @@ author: Shougo
 
 <h2>plugin の管理</h2>
 
-<p>plugin の管理は以下の様に .vimrc に <code>NeoBundle 'plugin name'</code> と記述することで行います。
-				極端な話、<code>Bundle</code>を<code>NeoBundle</code>に変更するだけです。</p>
+<p>plugin の管理は以下の様に .vimrc に <code class="lang-vim">NeoBundle 'plugin name'</code> と記述することで行います。
+				極端な話、<code class="lang-vim">Bundle</code>を<code class="lang-vim">NeoBundle</code>に変更するだけです。</p>
 
-<pre class="prettyprint"><code>set nocompatible
+<pre class="prettyprint"><code class="lang-vim">set nocompatible
 filetype off
 
 if has('vim_starting')
@@ -108,7 +108,7 @@ filetype indent on
 				最初、neobudle.vimの関数を呼べるよう、neobundle.vimのパスを<code>&amp;runtimepath</code>に追加します。
 				そして<code>neobundle#rc(expand('~/.bundle'))</code>で初期化します。
 <code>neobudle#rc()</code>の引数はプラグインをインストールする基準となるパスです。
-<code>NeoBundle</code>コマンドで設定をしたあと、最後にfiletype pluginをオンにします。</p>
+<code class="lang-vim">NeoBundle</code>コマンドで設定をしたあと、最後にfiletype pluginをオンにします。</p>
 
 <h2>NeoBundle コマンドの使い方</h2>
 
@@ -116,17 +116,17 @@ filetype indent on
 
 <h4>Github 上のリポジトリから取得する</h4>
 
-<pre class="prettyprint"><code>NeoBundle 'user_name/repository_name'
+<pre class="prettyprint"><code class="lang-vim">NeoBundle 'user_name/repository_name'
 </code></pre>
 
 <h4>vim-scripts 上のリポジトリから取得する</h4>
 
-<pre class="prettyprint"><code>NeoBundle 'script_name'
+<pre class="prettyprint"><code class="lang-vim">NeoBundle 'script_name'
 </code></pre>
 
 <h4>それ以外のリポジトリから取得する</h4>
 
-<pre class="prettyprint"><code>NeoBundle 'git://repository_url'
+<pre class="prettyprint"><code class="lang-vim">NeoBundle 'git://repository_url'
 NeoBundle 'http://svn.macports.org/repository/macports/contrib/mpvim/'
 NeoBundle 'https://bitbucket.org/ns9tks/vim-fuzzyfinder'
 </code></pre>
@@ -136,28 +136,28 @@ NeoBundle 'https://bitbucket.org/ns9tks/vim-fuzzyfinder'
 
 <h2>pluginの管理</h2>
 
-<p>plugin のインストールには、<code>:NeoBundleInstall</code> コマンドを使用します。
+<p>plugin のインストールには、<code class="lang-vim">:NeoBundleInstall</code> コマンドを使用します。
 				.vimrcで設定したplugin が自動的に取得され、インストールまで行われます。
 				ただし、アップデートしたプラグインを使用するには、Vimを再起動したほうが良いです。</p>
 
-<pre class="prettyprint"><code>:NeoBundleInstall
+<pre class="prettyprint"><code class="lang-vim">:NeoBundleInstall
 </code></pre>
 
-<p>既にインストールされている plugin をアップデートするには、 <code>:NeoBundleInstall!</code> コマンドを利用します。
-				通常の<code>NeoBundleInstall</code>では、アップデートが行われないからです。</p>
+<p>既にインストールされている plugin をアップデートするには、 <code class="lang-vim">:NeoBundleInstall!</code> コマンドを利用します。
+				通常の<code class="lang-vim">NeoBundleInstall</code>では、アップデートが行われないからです。</p>
 
-<pre class="prettyprint"><code>:NeoBundleInstall!
+<pre class="prettyprint"><code class="lang-vim">:NeoBundleInstall!
 </code></pre>
 
-<p>不要になったプラグインを削除するには、<code>:NeoBundle</code>の設定を.vimrcから削除した後、
-<code>:NeoBundleClean</code>コマンドを実行します。</p>
+<p>不要になったプラグインを削除するには、<code class="lang-vim">:NeoBundle</code>の設定を.vimrcから削除した後、
+<code class="lang-vim">:NeoBundleClean</code>コマンドを実行します。</p>
 
 <p>neobundle.vimはplugin検索には対応していません。</p>
 
 <p>neobudle.vimはneobundle/install sourceを使用することで、
 				unite.vimインタフェースによりアップデートを行うことができます。
 				アップデートは非同期に行われます。
-				neobundle/install sourceの引数に!を与えると、<code>:NeoBundleInstall!</code>相当になります。
+				neobundle/install sourceの引数に!を与えると、<code class="lang-vim">:NeoBundleInstall!</code>相当になります。
 				プラグイン名を引数に与えることで、個別にアップデートをすることも可能です。</p>
 
 <pre class="prettyprint"><code>:Unite neobundle/install:!

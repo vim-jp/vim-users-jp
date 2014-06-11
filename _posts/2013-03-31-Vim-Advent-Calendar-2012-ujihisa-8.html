@@ -34,7 +34,7 @@ author: ujihisa
 
 <p><code>lexer.vim</code></p>
 
-<pre class="prettyprint"><code>let s:L = vital#of('vital').import('Text.Lexer')
+<pre class="prettyprint"><code class="lang-vim">let s:L = vital#of('vital').import('Text.Lexer')
 let s:rule = [
       \ ['id','\d\+'], ['whitespace','\s\+'],
       \ ['pls', '+'], ['ast', '*'],
@@ -115,7 +115,7 @@ endfunction
 
 <p>これでVim scriptの<code>parser.vim</code>ファイルが生成されました。つづいて各アクション<code>make_pls</code>などを記述しましょう。</p>
 
-<pre class="prettyprint"><code>let s:semantic_action = {}
+<pre class="prettyprint"><code class="lang-vim">let s:semantic_action = {}
 function! s:semantic_action.make_mlt(arg_0, arg_1)
     return a:arg_0 * a:arg_1
 endfunction

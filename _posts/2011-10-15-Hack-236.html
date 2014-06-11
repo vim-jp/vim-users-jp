@@ -38,7 +38,7 @@ author: ujihisa
 
 <p><code>range()</code>で1から1000までの数値の配列を作り、それをもとに<code>for</code>で加算していきます。</p>
 
-<pre class="prettyprint"><code>function! s:p1()
+<pre class="prettyprint"><code class="lang-vim">function! s:p1()
   let memo = 0
   for i in range(1, 999)
     if i % 3 == 0 || i % 5 == 0
@@ -57,7 +57,7 @@ echo s:p1()
 
 <p><code>filter()</code>を使います。</p>
 
-<pre class="prettyprint"><code>function! s:p1()
+<pre class="prettyprint"><code class="lang-vim">function! s:p1()
   let memo = 0
   let list = filter(range(1, 999), 'v:val % 3 == 0 || v:val % 5 == 0')
   for i in list
@@ -73,7 +73,7 @@ echo s:p1()
 
 <p>さて、この調子で<code>for</code>を消せると考えた人も多くいるかもしれません。そうです、つい5日前に読んだ<a href="/vim-users-jp/2011/10/hack235/">Hack #235</a>を思い出しましょう。vitalを使います。</p>
 
-<pre class="prettyprint"><code>function! s:p1()
+<pre class="prettyprint"><code class="lang-vim">function! s:p1()
   let L = vital#of('vital').import('Data.List')
   let list = filter(range(1, 999), 'v:val % 3 == 0 || v:val % 5 == 0')
   return L.foldl1('v:memo + v:val', list)

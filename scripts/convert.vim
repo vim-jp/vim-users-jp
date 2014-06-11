@@ -92,6 +92,13 @@ function! s:readfile(f)
   return map(readfile(a:f), 'substitute(s:from_utf8(v:val), "\n", "", "g")')
 endfunction
 
+function! s:lang(str) abort
+  if a:str =~# 'endfunction' || a:str =~# 'Bundle'
+    return '<code class="lang-vim">' . a:str . '</code>'
+  endif
+  return '<code>' . a:str . '</code>'
+endfunction
+
 function! s:convert(f) abort
   let lines = s:readfile(a:f)
   let pos1 = s:index(lines, '<h1>')
@@ -121,6 +128,8 @@ function! s:convert(f) abort
   let text = substitute(text, '<code class="vim-script">', '<code class="lang-vim">', 'g')
   let text = substitute(text, '\Vもう少し:Captureについて (unite.vim)', 'unite.vimで:Capture', 'g')
   let text = substitute(text, '<pre>\s*\(<code[^>]*>.\{-}</code>\s*\)</pre>', '<pre class="prettyprint">\1</pre>', 'g')
+  let text = substitute(text, '<pre>\s*\(<code[^>]*>.\{-}</code>\s*\)</pre>', '<pre class="prettyprint">\1</pre>', 'g')
+  let text = substitute(text, '<code>\(.\{-}\)</code>', '\=s:lang(submatch(1))', 'g')
   let text = substitute(text, '/web/[0-9]\+/', '', 'g')
   let short = title
   let dict = [

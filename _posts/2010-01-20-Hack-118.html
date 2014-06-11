@@ -13,7 +13,7 @@ author: ujihisa
 
 <p>以下のコードを<code>~/.vimrc</code>に記述することで、コマンドラインモードでバックスラッシュで<code>~/</code>が入力できる上、<code>~/</code>が来て欲しくなさそうなところではそのままバックスラッシュが入力されます。</p>
 
-<pre class="prettyprint"><code>function! HomedirOrBackslash()
+<pre class="prettyprint"><code class="lang-vim">function! HomedirOrBackslash()
   if getcmdtype() == ':' &amp;&amp; (getcmdline() =~# '^e ' || getcmdline() =~? '^r\?!' || getcmdline() =~? '^cd ')
     return '~/'
   else

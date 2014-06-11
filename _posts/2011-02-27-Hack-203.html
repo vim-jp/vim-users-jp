@@ -54,7 +54,7 @@ author: tyru
 				出力から検索したい場合などに便利です。<br />
 				(<a href="http://d.hatena.ne.jp/tyru/20100427/vim_capture_command">筆者のブログの記事</a>も参照してください)</p>
 
-<pre class="prettyprint"><code>command!
+<pre class="prettyprint"><code class="lang-vim">command!
 \   -nargs=+ -complete=command
 \   Capture
 \   call s:cmd_capture(&lt;q-args&gt;)
