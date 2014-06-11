@@ -17,7 +17,7 @@ author: thinca
 
 <p>:source コマンドで外部の Vim スクリプトを読み込むことができます。例えば以下のような設定を vimrc に書いておきます。</p>
 
-<pre><code>if filereadable(expand('~/.vimrc.local'))
+<pre class="prettyprint"><code>if filereadable(expand('~/.vimrc.local'))
   source ~/.vimrc.local
 endif
 </code></pre>
@@ -29,7 +29,7 @@ endif
 
 <p>本 Hack のタイトルは使いどころをわかりやすくするため vimrc で、としましたが、:source コマンドはどこでも使えます。例えば</p>
 
-<pre><code>:source $MYVIMRC
+<pre class="prettyprint"><code>:source $MYVIMRC
 </code></pre>
 
 <p>とすれば Vim の起動後に vimrc ファイルを再読み込みすることもできます。ただしこの場合は vimrc が再読み込み可能なように書かれている必要があります。</p>

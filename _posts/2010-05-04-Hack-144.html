@@ -7,7 +7,7 @@ author: tyru
 <p><a href="/vim-users-jp/2009/08/hack-59/">Hack #59: 分かりやすいKey-mappingsを定義する</a>の方法だとグローバルなマッピング空間を使ってしまうのが玉に瑕です。<br />
 				そのせいで、例えば</p>
 
-<pre><code>nnoremap [tag] &lt;Nop&gt;
+<pre class="prettyprint"><code>nnoremap [tag] &lt;Nop&gt;
 nmap     t     [tag]
 
 " ...
@@ -28,7 +28,7 @@ nnoremap [t    &lt;C-]&gt;
 
 <p>マッピングを<code>&lt;SID&gt;</code>で定義します。</p>
 
-<pre><code>nnoremap &lt;SID&gt;[tag] &lt;Nop&gt;
+<pre class="prettyprint"><code>nnoremap &lt;SID&gt;[tag] &lt;Nop&gt;
 nmap     t          &lt;SID&gt;[tag]
 
 &#8221; &#8230;
@@ -43,7 +43,7 @@ nnoremap [t    &lt;C-]&gt;
 
 <p>これを使ってさらに.vimrcを見通しをよくすることもできます。</p>
 
-<pre><code>nnoremap &lt;SID&gt;[yank-$] y$
+<pre class="prettyprint"><code>nnoremap &lt;SID&gt;[yank-$] y$
 nnoremap &lt;SID&gt;[register-+] "+
 nnoremap &lt;SID&gt;[register-*] "*
 

@@ -11,7 +11,7 @@ author: thinca
 <p>Visual mode での * は Normal mode と同様カーソル下の単語を検索して次の単語出現位置にカーソルを動かしますが、選択範囲の文字列で検索をしてくれた方がNormal modeでの動作と対比して直感的でしょう。このキーに検索を行う機能を割り当てることで、Visual mode で選択中のテキストを検索することができます。
 				割り当てる方法はいくつかありますが、ここではなるべくシンプルなものを紹介します。</p>
 
-<pre><code>vnoremap &lt;silent&gt; * &quot;vy/\V&lt;C-r&gt;=substitute(escape(@v,'\/'),&quot;\n&quot;,'\\n',<code class="option">'g'</code>)&lt;CR&gt;&lt;CR&gt;
+<pre class="prettyprint"><code>vnoremap &lt;silent&gt; * &quot;vy/\V&lt;C-r&gt;=substitute(escape(@v,'\/'),&quot;\n&quot;,'\\n',<code class="option">'g'</code>)&lt;CR&gt;&lt;CR&gt;
 </code></pre>
 
 <p>この設定では選択中のテキストを取得するために v レジスタを使用しています。もっとちゃんとやるにはレジスタの中身の退避などが必要ですが、長くなってしまうのでここでは割愛します。</p>
@@ -20,33 +20,33 @@ author: thinca
 
 <p>ここではこの設定が一体何をしているのか、簡単にですが解説します。</p>
 
-<pre><code>&quot;vy
+<pre class="prettyprint"><code>&quot;vy
 </code></pre>
 
 <p>選択範囲を v レジスタにヤンク(コピー)しています。</p>
 
-<pre><code>/\V
+<pre class="prettyprint"><code>/\V
 </code></pre>
 
 <p>検索のためのCommand-line modeを開始して先頭に \V を入力しています。\V については<a href="/vim-users-jp/2009/08/hack55/">Hack #55: 正規表現のメタ文字の扱いを制御する</a>を参照してください。</p>
 
-<pre><code>&lt;C-r&gt;=
+<pre class="prettyprint"><code>&lt;C-r&gt;=
 </code></pre>
 
 <p>Command-line mode でこのキーをタイプするとネストするように新しいプロンプトに切り替わり、ここで入力した式の結果を前のプロンプトに挿入することができます。
 				余談ですが、この機能自体はネストすることはできません。</p>
 
-<pre><code>escape(@v,'\/')
+<pre class="prettyprint"><code>escape(@v,'\/')
 </code></pre>
 
 <p>@v には先ほどヤンクした選択範囲のテキストが入っています。この文字列で検索したいのですが、\ と / はそのままでは別の意味になってしまうので escape() を用いてエスケープしています。</p>
 
-<pre><code>substitute(escape(@v, '\/'),&quot;\n&quot;,'\\n',<code class="option">'g'</code>)
+<pre class="prettyprint"><code>substitute(escape(@v, '\/'),&quot;\n&quot;,'\\n',<code class="option">'g'</code>)
 </code></pre>
 
 <p>さらに改行文字を検索で使えるリテラルに置換しています。これは複数行を検索したい場合に必要な処理です。</p>
 
-<pre><code>&lt;CR&gt;&lt;CR&gt;
+<pre class="prettyprint"><code>&lt;CR&gt;&lt;CR&gt;
 </code></pre>
 
 <p>一つ目の <kbd>&lt;CR&gt;</kbd> で <kbd>&lt;C-r&gt;=</kbd> で開始したプロンプトを確定しています。二つ目の <kbd>&lt;CR&gt;</kbd> で検索を実行しています。</p>

@@ -23,12 +23,12 @@ author: tyru
 
 <p>コマンド(!= Exコマンド)はだいたい次のような規則になっています。</p>
 
-<pre><code>{モード}_[CTRL-]{キー}
+<pre class="prettyprint"><code>{モード}_[CTRL-]{キー}
 </code></pre>
 
 <p>またさらに<code>{キー}</code>の部分は次のようになっています。</p>
 
-<pre><code>{キー1}
+<pre class="prettyprint"><code>{キー1}
 {キー1}_{キー2}
 {キー1}_{キー2}_{キー3}
 ...
@@ -65,14 +65,14 @@ author: tyru
 
 <h3>「buf」を含む関数</h3>
 
-<pre><code>:help *buf*()&lt;Tab&gt;
+<pre class="prettyprint"><code>:help *buf*()&lt;Tab&gt;
 </code></pre>
 
 <p>関数は「()」を末尾に持つタグを持っています。</p>
 
 <h3>「wild」を含むオプション</h3>
 
-<pre><code>:help '*wild*'&lt;Tab&gt;
+<pre class="prettyprint"><code>:help '*wild*'&lt;Tab&gt;
 </code></pre>
 
 <p>前のと同じですね。
@@ -80,7 +80,7 @@ author: tyru
 
 <h3>頭が「:Neo」で始まるExコマンドを日本語版helpのみから</h3>
 
-<pre><code>:help :Neo*@ja&lt;Tab&gt;
+<pre class="prettyprint"><code>:help :Neo*@ja&lt;Tab&gt;
 </code></pre>
 
 <p>Exコマンドは先頭に「:(コロン)」を持つタグを持っています。
@@ -111,12 +111,12 @@ author: tyru
 <p>ちなみにこの<code>&lt;C-d&gt;</code>のタグ名は、
 				ここまで読まれた方なら分かると思いますが</p>
 
-<pre><code>:help c_CTRL-d
+<pre class="prettyprint"><code>:help c_CTRL-d
 </code></pre>
 
 <p>です。<a href="http://www.kaoriya.net/vimdoc_j/">Vim日本語ドキュメント</a>がインストールされている場合その項目名は？</p>
 
-<pre><code>:help c_CTRL-d@ja
+<pre class="prettyprint"><code>:help c_CTRL-d@ja
 </code></pre>
 
 <p>です。
@@ -130,12 +130,12 @@ author: tyru
 				このようにノーマルモードの項目は先頭に<code>n_</code>と付きません。
 				なので冒頭で言った次のような規則は嘘でした。</p>
 
-<pre><code>{モード}_[CTRL-]{キー}
+<pre class="prettyprint"><code>{モード}_[CTRL-]{キー}
 </code></pre>
 
 <p>正確に言えばノーマルモードの場合のみ</p>
 
-<pre><code>[CTRL-]{キー}
+<pre class="prettyprint"><code>[CTRL-]{キー}
 </code></pre>
 
 <p>になります。</p>

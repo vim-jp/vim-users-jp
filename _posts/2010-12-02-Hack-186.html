@@ -13,7 +13,7 @@ author: thinca
 
 <p>大抵の場合、関数を定義してその関数を呼び出すような式を設定します。</p>
 
-<pre><code>setlocal foldexpr=MyFold(v:lnum)
+<pre class="prettyprint"><code>setlocal foldexpr=MyFold(v:lnum)
 </code></pre>
 
 <h3>式の返す値</h3>
@@ -68,7 +68,7 @@ author: thinca
 
 <p>ここでは簡単な具体例を紹介します。</p>
 
-<pre><code>setlocal foldmethod=expr foldexpr=MyHelpFold(v:lnum)
+<pre class="prettyprint"><code>setlocal foldmethod=expr foldexpr=MyHelpFold(v:lnum)
 
 function! MyHelpFold(lnum)
   let line = getline(a:lnum)

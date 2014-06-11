@@ -8,19 +8,19 @@ author: ujihisa
 
 <p>いくつかのプログラミング言語における関数呼び出しないしメソッド呼び出しは、以下のような書き方をすることが多いです。</p>
 
-<pre><code>aaa(bbb, ccc)
+<pre class="prettyprint"><code>aaa(bbb, ccc)
 </code></pre>
 
 <p>引数部分に大抵の式を書くことができ、</p>
 
-<pre><code>aaa(bbb(ccc, ddd), eee())
+<pre class="prettyprint"><code>aaa(bbb(ccc, ddd), eee())
 </code></pre>
 
 <p>のように書くことができる場合も多いです。</p>
 
 <p>さて、上記関数aaaに与える引数の順序が実は間違っていたことに気づいたとします。どのように引数の順序を入れ替えるのがラクでなおかつ確実でしょうか。</p>
 
-<pre><code>aaa(bbb(ccc, ddd), eee())
+<pre class="prettyprint"><code>aaa(bbb(ccc, ddd), eee())
 </code></pre>
 
 <p>まず<code>0f(</code>などで引数のリストの手前の括弧に飛び、<code>df,</code>で削除…、おっとコンマは既に途中で使われていました。<code>df)</code>ならば今回はうまくいきますが、しかしこれも汎用的ではありません。<code>%</code>を使うにも、うまく個別の引数を指定できません。</p>
@@ -31,7 +31,7 @@ author: ujihisa
 
 <p>まず、以下のスクリプトを環境変数<code>$PATH</code>の通った位置に配置し、実行権限を与えます。</p>
 
-<pre><code>#!/usr/bin/env ruby
+<pre class="prettyprint"><code>#!/usr/bin/env ruby
 # flip('(aaa, bbb)') #=&gt; '(bbb, aaa)'
 def flip(str)
   stack = []
@@ -79,7 +79,7 @@ end
 
 <p>つづいて、<code>~/.vimrc</code>に以下を記述します。</p>
 
-<pre><code>&quot; Flip Arguments \{\{\{
+<pre class="prettyprint"><code>&quot; Flip Arguments \{\{\{
 &quot;   f(a, b) to f(b, a) when your cursol is on '('.
 function! FlipArguments()
   normal! y%
@@ -93,7 +93,7 @@ endfunction
 
 <p>入力を楽にするために、例えば以下のような設定をします。</p>
 
-<pre><code>nnoremap &lt;space&gt;flip :&lt;C-u&gt;call FlipArguments()&lt;Cr&gt;
+<pre class="prettyprint"><code>nnoremap &lt;space&gt;flip :&lt;C-u&gt;call FlipArguments()&lt;Cr&gt;
 </code></pre>
 
 <p><code>&lt;space&gt;flip</code>で同様の処理ができます。この作業はそれほど頻繁に行なうわけではないので、多少長いキーストロークでも問題ないのではないかと思います。</p>

@@ -13,12 +13,12 @@ author: ujihisa
 
 <p>多くのVimユーザはコロンとセミコロンの配置を入れ替え、コロンの入力を容易にするよう調整しているといわれています。しかしながらJavaScriptでは文末にセミコロンの入力を必要とします。</p>
 
-<pre><code>var a = 1;
+<pre class="prettyprint"><code>var a = 1;
 </code></pre>
 
 <p>上記のような簡素な例だと単純に<a href="/vim-users-jp/2009/04/hack2/">FP</a>の消費量のみの問題なのですが、しかし以下のようにセミコロンが必要な場合と必要でない場合がすぐに判別しないときもあり、このとき若干の面倒さが残ります。</p>
 
-<pre><code>function f1() {
+<pre class="prettyprint"><code>function f1() {
   return 1;
 }
 
@@ -30,14 +30,14 @@ var f2 = function() {
 
 <p>JavaScriptは関数と変数の名前空間が一致しているためか、関数適用の括弧を省略できない言語仕様となっています。</p>
 
-<pre><code>f();
+<pre class="prettyprint"><code>f();
 
 f(x);
 </code></pre>
 
 <p>引数がない場合は<code>()</code>の有無により関数自体か関数実行結果の値かを区別できるというので納得できるのですが、しかし引数がある場合には納得できません。</p>
 
-<pre><code>f x;
+<pre class="prettyprint"><code>f x;
 </code></pre>
 
 <p>もしこのように書けば、これは<code>f(x)</code>以外に考えられないはずです。それなのに毎回<code>f(x);</code>と記述しなければならないのは冗長で、開発効率の大幅な低下を招きます。</p></li>
@@ -53,7 +53,7 @@ f(x);
 
 <p>例を挙げます。0から2までの数字を出力するコードをCoffeeScriptで記述してみましょう。</p>
 
-<pre><code>f: -&gt;
+<pre class="prettyprint"><code>f: -&gt;
   memo: 0
   -&gt;
     memo++
@@ -69,7 +69,7 @@ g: f()
 
 <p><code>coffee -cp</code>コマンドで、上記コードが以下のようなJavaScriptにコンパイルされます。</p>
 
-<pre><code>(function(){
+<pre class="prettyprint"><code>(function(){
   var f, g;
   f = function() {
     var memo;
@@ -133,7 +133,7 @@ g: f()
 <li><a href="http://www.vim.org/scripts/script.php?script_id=2990">http://www.vim.org/scripts/script.php?script_id=2990</a> からstickykeyをインストールする</li>
 <li><p><code>~/.vim/ftplugin/coffee.vim</code>に以下を記述する</p>
 
-<pre><code>function! JavaScriptUnderScoreBecomesCamelCase()
+<pre class="prettyprint"><code>function! JavaScriptUnderScoreBecomesCamelCase()
   if matchstr(getline('.'), '.', col('.')-2) =~ '\w'
     return &quot;\&lt;Plug&gt;(stickykey-shift)&quot;
   else

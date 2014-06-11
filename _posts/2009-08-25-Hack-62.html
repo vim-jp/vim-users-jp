@@ -14,7 +14,7 @@ author: ujihisa
 
 <p><code>~/.vimrc</code>に以下を記述します。</p>
 
-<pre><code>nnoremap &lt;expr&gt; s* ':%substitute/\&lt;' . expand('&lt;cword&gt;') . '\&gt;/'
+<pre class="prettyprint"><code>nnoremap &lt;expr&gt; s* ':%substitute/\&lt;' . expand('&lt;cword&gt;') . '\&gt;/'
 </code></pre>
 
 <p>以後、<kbd>s*</kbd>と打鍵したあと置き換え文字列と<kbd>/g&lt;Cr&gt;</kbd>などを打鍵すると置換が行なわれます。</p>
@@ -23,12 +23,12 @@ author: ujihisa
 
 <p>バッファ内全体からカーソル下のキーワードをbbbという文字列に置換するには、以下のコマンドを実行します。</p>
 
-<pre><code>:exe '%s/\&lt;' . expand('&lt;cword&gt;') . '\&gt;/bbb/g'
+<pre class="prettyprint"><code>:exe '%s/\&lt;' . expand('&lt;cword&gt;') . '\&gt;/bbb/g'
 </code></pre>
 
 <p>これは以下の略称です</p>
 
-<pre><code>:execute '%substitute/\&lt;' . expand('&lt;cword&gt;') . '\&gt;/bbb/g'
+<pre class="prettyprint"><code>:execute '%substitute/\&lt;' . expand('&lt;cword&gt;') . '\&gt;/bbb/g'
 </code></pre>
 
 <p>もっとも、これを毎回打鍵するのは酷です。

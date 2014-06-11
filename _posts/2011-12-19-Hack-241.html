@@ -20,17 +20,17 @@ author: ujihisa
 
 <p>まずは上記プラギンをインストールします。依存プラギンはunite.vim、依存ツールは<code>hoogle</code>です。</p>
 
-<pre><code>$ cabal update &amp;&amp; cabal install hoogle &amp;&amp; hoogle data
+<pre class="prettyprint"><code>$ cabal update &amp;&amp; cabal install hoogle &amp;&amp; hoogle data
 </code></pre>
 
 <p>たとえば急に<code>==&gt;</code>という関数を使いたくなったとしましょう。</p>
 
-<pre><code>:Unite haskellimport
+<pre class="prettyprint"><code>:Unite haskellimport
 </code></pre>
 
 <p>としてunite窓を開き、<code>==&gt;</code>と打鍵しましょう。</p>
 
-<pre><code>Test.QuickCheck.Property (==&gt;) :: Testable prop =&gt; Bool -&gt; prop -&gt; Property
+<pre class="prettyprint"><code>Test.QuickCheck.Property (==&gt;) :: Testable prop =&gt; Bool -&gt; prop -&gt; Property
 Test.QuickCheck (==&gt;) :: Testable prop =&gt; Bool -&gt; prop -&gt; Property
 </code></pre>
 
@@ -40,14 +40,14 @@ Test.QuickCheck (==&gt;) :: Testable prop =&gt; Bool -&gt; prop -&gt; Property
 
 <p>Before</p>
 
-<pre><code>import qualified Data.Text as T
+<pre class="prettyprint"><code>import qualified Data.Text as T
 
 f x = ...
 </code></pre>
 
 <p>After</p>
 
-<pre><code>import qualified Data.Text as T
+<pre class="prettyprint"><code>import qualified Data.Text as T
 import Test.QuickCheck ((==&gt;))
 
 f x = ...
@@ -55,12 +55,12 @@ f x = ...
 
 <p>今回importしたのは記号からなる関数でした。が、もしも記号ではない関数、つまりVimの<code>&lt;cword&gt;</code>になるようなものならば、<code>:Unite</code>のかわりに</p>
 
-<pre><code>:UniteWithCursorWord haskellimport
+<pre class="prettyprint"><code>:UniteWithCursorWord haskellimport
 </code></pre>
 
 <p>とするとよいでしょう。これを頻繁に行うようならば、適切なキーにマッピングしておくべきです。たとえば以下を <code>~/.vim/ftplugin/haskell.vim</code>に記述すると、<kbd>&lt;space&gt;I</kbd>と打鍵するだけでカーソル以下にある単語の関数をimportしてくれます。</p>
 
-<pre><code>nnoremap &lt;buffer&gt; &lt;space&gt;I :&lt;C-u&gt;UniteWithCursorWord haskellimport&lt;Cr&gt;
+<pre class="prettyprint"><code>nnoremap &lt;buffer&gt; &lt;space&gt;I :&lt;C-u&gt;UniteWithCursorWord haskellimport&lt;Cr&gt;
 </code></pre>
 
 <address class="hack-author">ujihisa</address>

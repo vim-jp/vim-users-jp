@@ -24,7 +24,7 @@ author: Sixeight
 
 <p>保存場所からカレントディレクトリを除き、~/tmp にして、更新の間隔を 500 文字にするには以下の様に指定します。</p>
 
-<pre><code>set swapfile
+<pre class="prettyprint"><code>set swapfile
 set directory-=.
 set updatecount=500
 </code></pre>
@@ -41,7 +41,7 @@ set updatecount=500
 				&#8216;backupext&#8217; を指定すると、バックアップファイル名の最後に指定した文字列を追加することが出来ます。
 				例えば、ファイル名の最後にタイムスタンプを追加するには、以下のように指定します。(HELP からの引用)</p>
 
-<pre><code>:au BufWritePre * let &amp;bex = '-' . strftime("%Y%b%d%X") . '~'`
+<pre class="prettyprint"><code>:au BufWritePre * let &amp;bex = '-' . strftime("%Y%b%d%X") . '~'`
 </code></pre>
 
 <p>また、バックアップを作成しないファイル名のパターンを &#8216;backupskip&#8217; に指定することが出来ます。</p>

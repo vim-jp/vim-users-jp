@@ -13,7 +13,7 @@ author: ujihisa
 
 <p>以下のコードを<code>~/.vimrc</code>に記述することで、コマンドラインモードでバックスラッシュで<code>~/</code>が入力できる上、<code>~/</code>が来て欲しくなさそうなところではそのままバックスラッシュが入力されます。</p>
 
-<pre><code>function! HomedirOrBackslash()
+<pre class="prettyprint"><code>function! HomedirOrBackslash()
   if getcmdtype() == ':' &amp;&amp; (getcmdline() =~# '^e ' || getcmdline() =~? '^r\?!' || getcmdline() =~? '^cd ')
     return '~/'
   else
@@ -33,7 +33,7 @@ cnoremap &lt;expr&gt; &lt;Bslash&gt; HomedirOrBackslash()
 <a href="http://github.com/cho45/dotfiles/blob/9bc3ecc93d2c67d3500ee3655f3a709787fe35d0/.zshrc#L239">少し古いところ</a>に残っています。
 				著者の手元の<code>.zshrc</code>から引用すると、以下のようなコードでした。</p>
 
-<pre><code>expand-to-home-or-insert () {
+<pre class="prettyprint"><code>expand-to-home-or-insert () {
   if [ &quot;$LBUFFER&quot; = &quot;&quot; -o &quot;$LBUFFER[-1]&quot; = &quot; &quot; ]; then
     LBUFFER+=&quot;~/&quot;
   else

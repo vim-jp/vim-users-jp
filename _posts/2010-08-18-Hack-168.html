@@ -6,14 +6,14 @@ author: ujihisa
 ---
 <h2>問題</h2>
 
-<pre><code>:!ruby %
+<pre class="prettyprint"><code>:!ruby %
 </code></pre>
 
 <p>このコマンドが呼び出すrubyとして期待されるものは、<code>/usr/bin/ruby</code>であったり、<code>/usr/local/bin/ruby</code>であったり、はたまた<code>~/git/ruby/local/bin/ruby</code>のように独自で用意したものであったりします。</p>
 
 <p><code>zsh</code>などのシェルでは、<code>~/.zshrc</code>などの設定ファイルに</p>
 
-<pre><code>export PATH=~/git/ruby/local/bin/ruby:$PATH
+<pre class="prettyprint"><code>export PATH=~/git/ruby/local/bin/ruby:$PATH
 </code></pre>
 
 <p>などと記述することによって、単に<code>ruby</code>などとしてコマンドを呼び出したときに実際にどの場所のコマンドが呼び出されるか制御でき、またそのシェルから起動したVimもそれに準拠します。これはCUIでもGUIでも同様です。</p>
@@ -65,17 +65,17 @@ author: ujihisa
 
 <p>冗長で不便なので、キーマッピングを追加するか、あるいは<code>:!</code>の使用をさけてかわりに<a href="http://github.com/Shougo/vimshell">vimshell</a>を用いるとよいでしょう。</p>
 
-<pre><code>nnoremap :! :call vimproc#system('
+<pre class="prettyprint"><code>nnoremap :! :call vimproc#system('
 </code></pre>
 
 <p>さて、<code>:!</code>や<code>system()</code>を間接的にもっとも頻繁に使うのはなんといっても<a href="http://github.com/thinca/vim-quickrun">quickrun</a>でしょう。quickrunでvimprocを用いるためには、以下の設定を<code>~/.vimrc</code>に記述します。</p>
 
-<pre><code>let g:quickrun_config['*'].runmode = &quot;async:remote:vimproc&quot;}
+<pre class="prettyprint"><code>let g:quickrun_config['*'].runmode = &quot;async:remote:vimproc&quot;}
 </code></pre>
 
 <p>余談ですが、著者はこれにquickrun分割場所指定もあわせ、以下のように指定しています。</p>
 
-<pre><code>let g:quickrun_config['*'] = {'runmode': &quot;async:remote:vimproc&quot;, 'split': 'below'}
+<pre class="prettyprint"><code>let g:quickrun_config['*'] = {'runmode': &quot;async:remote:vimproc&quot;, 'split': 'below'}
 </code></pre>
 
 <p>これで、quickrunで好きなrubyを使いたい放題です。</p>

@@ -30,7 +30,7 @@ author: thinca
 				範囲は行単位で指定します。つまり、ある行からある行まで、ということです。最も単純な例を示します。
 </p>
 
-<pre><code class="lang-vim">
+<pre class="prettyprint"><code class="lang-vim">
 :10,20<var>command</var>
 </code></pre>
 
@@ -54,7 +54,7 @@ author: thinca
 
 <p>例: 現在行から最終行を html にしてファイルに出力(参考: <a class="hack" href="/vim-users-jp/2009/06/hack23/">Hack #23: Vimでハイライト表示させたコードを見た目そのままにHTML出力させる</a>)</p>
 
-<pre><code class="lang-vim">
+<pre class="prettyprint"><code class="lang-vim">
 :.,$TOhtml
 </code></pre>
 
@@ -78,7 +78,7 @@ author: thinca
 
 <p>例: 次の &#8220;class&#8221; で始まる行から、その行より下にある次の &#8220;end&#8221; で始まる行までを削除</p>
 
-<pre><code class="lang-vim">
+<pre class="prettyprint"><code class="lang-vim">
 :/^class/;/^end/delete
 </code></pre>
 
@@ -95,7 +95,7 @@ author: thinca
 
 <p>例: 次の &#8220;class&#8221; で始まる行の次の行から、その行より下にある次の &#8220;end&#8221; で始まる行の前の行までを削除</p>
 
-<pre><code class="lang-vim">
+<pre class="prettyprint"><code class="lang-vim">
 :/^class/+1;/^end/-1delete
 </code></pre>
 
@@ -107,7 +107,7 @@ author: thinca
 
 <p>例: カーソルを移動せずに、次の &#8220;class&#8221; で始まる行から、その行より下にある次の &#8220;end&#8221; で始まる行までを削除</p>
 
-<pre><code class="lang-vim">
+<pre class="prettyprint"><code class="lang-vim">
 :/^class/,/^class//^end/delete
 </code></pre>
 
@@ -123,7 +123,7 @@ author: thinca
 				Visual mode から Command-line mode に入ると、プロンプトに以下のような文字列が自動的に挿入されます。
 </p>
 
-<pre><code class="lang-vim">
+<pre class="prettyprint"><code class="lang-vim">
 :'&lt;,'&gt;
 </code></pre>
 
@@ -137,7 +137,7 @@ author: thinca
 				Normal mode で数字を入力してから Command-line mode に入ると、プロンプトに以下のような文字列が自動的に挿入されます。
 </p>
 
-<pre><code class="lang-vim">
+<pre class="prettyprint"><code class="lang-vim">
 :.,.+<var>(count - 1)</var>
 </code></pre>
 

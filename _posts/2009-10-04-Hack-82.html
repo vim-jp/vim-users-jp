@@ -15,7 +15,7 @@ author: ujihisa
 
 <p>例えばRubyで以下のようなコードを編集中に、</p>
 
-<pre><code>...
+<pre class="prettyprint"><code>...
 
 def fact(n)
 if n == 0
@@ -33,7 +33,7 @@ end
 
 <p>これを貼付け後に貼付けした範囲を指定して行なうことで本問題が解決します。まず<kbd>P</kbd>で貼付けを行ない、カーソル位置が貼付け位置の手前にある状態のまま移動せずに、<kbd>=']</kbd>を行い、貼付けしたコード片の末尾までを指定してインデントを整えさせます。</p>
 
-<pre><code>def fact(n)
+<pre class="prettyprint"><code>def fact(n)
   if n == 0
     0
   else
@@ -44,7 +44,7 @@ end
 
 <p>必要ならば、<kbd>P</kbd>自体を<kbd>P=']</kbd>で置き換えることで、より簡単に行なうことができます。</p>
 
-<pre><code>nnoremap P P=']
+<pre class="prettyprint"><code>nnoremap P P=']
 </code></pre>
 
 <h2>解決2 手動で頑張る</h2>

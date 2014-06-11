@@ -37,7 +37,7 @@ author: thinca
 
 <p>この場合を含み、<code class="option">'expandtab'</code> が off の場合、タブ文字だけではインデントが行えない場合があります。その場合は、半端な部分はスペースになります。</p>
 
-<pre><code>&quot; :set tabstop=8 shiftwidth=4 noexpandtab の場合
+<pre class="prettyprint"><code>&quot; :set tabstop=8 shiftwidth=4 noexpandtab の場合
 &quot; わかりやすくするためにタブ文字を &gt;------- で、スペースを _ で表示している
 hoge
 ____hoge
@@ -66,7 +66,7 @@ ____hoge
 <p>この自動で挿入されたインデントは、何も入力せずに Insert-mode の抜けたりさらに新しい行を作ったりした場合削除されます。
 				この動作を望まない場合は、新しい行を挿入した際に何かを入力してすぐ消すような Key mapping を定義するといいでしょう。</p>
 
-<pre><code>nnoremap o oX&lt;C-h&gt;
+<pre class="prettyprint"><code>nnoremap o oX&lt;C-h&gt;
 nnoremap O OX&lt;C-h&gt;
 inoremap &lt;CR&gt; &lt;CR&gt;X&lt;C-h&gt;
 </code></pre>

@@ -10,7 +10,7 @@ author: thinca
 
 <p>.gvimrc に以下のように書きます。</p>
 
-<pre><code>let g:save_window_file = expand('~/.vimwinpos')
+<pre class="prettyprint"><code>let g:save_window_file = expand('~/.vimwinpos')
 augroup SaveWindow
   autocmd!
   autocmd VimLeavePre * call s:save_window()

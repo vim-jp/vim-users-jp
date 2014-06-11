@@ -18,7 +18,7 @@ author: Sixeight
 
 <p>導入は以下の様に ~/.vim にリポジトリを clone すると完了します。</p>
 
-<pre><code>$ git clone http://github.com/gmarik/vundle.git ~/.vim/vundle.git
+<pre class="prettyprint"><code>$ git clone http://github.com/gmarik/vundle.git ~/.vim/vundle.git
 </code></pre>
 
 <p>ドットファイルを git で管理されている方は、submodule として取り込んで下さい。</p>
@@ -27,7 +27,7 @@ author: Sixeight
 
 <p>plugin の管理は以下の様に .vimrc に Bundle &#8216;plugin name&#8217; と記述することで行います。</p>
 
-<pre><code>set nocompatible
+<pre class="prettyprint"><code>set nocompatible
 filetype off                   " (1)
 
 set rtp+=~/.vim/vundle.git/    " (2)
@@ -54,21 +54,21 @@ filetype plugin indent on     " (5)
 
 <h4>Github 上のリポジトリから取得する場合</h4>
 
-<pre><code>Bundle 'user_name/repository_name'
+<pre class="prettyprint"><code>Bundle 'user_name/repository_name'
 </code></pre>
 
 <p>の様に、Github のユーザ名とリポジトリ名を指定します。</p>
 
 <h4>vim-scripts 上のリポジトリから取得する場合</h4>
 
-<pre><code>Bundle 'script_name'
+<pre class="prettyprint"><code>Bundle 'script_name'
 </code></pre>
 
 <p>の様に、plugin の名前を指定します。</p>
 
 <h4>それ以外の git リポジトリから取得する場合</h4>
 
-<pre><code>Bundle 'git://repository_url'
+<pre class="prettyprint"><code>Bundle 'git://repository_url'
 </code></pre>
 
 <p>の様に、Git リポジトリ のフルパスを指定します。</p>
@@ -78,17 +78,17 @@ filetype plugin indent on     " (5)
 <p>plugin のインストールには、:BundleInstall コマンドを使用します。
 				先程、.vimrc に Bundle &#8216;name&#8217; と記述した plugin が自動的に取得され、インストールまで行われます。</p>
 
-<pre><code>:BundleInstall
+<pre class="prettyprint"><code>:BundleInstall
 </code></pre>
 
 <p>また、既にインストールされている plugin をアップデートするには、 :BundleInstall! コマンドを利用します。</p>
 
-<pre><code>:BundleInstall!
+<pre class="prettyprint"><code>:BundleInstall!
 </code></pre>
 
 <p>plugin を検索して、インタラクティブに管理することも出来ます。</p>
 
-<pre><code>:Bundles unite
+<pre class="prettyprint"><code>:Bundles unite
 </code></pre>
 
 <p>上記のコマンドを実行すると、検索結果が split されて表示されます。リストから目的の plugin を選択し、インストール、削除などが行えます。</p>
@@ -97,12 +97,12 @@ filetype plugin indent on     " (5)
 
 <p>以下のようにしてヘルプを生成します。</p>
 
-<pre><code>:helptags ~/.vim/vundle.git/doc
+<pre class="prettyprint"><code>:helptags ~/.vim/vundle.git/doc
 </code></pre>
 
 <p>生成したヘルプは通常通り以下のように引くことが出来ます</p>
 
-<pre><code>:help vundle
+<pre class="prettyprint"><code>:help vundle
 </code></pre>
 
 <h2>参照</h2>

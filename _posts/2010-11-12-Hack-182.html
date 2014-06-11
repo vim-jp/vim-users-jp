@@ -10,14 +10,14 @@ author: thinca
 
 <p>折り畳みを開始したい行に \{\{\{ を、終了したい行に \}\}\} を書きます。行のどこかに入っていればいいので、コメントのなかに書くといいでしょう。</p>
 
-<pre><code>\{\{\{
+<pre class="prettyprint"><code>\{\{\{
 // この行と開始/終了行を合わせた 3 行が折り畳まれる
 \}\}\}
 </code></pre>
 
 <p>入れ子にすることが可能で、深くなるごとに折り畳みレベルが増えます。また、1 行に複数のマーカーを置くとその分だけ折り畳みレベルが深くなります。</p>
 
-<pre><code>// レベル 0 (折り畳みなし)
+<pre class="prettyprint"><code>// レベル 0 (折り畳みなし)
 \{\{\{
 // レベル 1
 \{\{\{ \{\{\{
@@ -30,7 +30,7 @@ author: thinca
 
 <p>マーカーの後ろに数字を付けることで、レベルを直接指定できます。この場合、途中のレベルを飛ばして折り畳みレベルを設定したり、同じレベルの折り畳みを連続で置くことができます。また、閉じるための \}\}\} は省略できます。</p>
 
-<pre><code>\{\{\{1
+<pre class="prettyprint"><code>\{\{\{1
 // レベル 1
 \{\{\{3
 // レベル 3
@@ -52,14 +52,14 @@ author: thinca
 
 <p>例えば C のソースを編集中に、</p>
 
-<pre><code>int main(int argc, char const* argv[]) {
+<pre class="prettyprint"><code>int main(int argc, char const* argv[]) {
   return 0;
 }
 </code></pre>
 
 <p>この関数の中で <kbd>zfa{</kbd> とすると、</p>
 
-<pre><code>int main(int argc, char const* argv[]) {/*\{\{\{*/
+<pre class="prettyprint"><code>int main(int argc, char const* argv[]) {/*\{\{\{*/
   return 0;
 }/*\}\}\}*/
 </code></pre>

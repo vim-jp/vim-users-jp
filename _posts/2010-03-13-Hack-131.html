@@ -8,7 +8,7 @@ author: ujihisa
 
 <p>Rubyでは文字列リテラルの中に<code>#{}</code>で囲まれた式を書くと展開されます。</p>
 
-<pre><code>puts &quot;It is now #{Time.now}.&quot;
+<pre class="prettyprint"><code>puts &quot;It is now #{Time.now}.&quot;
 #=&gt; It is now Wed Feb 17 16:28:18 -0800 2010.
 </code></pre>
 
@@ -22,14 +22,14 @@ author: ujihisa
 
 <p>すぐに思い浮かぶ解決方法は、<code>iabbrev</code>を用いて<code>\{\{</code>を<code>#{</code>に置き換えることです。</p>
 
-<pre><code>iabbrev \{\{ #{
+<pre class="prettyprint"><code>iabbrev \{\{ #{
 </code></pre>
 
 <p>この方法はうまくいきません。<code>\{\{</code>のあとにスペースを打鍵する必要がありますが、Rubyの慣習では<code>#{</code>のあとにスペースをいれずすぐに式を書くことになっている場合が多いためです。</p>
 
 <p>それならば<code>iabbrev</code>ではなく<code>inoremap</code>だ、と思い付くのではないでしょうか。</p>
 
-<pre><code>inoremap \{\{ #{
+<pre class="prettyprint"><code>inoremap \{\{ #{
 </code></pre>
 
 <p>この方法はうまくいきません。実際に試してみるとすぐに分かりますが、<code>{</code>を打鍵してすぐに<code>{</code>が画面にでてこないことにイライラする日々を送ることになります。Rubyでは<code>#{</code>よりもブロックとしての<code>{</code>を書くことの方が頻度は高く、メリットよりもデメリットの方が遥かに大きいのです。</p>
@@ -40,12 +40,12 @@ author: ujihisa
 
 <p>smartchrをインストールし、<code>~/.vim/ftplugin/ruby.vim</code>に以下を記述します。</p>
 
-<pre><code>inoremap &lt;expr&gt; &lt;buffer&gt; {  smartchr#loop('{', '#{', '\{\{\{')
+<pre class="prettyprint"><code>inoremap &lt;expr&gt; &lt;buffer&gt; {  smartchr#loop('{', '#{', '\{\{\{')
 </code></pre>
 
 <p>これで、<code>{</code>を続けて打鍵していくと以下のようになります。</p>
 
-<pre><code>{
+<pre class="prettyprint"><code>{
 #{
 \{\{\{
 {

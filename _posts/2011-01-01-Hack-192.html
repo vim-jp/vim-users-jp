@@ -37,18 +37,18 @@ author: ujihisa
 
 <p>まず、a.js.shdというファイル名のファイルを作成します。Vimで開き、一行目に以下のようなおまじないを書きましょう(*2)。</p>
 
-<pre><code>## coffee -csb
+<pre class="prettyprint"><code>## coffee -csb
 </code></pre>
 
 <p>あとは以下にCoffeeScriptでコードを記述しましょう。適当に記述したところで、一旦そのファイルを完全に閉じ、a.jsという名前の空ファイルを作成してからそのファイルを開きます。</p>
 
-<pre><code>:!touch a.js
+<pre class="prettyprint"><code>:!touch a.js
 :e a.js
 </code></pre>
 
 <p>するとそこには先ほど編集したばかりのa.js.shdファイルの中身が展開されています。しかし実際に<code>a.js</code>ファイルには、<code>coffee -csb</code>コマンドの適用結果であるJavaScriptのコードが記述されています。これは以下のコマンドなどで確認できます(*3)。</p>
 
-<pre><code>:!cat %
+<pre class="prettyprint"><code>:!cat %
 </code></pre>
 
 <p>補足ながら、shadow.vimとは直接関係ないことがらですが、適切なmodelineを与えることによって、.shdという拡張子でも適切なfiletypeを与えることができます。</p>

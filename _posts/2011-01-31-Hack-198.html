@@ -10,7 +10,7 @@ author: thinca
 
 <p>デフォルトでは、新しいウィンドウは上か左に開かれます。この挙動を変更するには、<code class="option">'splitbelow'</code> オプションや <code class="option">'splitright'</code> オプションを設定します。それぞれウィンドウを下、右に開くようにするオプションです。</p>
 
-<pre><code>" 新しいウィンドウを下に開く
+<pre class="prettyprint"><code>" 新しいウィンドウを下に開く
 set splitbelow
 " 新しいウィンドウを右に開く
 set splitright
@@ -37,7 +37,7 @@ set splitright
 <p>これらのコマンドで分割方法が指定されていた場合、<code class="option">'splitbelow'</code> <code class="option">'splitright'</code> オプションは上書きされます。
 				{cmd} は分割コマンドが直接指定される必要があります。<code>:execute</code> を使ったり、呼んだ関数内で分割コマンドが実行されても効果はありません。ただし、これらの修飾コマンドは複数指定することができます。</p>
 
-<pre><code>" 画面の一番左に新しいウィンドウを開く
+<pre class="prettyprint"><code>" 画面の一番左に新しいウィンドウを開く
 :vertical topleft new
 </code></pre>
 

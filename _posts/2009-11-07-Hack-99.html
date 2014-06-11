@@ -12,13 +12,13 @@ author: thinca
 <p>
 				Vim 7.2.269 から &#8211;startuptime と言う起動時のプロファイルを簡単に行うためのコマンドライン引数が追加されました。
 </p>
-<pre><code>
+<pre class="prettyprint"><code>
 vim --startuptime=<var>result.txt</var>
 </code></pre>
 <p>
 				7.2.286 からは引数の形式が変更されています。
 </p>
-<pre><code>
+<pre class="prettyprint"><code>
 vim --startuptime <var>result.txt</var>
 </code></pre>
 <p>
@@ -39,14 +39,14 @@ vim --startuptime <var>result.txt</var>
 
 <p>以下のようにして vim を起動します。</p>
 
-<pre><code>vim --cmd &quot;profile start result.txt&quot; --cmd &quot;profile file */plugin/*.vim&quot; -c quit
+<pre class="prettyprint"><code>vim --cmd &quot;profile start result.txt&quot; --cmd &quot;profile file */plugin/*.vim&quot; -c quit
 </code></pre>
 
 <p>このコマンドを実行すると、特にエラーが発生しない限り vim はすぐに終了します。そしてプロファイル結果が result.txt に出力されます。</p>
 
 <p>また、ついでに自分の vimrc も確認したい、という場合は &#8211;cmd を増やせば大丈夫です。</p>
 
-<pre><code>vim --cmd &quot;profile start result.txt&quot; --cmd &quot;profile file */plugin/*.vim&quot; --cmd &quot;profile file .vimrc&quot; -c quit
+<pre class="prettyprint"><code>vim --cmd &quot;profile start result.txt&quot; --cmd &quot;profile file */plugin/*.vim&quot; --cmd &quot;profile file .vimrc&quot; -c quit
 </code></pre>
 
 <p>ファイル名は適時変更してください。また、コマンドの実行タイミングにより $MYVIMRC は使えません。</p>
@@ -56,7 +56,7 @@ vim --startuptime <var>result.txt</var>
 <p>プロファイル結果の概要を知るために結果のファイルを加工してみます。
 				以下のような vim スクリプトを作成し、結果ファイルを開いてから作成したスクリプトを <code class="lang-vim">:source</code> します。</p>
 
-<pre><code>let s:list = []
+<pre class="prettyprint"><code>let s:list = []
 global/^SCRIPT/
 \ call add(s:list, printf(&quot;%s\t%s&quot;,
 \                         matchstr(getline(line('.')+2), '\d\+\.\d\+'),

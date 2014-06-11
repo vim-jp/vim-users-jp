@@ -11,7 +11,7 @@ author: ujihisa
 
 <h2>解決</h2>
 
-<pre><code>let $PATH=&quot;/the/new/path:&quot;.$PATH
+<pre class="prettyprint"><code>let $PATH=&quot;/the/new/path:&quot;.$PATH
 </code></pre>
 
 <p>とします。</p>
@@ -20,12 +20,12 @@ author: ujihisa
 
 <h2>解説</h2>
 
-<pre><code>let $PATH=&quot;/the/new/path:$PATH&quot;
+<pre class="prettyprint"><code>let $PATH=&quot;/the/new/path:$PATH&quot;
 </code></pre>
 
 <p>としたいところですが、$PATHは&quot;&quot;の中で展開されません。また、</p>
 
-<pre><code>set path=&quot;/the/new/path,.&quot;
+<pre class="prettyprint"><code>set path=&quot;/the/new/path,.&quot;
 </code></pre>
 
 <p>というのもありますが、これは<code>:!</code>用ではなく、<kbd>gf</kbd>などのためです。詳しくは<code>:h <code class="option">'path'</code></code>をご覧ください。</p>

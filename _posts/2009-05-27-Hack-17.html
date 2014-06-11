@@ -6,7 +6,7 @@ author: ujihisa
 ---
 <p>編集対象ファイル名を変更するには、シェルで</p>
 
-<pre><code>$ vim aaa.txt
+<pre class="prettyprint"><code>$ vim aaa.txt
 (編集作業)
 $ mv aaa.txt bbb.txt
 $ vim bbb.txt
@@ -18,7 +18,7 @@ $ vim bbb.txt
 
 <p>Vimにはシェルの<code>mv</code>に対応する関数<code>rename()</code>があります。これを使い、編集中ファイルをカレントディレクトリの<code>newfilename.txt</code>というファイル名に変更してみましょう。</p>
 
-<pre><code>:call rename(expand('%'), 'newfilename.txt')
+<pre class="prettyprint"><code>:call rename(expand('%'), 'newfilename.txt')
 :e newfilename.txt
 </code></pre>
 
@@ -31,7 +31,7 @@ $ vim bbb.txt
 
 <p>一旦新しい名前で保存し、古いファイルを削除することで名前の変更を実現します。Vim内で</p>
 
-<pre><code>:w newfilename.txt
+<pre class="prettyprint"><code>:w newfilename.txt
 :call delete(expand('#'))
 </code></pre>
 
@@ -41,7 +41,7 @@ $ vim bbb.txt
 
 <h2>ファイル保存先を指定し、古いファイルを削除する</h2>
 
-<pre><code>:file newfilename.txt
+<pre class="prettyprint"><code>:file newfilename.txt
 :call delete(expand('#'))
 </code></pre>
 
@@ -50,7 +50,7 @@ $ vim bbb.txt
 
 <p>さて、二行目の削除処理を忘れないため、この二行をまとめて一つのコマンドとして定義しましょう。<code>.vimrc</code>に以下の設定を記述します:</p>
 
-<pre><code>command! -nargs=1 -complete=file Rename f &lt;args&gt;|call delete(expand('#'))
+<pre class="prettyprint"><code>command! -nargs=1 -complete=file Rename f &lt;args&gt;|call delete(expand('#'))
 </code></pre>
 
 <p>これで、以後<code>:Rename newfilename.txt</code>とすることでファイル名を変更することができます。</p>

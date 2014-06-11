@@ -11,13 +11,13 @@ author: ujihisa
 <ol>
 <li><p>インデントがおかしい</p>
 
-<pre><code>var a = {
+<pre class="prettyprint"><code>var a = {
   a_
 </code></pre>
 
 <p>この状態で<code>:</code>を打鍵しますと、</p>
 
-<pre><code>var a = {
+<pre class="prettyprint"><code>var a = {
 a:_
 </code></pre>
 
@@ -26,7 +26,7 @@ a:_
 
 <p>jQuery時代、$ではじまる変数名を使う機会が増えています。</p>
 
-<pre><code>var $a = 1;
+<pre class="prettyprint"><code>var $a = 1;
 </code></pre>
 
 <p>この<code>a</code>の位置から<kbd>*</kbd>を打鍵しますと、<code>$a</code>ではなく<code>a</code>という単語だけを検索対象にしてしまいます。</p></li>
@@ -47,13 +47,13 @@ a:_
 
 <p><a href="http://www.vim.org/scripts/script.php?script_id=1840">http://www.vim.org/scripts/script.php?script_id=1840</a></p>
 
-<pre><code>var a = {
+<pre class="prettyprint"><code>var a = {
   a_
 </code></pre>
 
 <p>この状態で<code>:</code>を打鍵しますと、</p>
 
-<pre><code>var a = {
+<pre class="prettyprint"><code>var a = {
   a:
 </code></pre>
 
@@ -66,12 +66,12 @@ a:_
 
 <p>たとえばプログラミング言語Haskellでは、無名関数を作成するにあたってバックスラッシュを使用します。</p>
 
-<pre><code>map (\x -&gt; f (x * 2)) [1, 2, 3]
+<pre class="prettyprint"><code>map (\x -&gt; f (x * 2)) [1, 2, 3]
 </code></pre>
 
 <p>これはJavaScriptでは, jQueryを用いると</p>
 
-<pre><code>$.map([1, 2, 3], function(x) { return f(x * 2); });
+<pre class="prettyprint"><code>$.map([1, 2, 3], function(x) { return f(x * 2); });
 </code></pre>
 
 <p>となります。このことから類推すると、<code>\</code>と打鍵することで<code>function(</code>と入力されることが望ましいことが分かるのですが、
@@ -83,7 +83,7 @@ a:_
 
 <p>smartchr.vim導入後、以下の設定を<code>~/.vimrc</code>に記述しましょう。</p>
 
-<pre><code>augroup Ujihisa &quot; \{\{\{
+<pre class="prettyprint"><code>augroup Ujihisa &quot; \{\{\{
   autocmd!
   autocmd FileType javascript inoremap &lt;buffer&gt; &lt;expr&gt; \  smartchr#one_of('function(', '\')
 augroup END
@@ -91,7 +91,7 @@ augroup END
 
 <p>あるいは、以下の設定を<code>~/.vim/ftplugin/javascript/ujihisa.vim</code>に記述しましょう。</p>
 
-<pre><code>inoremap &lt;buffer&gt; &lt;expr&gt; \  smartchr#one_of('function(', '\')
+<pre class="prettyprint"><code>inoremap &lt;buffer&gt; &lt;expr&gt; \  smartchr#one_of('function(', '\')
 </code></pre></li>
 </ol>
 

@@ -41,14 +41,14 @@ author: Sora Harakami
 
 <p>投稿した.vimrcは、</p>
 
-<pre><code>http://soralabo.net/s/vrcb/s/ユーザー名
+<pre class="prettyprint"><code>http://soralabo.net/s/vrcb/s/ユーザー名
 </code></pre>
 
 <p>から閲覧できます。削除メニューなどもそこから可能です。</p>
 
 <p>.gvimrcは</p>
 
-<pre><code>http://soralabo.net/s/vrcb/sg/ユーザー名
+<pre class="prettyprint"><code>http://soralabo.net/s/vrcb/sg/ユーザー名
 </code></pre>
 
 <p>から閲覧できます。</p>
@@ -57,7 +57,7 @@ author: Sora Harakami
 
 <p>.vimrcに以下を記述します。</p>
 
-<pre><code>augroup VimRcBox
+<pre class="prettyprint"><code>augroup VimRcBox
     autocmd!
     autocmd BufWritePost $MYVIMRC RcbVimrc
     autocmd BufWritePost $MYGVIMRC RcbGVimrc

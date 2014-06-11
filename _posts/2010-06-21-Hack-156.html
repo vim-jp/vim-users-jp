@@ -8,7 +8,7 @@ author: ujihisa
 
 <p>プログラミング言語Ruby, JavaScript, Vim scriptにおける配列は角括弧のみで構成された配列リテラルを用いて<code>[1, 2, 3]</code>のように表現することができます。一方、PHPというプログラミング言語では<code>array(1, 2, 3)</code>のように、<code>array</code>という予約語を用いて表現する必要があり、このことがRuby, JavaScript, Vim scriptプログラマを当惑させてきたという伝統があります。</p>
 
-<pre><code>&lt;?php [1, 2, 3] ?&gt;
+<pre class="prettyprint"><code>&lt;?php [1, 2, 3] ?&gt;
 #=&gt; Parse error: syntax error, unexpected '[' in a.php on line 1
 
 &lt;?php array(1, 2, 3) ?&gt;
@@ -21,7 +21,7 @@ author: ujihisa
 
 <p>PHPのFiletype Pluginファイルに以下のコードを追加します。</p>
 
-<pre><code>function! s:last_char()
+<pre class="prettyprint"><code>function! s:last_char()
   return matchstr(getline('.'), '.', col('.')-2)
 endfunction
 inoremap &lt;buffer&gt;&lt;expr&gt; [ a:last_char =~ '\w\\|]' ? '[' : 'array(')
@@ -29,7 +29,7 @@ inoremap &lt;buffer&gt;&lt;expr&gt; [ a:last_char =~ '\w\\|]' ? '[' : 'array(')
 
 <p>Filetyle Pluginは<code>~/.vim/ftplugin/{filetype}.vim</code>あるいは<code>~/.vim/ftplugin/{filetype}/*.vim</code>です。とりあえずすぐに上記機能を導入したいのであれば、</p>
 
-<pre><code>~/.vim/ftplugin/php/ujihisa.vim
+<pre class="prettyprint"><code>~/.vim/ftplugin/php/ujihisa.vim
 </code></pre>
 
 <p>に上記4行のみを記述すればよいでしょう。</p>
@@ -38,12 +38,12 @@ inoremap &lt;buffer&gt;&lt;expr&gt; [ a:last_char =~ '\w\\|]' ? '[' : 'array(')
 
 <p>もう少し詳しく説明しましょう。そもそもPHPで<code>[</code>という記号を入力する必要があるのは、配列の要素を参照するときでしょう。配列の要素を参照するのは、カーソル位置を<code>_</code>で示すとして</p>
 
-<pre><code>print($aaa_
+<pre class="prettyprint"><code>print($aaa_
 </code></pre>
 
 <p>のように変数名の直後か、</p>
 
-<pre><code>print($aaa['bbb']_
+<pre class="prettyprint"><code>print($aaa['bbb']_
 </code></pre>
 
 <p>このように配列の要素の参照の直後です。なお、<code>fff()['aaa']</code>といった書き方は言語仕様上Syntax Errorとなるので<code>)</code>の直後に<code>[</code>がくることはないと仮定できます。</p>
@@ -74,7 +74,7 @@ inoremap &lt;buffer&gt;&lt;expr&gt; [ a:last_char =~ '\w\\|]' ? '[' : 'array(')
 
 <p>冒頭のサンプルコード</p>
 
-<pre><code>&lt;?php array(1, 2, 3) ?&gt;
+<pre class="prettyprint"><code>&lt;?php array(1, 2, 3) ?&gt;
 </code></pre>
 
 <p>はセミコロンがないことからエラーになりそうで、実はエラーになりません。</p>
@@ -83,7 +83,7 @@ inoremap &lt;buffer&gt;&lt;expr&gt; [ a:last_char =~ '\w\\|]' ? '[' : 'array(')
 
 <p>いろいろあって、いま著者の<code>~/.vim/ftplugin/php.vim</code>の該当部分以下のようになっています。</p>
 
-<pre><code>function! s:last_char()
+<pre class="prettyprint"><code>function! s:last_char()
   return matchstr(getline('.'), '.', col('.')-2)
 endfunction
 

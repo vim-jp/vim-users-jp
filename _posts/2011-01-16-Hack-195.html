@@ -12,7 +12,7 @@ author: tyru
 
 <p>ちなみに自分は.vimrcで</p>
 
-<pre><code>set virtualedit=all
+<pre class="prettyprint"><code>set virtualedit=all
 </code></pre>
 
 <p>のように設定しています。</p>
@@ -23,20 +23,20 @@ author: tyru
 				もし右端(<code>$</code>で移動できる場所です)よりも右にいた場合に、
 				現在いる場所にテキストが挿入されてしまいます。</p>
 
-<pre><code>hello,$      |
+<pre class="prettyprint"><code>hello,$      |
 </code></pre>
 
 <p><code>$</code>は行末の位置であり、<code>|</code>はカーソルです。
 				ここで無名レジスタ(<code>:help registers</code>)には「world」が入っているとします。種類はcharacterwise(<code>:help characterwise</code>)とします。
 				ここでpを押すと</p>
 
-<pre><code>hello,      world
+<pre class="prettyprint"><code>hello,      world
 </code></pre>
 
 <p>このようになってしまいます。
 				私が望んだのは</p>
 
-<pre><code>hello,world
+<pre class="prettyprint"><code>hello,world
 </code></pre>
 
 <p>であり、余計な空白は入れてほしくありません。
@@ -47,7 +47,7 @@ author: tyru
 
 <p>以下のコードを.vimrcに貼り付ければ無事解決です。</p>
 
-<pre><code>if has('virtualedit') &amp;&amp; &amp;virtualedit =~# '\&lt;all\&gt;'
+<pre class="prettyprint"><code>if has('virtualedit') &amp;&amp; &amp;virtualedit =~# '\&lt;all\&gt;'
     nnoremap &lt;expr&gt; &lt;SID&gt;($-if-right-of-$)  (col('.') &gt;= col('$') ? '$' : '')
     nnoremap        &lt;SID&gt;(noremap-p)        p
     nmap p &lt;SID&gt;($-if-right-of-$)&lt;SID&gt;(noremap-p)
@@ -56,7 +56,7 @@ endif
 
 <p>一行で書いてもいいでしょう。</p>
 
-<pre><code>if has('virtualedit') &amp;&amp; &amp;virtualedit =~# '\&lt;all\&gt;'
+<pre class="prettyprint"><code>if has('virtualedit') &amp;&amp; &amp;virtualedit =~# '\&lt;all\&gt;'
     nnoremap &lt;expr&gt; p (col('.') &gt;= col('$') ? '$' : '') . 'p'
 endif
 </code></pre>

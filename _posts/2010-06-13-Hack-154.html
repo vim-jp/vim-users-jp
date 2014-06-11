@@ -14,14 +14,14 @@ author: tyru
 <p>もし自分が<code>/project/a/src/</code>というディレクトリにいた場合に、できれば<code>/project/a/tags</code>や、
 				または全てのプロジェクト用のタグファイル(ライブラリの関数など)もタグジャンプに使いたいとします。</p>
 
-<pre><code>/project/a/src/ (現在のディレクトリ)
+<pre class="prettyprint"><code>/project/a/src/ (現在のディレクトリ)
 /project/a/tags (指定したいタグファイル)
 /project/tags   (指定したいライブラリ関数のタグファイル)
 </code></pre>
 
 <p>その場合、.vimrcには以下のように書くことで可能になります。</p>
 
-<pre><code>if has('path_extra')
+<pre class="prettyprint"><code>if has('path_extra')
     set tags+=tags;
 endif
 </code></pre>
@@ -36,7 +36,7 @@ endif
 <p>ただ<code>;</code>をつけただけではルートディレクトリまでさかのぼってしまいます。
 				そこで<code>;</code>の後に上限となる親ディレクトリを指定することができます。</p>
 
-<pre><code>if has('path_extra')
+<pre class="prettyprint"><code>if has('path_extra')
     set tags+=tags;/project/a
 endif
 </code></pre>
@@ -49,14 +49,14 @@ endif
 				今度はある特定のディレクトリにあるタグファイルを
 				現在のディレクトリから指定したい場合はどうすればいいでしょう。</p>
 
-<pre><code>/project/a/src/          (現在のディレクトリ)
+<pre class="prettyprint"><code>/project/a/src/          (現在のディレクトリ)
 /project/a/src/libA/tags (指定したいタグファイル)
 /project/a/src/libB/tags (指定したいタグファイル2)
 </code></pre>
 
 <p>その場合、以下を.vimrcに書けばいいでしょう。</p>
 
-<pre><code>if has('path_extra')
+<pre class="prettyprint"><code>if has('path_extra')
     set tags+=./*/tags;
 endif
 </code></pre>
@@ -64,7 +64,7 @@ endif
 <p>また、<code>/project/a/src/libA/tags</code>などの1階層下のディレクトリにあるタグファイルだけではなく
 <code>/project/a/src/libA/src/tags</code>などの何階層か下のタグファイルを指定するには以下のようにできます。</p>
 
-<pre><code>if has('path_extra')
+<pre class="prettyprint"><code>if has('path_extra')
     set tags+=./**/tags;
 endif
 </code></pre>
@@ -76,7 +76,7 @@ endif
 				その場合は階層の深さの最大値を次のように指定することができます。
 				(この例では3階層下のディレクトリまでマッチするように設定しています)</p>
 
-<pre><code>if has('path_extra')
+<pre class="prettyprint"><code>if has('path_extra')
     set tags+=./**3/tags;
 endif
 </code></pre>
@@ -86,12 +86,12 @@ endif
 <p>これは前項と前々項の合わせ技です。
 				現在のディレクトリが<code>/project/a/src</code>の時に</p>
 
-<pre><code>set tags=**;
+<pre class="prettyprint"><code>set tags=**;
 </code></pre>
 
 <p>とすると、</p>
 
-<pre><code>/project/tags
+<pre class="prettyprint"><code>/project/tags
 /project/a/tags
 /project/a/libA/src/tags
 /project/a/libB/src/tags
@@ -102,7 +102,7 @@ endif
 <p>これら全てが指定されることになります。
 				つまり<code>**;</code>とは、現在のディレクトリが<code>/project/a/src</code>の時には</p>
 
-<pre><code>/project/a/src/**
+<pre class="prettyprint"><code>/project/a/src/**
 /project/a/**
 /project/**
 /**

@@ -16,7 +16,7 @@ author: ujihisa
 
 <p>まず、MacVimを入手します。</p>
 
-<pre><code>$ git clone git://repo.or.cz/MacVim.git MacVimUjihisa
+<pre class="prettyprint"><code>$ git clone git://repo.or.cz/MacVim.git MacVimUjihisa
 $ cd MacVimUjihisa/src
 $ ./configure --enable-gui=macvim
 $ make
@@ -24,7 +24,7 @@ $ make
 
 <p>次に、以下のパッチを適用します。</p>
 
-<pre><code>diff --git a/src/MacVim/MMTextStorage.m b/src/MacVim/MMTextStorage.m
+<pre class="prettyprint"><code>diff --git a/src/MacVim/MMTextStorage.m b/src/MacVim/MMTextStorage.m
 index 0d272b2..0327a8f 100644
 --- a/src/MacVim/MMTextStorage.m
 +++ b/src/MacVim/MMTextStorage.m
@@ -100,12 +100,12 @@ index 0d272b2..0327a8f 100644
 
 <p>そしてビルドします。</p>
 
-<pre><code>$ xcodebuild
+<pre class="prettyprint"><code>$ xcodebuild
 </code></pre>
 
 <p>走らせてみましょう。</p>
 
-<pre><code>$ open build/Release/MacVim.app
+<pre class="prettyprint"><code>$ open build/Release/MacVim.app
 </code></pre>
 
 <h2>既知の問題</h2>

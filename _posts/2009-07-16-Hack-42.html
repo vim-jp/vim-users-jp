@@ -17,7 +17,7 @@ author: ujihisa
 
 <p>以下の設定を<code>~/.vimrc</code>に記述します。</p>
 
-<pre><code>nnoremap &lt;C-w&gt;h &lt;C-w&gt;h:call &lt;SID&gt;good_width()&lt;Cr&gt;
+<pre class="prettyprint"><code>nnoremap &lt;C-w&gt;h &lt;C-w&gt;h:call &lt;SID&gt;good_width()&lt;Cr&gt;
 nnoremap &lt;C-w&gt;l &lt;C-w&gt;l:call &lt;SID&gt;good_width()&lt;Cr&gt;
 nnoremap &lt;C-w&gt;H &lt;C-w&gt;H:call &lt;SID&gt;good_width()&lt;Cr&gt;
 nnoremap &lt;C-w&gt;L &lt;C-w&gt;L:call &lt;SID&gt;good_width()&lt;Cr&gt;
@@ -37,13 +37,13 @@ endfunction
 <p><kbd>&lt;C-w&gt;h</kbd>の挙動を上書きせずとも、<code>'winminwidth'</code>を設定した方が良いのでは、と勘ぐった人も多いのではないでしょうか。
 				具体的には以下のように指定します。</p>
 
-<pre><code>set winminwidth=84
+<pre class="prettyprint"><code>set winminwidth=84
 </code></pre>
 
 <p>あるいは、以下のように<code>WinEnter</code>イベントにウインドウ幅の変更を指定するという方法もあります。
 				具体的には以下のように指定します。</p>
 
-<pre><code>augroup MyWinEnterWidth
+<pre class="prettyprint"><code>augroup MyWinEnterWidth
   autocmd!
   autocmd WinEnter * if winwidth(0) &lt; 84 | vertical resize 84 | endif
 augroup END
@@ -56,7 +56,7 @@ augroup END
 
 <p>なお、著者は<kbd>CTRL</kbd>キーを回避するため、以下のように<kbd>s</kbd>をプレフィックスにしたウインドウの移動キーを割り当てています。</p>
 
-<pre><code>nnoremap sh &lt;C-w&gt;h:call &lt;SID&gt;good_width()&lt;Cr&gt;
+<pre class="prettyprint"><code>nnoremap sh &lt;C-w&gt;h:call &lt;SID&gt;good_width()&lt;Cr&gt;
 nnoremap sj &lt;C-w&gt;j
 nnoremap sk &lt;C-w&gt;k
 nnoremap sl &lt;C-w&gt;l:call &lt;SID&gt;good_width()&lt;Cr&gt;

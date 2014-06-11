@@ -14,12 +14,12 @@ author: ujihisa
 
 <p>例示します。Rubyでは、1というオブジェクトから2というオブジェクトを得るには、1に対して<code>succ</code>または<code>next</code>というメソッドを呼び出すことで実現できます。</p>
 
-<pre><code>1.succ #=&gt; 2
+<pre class="prettyprint"><code>1.succ #=&gt; 2
 </code></pre>
 
 <p>また、<code>[:a, :b, :c]</code>というオブジェクトから<code>:a</code>というオブジェクトを得るには、<code>[:a, :b, :c]</code>というオブジェクトに<code>first</code>などのメソッドを呼び出すことで実現できます。</p>
 
-<pre><code>[:a, :b, :c].first #=&gt; :a
+<pre class="prettyprint"><code>[:a, :b, :c].first #=&gt; :a
 </code></pre>
 
 <p>カーソル位置がオブジェクトの直後のメソッド呼び出しの<code>.</code>にあるとき、メソッド名が自動補完されるのを期待するのはごく自然なことと思います。</p>
@@ -34,7 +34,7 @@ author: ujihisa
 <li>
 <p>Rubygemsパッケージ<code>methodfinder</code>をインストールします。</p>
 
-<pre><code>  $ gem install methodfinder
+<pre class="prettyprint"><code>  $ gem install methodfinder
 </code></pre>
 </li>
 <li>
@@ -44,7 +44,7 @@ author: ujihisa
 
 <p>続いて、<code>'filetype'</code>が<code>ruby</code>であるバッファで、以下のように入力します(ただし<code>¶</code>はカーソルのつもりです。)</p>
 
-<pre><code>1.¶ #=&gt; 2
+<pre class="prettyprint"><code>1.¶ #=&gt; 2
 </code></pre>
 
 <p>すると、1というオブジェクトが持つメソッドでかつ返り値が2であるメソッド <code>next</code>と<code>succ</code>が補完候補にあらわれます。</p>
@@ -53,7 +53,7 @@ author: ujihisa
 
 <p>同様に、</p>
 
-<pre><code>[:a, :b, :c].¶ #=&gt; :a
+<pre class="prettyprint"><code>[:a, :b, :c].¶ #=&gt; :a
 </code></pre>
 
 <p>に対して</p>

@@ -73,7 +73,7 @@ author: Shougo
 <p>neobundle.vimの開発は、github上で行われています。<a href="https://github.com/Shougo/neobundle.vim">https://github.com/Shougo/neobundle.vim</a>
 				導入する場合、~/.vimにリポジトリをcloneすると楽でしょう。</p>
 
-<pre><code>$ git clone https://github.com/Shougo/neobundle.vim ~/.vim/neobundle.vim.git
+<pre class="prettyprint"><code>$ git clone https://github.com/Shougo/neobundle.vim ~/.vim/neobundle.vim.git
 </code></pre>
 
 <h2>plugin の管理</h2>
@@ -81,7 +81,7 @@ author: Shougo
 <p>plugin の管理は以下の様に .vimrc に <code>NeoBundle 'plugin name'</code> と記述することで行います。
 				極端な話、<code>Bundle</code>を<code>NeoBundle</code>に変更するだけです。</p>
 
-<pre><code>set nocompatible
+<pre class="prettyprint"><code>set nocompatible
 filetype off
 
 if has('vim_starting')
@@ -116,17 +116,17 @@ filetype indent on
 
 <h4>Github 上のリポジトリから取得する</h4>
 
-<pre><code>NeoBundle 'user_name/repository_name'
+<pre class="prettyprint"><code>NeoBundle 'user_name/repository_name'
 </code></pre>
 
 <h4>vim-scripts 上のリポジトリから取得する</h4>
 
-<pre><code>NeoBundle 'script_name'
+<pre class="prettyprint"><code>NeoBundle 'script_name'
 </code></pre>
 
 <h4>それ以外のリポジトリから取得する</h4>
 
-<pre><code>NeoBundle 'git://repository_url'
+<pre class="prettyprint"><code>NeoBundle 'git://repository_url'
 NeoBundle 'http://svn.macports.org/repository/macports/contrib/mpvim/'
 NeoBundle 'https://bitbucket.org/ns9tks/vim-fuzzyfinder'
 </code></pre>
@@ -140,13 +140,13 @@ NeoBundle 'https://bitbucket.org/ns9tks/vim-fuzzyfinder'
 				.vimrcで設定したplugin が自動的に取得され、インストールまで行われます。
 				ただし、アップデートしたプラグインを使用するには、Vimを再起動したほうが良いです。</p>
 
-<pre><code>:NeoBundleInstall
+<pre class="prettyprint"><code>:NeoBundleInstall
 </code></pre>
 
 <p>既にインストールされている plugin をアップデートするには、 <code>:NeoBundleInstall!</code> コマンドを利用します。
 				通常の<code>NeoBundleInstall</code>では、アップデートが行われないからです。</p>
 
-<pre><code>:NeoBundleInstall!
+<pre class="prettyprint"><code>:NeoBundleInstall!
 </code></pre>
 
 <p>不要になったプラグインを削除するには、<code>:NeoBundle</code>の設定を.vimrcから削除した後、
@@ -160,7 +160,7 @@ NeoBundle 'https://bitbucket.org/ns9tks/vim-fuzzyfinder'
 				neobundle/install sourceの引数に!を与えると、<code>:NeoBundleInstall!</code>相当になります。
 				プラグイン名を引数に与えることで、個別にアップデートをすることも可能です。</p>
 
-<pre><code>:Unite neobundle/install:!
+<pre class="prettyprint"><code>:Unite neobundle/install:!
 :Unite neobundle/install:neocomplcache
 :Unite neobundle/install:neocomplcache:unite.vim
 </code></pre>

@@ -20,13 +20,13 @@ author: thinca
 
 <p>コマンド版では範囲(range)を与えることができ、これによりチャンクを分割したマージが可能です。</p>
 
-<pre><code>" Visual-mode で範囲を選択した後に、その範囲を反対側のバッファへ適用する
+<pre class="prettyprint"><code>" Visual-mode で範囲を選択した後に、その範囲を反対側のバッファへ適用する
 :'&lt;,'&gt;diffput
 </code></pre>
 
 <p>また、Vim では 3 ファイル以上の差分の比較も可能になっていますが、その場合引数でバッファを指定することで差分をやりとりするバッファを指定することができます。バッファはバッファ番号かバッファ名のパターンや一部で指定します。</p>
 
-<pre><code>" バッファ名に "BASE" を含むバッファを対象にする
+<pre class="prettyprint"><code>" バッファ名に "BASE" を含むバッファを対象にする
 :diffget BASE
 </code></pre>
 

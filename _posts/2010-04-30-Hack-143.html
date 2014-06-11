@@ -18,7 +18,7 @@ author: thinca
 
 <p>例: tabstop=8 (タブ文字を &gt;&#8212;&#8212;- で、インデント中のスペースを _ で表示しています)</p>
 
-<pre><code>int main(int argc, char const* argv[]) {
+<pre class="prettyprint"><code>int main(int argc, char const* argv[]) {
 &gt;--------int&gt;---count&gt;--= 0;
 &gt;--------char&gt;--ch&gt;-----= '0';
 }
@@ -26,12 +26,12 @@ author: thinca
 
 <p>この状態で</p>
 
-<pre><code>:retab 3
+<pre class="prettyprint"><code>:retab 3
 </code></pre>
 
 <p>を実行すると、</p>
 
-<pre><code>int main(int argc, char const* argv[]) {
+<pre class="prettyprint"><code>int main(int argc, char const* argv[]) {
 &gt;--&gt;--__int&gt;&gt;--_count&gt;--= 0;
 &gt;--&gt;--__char&gt;--_ch&gt;--&gt;--= '0';
 }
@@ -51,7 +51,7 @@ author: thinca
 
 <p>ただし、この場合意図しない箇所、例えば文字列リテラル中の空白も置き換えられてしまうので注意が必要です。その場合は <code>:substitute</code> による行頭部分の置換の方が良いかもしれません。</p>
 
-<pre><code>%s@^\v(%( {4})+)@\=repeat(&quot;\t&quot;, len(submatch(1))/4)@
+<pre class="prettyprint"><code>%s@^\v(%( {4})+)@\=repeat(&quot;\t&quot;, len(submatch(1))/4)@
 </code></pre>
 
 <address class="hack-author">thinca</address>

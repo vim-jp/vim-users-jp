@@ -8,7 +8,7 @@ author: ujihisa
 
 <p>Vimの<code>:e</code>や<code>:new</code>などはカレントディレクトリにあるファイルを開きます。また補完対象もカレントディレクトリからのファイルです。</p>
 
-<pre><code>:e a&lt;tab&gt;
+<pre class="prettyprint"><code>:e a&lt;tab&gt;
 </code></pre>
 
 <p>このようにするとカレントディレクトリのaからはじまるファイル名を対象にファイル名補完を行ないます。</p>
@@ -20,19 +20,19 @@ author: ujihisa
 
 <p>一度カレントディレクトリを編集中ファイルのディレクトリに移動するか、あるいはnetrwで編集中ファイルのディレクトリを開くかが良いでしょう。<code>tabpagecd</code>などのプラグインを使用している場合、編集中ファイルのディレクトリにカレントディレクトリを移動させるのは副作用が大きすぎるため、後者の方法が好ましいでしょう。</p>
 
-<pre><code>:e %:h
+<pre class="prettyprint"><code>:e %:h
 </code></pre>
 
 <p>で編集中ファイルのディレクトリをnetrwで開き、ファイル一覧を取得できます。この作業を頻繁に行なうならば、あいているキーにマッピングしましょう。例えば<code>-</code>に割り当てるならば、以下の一行を<code>~/.vimrc</code>に記述します。</p>
 
-<pre><code>nnoremap - :&lt;C-u&gt;e %:h&lt;Cr&gt;
+<pre class="prettyprint"><code>nnoremap - :&lt;C-u&gt;e %:h&lt;Cr&gt;
 </code></pre>
 
 <h2>解決法2</h2>
 
 <p>あるいは<kbd>&lt;tab&gt;</kbd>キーでの展開までを一つのキーに割り当てる方法も考えられます。</p>
 
-<pre><code>nnoremap - :&lt;C-u&gt; %:h&lt;Tab&gt;
+<pre class="prettyprint"><code>nnoremap - :&lt;C-u&gt; %:h&lt;Tab&gt;
 </code></pre>
 
 <p>このまま<kbd>&lt;Cr&gt;</kbd>を打鍵するとnetrwでディレクトリを開くので、こちらの解決法の方がより選択の幅が広がるといえます。</p>

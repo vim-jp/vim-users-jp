@@ -16,7 +16,7 @@ author: ujihisa
 
 <h2>ゴール</h2>
 
-<pre><code>s:calc('1 + 2 * (3 + 4)')
+<pre class="prettyprint"><code>s:calc('1 + 2 * (3 + 4)')
 #=&gt; 15
 </code></pre>
 
@@ -34,7 +34,7 @@ author: ujihisa
 
 <p><code>lexer.vim</code></p>
 
-<pre><code>let s:L = vital#of('vital').import('Text.Lexer')
+<pre class="prettyprint"><code>let s:L = vital#of('vital').import('Text.Lexer')
 let s:rule = [
       \ ['id','\d\+'], ['whitespace','\s\+'],
       \ ['pls', '+'], ['ast', '*'],
@@ -46,12 +46,12 @@ endfunction
 
 <p>かなり短くかつ宣言的に記述することができました。</p>
 
-<pre><code>echo s:lex('1 + 2 * (3 + 4)')
+<pre class="prettyprint"><code>echo s:lex('1 + 2 * (3 + 4)')
 </code></pre>
 
 <p>を行うと</p>
 
-<pre><code>[{'label': 'id', 'col': 0, 'matched_text': '1'},
+<pre class="prettyprint"><code>[{'label': 'id', 'col': 0, 'matched_text': '1'},
  {'label': 'whitespace', 'col': 1, 'matched_text': ' '},
  {'label': 'pls', 'col': 2, 'matched_text': '+'},
  ... ]
@@ -76,7 +76,7 @@ endfunction
 
 <p>このoverlayを追加して</p>
 
-<pre><code>$ sudo emerge kp19pp
+<pre class="prettyprint"><code>$ sudo emerge kp19pp
 </code></pre>
 
 <p>すると<code>/usr/bin/kp19pp</code>が利用可能になります。</p>
@@ -89,7 +89,7 @@ endfunction
 
 <p><code>parser.vim.kpg</code></p>
 
-<pre><code>&lt;token_desc&gt; token{
+<pre class="prettyprint"><code>&lt;token_desc&gt; token{
     &lt;left&gt;{
         ast;
         pls;
@@ -110,12 +110,12 @@ endfunction
 
 <p>Advent Calendarの該当記事からそのままもってきました。さあこれからVim scriptを生成しましょう。</p>
 
-<pre><code>$ kp19pp -vimscript parser.vim.kpg parser.vim
+<pre class="prettyprint"><code>$ kp19pp -vimscript parser.vim.kpg parser.vim
 </code></pre>
 
 <p>これでVim scriptの<code>parser.vim</code>ファイルが生成されました。つづいて各アクション<code>make_pls</code>などを記述しましょう。</p>
 
-<pre><code>let s:semantic_action = {}
+<pre class="prettyprint"><code>let s:semantic_action = {}
 function! s:semantic_action.make_mlt(arg_0, arg_1)
     return a:arg_0 * a:arg_1
 endfunction
@@ -143,12 +143,12 @@ endfunction
 
 <p>Vital.Lexerを用いて作成した字句解析器とkp19ppを用いて作成した構文解析器とそれに適用するよう作成した評価機のすべてを組み合わせましょう。</p>
 
-<pre><code>$ cat lexer.vim parser.vim &gt; calc.vim
+<pre class="prettyprint"><code>$ cat lexer.vim parser.vim &gt; calc.vim
 </code></pre>
 
 <p>つづいてメイン処理です。</p>
 
-<pre><code>let s:p = copy(s:parser)
+<pre class="prettyprint"><code>let s:p = copy(s:parser)
 call s:p.ctor(s:semantic_action)
 
 let xs = s:lex('1 + 2 * (3 + 4)')

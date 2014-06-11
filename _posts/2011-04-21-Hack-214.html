@@ -10,7 +10,7 @@ author: ujihisa
 
 <p>現在のカーソル位置から次の閉じ括弧までの文字を一気に置き換えたい、というシーンは多々あると思います。</p>
 
-<pre><code>let l:lines = getbufline(buf■r(a:filename), 1, '$')
+<pre class="prettyprint"><code>let l:lines = getbufline(buf■r(a:filename), 1, '$')
 </code></pre>
 
 <p>例えば上記のようなコードを記述しており、カーソル位置は■とし、この位置から<code>a:filename</code>の直後の閉じ括弧までをまとめて削除し、<code>bufnr</code>のかわりに<code>bufloaded</code>と記述したいというケースを考えてみましょう。直後に開き括弧が存在し、これらは1トークンではないため、<code>w</code>や<code>e</code>などをそのまま使うことはできません。文字数を正確に数えることも困難です。おそらく<kbd>t)</kbd>か<kbd>fe</kbd>の二択となるでしょう。ただし後者を使う場合、正確にeがそれまで存在しないことを確認する必要があるため、より非存在性を確認しやすい括弧を用いて指定することになると思います。</p>
@@ -21,7 +21,7 @@ author: ujihisa
 
 <p>文単位モーションの<code>(</code>や<code>)</code>の使用をやめ、これに<code>t(</code>などを割り当てましょう。<code>~/.vimrc</code>に以下を記述します。</p>
 
-<pre><code>onoremap ) t)
+<pre class="prettyprint"><code>onoremap ) t)
 onoremap ( t(
 vnoremap ) t)
 vnoremap ( t(

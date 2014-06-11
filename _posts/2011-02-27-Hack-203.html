@@ -21,7 +21,7 @@ author: tyru
 <p><code>:AllMaps</code>を使います。<br />
 				次のコードを.vimrcに貼り付けましょう。</p>
 
-<pre><code>command!
+<pre class="prettyprint"><code>command!
 \   -nargs=* -complete=mapping
 \   AllMaps
 \   map &lt;args&gt; | map! &lt;args&gt; | lmap &lt;args&gt;
@@ -36,7 +36,7 @@ author: tyru
 
 <h2>使い方</h2>
 
-<pre><code>" 全てのマッピングを表示
+<pre class="prettyprint"><code>" 全てのマッピングを表示
 :AllMaps
 " 冒頭で言った1のケースのように現在のバッファで定義されたマッピングのみ表示
 :AllMaps &lt;buffer&gt;
@@ -54,7 +54,7 @@ author: tyru
 				出力から検索したい場合などに便利です。<br />
 				(<a href="http://d.hatena.ne.jp/tyru/20100427/vim_capture_command">筆者のブログの記事</a>も参照してください)</p>
 
-<pre><code>command!
+<pre class="prettyprint"><code>command!
 \   -nargs=+ -complete=command
 \   Capture
 \   call s:cmd_capture(&lt;q-args&gt;)
@@ -75,7 +75,7 @@ endfunction "\}\}\}
 
 <p>このExコマンドを使えば次のようにしてバッファに出力を書き込むことができます。</p>
 
-<pre><code>" 全てのマッピングをバッファに書き込む (/コマンドで検索できる)
+<pre class="prettyprint"><code>" 全てのマッピングをバッファに書き込む (/コマンドで検索できる)
 :Capture AllMaps &lt;buffer&gt;
 </code></pre>
 
@@ -85,7 +85,7 @@ endfunction "\}\}\}
 				これは<code>vexe</code>という内部コマンドを使っているので興味があればそちらも参照してください。<br />
 				(以下<code>$</code>がvimshellのプロンプトだとします)</p>
 
-<pre><code>$ cd    # ホームディレクトリに移動
+<pre class="prettyprint"><code>$ cd    # ホームディレクトリに移動
 $ ls    # /bin/lsを実行 (実際にはlsは内部コマンドで、それが/bin/lsを呼び出しているようです)
 bin git
 $ :ls   # :lsを実行。バッファリストを表示

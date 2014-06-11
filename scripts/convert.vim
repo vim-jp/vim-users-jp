@@ -120,6 +120,7 @@ function! s:convert(f) abort
   let text = substitute(text, '\Vhttp://rst.gsfc.nasa.gov/Sect16/full-20earth2.jpg', 'http://vaidehiparikh.files.wordpress.com/2012/08/full-20earth2.jpg', 'g')
   let text = substitute(text, '<code class="vim-script">', '<code class="lang-vim">', 'g')
   let text = substitute(text, '\Vもう少し:Captureについて (unite.vim)', 'unite.vimで:Capture', 'g')
+  let text = substitute(text, '<pre>\s*\(<code[^>]*>.\{-}</code>\s*\)</pre>', '<pre class="prettyprint">\1</pre>', 'g')
   let text = substitute(text, '/web/[0-9]\+/', '', 'g')
   let short = title
   let dict = [

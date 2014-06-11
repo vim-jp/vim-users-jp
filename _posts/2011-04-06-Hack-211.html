@@ -8,12 +8,12 @@ author: ujihisa
 
 <p>Haskellで、標準添付ライブラリを含むなんらかの外部モジュールを利用するためにはimport文を記述する必要があります。例えばData.ListモジュールのunionとunionByという関数を使用するためには、</p>
 
-<pre><code>import Data.List (union, unionBy)
+<pre class="prettyprint"><code>import Data.List (union, unionBy)
 </code></pre>
 
 <p>と記述します。また、Data.Listの全ての関数をLという名前に限定してimportするには、import qualified ~ as文を使います。</p>
 
-<pre><code>import qualified Data.List as L
+<pre class="prettyprint"><code>import qualified Data.List as L
 </code></pre>
 
 <p>いずれにせよ、importするためには事前に</p>
@@ -42,7 +42,7 @@ author: ujihisa
 
 <p>上記画像を見ていただければ、説明するまでもないでしょう。</p>
 
-<pre><code>import&lt;space&gt;
+<pre class="prettyprint"><code>import&lt;space&gt;
 </code></pre>
 
 <p>まで打鍵した時点で、自動でモジュールの一覧が補完候補に現れます。括弧を書くと、自動でそのモジュールの関数一覧が補完候補に現れます。これらの動作はかなり高速です。</p>

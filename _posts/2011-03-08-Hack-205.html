@@ -21,7 +21,7 @@ author: Sixeight
 <p>また <a href="http://vim.wikia.com/wiki/Commenting_with_opfunc">Tip 1570 Commenting with opfunc</a> で紹介されているスクリプトを利用する方法もあります。
 				オリジナルは Ruby に対応していなかったため、一部修正を加えています。</p>
 
-<pre><code>" Comment or uncomment lines from mark a to mark b.
+<pre class="prettyprint"><code>" Comment or uncomment lines from mark a to mark b.
 function! CommentMark(docomment, a, b)
   if !exists('b:comment')
     let b:comment = CommentStr() . ' '

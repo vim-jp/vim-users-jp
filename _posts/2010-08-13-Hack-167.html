@@ -6,7 +6,7 @@ author: tyru
 ---
 <h2>無名関数</h2>
 
-<pre><code>function! s:foo()
+<pre class="prettyprint"><code>function! s:foo()
     let foo = {}
     function foo.funcall() dict
         echo 'lambda'
@@ -19,7 +19,7 @@ call s:foo().funcall()
 
 <h2>クロージャ</h2>
 
-<pre><code>function! s:foo(num)
+<pre class="prettyprint"><code>function! s:foo(num)
     let foo = {'i': a:num}
     function foo.funcall() dict
         let self.i += 1

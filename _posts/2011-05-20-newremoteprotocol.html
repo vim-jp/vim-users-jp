@@ -9,12 +9,12 @@ author:
 <p>vimには複数のインスタンス間でコマンドや式がやりとりできるremote機能があります。</p>
 
 <p>
-<pre><code>
+<pre class="prettyprint"><code>
 # vim --servername GVIM --remote-send file.txt
 
 </code></pre>
 <p>こんな感じに別のvimにファイルを開かせたり</p>
-<pre><code>
+<pre class="prettyprint"><code>
 # vim --remote-expr 1+2
 3
 
@@ -28,7 +28,7 @@ author:
 <p>ところが、この問題を解決してくれるであろうプロジェクトがひっそりと始まりました。古参ユーザなら知ってる人もいるであろう<a href="https://sites.google.com/site/yukihironakadaira/">Yukihiro Nakadaira</a>さんです。</p>
 <p>これまでunixがX11で通信していた部分をunix domainソケットで、windowsがウィンドウメッセージで通信していた部分を名前付きパイプで実装を書き直しています。これにより、Xが起動していなくても、またWindowsではtelnetでログインしていたとしてもバックグラウンドから安全にメッセージを受信出きるようになるのです。</p>
 <p>現在まだテスト中ですが、基本的な動作は既に実装済みでVIM1からVIM2へ</p>
-<pre><code>
+<pre class="prettyprint"><code>
 :echo remote_expr("VIM2", 'remote_expr("VIM1", "1+2")')
 
 </code></pre>
