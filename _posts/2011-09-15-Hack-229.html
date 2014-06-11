@@ -8,7 +8,7 @@ author: ujihisa
 
 <p><img src="http://cache.gyazo.com/071b7fd4b985ad3d71e4ebb36c2ddea5.png" alt="" /></p>
 
-<p>静的型付け言語Haskellでの自動補完は<a href="/vim-users-jp/2011/04/Hack-211.html">Hack #211</a>で紹介しました。このときは補完候補の取得に<code>ghc-mod</code>という外部コマンドを用いました。補完候補を自動的に出力するために<code>neocomplcache</code>というVimプラギンを用いました。</p>
+<p>静的型付け言語Haskellでの自動補完は<a href="/vim-users-jp/2011/04/06/Hack-211.html">Hack #211</a>で紹介しました。このときは補完候補の取得に<code>ghc-mod</code>という外部コマンドを用いました。補完候補を自動的に出力するために<code>neocomplcache</code>というVimプラギンを用いました。</p>
 
 <p>動的型付け言語Rubyにおける自動補完はどのようにすれば達成できるでしょうか。Rubyのように非常に静的な解析が難しい言語では、メソッド名などの候補の取得が非常に困難であることが知られています。そもそも現在参照している式あるいは変数がどのクラスに属しているか、ほとんどのケースでは静的に決定することができません。クラスが分かったとしても、その変数のみが特異メソッドを持っているかもしれません。</p>
 
@@ -53,7 +53,7 @@ author: ujihisa
 				「関数やメンバを補完」は実現できるようになりました。しかし、そこには「自動的
 				に」が欠けているのです。</p>
 
-<p>Shougo 2009 <a href="/vim-users-jp/2009/07/Hack-44.html">/vim-users-jp/2009/07/Hack-44.html</a></p>
+<p>Shougo 2009 <a href="/vim-users-jp/2009/07/20/Hack-44.html">/vim-users-jp/2009/07/20/Hack-44.html</a></p>
 </blockquote>
 
 <p>自動補完を用いましょう。RSenseは<a href="https://github.com/Shougo/neocomplcache">neocomplcache</a>と連携することで自動補完として使うことができます。</p>
