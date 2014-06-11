@@ -142,8 +142,8 @@ endfunction
 function! s:from_utf8(str) abort
   let str = a:str
   let m = {
-  \ "\xE3\x80\x9C": "\xEF\xBD\x9E",
-  \ "\xE2\x80\x93": "\xEF\xBC\x8D",
+  \ "\xE3\x80\x9C": "&#12316;",
+  \ "\xE2\x80\x93": "&#8211;",
   \}
   for k in keys(m)
     let v = m[k]
