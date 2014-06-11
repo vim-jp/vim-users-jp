@@ -10,8 +10,7 @@ author: Shougo
 
 <p>
 				まずはすぐに.vimrcや.gvimrcを編集できるように、.vimrcにKey-mappingを定義しましょう。
-<pre class="prettyprint"><code class="lang-vim">
-nnoremap &lt;silent&gt; &lt;Space&gt;ev  :&lt;C-u&gt;edit $MYVIMRC&lt;CR&gt;
+<pre class="prettyprint"><code class="lang-vim">nnoremap &lt;silent&gt; &lt;Space&gt;ev  :&lt;C-u&gt;edit $MYVIMRC&lt;CR&gt;
 nnoremap &lt;silent&gt; &lt;Space&gt;eg  :&lt;C-u&gt;edit $MYGVIMRC&lt;CR&gt;
 </code></pre>
 				$MYVIMRCというのは特殊な環境変数で、現在使用している.vimrcへのパスが含まれています。$MYGVIMRCも同様に、.gvimrcへのパスが含まれています。
@@ -24,8 +23,7 @@ nnoremap &lt;silent&gt; &lt;Space&gt;eg  :&lt;C-u&gt;edit $MYGVIMRC&lt;CR&gt;
 				即座に.vimrcや.gvimrcを編集できるように設定しても、設定を反映させるためにはVimをいったん再起動しなければならず不便です。
 				sourceコマンドを用いれば.vimrcや.gvimrcを再度読み込むことができるので、.vimrcや.gvimrcに行った変更を現在のVimに反映できるように、
 				.vimrcにKey-mappingを定義しましょう。
-<pre class="prettyprint"><code class="lang-vim">
-" Load .gvimrc after .vimrc edited at GVim.
+<pre class="prettyprint"><code class="lang-vim">" Load .gvimrc after .vimrc edited at GVim.
 nnoremap &lt;silent&gt; &lt;Space&gt;rv :&lt;C-u&gt;source $MYVIMRC \| if has('gui_running') \| source $MYGVIMRC \| endif &lt;CR&gt;
 nnoremap &lt;silent&gt; &lt;Space&gt;rg :&lt;C-u&gt;source $MYGVIMRC&lt;CR&gt;
 </code></pre>
@@ -35,8 +33,7 @@ nnoremap &lt;silent&gt; &lt;Space&gt;rg :&lt;C-u&gt;source $MYGVIMRC&lt;CR&gt;
 
 <p>
 				しかし変更を適用するたびに、いちいちキーを入力するのは面倒です。自動的に変更が反映されるように.vimrcに設定してしまいましょう。
-<pre class="prettyprint"><code class="lang-vim">
-" Set augroup.
+<pre class="prettyprint"><code class="lang-vim">" Set augroup.
 augroup MyAutoCmd
     autocmd!
 augroup END
@@ -66,16 +63,14 @@ endif
 <p>
 				autocmdは常に追加されます。設定ファイルを何度も読み込むとautocmdが頻繁に追加され、Vimの動作がおかしくなる原因となります。
 				これを防ぐためには、.vimrcの先頭で一度autocmdをリセットします。
-<pre class="prettyprint"><code>
-autocmd!
+<pre class="prettyprint"><code>autocmd!
 
 ・・・・
 autocmd FileType * set textwidth=0
 autocmd FileType * set formatoptions-=ro
 </code></pre>
 				autocmdを全部削除するのに抵抗があるのならば、augroupを設定するとさらに便利になります。詳しくは<code class="lang-vim">:help augroup</code>を参照してください。
-<pre class="prettyprint"><code class="lang-vim">
-augroup MyAutoCmd
+<pre class="prettyprint"><code class="lang-vim">augroup MyAutoCmd
     autocmd!
 augroup END
 
@@ -87,12 +82,10 @@ autocmd MyAutoCmd FileType * set formatoptions-=ro
 <h4>オプションの設定</h4>
 <p>
 				オプションの初期値に値を追加する場合、次のように設定することがあると思います。
-<pre class="prettyprint"><code>
-set hoge_option+=piyo
+<pre class="prettyprint"><code>set hoge_option+=piyo
 </code></pre>
 				しかし設定ファイルを何度も読み込ませる場合、前の値が追加されてしまい、動作がおかしくなります。.vimrcには次のように設定し、一度初期値をロードするようにしましょう。
-<pre class="prettyprint"><code>
-set hoge_option&amp;
+<pre class="prettyprint"><code>set hoge_option&amp;
 set hoge_option+=piyo
 </code></pre>
 </p>

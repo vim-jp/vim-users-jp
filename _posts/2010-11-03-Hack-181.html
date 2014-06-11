@@ -25,8 +25,7 @@ author: Shougo
 				ファイルには拡張子を与えることができるので、使い捨てのスクリプトを書く際にも有用です。もちろん、<code>:setfiletype</code>を用いて手動でfiletypeを設定することもできます。thincaさんの作成した<a href="http://github.com/thinca/vim-quickrun">quickrun</a>を用いれば、スクリプトの実行も簡単です。ファイルは保存されているので、ちょっとしたメモ書きにも使えます。
 				私は<a href="http://github.com/Shougo/unite.vim">unite.vim</a>の<code>file_mru</code>で以前のメモを参照する、ということをよくやります。何かのキーにマッピングしておくと良いでしょう。</p>
 
-<pre class="prettyprint"><code class="lang-vim">
-" Open junk file."\{\{\{
+<pre class="prettyprint"><code class="lang-vim">" Open junk file."\{\{\{
 command! -nargs=0 JunkFile call s:open_junk_file()
 function! s:open_junk_file()
   let l:junk_dir = $HOME . '/.vim_junk'. strftime('/%Y/%m')

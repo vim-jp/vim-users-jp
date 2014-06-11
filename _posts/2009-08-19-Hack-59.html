@@ -10,8 +10,7 @@ author: Shougo
 
 <p><dd>tをタグジャンプのためのPrefix-keyとしてKey-mappingsを定義する場合、次のようになると思います。</dd></p>
 
-<pre class="prettyprint"><code class="lang-vim">
-nnoremap tt  &lt;C-]&gt;
+<pre class="prettyprint"><code class="lang-vim">nnoremap tt  &lt;C-]&gt;
 nnoremap &lt;silent&gt; tn  :&lt;C-u&gt;tag&lt;CR&gt;
 nnoremap &lt;silent&gt; tp  :&lt;C-u&gt;pop&lt;CR&gt;
 nnoremap &lt;silent&gt; tl  :&lt;C-u&gt;tags&lt;CR&gt;
@@ -25,8 +24,7 @@ nnoremap &lt;silent&gt; tl  :&lt;C-u&gt;tags&lt;CR&gt;
 
 <p><dd>次に示すのが、上記のPrefix-keyを改良したものです。</dd></p>
 
-<pre class="prettyprint"><code class="lang-vim">
-" The prefix key.
+<pre class="prettyprint"><code class="lang-vim">" The prefix key.
 nnoremap    [Tag]   &lt;Nop&gt;
 nmap    t [Tag]
 nnoremap [Tag]t  &lt;C-]&gt;

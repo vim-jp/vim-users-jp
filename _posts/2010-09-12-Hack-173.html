@@ -23,8 +23,7 @@ author: Shougo
 				CursorHoldI, CursorHoldは新たにキーが押されない限り連続して発生することがないので、処理の後にダミーの<code>feedkeys()</code>を呼び出し、関数が連続して呼ばれるようにします。
 				任意の時間でイベントを発生させるためには、&#8217;updatetime&#8217;を保存・復元する必要があります。</p>
 
-<pre class="prettyprint"><code class="lang-vim">
-autocmd CursorHold <buffer> call s:foo()
+<pre class="prettyprint"><code class="lang-vim">autocmd CursorHold <buffer> call s:foo()
 
 function s:foo()
   "  何か処理をする

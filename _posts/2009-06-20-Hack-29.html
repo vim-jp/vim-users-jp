@@ -65,8 +65,7 @@ author: Shougo
 
 <dl>
 <dt>補完関数のサンプル:</dt>
-<pre class="prettyprint"><code class="lang-vim">
-command! -nargs=+ -complete=customlist,CompletionGitCommands Git call GitCommand(<q-args>)
+<pre class="prettyprint"><code class="lang-vim">command! -nargs=+ -complete=customlist,CompletionGitCommands Git call GitCommand(<q-args>)
 function! CompletionGitCommands(ArgLead, CmdLine, CusorPos)
     let l:cmd = split(a:CmdLine)
     let l:len_cmd = len(l:cmd)

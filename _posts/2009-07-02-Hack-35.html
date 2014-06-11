@@ -14,8 +14,7 @@ author: thinca
 				Vim のキーマッピングは、定義した通りのキーシーケンスを発生させます。つまり、実際にコマンドを打つときと同じような定義をすればコマンドを実行させることができます。
 </p>
 
-<pre class="prettyprint"><code class="lang-vim">
-nnoremap &lt;Space&gt;n :setlocal number! number?&lt;CR&gt;
+<pre class="prettyprint"><code class="lang-vim">nnoremap &lt;Space&gt;n :setlocal number! number?&lt;CR&gt;
 </code></pre>
 
 <p>
@@ -33,16 +32,14 @@ nnoremap &lt;Space&gt;n :setlocal number! number?&lt;CR&gt;
 				例えば、以下のようなキーマッピングを設定していたとします。
 </p>
 
-<pre class="prettyprint"><code class="lang-vim">
-nnoremap &lt;Space&gt;w :write&lt;CR&gt;
+<pre class="prettyprint"><code class="lang-vim">nnoremap &lt;Space&gt;w :write&lt;CR&gt;
 </code></pre>
 
 <p>
 				これは <kbd>&lt;Space&gt;w</kbd> でファイルを保存するものですが、誤って事前に数字 (ここでは例として 3) を入力してしまうと、以下のようなコマンドが実行されてしまいます。
 </p>
 
-<pre class="prettyprint"><code class="lang-vim">
-:.,.+2write
+<pre class="prettyprint"><code class="lang-vim">:.,.+2write
 </code></pre>
 
 <p>
@@ -50,8 +47,7 @@ nnoremap &lt;Space&gt;w :write&lt;CR&gt;
 				これを防ぐためには、Command-line mode に入った際に自動入力される部分を削除する必要があります。以下のようにします。
 </p>
 
-<pre class="prettyprint"><code class="lang-vim">
-nnoremap &lt;Space&gt;w :&lt;C-u&gt;write&lt;CR&gt;
+<pre class="prettyprint"><code class="lang-vim">nnoremap &lt;Space&gt;w :&lt;C-u&gt;write&lt;CR&gt;
 </code></pre>
 
 <p>

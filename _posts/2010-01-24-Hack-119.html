@@ -61,8 +61,7 @@ author: Shougo
 				Vimの外部インタフェース機能は不安定なので、時々エラーをはいたりフリーズすることがあります。
 				無効にしたい場合は.vimrcで</p>
 
-<pre class="prettyprint"><code>
-if !exists('g:NeoComplCache_OmniPatterns')
+<pre class="prettyprint"><code>if !exists('g:NeoComplCache_OmniPatterns')
 let g:NeoComplCache_OmniPatterns = {}
 endif
 let g:NeoComplCache_OmniPatterns['ruby'] = ''

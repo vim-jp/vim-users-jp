@@ -16,8 +16,7 @@ author: Shougo
 
 <p>
 <dd>とはいえ、いちいちcdコマンドを入力するのは大変です。カレントディレクトリ移動はほとんどの場合、Vimで開いているファイルと同じディレクトリに移動したいことが多いです。よって単純なコマンドを作り、それに専用のキーマッピングを割り当てると便利でしょう。私は次のように設定しています。</dd>
-<pre class="prettyprint"><code class="lang-vim">
-command! -nargs=? -complete=dir -bang CD  call s:ChangeCurrentDir('&lt;args&gt;', '&lt;bang&gt;')
+<pre class="prettyprint"><code class="lang-vim">command! -nargs=? -complete=dir -bang CD  call s:ChangeCurrentDir('&lt;args&gt;', '&lt;bang&gt;')
 function! s:ChangeCurrentDir(directory, bang)
     if a:directory == ''
         lcd %:p:h

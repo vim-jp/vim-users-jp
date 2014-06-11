@@ -76,8 +76,7 @@ author: thinca
 				まずは対象をどのように目立たせるかを設定します。今回は不可視文字を目立たせるのが目的なので、対象の背景色を変更するようにします。
 </p>
 
-<pre class="prettyprint"><code class="lang-vim">
-highlight IdeographicSpace term=underline ctermbg=DarkGreen guibg=DarkGreen
+<pre class="prettyprint"><code class="lang-vim">highlight IdeographicSpace term=underline ctermbg=DarkGreen guibg=DarkGreen
 </code></pre>
 
 <p>
@@ -89,8 +88,7 @@ highlight IdeographicSpace term=underline ctermbg=DarkGreen guibg=DarkGreen
 				なお、<code class="lang-vim">:highlight</code> コマンドで作成したハイライトは <code class="lang-vim">:colorscheme</code> でカラースキームを設定する際に全てクリアされます。よってこのコマンドは <code class="lang-vim">:colorscheme</code> を実行した後に実行するか、もしくはカラースキームを変更した際に常に実行されるように
 </p>
 
-<pre class="prettyprint"><code class="lang-vim">
-autocmd Colorscheme * highlight IdeographicSpace term=underline ctermbg=DarkGreen guibg=DarkGreen
+<pre class="prettyprint"><code class="lang-vim">autocmd Colorscheme * highlight IdeographicSpace term=underline ctermbg=DarkGreen guibg=DarkGreen
 </code></pre>
 
 <p>
@@ -107,8 +105,7 @@ autocmd Colorscheme * highlight IdeographicSpace term=underline ctermbg=DarkGree
 <code class="lang-vim">:match</code> コマンドは以下の様に使用します(厳密なコマンドの書式の解説は省きます)。
 </p>
 
-<pre class="prettyprint"><code class="lang-vim">
-match IdeographicSpace /　/
+<pre class="prettyprint"><code class="lang-vim">match IdeographicSpace /　/
 </code></pre>
 
 <p>
@@ -117,8 +114,7 @@ match IdeographicSpace /　/
 				よって、ウィンドウに入り直す度にコマンドを実行するように、以下のようにします。
 </p>
 
-<pre class="prettyprint"><code class="lang-vim">
-autocmd VimEnter,WinEnter * match IdeographicSpace /　/
+<pre class="prettyprint"><code class="lang-vim">autocmd VimEnter,WinEnter * match IdeographicSpace /　/
 </code></pre>
 
 <p>
@@ -130,16 +126,14 @@ autocmd VimEnter,WinEnter * match IdeographicSpace /　/
 				コマンドを Vim スクリプトに記述する場合、スクリプト内にマルチバイト文字を記述することになるので該当コマンドを実行するより前に <code class="lang-vim">:scriptencoding</code> でスクリプトファイルのエンコーディングを指定しておく必要があります。
 </p>
 
-<pre class="prettyprint"><code class="lang-vim">
-scriptencoding utf-8
+<pre class="prettyprint"><code class="lang-vim">scriptencoding utf-8
 </code></pre>
 
 <p>
 				以上の内容をまとめると以下のようになります。
 </p>
 
-<pre class="prettyprint"><code class="lang-vim">
-scriptencoding utf-8
+<pre class="prettyprint"><code class="lang-vim">scriptencoding utf-8
 
 augroup highlightIdegraphicSpace
   autocmd!

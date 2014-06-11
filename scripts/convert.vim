@@ -212,6 +212,7 @@ function! s:convert(f) abort
   let text = substitute(text, '<pre>\s*\(<code[^>]*>.\{-}</code>\s*\)</pre>', '<pre class="prettyprint">\1</pre>', 'g')
   let text = substitute(text, '<pre>\s*\([^<].\{-}\)</pre>', '<pre class="prettyprint"><code>\1</code></pre>', 'g')
   let text = substitute(text, '<code>\(.\{-}\)</code>', '\=s:lang(submatch(1))', 'g')
+  let text = substitute(text, '\(<code[^>]*>\)\n', '\1', 'g')
   let text = substitute(text, '/web/[0-9]\+/', '', 'g')
   for k in keys(s:urlmap)
     let v = s:urlmap[k]

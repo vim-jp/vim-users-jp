@@ -16,8 +16,7 @@ author: Shougo
 
 <p>
 <dd>基本的に、キーマッピングの.vimrcに設定をするだけです。一つずつ設定すると煩雑になるので、配列を使って評価するようにすると簡単でしょう。私は次のように設定し、Insert mode, Command-line mode, Select modeでSticky Shiftが有効になるようにしています。これは英語キーボード用の設定です。日本語キーボードを使用している場合、適時設定を変更してください。</dd>
-<pre class="prettyprint"><code class="lang-vim">
-inoremap &lt;expr&gt; ;  &lt;SID&gt;sticky_func()
+<pre class="prettyprint"><code class="lang-vim">inoremap &lt;expr&gt; ;  &lt;SID&gt;sticky_func()
 cnoremap &lt;expr&gt; ;  &lt;SID&gt;sticky_func()
 snoremap &lt;expr&gt; ;  &lt;SID&gt;sticky_func()
 

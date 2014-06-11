@@ -48,8 +48,7 @@ author: Shougo
 
 <dl>
 <dt>補完関数のサンプル:</dt>
-<pre class="prettyprint"><code class="lang-vim">
-function! CompleteFiles(findstart, base)
+<pre class="prettyprint"><code class="lang-vim">function! CompleteFiles(findstart, base)
     if a:findstart
         " Get cursor word.
         let cur_text = strpart(getline('.'), 0, col('.') - 1)

@@ -10,8 +10,7 @@ author: Shougo
 
 <p>
 <dd>戦闘力の計算方法は単純です。以下のコードを.vimrc中に記述し、Command-line modeで<code lang="vim-script">:Scouter</code>を実行するだけです。<code lang="vim-script">:GScouter</code>は.gvimrcの戦闘力を計測する場合に使用します。</dd>
-<pre class="prettyprint"><code class="lang-vim">
-function! Scouter(file, ...)
+<pre class="prettyprint"><code class="lang-vim">function! Scouter(file, ...)
   let pat = '^\s*$\|^\s*"'
   let lines = readfile(a:file)
   if !a:0 || !a:1

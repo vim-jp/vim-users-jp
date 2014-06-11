@@ -10,8 +10,7 @@ author: Shougo
 
 <p>Vimのバージョンをチェックするには、<code>v:version</code>変数をチェックすればよいです。百の位がVimのメジャーバージョン、十の位と一の位がマイナーバージョンを表します。例えばVim 7.2で<code>:echo v:version</code>すると、<code>702</code>が表示されます。<code>720</code>ではありません。Vimがバージョン7以上であることをチェックするには次のようにします。</p>
 
-<pre class="prettyprint"><code>
-if v:version < 700
+<pre class="prettyprint"><code>if v:version < 700
     echoerr 'Does not work this version of Vim "' . v:version . '".'
     finish
 endif
@@ -25,8 +24,7 @@ endif
 				プラグインがチェックする場合には使えません。スクリプトでチェックするには、<code>has()</code>を用います。
 				たとえば、Windowsかどうかをチェックするには、</p>
 
-<pre class="prettyprint"><code>
-if has('win32') || has('win64')
+<pre class="prettyprint"><code>if has('win32') || has('win64')
     " Windowsの場合の処理
 endif
 </code></pre>
