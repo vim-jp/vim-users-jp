@@ -65,7 +65,7 @@ author: Shougo
 
 <dl>
 <dt>補完関数のサンプル:</dt>
-<pre>
+<pre class="prettyprint"><code class="lang-vim">
 command! -nargs=+ -complete=customlist,CompletionGitCommands Git call GitCommand(<q-args>)
 function! CompletionGitCommands(ArgLead, CmdLine, CusorPos)
     let l:cmd = split(a:CmdLine)
@@ -86,7 +86,7 @@ function! CompletionGitCommands(ArgLead, CmdLine, CusorPos)
         else
             return []
 endfunction
-</pre>
+</code></pre>
 <dd>最後にまとめとして、補完関数のサンプルを紹介しておきます。gitのコマンドを補完するサンプルです。それだけでは面白くないので、第二引数に'mv'や'add', 'rm'といったコマンド名が与えられるとファイル名を補完するようになっています。</dd>
 </dl>
 

@@ -48,7 +48,7 @@ author: Shougo
 
 <dl>
 <dt>補完関数のサンプル:</dt>
-<pre>
+<pre class="prettyprint"><code class="lang-vim">
 function! CompleteFiles(findstart, base)
     if a:findstart
         " Get cursor word.
@@ -67,7 +67,7 @@ function! CompleteFiles(findstart, base)
 
     return list
 endfunction
-</pre>
+</code></pre>
 <dd>最後にまとめとして、補完関数のサンプルを紹介しておきます。これはカレントディレクトリに存在するファイルを補完するサンプルです。&#8217;abbr&#8217;や&#8217;menu&#8217;も使用しています。一番最初にファイル名としてマッチする部分を返し、次に呼び出されたときにファイル名にマッチする補完リストを返します。<code class="lang-vim">:setlocal completefunc=CompleteFiles</code>とすると使えます。</dd>
 <div id="attachment_406" class="wp-caption alignnone" style="width: 422px"><a href="/vim-users-jp/assets/images/sample.png"><img src="/vim-users-jp/assets/images/sample.png" alt="ファイル名補完" title="filename_completion" width="412" height="775" class="size-full wp-image-406" /></a><p class="wp-caption-text">ファイル名補完</p></div>
 </dl>

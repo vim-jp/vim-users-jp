@@ -26,13 +26,13 @@ author: tyru
 				Exコマンドの出力をキャプチャーし、
 				ファイルや変数に保存できます。</p>
 
-<pre class="prettyprint"><code>:redir &gt; messages
+<pre class="prettyprint"><code class="lang-vim">:redir &gt; messages
 :silent messages
 :redir END
 </code></pre>
 
 <p>これで<code>messages</code>というファイルに出力結果が保存されます。
-<code>:silent</code>はつけると<code>:messages</code>の出力をコマンドラインに出力しません。
+<code class="lang-vim">:silent</code>はつけると<code>:messages</code>の出力をコマンドラインに出力しません。
 				つけなくてもファイルの中身に変わりはありませんが、
 				今回はコマンドラインに出力されてもうっとうしいだけなので付けただけです。</p>
 

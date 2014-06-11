@@ -22,16 +22,16 @@ author: Shougo
 
 <p>
 				GNU Screen上でVimを256色対応させたい場合、少しややこしくなります。.screenrcに以下のような設定を追加しなければなりません。さらにGNU Screenが256色対応でコンパイルされている必要もあります。Ubuntu 9.04などでは標準配布のscreenをインストールすれば大丈夫ですが、ディストリビューションで配布されているscreenが256色対応でコンパイルされていない場合、自分でコンパイル・インストールしなければなりません。
-<pre>
+<pre class="prettyprint"><code>
 attrcolor b ".I"
 termcapinfo xterm 'Co#256:AB=\E[48;5;%dm:AF=\E[38;5;%dm'
 defbce on
-</pre>
+</code></pre>
 				Macだと上記の設定ではうまく動作しないので、次のように設定します。
-<pre>
+<pre class="prettyprint"><code>
 term xterm-256color
 termcapinfo xterm-256color 'is=^[r^[mJ^[H^[?7h^[?1;4;6l'
-</pre>
+</code></pre>
 				Macの場合、screenの256色対応のためにコンパイルする必要がありますが、パッチを当てないとエラーになるので、かなりややこしいです。<a href="http://d.hatena.ne.jp/milk1000cc/20090205/1233792728">次のサイト</a>を参考にすると良いでしょう。
 				ターミナルやscreenが256色に対応できるようになったかどうかは、<a href="http://frexx.de/xterm-256-notes/data/256colors2.pl">256colors2.pl</a>を実行すると楽に確認できます。
 </p>

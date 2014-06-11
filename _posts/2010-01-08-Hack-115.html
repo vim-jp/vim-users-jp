@@ -10,12 +10,12 @@ author: Shougo
 
 <p>Vimのバージョンをチェックするには、<code>v:version</code>変数をチェックすればよいです。百の位がVimのメジャーバージョン、十の位と一の位がマイナーバージョンを表します。例えばVim 7.2で<code>:echo v:version</code>すると、<code>702</code>が表示されます。<code>720</code>ではありません。Vimがバージョン7以上であることをチェックするには次のようにします。</p>
 
-<pre>
+<pre class="prettyprint"><code>
 if v:version < 700
     echoerr 'Does not work this version of Vim "' . v:version . '".'
     finish
 endif
-</pre>
+</code></pre>
 
 <p>ちなみに、パッチレベルは<code>has('patch100')</code>などでチェックします。詳しくは、<code>:help has-patch</code>を参照してください。</p>
 
@@ -25,11 +25,11 @@ endif
 				プラグインがチェックする場合には使えません。スクリプトでチェックするには、<code>has()</code>を用います。
 				たとえば、Windowsかどうかをチェックするには、</p>
 
-<pre>
+<pre class="prettyprint"><code>
 if has('win32') || has('win64')
     " Windowsの場合の処理
 endif
-</pre>
+</code></pre>
 
 <p>です。GVimかどうかをチェックするには、<code>has('gui_running')</code>です。これは<code>has('gui')</code>と間違えやすいので気をつけてください。<code>has('gui')</code>はGUI機能付きでコンパイルされているかどうかをチェックします。<code>has('gui_running')</code>でうまく条件を切り分ければ、.gvimrcを用いずにGVim用の設定を.vimrcだけで完結させることも可能です。
 				ただし、最初vimで起動して:guiでGUIになる場合は.vimrcの<code>has('gui_running')</code>設定は読み込まれません。注意してください。（mattnさん情報）</p>

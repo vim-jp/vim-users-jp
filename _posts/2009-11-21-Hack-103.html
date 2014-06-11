@@ -18,7 +18,7 @@ author: Shougo
 				NYACUSをシェルとして使用するため、私は次のように設定しています。
 </p>
 
-<pre>
+<pre class="prettyprint"><code>
 " Shell settings.
 " Use NYACUS.
 set shell=nyacus.exe
@@ -26,7 +26,7 @@ set shellcmdflag=-e
 set shellpipe=\|&amp;\ tee
 set shellredir=&gt;%s\ 2&gt;&amp;1
 set shellxquote=\"
-</pre>
+</code></pre>
 
 <p>
 <code class="option">shell</code>には、使用するシェルへのパスを設定します。<code class="option">shellcmdflag</code>には、Vimからシェルを起動するときのオプションを設定します。例えばnyacusの場合、オプションなしで直接起動すると、対話モードになってしまいます。よってVimはオプションを設定し、シェルを非対話モードで起動します。<code class="option">shellpipe</code>や<code class="option">shellredir</code>は、パイプやリダイレクト記号をどのように処理するかの設定です。これは好みに応じて設定して良いです。上記のように設定すると、シェルが出力した標準エラー出力もリダイレクトして、Vimが受け取ることになります。<code class="option">shellxquote</code>はシェルに引数を渡すためにクオートする記号です。<code class="option">shellquote</code>とは違い、リダイレクト記号もクオートします。Windows環境では&#8221;で囲まないと、リダイレクト記号が解釈されてしまうので、こちらを使用しなければなりません。

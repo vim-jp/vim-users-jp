@@ -16,7 +16,7 @@ author: Shougo
 
 <p>
 <dd>とはいえ、いちいちcdコマンドを入力するのは大変です。カレントディレクトリ移動はほとんどの場合、Vimで開いているファイルと同じディレクトリに移動したいことが多いです。よって単純なコマンドを作り、それに専用のキーマッピングを割り当てると便利でしょう。私は次のように設定しています。</dd>
-<pre>
+<pre class="prettyprint"><code class="lang-vim">
 command! -nargs=? -complete=dir -bang CD  call s:ChangeCurrentDir('&lt;args&gt;', '&lt;bang&gt;')
 function! s:ChangeCurrentDir(directory, bang)
     if a:directory == ''
@@ -32,7 +32,7 @@ endfunction
 
 " Change current directory.
 nnoremap &lt;silent&gt; &lt;Space&gt;cd :&lt;C-u&gt;CD&lt;CR&gt;
-</pre>
+</code></pre>
 <dd>簡単に解説すると、CDというコマンドを定義し、&lt;Space&gt;cdに割り当てています。コマンドが引数なしで呼び出されたときは、現在開いているファイルと同じディレクトリに移動し、そうでない場合は引数のディレクトリに移動します。:CD!として呼び出された場合、移動先のカレントディレクトリを表示し、どこに移動したのかを分かり易くしています。</dd>
 </p>
 

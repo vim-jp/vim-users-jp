@@ -26,10 +26,10 @@ author: Shougo
 
 <p>Command-line modeでは、履歴検索が簡単にはできません。</p>
 
-<pre>
+<pre class="prettyprint"><code>
 cnoremap &lt;C-n&gt;          &lt;Down&gt;
 cnoremap &lt;C-p&gt;          &lt;Up&gt;
-</pre>
+</code></pre>
 
 <p>とキーマップを定義する手はあります。これなら現在入力されているものにマッチする候補を検索することができます。しかし<a href="http://github.com/Shougo/vimshell">vimshell</a>のように一覧から履歴を検索する方法はなく、そもそも設定が面倒です。検索には<a href="http://www.vim.org/scripts/script.php?script_id=1984">fuzzyfinder</a>や<a href="http://www.vim.org/scripts/script.php?script_id=2337">ku</a>を使うという手もありますが、この程度のことで外部プラグインに依存するというのもどうでしょうか。</p>
 
@@ -47,7 +47,7 @@ cnoremap &lt;C-p&gt;          &lt;Up&gt;
 
 <p>Command-line windowはウインドウに入ったときにInsert modeにならなかったり、neocomplcacheと相性が悪かったりして使いづらいので、カスタマイズする必要があります。筆者は.vimrc中で、次のように設定しています。この設定では:を入力したときにCommand-line windowに遷移するようにしています。CmdwinEnterにautocmdを設定すれば簡単にカスタマイズできるので、皆さんも最適な設定を探してみてください。</p>
 
-<pre>
+<pre class="prettyprint"><code class="lang-vim">
 nnoremap &lt;sid&gt;(command-line-enter) q:
 xnoremap &lt;sid&gt;(command-line-enter) q:
 nnoremap &lt;sid&gt;(command-line-norange) q:&lt;C-u&gt;
@@ -68,16 +68,16 @@ function! s:init_cmdwin()
 
   startinsert!
 endfunction
-</pre>
+</code></pre>
 
 <p>追記： Command-line windowでは、<a href="http://www.vim.org/scripts/script.php?script_id=2675">altercmd</a>が使用できません。これでは不便なので、tyruさんがCommand-line windowでも使えるように改造したものを公開しているので、<a href="http://github.com/tyru/vim-altercmd">こちら</a>を使ってください。
 				私は次のように設定しています。</p>
 
-<pre>
+<pre class="prettyprint"><code class="lang-vim">
 function! s:init_cmdwin()
         call altercmd#define('b', 'gr[ep]', 'Grep', 'i')
         " AlterCommand &lt;buffer&gt;&lt;mode:i&gt; gr[ep] Grepでも可
 endfunction
-</pre>
+</code></pre>
 
 <address class="hack-author">Shougo</address>

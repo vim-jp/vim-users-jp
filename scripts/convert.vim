@@ -8,6 +8,9 @@ scriptencoding utf-8
 " Dependency:
 "  https://github.com/mattn/webapi-vim
 
+" TODO
+" highlight http://vim-jp.org/vim-users-jp/2009/05/27/Hack-17.html
+
 let s:urlmap = {
 \  '/vim-users-jp/2009/07/hack-49/': '/vim-users-jp/2009/07/30/Hack-49.html',
 \  '/vim-users-jp/2009/04/hack2/': '/vim-users-jp/2009/04/27/Hack-2.html',
@@ -169,7 +172,7 @@ function! s:readfile(f)
 endfunction
 
 let s:langmap = {
-\  '\<endfunction\>\|\<Bundle\>\|\<NeoBundle\>\|\<nnoremap\>\|\<augroup\>\|\<cursorcolumn\>\|:highlight': 'lang-vim',
+\  '\<endfunction\>\|\<Bundle\>\|\<NeoBundle\>\|\<nnoremap\>\|\<augroup\>\|\<cursorcolumn\>\|:highlight\|:silent': 'lang-vim',
 \}
 
 function! s:lang(str) abort
@@ -210,7 +213,7 @@ function! s:convert(f) abort
   let text = substitute(text, '<code class="vim-script">', '<code class="lang-vim">', 'g')
   let text = substitute(text, '\Vもう少し:Captureについて (unite.vim)', 'unite.vimで:Capture', 'g')
   let text = substitute(text, '<pre>\s*\(<code[^>]*>.\{-}</code>\s*\)</pre>', '<pre class="prettyprint">\1</pre>', 'g')
-  let text = substitute(text, '<pre>\s*\(<code[^>]*>.\{-}</code>\s*\)</pre>', '<pre class="prettyprint">\1</pre>', 'g')
+  let text = substitute(text, '<pre>\(\s*[^<].\{-}\)</pre>', '<pre class="prettyprint"><code>\1</code></pre>', 'g')
   let text = substitute(text, '<code>\(.\{-}\)</code>', '\=s:lang(submatch(1))', 'g')
   let text = substitute(text, '/web/[0-9]\+/', '', 'g')
   for k in keys(s:urlmap)
