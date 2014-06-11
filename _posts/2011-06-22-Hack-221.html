@@ -49,21 +49,21 @@ author: ujihisa
 <li>
 <p>より透明にする: ↑</p>
 
-<pre class="prettyprint"><code>  nnoremap &lt;up&gt; :&lt;C-u&gt;call &lt;SID&gt;relative_tranparency(5)&lt;Cr&gt;
+<pre class="prettyprint"><code class="lang-vim">  nnoremap &lt;up&gt; :&lt;C-u&gt;call &lt;SID&gt;relative_tranparency(5)&lt;Cr&gt;
   inoremap &lt;up&gt; &lt;C-o&gt;:call &lt;SID&gt;relative_tranparency(5)&lt;Cr&gt;
 </code></pre>
 </li>
 <li>
 <p>より不透明にする: ↓</p>
 
-<pre class="prettyprint"><code>  nnoremap &lt;down&gt; :&lt;C-u&gt;call &lt;SID&gt;relative_tranparency(-5)&lt;Cr&gt;
+<pre class="prettyprint"><code class="lang-vim">  nnoremap &lt;down&gt; :&lt;C-u&gt;call &lt;SID&gt;relative_tranparency(-5)&lt;Cr&gt;
   inoremap &lt;down&gt; &lt;C-o&gt;:call &lt;SID&gt;relative_tranparency(-5)&lt;Cr&gt;
 </code></pre>
 </li>
 <li>
 <p>再描画: <kbd>&lt;esc&gt;&lt;esc</kbd></p>
 
-<pre class="prettyprint"><code>  nnoremap &lt;Esc&gt;&lt;Esc&gt; :&lt;C-u&gt;let &amp;transparency = g:transparency&lt;Cr&gt;&lt;C-l&gt;
+<pre class="prettyprint"><code class="lang-vim">  nnoremap &lt;Esc&gt;&lt;Esc&gt; :&lt;C-u&gt;let &amp;transparency = g:transparency&lt;Cr&gt;&lt;C-l&gt;
 </code></pre>
 </li>
 </ul>
@@ -80,7 +80,7 @@ endfunction
 
 <p>筆者はもともと<kbd>&lt;esc&gt;&lt;esc&gt;</kbd>に<code>:set nohlsearch</code>の副作用を持たせるkey mappingをしていました。これを組み合わせため、筆者の設定は以下のようになっています。</p>
 
-<pre class="prettyprint"><code>    nnoremap &lt;Esc&gt;&lt;Esc&gt; :&lt;C-u&gt;set nohlsearch&lt;Cr&gt;:let &amp;transparency = g:transparency&lt;Cr&gt;&lt;C-l&gt;
+<pre class="prettyprint"><code class="lang-vim">    nnoremap &lt;Esc&gt;&lt;Esc&gt; :&lt;C-u&gt;set nohlsearch&lt;Cr&gt;:let &amp;transparency = g:transparency&lt;Cr&gt;&lt;C-l&gt;
 </code></pre>
 
 <address class="hack-author">ujihisa</address>

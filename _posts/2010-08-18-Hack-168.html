@@ -65,7 +65,7 @@ author: ujihisa
 
 <p>冗長で不便なので、キーマッピングを追加するか、あるいは<code>:!</code>の使用をさけてかわりに<a href="http://github.com/Shougo/vimshell">vimshell</a>を用いるとよいでしょう。</p>
 
-<pre class="prettyprint"><code>nnoremap :! :call vimproc#system('
+<pre class="prettyprint"><code class="lang-vim">nnoremap :! :call vimproc#system('
 </code></pre>
 
 <p>さて、<code>:!</code>や<code>system()</code>を間接的にもっとも頻繁に使うのはなんといっても<a href="http://github.com/thinca/vim-quickrun">quickrun</a>でしょう。quickrunでvimprocを用いるためには、以下の設定を<code>~/.vimrc</code>に記述します。</p>

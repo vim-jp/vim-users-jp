@@ -19,7 +19,7 @@ author: thinca
 
 <p>以下のファイルを ~/.vim/ftplugin/xxd.vim (Windows の場合は ~/vimfiles/ftplugin/xxd.vim) に置きます。</p>
 
-<pre class="prettyprint"><code>if !executable('xxd')
+<pre class="prettyprint"><code class="lang-vim">if !executable('xxd')
   finish
 endif
 
@@ -65,7 +65,7 @@ augroup END
 
 <p>例えば、バイナリモードのファイル(vim -b file で開いた場合など)を自動的にバイナリ編集モードにするには vimrc で以下のようにします。</p>
 
-<pre class="prettyprint"><code>augroup xxd
+<pre class="prettyprint"><code class="lang-vim">augroup xxd
   autocmd!
   autocmd BufReadPost * if &amp;l:binary | setlocal filetype=xxd | endif
 augroup END

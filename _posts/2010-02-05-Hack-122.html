@@ -20,7 +20,7 @@ author: ujihisa
 
 <p><code>~/.vimrc</code>に以下を記述します。</p>
 
-<pre class="prettyprint"><code>nnoremap Y y$
+<pre class="prettyprint"><code class="lang-vim">nnoremap Y y$
 </code></pre>
 
 <p>これで、<kbd>Y</kbd>の挙動が<kbd>D</kbd>や<kbd>C</kbd>と同様に、「カーソル位置から行末までヤンクする」になります。
@@ -44,6 +44,6 @@ author: ujihisa
 <li>ビジュアルモードなどでは今回の<kbd>Y</kbd>は関係ないため、<code>map</code>ではなく<code>nmap</code>がより好ましいです</li>
 </ul>
 
-<p>組み合わせて、本Hackでは<code>nnoremap</code>としました。</p>
+<p>組み合わせて、本Hackでは<code class="lang-vim">nnoremap</code>としました。</p>
 
 <address class="hack-author">ujihisa</address>

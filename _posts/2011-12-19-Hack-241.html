@@ -60,7 +60,7 @@ f x = ...
 
 <p>とするとよいでしょう。これを頻繁に行うようならば、適切なキーにマッピングしておくべきです。たとえば以下を <code>~/.vim/ftplugin/haskell.vim</code>に記述すると、<kbd>&lt;space&gt;I</kbd>と打鍵するだけでカーソル以下にある単語の関数をimportしてくれます。</p>
 
-<pre class="prettyprint"><code>nnoremap &lt;buffer&gt; &lt;space&gt;I :&lt;C-u&gt;UniteWithCursorWord haskellimport&lt;Cr&gt;
+<pre class="prettyprint"><code class="lang-vim">nnoremap &lt;buffer&gt; &lt;space&gt;I :&lt;C-u&gt;UniteWithCursorWord haskellimport&lt;Cr&gt;
 </code></pre>
 
 <address class="hack-author">ujihisa</address>

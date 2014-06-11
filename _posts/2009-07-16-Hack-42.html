@@ -43,7 +43,7 @@ endfunction
 <p>あるいは、以下のように<code>WinEnter</code>イベントにウインドウ幅の変更を指定するという方法もあります。
 				具体的には以下のように指定します。</p>
 
-<pre class="prettyprint"><code>augroup MyWinEnterWidth
+<pre class="prettyprint"><code class="lang-vim">augroup MyWinEnterWidth
   autocmd!
   autocmd WinEnter * if winwidth(0) &lt; 84 | vertical resize 84 | endif
 augroup END

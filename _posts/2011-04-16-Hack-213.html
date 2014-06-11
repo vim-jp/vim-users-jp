@@ -56,7 +56,7 @@ author: tyru
 
 <p>ダブルクリックへのマッピングは<code>&lt;2-LeftMouse&gt;</code>を使えばできます。</p>
 
-<pre class="prettyprint"><code>nnoremap &lt;2-LeftMouse&gt; g*
+<pre class="prettyprint"><code class="lang-vim">nnoremap &lt;2-LeftMouse&gt; g*
 </code></pre>
 
 <p>これで終わりでしょうか？いいえ、<!-- こだまです -->まだです。</p>
@@ -141,7 +141,7 @@ endfunction
 				Vimスクリプトを書いているような人しか知らないオプションを使って
 				一時的に無効にできます。</p>
 
-<pre class="prettyprint"><code>nnoremap &lt;silent&gt; &lt;LeftMouse&gt; &lt;Esc&gt;:set eventignore=all&lt;CR&gt;&lt;LeftMouse&gt;:set eventignore=&lt;CR&gt;
+<pre class="prettyprint"><code class="lang-vim">nnoremap &lt;silent&gt; &lt;LeftMouse&gt; &lt;Esc&gt;:set eventignore=all&lt;CR&gt;&lt;LeftMouse&gt;:set eventignore=&lt;CR&gt;
 </code></pre>
 
 <h2>visualstar.vim</h2>

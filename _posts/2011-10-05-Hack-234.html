@@ -15,7 +15,7 @@ author: ujihisa
 <p>Vimには<code>FocusGained</code>と<code>FocusLost</code>というイベントがあります。これを用いてVimの透明度を変更すると、とてもいい感じになります。
 				参考までに、著者のMacVimのための設定を以下に掲載します。<code>~/.vimrc</code>ではなく<code>~/.gvimrc</code>に記述してください。</p>
 
-<pre class="prettyprint"><code>augroup hack234
+<pre class="prettyprint"><code class="lang-vim">augroup hack234
   autocmd!
   if has('mac')
     autocmd FocusGained * set transparency=10

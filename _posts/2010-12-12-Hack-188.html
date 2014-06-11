@@ -52,7 +52,7 @@ author: ujihisa
 
 <p>これらは頻繁に使用されるので、なにかしらのキーマッピングを与えておくとよいでしょう。たとえば<code>sc</code>というキーに割り当てたい場合、<code>~/.vimrc</code>に以下を記述しましょう。</p>
 
-<pre class="prettyprint"><code>let g:unite_enable_start_insert = 1
+<pre class="prettyprint"><code class="lang-vim">let g:unite_enable_start_insert = 1
 let g:unite_enable_split_vertically = 1
 if globpath(&amp;rtp, 'plugin/unite.vim') != ''
   nnoremap sc :&lt;C-u&gt;Unite colorscheme font&lt;Cr&gt;
@@ -65,7 +65,7 @@ endif
 <li><code>g:unite_enable_start_insert</code>: Uniteを挿入モードで開始します</li>
 <li><code>g:unite_enable_split_vertically</code>: Uniteを縦分割で開始します</li>
 <li><code>if</code>の行: unite.vimがインストールされているときのみ以下のキーマッピングを行う</li>
-<li><code>nnoremap</code>の行: <code>sc</code>で<code>:Unite colorscheme font</code>を実行するようにします。このように、<code>:Unite</code>コマンドには複数のsourceを指定することができます</li>
+<li><code class="lang-vim">nnoremap</code>の行: <code>sc</code>で<code>:Unite colorscheme font</code>を実行するようにします。このように、<code>:Unite</code>コマンドには複数のsourceを指定することができます</li>
 </ul>
 
 <h2>参考</h2>

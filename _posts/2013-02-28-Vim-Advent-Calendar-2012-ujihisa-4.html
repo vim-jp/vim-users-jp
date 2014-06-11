@@ -27,7 +27,7 @@ author: ujihisa
 
 <p>を順にまとめて行う必要がかなり頻繁にあります。</p>
 
-<pre class="prettyprint"><code>nnoremap &lt;Space&gt;m :&lt;C-u&gt;update&lt;Cr&gt;:VimShellSendString compile&lt;Cr&gt;
+<pre class="prettyprint"><code class="lang-vim">nnoremap &lt;Space&gt;m :&lt;C-u&gt;update&lt;Cr&gt;:VimShellSendString compile&lt;Cr&gt;
 </code></pre>
 
 <p>などと設定することでワンキーで保存・コンパイルを行うことができ、便利です。quickrunやsyntasticやwatchdogsなどのプラギンと違い、すでにライブラリの読み込みなどが完了して起動しているプロセスを再利用するので、10~30倍くらい高速で動作します。</p>

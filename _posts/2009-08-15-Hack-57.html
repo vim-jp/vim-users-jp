@@ -28,7 +28,7 @@ author: ujihisa
 
 <p><code>~/.vimrc</code>に以下の一行を書きます。</p>
 
-<pre class="prettyprint"><code>nnoremap O :&lt;C-u&gt;call append(expand('.'), <code class="option">''</code>)&lt;Cr&gt;j
+<pre class="prettyprint"><code class="lang-vim">nnoremap O :&lt;C-u&gt;call append(expand('.'), <code class="option">''</code>)&lt;Cr&gt;j
 </code></pre>
 
 <p>以後、<kbd>O</kbd>を打鍵するだけでカーソル位置の次の行に空行を挿入します。
@@ -53,14 +53,14 @@ author: ujihisa
 
 <p>先ほど紹介した</p>
 
-<pre class="prettyprint"><code>nnoremap O :&lt;C-u&gt;call append(expand('.'), <code class="option">''</code>)&lt;Cr&gt;j
+<pre class="prettyprint"><code class="lang-vim">nnoremap O :&lt;C-u&gt;call append(expand('.'), <code class="option">''</code>)&lt;Cr&gt;j
 </code></pre>
 
 <p>はまず<code>append()</code>で現在の行<code>expand('.')</code>の直後に空文字列<code><code class="option">''</code></code>だけの行を挿入し、そしてその挿入した行に<code>j</code>で移動するという一連の操作を<kbd>O</kbd>に割り当てています。</p>
 
 <p>逆に、この自動挿入を行いたい場合は、通常の改行を行なえばよいため</p>
 
-<pre class="prettyprint"><code>nnoremap O o&lt;Esc&gt;
+<pre class="prettyprint"><code class="lang-vim">nnoremap O o&lt;Esc&gt;
 </code></pre>
 
 <p>とすることで実現できます。</p>

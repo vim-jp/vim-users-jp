@@ -168,10 +168,16 @@ function! s:readfile(f)
   return map(readfile(a:f), 'substitute(s:from_utf8(v:val), "\n", "", "g")')
 endfunction
 
+let s:langmap = {
+\  '\<endfunction\>\|\<Bundle\>\|\<NeoBundle\>\|\<nnoremap\>\|\<augroup\>\|\<cursorcolumn\>\|\<:highlight\>': 'lang-vim',
+\}
+
 function! s:lang(str) abort
-  if a:str =~# 'endfunction' || a:str =~# 'Bundle'
-    return '<code class="lang-vim">' . a:str . '</code>'
-  endif
+  for k in keys(s:langmap)
+    if a:str =~# k
+      return '<code class="' . s:langmap[k] . '">' . a:str . '</code>'
+    endif
+  endfor
   return '<code>' . a:str . '</code>'
 endfunction
 

@@ -47,7 +47,7 @@ author: tyru
 
 <p>以下のコードを.vimrcに貼り付ければ無事解決です。</p>
 
-<pre class="prettyprint"><code>if has('virtualedit') &amp;&amp; &amp;virtualedit =~# '\&lt;all\&gt;'
+<pre class="prettyprint"><code class="lang-vim">if has('virtualedit') &amp;&amp; &amp;virtualedit =~# '\&lt;all\&gt;'
     nnoremap &lt;expr&gt; &lt;SID&gt;($-if-right-of-$)  (col('.') &gt;= col('$') ? '$' : '')
     nnoremap        &lt;SID&gt;(noremap-p)        p
     nmap p &lt;SID&gt;($-if-right-of-$)&lt;SID&gt;(noremap-p)
@@ -56,7 +56,7 @@ endif
 
 <p>一行で書いてもいいでしょう。</p>
 
-<pre class="prettyprint"><code>if has('virtualedit') &amp;&amp; &amp;virtualedit =~# '\&lt;all\&gt;'
+<pre class="prettyprint"><code class="lang-vim">if has('virtualedit') &amp;&amp; &amp;virtualedit =~# '\&lt;all\&gt;'
     nnoremap &lt;expr&gt; p (col('.') &gt;= col('$') ? '$' : '') . 'p'
 endif
 </code></pre>
