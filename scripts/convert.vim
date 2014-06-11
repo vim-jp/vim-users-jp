@@ -8,6 +8,84 @@ scriptencoding utf-8
 " Dependency:
 "  https://github.com/mattn/webapi-vim
 
+let s:urlmap = {
+\  "/vim-users-jp/2009/03/mtl_vim/": "/vim-users-jp/2009/03/mtl-vim.html",
+\  "/vim-users-jp/2009/04/hack2/": "/vim-users-jp/2009/04/Hack-2.html",
+\  "/vim-users-jp/2009/04/hack3/": "/vim-users-jp/2009/04/Hack-3.html",
+\  "/vim-users-jp/2009/05/hack11/": "/vim-users-jp/2009/05/Hack-11.html",
+\  "/vim-users-jp/2009/05/hack12/": "/vim-users-jp/2009/05/Hack-12.html",
+\  "/vim-users-jp/2009/05/hack13/": "/vim-users-jp/2009/05/Hack-13.html",
+\  "/vim-users-jp/2009/05/hack15/": "/vim-users-jp/2009/05/Hack-15.html",
+\  "/vim-users-jp/2009/05/hack18/": "/vim-users-jp/2009/05/Hack-18.html",
+\  "/vim-users-jp/2009/05/hack4/": "/vim-users-jp/2009/05/Hack-4.html",
+\  "/vim-users-jp/2009/05/hack5/": "/vim-users-jp/2009/05/Hack-5.html",
+\  "/vim-users-jp/2009/05/hack7/": "/vim-users-jp/2009/05/Hack-7.html",
+\  "/vim-users-jp/2009/05/hack8/": "/vim-users-jp/2009/05/Hack-8.html",
+\  "/vim-users-jp/2009/06/blogger-vim-talk-with-ujihisa-on-vimm4/": "/vim-users-jp/2009/06/blogger-vim-talk-with-ujihisa-on-vimm4.html",
+\  "/vim-users-jp/2009/06/hack20/": "/vim-users-jp/2009/06/Hack-20.html",
+\  "/vim-users-jp/2009/06/hack21/": "/vim-users-jp/2009/06/Hack-21.html",
+\  "/vim-users-jp/2009/06/hack23/": "/vim-users-jp/2009/06/Hack-23.html",
+\  "/vim-users-jp/2009/06/hack26/": "/vim-users-jp/2009/06/Hack-26.html",
+\  "/vim-users-jp/2009/06/hack30/": "/vim-users-jp/2009/06/Hack-30.html",
+\  "/vim-users-jp/2009/06/vimm4-ann/": "/vim-users-jp/2009/06/vimm4-ann.html",
+\  "/vim-users-jp/2009/07/hack-44/": "/vim-users-jp/2009/07/Hack-44.html",
+\  "/vim-users-jp/2009/07/hack-49/": "/vim-users-jp/2009/07/Hack-49.html",
+\  "/vim-users-jp/2009/07/hack35/": "/vim-users-jp/2009/07/Hack-35.html",
+\  "/vim-users-jp/2009/07/hack36/": "/vim-users-jp/2009/07/Hack-36.html",
+\  "/vim-users-jp/2009/07/hack37/": "/vim-users-jp/2009/07/Hack-37.html",
+\  "/vim-users-jp/2009/07/hack43/": "/vim-users-jp/2009/07/Hack-43.html",
+\  "/vim-users-jp/2009/07/hack45/": "/vim-users-jp/2009/07/Hack-45.html",
+\  "/vim-users-jp/2009/08/hack-59/": "/vim-users-jp/2009/08/Hack-59.html",
+\  "/vim-users-jp/2009/08/hack51/": "/vim-users-jp/2009/08/Hack-51.html",
+\  "/vim-users-jp/2009/08/hack52/": "/vim-users-jp/2009/08/Hack-52.html",
+\  "/vim-users-jp/2009/08/hack55/": "/vim-users-jp/2009/08/Hack-55.html",
+\  "/vim-users-jp/2009/08/hack64/": "/vim-users-jp/2009/08/Hack-64.html",
+\  "/vim-users-jp/2009/09/hack67/": "/vim-users-jp/2009/09/Hack-67.html",
+\  "/vim-users-jp/2009/09/hack70/": "/vim-users-jp/2009/09/Hack-70.html",
+\  "/vim-users-jp/2009/09/hack71/": "/vim-users-jp/2009/09/Hack-71.html",
+\  "/vim-users-jp/2009/09/hack72/": "/vim-users-jp/2009/09/Hack-72.html",
+\  "/vim-users-jp/2009/09/hack76/": "/vim-users-jp/2009/09/Hack-76.html",
+\  "/vim-users-jp/2009/09/hack77/": "/vim-users-jp/2009/09/Hack-77.html",
+\  "/vim-users-jp/2009/09/hack80/": "/vim-users-jp/2009/09/Hack-80.html",
+\  "/vim-users-jp/2009/10/hack92/": "/vim-users-jp/2009/10/Hack-92.html",
+\  "/vim-users-jp/2009/11/hack100/": "/vim-users-jp/2009/11/Hack-100.html",
+\  "/vim-users-jp/2009/11/hack100/#fn:1": "/vim-users-jp/2009/11/hack100/#fn:1",
+\  "/vim-users-jp/2009/11/hack100/#fnref:1": "/vim-users-jp/2009/11/hack100/#fnref:1",
+\  "/vim-users-jp/2009/11/hack104/": "/vim-users-jp/2009/11/Hack-104.html",
+\  "/vim-users-jp/2009/11/hack105/": "/vim-users-jp/2009/11/Hack-105.html",
+\  "/vim-users-jp/2009/12/hack112/": "/vim-users-jp/2009/12/Hack-112.html",
+\  "/vim-users-jp/2010/01/vimworkshop5-ujihisa/": "/vim-users-jp/2010/01/Vimworkshop5-ujihisa.html",
+\  "/vim-users-jp/2010/02/hack125/": "/vim-users-jp/2010/02/Hack-125.html",
+\  "/vim-users-jp/2010/03/hack129/": "/vim-users-jp/2010/03/Hack-129.html",
+\  "/vim-users-jp/2010/03/hack131/": "/vim-users-jp/2010/03/Hack-131.html",
+\  "/vim-users-jp/2010/03/hack132/": "/vim-users-jp/2010/03/Hack-132.html",
+\  "/vim-users-jp/2010/03/hack134/": "/vim-users-jp/2010/03/Hack-134.html",
+\  "/vim-users-jp/2010/04/hack142/": "/vim-users-jp/2010/04/Hack-142.html",
+\  "/vim-users-jp/2010/07/hack160/": "/vim-users-jp/2010/07/Hack-160.html",
+\  "/vim-users-jp/2010/07/hack161/": "/vim-users-jp/2010/07/Hack-161.html",
+\  "/vim-users-jp/2010/07/hack162/": "/vim-users-jp/2010/07/Hack-162.html",
+\  "/vim-users-jp/2010/07/hack164/": "/vim-users-jp/2010/07/Hack-164.html",
+\  "/vim-users-jp/2010/08/hack170/": "/vim-users-jp/2010/08/Hack-170.html",
+\  "/vim-users-jp/2010/09/hack172/": "/vim-users-jp/2010/09/Hack-172.html",
+\  "/vim-users-jp/2010/09/quickquine/": "/vim-users-jp/2010/09/quick-quine.html",
+\  "/vim-users-jp/2010/10/hack176/": "/vim-users-jp/2010/10/Hack-176.html",
+\  "/vim-users-jp/2010/10/hack178/": "/vim-users-jp/2010/10/Hack-178.html",
+\  "/vim-users-jp/2010/12/hack186/": "/vim-users-jp/2010/12/Hack-186.html",
+\  "/vim-users-jp/2010/12/hack188/": "/vim-users-jp/2010/12/Hack-188.html",
+\  "/vim-users-jp/2010/12/hack189/": "/vim-users-jp/2010/12/Hack-189.html",
+\  "/vim-users-jp/2011/01/hack196/": "/vim-users-jp/2011/01/Hack-196.html",
+\  "/vim-users-jp/2011/01/hack197/": "/vim-users-jp/2011/01/Hack-197.html",
+\  "/vim-users-jp/2011/02/hack199/": "/vim-users-jp/2011/02/Hack-199.html",
+\  "/vim-users-jp/2011/02/hack200/": "/vim-users-jp/2011/02/Hack-200.html",
+\  "/vim-users-jp/2011/04/hack211/": "/vim-users-jp/2011/04/Hack-211.html",
+\  "/vim-users-jp/2011/04/hack215/": "/vim-users-jp/2011/04/Hack-215.html",
+\  "/vim-users-jp/2011/07/release-note-quickrun-05/": "/vim-users-jp/2011/07/Release-Note-Quickrun-05.html",
+\  "/vim-users-jp/2011/09/hack229/": "/vim-users-jp/2011/09/Hack-229.html",
+\  "/vim-users-jp/2011/10/hack235/": "/vim-users-jp/2011/10/Hack-235.html",
+\  "/vim-users-jp/2012/11/ujihisa-vim-3-pre-2/": "/vim-users-jp/2012/11/Ujihisa-Vim-3-Pre-2.html",
+\  "/vim-users-jp/2013/03/wanted-vim-advent-calendar-2012/lingr.com/room/vim": "/vim-users-jp/2013/03/Wanted-Vim-Advent-Calendar-2012/lingr.com/room/vim",
+\}
+
 let s:fmap = {}
 let s:index = []
 let s:clean_dup = 0
@@ -131,6 +209,18 @@ function! s:convert(f) abort
   let text = substitute(text, '<pre>\s*\(<code[^>]*>.\{-}</code>\s*\)</pre>', '<pre class="prettyprint">\1</pre>', 'g')
   let text = substitute(text, '<code>\(.\{-}\)</code>', '\=s:lang(submatch(1))', 'g')
   let text = substitute(text, '/web/[0-9]\+/', '', 'g')
+  for k in keys(s:urlmap)
+    let v = s:urlmap[k]
+    let l = len(k)
+    let pos = -l
+    while 1
+      let pos = stridx(text, k, pos + l)
+      if pos < 0
+        break
+      endif
+      let text = strpart(text, 0, pos) . v . strpart(text, pos + l)
+    endwhile
+  endfor
   let short = title
   let dict = [
   \ ['東京都渋谷', 'tokyo-shibuya'],
