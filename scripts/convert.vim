@@ -55,8 +55,37 @@ function! s:index(lines, str) abort
   return -1
 endfunction
 
+function! s:from_utf8(str) abort
+  let str = a:str
+  let m = {
+  \ "\xE3\x80\x9C": "\xEF\xBD\x9E",
+  \ "\xE2\x80\x93": "\xEF\xBC\x8D",
+  \}
+  for k in keys(m)
+    let v = m[k]
+    let l = len(k)
+    let pos = -l
+    while 1
+      let pos = stridx(str, k, pos + l)
+      if pos < 0
+        break
+      endif
+      let str = strpart(str, 0, pos) . v . strpart(str, pos + l)
+    endwhile
+  endfor
+  return iconv(str, "utf-8", &encoding)
+endfunction
+
+function! s:readfile(f)
+  "if &encoding == 'cp932' && executable('nkf')
+  "  silent let res = system(printf("cat %s | nkf -Wxs", a:f))
+  "  return split(res, "\n")
+  "endif
+  return map(readfile(a:f), 'substitute(s:from_utf8(v:val), "\n", "", "g")')
+endfunction
+
 function! s:convert(f) abort
-  let lines = map(readfile(a:f), 'substitute(iconv(v:val,"utf-8",&encoding), "\n", "", "g")')
+  let lines = s:readfile(a:f)
   let pos1 = s:index(lines, '<h1>')
   let pos2 = s:index(lines, '</div><!--end entry-->')
   if pos1 < 0 || pos2 < 0
