@@ -1,0 +1,54 @@
+---
+layout: post
+title: "Hack #134: Vimをデフォルトの状態で起動する"
+date: 2010-03-25
+author: kana
+---
+<h3>問題</h3>
+
+<p>例えば何らかのプラグインが原因でVimの動作が怪しいといった状況になったときなど、
+				Vimをデフォルトの状態で起動したいことがあります。
+				vimrcや各種プラグインを一旦削除してから起動すれば可能ですが、
+				さすがにそれは面倒です。簡単に行う方法はないでしょうか。</p>
+
+<h3>解決方法</h3>
+
+<p>以下のオプションを指定してVimを起動します:</p>
+
+<pre class="prettyprint"><code>vim -u NONE
+</code></pre>
+
+<p>デフォルトの状態では<code>'compatible'</code>がオン
+				(=可能な限りvi互換な挙動となる)のですが、
+				場合によっては<code>'compatible'</code>がオフの方が良い場合もあります。
+				その場合は以下のオプションを指定してVimを起動します:</p>
+
+<pre class="prettyprint"><code>vim -u NONE -N
+</code></pre>
+
+<h3>解説</h3>
+
+<p>Vimには様々な起動オプションがあり、そのひとつとして
+				vimrcのパスを指定する<code>-u <var>{vimrc}</var></code>オプションがあります。
+				通常は<code>~/.vimrc</code>などのファイルがロードされますが、
+<code>-u</code>を指定することで別のファイルをロードさせることができます。
+				さらに<code>-u</code>には特殊な値として<code>NONE</code>を指定でき、
+				これは「vimrcのロードは行なわず、プラグインのロードも行なわない」
+				という意味になります。つまりVimがデフォルトの状態で起動することになります。</p>
+
+<p><code>-N</code>は<code>'compatible'</code>がオフの状態で起動するよう
+				指定するオプションです。
+				なお、<code>-c</code>で任意のコマンドを起動時に実行できるため、
+<code>-c "set nocompatible"</code>としても同じことができますが、
+<code>-N</code>の方が簡潔です。</p>
+
+<h3>参考資料</h3>
+
+<ul>
+<li><a href="http://vimdoc.sourceforge.net/htmldoc/starting.html#starting">:help starting</a></li>
+<li><a href="http://vimdoc.sourceforge.net/htmldoc/starting.html#-u">:help -u</a></li>
+<li><a href="http://vimdoc.sourceforge.net/htmldoc/starting.html#-N">:help -N</a></li>
+<li><a href="http://vimdoc.sourceforge.net/htmldoc/starting.html#-c">:help -c</a></li>
+</ul>
+
+<address class="hack-author">kana</address>

@@ -1,0 +1,54 @@
+---
+layout: post
+title: "Hack #11: argument listを利用して複数のファイルを取り扱う"
+date: 2009-05-15
+author: kana
+---
+<h3>概要</h3>
+
+<p>テキスト編集が単一のファイルのみで済むことは稀です。実際には複数のファイルを取り扱うことがほとんどです。Vimで複数のファイルを取り扱う方法は色々とありますが、ここではargument listを用いたものについて述べます。</p>
+
+<h3>argument listとは何か</h3>
+
+<p>Vimを起動した場合、特に何も引数を与えていなければ内容が空のバッファが作成・表示されます。起動に際しファイル名を与えていた場合、そのファイルが読み込まれたバッファが作成・表示されます。</p>
+
+<p>ここで複数のファイル名を与えた場合、Vimは最初のファイルに対応するバッファが表示された状態で起動します。では残りのファイルについてはどうなったかというと、Vimは何が指定されたかを記憶しており、これらのファイルの一覧のことをargument listと言います。</p>
+
+<p>Vimではargument listに対する様々なコマンドが提供されており、これを利用することで複数のファイルの取り扱いを便利にすることができます。</p>
+
+<h3>基本的な使い方</h3>
+
+<p>ここでは例として<code>vim Makefile foo.c foo.h</code>としてVimを起動したとします。Makefileが表示され、foo.cとfoo.hは画面上には見えない状態です。</p>
+
+<dl>
+<dt><code class="lang-vim">:next</code></dt>
+<dd>argument list内の次のファイルを開きます。</dd>
+<dd>例: 現在開かれているファイルはMakefileですから、その次のfoo.cが開かれます。</dd>
+
+<dt><code class="lang-vim">:previous</code></dt>
+<dt><code class="lang-vim">:Next</code></dt>
+<dd><code class="lang-vim">:next</code>の逆で、argument list内の前のファイルを開きます。一見不自然な<code class="lang-vim">:<em>N</em>ext</code>は<code>/</code>や<code>?</code>による検索の繰り返しを行なう<code>n</code>や<code>N</code>との類似性から提供されています。</dd>
+<dd>例: 現在開かれているファイルはfoo.cですから、Makefileが開かれます。</dd>
+
+<dt><code class="lang-vim">:last</code></dt>
+<dd>argument listの最後のファイルを開きます。</dd>
+<dd>例: argument list中の最後のファイルはfoo.hですから、foo.hが開かれます。</dd>
+
+<dt><code class="lang-vim">:first</code></dt>
+<dt><code class="lang-vim">:rewind</code></dt>
+<dd>argument listの最初のファイルを開きます。</dd>
+<dd>例: argument list中の最初のファイルはMakefileですから、Makefileが開かれます。</dd>
+
+<dt><code class="lang-vim">:args</code></dt>
+<dd>argument listの一覧を表示します。</dd>
+</dl>
+
+<h3>応用例</h3>
+
+<p>argument listは、本来はVim起動時に与えられたファイル群を取り扱うためのものなのですが、起動後に任意のファイルをargument listに設定することができます。これを利用すれば、argument list用の機能を用いて任意のファイル群を集中して取り扱うことが簡単にできます。</p>
+
+<p>argument listの設定は<code class="lang-vim">:args <var>{file}</var> ...</code>で行うことができます。例えば特定の拡張子のファイルを取り扱いたい場合は<code class="lang-vim">:args *.c</code>のようにすることで一連のファイルをargument listに設定することができ、<code class="lang-vim">:next</code>/<code class="lang-vim">:previous</code>を用いて編集するファイルを素早く切り替えることができます。</p>
+
+<p>ここでは基本的な利用方法についてのみ述べましたが、argument listについては他にも様々なコマンドがあります。詳細については<code class="lang-vim">:help argument-list</code>を参照してください。</p>
+
+<address class="hack-author">kana</address>

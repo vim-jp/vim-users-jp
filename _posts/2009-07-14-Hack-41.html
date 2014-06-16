@@ -1,0 +1,56 @@
+---
+layout: post
+title: "Hack #41: ウィンドウのレイアウトを変更する"
+date: 2009-07-14
+author: kana
+---
+<h3>問題</h3>
+
+<p>マルチウィンドウを活用してウィンドウ分割を繰り返していると、
+				しばしば分割のレイアウトを変更したいときがあります。
+				例えばウィンドウの分割状況が以下のように縦3つに分割されているとき、</p>
+
+<div class="figure">
+<img src="http://gyazo.com/b965e2f9e67fa1a4b4fc78d6340fbb57.png"
+				       alt="縦3つにウィンドウ分割した状態"
+				       style="width: 100%;" />
+</div>
+
+<p>以下のように左右に分割し、
+				さらに左半分を縦2つに分割したレイアウトに変更したいとしましょう。</p>
+
+<div class="figure">
+<img src="http://gyazo.com/043b628ac8353ff15f8a01e034f78528.png"
+				       alt="全体を左右二等分し、さらに左を縦2つにウィンドウ分割した状態"
+				        style="width: 100%;" />
+</div>
+
+<p>一度他のウィンドウを全て閉じてから
+<code class="vim-scsript">:vsplit</code>や
+<code class="vim-scsript">:split</code>を
+				繰り返して調整すれば可能ですが、
+				それは面倒です。
+				簡単にレイアウトを変更できないでしょうか。</p>
+
+<h3>解決方法</h3>
+
+<p>簡単にウィンドウ分割のレイアウトを変更するには以下のコマンドを使います。</p>
+
+<dl>
+<dt><kbd>&lt;C-w&gt;H</kbd></dt>  <dd>カレントウィンドウを最も左に移動します。</dd>
+<dt><kbd>&lt;C-w&gt;J</kbd></dt>  <dd>カレントウィンドウを最も下に移動します。</dd>
+<dt><kbd>&lt;C-w&gt;K</kbd></dt>  <dd>カレントウィンドウを最も上に移動します。</dd>
+<dt><kbd>&lt;C-w&gt;L</kbd></dt>  <dd>カレントウィンドウを最も右に移動します。</dd>
+</dl>
+
+<p>最初に挙げた例の場合、
+<kbd>&lt;C-w&gt;L</kbd>で望みのレイアウトに変更できます。
+				また上記のコマンドを駆使すれば多くのケースで望みのレイアウトに変更できます。</p>
+
+<h3>参考資料</h3>
+
+<ul>
+<li><a href="http://vimdoc.sourceforge.net/htmldoc/windows.html#CTRL-W_K">:help CTRL-W_K</a></li>
+</ul>
+
+<address class="hack-author">kana</address>

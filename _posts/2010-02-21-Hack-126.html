@@ -1,0 +1,113 @@
+---
+layout: post
+title: "Hack #126: クリップボードを利用する"
+date: 2010-02-21
+author: kana
+---
+<h3>問題1</h3>
+
+<p>ふつうのテキストエディタであれば
+				クリップボードにあるテキストがペーストされ、
+				コピーしたテキストはクリップボードに保存されます。</p>
+
+<p>しかしVimではコピー/ペーストされるテキストは
+				レジスタと呼ばれるVim内部の領域から読み書きされるため、
+				そのようにはなっていません。</p>
+
+<p>クリップボードに対してコピー/ペーストを行なうにはどうすればよいのでしょうか。</p>
+
+<h3>解決方法1</h3>
+
+<p>Vimには
+				クリップボードを表す仮想的なレジスタ<code><em>"*</em></code>があるため、
+				コピー/ペーストする際にそのレジスタを使用するよう指定します。
+				例えばクリップボードへ1行分のテキストをコピーする場合は
+				以下のコマンドを入力します:</p>
+
+<pre class="prettyprint"><code>"*Y
+</code></pre>
+
+<p>クリップボードからテキストをペーストする場合は
+				以下のコマンドを入力します:</p>
+
+<pre class="prettyprint"><code>"*p
+</code></pre>
+
+<h3>問題2</h3>
+
+<p>Vimからクリップボードにアクセスする方法は分かりました。
+				しかし毎回<code>"*</code>を指定しなければならず、入力が面倒です。
+				Vim内でテキストのコピー/ペーストを行なう場合に、
+				何も指定しなくても自動的にクリップボードを利用するようにできないでしょうか。</p>
+
+<h3>解決方法2</h3>
+
+<p>以下のコマンドを実行します:</p>
+
+<pre class="prettyprint"><code>:set clipboard=unnamed
+</code></pre>
+
+<p>この設定を行なうと、
+				特にレジスタを指定せずにコピー/ペーストを行なった場合は
+				クリップボードを利用するようになります。</p>
+
+<p>また、xtermなどのX Window System下のアプリケーションでは
+				選択されたテキストが自動的にクリップボードへコピーされます。
+				VimのVisual modeでも同様の挙動にしたい場合は以下のコマンドを実行します。</p>
+
+<pre class="prettyprint"><code>:set clipboard=autoselect
+</code></pre>
+
+<p>もし両方の挙動が必要な場合は以下のように値をコンマ(,)区切りで指定します:</p>
+
+<pre class="prettyprint"><code>:set clipboard=unnamed,autoselect
+</code></pre>
+
+<h3>問題3</h3>
+
+<p>基本的にGUI版のVimでしかクリップボードに関する機能は利用できません。
+				つまり、諸事情で端末エミュレータ内でVimを利用している場合は
+				クリップボード関連の機能は使えません。</p>
+
+<p>幸いなことに、
+				一部の環境ではクリップボードにアクセスするためのコマンドがあります。
+				例えばMac OS Xの場合はpbcopy/pbpasteでクリップボードの読み書きができるため、
+<code>:read !pbpaste</code>などとすればクリップボードの内容を取り込むことが
+				できます。</p>
+
+<p>しかしこのようなコマンドは入力が煩雑ですし、
+				何より<code>d</code>/<code>p</code>/<code>y</code>のような
+				Vim本来の操作と比べると不便です。
+				どうにかして<code>"*</code>と同様の操作性を実現できないでしょうか。</p>
+
+<h3>解決方法3</h3>
+
+<p><a href="http://www.vim.org/scripts/script.php?script_id=2098">fakeclip</a>を使います。
+				このプラグインをインストールすると
+				Cygwin、Mac OS X、X Window Systemの非GUI版Vimでも
+<code>"*Y</code>や
+<code>"&#42;p</code>などの操作ができるようになります
+				(バージョン0.2.6現在)。</p>
+
+<h3>解説</h3>
+
+<p>Q. なぜ<code>"*Y</code>のようなまどろっこしい操作になっているのですか?</p>
+
+<p>A. 祖先のviが生まれた頃にクリップボードなんてものはなかったからです。</p>
+
+<p>Q. なぜ<code>:set clipboard=unnamed</code>がデフォルトでないのですか?</p>
+
+<p>A. Vimのデフォルト設定は可能な限りviライクだからです。
+				そして祖先のviが生まれた頃にクリップボードなんてものはなかったからです。</p>
+
+<h3>参考資料</h3>
+
+<ul>
+<li><a href="http://vimdoc.sourceforge.net/htmldoc/options.html#'clipboard'">:help &#8216;clipboard&#8217;</a></li>
+<li><a href="http://vimdoc.sourceforge.net/htmldoc/gui.html#quotestar">:help &#8220;*</a></li>
+<li><a href="http://vimdoc.sourceforge.net/htmldoc/change.html#registers">:help registers</a></li>
+<li><a href="http://www.vim.org/scripts/script.php?script_id=2098">fakeclip</a></li>
+<li><a href="http://vimdoc.sourceforge.net/htmldoc/insert.html#:read!">:help :read!</a></li>
+</ul>
+
+<address class="hack-author">kana</address>

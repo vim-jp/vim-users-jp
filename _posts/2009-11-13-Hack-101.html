@@ -1,0 +1,101 @@
+---
+layout: post
+title: "Hack #101: gitリポジトリの内容を参照する"
+date: 2009-11-13
+author: kana
+---
+<h3>問題</h3>
+
+<p><a href="http://git-scm.com/">git</a>を利用して開発を行なっていると、
+				しばしば現在作業中のブランチとは
+				別のブランチのファイルを参照したいときがあります。</p>
+
+<p><code>git show {branch}:{path-to-a-file}</code>
+				で特定のブランチのファイルを出力できるので、
+				Vimからは</p>
+
+<pre class="prettyprint"><code>:new
+:read !git show {branch}:{path-to-a-file}
+</code></pre>
+
+<p>とすれば問題のファイルの内容を参照することはできますが、手順が面倒です。
+				それに多数のブランチが存在する場合や参照したいファイルへのパスが長い場合は
+				コマンドの入力にも苦労します。
+				どうにかして簡単に参照することはできないでしょうか。</p>
+
+<h3>解決方法</h3>
+
+<p><a href="http://www.vim.org/scripts/script.php?script_id=2336">metarw-git</a>
+				を利用します。</p>
+
+<p>例えば「あるブランチのファイル」は以下のようにして参照することができます。</p>
+
+<pre class="prettyprint"><code>:edit git:{branch}:{path-to-a-file}
+</code></pre>
+
+<p><code>:edit</code>だけでなく、
+<code>:read</code>や<code>:source</code>といった
+				ファイル名を引数として取るコマンドならば
+				同様にして内容を参照することができます。</p>
+
+<p><img src="http://gyazo.com/d586aa55e7efdcd8ba3ed6def56a3546.png" alt="git:{branch}:{path-to-a-file}の使用例" /></p>
+
+<p>また、Vimでは標準でディレクトリの内容を「開く」ことができますが、
+				これと同様に「あるブランチのディレクトリの内容」も参照することができます。
+				これには以下のようなパスを用います。</p>
+
+<pre class="prettyprint"><code>:edit git:{branch}:{path-to-a-directory}
+</code></pre>
+
+<p><img src="http://gyazo.com/2f1ee7baaded9c958027907abd3b0274.png" alt="git:{branch}:{path-to-a-directory}の使用例" /></p>
+
+<p>さらに、ディレクトリに対するファイル/ディレクトリと同様に、
+				gitリポジトリ内に存在するブランチも参照することができます。
+				これには以下のようなパスを用います。</p>
+
+<pre class="prettyprint"><code>:edit git:
+</code></pre>
+
+<p><img src="http://gyazo.com/fba6db5e373de2ade18a0cd9f31c5fe4.png" alt="git:の使用例" /></p>
+
+<p>以上の例では説明と簡単にするため
+				「あるブランチの内容」という表現をしましたが、
+				実際にはブランチに限らず任意のコミットオブジェクト
+				(に付随するツリーオブジェクト)の内容を参照することができます。
+				ですので、metarw-gitを利用して
+<a href="http://gist.github.com/197936">現在開いているファイルの一つ前のバージョンを開く</a>
+				といったことも可能です。</p>
+
+<h3>解説</h3>
+
+<p>Vimでは各種イベントに応じて任意のコマンドを自動的に実行することができます
+				(:autocmd)。
+				metarw-gitではこれを利用して、
+<code>git:{branch}:{file}</code>のような実際には存在しないファイルが
+				読み書きされる際にgitリポジトリから適切な内容をバッファへ読み込むことで、
+				あたかもそのようなファイルが存在するかのようにVimを拡張しています。</p>
+
+<p>例えばVimでは標準で
+				ディレクトリやzipなどのアーカイブファイルの内容を閲覧したり、
+				それに含まれるファイルなどの内容を「開く」ことができるように
+				なっていますが、
+				その機能は標準添付されているプラグインにより実現されており、
+				各プラグインではmetarw-gitと同様に:autocmdを駆使して処理を行なっています。</p>
+
+<p>なお、metarw-gitなどのプラグインが行なっている
+				「ファイルでないものを普通のファイルであるかのように扱う」
+				処理は実際に実装するとなるとかなり煩雑です。
+				この点を抽象化した
+<a href="http://www.vim.org/scripts/script.php?script_id=2335">metarw</a>
+				というライブラリがあり、
+				metarw-gitはそれを利用して作られています。</p>
+
+<h3>参考資料</h3>
+
+<ul>
+<li><a href="http://vimdoc.sourceforge.net/htmldoc/autocmd.html">:help autocmd.txt</a></li>
+<li><a href="http://www.vim.org/scripts/script.php?script_id=2336">metarw-git</a></li>
+<li><a href="http://www.vim.org/scripts/script.php?script_id=2335">metarw</a></li>
+</ul>
+
+<address class="hack-author">kana</address>

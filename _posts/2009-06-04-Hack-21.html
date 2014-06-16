@@ -1,0 +1,36 @@
+---
+layout: post
+title: "Hack #21: 複数のバッファを一度に変更する &#8211; :bufdo編"
+date: 2009-06-04
+author: kana
+---
+<h3>問題</h3>
+
+<p>日常的に複数のファイルを取り扱っていると、同じ変更を複数のファイルに対して行いたい場合があります。例えば<code class="lang-vim">:%substitute/foo/bar/g</code>のような単純な置換を行うとしましょう。取り扱うファイル数が数個なら各々のファイルを開いて同じコマンドを入力して済ませられます。しかしファイル数が10個や20個となってくると手作業では時間がかかりますしミスも誘発します。なんとかして同じ変更を複数のファイルに行うこ
+				とはできないでしょうか。</p>
+
+<h3>解決方法</h3>
+
+<p>複数のファイルを一斉に変更するには<code class="lang-vim">:bufdo</code>を用います。例えば先程の例の場合は次の手順で実現することができます:</p>
+
+<pre class="vim-script">:bufdo %substitute/foo/bar/g | update</pre>
+
+<h3>解説</h3>
+
+<p>Vimには<code class="lang-vim">:bufdo</code>のような複数のバッファを一度に処理するためのExコマンドが用意されています。<code class="lang-vim">:bufdo</code>は全てのバッファを対象としますが、他にも<code class="lang-vim">:argdo</code>、<code class="lang-vim">:tabdo</code>、<code class="lang-vim">:windo</code>があり、それぞれ対象とするものが異なります。</p>
+
+<p>分かり易さのために「複数のファイルを一斉に変更する」と表現しましたが、実際には各ファイルを開いて指定されたExコマンドを実行することを繰り返します。上記の例は、実際にやりたいことだけを表すと以下のコマンドになりますが、</p>
+
+<pre class="vim-script">:bufdo %substitute/foo/bar/g</pre>
+
+<p>ほとんどの場合、これは期待通りに動かないでしょう。これは<code class="lang-vim">:bufdo</code>の処理過程において、あるバッファに変更を加えた後、それを保存しないまま次のバッファを開こうとするからです。そしてVimのデフォルトの設定ではそのようなケースをエラーとするので、<code class="lang-vim">:bufdo</code>の処理が中断されます(<code class="option">'autowrite'</code>や<code class="option">'hidden'</code>が有効な場合を除く。デフォルトではどちらも無効)。</p>
+
+<p>そのため、変更を行った後に保存を行うよう<code class="lang-vim">:update</code>または<code class="lang-vim">:write</code>を最後に記述する必要があります。</p>
+
+<h3>参考資料</h3>
+
+<ul>
+<li><a href="http://vimdoc.sourceforge.net/htmldoc/windows.html#:bufdo">:help :bufdo</a></li>
+</ul>
+
+<address class="hack-author">kana</address>

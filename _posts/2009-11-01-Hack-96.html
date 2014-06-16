@@ -1,0 +1,66 @@
+---
+layout: post
+title: "Hack #96: あらゆる言語に対してキーワードの補完を有効にする"
+date: 2009-11-01
+author: kana
+---
+<h3>問題</h3>
+
+<p>Vim 7からはユーザー独自の入力補完
+				(<a href="http://vimdoc.sourceforge.net/htmldoc/version7.html#new-omni-completion">:help new-omni-completion</a>)
+				を定義できるようになりました。
+				これを利用した各種言語用の高度な入力補完が利用可能になっており、
+				標準では以下の言語用の補完が用意されています。</p>
+
+<ul>
+<li>C</li>
+<li>CSS</li>
+<li>HTML</li>
+<li>JavaScript</li>
+<li>PHP</li>
+<li>Python</li>
+<li>Ruby</li>
+<li>SQL</li>
+<li>XML</li>
+</ul>
+
+<p>例えばHTMLの場合は下図のように文脈による高度な補完が可能です。</p>
+
+<p><img src="http://gyazo.com/ebe3ebd40fae33f4d99d0299e5eb0c24.png" alt="Vim標準添付のHTML用補完の実行例" /></p>
+
+<p>しかし他の言語についてはこのような入力補完は用意されていません。
+				HTMLのような高度なものでなくとも、
+				せめて予約語程度くらいは補完できてほしいものです。</p>
+
+<h3>解決方法</h3>
+
+<p>Vimは標準で500種類以上の言語に対するシンタックスハイライトが可能です。
+				シンタックスハイライト用の定義の中には
+				予約語のようなキーワードに関する情報が含まれていますので、
+				それを利用した入力補完が考えられます。</p>
+
+<p>これには以下の内容をvimrcに追加します。</p>
+
+<pre class="prettyprint"><code>" 注意: この内容は:filetype onよりも後に記述すること。
+autocmd FileType *
+\   if &amp;l:omnifunc == ''
+\ |   setlocal omnifunc=syntaxcomplete#Complete
+\ | endif
+</code></pre>
+
+<p>これにより、特に入力補完が用意されていないあらゆる言語に対して
+				各種キーワードの補完ができるようになります。</p>
+
+<p>例えばScheme用の入力補完は標準で用意されていませんが、
+				上記の設定を行なうことで以下のように補完を行なうことができます。</p>
+
+<p><img src="http://gyazo.com/98ce418f54a2dbcaa6e4df776fda772b.png" alt="Scheme編集中のキーワード補完の様子" /></p>
+
+<h3>参考資料</h3>
+
+<ul>
+<li><a href="http://vimdoc.sourceforge.net/htmldoc/version7.html#new-omni-completion">:help new-omni-completion</a></li>
+<li><a href="http://vimdoc.sourceforge.net/htmldoc/insert.html#ft-syntax-omni">:help ft-syntax-omni</a></li>
+</ul>
+
+<address class="hack-author">kana</address>

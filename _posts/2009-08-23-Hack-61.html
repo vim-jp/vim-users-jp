@@ -1,0 +1,60 @@
+---
+layout: post
+title: "Hack #61: カーソル下のファイル名に対応するファイルを開く"
+date: 2009-08-23
+author: kana
+---
+<h3>問題</h3>
+
+<p>ファイルの内容に他のファイル名が記述されていることは少なくありません。
+				例えばMakefileなら関連ファイルの名前が直接記述されます。
+				このようなファイルを閲覧しているとき、
+				バッファ中のファイル名に対応するファイルを開きたいことがしばしばあります。</p>
+
+<p>もちろん、そのファイル名を直接手入力すれば開けますが、それは面倒です。
+				バッファ中のファイル名をコピー・ペーストすれば少しは手間が軽減されますが、
+				やはり面倒です。
+				簡単に行なう方法はないでしょうか。</p>
+
+<h3>解決方法</h3>
+
+<p>Normal modeで<code>gf</code>をタイプします。
+<code>gf</code>はGo to Fileの略です。
+				これはカーソル下(あるいはカーソル近傍)のファイル名に対応するファイルを開きます。</p>
+
+<p>また<code>&lt;C-w&gt;f</code>というコマンドもあります。
+				これは<code>gf</code>と同様ですが、
+				新しいウィンドウを開き、そこで該当ファイルを開きます。</p>
+
+<p>これらのコマンドを使うことでより効率的に作業を行なうことができます。</p>
+
+<h3>応用例</h3>
+
+<p><code>gf</code>は単純にカーソル下のファイル名に対応するファイルだけを
+				調べるだけではありません。</p>
+
+<ul>
+<li>該当ファイルが特定のディレクトリ下に存在するかどうかも調べます
+				(<code class="option">'path'</code>)。
+				例えばCのソースコードには通常<code>#include &lt;stdio.h&gt;</code>の
+				ような形でヘッダファイルの参照が記述されますが、
+<code class="option">'path'</code>を正しく設定すれば
+				このような場合でも<code>gf</code>で開くことができます。</li>
+<li>該当ファイル名に特定の拡張子を付加したものが存在するかどうかも調べます
+				(<code class="option">'suffixesadd'</code>)。
+				例えばPythonのモジュール<code>spam</code>に
+				対応するファイルは(大抵は)<code>spam.py</code>ですが、
+<code class="option">'suffixesadd'</code>を正しく設定すれば
+				そのようなモジュール名に対応するファイルを
+<code>gf</code>で開くことができます。</li>
+</ul>
+
+<p>他にも<code>gf</code>に関連するオプションがありますが、詳細は省略します。</p>
+
+<h3>参考資料</h3>
+
+<ul>
+<li><a href="http://vimdoc.sourceforge.net/htmldoc/editing.html#gf">:help gf</a></li>
+</ul>
+
+<address class="hack-author">kana</address>

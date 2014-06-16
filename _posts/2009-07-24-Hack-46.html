@@ -1,0 +1,42 @@
+---
+layout: post
+title: "Hack #46: カーソル位置の履歴を辿る"
+date: 2009-07-24
+author: kana
+---
+<h3>問題</h3>
+
+<p>特にソースコードを渡り歩いている場合、
+				カーソルは様々なファイルを行き来しますし、
+				同一ファイル内であってもカーソルが様々な位置へ飛びます。</p>
+
+<p>このとき、しばしば移動前の位置へ戻りたいときがあります。
+				複数のファイルを横断していた場合は面倒ですし、
+				同一ファイル内であっても的確な位置に戻るのは面倒です。
+				簡単に移動前のカーソル位置に戻る方法はないでしょうか。</p>
+
+<h3>解決方法</h3>
+
+<p>カーソルを移動前の位置に戻すにはNormal modeで
+<kbd>&lt;C-o&gt;</kbd>をタイプします。
+				タイプする度にさらに前の位置にカーソル位置が戻ります。</p>
+
+<p>また、<kbd>&lt;C-o&gt;</kbd>と反対のコマンドとして
+<kbd>&lt;C-i&gt;</kbd>があります。
+<kbd>&lt;C-o&gt;</kbd>がVimにおける「戻る」ボタンだとすれば
+<kbd>&lt;C-i&gt;</kbd>は「進む」ボタンです。</p>
+
+<h3>解説</h3>
+
+<p>Vimではカーソル移動を伴うコマンドの一部を「jump」と呼び、
+				jumpによるカーソル移動履歴はVim内部で記憶されます。
+				この履歴をjumplistと呼び、<kbd>&lt;C-o&gt;</kbd>と<kbd>&lt;C-i&gt;</kbd>は
+				jumplistを元にカーソルを移動するコマンドです。</p>
+
+<h3>参考資料</h3>
+
+<ul>
+<li><a href="http://vimdoc.sourceforge.net/htmldoc/motion.html#jump-motions">:help jump-motions</a></li>
+</ul>
+
+<address class="hack-author">kana</address>

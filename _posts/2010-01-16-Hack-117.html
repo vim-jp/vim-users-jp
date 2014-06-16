@@ -1,0 +1,62 @@
+---
+layout: post
+title: "Hack #117: 置換行為を繰り返す"
+date: 2010-01-16
+author: kana
+---
+<h3>問題</h3>
+
+<p><code>:substitute</code> (<code>:s</code>)による置換処理は頻繁に使います。
+				バッファ全体を対象にする場合は<code>:%s/foo/bar/g</code>などでできますし、
+				特定範囲のみを対象にする場合はVisual modeで選択しておいて
+<code>:s/foo/bar/g</code>でできます。</p>
+
+<p>では飛び飛びの場所で置換を行なう場合はどうでしょうか。
+				例えばソースコード中の特定の関数3つに対して置換を行なうとしましょう。
+				この場合は3箇所それぞれを対象として置換を実行することになりますが、
+				毎回
+<code>:s/foo/bar/g</code>
+				のような長ったらしいコマンドを入力したくはありません。
+<kbd>&lt;Up&gt;</kbd>/<kbd>&lt;Down&gt;</kbd>
+				でコマンドの入力履歴を辿って実行してもいいのですが、
+				これらのキーは概して遠い位置にあるため押下が面倒ですし、
+				押し易いキーバインドを設定することも面倒です。
+				どうにかして最小の手数で置換行為を繰り返せないでしょうか。</p>
+
+<h3>解決方法</h3>
+
+<p>以下のコマンドを実行します:</p>
+
+<pre class="prettyprint"><code>:s
+</code></pre>
+
+<p>通常、<code>:s</code>には検索パターンと置換文字列を指定しますが、
+				それらを省略した場合は最後に実行された
+<code>:s</code>と同じ検索パターンと置換文字列で置換が行なわれます。</p>
+
+<p>なお<code>:s</code>では
+<code>:s/foo/bar/<em>gc</em></code>
+				などのフラグは無視されます。
+				フラグまで同一にする場合は<code>:s</code>の代わりに</p>
+
+<pre class="prettyprint"><code>:&amp;&amp;
+</code></pre>
+
+<p>を使います。</p>
+
+<p>また1行だけ繰り返す場合には<code>:s</code>の代わりに</p>
+
+<pre class="prettyprint"><code>&amp;
+</code></pre>
+
+<p>を使うこともできます。</p>
+
+<h3>参考資料</h3>
+
+<ul>
+<li><a href="http://vimdoc.sourceforge.net/htmldoc/change.html#:s">:help :s</a></li>
+<li><a href="http://vimdoc.sourceforge.net/htmldoc/change.html#:&amp;">:help :&amp;</a></li>
+<li><a href="http://vimdoc.sourceforge.net/htmldoc/change.html#&amp;">:help &amp;</a></li>
+</ul>
+
+<address class="hack-author">kana</address>

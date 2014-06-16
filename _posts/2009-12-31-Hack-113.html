@@ -1,0 +1,105 @@
+---
+layout: post
+title: "Hack #113: grex &#8211; 特定パターンにマッチする行をまとめて取り扱う"
+date: 2009-12-31
+author: kana
+---
+<h3>問題</h3>
+
+<p>Vimで大量のデータを取り扱う場合、
+				特にCSVなどの1レコード1行の形式のデータを取り扱うとき、
+				特定の条件にマッチする行を抽出するなど、
+				まとめて編集したいことがしばしばあります。</p>
+
+<p>例えばバッファの内容が以下のようになっていたとします:</p>
+
+<pre class="prettyprint"><code>Name      Creator            First release Cost License          Open source
+Diakonos  Pistos             2004          Free MIT              Yes
+GNU Emacs Richard Stallman   1984          Free GPL              Yes
+JED       John E. Davis      1992          Free GPL              Yes
+Metapad   Alexander Davidson 1999          Free GPL              Yes
+Notepad   Microsoft          1985          -    Proprietary      No
+RText     Fifesoft           2003          Free GPL              Yes
+SciTE     Neil Hodgson       1999          Free HPND             Yes
+Vim       Bram Moolenaar     1991          Free GPL - compatible Yes
+Yi        Don Stewart        2005          Free GPL              Yes
+</code></pre>
+
+<p>この中から
+				「19XX年にリリースされたエディタ(に対応する行)を削除する」
+				としましょう。
+				これは<code>:global</code>を利用して行うことができます
+				(<code>:g/\&lt;19\d\d&#62;/d</code>)。</p>
+
+<p>では
+				「19XX年にリリースされたエディタ(に対応する行)をヤンクする」
+				としたらどうでしょうか。
+				すぐに思いつくのは<code>:g/\&lt;19\d\d&#62;/y</code>ですが、
+				これはマッチする行で毎回ヤンクを行うため、
+				レジスタに残るのは最後にマッチした行のテキストだけになります。
+				つまり、ヤンクしたいテキストは以下の通りなのですが、</p>
+
+<pre class="prettyprint"><code>GNU Emacs Richard Stallman   1984          Free GPL              Yes
+JED       John E. Davis      1992          Free GPL              Yes
+Metapad   Alexander Davidson 1999          Free GPL              Yes
+Notepad   Microsoft          1985          -    Proprietary      No
+SciTE     Neil Hodgson       1999          Free HPND             Yes
+Vim       Bram Moolenaar     1991          Free GPL - compatible Yes
+</code></pre>
+
+<p>実際にヤンクされるのは以下の1行だけになります。</p>
+
+<pre class="prettyprint"><code>Vim       Bram Moolenaar     1991          Free GPL - compatible Yes
+</code></pre>
+
+<p>この観点で考えると、最初の「削除」についても同様のことが言えます。
+				つまり、削除されたテキストを別の箇所にペーストした場合、
+				ペーストされるのは最後にマッチした行のテキストだけになります。</p>
+
+<p>上記のように、特定パターンにマッチする行をまとめて削除/ヤンクして
+				ペーストするにはどうすればよいでしょうか。</p>
+
+<h3>解決方法</h3>
+
+<p>ベタな解決方法としては、
+				削除/ヤンクされるテキストをレジスタに上書きするのではなく、
+				レジスタに追加するようにします。
+				これには<code>"A</code>-<code>"Z</code>などの大文字のレジスタを使います。</p>
+
+<p>例えば<code>:g/{pattern}/y A</code>とすると、
+<code>"a</code>レジスタにマッチする各行のテキストが追記されるので、
+<code>"ap</code> (操作直後であれば<code>p</code>だけ)で
+				各行のテキストを一度にペーストできます。</p>
+
+<p>ところが既に<code>"a</code>に何か別のテキストが入っていた場合、
+				それに対してテキストが追加されていくため、
+				実際には<code>:let @a = ''</code>などとして
+				操作前にレジスタの内容を空にする必要があります。
+				これは結構面倒です。</p>
+
+<p>幸いなことに、上記のような操作パターンをまとめたコマンドを提供する
+<a href="http://www.vim.org/scripts/script.php?script_id=2773">grex</a>
+				というプラグインがありますので、これを使うと簡単に行うことができます。</p>
+
+<p>例えば特定パターンにマッチする行をまとめて削除する場合、
+<code>/\&lt;19\d\d&#62;</code>などとしてマッチするかどうかを確認した後、
+<code>:Gred</code>で行うことができます。
+				ヤンクであれば<code>:Grey</code>で行うことができます。</p>
+
+<p>なお、各コマンドは<code>:g/{pattern}/[cmd]</code>と
+				同様の形式では実行できません。
+				これは通常の操作では
+				検索パターンを含むコマンドを一度に入力して実行することはなく、
+				(<code>'incsearch'</code>および<code>'hlsearch'</code>を有効にした上で)<code>/{pattern}</code>により
+				期待通りの検索パターンができたかどうかをインタラクティブに確認してから
+				実際のコマンドを入力・実行することがほとんどだからです。</p>
+
+<h3>参考資料</h3>
+
+<ul>
+<li><a href="http://vimdoc.sourceforge.net/htmldoc/repeat.html#:global">:help :global</a></li>
+<li><a href="http://vimdoc.sourceforge.net/htmldoc/change.html#quote_alpha">:help quote_alpha</a></li>
+<li><a href="http://www.vim.org/scripts/script.php?script_id=2773">grex</a></li>
+</ul>
+
+<address class="hack-author">kana</address>

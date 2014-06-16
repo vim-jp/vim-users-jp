@@ -1,0 +1,68 @@
+---
+layout: post
+title: "Hack #51: カーソル下のキーワードを検索する"
+date: 2009-08-03
+author: kana
+---
+<h3>問題</h3>
+
+<p>どのような種類のテキストを編集していても頻出する作業として、
+				あるキーワードを検索することが挙げられます。
+				その都度<code>/<var>keyword</var></code>と入力しても構わないのですが、
+				面倒です。
+				簡単に行うことはできないのでしょうか。</p>
+
+<h3>解決方法</h3>
+
+<p>キーワードを簡単に検索するにはNormal modeで<code>&#42;</code>をタイプします。
+				これはカーソル下のキーワードを検索するコマンドです。
+				カーソル下に何らかのキーワードが存在しない場合はカーソル近傍のキーワードを
+				用いて検索が行なわれます。</p>
+
+<p>同様に<code>g&#42;</code>というコマンドもあります。
+<code>&#42;</code>との違いは検索するキーワードが単語中に含まれるケースを
+				考慮するかどうかです。
+				例えばカーソル下のキーワードがfooの場合、
+<code>&#42;</code>と<code>g&#42;</code>の違いは以下の通りです:</p>
+
+<table summary="*とg*の違い">
+<thead>
+<tr>
+<th rowspan="2">コマンド</th>
+<th colspan="4">バッファ中のテキスト</th>
+</tr>
+<tr>
+<th>foo</th>
+<th>foobar</th>
+<th>barfoo</th>
+<th>barfoobar</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th><code>*</code></th>
+<td>マッチする</td>
+<td>マッチしない</td>
+<td>マッチしない</td>
+<td>マッチしない</td>
+</tr>
+<tr>
+<th><code>g*</code></th>
+<td>マッチする</td>
+<td>マッチする</td>
+<td>マッチする</td>
+<td>マッチする</td>
+</tr>
+</tbody>
+</table>
+
+<p>また<code>&#42;</code>と<code>g&#42;</code>は順方向に検索を行ないますが、
+<code>#</code>と<code>g#</code>という逆方向に検索を行なうコマンドもあります。</p>
+
+<h3>参考資料</h3>
+
+<ul>
+<li><a href="http://vimdoc.sourceforge.net/htmldoc/pattern.html#star">:help star</a></li>
+</ul>
+
+<address class="hack-author">kana</address>

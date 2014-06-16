@@ -1,0 +1,28 @@
+---
+layout: post
+title: "Hack #6: 直前まで開いていたファイルを編集する"
+date: 2009-05-05
+author: kana
+---
+<h3>問題</h3>
+
+<p>Vimであれこれと多数のファイルを編集していると、ときどき直前に開いていたファイルを編集したい場合が出てきます。例えば<code class="lang-vim">:edit foo.h</code>の後に<code class="lang-vim">:edit foo.c</code>をしたけれど、やはり再度foo.hを編集したい、といった状況です。もちろん、<code class="lang-vim">:edit foo.h</code>とすれば開くことはできますが、補完による補助があったとしてもパスの入力は面倒なものです。どうにかできないでしょうか。</p>
+
+<h3>解決方法</h3>
+
+<p>次のいずれかのコマンドを使うと直前に開いていたファイルに切り替えることができます。</p>
+
+<ul>
+<li><code class="lang-vim">:edit <em>#</em></code><ul>
+<li>ここでは<code class="lang-vim">:edit</code>を例にしましたが、おおよそファイル名を取るExコマンドであればファイル名の代わりに<em>#</em>を使うことができます。例えば<code class="lang-vim">:new</code>、<code class="lang-vim">:read</code>、<code class="lang-vim">:write</code>などが挙げられます。</li>
+</ul></li>
+<li><kbd>&lt;C-^&gt;</kbd><ul>
+<li><kbd>Ctrl</kbd>を押しながら<kbd>^</kbd>を押します。環境によっては入力方法が異なるかも知れません。例えばUS配列のキーボードの場合は<kbd>Ctrl</kbd>と<kbd>Shift</kbd>を押しながら<kbd>6</kbd>を押します。</li>
+</ul></li>
+</ul>
+
+<h3>解説</h3>
+
+<p>Vimには<em>alternate file</em>という概念があり、これはおおよそ<em>「直前まで編集していたファイル」に相当</em>します(厳密に言えば必ずしもそうとは言えませんが、取り敢えずはそういう理解で構いません)。Vimはその使用状況から適切なファイルが何かを保持しており、上記のコマンドではそのファイル、つまりalternate fileを対象に編集を開始します。</p>
+
+<address class="hack-author">kana</address>

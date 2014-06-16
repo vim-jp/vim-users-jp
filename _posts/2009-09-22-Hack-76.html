@@ -1,0 +1,76 @@
+---
+layout: post
+title: "Hack #76: Insert mode中で単語単位/行単位の削除を行なう"
+date: 2009-09-22
+author: kana
+---
+<h3>問題</h3>
+
+<p>テキスト入力中に誤入力をしてしまうことはしばしばあります。
+				例えば</p>
+
+<pre class="prettyprint"><code>if (foo == bar|
+</code></pre>
+
+<p>とまで入力したところでbarはloungeの間違いだったことに気付いたとしましょう
+				(「|」はカーソル位置です)。
+				これには</p>
+
+<pre class="prettyprint"><code>&lt;Esc&gt; b ciw lounge
+</code></pre>
+
+<p>のようにカーソル位置を調整して該当単語を修正することができます
+				(読み易さのためにスペースを入れていますが実際にスペースは入力しません)。</p>
+
+<p>しかしこの手順は面倒です。Insert mode中のまま簡単に削除を行なうことは
+				できないでしょうか。</p>
+
+<h3>解決方法</h3>
+
+<p>これにはInsert mode中で<code>&lt;C-w&gt;</code>を入力します。
+				例えば最初に例示した状態で</p>
+
+<pre class="prettyprint"><code>if (foo == bar|
+</code></pre>
+
+<p><code>&lt;C-w&gt;</code>を入力すると以下の状態になります。</p>
+
+<pre class="prettyprint"><code>if (foo == |
+</code></pre>
+
+<p>Insert mode中での<code>&lt;C-w&gt;</code>は
+				カーソル位置より前にある単語を削除することができます。</p>
+
+<h3>関連項目</h3>
+
+<p><code>&lt;C-u&gt;</code>というコマンドもあります。
+				これはカーソル行で入力された文字を全て削除します。
+				例えば以下のようにテキスト入力を行なったとしましょう
+				(「^」はInsert modeの開始位置です)。</p>
+
+<pre class="prettyprint"><code>if (foo == lounge) retrun a|
+                   ^
+</code></pre>
+
+<p>ここで<code>&lt;C-u&gt;</code>を入力すると以下の状態になります。</p>
+
+<pre class="prettyprint"><code>if (foo == lounge) |
+                   ^
+</code></pre>
+
+<p>また、<code>&lt;C-w&gt;</code>や<code>&lt;C-u&gt;</code>を使う場合は
+				&#8216;backspace&#8217;の値を以下のように調整しておくと
+				より便利に使うことができるでしょう。</p>
+
+<pre class="prettyprint"><code>set backspace=indent,eol,start
+</code></pre>
+
+<h3>参考資料</h3>
+
+<ul>
+<li><a href="http://vimdoc.sourceforge.net/htmldoc/insert.html#i_CTRL-W">:help i_CTRL-W</a></li>
+<li><a href="http://vimdoc.sourceforge.net/htmldoc/insert.html#i_CTRL-U">:help i_CTRL-U</a></li>
+<li><a href="http://vimdoc.sourceforge.net/htmldoc/options.html#'backspace'">:help &#8216;backspace&#8217;</a></li>
+</ul>
+
+<address class="hack-author">kana</address>

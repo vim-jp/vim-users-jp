@@ -1,0 +1,40 @@
+---
+layout: post
+title: "Hack #66: 文字列を暗号化する"
+date: 2009-09-02
+author: kana
+---
+<h3>問題</h3>
+
+<p>突然ですが、下記の暗号を解読してください。</p>
+
+<pre class="prettyprint"><code>t? gb rapbqr grkg jvgu EBG13.
+</code></pre>
+
+<h3>解決方法</h3>
+
+<p>解読するにはVisual modeで暗号文を選択して<code>g?</code>をタイプします。
+				解読結果は以下の通りです。</p>
+
+<pre class="prettyprint"><code>g? to encode text with ROT13.
+</code></pre>
+
+<h3>応用例</h3>
+
+<p><code>g?</code>は暗号を解読するだけでなく、暗号化にも用いることができます。
+				これには暗号化したい文字列を選択して<code>g?</code>をタイプします。
+				例えば先程解読した文章を暗号化すると以下のようになります。</p>
+
+<pre class="prettyprint"><code>t? gb rapbqr grkg jvgu EBG13.
+</code></pre>
+
+<p>また、<code>g?g?</code>または<code>g??</code>でカーソル行を暗号化/復号することができます。</p>
+
+<h3>参考資料</h3>
+
+<ul>
+<li><a href="http://vimdoc.sourceforge.net/htmldoc/change.html#g?">:help g?</a></li>
+<li><a href="http://en.wikipedia.org/wiki/ROT13">ROT13 &#8211; Wikipedia, the free encyclopedia</a></li>
+</ul>
+
+<address class="hack-author">kana</address>

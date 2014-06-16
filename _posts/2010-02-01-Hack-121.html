@@ -1,0 +1,52 @@
+---
+layout: post
+title: "Hack #121: バッファ名をペーストする"
+date: 2010-02-01
+author: kana
+---
+<h3>問題</h3>
+
+<p>ときおりバッファ名をペーストしたいことがあります。
+				短い名前なら手動で入力しても構いませんし、
+				ファイルに対応するバッファならばファイル名補完で多少の手間を省けますが、
+				面倒臭いことには変わりありません。
+				直接バッファ名をペーストできないでしょうか。</p>
+
+<h3>解決方法</h3>
+
+<p>Normal modeの場合は以下のコマンドを実行します:</p>
+
+<pre class="prettyprint"><code>"%p
+</code></pre>
+
+<p>Insert modeやCommand-line modeの場合は以下のコマンドを入力します:</p>
+
+<pre class="prettyprint"><code>&lt;C-r&gt;%
+</code></pre>
+
+<p>上記のコマンドはカレントバッファ名をペーストします。
+<code>%</code>の代わりに<code>#</code>を用いると
+<a href="http://vimdoc.sourceforge.net/htmldoc/editing.html#alternate-file">代替バッファ</a>
+				の名前をペーストします。</p>
+
+<h3>解説</h3>
+
+<p>上記のコマンドは実際には指定されたレジスタの内容をペーストするコマンドです。
+				Vimには特殊なレジスタとしてカレントバッファ名や代替バッファ名を表すものがあり、
+				この二つを組み合わせることで上記のようにバッファ名のペーストができます。</p>
+
+<p>Vimには他にも様々な
+<a href="http://vimdoc.sourceforge.net/htmldoc/change.html#registers">特殊レジスタ</a>
+				があるので、一度確認しておくとより便利に使うことができるでしょう。</p>
+
+<h3>参考資料</h3>
+
+<ul>
+<li><a href="http://vimdoc.sourceforge.net/htmldoc/change.html#p">:help p</a></li>
+<li><a href="http://vimdoc.sourceforge.net/htmldoc/insert.html#i_CTRL-R">:help i_CTRL-R</a></li>
+<li><a href="http://vimdoc.sourceforge.net/htmldoc/cmdline.html#c_CTRL-R">:help c_CTRL-R</a></li>
+<li><a href="http://vimdoc.sourceforge.net/htmldoc/change.html#registers">:help registers</a></li>
+<li><a href="http://vimdoc.sourceforge.net/htmldoc/editing.html#alternate-file">:help alternate-file</a></li>
+</ul>
+
+<address class="hack-author">kana</address>

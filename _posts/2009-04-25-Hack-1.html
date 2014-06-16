@@ -1,0 +1,39 @@
+---
+layout: post
+title: "Hack #1: Vimを使うために必要な最小限の設定"
+date: 2009-04-25
+author: kana
+---
+<h3>問題</h3>
+
+<p>数あるviクローンの中でも数多の機能を備えているVimですが、デフォルトでは可能な限りvi互換で動作するようになっており、一切設定を行なっていない状態ではVimを使う意味がほとんどありません。しかし設定を行おうにも項目は多岐に渡るため、どこから手をつければいいのか初心者には判断することができません。そこで、まず最初にVimをVimとして使うための最小限の設定を行う必要があります。</p>
+
+<h3>解決方法</h3>
+
+<ol>
+<li>Vimを起動する。</li>
+<li>次のコマンドを実行する:<dl>
+<dt>*nix環境の場合</dt>
+<dd><code class="lang-vim">:edit $HOME/.vimrc</code></dd>
+
+<dt>Windows環境の場合</dt>
+<dd><code class="lang-vim">:edit $HOME/_vimrc</code>または<code class="lang-vim">:edit $VIM/_vimrc</code></dd>
+<dd>もし<code>$HOME</code>の意味が分からない場合は<code>$VIM</code>の方を使ってください。</dd>
+
+<dt>その他の環境の場合</dt>
+<dd><code class="lang-vim">:edit <var>vimrc</var></code></dd>
+<dd>ただし<var>vimrc</var>は<code class="lang-vim">:help vimrc</code>を参照して自分に最適な値に置き換えてください。</dd>
+</dl></li>
+<li>次のコマンドを実行する: <code class="lang-vim">:write</code></li>
+<li>Vimを終了する。</li>
+</ol>
+
+<p>これで次にVimを起動するとvi互換ではなくVimらしいデフォルト値が設定された状態になります。</p>
+
+<h3>解説</h3>
+
+<p>Vimの各種挙動は多数のオプションで変更可能ですが、デフォルト値の多くはvi互換で動作する場合とそうでない場合とで値が異なります。Vimは起動時にユーザー固有の設定が記述されたファイル<em>vimrc</em>を読み込むのですが、このファイルが存在しない場合はvi互換で動作するようになっています。逆に、中身が空であってもvimrcが存在しさえすればVim独自のデフォルト値が設定された状態で起動するようになります。</p>
+
+<p>このvi互換の動作をするかどうかについてはオプション<code class="option">'compatible'</code>で明示的に設定することもできます。ただしこのオプションは副作用が大きいため、特に理由のない限りは明示的に設定する必要はありません。</p>
+
+<address class="hack-author">kana</address>
