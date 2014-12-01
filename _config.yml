@@ -1,5 +1,6 @@
 markdown: rdiscount
 encoding: utf-8
+base-url: http://vim-jp.org/vim-users-jp
 exclude:
   - 'scripts'
   - '_original'
