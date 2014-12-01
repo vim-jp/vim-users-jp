@@ -12,14 +12,14 @@ author: tyru
 
 <p>ちなみに自分は.vimrcで</p>
 
-<pre class="prettyprint"><code>set virtualedit=all
+<pre class="prettyprint"><code class="lang-vim">set virtualedit=all
 </code></pre>
 
 <p>のように設定しています。</p>
 
 <h2>問題</h2>
 
-<p>しかし、<code>set virtualedit=all</code>をしていると<code>p</code>でのペーストで
+<p>しかし、<code class="lang-vim">set virtualedit=all</code>をしていると<code>p</code>でのペーストで
 				もし右端(<code>$</code>で移動できる場所です)よりも右にいた場合に、
 				現在いる場所にテキストが挿入されてしまいます。</p>
 
@@ -40,7 +40,7 @@ author: tyru
 </code></pre>
 
 <p>であり、余計な空白は入れてほしくありません。
-<code>set virtualedit=all</code>だといともたやすく存在しない場所へカーソルを動かすことができるので、
+<code class="lang-vim">set virtualedit=all</code>だといともたやすく存在しない場所へカーソルを動かすことができるので、
 				ただ末尾に付け加えたいだけの場合に余計な神経を使ってしまうのです。なんとかできないでしょうか。</p>
 
 <h2>解決</h2>

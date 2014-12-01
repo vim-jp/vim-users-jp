@@ -63,7 +63,7 @@ endif
 <p>
 				autocmdは常に追加されます。設定ファイルを何度も読み込むとautocmdが頻繁に追加され、Vimの動作がおかしくなる原因となります。
 				これを防ぐためには、.vimrcの先頭で一度autocmdをリセットします。
-<pre class="prettyprint"><code>autocmd!
+<pre class="prettyprint"><code class="lang-vim">autocmd!
 
 ・・・・
 autocmd FileType * set textwidth=0

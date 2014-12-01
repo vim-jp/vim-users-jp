@@ -31,7 +31,7 @@ author: ujihisa
 
 <p>次に、今後スワップファイルが散らばらないようにしましょう。以下の設定を<code>~.vimrc</code>に記述します。</p>
 
-<pre class="prettyprint"><code>set directory-=.
+<pre class="prettyprint"><code class="lang-vim">set directory-=.
 </code></pre>
 
 <p>今後<code>~/tmp</code>以下にのみスワップファイルが生成されるようになります。</p>
@@ -56,7 +56,7 @@ author: ujihisa
 
 <p>ところで、より強気な解決方法として、そもそもスワップファイルを生成しないという設定があります。</p>
 
-<pre class="prettyprint"><code>set directory=
+<pre class="prettyprint"><code class="lang-vim">set directory=
 </code></pre>
 
 <p>この設定は自動保存を有効にしている使用者と非常に相性が良いですが、そうでない使用者には必ずしもおすすめできません。

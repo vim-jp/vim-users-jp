@@ -14,7 +14,7 @@ author: tyru
 <p>Vim 7.3 <em>*1</em> では
 				以下を.vimrcに入れると80文字以上長い列をハイライトしてくれます。</p>
 
-<pre class="prettyprint"><code>set textwidth=80
+<pre class="prettyprint"><code class="lang-vim">set textwidth=80
 if exists('&amp;colorcolumn')
     set colorcolumn=+1
 endif
@@ -24,7 +24,7 @@ endif
 				この問題は.vimrcで<code>'textwidth'</code>を0に指定しておき、<br />
 				コードを書く時のみ<code>:setlocal textwidth=80</code>とすることで回避できます。</p>
 
-<pre class="prettyprint"><code>set textwidth=0
+<pre class="prettyprint"><code class="lang-vim">set textwidth=0
 if exists('&amp;colorcolumn')
     set colorcolumn=+1
     " sh,cpp,perl,vim,...の部分は自分が使う

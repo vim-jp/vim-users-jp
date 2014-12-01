@@ -42,7 +42,7 @@ augroup END
 
 <p>特定の拡張子に対して自動でバイナリ編集モードにしたい場合は、~/.vim/ftdetect/xxd.vim (Windows の場合は ~/vimfiles/ftdetect/xxd.vim) に以下のように書きます。</p>
 
-<pre class="prettyprint"><code>autocmd BufReadPost,BufNewFile *.bin,*.exe,*.dll setlocal filetype=xxd
+<pre class="prettyprint"><code class="lang-vim">autocmd BufReadPost,BufNewFile *.bin,*.exe,*.dll setlocal filetype=xxd
 </code></pre>
 
 <p>この例では、bin, exe, dll の拡張子のファイルを開いた際にバイナリ編集モードになります。</p>

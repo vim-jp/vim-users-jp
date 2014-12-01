@@ -11,7 +11,7 @@ author: tyru
 <p>さて、タイトルの&#8217;cpoptions&#8217;と&#8217;compatible&#8217;についてですが、<br />
 				理由もわからず</p>
 
-<pre class="prettyprint"><code>set nocompatible
+<pre class="prettyprint"><code class="lang-vim">set nocompatible
 
 " 以下は省略形
 set nocp
@@ -20,7 +20,7 @@ set nocp
 <p>と.vimrcに書いている方も多いことでしょう。<br />
 				また</p>
 
-<pre class="prettyprint"><code>set cpoptions&amp;vim
+<pre class="prettyprint"><code class="lang-vim">set cpoptions&amp;vim
 
 " 以下は省略形
 set cpo&amp;vim
@@ -36,9 +36,9 @@ set cpo&amp;vim
 </code></pre>
 
 <p>つまり、.vimrcか.gvimrcをVimが見つけられていればこの値は自動的にオフになるのです。<br />
-				なので.vimrcで<code>set nocompatible</code>しても意味がありません。<br />
+				なので.vimrcで<code class="lang-vim">set nocompatible</code>しても意味がありません。<br />
 				しかもこのオプションがオフの時は<code>'cpoptions'</code>は自動的にVim互換の値になるので<br />
-<code>set cpo&amp;vim</code>とする必要もありません。<br />
+<code class="lang-vim">set cpo&amp;vim</code>とする必要もありません。<br />
 				ようするにユーザがこの値をいじる必要はありません。</p>
 
 <p>また、この2つのオプションを変える際は<br />

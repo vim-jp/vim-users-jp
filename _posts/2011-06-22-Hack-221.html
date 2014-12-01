@@ -41,7 +41,7 @@ author: ujihisa
 <pre class="prettyprint"><code>:set transparency=10
 </code></pre>
 
-<p>ただ、それ描画が狂う時点の前にどんな<code>'transparency'</code>を設定していたかその具体的な忘れている場合がほとんどでしょう。普段から<code>set transparency</code>するときに常に同時に<code>g:transparency</code>などの変数にその値を格納しておき、そしてその値に戻ることができるようにKey mappingを設定するのがよいでしょう。</p>
+<p>ただ、それ描画が狂う時点の前にどんな<code>'transparency'</code>を設定していたかその具体的な忘れている場合がほとんどでしょう。普段から<code class="lang-vim">set transparency</code>するときに常に同時に<code>g:transparency</code>などの変数にその値を格納しておき、そしてその値に戻ることができるようにKey mappingを設定するのがよいでしょう。</p>
 
 <p>例として、筆者は半透明度の変更と、半透明再描画をそれぞれ以下のように割り当てています。すべて、<code>~/.vimrc</code>ではなく<code>~/.gvimrc</code>です。</p>
 

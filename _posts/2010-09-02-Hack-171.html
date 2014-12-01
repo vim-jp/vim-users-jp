@@ -40,7 +40,7 @@ author: tyru
 
 <p>statuslineは</p>
 
-<pre class="prettyprint"><code>set statusline=...
+<pre class="prettyprint"><code class="lang-vim">set statusline=...
 </code></pre>
 
 <p>という風にセットすることもできますが</p>
@@ -50,14 +50,14 @@ author: tyru
 
 <p>としたほうが空白を含む文字列をセットする時にエスケープする必要がなく便利です。</p>
 
-<pre class="prettyprint"><code>set statusline=this\ is\ my\ statusline
+<pre class="prettyprint"><code class="lang-vim">set statusline=this\ is\ my\ statusline
 
 let &amp;statusline = 'this is my statusline'
 </code></pre>
 
 <p>また</p>
 
-<pre class="prettyprint"><code>set statusline=%!...
+<pre class="prettyprint"><code class="lang-vim">set statusline=%!...
 </code></pre>
 
 <p>のようにすることもできます。(<code>:help 'statusline'</code> 参照)</p>

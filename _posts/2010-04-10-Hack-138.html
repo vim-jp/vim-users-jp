@@ -4,7 +4,7 @@ title: "Hack #138: ファイルタイプのエイリアスを作る"
 date: 2010-04-10
 author: tyru
 ---
-<pre class="prettyprint"><code>set filetype=c
+<pre class="prettyprint"><code class="lang-vim">set filetype=c
 </code></pre>
 
 <p>と入力すると現在のバッファにシンタックスハイライトやftpluginなどの設定をロードすることができます。<br />
@@ -16,7 +16,7 @@ author: tyru
 <p>ただファイルタイプの中には「javascript」などといった長い名前のものがしばしばあります。<br />
 				そこでautocmdを使い</p>
 
-<pre class="prettyprint"><code>autocmd FileType js setlocal ft=javascript
+<pre class="prettyprint"><code class="lang-vim">autocmd FileType js setlocal ft=javascript
 </code></pre>
 
 <p>とすると</p>
