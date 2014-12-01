@@ -169,7 +169,8 @@ function! s:readfile(f)
 endfunction
 
 let s:langmap = {
-\  '\<endfunction\>\|\<Bundle\>\|\<NeoBundle\>\|\<nnoremap\>\|\<augroup\>\|\<cursorcolumn\>\|:highlight\|:silent': 'lang-vim',
+\  '\<endfunction\>\|\<Bundle\>\|\<NeoBundle\>\|\<nnoremap\>\|\<augroup\>\|\<autocmd\>\|\<cursorcolumn\>\|:highlight\|:silent': 'lang-vim',
+\  '^set ': 'lang-vim',
 \}
 
 function! s:lang(str) abort
