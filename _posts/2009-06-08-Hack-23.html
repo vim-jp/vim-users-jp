@@ -1,0 +1,32 @@
+---
+layout: post
+title: "Hack #23: Vimでハイライト表示させたコードを見た目そのままにHTML出力させる"
+date: 2009-06-08
+author: ukstudio
+---
+<p>Vimにはソースコードのハイライト機能が備わっており、対応しているファイルフォーマットかなり豊富です。今回はそのハイライト表示させたソースコードを見た目そのままにHTMLとして出力させる方法の紹介です。</p>
+
+<h2>:TOhtml</h2>
+
+<p>HTML出力を行う場合は<code class="lang-vim">:TOhtml</code>を実行します。何も選択しなかった場合は全文、選択した場合は選択した部分をHTMLとして出力します。出力先は開いているファイル名.htmlとして同じ階層に保存されています。</p>
+
+<p>以下は簡単なRubyコードを<code class="lang-vim">:TOhtml</code>した例です。</p>
+
+<p><img src="/vim-users-jp/assets/images/tohtml.jpg" alt="tohtml" title="tohtml" width="504" height="418" class="aligncenter size-full wp-image-460" /></p>
+
+<p>デフォルトで出力されるHTMLコードはfontタグや、styleがタグごとに指定されているなど、お世辞にもキレイなコードとは言えません。</p>
+
+<p><code class="lang-vim">:TOhtml</code>にはいくつかオプションがあり、それらを指定することで改善することができます。最低限、以下の設定を.vimrcに書いておくといいでしょう。</p>
+
+<p><code class="lang-vim"></p>
+
+<pre class="prettyprint"><code>let g:use_xhtml = 1
+let g:html_use_css = 1
+let g:html_no_pre = 1
+</code></pre>
+
+<p></code></p>
+
+<p>また<code class="vim-options">'html_use_css'</code>を指定している場合、classなどは基本的に固定されていますので、あらかじめ自分で外部スタイルシートファイルを用意しておくのもいいでしょう。</p>
+
+<address class="hack-author">ukstudio</address>

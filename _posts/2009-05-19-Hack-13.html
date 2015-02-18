@@ -1,0 +1,27 @@
+---
+layout: post
+title: "Hack #13: autocmdを使用して自動的に処理を実行する"
+date: 2009-05-19
+author: ukstudio
+---
+<h3>autocmdとは</h3>
+
+<p>簡単に説明するとautocmd(オートコマンド)とはファイルやバッファの読み書きなどのイベントに応じて自動的に実行されるコマンドです。例えばオートコマンドを使用するとプログラムのソースコードの書き込み時に自動で構文チェックを実行させたりすることができます。</p>
+
+<h3>書き方</h3>
+
+<p>autocmdの最も簡単な例を紹介します。</p>
+
+<pre class="vim-script">autocmd BufWrite *  echo "Hello, World"</pre>
+
+<p>このコマンドは*(全てのファイル)に対してバッファ全体をファイルに書き込むときに<code class="lang-vim">echo "Hello, World"</code>を実行するように指示します。</p>
+
+<p>これを応用して先程例としてあげた構文チェックは以下のようになります。</p>
+
+<pre class="vim-script">autocmd BufWrite *.rb  !ruby -c %</pre>
+
+<p>上記はRubyの例ですが、他にもPHPなどでも同じことが可能です。もしインタプリタやコンパイラに構文チェック機能がない場合もLintなどを用いればチェックは可能です。</p>
+
+<p>BufWrite以外にもたくさんのイベントや、autocmdをグループ化する方法などもあります。詳細は<code class="lang-vim">:help autocmd</code>を参照してください。</p>
+
+<address class="hack-author">ukstudio</address>

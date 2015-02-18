@@ -1,0 +1,61 @@
+---
+layout: post
+title: "blogger.vim talk with ujihisa on VimM#4"
+date: 2009-06-23
+author: 
+---
+<div style='background:#000000'><font face="monospace" color=#ffffff>
+<font color="#00ff00">&nbsp;1 </font><font color="#ff40ff">blogger.vim</font><br />
+<font color="#00ff00">&nbsp;2 </font><font color="#ff40ff">===========</font><br />
+<font color="#00ff00">&nbsp;3 </font><font color="#00ffff">&lt;</font>http<font color="#00ffff">://www.vim.org/scripts/script.php?script_id=</font><font color="#ffff00">2638</font><font color="#00ffff">&gt;</font><br />
+<font color="#00ff00">&nbsp;4 </font><font color="#00ffff">* </font>ブログサービスbloggerに記事を投稿したり<br />
+<font color="#00ff00">&nbsp;5 </font>&nbsp;&nbsp;修正したりするためのプラグイン<br />
+<font color="#00ff00">&nbsp;6 </font>&nbsp;&nbsp;<a href="http://***.blogspot.com">http://***.blogspot.com</a><br />
+<font color="#00ff00">&nbsp;7 </font><font color="#00ffff">* </font><a href="http://github.com/ujihisa/blogger.vim">http://github.com/ujihisa/blogger.vim</a><br />
+<font color="#00ff00">&nbsp;8 </font><br />
+<font color="#00ff00">&nbsp;9 </font><font color="#ff40ff">## 開発の動機</font><br />
+<font color="#00ff00">10 </font><font color="#00ffff">* </font>ブログサービスnowaをnowa.vimで快適に利用<br />
+<font color="#00ff00">11 </font><font color="#00ffff">* </font>nowaが終了<br />
+<font color="#00ff00">12 </font><font color="#00ffff">* </font>(旧)blogger.vimを使用、快適<br />
+<font color="#00ff00">13 </font><font color="#00ffff">* </font>(旧)blogger.vimが破壊<br />
+<font color="#00ff00">14 </font><font color="#00ffff">* </font>憤慨してblogger.vimを作ることに<br />
+<font color="#00ff00">15 </font><font color="#00ffff">* </font>折角ならmetarw<br />
+<font color="#00ff00">16 </font><br />
+<font color="#00ff00">17 </font><font color="#ff40ff">## metarw</font><br />
+<font color="#00ff00">18 </font><font color="#00ffff">* </font>ファイルでない何かをファイルであるかのように取り扱う<br />
+<font color="#00ff00">19 </font>&nbsp;&nbsp;プラグインを書くためのライブラリプラグイン<br />
+<font color="#00ff00">20 </font><font color="#00ffff">* </font>kana<br />
+<font color="#00ff00">21 </font><br />
+<font color="#00ff00">22 </font><font color="#ff40ff">## blogger.vimの使い方</font><br />
+<font color="#00ff00">23 </font>netrw同様<br />
+<font color="#00ff00">24 </font><font color="#00ffff">* </font>(事前に.vimrcなどにパスワード記述)<br />
+<font color="#00ff00">25 </font><font color="#00ffff">* </font>記事一覧取得 <font color="#ffff00">`:e blogger:list`</font><br />
+<font color="#00ff00">26 </font><font color="#00ffff">* </font>特定記事取得 <font color="#ffff00">`:e blogger:<a href="http://...`">http://&#8230;`</a></font><br />
+<font color="#00ff00">27 </font>&nbsp;&nbsp;または記事一覧画面で<font color="#00ffff">&lt;</font>Enter<font color="#00ffff">&gt;</font><br />
+<font color="#00ff00">28 </font><font color="#00ffff">* </font>記事新規投稿 <font color="#ffff00">`:w blogger:create`</font><br />
+<font color="#00ff00">29 </font><font color="#00ffff">* </font>記事上書き保存 <font color="#ffff00">`:w blogger:<a href="http://...`">http://&#8230;`</a></font><br />
+<font color="#00ff00">30 </font><br />
+<font color="#00ff00">31 </font><font color="#ff40ff">## 実装</font><br />
+<font color="#00ff00">32 </font><font color="#00ffff">* </font>Blogger API<br />
+<font color="#00ff00">33 </font><font color="#00ffff">* </font>metarw (by kana)<br />
+<font color="#00ff00">34 </font><font color="#00ffff">* </font>Ruby (nokogiri, rspec, etc)<br />
+<font color="#00ff00">35 </font><font color="#00ffff">* </font>Haskell (pandoc)<br />
+<font color="#00ff00">36 </font><br />
+<font color="#00ff00">37 </font><font color="#ff40ff">## 構成</font><br />
+<font color="#00ff00">38 </font>80% of Ruby, 20% of Vim script<br />
+<font color="#00ff00">39 </font><font color="#00ffff">* </font>if_rubyの:rubyではなくsystem()<br />
+<font color="#00ff00">40 </font><br />
+<font color="#00ff00">41 </font><font color="#ff40ff">## 歴史</font><br />
+<font color="#00ff00">42 </font><font color="#00ffff">* </font>mixi.vim (if_ruby)<br />
+<font color="#00ff00">43 </font><font color="#00ffff">* </font>nowa.vim (metarw)<br />
+<font color="#00ff00">44 </font><br />
+<font color="#00ff00">45 </font><font color="#ff40ff">おわりに</font><br />
+<font color="#00ff00">46 </font><font color="#ff40ff">========</font><br />
+<font color="#00ff00">47 </font>伝えたいこと、覚えてもらいたいことが3つあります。<br />
+<font color="#00ff00">48 </font><br />
+<font color="#00ff00">49 </font><font color="#00ffff">* </font>参加費はブログに書いてトラックバック的行為をすること<br />
+<font color="#00ff00">50 </font><font color="#00ffff">* </font>誰でも主催できるのでVim勉強会を各地でゲリラ的に開催し、<br />
+<font color="#00ff00">51 </font>&nbsp;&nbsp;そしてVimKaigi2010でBram召還<br />
+<font color="#00ff00">52 </font><font color="#00ffff">* </font>Vim Hacks Project<br />
+<font color="#00ff00">53 </font><br />
+</font></div>

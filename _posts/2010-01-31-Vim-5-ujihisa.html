@@ -1,0 +1,343 @@
+---
+layout: post
+title: "Vim勉強会#5 ujihisa発表資料"
+date: 2010-01-31
+author: 
+---
+<h1>Vim勉強会5 初級者向け講座</h1>
+
+<p>ujihisa</p>
+
+<ul>
+<li><a href="http://ujihisa.blogspot.com/">http://ujihisa.blogspot.com/</a></li>
+<li>Vancouver, Canada</li>
+</ul>
+
+<h2>初級者とは</h2>
+
+<p>「初級者向け講座」 &#8230; 具体的に、初級者とは?</p>
+
+<h2>Vim使いのレベル10</h2>
+
+<ul>
+<li>Lv1 vimtutorを終わらせた。あるいは、hjklで移動できて保存と終了ができる</li>
+<li>Lv2 ビジュアルモードを使うのをやめ、y}やdawなどの素晴らしい操作性に自己陶酔する</li>
+<li>Lv3 自分でインストールしたプラギンの数が5を越え、ダメプラギンはすぐに判別できるようになる</li>
+<li>Lv4 自分で作ったプラギンをvim.orgでリリースし、何人かをLife Changingさせる</li>
+<li>Lv5 他のアプリケーション使用時にescやiを打鍵してしまい、イラっとする日々を送る</li>
+<li>Lv6 シェルは当然vimshell。ネオコンなど大規模プラギンのバグを発見し、パッチ付きで報告する</li>
+<li>Lv7 Vim本体のソースコードを読み、あまりの魔界に発狂する</li>
+<li>Lv8 他言語インタフェース<code>if_***</code>を作り、<code>vim_dev</code>に投稿する。当然採用されない</li>
+<li>Lv9 Vim本体の開発への貢献が日常になる。投稿し採用されたパッチ数が10を越える</li>
+<li>Lv10 神になる</li>
+</ul>
+
+<h2>つまり</h2>
+
+<ul>
+<li>Lv1~Lv4 初級者</li>
+<li>Lv4~Lv7 中級者</li>
+<li>Lv7~Lv10 上級者</li>
+</ul>
+
+<h2>今日の目標</h2>
+
+<p>Lv4 自分で作ったプラギンをvim.orgでリリースし、何人かをLife Changingさせる</p>
+
+<p>全員ここまでやる</p>
+
+<h2>Be Lv1</h2>
+
+<ul>
+<li>Lv1 vimtutorを終わらせた。あるいは、hjklで移動できて保存と終了ができる</li>
+</ul>
+
+<p>VimをインストールしてVimtutorを全部やる。25~30分。</p>
+
+<pre class="prettyprint"><code>$ vimtutor
+</code></pre>
+
+<h2>Lv1の重要な点</h2>
+
+<ul>
+<li><code>u</code>
+
+<ul>
+<li>undo。無制限</li>
+<li>Vimは終了しない</li>
+<li>キャンセルは<code>&lt;C-r&gt;</code></li>
+</ul></li>
+<li><code>A</code>
+
+<ul>
+<li>その行の行末から文字入力開始!</li>
+</ul></li>
+<li><code>dw</code>
+
+<ul>
+<li><code>(delete 'word)</code></li>
+<li>カーソル位置からその単語の終わりまでまとめて削除!</li>
+</ul></li>
+<li><code>d$</code>
+
+<ul>
+<li>カーソル位置から行末まで削除!</li>
+</ul></li>
+<li><code>dd</code>
+
+<ul>
+<li>その行を削除</li>
+</ul></li>
+<li><code>p</code>, <code>P</code>
+
+<ul>
+<li>消した文字を貼付け。<code>P</code>だとVim以外のソフトのペーストのような挙動</li>
+</ul></li>
+<li><code>0</code>
+
+<ul>
+<li>行頭に移動</li>
+</ul></li>
+</ul>
+
+<h3>ビジュアルモード</h3>
+
+<ul>
+<li><code>v</code>
+
+<ul>
+<li>一文字単位のビジュアルモード</li>
+</ul></li>
+<li><code>V</code>
+
+<ul>
+<li>行単位のビジュアルモード</li>
+</ul></li>
+<li><code>&lt;C-v&gt;</code>
+
+<ul>
+<li>矩形選択</li>
+</ul></li>
+</ul>
+
+<p><code>v</code>して<code>y</code>でヤンク、あるいは<code>d</code>で削除できる!</p>
+
+<h2>Be Lv2</h2>
+
+<ul>
+<li>Lv2 ビジュアルモードを使うのをやめ、y}やdawなどの素晴らしい操作性に自己陶酔する</li>
+</ul>
+
+<h3>非オブジェクト指向言語</h3>
+
+<p>値x に対して、 引数2 で、 関数f を実行する</p>
+
+<pre class="prettyprint"><code>f(x, 2)
+</code></pre>
+
+<h3>オブジェクト指向言語</h3>
+
+<p>値x に対して、 引数2 で、 関数f を実行する</p>
+
+<pre class="prettyprint"><code># f(x, 2)
+x.f(2)
+</code></pre>
+
+<h3>Vimのビジュアルモード</h3>
+
+<p>範囲x に対して、 引数2 で、 操作f を実行する</p>
+
+<pre class="prettyprint"><code># f(x, 2)
+# x.f(2)
+x2f
+</code></pre>
+
+<h3>Vimの非ビジュアルモード</h3>
+
+<p>範囲x に対して、 引数2 で、 操作f を実行する</p>
+
+<pre class="prettyprint"><code># f(x, 2)
+# x.f(2)
+# x2f
+2fx
+</code></pre>
+
+<h3>例: 次の空行まで削除</h3>
+
+<p>ビジュアルモード</p>
+
+<pre class="prettyprint"><code>v}d
+</code></pre>
+
+<p>非ビジュアルモード</p>
+
+<pre class="prettyprint"><code>d}
+</code></pre>
+
+<h3>非ビジュアルモードの薦め</h3>
+
+<ul>
+<li>自分で画面を確認する必要がない! EP確保 (後述)</li>
+<li>キータイプ数が少ない!</li>
+<li>範囲の大きさに依存しない!</li>
+</ul>
+
+<h3>dawは?</h3>
+
+<p>text-objectの一つ。</p>
+
+<p>詳しくは次のSixeightさんによるtext-objectのためだけのプレゼンに刮目せよ!</p>
+
+<h2>Be Lv3</h2>
+
+<ul>
+<li>Lv3 自分でインストールしたプラギンの数が5を越え、ダメプラギンはすぐに判別できるようになる</li>
+</ul>
+
+<h3>Vim plugins</h3>
+
+<p>インストール: 単にファイルを置くだけ</p>
+
+<ul>
+<li>(大抵の場合) ビルドとかいらないよ!</li>
+</ul>
+
+<h3>便利で小さいプラギン</h3>
+
+<ul>
+<li>quickrun
+
+<ul>
+<li>編集中バッファを「実行」する</li>
+</ul></li>
+<li>git-vim
+
+<ul>
+<li>gitをラクに使う</li>
+</ul></li>
+<li>smartchr
+
+<ul>
+<li>いい感じに文字入力をラクにする</li>
+</ul></li>
+</ul>
+
+<h3>便利で大きいプラギン</h3>
+
+<ul>
+<li>neocomplcache
+
+<ul>
+<li>補完!</li>
+</ul></li>
+<li>vimshell
+
+<ul>
+<li>Vim scriptで実装されたシェル</li>
+</ul></li>
+<li>blogger.vim
+
+<ul>
+<li>blogspot.comにブログを投稿する</li>
+</ul></li>
+</ul>
+
+<h2>自己紹介</h2>
+
+<p>ujihisa</p>
+
+<ul>
+<li><a href="http://ujihisa.blogspot.com/">http://ujihisa.blogspot.com/</a></li>
+<li>Vancouver, Canada</li>
+</ul>
+
+<h3>自分のプロジェクト</h3>
+
+<ul>
+<li>quickrun.vim (現在はthincaさんがメインブランチ)</li>
+<li>blogger.vim</li>
+<li>few</li>
+</ul>
+
+<h3>関わっているプロジェクト</h3>
+
+<ul>
+<li>Termtter</li>
+<li>Ruby Core</li>
+</ul>
+
+<h3>最近の活動</h3>
+
+<ul>
+<li>アメリカの大学院入試。いまは結果待ち</li>
+<li>明後日カナダに帰ります</li>
+<li>アセンブリ言語勉強しています (LLVM, IA-32)</li>
+</ul>
+
+<h2>Be Lv4</h2>
+
+<ul>
+<li>Lv4 自分で作ったプラギンをvim.orgでリリースし、何人かをLife Changingさせる</li>
+</ul>
+
+<h3>プラギンの作り方</h3>
+
+<ol>
+<li>Vimを使いまくる</li>
+<li>こんな機能があればラクなのになあと思う</li>
+<li>Vim標準でその機能があるか調べる <code>:h</code></li>
+<li><code>www.vim.org</code>にそのスクリプトがあるか調べる</li>
+</ol>
+
+<h2>#</h2>
+
+<ol>
+<li>大抵はすぐにいくつか見つかる</li>
+<li>実際に使ってみる</li>
+<li>ヒドい出来具合に発狂する</li>
+<li>自分で実装する</li>
+<li>githubで公開する</li>
+<li>vim.orgで公開する</li>
+</ol>
+
+<h2>今後の発展</h2>
+
+<ul>
+<li>Vim用語を抑える</li>
+<li>Vim hacksを毎日読む</li>
+<li>Lingr Vim Roomに常駐する</li>
+</ul>
+
+<h3>Vim用語</h3>
+
+<ul>
+<li>Bram</li>
+<li>神</li>
+<li>教皇</li>
+<li>エネミー</li>
+<li>hkn</li>
+</ul>
+
+<h3>Vim Hacks</h3>
+
+<p><a href="/vim-users-jp/">/vim-users-jp/</a></p>
+
+<ul>
+<li>kana, ujihisa, thinca, Shougo, ukstudioらが執筆</li>
+<li>時々ゲスト執筆者も。</li>
+</ul>
+
+<p>ゲスト執筆者は常時募集中!</p>
+
+<h3>Lingr Vim Room</h3>
+
+<p><a href="http://lingr.com/room/vim/">http://lingr.com/room/vim/</a></p>
+
+<ul>
+<li>大勢が常に常駐</li>
+<li>tsukkeeさんのlingr-vimを使うとさらに快適に!</li>
+</ul>
+
+<h2>let g:loaded_vimlectur = 1</h2>
+
+<p>完</p>

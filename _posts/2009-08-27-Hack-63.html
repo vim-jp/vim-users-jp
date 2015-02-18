@@ -1,0 +1,21 @@
+---
+layout: post
+title: "Hack #63: 日本語のヘルプを用意する"
+date: 2009-08-27
+author: ukstudio
+---
+<p>大多数の人は、<code class="lang-vim">:help</code>を実行したとき、表示されるヘルプは英語だと思います。Vimエヴァンジェリストのkana氏は英語のヘルプを読むことを推奨していますが、日本語のヘルプを読みたい方もいると思いますので、今回はその方法の紹介です。</p>
+
+<p>まず、Vimの日本語ヘルプを<a href="http://www.kaoriya.net/vimdoc_j/" title="http://www.kaoriya.net/vimdoc_j/">ダウンロード</a>します。</p>
+
+<p>ダウンロードした圧縮ファイルを展開するとruntimeというディレクトリが出来ていると思うので、それを$VIMRUNTIMEに上書きします。$VIMRUNTIMEの内容を知りたければ、<code class="lang-vim">:echo $VIMRUNTIME</code>と実行するといいでしょう。</p>
+
+<p>上書きをしたら<code class="lang-vim">:helptags $VIMRUNTIME/doc</code>を実行すると無事、日本語のヘルプが使えるようになっています。</p>
+
+<p><code class="lang-vim">:help help@ja help@en</code></p>
+
+<p>@jaなどを付けなかった時は&#8217;helplang&#8217;の優先順位が適用されます。日本語の優先度を上げるにはvimrcに以下の様に記述すれば可能です。</p>
+
+<p><code class="lang-vim">:set helplang=ja,en</code></p>
+
+<address class="hack-author">ukstudio</address>

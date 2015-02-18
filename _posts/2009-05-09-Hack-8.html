@@ -1,0 +1,94 @@
+---
+layout: post
+title: "Hack #8: 作業の履歴を辿る"
+date: 2009-05-09
+author: ukstudio
+---
+<h3>undo/redoの基礎</h3>
+
+<p>テキストエディタにおいて、文章の変更の取り消しはもはや必須と言えます。当然Vimにもその機能はそなわっています。</p>
+
+<table>
+<tr>
+<th><kbd>u</kbd></th><td>undo</td>
+</tr>
+<tr>
+<th><kbd>CTRL-R</kbd></th><td>redo</td>
+</tr>
+<tr>
+<th><kbd>U</kbd></th><td>行の変更全てをundo</td>
+</tr>
+</table>
+
+<p>それぞれノーマルモードで実行することで文章を編集前の状態に戻したり(undo)、編集後の状態に戻したり(redo)することができます。Vimでは履歴をある一定数保持しているので、undoをくり返せばそれだけ履歴を逆昇ることができます。</p>
+
+<p>Vimのundo/redoはインサートモードに入ってから抜けるまでが1つの変更とカウントされます。長い文章を入力する時は小まめにインサートモードを抜けると作業履歴が管理しやすくなります。</p>
+
+<p>保存する履歴の数を指定する場合は<code class="lang-vim">:set undolevels=1000</code>といった感じで設定します。デフォルトでは1000になっています。</p>
+
+<h3>undo-branches</h3>
+
+<p>上記で説明した<kbd>u</kbd>と<kbd>CTRL-R</kbd>は直線的にしか履歴を辿ることができません。</p>
+
+<p>例えば「初期状態から文章を入力(state1)し、さらにもう一度入力(state2)、その状態から一度undoをしそのまま別の文章を入力(state3)した」とします。この場合、最後のstate3の状態からstate1の状態には戻れますが、state2の状態には戻れません。</p>
+
+<pre class="prettyprint"><code>state1--->state2
+       |
+       +->state3
+</code></pre>
+
+<p>Vim7からはこの様な複雑な履歴も辿れるように「undo-branches」が実装されました。</p>
+
+<table>
+<tr>
+<th><kbd>g-</kbd></th><td>状態を1つ戻す</td>
+</tr>
+<tr>
+<th><kbd>g+</kbd></th><td>状態を1つ進める</td>
+</tr>
+</table>
+
+<p>上記2つのコマンドを使用するとstate1<->state2<->state3を自由に行き来できます。現時点での作業履歴を確認するには<code class="lang-vim">:undolist</code>を使用します。</p>
+
+<p><code>				number changes  time
+				     2       2  19 seconds ago
+				     3       2  16 seconds ago
+</code></p>
+
+<p><code class="lang-vim">:undolist</code>の実行結果です。左のnumberが文章の状態番号でその番号を指定して指定された番号の状態まで戻ることもできます。</p>
+
+<p><code class="lang-vim">				:undo 2
+</code></p>
+
+<p>他にも時間で指定するコマンドもあります。</p>
+
+<table>
+<tr>
+<th><code class="lang-vim">:earlier 10s</th>
+<td>10秒前の状態に戻る</td>
+</tr>
+<tr>
+<th><code class="lang-vim">:earlier 10m</th>
+<td>10分前の状態に戻る</td>
+</tr>
+<tr>
+<th><code class="lang-vim">:earlier 10h</th>
+<td>10時間前の状態に戻る</td>
+</tr>
+<tr>
+<th><code class="lang-vim">:later 10s</th>
+<td>10秒後の状態に戻る</td>
+</tr>
+<tr>
+<th><code class="lang-vim">:later 10m</th>
+<td>10分後の状態に戻る</td>
+</tr>
+<tr>
+<th><code class="lang-vim">:later 10h</th>
+<td>10時間後の状態に戻る</td>
+</tr>
+</table>
+
+<p>undo-branchesはちょっと複雑ですが、全ての作業履歴(undolevelsの指定内ですが)を記録しているので戻れない状態はありません。うまく使いこなしてみるといいでしょう。</p>
+
+<address class="hack-author">ukstudio</address>

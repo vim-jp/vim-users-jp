@@ -1,0 +1,47 @@
+---
+layout: post
+title: "Hack #28: changelogを記述する"
+date: 2009-06-18
+author: ukstudio
+---
+<h2>概要</h2>
+
+<p>Vimでchangelogを記述する方法を紹介します。changelogについては<a href="http://0xcc.net/unimag/1/">横着プログラミング 第1回: Unixのメモ技術</a>を参考にするといいでしょう。 </p>
+
+<h2>changelog.vim</h2>
+
+<p>Vimでchangelogを記述する際、特にインストール作業などは必要ありません。Vimには標準でchangelog.vimというプラグインが付属されている為です。</p>
+
+<p>changelog.vimはファイルタイププラグインなので、ファイルタイプが「changelog」であることが必要です。具体的にはファイル名が以下のどれかから始まっていることが必要です。</p>
+
+<ul>
+<li>ChangeLog</li>
+<li>Changelog</li>
+<li>changeLog</li>
+<li>changelog</li>
+</ul>
+
+<p>changelogを記述する前に、いくつかオプションを設定しておくといいでしょう。</p>
+
+<pre class="vim-script"><code>  let g:changelog_timeformat = "%Y-%m-%d"
+  let g:changelog_username = "ukstudio <example@example.com>"
+</code></pre>
+
+<p>設定をしたあとは、ファイルタイプが「changelog」のファイルを開き、<kbd>&lt;Leader&gt;o</kbd>をノーマルモードで入力するとchangelogの項目が追加されます。<kbd>&lt;Leader&gt;</kbd>はデフォルトの状態であれば<kbd>\(￥)</kbd>になっています。</p>
+
+<pre class="prettyprint"><code>2009-06-17 ukstudio &lt;example@example.com&gt;
+
+*
+</code></pre>
+
+<p>changelogの項目は<kbd>&lt;Leader&gt;o</kbd>を入力するごとに追加されていきます。</p>
+
+<pre class="prettyprint"><code>2009-06-17 ukstudio &lt;example@example.com&gt;
+
+* Foo
+*
+</code></pre>
+
+<p></p></p>
+
+<address class="hack-author">ukstudio</address>

@@ -1,0 +1,64 @@
+---
+layout: post
+title: "Vim勉強会#11 が尼崎市で開催されました"
+date: 2012-11-12
+author: 
+---
+<p>Vim勉強会#11 (<a href="http://cotocoto.jp/event/71098">http://cotocoto.jp/event/71098</a>)</p>
+
+<p><img src="http://bbs50.meiwasuisan.com/bbs/kaiki/img/13265275940001.jpg" alt="マグロ漁船" /> (&#42;1)</p>
+
+<p>公式ハッシュタグ#vim11 のまとめ <a href="http://togetter.com/li/405475">http://togetter.com/li/405475</a></p>
+
+<p>感想記事</p>
+
+<ul>
+<li><a href="http://rhysd.hatenablog.com/entry/2012/11/11/215849">http://rhysd.hatenablog.com/entry/2012/11/11/215849</a></li>
+<li><a href="http://leafcage.hateblo.jp/entry/2012/11/16/172501">http://leafcage.hateblo.jp/entry/2012/11/16/172501</a></li>
+</ul>
+
+<h2>ujihisaによるまとめ</h2>
+
+<p>ujihisaさんによる発表が3つありました。すべてGentoo Linux上で行われました。使用しているラップトップがAcerのAspire S3というVGA出力ができないものだったため、<a href="http://twitter.com/cuzic">cuzic</a>さんのWindows 8のラップトップからVNCで接続し、cuzicラップトップをプロジェクタに投影することで対応しました。ujihisaさんの発表はgvim上でshowtime.vimを用いたもので、今回再びgvimがクラッシュし、さらにそのときvncサーバもgvim上で起動していたため、同時に死亡するという痛ましい事件が起きました。</p>
+
+<p>neocomplcacheやvimshellの重要性について詳しく解説しました。いまだにこれらのプラギンを導入していない者を洗脳することに成功し、この歪曲された空間で、すべての参加者は勉強会終了後にはneosnippetのない生活が考えられないようなものとなったでしょう。</p>
+
+<p>kozo2さんによるjedi.vimの発表はGentoo Linux上で行われました。jedi.vimは一言でいうと「RSenseのPython版」です。RSenseと違って締め切りの制約がなかったためJavaを用いずPure Pythonで動作します。常駐するサーバを必要としないため、かなりカジュアルに使えるようです。これからの動的型言語の自動補完機構は、RubyやPythonに限らず、このような方式で強化されていくのではないでしょうか。</p>
+
+<p>LeafCageさんによるaltercmdの発表。ラップトップを2台保有しているもののどちらも故障中のため、他人のものを借りて発表したものの、デモの際にキーボードの配置が異なるという問題に悩まされているようでした。僕も同様の問題に直面しましたが、VNCを使うことで解決しました。今後プレゼン時のVNCの使用がますます流行っていくことでしょう(といってもマシンが壊れているならどうしようもないですが・・・)。altercmdは一言でいうと「command-line modeのためのabbrを宣言的に定義する」ためのもので、大文字のコマンドなど入力が困難なもののkey mappingを与えるほどのものではないというものを最適化するのに大変便利です。勉強会の休憩時間には有志数名がaltercmdの実装を読むなどしていました。</p>
+
+<p>kozo2さん二回目の発表、tcodeについての前に、kozo2さんとujihisaさんの間でこのような会話が行われたそうです。「ujihisaさんは昔t-codeをどのように学習しはりましたか」「根性です」「そりゃ無理すわ」。今回発表されたtcvimeは根性非依存のt-code用ツールで、この発表の後には、t-code挫折組の多くの人が即座にtcvimeをインストールしたほどの影響力のあるものでした。</p>
+
+<p>匿名希望の謎の方によるマクロ漁船の発表は、まさにつらい戦いでした。数多くの溺死者が出るなか、nviによるbrainf&#42;&#42;k処理系が、ユーザ入力された大文字文字列を小文字文字列に変換する処理を24時間行いつづけました。なおマクロとは関係ないですが、すべてのプログラマが必ず一度はbrainf&#42;&#42;k処理系を実装すべきと私は考えています。</p>
+
+<p>Vim勉強会#11は、まとめ記事を書き、twitterなどでその記事をハッシュタグ付きで投稿することで、はじめて終わります。というわけで、これでujihisaのVim勉強会#11が終わりました。 <a href="https://twitter.com/ujm/status/267878661414338560">https://twitter.com/ujm/status/267878661414338560</a></p>
+
+<ul>
+<li>ujihisaさん発表資料
+
+<ul>
+<li>neocomplcache, vimshell, neosnippetすべての個別の発表を一つにまとめたもの <a href="https://gist.github.com/4054220">https://gist.github.com/4054220</a></li>
+</ul></li>
+<li>kozo2さん発表資料
+
+<ul>
+<li>jedi.vim (ここにURL)</li>
+<li>tcvime <a href="https://gist.github.com/4076375">https://gist.github.com/4076375</a></li>
+</ul></li>
+<li>LeafCageさん発表資料
+
+<ul>
+<li><a href="https://gist.github.com/4085361">https://gist.github.com/4085361</a></li>
+</ul></li>
+<li>匿さん発表資料</li>
+</ul>
+
+<h2>今後のVim勉強会について</h2>
+
+<p>Vimを勉強したい、そう思ったときがVim勉強会開催の瞬間です。今回は<a href="http://twitter.com/ujm">ujihisa</a>さんが主催しましたが、<em>Vim勉強会はどなたでも主催できます</em>ので、ぜひいますぐ主催してみませんか。</p>
+
+<h2>脚注</h2>
+
+<ul>
+<li>(&#42;1) 出展: http://bbs50.meiwasuisan.com/bbs/bin/read/kaiki/1326527594/l50</li>
+</ul>

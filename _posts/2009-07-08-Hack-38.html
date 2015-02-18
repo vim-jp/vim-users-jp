@@ -1,0 +1,49 @@
+---
+layout: post
+title: "Hack #38: vimwikiで文章を管理する"
+date: 2009-07-08
+author: ukstudio
+---
+<p>Wikiという文章の作成・編集を行うツールがあります。基本的にはサービスとして公開されているものを使う、自分でWikiのプログラムをどこかのサーバ(もしくはローカル環境)に起動させてあるものを使用します。</p>
+
+<p>複数人での管理という点においてはWeb上にあるのは非常に便利です。しかし、あくまで個人のメモツールとして考えた場合、一々ネットに接続しなければならない点や、Webブラウザからの文章入力は非常につらいなどと言った問題点があります。</p>
+
+<p>vimwikiはVim Scriptで動作するWikiで、普段からVimを使っている人であればいつものテキスト編集と同じ形で文章を管理することが出来ます。 </p>
+
+<h3>インストール</h3>
+
+<p><a href="http://www.vim.org/scripts/script.php?script_id=2226">http://www.vim.org/scripts/script.php?script_id=2226</a></p>
+
+<p>上記URLからvimballをダウンロードします。その後、Vimでそのファイルを開き、<code class="lang-vim">:source %</code>を実行し、インストールは完了です。</p>
+
+<h3>文章を作成する</h3>
+
+<p>Vimを起動し、<kbd>\ww</kbd>と入力するとWikiの一番トップにあたるページが開きます。ページがない場合は自動的に作られます。他のページを開いてるときにトップに移動したい場合にも<kbd>\ww</kbd>と入力します。</p>
+
+<p>Wikiですので基本的にはトップからツリー上にページを作っていくと思います。ページを作るときはまずそのページへのリンクを作り、そのページに移動するという形で作ります。</p>
+
+<p>リンクの作りかたはキャメルケースで書くかもしくは[[]]で囲んだ文字列がリンクになります。</p>
+
+<pre class="prettyprint"><code>NewPage
+[[new_page]]
+</code></pre>
+
+<p>気をつけなくてはならないのが、このリンク名がファイル名になることです。基本的には日本語やスペース、/などは使わない方がいいでしょう。HTMLファイルを生成した時などにリンクがつながらないなどの問題が起きます。</p>
+
+<p>wikiのページの移動はリンクの上で<kbd>Enter</kbd>を押すとそのページに、<kbd>BackSpace</kbd>を押すと1つ前のページに戻ります。</p>
+
+<h3>文法</h3>
+
+<p>リンク以外にも見出しやリスト、テーブルなどあります。詳細は<code class="lang-vim">:help vimwiki-syntax</code>を見てください。</p>
+
+<h3>HTMLへの変換</h3>
+
+<p>vimwikiには書いた文章をHTMLに変換する機能があります。<code class="lang-vim">:Vimwiki2HTML</code>か<code class="lang-vim">:VimwikiALL2HTML</code>のどちらかを使用してください。単体ページのみの変換か全てのページを変換するかの違いです。</p>
+
+<p>生成されたHTMLファイルは$HOME/vimwiki_html/index.htmlといった感じに生成されます。</p>
+
+<h3>まとめ</h3>
+
+<p>筆者はブログに書くネタや、カンファレンス、勉強会などのメモをvimwikiで管理しています。適当なディレクトリにメモを書いたテキストファイルを放りこんでもいいのですが、なんとなくWikiを使うと整理がしやすい気がします。</p>
+
+<address class="hack-author">ukstudio</address>

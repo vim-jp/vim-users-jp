@@ -1,0 +1,30 @@
+---
+layout: post
+title: "Hack #33: リモートのファイルを編集する"
+date: 2009-06-28
+author: ukstudio
+---
+<p>例えば、あるサーバーに保存してあるテキストファイルの編集を行いたいとします。SSHで接続し、サーバー側で直接編集する方法や、ローカルで編集を行ないそれをアップする方法など色々ありますが、今回はローカルのVimから直接サーバーにあるファイルを変更する方法を紹介します。</p>
+
+<h3>SSH/scpを使用する場合</h3>
+
+<p>サーバー側でsshdが起動してある場合は以下のようにファイルを開くことができます。</p>
+
+<p><code class="lang-vim">:e scp://user@host/path</code></p>
+
+<p>開いたあとは、ローカルでファイルを開いた場合と同じように編集することができます。</p>
+
+<h3>FTPを使用する場合</h3>
+
+<p>FTPもSSHと同じ要領でファイルを編集することが可能です。</p>
+
+<p><code class="lang-vim">:e ftp://host/path</code></p>
+
+<p>FTPの設定は.netrcに書いておくことも可能です。</p>
+
+<pre class="prettyprint"><code>machine HOSTNAME login USERID password "PASSWORD"
+</code></pre>
+
+<p>この機能はnetrwによって実現されています。詳細は<code class="lang-vim">:help netrwにて</p>
+
+<address class="hack-author">ukstudio</address>

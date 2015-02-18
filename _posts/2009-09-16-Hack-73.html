@@ -1,0 +1,23 @@
+---
+layout: post
+title: "Hack #73: setのちょっとしたtips"
+date: 2009-09-16
+author: ukstudio
+---
+<p>vimrcの編集をしたことがある人であれば、ほとんどの人が&#8217;set&#8217;は使ったことがあるでしょう。今回はその&#8217;set&#8217;に関するちょっとしたtipsを紹介します。</p>
+
+<p>VimにはいくつかOn/Offが対応した設定項目があります。例えば&#8217;number&#8217;と&#8217;nonumber&#8217;、&#8217;list&#8217;と&#8217;nolist&#8217;などです。これらにはちょっとした機能が備わっています。以下、&#8217;number&#8217;の例です。</p>
+
+<pre class="prettyprint"><code class="lang-vim">" 現在の値を表示 number/nonumber
+:set number?
+" デフォルト値に戻す
+:set number&#038;
+" On/Offのトグル
+:set number!
+</code></pre>
+
+<p>&#8216;number!&#8217;などのトグル系はkey mappingを割り当てておくと意外と便利です。</p>
+
+<p>オマケとして<code class="lang-vim">:set</code>を実行すると、デフォルト値以外が設定されているもののリストを表示することができます。</p>
+
+<address class="hack-author">ukstudio</address>

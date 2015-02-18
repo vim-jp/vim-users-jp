@@ -1,0 +1,25 @@
+---
+layout: post
+title: "Hack #58: VimからTwitterの閲覧、投稿を行う"
+date: 2009-08-17
+author: ukstudio
+---
+<p>Vimから<a href="http://twitter.com/" title="twitter">Twitter</a>へ投稿するプラグインの紹介です。プログラマであれば、プログラミング中にTwitterの閲覧や投稿をしたいと思うときがあるかと思います。その際にいちいち、ブラウザやTwitterクライアントへフォーカスを移すのも微妙なところです。</p>
+
+<p>今回紹介する<a href="http://www.vim.org/scripts/script.php?script_id=2204" title="TwitVim">TwitVim</a>を使用すると、VimからTwitterを操作できるため、フォーカスを移す必要がなく、また他者の目からみてもパッと見、Twitterを見ているようには見えないためこっそりTwitterするのにもうってつけです。</p>
+
+<p>インストールはvba方式なのでvbaをダウンロードし、Vimで開いたあとに<code class="lang-vim">:source %</code>を実行します。</p>
+
+<p>あとはvimrcにTwitterのIDとパスワードを設定して完了です。</p>
+
+<pre class="prettyprint"><code><code class="lang-vim">let twitvim_login = "user:pass"
+let twitvim_count = 100
+</code></code></pre>
+
+<p>Twitterへ投稿するには<code class="lang-vim">PosttoTwitter</code>、Followingの発言を見るには<code class="lang-vim">:FriendsTwitter</code>、Replyを見るには<code class="lang-vim">:ReplyTwitter</code>を実行します。</p>
+
+<p>タイムラインを表示した状態で<kbd>&lt;Leader&gt;&lt;Leader&gt;</kbd>で更新、<kbd>&lt;Leader&gt;r</kbd>で返信を行うこともできます。</p>
+
+<p>その他、細かい機能については<code class="lang-vim">:h TwitVim</code>を見るといいでしょう。</p>
+
+<address class="hack-author">ukstudio</address>

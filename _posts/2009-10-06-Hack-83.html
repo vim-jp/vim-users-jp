@@ -1,0 +1,49 @@
+---
+layout: post
+title: "Hack #83: ステータス行をカスタマイズする"
+date: 2009-10-06
+author: ukstudio
+---
+<p>標準で表示しているステータス行は非常に貧相です。情報としてもあまり役に立つものではありません。今回のHackでは、ステータス行を自分の好みにカスタマイズする方法を紹介します。</p>
+
+<p>まず、ステータス行を表示させるには&#8217;laststatus&#8217;の値が1か2である必要があります。筆者は2を設定しています。デフォルトでは1になっています。</p>
+
+<table>
+<tr>
+<td>0</td><td>ステータス行を全く表示しない</td>
+</tr>
+<tr>
+<td>1</td><td>ウィンドウの数が2以上のときのみステータス行を表示</td>
+</tr>
+<tr>
+<td>2</td><td>常にステータス行を表示</td>
+</tr>
+</table>
+
+<p>ステータス行をカスタマイズするには&#8217;statusline&#8217;を設定します。</p>
+
+<pre class="prettyprint"><code class="lang-vim">:set statusline=format
+</code></pre>
+
+<p>&#8216;statusline&#8217;のフォーマットはprintfに非常に似ています。いくつか例をあげてみましょう。</p>
+
+<pre class="prettyprint"><code class="lang-vim">" 文字列を表示
+:set statusline=example
+
+" ファイル名のみ表示
+:set statusline=%f
+
+" 1文字以上、かつ3文字以下でファイル名を表示
+:set statusline=%1.3f
+
+" 以下の様に表示([+]はバッファが変更されている時のみ
+" ファイル名 [+]      行番号, 列番号
+:set statusline=%f%m%=%3l,%3c
+
+</code></pre>
+
+<p>&#8216;statusline&#8217;の設定ではこのように文字列や、%fなどの特別なフォーマットを用います。また、&#8217;statusline&#8217;のフォーマットには式の結果を埋め込むものもあるので、独自に書いたスクリプトの結果を表示させる、と言ったことも可能です。フォーマットの一覧は<code class="lang-vim">:h statusline</code>を参照すると良いでしょう。</p>
+
+<p>&#8216;statusline&#8217;は一見複雑なように見えますが、左から順に見ていけば案外簡単に読み解けます。まずは、他人のvimrcに書かれている&#8217;statusline&#8217;を参考にするとよいでしょう。</p>
+
+<address class="hack-author">ukstudio</address>

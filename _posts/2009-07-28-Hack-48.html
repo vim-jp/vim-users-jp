@@ -1,0 +1,17 @@
+---
+layout: post
+title: "Hack #48: 一般ユーザで開いてしまったファイルをrootで再度開く"
+date: 2009-07-28
+author: ukstudio
+---
+<p>筆者がよくやってしまうミスとして、自分の権限で書き込めないファイルを開いてしまい、書き込み時に気づくというものです。書き込む権限がないわけですから、当然それまで行なっていた編集を保存することはできません。</p>
+
+<p>sudo.vimはrootでファイルの編集、保存をできるようにするプラグインです。</p>
+
+<p><a href="http://www.vim.org/scripts/script.php?script_id=729" title="sudo.vim">http://www.vim.org/scripts/script.php?script_id=729</a></p>
+
+<p>例えば、あるファイルを開いてしまい、書き込みをしようとしたところ、エラーがでてしまった場合は<code class="lang-vim">:w sudo:%</code>で可能です。</p>
+
+<p>ちなみに<code class="lang-vim">:w !sudo tee %</code>でも同じことは可能です。</p>
+
+<address class="hack-author">ukstudio</address>

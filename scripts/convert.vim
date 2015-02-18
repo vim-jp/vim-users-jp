@@ -294,6 +294,9 @@ function! s:scan() abort
     catch
       redraw
       echo v:exception
+      if v:exception =~ '^Vim:Interrupt'
+        return
+      endif
     endtry
   endfor
   if s:clean_dup

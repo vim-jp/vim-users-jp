@@ -1,0 +1,290 @@
+---
+layout: post
+title: "新年あけましておめでとうございます"
+date: 2012-01-01
+author: 
+---
+<p>新年あけましておめでとうございます。いまこの記事はAmtrak Cascadesという大陸縦断鉄道の中で執筆しています。さきほどカナダからの出国を済ませました。時刻は6:18amで、日の出は8:07amの予定なので、初日の出までまだまだ時間があります。</p>
+
+<p><img src="http://cache.gyazo.com/a6aa9d66e5efed7aeced49cc1c260373.png" alt="amtrak cascades" /></p>
+
+<p>車内にはかなり安定したwifiがあり、ssh接続すら切れません。当然各席に電源があり、3時間程度しかバッテリのもたない初代MacBook Airでも平然と作業をすすめることができます。</p>
+
+<p><img src="http://www.yougottabehere.com/media/resampled/articleElement/1026/resampled_Jan_11_2010_amtrak_cascades_train_600.jpg" alt="amtrak cascades" /></p>
+
+<p>お腹が減ったら食堂車で朝食Vimをキメることも可能です。</p>
+
+<p><img src="http://upload.wikimedia.org/wikipedia/commons/thumb/1/1d/AmtrakCascadesDiner.JPG/220px-AmtrakCascadesDiner.JPG" alt="amtrak cascades" /></p>
+
+<h2>スピリチュアルな話</h2>
+
+<p>をして感極まる元旦を迎えるというのも良いですが、あんまりそういう話は得意でないので、Vimの話をします。</p>
+
+<p>プログラミング関する何かを新たに学ぶとき、まずVimでそれをどのようにラクに行なうかを考える、ということは日常的に行なわれていることだと思います。たとえば普段はVim scriptとRubyしか書かない人が急にPythonをはじめるときは、neocomplcacheの自動補完やref.vimを駆使してVim内でPythonの学習を行なうでしょう。</p>
+
+<p>これにちなんで、ちょっと個人的な話と、プラギンの紹介を行ないます。</p>
+
+<h2>時代は低レイヤ</h2>
+
+<p>僕はRubyでらくらくスクリプト書きなぐりやHaskellで宣言的に書きなぐりといった高レイヤ部分ばかりに慣れ親しみすぎたため、アセンブラやそれ以前にCやJavaといった低水準言語すらもうまく使えない軟弱プログラマなのでした。最も低水準な言語はJavaScriptやVim scriptだったと思います。このままではまずいと思い、青木峰郎先生の<a href="http://www.amazon.co.jp/%E3%81%B5%E3%81%A4%E3%81%86%E3%81%AE%E3%82%B3%E3%83%B3%E3%83%91%E3%82%A4%E3%83%A9%E3%82%92%E3%81%A4%E3%81%8F%E3%82%8D%E3%81%86-%E8%A8%80%E8%AA%9E%E5%87%A6%E7%90%86%E7%B3%BB%E3%82%92%E3%81%A4%E3%81%8F%E3%82%8A%E3%81%AA%E3%81%8C%E3%82%89%E5%AD%A6%E3%81%B6%E3%82%B3%E3%83%B3%E3%83%91%E3%82%A4%E3%83%AB%E3%81%A8%E5%AE%9F%E8%A1%8C%E7%92%B0%E5%A2%83%E3%81%AE%E4%BB%95%E7%B5%84%E3%81%BF-%E9%9D%92%E6%9C%A8-%E5%B3%B0%E9%83%8E/dp/4797337958">ふつうのコンパイラ</a>などを片手にアセンブラやその周辺技術、とくにコンパイラの最適化あたりの勉強に集中することに決めました。</p>
+
+<p>大抵のC言語コンパイラは末尾再帰最適化を行なっているということは、低レイヤにあまり慣れ親しんでいない人でも、耳にしたことがあるのではないでしょうか。さて、最適化が行なわれたか否かを実際に確かめるには、実際にアセンブラを確認するとよいでしょう。</p>
+
+<pre class="prettyprint"><code>int f(int acc, int n)
+{
+  return n &lt; 0 ? acc : f(acc + n, n - 1);
+}
+</code></pre>
+
+<p>0からnまでの和を得る末尾再帰の関数です。f(0, 10) == 55です。</p>
+
+<pre class="prettyprint"><code>$ gcc a.c -S -m32 -O2 -o -
+
+_f:
+  pushl %ebp
+  movl  %esp, %ebp
+  movl  8(%ebp), %eax
+  movl  12(%ebp), %edx
+  testl %edx, %edx
+  jns   L7
+  jmp   L3
+  .align 4,0x90
+L9:
+  movl  %ecx, %edx
+L7:
+  leal  -1(%edx), %ecx
+  addl  %edx, %eax
+  cmpl  $-1, %ecx
+  jne   L9
+L3:
+  leave
+  ret
+</code></pre>
+
+<p>詳しい解説は省略しますが、ようするに再帰的に関数呼び出しを行なうかわりに、単なるループに変換されています。</p>
+
+<p>これはGCCでx86アセンブリ言語に変換するよりもClangでLLVM IRに変換する方が直感的で読みやすいでしょう。</p>
+
+<pre class="prettyprint"><code>$ clang -O3 a.c -S -emit-llvm -o -
+define i32 @f(i32 %acc, i32 %n) nounwind uwtable readnone ssp {
+entry:
+  %cmp1 = icmp slt i32 %n, 0
+  br i1 %cmp1, label %cond.end, label %cond.false.lr.ph
+
+cond.false.lr.ph:                                 ; preds = %entry
+  %0 = mul i32 %n, %n
+  %1 = zext i32 %n to i33
+  %2 = add i32 %n, -1
+  %3 = zext i32 %2 to i33
+  %4 = mul i33 %1, %3
+  %5 = lshr i33 %4, 1
+  %6 = trunc i33 %5 to i32
+  %7 = add i32 %0, %acc
+  %8 = sub i32 %7, %6
+  br label %cond.end
+
+cond.end:                                         ; preds = %cond.false.lr.ph, %entry
+  %acc.tr.lcssa = phi i32 [ %8, %cond.false.lr.ph ], [ %acc, %entry ]
+  ret i32 %acc.tr.lcssa
+}
+</code></pre>
+
+<p>要するにループに変換されています。</p>
+
+<p>つづいて、末尾再帰ではない形でも確認してみましょう。</p>
+
+<pre class="prettyprint"><code>int f(int n)
+{
+  return n &lt; 0 ? 0 : n + f(n - 1);
+}
+</code></pre>
+
+<p>実はこれでも先ほどとほとんど同じ結果が得られます。わざわざ人間が末尾再帰の形に変形する必要はないのでした。</p>
+
+<p>これらのような事実が実際に目で確認できることがわかりました。しかし毎回gccやclangコマンドをvimshellから入力するのは大変です。それどころか、さきほど記述したCのコードにファイル名を与えて保存することは大変で、そんなことをしていると学習以前に一年が過ぎてしまい、次の元旦を迎えてしまいます。このような事態に陥ったとき、訓練されたVim使いは「そうだquickrun、使おう」となります。</p>
+
+<pre class="prettyprint"><code>:QuickRun -type c/gcc  -exec '%c %o %s -S -o -' -cmdopt '-m32 -O2'
+</code></pre>
+
+<p>これで動作することが分かるので、よし、<code>~/.vimrc</code>を開いて<code>g:quickrun_config</code>に・・・おっと、それだとclangの例を試せません。</p>
+
+<pre class="prettyprint"><code>:QuickRun -type c/clang  -exec '%c %o %s -S -emit-llvm -o -' -cmdopt '-O3'
+</code></pre>
+
+<p>複数の候補から選択したい。<a href="/vim-users-jp/2011/02/10/Hack-200.html">Hack #200: 候補を選択し、実行する</a>にあるように、これはunite.vimの出番です。</p>
+
+<p>欲深いもので、Cという1つの言語だけをサポートするのではなく、RubyにはYARV instructionを、CoffeeScriptにはJavaScriptを、といった具合で、人間の煩悩が108あるように、複数の要求をすべて満たしてみたくなるものです。</p>
+
+<p>というわけでプラギンにしてみました。すばやく学習を支援するという意味で、quicklearn.vimという名前にしました。quickrunとquicklearnでrとlの発音をそれぞれ学習でき、一石二鳥です。</p>
+
+<ul>
+<li><a href="https://github.com/ujihisa/quicklearn">https://github.com/ujihisa/quicklearn</a></li>
+</ul>
+
+<p>紹介動画</p>
+
+<p><object width="480" height="386" classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000">
+<param name="flashvars" value="vid=18198707&amp;autoplay=false" />
+<param name="allowfullscreen" value="true" />
+<param name="allowscriptaccess" value="always" />
+<param name="src" value="http://www.ustream.tv/flash/viewer.swf" />
+<embed flashvars="vid=18198707&amp;autoplay=false" width="480" height="386" allowfullscreen="true" allowscriptaccess="always" src="http://www.ustream.tv/flash/viewer.swf" type="application/x-shockwave-flash" />
+</object></p>
+
+<p><br /><a href="http://www.ustream.tv/" style="padding: 2px 0px 4px; width: 400px; background: #ffffff; display: block; color: #000000; font-weight: normal; font-size: 10px; text-decoration: underline; text-align: center;" target="_blank">Video streaming by Ustream</a></p>
+
+<p>以下の言語/処理系/中間言語をサポートしています。</p>
+
+<ul>
+<li>C
+<ul>
+<li>Assembly language (gcc)</li>
+<li>LLVM IR (clang)</li>
+</ul>
+</li>
+<li>Haskell
+<ul>
+<li>Core (ghc)</li>
+</ul>
+</li>
+<li>CoffeeScript
+<ul>
+<li>JavaScript</li>
+</ul>
+</li>
+<li>Ruby
+<ul>
+<li>YARV Instructions (CRuby)</li>
+</ul>
+</li>
+</ul>
+
+<p>quicklearnは</p>
+
+<pre class="prettyprint"><code>:Unite quicklearn -immediately
+</code></pre>
+
+<p>のようにして実行できます。筆者は</p>
+
+<pre class="prettyprint"><code class="lang-vim">nnoremap &lt;space&gt;R :&lt;C-u&gt;Unite quicklearn -immediately&lt;Cr&gt;
+</code></pre>
+
+<p>と<code>~/.vimrc</code>で設定し、<kbd>&lt;space&gt;R</kbd>で実行できるようにしています。なお、quickrunは<kbd>&lt;space&gt;r</kbd>にしています。</p>
+
+<p><code>-immediately</code>オプションがとても便利です。</p>
+
+<p>なお、quickrunはアセンブリ言語やLLVM IRをサポートしています。つまり、quicklearnによって生成させたアセンブリ言語やLLVM IRのバッファでさらにquickrunを行なうことで、それを実行することができ、とても便利です。</p>
+
+<h2>実装</h2>
+
+<p>たったの98行です。</p>
+
+<p>autoload/unite/sources/quicklearn.vim</p>
+
+<pre class="prettyprint"><code class="lang-vim">let s:save_cpo = &amp;cpo
+set cpo&amp;vim
+
+" fmap([a, b, c], f) =&gt; [f(a), f(b), f(c)]
+" fmap(a, f) =&gt; [f(a)]
+function! s:fmap(xs, f)
+  if type(a:xs) == type([])
+    return map(a:xs, a:f)
+  else
+    return map([a:xs], a:f)
+  endif
+endfunction
+
+let g:quicklearn_gcc_remote_url = get(g:, 'quicklearn_gcc_remote_url', 'localhost')
+
+let s:quicklearn = {}
+let s:source = {
+      \ 'name': 'quicklearn',
+      \ }
+let s:quicklearn['c/clang/intermediate'] = {
+      \ 'meta': {
+      \   'parent': 'c/clang'},
+      \ 'exec': '%c %o %s -S -emit-llvm -o -'}
+let s:quicklearn['c/clang-O3/intermediate'] = {
+      \ 'meta': {
+      \   'parent': 'c/clang'},
+      \ 'cmdopt': '-O3',
+      \ 'exec': '%c %o %s -S -emit-llvm -o -'}
+let s:quicklearn['c/gcc/intermediate'] = {
+      \ 'meta': {
+      \   'parent': 'c/gcc'},
+      \ 'exec': '%c %o %s -S -o -'}
+let s:quicklearn['c/gcc-32/intermediate'] = {
+      \ 'meta': {
+      \   'parent': 'c/gcc'},
+      \ 'cmdopt': '-m32',
+      \ 'exec': '%c %o %s -S -o -'}
+let s:quicklearn['c/gcc-remote/intermediate'] = {
+      \ 'meta': {
+      \   'parent': 'c/gcc'},
+      \ 'exec': 'ssh ' . g:quicklearn_gcc_remote_url . ' %c %o %s -S -o -'}
+let s:quicklearn['haskell/ghc/intermediate'] = {
+      \ 'meta': {
+      \   'parent': 'haskell/ghc'},
+      \ 'exec': [
+      \   '%c %o -ddump-simpl -dsuppress-coercions %s',
+      \   'rm %s:p:r %s:p:r.o %s:p:r.hi'],
+      \ 'cmdopt': '-v0 --make'}
+let s:quicklearn['coffee/intermediate'] = {
+      \ 'meta': {
+      \   'parent': '_'},
+      \ 'exec': ['%c %o -cbp %s %a']}
+let s:quicklearn['ruby/intermediate'] = {
+      \ 'meta': {
+      \   'parent': 'ruby'},
+      \ 'cmdopt': '--dump=insns'}
+
+" inheritance
+for k in keys(s:quicklearn)
+  let v = s:quicklearn[k]
+  for item in ['command', 'exec', 'cmdopt', 'tempfile', 'eval_template']
+    let ofParent = get(g:quickrun#default_config[v.meta.parent], item)
+    if type(ofParent) != type(0) || ofParent != 0
+      let s:quicklearn[k][item] = get(v, item, ofParent)
+    endif
+    unlet ofParent
+  endfor
+endfor
+
+" build quickrun command
+for k in keys(s:quicklearn)
+  let v = s:quicklearn[k]
+  let s:quicklearn[k].quickrun_command = printf(
+        \ 'QuickRun %s %s %s -cmdopt %s',
+        \ v.meta.parent == '_' ? '' : '-type ' . v.meta.parent,
+        \ get(v, 'command') ? '-command ' . string(v.command) : '',
+        \ join(s:fmap(get(v, 'exec', []), '"-exec " . string(v:val)'), ' '),
+        \ string(get(v, 'cmdopt', '')))
+endfor
+lockvar s:quicklearn
+
+function! unite#sources#quicklearn#define()
+  return s:source
+endfunction
+
+function! s:source.gather_candidates(args, context)
+  let configs = filter(copy(s:quicklearn), 'v:key =~ "^" . &amp;filetype . "/"')
+
+  return values(map(configs, '{
+        \ "word": substitute(v:key, "/intermediate$", "", ""),
+        \ "source": s:source.name,
+        \ "kind": ["command"],
+        \ "action__command": v:val.quickrun_command,
+        \ }'))
+        "\ "action__type": ": ",
+endfunction
+
+let &amp;cpo = s:save_cpo
+</code></pre>
+
+<p>適当な辞書を事前に作っておき、uniteから実際に実行させたいコマンド文字列を事前に生成しておきます。それを対応するfiletypeごとにs:source.gather_candidatesで適切な辞書の配列を返すことによって行なっています。uniteのkindはcommandです。</p>
+
+<p>冒頭のローカル関数fmapはfunctorっぽいものの実現です。対象が複数でも単数でも気にせず使えます。JavaScriptに詳しい方には、jQueryのアレ、といえば通じるかもしれません。</p>
+
+<h2>以上</h2>
+
+<p>Vim Advent Calendar 2011の32本目の記事でした。今年もよろしくお願いいたします。</p>

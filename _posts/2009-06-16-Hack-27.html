@@ -1,0 +1,39 @@
+---
+layout: post
+title: "Hack #27: 選択範囲の数値を増分する"
+date: 2009-06-16
+author: 
+---
+<h2>問題</h2>
+
+<p>Normal modeで<kbd>&lt;C-a&gt;</kbd>を打鍵するたびに、カーソル下の数値を1加算した値に置き換えることができます。また、<kbd>3&lt;C-a&gt;</kbd>などと打鍵することによって一度に指定した数値分だけ増分することができます。</p>
+
+<p>しかし加算したい数値が複数あるときに、いちいちカーソルを移動して各数値の位置に移動して<kbd>&lt;C-a&gt;</kbd>を打鍵するのは非常に困難です。</p>
+
+<h2>解決</h2>
+
+<p>以下のコマンドで編集中バッファ内に現れる全ての数値を1加算します。</p>
+
+<pre class="prettyprint"><code>:%s/[0-9]\+/\=submatch(0)+1/g
+</code></pre>
+
+<p>また、Visual modeで範囲を選択してから上記コマンドを入力すると、選択範囲の行に現れる全ての数値を1加算します。</p>
+
+<p><img src="http://gyazo.com/86d5480132b11b7788eef13fa83b2fb0.png" alt="before" />
+<img src="http://gyazo.com/13b98bf76e0a0fa930bc15fde95cd83d.png" alt="after" /></p>
+
+<h2>議論</h2>
+
+<p><kbd>&lt;C-a&gt;</kbd>はmotionを受け取って範囲を指定して一気に処理するという機能が標準で提供されているわけではないので、上記のような別の方法が必要となります。</p>
+
+<p>多くの場合<code>:s[ubstitute]/{pattern}/{string}/[flags]</code>の<code>{string}</code>部分には置き換え文字列を記述しますが、この部分を<code>\=</code>で始めることにより、任意の式を用いて記述することができます。<kbd>&lt;C-a&gt;</kbd>ではなくVimの式の<code>+</code>を用いて加算しています。これは<code>:echo 1+2</code>などで使われる<code>+</code>です。</p>
+
+<p>なお、同様に数値を減らすには<kbd>&lt;C-a&gt;</kbd>のかわりに<kbd>&lt;C-x&gt;</kbd>を、あるいは<code>:%s/[0-9]\+/\=submatch(0)-1/g</code>を用います。</p>
+
+<h2>参考</h2>
+
+<ul>
+<li><code>:h sub-replace-expression</code></li>
+</ul>
+
+<p><author>ujihisa</author></p>

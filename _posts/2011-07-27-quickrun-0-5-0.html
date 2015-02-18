@@ -1,0 +1,81 @@
+---
+layout: post
+title: "quickrun 0.5.0がリリースされました"
+date: 2011-07-27
+author: 
+---
+<ul>
+<li>on vim.org <a href="http://www.vim.org/scripts/script.php?script_id=3146">http://www.vim.org/scripts/script.php?script_id=3146</a></li>
+<li>on github <a href="http://github.com/thinca/vim-quickrun">http://github.com/thinca/vim-quickrun</a></li>
+</ul>
+
+<h2>変更点1 非同期出力</h2>
+
+<p>quickrunは従来から非同期実行を行っていましたが、今回さらにそれに加え、非同期出力も行うようになりました。</p>
+
+<p>例:</p>
+
+<pre class="prettyprint"><code>(1..20).each do |i|
+  sleep 0.2
+  puts i
+  STDOUT.flush
+end
+</code></pre>
+
+<p>という内容に対し</p>
+
+<pre class="prettyprint"><code>:QuickRun -runner vimproc:100
+</code></pre>
+
+<p>のように実行させると、ちょっとずつ結果が出ます。(*1)</p>
+
+<h2>変更点2 モジュール化</h2>
+
+<p>ところで先ほど<code>-runner</code>という新しい記法がでていました。これはquickrunのモジュール化に密接に関わってくるオプションです。</p>
+
+<p>quickrun 0.5.0では、実行部分と出力部分をモジュール化しました。</p>
+
+<pre class="prettyprint"><code>runmode =&gt; runner
+output =&gt; outputter
+</code></pre>
+
+<p>名前なども変わっております。詳しくは <code>:help quickrun</code> を見てください。</p>
+
+<p>モジュール一覧:</p>
+
+<ul>
+<li>runner
+<ul>
+<li>system</li>
+<li>shell</li>
+<li>vimproc</li>
+<li>remote</li>
+<li>python</li>
+</ul>
+</li>
+<li>outputter
+<ul>
+<li>buffer</li>
+<li>message</li>
+<li>variable</li>
+<li>file</li>
+<li>buffered</li>
+<li>multi</li>
+</ul>
+</li>
+</ul>
+
+<h2>変更点3 式展開記法</h2>
+
+<p>quickrun-syntax-option で <code>{}</code> が式展開になっていたものが、<code>%{}</code> に変更されました。多くの人は <code>~/.vimrc</code> の変更が必要になります。これは大事なところなので、ぜひ一日三回はtweetしてください。</p>
+
+<h2>参考文献</h2>
+
+<p><a href="http://d.hatena.ne.jp/thinca/20110529/1306677726">http://d.hatena.ne.jp/thinca/20110529/1306677726</a></p>
+
+<ul>
+<li>*1 すごい気がしないでもないけど、通常のプログラムは出力先が端末でない場合自動でバッファリングしちゃうみたいなので、残念ながら普段は恩恵に授かれないと思います。過度な期待はしないでください。</li>
+<li>*2 ちなみに著者ujihisaは英語版documentの翻訳を行うなどしました。tyruさんとujihisaさんの英語を世界に広めましょう!</li>
+</ul>
+
+<p>author: ujihisa</p>

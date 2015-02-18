@@ -1,0 +1,124 @@
+---
+layout: post
+title: "Hack #227: surround.vim の囲むルールを独自に拡張する"
+date: 2011-09-05
+author: t9md
+---
+<h2>surround.vim について</h2>
+
+<p>テキストを好きな文字列で&#8221;囲む&#8221;ことに特化したプラグインとして、<a href="http://www.vim.org/scripts/script.php?script_id=1697">surround.vim</a> があります。<br />
+				定番プラグインなので使用している方も多いでしょう。</p>
+
+<p>デフォルトで、テキストを括弧( <kbd><code>[([{</code></kbd> 等)や、HTMLタグで囲んだりする事が出来ます。</p>
+
+<p>surround.vim は囲むルール( 以降 surrounding rule と記載 )を拡張する機能を用意しており、ユーザーが独自に surrounding rule を追加することが出来ます。</p>
+
+<h2>surrounding rule の拡張</h2>
+
+<p>例えば下記のような設定は</p>
+
+<pre class="prettyprint"><code>autocmd FileType ruby let b:surround_45 = "&lt;% \r %&gt;"
+</code></pre>
+
+<p><code>&amp;filetype</code> が ruby 場合に <code>let b:surround_45 = "&lt;% \r %&gt;"</code> を設定しています。</p>
+
+<ul>
+<li><kbd><code>b:surround_45</code></kbd> の  <kbd><code>45</code></kbd> は  <kbd><code>-</code></kbd> の ASCII コード番号です。</li>
+<li><kbd><code>\r</code></kbd> は囲まれるテキストが入るプレースホルダです。</li>
+</ul>
+
+<p>上記のように設定すると、</p>
+
+<pre class="prettyprint"><code>puts "Hello world!"
+</code></pre>
+
+<p>の行にカーソルを合わせ、ノーマルモードで  <kbd><code>yss-</code></kbd> と入力すると、下記のように eruby のコードとして囲む事ができます。</p>
+
+<pre class="prettyprint"><code>&lt;% puts "Hello world!" %&gt;
+</code></pre>
+
+<p>しかし、毎回 ASCII コードを確認して設定するのは面倒なので、 <kbd><code>char2nr()</code></kbd> を使用し、下記のように設定する方が分かりやすいでしょう。<br />
+				以下の設定は <kbd><code>E</code></kbd> で囲まれるテキストをヒアドキュメント化します。</p>
+
+<pre class="prettyprint"><code>let b:surround_{char2nr("E")} = "&lt;&lt;EOS \r EOS"
+</code></pre>
+
+<p>surrounding rule のより詳細な説明は <kbd><code>:help surround-customizing</code></kbd> を参考にして下さい。</p>
+
+<h2>さらに簡単に surrounding rule を拡張する</h2>
+
+<p>さて、ここまでは前置きで、目的は基本知識の整理だったのでした。<br />
+				上述の surrounding rule の拡張をより簡単に行う為の、簡単なプラグインを作成しました。</p>
+
+<ul>
+<li><a href="https://github.com/t9md/vim-surround_custom_mapping">vim-surround_custom_mapping</a></li>
+</ul>
+
+<h2>インストール</h2>
+
+<p>Vundle を使用している場合以下のコマンドでインストール出来ます。</p>
+
+<pre class="prettyprint"><code>:BundleInstall t9md/vim-surround_custom_mapping
+</code></pre>
+
+<h2>設定</h2>
+
+<p><kbd><code>g:surround_custom_mapping</code></kbd> ディクショナリを設定します。<br />
+				キー に surrounding rule が設定される <kbd><code>&amp;filetype</code></kbd> 、値には surrounding rule をディクショナリとして設定します。<br />
+				キー <kbd><code>_</code></kbd>(アンダースコア)は特殊なキーで、ここに設定された surrounding rule は全てのファイルタイプで利用できるようになります。</p>
+
+<p>例えば下記の様に設定すると</p>
+
+<pre class="prettyprint"><code>let g:surround_custom_mapping = {}
+let g:surround_custom_mapping._ = {
+            \ 'p':  "&lt;pre&gt; \r &lt;/pre&gt;",
+            \ 'w':  "%w(\r)",
+            \ }
+let g:surround_custom_mapping.ruby = {
+            \ '-':  "&lt;% \r %&gt;",
+            \ '=':  "&lt;%= \r %&gt;",
+            \ }
+</code></pre>
+
+<ul>
+<li><kbd><code>p</code></kbd> で <code>pre</code> タグで囲む(全てのファイルタイプで有効)</li>
+<li><kbd><code>w</code></kbd> で <code>%w(</code> と <code>)</code> で囲む(全てのファイルタイプで有効)</li>
+<li><kbd><code>-</code></kbd> で <code>%&lt;</code> と <code>%&gt;</code> で囲む(ruby ファイルのみ)</li>
+<li><kbd><code>=</code></kbd> で <code>%&lt;=</code> と <code>%&gt;</code> で囲む(ruby ファイルのみ)</li>
+</ul>
+
+<p>という意味になります。</p>
+
+<h2>より具体的な例</h2>
+
+<p>もともと私がこのヘルパープラグインを作ったのは</p>
+
+<ul>
+<li>html を編集していようが、</li>
+<li>textile を編集していようが、</li>
+<li>vim のヘルプを編集していようが</li>
+</ul>
+
+<p><kbd><code>p</code></kbd> で整形済みテキストとして囲むというように、<strong>似た様な意味(=整形済みテキスト)で囲む場合は、指運動を同じにしたかった</strong> からです。<br />
+				意味に対応する指運動(=運指)が別だと覚えるのが大変です。<br />
+				上記を実現する設定は下記になります。</p>
+
+<pre class="prettyprint"><code>let g:surround_custom_mapping = {}
+let g:surround_custom_mapping.help = {
+            \ 'p':  "&gt; \r &lt;",
+            \ }
+let g:surround_custom_mapping.textile = {
+            \ 'p':  "&lt;pre&gt; \r &lt;/pre&gt;",
+            \ }
+let g:surround_custom_mapping.html = {
+            \ 'p':  "&lt;pre&gt; \r &lt;/pre&gt;",
+            \ }
+</code></pre>
+
+<h2>最後に</h2>
+
+<p>このプラグインを作った際、surround.vim 作者の tpope さんに <a href="https://github.com/tpope/vim-surround/pull/32">Pull Request</a> を送りました。<br />
+				取り込まれはしませんでしたが、８/７ 日頃に「 来月か、再来月位に新しいのを出す予定、それまでこの pull request はオープンにしておくよ。」と返事をくれました。<br />
+				ですので、もしかすると９月か１０月頃には surround.vim のニューバージョンがリリースされ、今回紹介したプラグインは不要になっているかもしれません。</p>
+
+<address class="hack-author">t9md</address>

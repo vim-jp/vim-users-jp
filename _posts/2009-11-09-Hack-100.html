@@ -1,0 +1,91 @@
+---
+layout: post
+title: "Hack #100: vimrcにパスワード等を記述しなくてもよくする"
+date: 2009-11-09
+author: from_kyushu
+---
+<h2>問題</h2>
+
+<p><a href="http://www.vim.org/scripts/script.php?script_id=2638">blogger.vim</a> などの Plugin を利用する場合、 .vimrc にパスワード等の設定を記述する必要があります。 <a href="http://github.com/">GitHub</a> や <a href="http://soralabo.net/s/vrcb/">Vimrcbox</a> に .vimrc を公開している場合、そのままでは利用することができません。</p>
+
+<h2>解決</h2>
+
+<p><a href="http://github.com/mattn/pitconfig-vim">pitconfig.vim</a> もしくは <a href="http://github.com/fkfk/rbpit.vim/tree/master">rbpit.vim</a> を利用することで .vimrc に直接記述することなくパスワード等を設定することが可能です。</p>
+
+<h3>準備</h3>
+
+<p>pitconfig.vim を利用する場合は Perl インターフェイス付きの、 rbpit.vim を利用する場合は Ruby インターフェイス付きの Vim を準備してください。手元の Vim がこれらのインターフェイス付きでない場合は、ソースからコンパイルする必要があります。コンパイル方法については本 Hack の範囲を超えるので省略します。</p>
+
+<p>また pitconfig.vim なら <a href="http://search.cpan.org/~satoh/Config-Pit/lib/Config/Pit.pm">Config::Pit</a> を CPAN から、 rbpit.vim なら <a href="http://rubyforge.org/projects/lowreal">pit</a> を Rubygems からインストールします。</p>
+
+<h3>Plugin のインストール</h3>
+
+<p>pitconfig.vim または rbpit.vim を Plugin Directory へコピーしてください。 Plugin Directory については <code class="lang-vim">:h add-global-plugin</code> を参照してください。</p>
+
+<p>pitconfig.vim と rbpit.vim の違いは Perl インターフェイスを利用するか Ruby インターフェイスを利用するかの違いのみで、動作は同一です。<sup id="fnref:1"><a href="/vim-users-jp/2009/11/09/Hack-100.html#fn:1" rel="footnote">1</a></sup></p>
+
+<h3>設定</h3>
+
+<p>設定は Config::Pit の ppit コマンドや pit の pit コマンドから設定することが可能です。デフォルトのプロファイル名は vimrc ですが、変更することも可能です。</p>
+
+<pre class="prettyprint"><code>pit set vimrc </code></pre>
+
+<p>設定はYAMLとして記述します。例として blogger.vim の設定方法を記述します。</p>
+
+<pre class="prettyprint"><code>---
+blogger_blogid = 7772225564702673313
+blogger_email = blogger.vim@gmail.com
+blogger_pass = bloggervimvim
+</code></pre>
+
+<p>また、 Vim の Command Mode から以下の要領で設定を行うこともできます。例として blogger.vim の設定方法を記述します。</p>
+
+<pre class="prettyprint"><code>:let g:blogger_blogid = 7772225564702673313
+:let g:blogger_email = "blogger.vim@gmail.com"
+:let g:blogger_pass = "bloggervimvim"
+:PitAdd g:blogger_blogid g:blogger_email g:blogger_pass
+:PitSave
+</code></pre>
+
+<h4>デフォルトプロファイル名の設定</h4>
+
+<p>デフォルトでのプロファイル名は vimrc になっていますが、 g:pitconfig_default でデフォルトのプロファイル名を変更することが可能です。</p>
+
+<h3>コマンド</h3>
+
+<h4>:PitLoad (プロファイル名)</h4>
+
+<p>プロファイル名に保存された設定をロードします。</p>
+
+<h4>:PitReload</h4>
+
+<p>デフォルトプロファイルをリロードします。</p>
+
+<h4>:PitAdd (変数名)</h4>
+
+<p>引数で指定した変数を <code class="lang-vim"> :PitSave </code> で保存する対象に設定します。変数名は複数指定可能です。</p>
+
+<h4>:PitDel (変数名)</h4>
+
+<p>引数で指定した変数を <code class="lang-vim"> :PitSave </code> で保存する対象から外します。変数名は複数指定可能です。</p>
+
+<h4>:PitSave (プロファイル名)</h4>
+
+<p>引数で指定したプロファイル名を使用して設定を保存します。引数なしで実行した場合はデフォルトプロファイルに保存します。</p>
+
+<h2>注意</h2>
+
+<p>MacVimを利用している場合、 pit は Mac OSX 標準の Rubygems (/usr/bin/gem) を利用してインストールする必要があります。 MacPorts を利用して ruby 及び rb-rubygems をインストールしていたとしても、使われるのは Mac OSX 標準の Rubygems になります。</p>
+
+<address class="hack-author">from_kyushu</address>
+
+<div class="footnotes">
+<hr />
+<ol>
+
+<li id="fn:1">
+<p>元々 rbpit.vim 自体が <a href="http://d.hatena.ne.jp/from_kyushu/20090617/1245202567">pitconfig.vim が動作しなかったという理由で、Perl 部分を Ruby で書き直したもの</a>です。&#160;<a href="/vim-users-jp/2009/11/09/Hack-100.html#fnref:1" rev="footnote">&#8617;</a></p>
+</li>
+
+</ol>
+</div>

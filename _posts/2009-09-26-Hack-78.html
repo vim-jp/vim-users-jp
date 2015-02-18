@@ -1,0 +1,22 @@
+---
+layout: post
+title: "Hack #78: CSVの特定のカラムをハイライトする"
+date: 2009-09-26
+author: 
+---
+<p>Excel形式はともかく、CSV形式のファイルであればプレーンテキストですのでVimで編集する場合もあるでしょう。</p>
+
+<p>CSVは大抵の場合、テキストエディタで開くと各カラムの長さがバラバラで視認性にかけます。<a href="/vim-users-jp/2009/09/24/Hack-77.html" title="">Hack #77</a>の方法で縦を揃えることもできますが、別の方法として、ある特定のカラムをハイライトする方法を紹介します。</p>
+
+<p><code class="lang-vim"></p>
+
+<pre class="prettyprint"><code class="lang-vim">function! CSVH(x)
+    execute 'match Keyword /^\([^,]*,\)\{'.a:x.'}\zs[^,]*/'
+    execute 'normal ^'.a:x.'f,'
+endfunction
+command! -nargs=1 Csvhl :call CSVH(&lt;args&gt;)
+</code></pre>
+
+<p></code></p>
+
+<p>以上のコードを.vimrcに書けば準備OKです。このコードの詳細は割愛します。以上のコードで<code class="lang-vim">:Csvhl n</code>(nは0&#12316;の数字)でn番目のカラムをハイライトすることができます。注意してほしいのは、0番目、1番目とカラムをカウントする点です。</p>

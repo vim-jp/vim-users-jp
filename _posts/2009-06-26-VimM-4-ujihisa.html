@@ -1,0 +1,136 @@
+---
+layout: post
+title: "VimM#4 ログ (ujihisa)"
+date: 2009-06-26
+author: 
+---
+<p>VimM#4のログというかメモです。</p>
+
+<ul>
+<li>文責: <a href="http://ujihisa.blogspot.com/">ujihisa</a></li>
+<li><a href="http://ujihisa.blogspot.com/2009/06/vimm4.html">http://ujihisa.blogspot.com/2009/06/vimm4.html</a> の和訳です。</li>
+</ul>
+
+<h2>Vim server 入門 with bonar</h2>
+
+<p>Vimをserverとしてperlとかのコマンドを送れる</p>
+
+<ul>
+<li>+clientserverが必要</li>
+<li><code>vim --servername FOO --remote temp</code></li>
+<li><code>--remote-expr "getline(2) #=&gt; ...</code></li>
+</ul>
+
+<p>VimをWEBサーバにする</p>
+
+<ul>
+<li>listenできない <code>-&gt;</code> proxy作れば解決 (perl)</li>
+<li>vimにリクエストが来るので、その場でhtmlを書いて返す</li>
+<li><code>:w</code>して<code>:bd</code>するとレスポンスがくる
+
+<ul>
+<li>非常に柔軟</li>
+<li>スケールできないことができる</li>
+</ul></li>
+<li>用途はおそらくGUIの右クリックで既存のVimで開く機能</li>
+</ul>
+
+<h2>Vimでコード印刷 with taku-o</h2>
+
+<ul>
+<li>Windowsとプリンタ</li>
+<li><code>:help printing</code></li>
+<li>コード印刷 (highlight)
+
+<ul>
+<li>hardcopyコマンドで印刷範囲指定</li>
+</ul></li>
+<li>白黒印刷はcolorschemeによっては読めない</li>
+<li>VM上のWinでデモ (香り屋gvim)</li>
+<li>範囲指定して<code>:hardcopy</code></li>
+</ul>
+
+<h2>人類の絶滅 with ssig33</h2>
+
+<ul>
+<li>growlに激しく邪魔されながら発表</li>
+<li>テレビ番組のプロデューサの仕事</li>
+<li>Eclim</li>
+<li>日本語プログラミング言語
+
+<ul>
+<li>動的型付け言語</li>
+<li>文法が柔軟</li>
+<li>フレームワークがない</li>
+<li>変数名が言語仕様で決まっている</li>
+<li>要素を記述するだけで代名詞変数が束縛される</li>
+</ul></li>
+</ul>
+
+<h2>blogger.vim with ujihisa</h2>
+
+<p>(自分の発表につき、まとめなし)</p>
+
+<ul>
+<li>発表資料 <a href="/vim-users-jp/2009/06/23/blogger-vim-talk-with-ujihisa-on-VimM-4.html">/vim-users-jp/2009/06/23/blogger-vim-talk-with-ujihisa-on-VimM-4.html</a></li>
+</ul>
+
+<h2>IDEからVimに移行する11の方法 with hagino_3000</h2>
+
+<ul>
+<li>Vim暦2週間</li>
+<li>KeyRemap4MacBook
+
+<ul>
+<li>EISUU to Esc</li>
+<li>KANA to return</li>
+</ul></li>
+<li>Ctrl-Shift-r (eclipse)
+
+<ul>
+<li>fuzzyfinder.vim</li>
+</ul></li>
+<li>Vimに乗り換えた理由: かっこいいから</li>
+</ul>
+
+<h2>Vim on Emacs with Ubuntu</h2>
+
+<p>Vimとはなにか, 人はなぜVimを使うのか</p>
+
+<ul>
+<li>Lispインタプリタ+elicp = Emacs</li>
+<li>唯一の違い = 言語</li>
+<li>Vimの良さ: netrw, モード</li>
+<li>新規オープン時EmacsのViewモードを強制</li>
+<li>EmacsでVimを実現 (viperではなく)</li>
+<li>VimにLispがあってもVimがLispじゃない</li>
+</ul>
+
+<h2>これからVimを極めたい人が読むべきたった一つの文書 with kana</h2>
+
+<p>Vimマスターへの道しるべ by kana</p>
+
+<ul>
+<li>Web+DB Press 2009-08-24 発売</li>
+<li>アフィリエイト経由で買ってね(はぁと)</li>
+<li>およそ30ページ</li>
+</ul>
+
+<h2>基調講演 with ujihisa</h2>
+
+<ul>
+<li>参加していただいた方はブログに書いて、ここにトラックバック的行為をしてくれるとうれしい</li>
+<li>誰でも主催できるのでVim勉強会を各地でゲリラ的に開催し、そしてVimKaigi2010</li>
+<li>Vim Hacks Projectが水面下ではじまっている</li>
+</ul>
+
+<h2>おまけ</h2>
+
+<ul>
+<li>8:00pmから冷房が切れ、既に定員を超過している会場はすさまじい熱気となる。</li>
+<li>hyoshiokさん、nishioさん、ko1さんらによるプログラミングキャンプの宣伝も行なわれる。</li>
+<li>勇士によるお菓子、ジュースの配布あり。ありがとうございます!</li>
+<li>カナダ直輸入のtwizzlersなども配布あり。カラフルな方はマシだが、黒はヤバい。</li>
+<li>ujihisaは飛行機が遅れてギリギリの到着 (この日夕方に成田空港について、その足でそのままVimM会場にやってきた)</li>
+<li>その後何人かは和民(わたみ)という飲み屋で懇親会的な行為を行なう。</li>
+</ul>

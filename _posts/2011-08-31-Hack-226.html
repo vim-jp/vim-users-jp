@@ -1,0 +1,82 @@
+---
+layout: post
+title: "Hack #226: 複数のキーワードを手軽にハイライトする"
+date: 2011-08-31
+author: t9md
+---
+<h2>問題</h2>
+
+<p>vim でファイルを編集している時やログファイルを閲覧している時に特定のテキストを目立たせたいと思ったことはありませんか？<br />
+				私はあります。<br />
+				例えば以下のような場合です。</p>
+
+<ul>
+<li>tcpdump の ログファイルを vim で閲覧していて特定の MACアドレス、IPアドレスを目立たせたい。</li>
+<li>ソースコードを編集していて、特定のキーワードの出現を(ハイライトさせて)意識しつつ編集を進めたい。</li>
+<li><a href="https://github.com/tpope/vim-fugitive">fugitive.vim</a> の  <kbd><code>:Gblame</code></kbd> コマンド(git blame)で特定の author を目立たせたい。</li>
+</ul>
+
+<p>もちろん、 <kbd><code>:Unite line</code></kbd>  、あるいは <kbd><code>/</code></kbd>  で検索してハイライトして目立たせる事は可能ですが、<br />
+				複数の単語をハイライトさせたい場合は、 <kbd><code>/</code></kbd> では対応できません。</p>
+
+<h2>対処</h2>
+
+<p>quickhl.vim を使用すれば、手っ取り早く色を付けることができます。</p>
+
+<p>動画を用意しました。
+<a href="http://www.youtube.com/watch?v=W_XJlTbuoyI">Youtube: quickhl.vim</a></p>
+
+<p>※ 同様の事を目的としたプラグインとして、<a href="http://www.vim.org/scripts/script.php?script_id=479">MultipleSearch</a> 等があります。</p>
+
+<h2>インストール</h2>
+
+<p>quickhl.vim は vim.org や、github から入手可能です。<br />
+				version 7.2 以上の vim で動作します。</p>
+
+<ul>
+<li><a href="https://github.com/t9md/vim-quickhl">t9md/vim-quckhl</a></li>
+<li><a href="http://www.vim.org/scripts/script.php?script_id=3692">www.vim.org/quickhl.vim</a></li>
+</ul>
+
+<p>Vundle を使用している場合は下記のコマンドでインストールできます。</p>
+
+<pre class="prettyprint"><code>:BundleInstall quickhl.vim
+</code></pre>
+
+<h2>設定</h2>
+
+<p>quickhl.vim はデフォルトのキーマップを提供しませんので、ユーザーが <kbd><code>.vimrc</code></kbd> に設定する必要があります。<br />
+				筆者オススメのキーマップは以下です。</p>
+
+<pre class="prettyprint"><code>nmap &lt;Space&gt;m &lt;Plug&gt;(quickhl-toggle)
+xmap &lt;Space&gt;m &lt;Plug&gt;(quickhl-toggle)
+nmap &lt;Space&gt;M &lt;Plug&gt;(quickhl-reset)
+xmap &lt;Space&gt;M &lt;Plug&gt;(quickhl-reset)
+nmap &lt;Space&gt;j &lt;Plug&gt;(quickhl-match)
+</code></pre>
+
+<p>上記の設定をした後、ノーマルモードで <kbd><code>&lt;Space&gt;m</code></kbd> を押すと、カーソル下の単語がハイライトされます。<br />
+				同じ単語の上で、もう一度、 <kbd><code>&lt;Space&gt;m</code></kbd> を押すと、ハイライトがクリアされます。<br />
+				すべてのハイライトをクリアしたい場合は、 <kbd><code>&lt;Space&gt;M</code></kbd> (スペースの後、大文字M)でクリアできます。</p>
+
+<p>またビジュアルモードでテキストを選択して、 <kbd><code>&lt;Space&gt;m</code></kbd> を押すと、選択したテキストがハイライトされます。<br />
+				複数行のテキストブロックのハイライトには対応していません。<br />
+				ハイライトの追加削除は  <kbd><code>:QuickhlAdd</code></kbd> , <kbd><code>:QuickhlDel</code></kbd> でも可能ですが、<strong>ハイライトしたい欲望は突然やってくる</strong>ので、キーマップを設定して備えておくのがいいでしょう。</p>
+
+<p>特定の単語を常にハイライトしたい場合は、 <kbd><code>g:quickhl_keywords</code></kbd> にキーワードを設定します。<br />
+				例えば <kbd><code>.vimrc</code></kbd> に以下の様に設定します。</p>
+
+<pre class="prettyprint"><code>let g:quickhl_keywords = [
+    \ "ujihisa",
+    \ "tyru",
+    \ "Sixeight",
+    \ "t9md",
+    \ "thinca",
+    \ "Shougo",
+    \ ]
+</code></pre>
+
+<p>その他、一時的に特定のバッファでハイライトを無効(Lock)する、 <kbd><code>:QuickhlLock</code></kbd> コマンド等も用意されています。<br />
+				詳しくは <kbd><code>:help quickhl</code></kbd> で確認して下さい。</p>
+
+<address class="hack-author">t9md</address>

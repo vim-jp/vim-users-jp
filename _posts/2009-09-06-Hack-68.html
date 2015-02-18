@@ -1,0 +1,23 @@
+---
+layout: post
+title: "Hack #68:  Subversionを使う"
+date: 2009-09-06
+author: 
+---
+<p>VimからGitを扱う方法をHack #67で紹介されていますが、まだまだSubversionを使用している人も多いでしょう。今回はVimからSubversionを扱う方法を紹介します。</p>
+
+<p><a href="http://www.vim.org/scripts/script.php?script_id=90">http://www.vim.org/scripts/script.php?script_id=90</a></p>
+
+<p>vcscommand.vimをインストールするといくつかのコマンドが使えるようになります。その中から使用頻度が高いと思われるものを幾つか紹介します。</p>
+
+<h3>VCSCommit</h3>
+
+<p>現在のバッファを対象にコミットを行います。<kbd>&lt;Leader&gt;cc</kbd>を実行すると一旦コミットメッセージを書く状態に遷移し、もう一度<kbd>&lt;Leader&gt;cc</kbd>を実行するとコミットを行います。</p>
+
+<h3>VCSVimDiff</h3>
+
+<p>個人的にはこれが一番使用頻度が高いです。現在のバッファと前回コミット時の状態を差分を表示します。VimDiffを使って差分を表示しますので、普段からVimを使っている人にも比較的使い易いコマンドでしょう。</p>
+
+<p>その他のコマンドのついては<code class="lang-vim">:h vcscommand</code>で調べるとよいでしょう。</p>
+
+<address class="hack-authoer">ukstudio</address>

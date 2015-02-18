@@ -1,0 +1,34 @@
+---
+layout: post
+title: "Vimpressのご紹介"
+date: 2008-10-09
+author: 
+---
+<p>Vim-users.jpはWordPressを用いているのですが、このWordPressに投稿するvim scriptがありましたのでご紹介します。</p>
+
+<p><a href="http://www.vim.org/scripts/script.php?script_id=1953" title="Vimpress - Manage wordpress blog posts from Vim : vim online">Vimpress &#8211; Manage wordpress blog posts from Vim : vim online</a></p>
+
+<h3>インストール</h3>
+
+<p>vimpress.tar.gz を取得して展開したものを.vimディレクトリに保存してください。</p>
+
+<p>また、このvim scriptはPythonを使用して書かれており、標準添付でないxmlrpclibというライブラリを使用しています。別途インストールを行ってください。</p>
+
+<h3>使用方法</h3>
+
+<p>.vim/plugin/blog.vimを開き、Settingsセクション内に以下の内容を入力して保存します。</p>
+
+<ul>
+<li>blog_username: ユーザーID</li>
+<li>blog_password: ユーザーパスワード</li>
+<li>blog_url: /vim-users-jp/xmlrpc.php</li>
+</ul>
+
+<p>コマンドは以下になります。</p>
+
+<ul>
+<li>新規作成: :BlogNew</li>
+<li>エントリ一覧: :BlogList</li>
+<li>エントリ編集: :BlogOpen id</li>
+<li>エントリ投稿: :BlogSend</li>
+</ul>

@@ -1,0 +1,18 @@
+---
+layout: post
+title: "Hack #53: 略語を定義する"
+date: 2009-08-08
+author: ukstudio
+---
+<p>長い単語を入力するのは非常に面倒な上、タイプミスなどもありえます。長い単語の略語を登録しておくことで、入力の手間を減らす方法を紹介します。</p>
+
+<p><code class="lang-vim">				:abbreviate HTTP HypertextTransferProtocol
+</code></p>
+
+<p>大抵の場合、文章中においてもHTTPと記述すると思うのであまりいい例ではありませんが、機能を紹介する分には十分です。上記のように登録しておくと、<kbd>HTTP<space></kbd>と入力するとVimの方で自動的にHypertextTransferProtocolと置換してくれます。</p>
+
+<p>この例のあまりよくないところは逆にHTTPと文章で入力するのが困難になってしまうことです。その為、略語を登録する際にその略語が文章に出てこないか気をつける必要があります。</p>
+
+<p>例えばRails.vimはプラグインの機能として略語の定義も行なっていますが、その中で<kbd>pa[</kbd>が登録されており、これは<kbd>params[:</kbd>の略語です。Railsでの開発を行なったことがある人なら<kbd>params[:</kbd>をよく入力していると思います。またよほどのことがない限り<kbd>pa[</kbd>とは入力しないでしょうから、なかなかいい略語の定義だと思います。</p>
+
+<address class="hack-author">ukstudio</address>
