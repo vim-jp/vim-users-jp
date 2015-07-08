@@ -28,7 +28,7 @@ author: ujihisa
 
 <p>著者は以下の関数とコマンドを定義し、<kbd>&lt;Space&gt;ao</kbd>で編集中バッファを別の単独のタブに切り出すようにしています。</p>
 
-<pre class="prettyprint"><code>&quot; kana's useful tab function \{\{\{
+<pre class="prettyprint"><code>&quot; kana's useful tab function &#123;&#123;&#123;
 function! s:move_window_into_tab_page(target_tabpagenr)
   &quot; Move the current window into a:target_tabpagenr.
   &quot; If a:target_tabpagenr is 0, move into new tab page.
@@ -60,7 +60,7 @@ function! s:move_window_into_tab_page(target_tabpagenr)
   endif
 
   execute target_tabpagenr <code class="option">'tabnext'</code>
-endfunction &quot; \}\}\}
+endfunction &quot; &#125;&#125;&#125;
 
 &quot; &lt;space&gt;ao move current buffer into a new tab.
 nnoremap &lt;silent&gt; &lt;Space&gt;ao :&lt;C-u&gt;call &lt;SID&gt;move_window_into_tab_page(0)&lt;Cr&gt;

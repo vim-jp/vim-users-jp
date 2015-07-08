@@ -79,14 +79,14 @@ end
 
 <p>つづいて、<code>~/.vimrc</code>に以下を記述します。</p>
 
-<pre class="prettyprint"><code class="lang-vim">&quot; Flip Arguments \{\{\{
+<pre class="prettyprint"><code class="lang-vim">&quot; Flip Arguments &#123;&#123;&#123;
 &quot;   f(a, b) to f(b, a) when your cursol is on '('.
 function! FlipArguments()
   normal! y%
   let @&quot; = split(system('flipper &quot;' . @&quot; . '&quot;'), &quot;\n&quot;)[0]
   execute &quot;normal! %p\&lt;C-o&gt;d%&quot;
 endfunction
-&quot; \}\}\}
+&quot; &#125;&#125;&#125;
 </code></pre>
 
 <p>これで、<code>:call FlipArguments()</code>とすることでカーソル位置の引数リストの順番を逆順にすることができます。</p>

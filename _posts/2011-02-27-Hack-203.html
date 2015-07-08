@@ -59,7 +59,7 @@ author: tyru
 \   Capture
 \   call s:cmd_capture(&lt;q-args&gt;)
 
-function! s:cmd_capture(q_args) "\{\{\{
+function! s:cmd_capture(q_args) "&#123;&#123;&#123;
     redir =&gt; output
     silent execute a:q_args
     redir END
@@ -70,7 +70,7 @@ function! s:cmd_capture(q_args) "\{\{\{
     silent file `=printf('[Capture: %s]', a:q_args)`
     setlocal buftype=nofile bufhidden=unload noswapfile nobuflisted
     call setline(1, split(output, '\n'))
-endfunction "\}\}\}
+endfunction "&#125;&#125;&#125;
 </code></pre>
 
 <p>このExコマンドを使えば次のようにしてバッファに出力を書き込むことができます。</p>

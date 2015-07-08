@@ -23,9 +23,9 @@ command!
 \   CodingStyle
 \   execute get(s:coding_styles, &lt;f-args&gt;, '')
 
-function! s:coding_style_complete(...) "\{\{\{
+function! s:coding_style_complete(...) "&#123;&#123;&#123;
     return keys(s:coding_styles)
-endfunction "\}\}\}
+endfunction "&#125;&#125;&#125;
 </code></pre>
 
 <p>するとこのようにコーディングスタイルを切り替えられます。(もちろん引数は補完が効きます)</p>

@@ -17,19 +17,19 @@ author: ujihisa
 <p>様々な解決方法がありますが、著者が最も直感的と感じるのは以下の方法です。</p>
 
 <ul>
-<li><code>\{\{</code> と打鍵すると自動的に<code>#{</code>と置き換えられる</li>
+<li><code>&#123;&#123;</code> と打鍵すると自動的に<code>#{</code>と置き換えられる</li>
 </ul>
 
-<p>すぐに思い浮かぶ解決方法は、<code>iabbrev</code>を用いて<code>\{\{</code>を<code>#{</code>に置き換えることです。</p>
+<p>すぐに思い浮かぶ解決方法は、<code>iabbrev</code>を用いて<code>&#123;&#123;</code>を<code>#{</code>に置き換えることです。</p>
 
-<pre class="prettyprint"><code>iabbrev \{\{ #{
+<pre class="prettyprint"><code>iabbrev &#123;&#123; #{
 </code></pre>
 
-<p>この方法はうまくいきません。<code>\{\{</code>のあとにスペースを打鍵する必要がありますが、Rubyの慣習では<code>#{</code>のあとにスペースをいれずすぐに式を書くことになっている場合が多いためです。</p>
+<p>この方法はうまくいきません。<code>&#123;&#123;</code>のあとにスペースを打鍵する必要がありますが、Rubyの慣習では<code>#{</code>のあとにスペースをいれずすぐに式を書くことになっている場合が多いためです。</p>
 
 <p>それならば<code>iabbrev</code>ではなく<code>inoremap</code>だ、と思い付くのではないでしょうか。</p>
 
-<pre class="prettyprint"><code>inoremap \{\{ #{
+<pre class="prettyprint"><code>inoremap &#123;&#123; #{
 </code></pre>
 
 <p>この方法はうまくいきません。実際に試してみるとすぐに分かりますが、<code>{</code>を打鍵してすぐに<code>{</code>が画面にでてこないことにイライラする日々を送ることになります。Rubyでは<code>#{</code>よりもブロックとしての<code>{</code>を書くことの方が頻度は高く、メリットよりもデメリットの方が遥かに大きいのです。</p>
@@ -40,17 +40,17 @@ author: ujihisa
 
 <p>smartchrをインストールし、<code>~/.vim/ftplugin/ruby.vim</code>に以下を記述します。</p>
 
-<pre class="prettyprint"><code>inoremap &lt;expr&gt; &lt;buffer&gt; {  smartchr#loop('{', '#{', '\{\{\{')
+<pre class="prettyprint"><code>inoremap &lt;expr&gt; &lt;buffer&gt; {  smartchr#loop('{', '#{', '&#123;&#123;&#123;')
 </code></pre>
 
 <p>これで、<code>{</code>を続けて打鍵していくと以下のようになります。</p>
 
 <pre class="prettyprint"><code>{
 #{
-\{\{\{
+&#123;&#123;&#123;
 {
 #{
-\{\{\{
+&#123;&#123;&#123;
 ...
 </code></pre>
 
