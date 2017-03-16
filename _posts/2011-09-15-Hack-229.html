@@ -6,7 +6,7 @@ author: ujihisa
 ---
 <h2>問題</h2>
 
-<p><img src="http://cache.gyazo.com/071b7fd4b985ad3d71e4ebb36c2ddea5.png" alt="" /></p>
+<p><img src="/vim-users-jp/assets/images/071b7fd4b985ad3d71e4ebb36c2ddea5.png" alt="" /></p>
 
 <p>静的型付け言語Haskellでの自動補完は<a href="/vim-users-jp/2011/04/06/Hack-211.html">Hack #211</a>で紹介しました。このときは補完候補の取得に<code>ghc-mod</code>という外部コマンドを用いました。補完候補を自動的に出力するために<code>neocomplcache</code>というVimプラギンを用いました。</p>
 
@@ -30,13 +30,13 @@ author: ujihisa
 
 <p>です。これらに対応するためには、Rubyのパーサなどを実装する必要があり、かなり大変です。またそもそも処理に時間がかかりすぎ、補完機構としはやりすぎと判断したのかもしれません(*4)。</p>
 
-<p><img src="http://cache.gyazo.com/466b12454d1a8213b9826455f7e1b0d7.png" alt="図1: vim-rubyが正しく補完候補を生成している例" /></p>
+<p><img src="/vim-users-jp/assets/images/466b12454d1a8213b9826455f7e1b0d7.png" alt="図1: vim-rubyが正しく補完候補を生成している例" /></p>
 
-<p><img src="http://cache.gyazo.com/f933e019f0ae6dc10226f88a2f7b7274.png" alt="図2: vim-rubyが正しくない補完候補を生成してしまっている例" /></p>
+<p><img src="/vim-users-jp/assets/images/f933e019f0ae6dc10226f88a2f7b7274.png" alt="図2: vim-rubyが正しくない補完候補を生成してしまっている例" /></p>
 
 <p>一方RSenseは、<code>vim-ruby</code>が提供している機能にさらに加えて、上記の諦めた部分にも対応しています。</p>
 
-<p><img src="http://cache.gyazo.com/4643f4c15db03bc34aa91269c7fd0630.png" alt="図3: RSenseが正しく補完候補を生成している例" /></p>
+<p><img src="/vim-users-jp/assets/images/4643f4c15db03bc34aa91269c7fd0630.png" alt="図3: RSenseが正しく補完候補を生成している例" /></p>
 
 <p>RSenseの補完関数もオムニ補完として定義されています。デフォルトでは、挿入モード時に<code>&lt;C-x&gt;&lt;C-o&gt;</code>と打鍵することで補完のポップアップがでてきます。なお、初回起動時は若干時間がかかりますが、二回目からは非常にすばやいです(*5)。</p>
 
