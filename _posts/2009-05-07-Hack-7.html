@@ -38,7 +38,7 @@ author: ujihisa
 
 <p>Normal modeで<kbd>&lt;Space&gt;r</kbd>とタイプすると、別windowが開き、実行結果が出力されます。</p>
 
-<p>このとき、編集中ファイルには適切なFileTypeが設定されている必要があります。適切な拡張子のついたファイルを編集中は大抵は大丈夫なのですが、無名バッファを編集時には通常FileTypeが設定されておりません。この場合、<code class="lang-vim">:setfiletype ruby</code>などとして明示的にFileTypeを指定するか、または一行目に<code>0</code>などとShebangを書く必要があります。</p>
+<p>このとき、編集中ファイルには適切なFileTypeが設定されている必要があります。適切な拡張子のついたファイルを編集中は大抵は大丈夫なのですが、無名バッファを編集時には通常FileTypeが設定されておりません。この場合、<code class="lang-vim">:setfiletype ruby</code>などとして明示的にFileTypeを指定するか、または一行目に<code>#!/usr/bin/env ruby</code>などとShebangを書く必要があります。</p>
 
 <p>無名バッファにHaskellでフィボナッチ数列を計算するコードを書いて実行した結果のサンプルをここに示します。</p>
 

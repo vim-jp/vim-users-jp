@@ -7,7 +7,7 @@ author: ujihisa
 <h2>問題</h2>
 
 <p>通常、Vimでは縦横に画面を分割して複数のファイルを同時に閲覧しながら編集することになります。
-				常に一つのウインドウのみ表示して他のバッファに<code class="lang-vim">0</code>などで移動することもできますが、画面分割を行なうことで編集対象のウインドウ群を平面上の位置関係で認識することにより、人間にとって直感的な管理ができ、画面分割したままウインドウの移動で複数ファイルを同時に対処するという方法が好ましいシーンが多いです。</p>
+				常に一つのウインドウのみ表示して他のバッファに<code class="lang-vim">:bn</code>などで移動することもできますが、画面分割を行なうことで編集対象のウインドウ群を平面上の位置関係で認識することにより、人間にとって直感的な管理ができ、画面分割したままウインドウの移動で複数ファイルを同時に対処するという方法が好ましいシーンが多いです。</p>
 
 <p>さて、ディスプレイのサイズやフォントサイズによっては、たとえばたった6分割するだけで各ウインドウがとても小さくなってしまいます。
 				とりわけプレゼンテーションを行なう際には、フォントサイズを通常よりもとても大きくするため、ウインドウサイズの制限がより厳しくなります。</p>
@@ -16,17 +16,54 @@ author: ujihisa
 
 <h2>解決</h2>
 
-<p>コマンド<code>0</code>を定義します。以下の設定を<code>0</code>に記述します。</p>
+<p>コマンド<code>Big</code>を定義します。以下の設定を<code>~/.vimrc</code>に記述します。</p>
 
-<pre class="prettyprint"><code>0</code></pre>
+<pre class="prettyprint"><code>command! Big wincmd _ | wincmd |
+</code></pre>
 
-<p>以後、<code class="lang-vim">0</code>でそのウインドウサイズを可能な限り広げます。
+<p>以後、<code class="lang-vim">:Big</code>でそのウインドウサイズを可能な限り広げます。
 				逆に全てのウインドウサイズを同程度に戻したいときは、Vim標準機能である<kbd>&lt;C-w&gt;=</kbd>を使用します。</p>
 
 <h2>発展</h2>
 
 <p>著者は以下の関数とコマンドを定義し、<kbd>&lt;Space&gt;ao</kbd>で編集中バッファを別の単独のタブに切り出すようにしています。</p>
 
-<pre class="prettyprint"><code class="lang-vim">0</code></pre>
+<pre class="prettyprint"><code class="lang-vim">&quot; kana's useful tab function &#123;&#123;&#123;
+function! s:move_window_into_tab_page(target_tabpagenr)
+  &quot; Move the current window into a:target_tabpagenr.
+  &quot; If a:target_tabpagenr is 0, move into new tab page.
+  if a:target_tabpagenr &lt; 0  &quot; ignore invalid number.
+    return
+  endif
+  let original_tabnr = tabpagenr()
+  let target_bufnr = bufnr(&lt;code class="option"&gt;''&lt;/code&gt;)
+  let window_view = winsaveview()
+
+  if a:target_tabpagenr == 0
+    tabnew
+    tabmove  &quot; Move new tabpage at the last.
+    execute target_bufnr &lt;code class="option"&gt;'buffer'&lt;/code&gt;
+    let target_tabpagenr = tabpagenr()
+  else
+    execute a:target_tabpagenr &lt;code class="option"&gt;'tabnext'&lt;/code&gt;
+    let target_tabpagenr = a:target_tabpagenr
+    topleft new  &quot; FIXME: be customizable?
+    execute target_bufnr &lt;code class="option"&gt;'buffer'&lt;/code&gt;
+  endif
+  call winrestview(window_view)
+
+  execute original_tabnr &lt;code class="option"&gt;'tabnext'&lt;/code&gt;
+  if 1 &lt; winnr('$')
+    close
+  else
+    enew
+  endif
+
+  execute target_tabpagenr &lt;code class="option"&gt;'tabnext'&lt;/code&gt;
+endfunction &quot; &#125;&#125;&#125;
+
+&quot; &lt;space&gt;ao move current buffer into a new tab.
+nnoremap &lt;silent&gt; &lt;Space&gt;ao :&lt;C-u&gt;call &lt;SID&gt;move_window_into_tab_page(0)&lt;Cr&gt;
+</code></pre>
 
 <address class="hack-author">ujihisa</address>

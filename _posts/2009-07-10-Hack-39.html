@@ -10,7 +10,19 @@ author: Shougo
 
 <p>
 <dd>戦闘力の計算方法は単純です。以下のコードを.vimrc中に記述し、Command-line modeで<code lang="vim-script">:Scouter</code>を実行するだけです。<code lang="vim-script">:GScouter</code>は.gvimrcの戦闘力を計測する場合に使用します。</dd>
-<pre class="prettyprint"><code class="lang-vim">0</code></pre>
+<pre class="prettyprint"><code class="lang-vim">function! Scouter(file, ...)
+  let pat = '^\s*$\|^\s*"'
+  let lines = readfile(a:file)
+  if !a:0 || !a:1
+    let lines = split(substitute(join(lines, "\n"), '\n\s*\\', '', 'g'), "\n")
+  endif
+  return len(filter(lines,'v:val !~ pat'))
+endfunction
+command! -bar -bang -nargs=? -complete=file Scouter
+\        echo Scouter(empty(&lt;q-args&gt;) ? $MYVIMRC : expand(&lt;q-args&gt;), &lt;bang&gt;0)
+command! -bar -bang -nargs=? -complete=file GScouter
+\        echo Scouter(empty(&lt;q-args&gt;) ? $MYGVIMRC : expand(&lt;q-args&gt;), &lt;bang&gt;0)
+</code></pre>
 <dd>注意：正味戦闘力が1000を超えてくると、.vimrcが飽和状態となるので、.vimrcだけで戦闘力を計測するのは無意味になってきます。もはやVimScriptに精通しているのは明白なので、自分の作ったVimプラグインの行数も戦闘力に含めるべきでしょう。</dd>
 <dd>ちなみに、Shougoの戦闘力は1537です（2009年11月3日現在）。空行やコメントを含めると2663なので、行数が多いと思えても、ずいぶんコメント等で占められていることが分かります。</dd>
 <dd>追記：thincaさんが考案した、<a href="http://d.hatena.ne.jp/thinca/20091031/1257001194">新型戦闘力計測器</a>にバージョンアップしました。ありがとうございます。ちなみに、<code lang="vim-script">:Scouter!</code>で、旧式の動作をします。</dd>

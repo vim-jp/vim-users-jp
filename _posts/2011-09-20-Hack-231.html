@@ -12,15 +12,17 @@ author: ujihisa
 
 <p>では、オブジェクトと、メソッドを呼び出すことで得られる返り値の両方から補完を行うことはできないのでしょうか。</p>
 
-<p>例示します。Rubyでは、1というオブジェクトから2というオブジェクトを得るには、1に対して<code>0</code>または<code>0</code>というメソッドを呼び出すことで実現できます。</p>
+<p>例示します。Rubyでは、1というオブジェクトから2というオブジェクトを得るには、1に対して<code>succ</code>または<code>next</code>というメソッドを呼び出すことで実現できます。</p>
 
-<pre class="prettyprint"><code>0</code></pre>
+<pre class="prettyprint"><code>1.succ #=&gt; 2
+</code></pre>
 
-<p>また、<code>0</code>というオブジェクトから<code class="lang-vim">0</code>というオブジェクトを得るには、<code>0</code>というオブジェクトに<code>0</code>などのメソッドを呼び出すことで実現できます。</p>
+<p>また、<code>[:a, :b, :c]</code>というオブジェクトから<code class="lang-vim">:a</code>というオブジェクトを得るには、<code>[:a, :b, :c]</code>というオブジェクトに<code>first</code>などのメソッドを呼び出すことで実現できます。</p>
 
-<pre class="prettyprint"><code>0</code></pre>
+<pre class="prettyprint"><code>[:a, :b, :c].first #=&gt; :a
+</code></pre>
 
-<p>カーソル位置がオブジェクトの直後のメソッド呼び出しの<code>0</code>にあるとき、メソッド名が自動補完されるのを期待するのはごく自然なことと思います。</p>
+<p>カーソル位置がオブジェクトの直後のメソッド呼び出しの<code>.</code>にあるとき、メソッド名が自動補完されるのを期待するのはごく自然なことと思います。</p>
 
 <h2>解決</h2>
 
@@ -30,26 +32,29 @@ author: ujihisa
 
 <ul>
 <li>
-<p>Rubygemsパッケージ<code>0</code>をインストールします。</p>
+<p>Rubygemsパッケージ<code>methodfinder</code>をインストールします。</p>
 
-<pre class="prettyprint"><code>0</code></pre>
+<pre class="prettyprint"><code>  $ gem install methodfinder
+</code></pre>
 </li>
 <li>
 <p>neocomplcacheプラギン<a href="http://github.com/ujihisa/neco-rubymf">neco-rubymf</a>をインストールします。もしも未だにneocomplcacheをインストールしていなければ、そちらもインストールして下さい。</p>
 </li>
 </ul>
 
-<p>続いて、<code>0</code>が<code>0</code>であるバッファで、以下のように入力します(ただし<code>0</code>はカーソルのつもりです。)</p>
+<p>続いて、<code>'filetype'</code>が<code>ruby</code>であるバッファで、以下のように入力します(ただし<code>¶</code>はカーソルのつもりです。)</p>
 
-<pre class="prettyprint"><code>0</code></pre>
+<pre class="prettyprint"><code>1.¶ #=&gt; 2
+</code></pre>
 
-<p>すると、1というオブジェクトが持つメソッドでかつ返り値が2であるメソッド <code>0</code>と<code>0</code>が補完候補にあらわれます。</p>
+<p>すると、1というオブジェクトが持つメソッドでかつ返り値が2であるメソッド <code>next</code>と<code>succ</code>が補完候補にあらわれます。</p>
 
 <p><img src="/vim-users-jp/assets/images/431718249321702b98671e05463f495b.png" alt="neco-rubymf" /></p>
 
 <p>同様に、</p>
 
-<pre class="prettyprint"><code>0</code></pre>
+<pre class="prettyprint"><code>[:a, :b, :c].¶ #=&gt; :a
+</code></pre>
 
 <p>に対して</p>
 

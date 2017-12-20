@@ -5,32 +5,82 @@ date: 2010-11-22
 author: 
 ---
 <p><a href="/vim-users-jp/2010/07/14/Hack-161.html">Hack #161: Command-line windowを使いこなす</a>
-				という記事を参考に、<code class="lang-vim">0</code>キーに<code>0</code>相当の機能を割り当てた人が相当数いると思います。
+				という記事を参考に、<code class="lang-vim">:</code>キーに<code>q:</code>相当の機能を割り当てた人が相当数いると思います。
 				しかし、この設定はMacVim上でうまく動作しません。</p>
 
 <p>MacVimはGUIで動作するVimとして最も評判が悪いものですが、しかしながらMac OS X上で最も高速で動作するVimであり、泣く泣く使用し続ける方も多くいらっしゃることだと思います。(*1)</p>
 
-<p>具体的にはMacVimで<code>0</code>してCommand-line windowを開いた状態で、何か一行だけの結果を出力するコマンドを実行するとします。</p>
+<p>具体的にはMacVimで<code>q:</code>してCommand-line windowを開いた状態で、何か一行だけの結果を出力するコマンドを実行するとします。</p>
 
-<pre class="prettyprint"><code>0</code></pre>
+<pre class="prettyprint"><code>echo 1
+</code></pre>
 
 <p>ターミナルのVim、あるいはGVimでは画面下部に1と出力されたままになるのですが、MacVimのみ、何も表示されません。</p>
 
-<pre class="prettyprint"><code>0</code></pre>
+<pre class="prettyprint"><code>echo &amp;filetype
+</code></pre>
 
 <p>などが完全に使えなくなってしまいます。</p>
 
 <h2>解決</h2>
 
-<p>Command-line windowでの<kbd>&lt;Cr&gt;</kbd>キーの挙動を上書きし、(1) 一旦入力コマンドを別のところに保存し、(2) Command-line windowを閉じ、(3) 通常の<code class="lang-vim">0</code>を打鍵、(4) 先ほど入力したコマンドを展開、(5) 実行、という手順をとることにします。</p>
+<p>Command-line windowでの<kbd>&lt;Cr&gt;</kbd>キーの挙動を上書きし、(1) 一旦入力コマンドを別のところに保存し、(2) Command-line windowを閉じ、(3) 通常の<code class="lang-vim">:</code>を打鍵、(4) 先ほど入力したコマンドを展開、(5) 実行、という手順をとることにします。</p>
 
-<p>前提として、<a href="/vim-users-jp/2010/07/14/Hack-161.html">Hack #161の設定</a> が既になされているものとします。その上で、以下のコードを<code>0</code>に記述します。</p>
+<p>前提として、<a href="/vim-users-jp/2010/07/14/Hack-161.html">Hack #161の設定</a> が既になされているものとします。その上で、以下のコードを<code>~/.vimrc</code>に記述します。</p>
 
-<pre class="prettyprint"><code class="lang-vim">0</code></pre>
+<pre class="prettyprint"><code class="lang-vim">autocmd CmdwinEnter * nnoremap &lt;buffer&gt;&lt;expr&gt; &lt;Cr&gt; CmdwinRun()
+autocmd CmdwinEnter * inoremap &lt;buffer&gt;&lt;expr&gt; &lt;Cr&gt; CmdwinRun()
+function! CmdwinRun()
+  let a = getline(line('.'))
+  return &quot;\&lt;Esc&gt;\&lt;C-c&gt;\&lt;C-c&gt;:&quot; . a . &quot;\&lt;Cr&gt;&quot;
+endfunction
+</code></pre>
 
-<p>なお、他にもいろいろあって、最終的に著者の<code>0</code>のCommand-line window関係の設定は以下のようになっています。</p>
+<p>なお、他にもいろいろあって、最終的に著者の<code>~/.vimrc</code>のCommand-line window関係の設定は以下のようになっています。</p>
 
-<pre class="prettyprint"><code class="lang-vim">0</code></pre>
+<pre class="prettyprint"><code class="lang-vim">&quot; No Command-line window by Shougo /vim-users-jp/2010/07/14/Hack-161.html &#123;&#123;&#123;
+nnoremap &lt;sid&gt;(command-line-enter) q:
+xnoremap &lt;sid&gt;(command-line-enter) q:
+nnoremap &lt;sid&gt;(command-line-norange) q:&lt;C-u&gt;
+
+nmap :  &lt;sid&gt;(command-line-enter)
+xmap :  &lt;sid&gt;(command-line-enter)
+
+&quot; I added
+nnoremap q: q:&lt;Esc&gt;
+
+autocmd MyAutoCmd CmdwinEnter * call s:init_cmdwin()
+
+&quot; MacVim is shit
+autocmd CmdwinEnter * nnoremap &lt;buffer&gt;&lt;expr&gt; &lt;Cr&gt; CmdwinRun()
+autocmd CmdwinEnter * inoremap &lt;buffer&gt;&lt;expr&gt; &lt;Cr&gt; CmdwinRun()
+function! CmdwinRun()
+  let a = getline(line('.'))
+  return &quot;\&lt;Esc&gt;\&lt;C-c&gt;\&lt;C-c&gt;:&quot; . a . &quot;\&lt;Cr&gt;&quot;
+endfunction
+
+function! s:init_cmdwin()
+  nnoremap &lt;buffer&gt; q :&lt;C-u&gt;quit&lt;CR&gt;
+  nnoremap &lt;buffer&gt; &lt;TAB&gt; :&lt;C-u&gt;quit&lt;CR&gt;
+  inoremap &lt;buffer&gt;&lt;expr&gt;&lt;CR&gt; pumvisible() ? &quot;\&lt;C-y&gt;\&lt;CR&gt;&quot; : &quot;\&lt;CR&gt;&quot;
+  inoremap &lt;buffer&gt;&lt;expr&gt;&lt;C-h&gt; pumvisible() ? &quot;\&lt;C-y&gt;\&lt;C-h&gt;&quot; : &quot;\&lt;C-h&gt;&quot;
+  &quot;inoremap &lt;buffer&gt;&lt;expr&gt;&lt;BS&gt; pumvisible() ? &quot;\&lt;C-y&gt;\&lt;C-h&gt;&quot; : &quot;\&lt;C-h&gt;&quot;
+  &quot;I added
+  inoremap &lt;buffer&gt;&lt;expr&gt;&lt;BS&gt; col('.') == 1 ? &quot;\&lt;ESC&gt;:quit\&lt;CR&gt;&quot; : pumvisible() ? &quot;\&lt;C-y&gt;\&lt;C-h&gt;&quot; : &quot;\&lt;C-h&gt;&quot;
+  inoremap &lt;buffer&gt;&lt;expr&gt;: col('.') == 1 ? &quot;VimProcBang &quot; : &quot;:&quot;
+  inoremap &lt;buffer&gt;&lt;expr&gt; \  smartchr#one_of('~/', '\')
+
+  &quot; Completion.
+  inoremap &lt;buffer&gt;&lt;expr&gt;&lt;TAB&gt;  pumvisible() ? &quot;\&lt;C-n&gt;&quot; : &quot;\&lt;TAB&gt;&quot;
+
+  &quot; HootSuite
+  inoreabbrev &lt;buffer&gt; c: ./core/mvc/controllers/mobile/
+  inoreabbrev &lt;buffer&gt; v: ./core/mvc/views/mobile/
+
+  startinsert!
+endfunction
+&quot; &#125;&#125;&#125;
+</code></pre>
 
 <p>MacVim固有のバグ回避コードが入っていますが、MacVim以外のVimでも正常に動作するはずです。</p>
 

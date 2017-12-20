@@ -15,18 +15,37 @@ author: ujihisa
 
 <p>例えばRubyで以下のようなコードを編集中に、</p>
 
-<pre class="prettyprint"><code>0</code></pre>
+<pre class="prettyprint"><code>...
 
-<p><code>0</code>の行にカーソルがあり、そこから次の空行までをまとめてRubyとしての正しいインデントに整形するには<kbd>=}</kbd>とタイプします。
-				これは<kbd>=</kbd>を<kbd>}</kbd> (次の空行までを示す<code>0</code>)まで適用するという意味です。</p>
+def fact(n)
+if n == 0
+0
+else
+n * fact(n - 1)
+end
+end
+
+...
+</code></pre>
+
+<p><code>def fact(n)</code>の行にカーソルがあり、そこから次の空行までをまとめてRubyとしての正しいインデントに整形するには<kbd>=}</kbd>とタイプします。
+				これは<kbd>=</kbd>を<kbd>}</kbd> (次の空行までを示す<code>motion</code>)まで適用するという意味です。</p>
 
 <p>これを貼付け後に貼付けした範囲を指定して行なうことで本問題が解決します。まず<kbd>P</kbd>で貼付けを行ない、カーソル位置が貼付け位置の手前にある状態のまま移動せずに、<kbd>=']</kbd>を行い、貼付けしたコード片の末尾までを指定してインデントを整えさせます。</p>
 
-<pre class="prettyprint"><code>0</code></pre>
+<pre class="prettyprint"><code>def fact(n)
+  if n == 0
+    0
+  else
+    n * fact(n - 1)
+  end
+end
+</code></pre>
 
 <p>必要ならば、<kbd>P</kbd>自体を<kbd>P=']</kbd>で置き換えることで、より簡単に行なうことができます。</p>
 
-<pre class="prettyprint"><code class="lang-vim">0</code></pre>
+<pre class="prettyprint"><code class="lang-vim">nnoremap P P=']
+</code></pre>
 
 <h2>解決2 手動で頑張る</h2>
 

@@ -178,6 +178,7 @@ function! s:html_escape(str)
   let str = a:str
   let str = substitute(str, '<', '\&lt;', 'g')
   let str = substitute(str, '>', '\&gt;', 'g')
+  return str
 endfunction
 
 function! s:pre(str) abort

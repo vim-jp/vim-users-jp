@@ -14,7 +14,7 @@ author: ujihisa
 
 <h2>黒背景vsその他の配色</h2>
 
-<p>多くの方は<code>0</code>などの黒背景のカラースキームを用いていると思います。私もです。</p>
+<p>多くの方は<code>desert</code>などの黒背景のカラースキームを用いていると思います。私もです。</p>
 
 <p><img src="/vim-users-jp/assets/images/c3a8d543228b3c82af9fd879756b8b88.png" alt="" /></p>
 
@@ -29,16 +29,16 @@ author: ujihisa
 <p>しかしながら、多くの他のGUIアプリケーションは黒背景ではないです。特にウェブページなどは、白背景の方がモダンでイケている印象を与えるとさえいわれています(<em>1)。
 				いずれにせよVim以外の他のほとんどのアプリケーションが白背景であるのならば、フォーカスを変更するたびにダイナミックに視界全体の色使いが変わるため、かえって目が疲れるのではないかという問題点も指摘されています(</em>2)。</p>
 
-<p>思い切って先入観を捨て、黒背景以外のカラースキームも試してみると、長い目でみての開発効率の向上がみられるかもしれません。著者のおすすめの明るいカラースキームは、<code>0</code>と<code>0</code>です。</p>
+<p>思い切って先入観を捨て、黒背景以外のカラースキームも試してみると、長い目でみての開発効率の向上がみられるかもしれません。著者のおすすめの明るいカラースキームは、<code>newspaper</code>と<code>pyte</code>です。</p>
 
 <p><img src="/vim-users-jp/assets/images/257c1f9fae6e7ac0198f583b1caeb685.png" alt="newspaper" />
 <img src="/vim-users-jp/assets/images/cef2aecfa95affca69c3f034a63e7733.png" alt="pyte" /></p>
 
 <h2>tabpagecolorscheme</h2>
 
-<p>読者のほとんどの方は<code>0</code>などを用いていると思います。Vimのタブごとにディレクトリ情報を持たせ、このタブではこのディレクトリ、またこちらのタブではこちらのディレクトリ、といったようにタブごとに別のカレントディレクトリを保持させたままにすることで、複数のプロジェクトを容易に並行していじることができます。</p>
+<p>読者のほとんどの方は<code>TabpageCD</code>などを用いていると思います。Vimのタブごとにディレクトリ情報を持たせ、このタブではこのディレクトリ、またこちらのタブではこちらのディレクトリ、といったようにタブごとに別のカレントディレクトリを保持させたままにすることで、複数のプロジェクトを容易に並行していじることができます。</p>
 
-<p>同様に、タブごとにカラースキーム情報を保持させる<code>0</code>というプラギンがあります。</p>
+<p>同様に、タブごとにカラースキーム情報を保持させる<code>tabpagecolorscheme</code>というプラギンがあります。</p>
 
 <ul>
 <li><a href="http://www.vim.org/scripts/script.php?script_id=3358">http://www.vim.org/scripts/script.php?script_id=3358</a></li>
@@ -46,20 +46,22 @@ author: ujihisa
 
 <p>通常は</p>
 
-<pre class="prettyprint"><code class="lang-vim">0</code></pre>
+<pre class="prettyprint"><code class="lang-vim">:colorscheme ujihisa
+</code></pre>
 
 <p>などとしてカラースキームを指定するところを、</p>
 
-<pre class="prettyprint"><code class="lang-vim">0</code></pre>
+<pre class="prettyprint"><code class="lang-vim">:Tcolorscheme ujihisa
+</code></pre>
 
 <p>とすることによって、カレントタブのためのカラースキームを指定することができます。</p>
 
 <p>もっとも、わざわざ上記のようなコマンドを直接打鍵することは稀でしょう。
-				このプラギンと<code>0</code>を連携させることで、<code class="lang-vim">0</code>からカレントタブのためのカラースキームを指定することができます。</p>
+				このプラギンと<code>unite-colorscheme</code>を連携させることで、<code class="lang-vim">:Unite colorscheme</code>からカレントタブのためのカラースキームを指定することができます。</p>
 
 <h2>補足: unite-beautiful-attack</h2>
 
-<p>カラースキームの無限の可能性を示してくれる実験的プラギン<code>0</code>というものがあります。</p>
+<p>カラースキームの無限の可能性を示してくれる実験的プラギン<code>unite-beautiful-attack</code>というものがあります。</p>
 
 <p><object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" width="480" height="296" id="utv373242" name="utv_n_204421"><param name="flashvars" value="loc=%2F&amp;autoplay=false&amp;vid=11358539&amp;locale=en_US&amp;hasticket=false&amp;id=11358539&amp;v3=1" /><param name="allowfullscreen" value="true" /><param name="allowscriptaccess" value="always" /><param name="src" value="http://www.ustream.tv/flash/viewer.swf" /><embed flashvars="loc=%2F&amp;autoplay=false&amp;vid=11358539&amp;locale=en_US&amp;hasticket=false&amp;id=11358539&amp;v3=1" width="480" height="296" allowfullscreen="true" allowscriptaccess="always" id="utv373242" name="utv_n_204421" src="http://www.ustream.tv/flash/viewer.swf" type="application/x-shockwave-flash" /></object></p>
 

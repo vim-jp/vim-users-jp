@@ -8,22 +8,29 @@ author: Shougo
 
 <h2>Vimのバージョンをチェックする方法</h2>
 
-<p>Vimのバージョンをチェックするには、<code>0</code>変数をチェックすればよいです。百の位がVimのメジャーバージョン、十の位と一の位がマイナーバージョンを表します。例えばVim 7.2で<code class="lang-vim">0</code>すると、<code>0</code>が表示されます。<code>0</code>ではありません。Vimがバージョン7以上であることをチェックするには次のようにします。</p>
+<p>Vimのバージョンをチェックするには、<code>v:version</code>変数をチェックすればよいです。百の位がVimのメジャーバージョン、十の位と一の位がマイナーバージョンを表します。例えばVim 7.2で<code class="lang-vim">:echo v:version</code>すると、<code>702</code>が表示されます。<code>720</code>ではありません。Vimがバージョン7以上であることをチェックするには次のようにします。</p>
 
-<pre class="prettyprint"><code>0</code></pre>
+<pre class="prettyprint"><code>if v:version &lt; 700
+    echoerr 'Does not work this version of Vim "' . v:version . '".'
+    finish
+endif
+</code></pre>
 
-<p>ちなみに、パッチレベルは<code>0</code>などでチェックします。詳しくは、<code class="lang-vim">0</code>を参照してください。</p>
+<p>ちなみに、パッチレベルは<code>has('patch100')</code>などでチェックします。詳しくは、<code class="lang-vim">:help has-patch</code>を参照してください。</p>
 
 <h2>有効になっている拡張機能をチェックする方法</h2>
 
-<p>自分のVimがどのような拡張機能を持っているかは、<code class="lang-vim">0</code>を実行するのが早いですが、
-				プラグインがチェックする場合には使えません。スクリプトでチェックするには、<code>0</code>を用います。
+<p>自分のVimがどのような拡張機能を持っているかは、<code class="lang-vim">:version</code>を実行するのが早いですが、
+				プラグインがチェックする場合には使えません。スクリプトでチェックするには、<code>has()</code>を用います。
 				たとえば、Windowsかどうかをチェックするには、</p>
 
-<pre class="prettyprint"><code>0</code></pre>
+<pre class="prettyprint"><code>if has('win32') || has('win64')
+    " Windowsの場合の処理
+endif
+</code></pre>
 
-<p>です。GVimかどうかをチェックするには、<code>0</code>です。これは<code>0</code>と間違えやすいので気をつけてください。<code>0</code>はGUI機能付きでコンパイルされているかどうかをチェックします。<code>0</code>でうまく条件を切り分ければ、.gvimrcを用いずにGVim用の設定を.vimrcだけで完結させることも可能です。
-				ただし、最初vimで起動して:guiでGUIになる場合は.vimrcの<code>0</code>設定は読み込まれません。注意してください。（mattnさん情報）</p>
+<p>です。GVimかどうかをチェックするには、<code>has('gui_running')</code>です。これは<code>has('gui')</code>と間違えやすいので気をつけてください。<code>has('gui')</code>はGUI機能付きでコンパイルされているかどうかをチェックします。<code>has('gui_running')</code>でうまく条件を切り分ければ、.gvimrcを用いずにGVim用の設定を.vimrcだけで完結させることも可能です。
+				ただし、最初vimで起動して:guiでGUIになる場合は.vimrcの<code>has('gui_running')</code>設定は読み込まれません。注意してください。（mattnさん情報）</p>
 
 <h2>使用上の注意</h2>
 

@@ -22,33 +22,44 @@ author: ujihisa
 
 <p>Vim scriptを読んでいると以下のようなコードを比較的頻繁に見かけるのではないでしょうか。</p>
 
-<pre class="prettyprint"><code>0</code></pre>
+<pre class="prettyprint"><code>if !exists('g:aaa_bbb')
+  let g:aaa_bbb = 'something default'
+endif
+</code></pre>
 
 <p>特定のグローバル変数が存在しないときのみデフォルトの値を入れるときのパターンです。これは一行で宣言的に書きたいですよね。かといって、これのためだけに別の関数を用意するのも、健康的でなさそうです。</p>
 
 <h2>解決</h2>
 
-<p>実はグローバル変数の一覧を<code>0</code>で取得することができます。同様にバッファローカル変数一覧は<code>0</code>、スクリプトローカル変数一覧は<code>0</code>など。これは変数名がキーで変数の値が値の辞書となっています。</p>
+<p>実はグローバル変数の一覧を<code>g:</code>で取得することができます。同様にバッファローカル変数一覧は<code>b:</code>、スクリプトローカル変数一覧は<code>s:</code>など。これは変数名がキーで変数の値が値の辞書となっています。</p>
 
-<pre class="prettyprint"><code>0</code></pre>
+<pre class="prettyprint"><code>echo g:hello
+</code></pre>
 
 <p>は、実は以下のように書くことができます。</p>
 
-<pre class="prettyprint"><code>0</code></pre>
+<pre class="prettyprint"><code>echo (g:).hello
+echo (g:)['hello']
+</code></pre>
 
-<p>いずれもそのキーがなければ実行時エラーをだしてしまいます。しかし、<code>0</code>関数を用いれば、デフォルト値を使いつつその値に参照することができます。</p>
+<p>いずれもそのキーがなければ実行時エラーをだしてしまいます。しかし、<code>get()</code>関数を用いれば、デフォルト値を使いつつその値に参照することができます。</p>
 
-<pre class="prettyprint"><code>0</code></pre>
+<pre class="prettyprint"><code>echo get(g:, 'hello', 'the default value')
+</code></pre>
 
-<p>これは<code>0</code>が定義されていればその値を表示、定義されていなければ<code>0</code>を表示します。</p>
+<p>これは<code>g:hello</code>が定義されていればその値を表示、定義されていなければ<code>the default value</code>を表示します。</p>
 
 <p>したがって、元々の問題は、</p>
 
-<pre class="prettyprint"><code>0</code></pre>
+<pre class="prettyprint"><code>if !exists('g:aaa_bbb')
+  let g:aaa_bbb = 'something default'
+endif
+</code></pre>
 
 <p>以下のように一行で記述することができます。</p>
 
-<pre class="prettyprint"><code>0</code></pre>
+<pre class="prettyprint"><code>let g:aaa_bbb = get(g:, 'aaa_bbb', 'something default')
+</code></pre>
 
 <p>美しいですね。これがVim script使いの生きる道といえるのではないでしょうか。</p>
 

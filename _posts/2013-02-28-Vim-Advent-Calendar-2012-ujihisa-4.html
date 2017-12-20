@@ -16,18 +16,19 @@ author: ujihisa
 
 <h2>:VimShellSendString</h2>
 
-<p>VimShellの<code>0</code>ならびに<code class="lang-vim">0</code>で立ち上げた外部プロセスにメッセージを投げる便利な方法として<code class="lang-vim">0</code>コマンドがあります。これは引数として与えられた文字列または選択範囲を&#8221;background buffer&#8221;に投げます。</p>
+<p>VimShellの<code>iexe</code>ならびに<code class="lang-vim">:VimShellInteractive</code>で立ち上げた外部プロセスにメッセージを投げる便利な方法として<code class="lang-vim">:VimShellSendString</code>コマンドがあります。これは引数として与えられた文字列または選択範囲を&#8221;background buffer&#8221;に投げます。</p>
 
 <p>たとえばfiletypeがscalaであるファイルを編集中は、</p>
 
 <ol>
 <li>ファイルを保存する</li>
-<li>sbtに<code>0</code>メッセージを送って適切にコンパイルできるかどうか確認する</li>
+<li>sbtに<code>compile</code>メッセージを送って適切にコンパイルできるかどうか確認する</li>
 </ol>
 
 <p>を順にまとめて行う必要がかなり頻繁にあります。</p>
 
-<pre class="prettyprint"><code class="lang-vim">0</code></pre>
+<pre class="prettyprint"><code class="lang-vim">nnoremap &lt;Space&gt;m :&lt;C-u&gt;update&lt;Cr&gt;:VimShellSendString compile&lt;Cr&gt;
+</code></pre>
 
 <p>などと設定することでワンキーで保存・コンパイルを行うことができ、便利です。quickrunやsyntasticやwatchdogsなどのプラギンと違い、すでにライブラリの読み込みなどが完了して起動しているプロセスを再利用するので、10~30倍くらい高速で動作します。</p>
 
@@ -46,16 +47,49 @@ author: ujihisa
 
 <h2>解決</h2>
 
-<p><code>0</code>スコープの変数、<code>0</code>, <code>0</code>の合わせ技で対処します。</p>
+<p><code>t:</code>スコープの変数、<code>vimshell#interactive#set_send_buffer()</code>, <code>vimshell#interactive#send()</code>の合わせ技で対処します。</p>
 
-<pre class="prettyprint"><code class="lang-vim">0</code></pre>
+<pre class="prettyprint"><code class="lang-vim">function! s:ujihisa_start_sbt()
+  execute 'VimShellInteractive sbt'
+  stopinsert
+  let t:sbt_bufname = bufname('%')
+  if !has_key(t:, 'sbt_cmds')
+    let t:sbt_cmds = [input('t:sbt_cmds[0] = ')]
+  endif
+  wincmd p
+endfunction
 
-<p>上記のように<code>0</code>に記述し、scalaのファイルを編集するときに<code>0</code>や<code class="lang-vim">0</code>のかわりに<code class="lang-vim">0</code>コマンドを使います。以後、コンパイルなど行いたいときには<code>0</code>を打鍵します。なお<code>0</code>以外のコマンドにも対応するため、<code>0</code>という変数を用意しています。ここに実行させたいコマンド列を指定します。なお初回起動などでそのタブにこの変数がセットされていないときは、入力を求められます。</p>
+command! -nargs=0 StartSBT call &lt;SID&gt;ujihisa_start_sbt()
 
-<p>これで<code>0</code>を打鍵するだけでファイルの保存・コンパイルができ、しかも30倍高速化しました。Scalaにおける開発がはかどります。</p>
+function! s:sbt_run()
+  let cmds = get(t:, 'sbt_cmds', 'run')
+
+  let sbt_bufname = get(t:, 'sbt_bufname')
+  if sbt_bufname !=# ''
+    call vimshell#interactive#set_send_buffer(sbt_bufname)
+    call vimshell#interactive#send(cmds)
+  else
+    echoerr 'try StartSBT'
+  endif
+endfunction
+
+function! s:vimrc_scala()
+  nnoremap &lt;buffer&gt; &lt;Space&gt;m :&lt;C-u&gt;write&lt;Cr&gt;:call &lt;SID&gt;sbt_run()&lt;Cr&gt;
+endfunction
+
+augroup vimrc_scala
+  autocmd!
+  autocmd FileType scala call s:vimrc_scala()
+  autocmd FileType scala nnoremap &lt;buffer&gt; &lt;Space&gt;st :&lt;C-u&gt;StartSBT
+augroup END
+</code></pre>
+
+<p>上記のように<code>~/.vimrc</code>に記述し、scalaのファイルを編集するときに<code>iexe sbt</code>や<code class="lang-vim">:VimShellInteractive sbt</code>のかわりに<code class="lang-vim">:StartSBT</code>コマンドを使います。以後、コンパイルなど行いたいときには<code>&lt;Space&gt;m</code>を打鍵します。なお<code>compile</code>以外のコマンドにも対応するため、<code>t:sbt_cmds</code>という変数を用意しています。ここに実行させたいコマンド列を指定します。なお初回起動などでそのタブにこの変数がセットされていないときは、入力を求められます。</p>
+
+<p>これで<code>&lt;Space&gt;m</code>を打鍵するだけでファイルの保存・コンパイルができ、しかも30倍高速化しました。Scalaにおける開発がはかどります。</p>
 
 <h2>余談</h2>
 
-<p><a href="http://hootsuite.com/">HootSuite</a>という会社はHootSuiteの実装に一部Scalaを用いています。Scala開発チームの約50%の人が上記テクニックを用いて<code>0</code>だけで保存・コンパイルなどの定形操作を自動化かつ高速化しています。</p>
+<p><a href="http://hootsuite.com/">HootSuite</a>という会社はHootSuiteの実装に一部Scalaを用いています。Scala開発チームの約50%の人が上記テクニックを用いて<code>|&lt;Space&gt;m|</code>だけで保存・コンパイルなどの定形操作を自動化かつ高速化しています。</p>
 
 <address class="hack-author">ujihisa</address>

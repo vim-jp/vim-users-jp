@@ -8,15 +8,15 @@ author: Shougo
 
 <h2>キーワード補完とは</h2>
 
-<p>neocomplcacheのキーワード補完は、<code>0</code>や<code>0</code>で呼び出すことのできるVim組み込みのキーワード補完を模倣して設計されています。
+<p>neocomplcacheのキーワード補完は、<code>&lt;C-n&gt;</code>や<code>&lt;C-p&gt;</code>で呼び出すことのできるVim組み込みのキーワード補完を模倣して設計されています。
 				言語ごとにキーワードパターンを定義して、一括して候補を検索できるのが最大の特徴です。
-				使用するキーワードパターンは<code>0</code>で定義されています。</p>
+				使用するキーワードパターンは<code>g:NeoComplCache_KeywordPatterns</code>で定義されています。</p>
 
 <h2>pluginとcomplfuncの違い</h2>
 
 <p>neocomplcacheには補完候補を収集するために、pluginとcomplfuncという二つの拡張プラグインが存在します。
-				それぞれ、<code>0</code>と<code>0</code>に配置します。
-				pluginは<code>0</code>から一括して呼びだされる拡張プラグインで、単純なため実装が比較的簡単です。
+				それぞれ、<code>autoload/neocomplcache/plugin</code>と<code>autoload/neocomplcache/complfunc</code>に配置します。
+				pluginは<code>keyword_complete.vim</code>から一括して呼びだされる拡張プラグインで、単純なため実装が比較的簡単です。
 				complfuncは補完開始位置を拡張プラグイン側で計算しないといけません。
 				その代わり、補完開始位置は自由に決定できるので、ファイル名補完のような複雑な補完を実装できます。
 				初期のneocomplcacheでは、complfuncは一つのプラグインしか呼べないという制限がありました。
@@ -30,7 +30,7 @@ author: Shougo
 
 <h3>dictionary_complete.vim</h3>
 
-<p><code>0</code>から補完候補を収集するプラグインです。</p>
+<p><code>g:NeoComplCache_DictionaryFileTypeLists</code>から補完候補を収集するプラグインです。</p>
 
 <h3>include_complete.vim</h3>
 
@@ -52,7 +52,7 @@ author: Shougo
 
 <h3>completefunc_complete.vim</h3>
 
-<p>補完関数を登録することで、自動呼び出しするプラグインです。neocomplcacheは<code>0</code>を上書きしてしまうので、その対策に使えます。
+<p>補完関数を登録することで、自動呼び出しするプラグインです。neocomplcacheは<code>completefunc</code>を上書きしてしまうので、その対策に使えます。
 				手動補完として補完関数を個別に呼び出しすることもできます。</p>
 
 <h3>filename_complete.vim</h3>
@@ -69,6 +69,6 @@ author: Shougo
 
 <h3>vim_complete.vim</h3>
 
-<p>Vimのオムニ補完機能を提供するプラグインです。Vim標準の<code>0</code>よりも機能が拡張されていて、ローカル変数や引数の補完も可能です。</p>
+<p>Vimのオムニ補完機能を提供するプラグインです。Vim標準の<code>&lt;C-x&gt;&lt;C-v&gt;</code>よりも機能が拡張されていて、ローカル変数や引数の補完も可能です。</p>
 
 <address class="hack-author">Shougo</address>

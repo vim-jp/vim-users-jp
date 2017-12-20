@@ -24,11 +24,13 @@ author: thinca
 
 <p>例えば、</p>
 
-<pre class="prettyprint"><code>0</code></pre>
+<pre class="prettyprint"><code>\w\+\%(()\)\@=
+</code></pre>
 
 <p>とすると直後に &quot;()&quot; が来る単語にマッチします。また、</p>
 
-<pre class="prettyprint"><code>0</code></pre>
+<pre class="prettyprint"><code>\%(function\s\+\)\@&lt;!\w\+
+</code></pre>
 
 <p>とすると直前に &quot;function&quot; と空白文字が来ない単語にマッチします。</p>
 
@@ -36,11 +38,13 @@ author: thinca
 
 <p>\zs や \ze は肯定先読み/肯定後読みの省略形と考える事ができます。すなわち、</p>
 
-<pre class="prettyprint"><code>0</code></pre>
+<pre class="prettyprint"><code>foo\zsbar\ze\baz
+</code></pre>
 
 <p>と</p>
 
-<pre class="prettyprint"><code>0</code></pre>
+<pre class="prettyprint"><code>\%(foo\)\@&lt;=bar\%(baz\)\@=
+</code></pre>
 
 <p>は同義になります。ただし、読み易さや処理速度を考えると可能ならば前者を使う方が良いでしょう。</p>
 

@@ -6,7 +6,7 @@ author: thinca
 ---
 <p>Vim にはタブやインデントの挙動を制御するオプションが多数あり、細かい指定ができます。</p>
 
-<p>本 Hack ではこれらに関するオプションについて簡単に紹介します。一部説明を省略している箇所もあります。より詳しい説明が知りたい場合は <code class="lang-vim">0</code> で各オプションの項目を見てみてください。</p>
+<p>本 Hack ではこれらに関するオプションについて簡単に紹介します。一部説明を省略している箇所もあります。より詳しい説明が知りたい場合は <code class="lang-vim">:help</code> で各オプションの項目を見てみてください。</p>
 
 <p>また、ここで紹介しているもので全てではありません。より高度なオプションについては省略しています。</p>
 
@@ -37,7 +37,13 @@ author: thinca
 
 <p>この場合を含み、<code class="option">'expandtab'</code> が off の場合、タブ文字だけではインデントが行えない場合があります。その場合は、半端な部分はスペースになります。</p>
 
-<pre class="prettyprint"><code>0</code></pre>
+<pre class="prettyprint"><code>&quot; :set tabstop=8 shiftwidth=4 noexpandtab の場合
+&quot; わかりやすくするためにタブ文字を &gt;------- で、スペースを _ で表示している
+hoge
+____hoge
+&gt;-------hoge
+&gt;-------____hoge
+</code></pre>
 
 <h3><code class="option">'softtabstop'</code> <code class="option">'sts'</code></h3>
 
@@ -60,7 +66,10 @@ author: thinca
 <p>この自動で挿入されたインデントは、何も入力せずに Insert-mode の抜けたりさらに新しい行を作ったりした場合削除されます。
 				この動作を望まない場合は、新しい行を挿入した際に何かを入力してすぐ消すような Key mapping を定義するといいでしょう。</p>
 
-<pre class="prettyprint"><code class="lang-vim">0</code></pre>
+<pre class="prettyprint"><code class="lang-vim">nnoremap o oX&lt;C-h&gt;
+nnoremap O OX&lt;C-h&gt;
+inoremap &lt;CR&gt; &lt;CR&gt;X&lt;C-h&gt;
+</code></pre>
 
 <h3><code class="option">'copyindent'</code> <code class="option">'ci'</code></h3>
 

@@ -41,13 +41,15 @@ author: Sora Harakami
 
 <p>投稿した.vimrcは、</p>
 
-<pre class="prettyprint"><code>0</code></pre>
+<pre class="prettyprint"><code>http://soralabo.net/s/vrcb/s/ユーザー名
+</code></pre>
 
 <p>から閲覧できます。削除メニューなどもそこから可能です。</p>
 
 <p>.gvimrcは</p>
 
-<pre class="prettyprint"><code>0</code></pre>
+<pre class="prettyprint"><code>http://soralabo.net/s/vrcb/sg/ユーザー名
+</code></pre>
 
 <p>から閲覧できます。</p>
 
@@ -55,7 +57,12 @@ author: Sora Harakami
 
 <p>.vimrcに以下を記述します。</p>
 
-<pre class="prettyprint"><code class="lang-vim">0</code></pre>
+<pre class="prettyprint"><code class="lang-vim">augroup VimRcBox
+    autocmd!
+    autocmd BufWritePost $MYVIMRC RcbVimrc
+    autocmd BufWritePost $MYGVIMRC RcbGVimrc
+augroup END
+</code></pre>
 
 <p>これで自動アップデートできます。</p>
 

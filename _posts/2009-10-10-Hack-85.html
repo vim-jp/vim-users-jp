@@ -12,7 +12,8 @@ author: thinca
 <p>\%[<var>string</var>] とすることで、<var>string</var> の部分は任意に省略可能になります。この場合、全てを省略するパターンにもマッチするので気を付けてください。
 				例えば冒頭のパターンは</p>
 
-<pre class="prettyprint"><code class="lang-vim">0</code></pre>
+<pre class="prettyprint"><code class="lang-vim">:\&lt;w\%[rite]\&gt;
+</code></pre>
 
 <p>となります。単語境界をはっきりさせるために <a href="/vim-users-jp/2009/09/30/Hack-80.html">Hack #80: 単語境界にマッチさせる</a> で紹介した \&lt; \&gt; を使用しています。</p>
 

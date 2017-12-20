@@ -8,7 +8,7 @@ author: Shougo
 
 <h2>:enewを使う</h2>
 
-<p>まず考えられるのが、<code class="lang-vim">0</code>コマンドを用いることです。何も特別な設定はいらず、任意のキーにマッピングをしておけば、便利に使えるのですが、バッファを切り換えてしまったときに内容が失われてしまうという欠点があります。これのおかげでよく事故が起こったため、私は使用していません。</p>
+<p>まず考えられるのが、<code class="lang-vim">:enew</code>コマンドを用いることです。何も特別な設定はいらず、任意のキーにマッピングをしておけば、便利に使えるのですが、バッファを切り換えてしまったときに内容が失われてしまうという欠点があります。これのおかげでよく事故が起こったため、私は使用していません。</p>
 
 <h2>scratch.vimを使う</h2>
 
@@ -21,11 +21,24 @@ author: Shougo
 
 <h2>:JunkFileを用いる</h2>
 
-<p>私は次の<code class="lang-vim">0</code>コマンドを使っています。このコマンドを実行すると、<code>0</code>ディレクトリに日付の名前が付いたファイルを自動生成します。
-				ファイルには拡張子を与えることができるので、使い捨てのスクリプトを書く際にも有用です。もちろん、<code class="lang-vim">0</code>を用いて手動でfiletypeを設定することもできます。thincaさんの作成した<a href="http://github.com/thinca/vim-quickrun">quickrun</a>を用いれば、スクリプトの実行も簡単です。ファイルは保存されているので、ちょっとしたメモ書きにも使えます。
-				私は<a href="http://github.com/Shougo/unite.vim">unite.vim</a>の<code>0</code>で以前のメモを参照する、ということをよくやります。何かのキーにマッピングしておくと良いでしょう。</p>
+<p>私は次の<code class="lang-vim">:JunkFile</code>コマンドを使っています。このコマンドを実行すると、<code>~/.vim_junk</code>ディレクトリに日付の名前が付いたファイルを自動生成します。
+				ファイルには拡張子を与えることができるので、使い捨てのスクリプトを書く際にも有用です。もちろん、<code class="lang-vim">:setfiletype</code>を用いて手動でfiletypeを設定することもできます。thincaさんの作成した<a href="http://github.com/thinca/vim-quickrun">quickrun</a>を用いれば、スクリプトの実行も簡単です。ファイルは保存されているので、ちょっとしたメモ書きにも使えます。
+				私は<a href="http://github.com/Shougo/unite.vim">unite.vim</a>の<code>file_mru</code>で以前のメモを参照する、ということをよくやります。何かのキーにマッピングしておくと良いでしょう。</p>
 
-<pre class="prettyprint"><code class="lang-vim">0</code></pre>
+<pre class="prettyprint"><code class="lang-vim">" Open junk file."&#123;&#123;&#123;
+command! -nargs=0 JunkFile call s:open_junk_file()
+function! s:open_junk_file()
+  let l:junk_dir = $HOME . '/.vim_junk'. strftime('/%Y/%m')
+  if !isdirectory(l:junk_dir)
+    call mkdir(l:junk_dir, 'p')
+  endif
+
+  let l:filename = input('Junk Code: ', l:junk_dir.strftime('/%Y-%m-%d-%H%M%S.'))
+  if l:filename != ''
+    execute 'edit ' . l:filename
+  endif
+endfunction"&#125;&#125;&#125;
+</code></pre>
 
 <p>このスクリプトはるびきちさんの<a href="http://www.emacswiki.org/emacs/open-junk-file.el">open-junk-file.el</a>にインスパイアされました。</p>
 

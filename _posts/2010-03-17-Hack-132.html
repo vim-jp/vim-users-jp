@@ -8,7 +8,7 @@ author: tsukkee
 
 <h2>そもそもPythonインタフェースを使うには？</h2>
 
-<p>Vimを <code>0</code> 付きでconfigureしてビルドする！だけではあんまりなので、それ以外の方法を一部紹介します。</p>
+<p>Vimを <code>--enable-pythoninterp</code> 付きでconfigureしてビルドする！だけではあんまりなので、それ以外の方法を一部紹介します。</p>
 
 <ul>
 <li>Mac<ul>
@@ -28,21 +28,37 @@ author: tsukkee
 
 <p>以下のコマンドで1が返ればOKです。</p>
 
-<pre class="prettyprint"><code class="lang-vim">0</code></pre>
+<pre class="prettyprint"><code class="lang-vim">:echo has('python')</code></pre>
 
 <h2>VimScriptからPythonを呼ぶ</h2>
 
 <p>:pythonコマンドを使います。</p>
 
-<pre class="prettyprint"><code>0</code></pre>
+<pre class="prettyprint"><code>" VimScript
+:python print "hoge"; print "hoge"
+
+:python &lt;&lt;EOM
+print "fuga"
+print "fuga"
+EOM</code></pre>
 
 <p>といった感じで，そのまま引数にPythonスクリプトを渡すか，複数行のスクリプトを渡すときは2番目のようにヒアドキュメント風にすることでPythonを実行できます。Pythonはインデントが重要なので2番目の呼び方を用いるときには注意が必要です。ちなみに、print文などPythonからの標準出力は:echomsgで出力するのと同じ扱いで、エラーは:echoerrしたのと同じ扱いになります。また、input()やraw_input()などの標準入力からのインプットはサポートされていません。</p>
 
-<pre class="prettyprint"><code>0</code></pre>
+<pre class="prettyprint"><code>" VimScript
+function Hoge()
+    python &lt;&lt;EOM
+    print "hoge"
+    EOM
+enfcuntion " エラー！</code></pre>
 
 <p>上記のようについつい書きたくなりますが、これはエラーになります。Pythonは必ずインデントなしの状態で書き始めないといけませんし、EOMの前に空白があるとPythonブロックの終了と見なされません。正しくは、以下のように書きます。</p>
 
-<pre class="prettyprint"><code class="lang-vim">0</code></pre>
+<pre class="prettyprint"><code class="lang-vim">" VimScript
+function Fuga()
+    python &lt;&lt;EOM
+print "fuga"
+EOM
+endfunction</code></pre>
 
 <p>そのほか、Pythonの書かれたファイルを読み込んで実行する:pyfileコマンドもあります。</p>
 
@@ -50,15 +66,39 @@ author: tsukkee
 
 <p>Pythonからはvimモジュールを利用することで、VimScriptを呼ぶことができます。importしないと使えないので注意してください。</p>
 
-<pre class="prettyprint"><code>0</code></pre>
+<pre class="prettyprint"><code># Python
+import vim</code></pre>
 
 <p>vimモジュールにはvim.command()とvim.eval()の二つの関数が用意されています。vim.command()は引数に渡されたVimのコマンドを実行します。例えば以下のように使います。</p>
 
-<pre class="prettyprint"><code>0</code></pre>
+<pre class="prettyprint"><code># Python
+vim.command('echo "hoge"')
+vim.command('let val = "fuga"')</code></pre>
 
 <p>vim.eval()は与えられたVimの式を評価して返します。配列もちゃんとPythonの配列にして返してくれます。ただし、数値であっても全て文字列として返されるので注意してください。例えば以下のような感じになります。</p>
 
-<pre class="prettyprint"><code>0</code></pre>
+<pre class="prettyprint"><code># Python
+color_name = vim.eval('g:color_name')
+bufnum, lnum, col, off = vim.eval('getpos(".")') # 例えば、("0", "3", "10", "0")のようになる&lt;/pre&gt;
+
+&lt;p&gt;&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;また，Vimのバッファを表すオブジェクトとしてvim.bufferが提供されています。vim.buffersが全てのバッファが入った配列で、vim.current.bufferが現在表示しているバッファになります。:help pythonにもありますが、おおよその使い方は以下の通りです。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;# Python
+import vim
+b = vim.current.buffer # 現在のバッファ
+print b.name           # バッファ名
+print b.number         # bufnr()で得られる値，vim.buffersのインデックスはbufnr()とは異なるので注意
+b[0] = "hoge"          # 1行目を変更する
+b[:] = None            # バッファを空にする
+b = vim.buffers[1]     # 1番目のバッファ（bufnr()が1というわけではない）
+del b[:]               # これもバッファを空にする
+b[0:0] = ["fuga"]      # 一番上に行を挿入
+del b[2]               # 3行目を削除
+b.append("hoge")       # 末尾に行を追加
+print len(b)           # バッファの行数を表示
+</code></pre>
 
 <p>vim.buffersで全てのバッファを得られることからわかるように、VimScript単体では難しい表示していない（アクティブでない）バッファの内容を取得したり、その中身を編集したりすることができます。また、vim.bufferを用いた編集もVimの'modifiable'などの影響を受けるので、set nomodifiableされたバッファに書き込もうとすると、vim.error例外が発生し編集できません。</p>
 

@@ -12,33 +12,65 @@ author: t9md
 
 <ol>
 <li><a href="http://www.vim.org/scripts/script.php?script_id=625">Color Sampler Pack</a> をインストールする。</li>
-<li><kbd><code class="lang-vim">0</code></kbd> を駆使して片っ端から気に入るものを探す。</li>
+<li><kbd><code class="lang-vim">:Unite colorscheme</code></kbd> を駆使して片っ端から気に入るものを探す。</li>
 </ol>
 
 <p>という流れで探すのが便利で手軽だと思います。</p>
 
-<p><kbd><code class="lang-vim">0</code></kbd> によるカラースキームの変更は一つ一つ <kbd><code class="lang-vim">0</code></kbd> コマンドでカラースキームを入力する手間に比べればとても手軽です。<br />
+<p><kbd><code class="lang-vim">:Unite colorscheme</code></kbd> によるカラースキームの変更は一つ一つ <kbd><code class="lang-vim">:colorscheme</code></kbd> コマンドでカラースキームを入力する手間に比べればとても手軽です。<br />
 				しかし、一度お気に入りが決まってしまうと、 もっと手早くカラースキームを切り替えたいと感じる方もいるのではないでしょうか？</p>
 
 <p>問題提起が少し強引な気もしますが、筆者はお気に入りの３、４種類のカラースキームをワンキーで手早く切り替えたいと感じていました。</p>
 
 <h2>対処</h2>
 
-<p>下記のコードを <kbd><code>0</code></kbd> に貼り付けます。</p>
+<p>下記のコードを <kbd><code>.vimrc</code></kbd> に貼り付けます。</p>
 
-<pre class="prettyprint"><code class="lang-vim">0</code></pre>
+<pre class="prettyprint"><code class="lang-vim">let ColorRoller = {}
+let ColorRoller.colors = [
+      \ 'molokai_custom',
+      \ 'tomorrow_night_custom',
+      \ 'lucius_custom',
+      \ 'github256_custom',
+      \ 'pyte',
+      \ 'newspaper',
+      \ ]
+
+function! ColorRoller.change()
+  let color = get(self.colors, 0)
+  " tabpagecolorscheme を使用している場合は↓の "colorscheme" を "Tcolorscheme" に変える。
+  silent exe "colorscheme " . color
+  redraw
+  echo self.colors
+endfunction
+
+function! ColorRoller.roll()
+  let item = remove(self.colors, 0)
+  call insert(self.colors, item, len(self.colors))
+  call self.change()
+endfunction
+
+function! ColorRoller.unroll()
+  let item = remove(self.colors, -1)
+  call insert(self.colors, item, 0)
+  call self.change()
+endfunction
+
+nnoremap &lt;silent&gt;&lt;F9&gt;   :&lt;C-u&gt;call ColorRoller.roll()&lt;CR&gt;
+nnoremap &lt;silent&gt;&lt;S-F9&gt; :&lt;C-u&gt;call ColorRoller.unroll()&lt;CR&gt;
+</code></pre>
 
 <h2>解説</h2>
 
-<p>お気に入りのカラースキーム群をローラー( <code>0</code> )に見立てて、ローラーを回す( <code>0</code> )、戻す( <code>0</code> )ことで、カラースキームを切り替えます。<br />
-<kbd><code>0</code></kbd> を <kbd><code>0</code></kbd> 、 <kbd><code>0</code></kbd> を <kbd><code>0</code></kbd> (Shiftキーを押しながら <kbd><code>0</code></kbd> )にそれぞれ割り当てています。</p>
+<p>お気に入りのカラースキーム群をローラー( <code>ColorRoller</code> )に見立てて、ローラーを回す( <code>roll</code> )、戻す( <code>unroll</code> )ことで、カラースキームを切り替えます。<br />
+<kbd><code>roll()</code></kbd> を <kbd><code>&lt;F9&gt;</code></kbd> 、 <kbd><code>unroll()</code></kbd> を <kbd><code>&lt;S-F9&gt;</code></kbd> (Shiftキーを押しながら <kbd><code>&lt;F9&gt;</code></kbd> )にそれぞれ割り当てています。</p>
 
 <h2>使い方</h2>
 
-<p>お気に入りのカラースキームを、 <kbd><code>0</code></kbd> に設定して使用します。</p>
+<p>お気に入りのカラースキームを、 <kbd><code>ColorRoller.colors</code></kbd> に設定して使用します。</p>
 
-<p><a href="http://www.vim.org/scripts/script.php?script_id=3358">tabpagecolorscheme</a> を使用している場合、 <kbd><code>0</code></kbd> 内のコメントを参考に、<br />
-<kbd><code>0</code></kbd> の行を <kbd><code>0</code></kbd> に変更して使用して下さい。</p>
+<p><a href="http://www.vim.org/scripts/script.php?script_id=3358">tabpagecolorscheme</a> を使用している場合、 <kbd><code>ColorRoller.change()</code></kbd> 内のコメントを参考に、<br />
+<kbd><code>silent exe "colorscheme " . color</code></kbd> の行を <kbd><code>silent exe "Tcolorscheme " . color</code></kbd> に変更して使用して下さい。</p>
 
 <h2>最後に</h2>
 

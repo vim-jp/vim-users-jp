@@ -10,7 +10,34 @@ author: Shougo
 
 <p>今回は、下の設定について一行ずつ解説をしたいと思います。</p>
 
-<pre class="prettyprint"><code>0</code></pre>
+<pre class="prettyprint"><code>    " Disable AutoComplPop.
+    let g:acp_enableAtStartup = 0
+    " Use neocomplcache.
+    let g:neocomplcache_enable_at_startup = 1
+    " Use smartcase.
+    let g:neocomplcache_enable_smart_case = 1
+    " Use camel case completion.
+    let g:neocomplcache_enable_camel_case_completion = 1
+    " Use underbar completion.
+    let g:neocomplcache_enable_underbar_completion = 1
+    " Set minimum syntax keyword length.
+    let g:neocomplcache_min_syntax_length = 3
+    let g:neocomplcache_lock_buffer_name_pattern = '\*ku\*'
+
+    " Define dictionary.
+    let g:neocomplcache_dictionary_filetype_lists = {
+        \ 'default' : '',
+        \ 'vimshell' : $HOME.'/.vimshell_hist',
+        \ 'scheme' : $HOME.'/.gosh_completions'
+            \ }
+
+    " Define keyword.
+    if !exists('g:neocomplcache_keyword_patterns')
+        let g:neocomplcache_keyword_patterns = {}
+    endif
+    let g:neocomplcache_keyword_patterns['default'] = '\h\w*'
+
+</code></pre>
 
 <h2>let g:acp_enableAtStartup = 0</h2>
 
@@ -19,22 +46,22 @@ author: Shougo
 <h2>let g:neocomplcache_enable_at_startup = 1</h2>
 
 <p>neocomplcacheを起動時に有効化する設定です。AutoComplPopと違ってneocomplcacheは自動起動しないので、普段使用するにはこの設定が必要です。
-				そうでないと、毎回<code class="lang-vim">0</code>を実行しなければいけません。</p>
+				そうでないと、毎回<code class="lang-vim">:NeoComplCacheEnable</code>を実行しなければいけません。</p>
 
 <h2>let g:neocomplcache_enable_smart_case = 1</h2>
 
 <p>neocomplcacheのsmart case機能を有効化します。
-				smart caseは<code>0</code>と同様に、大文字が入力されるまで大文字小文字の区別を無視するという機能です。</p>
+				smart caseは<code>'smartcase'</code>と同様に、大文字が入力されるまで大文字小文字の区別を無視するという機能です。</p>
 
 <h2>let g:neocomplcache_enable_camel_case_completion = 1</h2>
 
 <p>neocomplcacheのcamel case機能を有効化します。
-				camel caseは大文字を区切りとしたワイルドカードのように振る舞うという機能です。FAと入力すると、内部では<code>0</code>のように変換されます。
+				camel caseは大文字を区切りとしたワイルドカードのように振る舞うという機能です。FAと入力すると、内部では<code>F*A*</code>のように変換されます。
 				ただし若干重くなるので私は使っていません。Javaのように大文字を多様した長いキーワードが多い言語に有効です。</p>
 
 <h2>let g:neocomplcache_enable_underbar_completion = 1</h2>
 
-<p>こちらは<code>0</code>区切りの補完を有効化します。これは便利なことが多いでしょう。</p>
+<p>こちらは<code>_</code>区切りの補完を有効化します。これは便利なことが多いでしょう。</p>
 
 <h2>let g:neocomplcache_min_syntax_length = 3</h2>
 
@@ -49,15 +76,15 @@ author: Shougo
 <h2>let g:neocomplcache_dictionary_filetype_lists = {</h2>
 
 <p>ファイルタイプ毎にneocomplcacheのディクショナリを設定することができます。
-				neocomplcacheは<code>0</code>も見ますが、こちらを優先します。
-<code>0</code>はcontext filetypeでも参照できるので、できればこちらを設定するべきです。
+				neocomplcacheは<code>'dictionary'</code>も見ますが、こちらを優先します。
+<code>g:neocomplcache_dictionary_filetype_lists</code>はcontext filetypeでも参照できるので、できればこちらを設定するべきです。
 				私はvimshellの履歴ファイルをディクショナリに設定し、簡単にコマンドを入力できるようにしています。</p>
 
 <h2>let g:neocomplcache_keyword_patterns['default'] = &#8216;\h\w*&#8217;</h2>
 
 <p>キーワードパターンの設定です。
 				neocomplcacheが対応していない独自の言語を使いたい場合は、これを変更しないといけません。
-<code>0</code>を変更しているのは、
-				デフォルトが<code>0</code>となっていて、日本語も収集してしまう仕様が個人的に好きではないからです。</p>
+<code>let g:neocomplcache_keyword_patterns['default']</code>を変更しているのは、
+				デフォルトが<code>\k\+</code>となっていて、日本語も収集してしまう仕様が個人的に好きではないからです。</p>
 
 <address class="hack-author">Shougo</address>

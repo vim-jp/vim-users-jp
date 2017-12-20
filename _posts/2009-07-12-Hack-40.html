@@ -76,7 +76,8 @@ author: thinca
 				まずは対象をどのように目立たせるかを設定します。今回は不可視文字を目立たせるのが目的なので、対象の背景色を変更するようにします。
 </p>
 
-<pre class="prettyprint"><code>0</code></pre>
+<pre class="prettyprint"><code>highlight IdeographicSpace term=underline ctermbg=DarkGreen guibg=DarkGreen
+</code></pre>
 
 <p>
 				この例では、背景色を緑に、色の利用できない端末ではアンダーラインを引くようなハイライトを作成し、それに対し &#8220;IdeographicSpace&#8221; と言う名前を付けています。
@@ -87,7 +88,8 @@ author: thinca
 				なお、<code class="lang-vim">:highlight</code> コマンドで作成したハイライトは <code class="lang-vim">:colorscheme</code> でカラースキームを設定する際に全てクリアされます。よってこのコマンドは <code class="lang-vim">:colorscheme</code> を実行した後に実行するか、もしくはカラースキームを変更した際に常に実行されるように
 </p>
 
-<pre class="prettyprint"><code class="lang-vim">0</code></pre>
+<pre class="prettyprint"><code class="lang-vim">autocmd Colorscheme * highlight IdeographicSpace term=underline ctermbg=DarkGreen guibg=DarkGreen
+</code></pre>
 
 <p>
 				とします。
@@ -103,7 +105,8 @@ author: thinca
 <code class="lang-vim">:match</code> コマンドは以下の様に使用します(厳密なコマンドの書式の解説は省きます)。
 </p>
 
-<pre class="prettyprint"><code>0</code></pre>
+<pre class="prettyprint"><code>match IdeographicSpace /　/
+</code></pre>
 
 <p>
 				/で囲まれた部分が全角スペースです。見ての通り、対象となる正規表現と、対象をどのハイライトグループでハイライトするかを指定します。
@@ -111,7 +114,8 @@ author: thinca
 				よって、ウィンドウに入り直す度にコマンドを実行するように、以下のようにします。
 </p>
 
-<pre class="prettyprint"><code class="lang-vim">0</code></pre>
+<pre class="prettyprint"><code class="lang-vim">autocmd VimEnter,WinEnter * match IdeographicSpace /　/
+</code></pre>
 
 <p>
 				Vim の起動直後は WinEnter イベントが発生しないので、VimEnter イベント発生時にも実行しています。BufRead,BufNew などでは不完全です。ファイルを指定せずに Vim を起動した場合や <code class="lang-vim">:split</code> などで分割したウィンドウではコマンドが実行されません。
@@ -122,12 +126,22 @@ author: thinca
 				コマンドを Vim スクリプトに記述する場合、スクリプト内にマルチバイト文字を記述することになるので該当コマンドを実行するより前に <code class="lang-vim">:scriptencoding</code> でスクリプトファイルのエンコーディングを指定しておく必要があります。
 </p>
 
-<pre class="prettyprint"><code>0</code></pre>
+<pre class="prettyprint"><code>scriptencoding utf-8
+</code></pre>
 
 <p>
 				以上の内容をまとめると以下のようになります。
 </p>
 
-<pre class="prettyprint"><code class="lang-vim">0</code></pre>
+<pre class="prettyprint"><code class="lang-vim">scriptencoding utf-8
+
+augroup highlightIdegraphicSpace
+  autocmd!
+  autocmd Colorscheme * highlight IdeographicSpace term=underline ctermbg=DarkGreen guibg=DarkGreen
+  autocmd VimEnter,WinEnter * match IdeographicSpace /　/
+augroup END
+
+colorscheme &lt;var&gt;YourFavoriteColorscheme&lt;/var&gt;
+</code></pre>
 
 <address class="hack-author">thinca</address>

@@ -8,7 +8,7 @@ author: Shougo
 
 <h2>:shellの欠点</h2>
 
-<p>Vimに搭載されている<code class="lang-vim">0</code>コマンドは、一時的にシェルを実行できます。しかし当然使用するシェルの設定に左右される上、実行している間はVimが止まってしまいます。
+<p>Vimに搭載されている<code class="lang-vim">:shell</code>コマンドは、一時的にシェルを実行できます。しかし当然使用するシェルの設定に左右される上、実行している間はVimが止まってしまいます。
 				この状態ではコマンドの出力もバッファにとれないですし、VimScriptとの連携もできません。
 				さらにLinux上のGVimではエスケープシーケンスを解釈しない上、WindowsのGVimでは邪魔なDOS窓が一瞬開くという問題もあります。
 				根本的な問題として、WindowsのシェルであるCMD.exeは貧弱なので、使う気になれません。
@@ -34,11 +34,11 @@ author: Shougo
 
 <h2>Emacsとの比較</h2>
 
-<p>対するEmacsはどうでしょう。Emacsでは、標準的に搭載されている<code>0</code>を用いてシェルを実行できます。
-				起動が遅いですが、さらに高機能な<code>0</code>を用いて100% Emacs Lispなシェルを使うこともできます。
-<code>0</code>は端末機能としては不完全なので、端末がほしいだけなら、<code>0</code>を用いると良いでしょう。
+<p>対するEmacsはどうでしょう。Emacsでは、標準的に搭載されている<code>shell-mode</code>を用いてシェルを実行できます。
+				起動が遅いですが、さらに高機能な<code>eshell-mode</code>を用いて100% Emacs Lispなシェルを使うこともできます。
+<code>eshell-mode</code>は端末機能としては不完全なので、端末がほしいだけなら、<code>ansi-term</code>を用いると良いでしょう。
 				この優れたシェル環境を得るためだけにEmacsへと移行した人々も多いのではないかと思います。
-				最近では、<code>0</code>を改良した<code>0</code>というものが人気らしいです。</p>
+				最近では、<code>ansi-term</code>を改良した<code>multi-term</code>というものが人気らしいです。</p>
 
 <h2>vimshellについて</h2>
 

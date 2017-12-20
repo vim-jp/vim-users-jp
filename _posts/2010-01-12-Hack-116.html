@@ -39,6 +39,10 @@ author: thinca
 <p>人によっては、たまにしか使わない、けれどたまには使うので使えないと困る、というキーがある場合があります。<kbd>s</kbd> <kbd>f</kbd> <kbd>t</kbd> などがその例です。
 				その場合、それらのキーをプレフィックス付きの場所に再マップすることでプレフィックスキーとして使えます。</p>
 
-<pre class="prettyprint"><code class="lang-vim">0</code></pre>
+<pre class="prettyprint"><code class="lang-vim">nnoremap s &lt;Nop&gt;
+nnoremap ss s
+nnoremap sa &lt;var&gt;func-a&lt;/var&gt;
+nnoremap sb &lt;var&gt;func-b&lt;/var&gt;
+</code></pre>
 
 <address class="hack-author">thinca</address>

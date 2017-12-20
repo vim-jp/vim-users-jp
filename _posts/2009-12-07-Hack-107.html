@@ -8,7 +8,29 @@ author: Shougo
 
 <h2>設定</h2>
 
-<pre class="prettyprint"><code class="lang-vim">0</code></pre>
+<pre class="prettyprint"><code class="lang-vim">" Enable mouse support.
+set mouse=a
+
+" For screen.
+if &amp;term =~ "^screen"
+    augroup MyAutoCmd
+        autocmd VimLeave * :set mouse=
+     augroup END
+
+    " screenでマウスを使用するとフリーズするのでその対策
+    set ttymouse=xterm2
+endif
+
+if has('gui_running')
+    " Show popup menu if right click.
+    set mousemodel=popup
+
+    " Don't focus the window when the mouse pointer is moved.
+    set nomousefocus
+    " Hide mouse pointer on insert mode.
+    set mousehide
+endif
+</code></pre>
 
 <p>
 <code class="lang-vim">set mouse=a</code>の記述により、マウスが使用できる全てのモードでマウスサポートを有効にします。これはGVimだけでなく、Vimでも有効です。GUIのVimでは右クリックでポップアップメニューを表示できるため、その設定もしています。

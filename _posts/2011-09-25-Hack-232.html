@@ -16,11 +16,13 @@ author: ujihisa
 
 <p><a href="https://github.com/jondistad/vimclojure">https://github.com/jondistad/vimclojure</a></p>
 
-<p>なお、<code>0</code>を設定すると標準関数のハイライトが、また<code>0</code>を設定すると括弧の対応が虹色に美しく輝き、便利です。筆者は以下のようにして両方とも利用可能にしています。</p>
+<p>なお、<code>g:clj_highlight_builtins</code>を設定すると標準関数のハイライトが、また<code>g:clj_paren_rainbow</code>を設定すると括弧の対応が虹色に美しく輝き、便利です。筆者は以下のようにして両方とも利用可能にしています。</p>
 
-<p><code>0</code>:</p>
+<p><code>~/.vimrc</code>:</p>
 
-<pre class="prettyprint"><code>0</code></pre>
+<pre class="prettyprint"><code>let g:clj_highlight_builtins = 1
+let g:clj_paren_rainbow = 1
+</code></pre>
 
 <p><img src="/vim-users-jp/assets/images/b06a1ebce88f8e4185758a1439ba617c.png" alt="vimclojure highlighting" /></p>
 
@@ -40,7 +42,7 @@ author: ujihisa
 
 <h2>解決3</h2>
 
-<p>quickrunを用います。もし<code>0</code>というコマンドを持っていれば、ファイルタイプがclojureであるバッファに対してquickrunは無設定で動作します。</p>
+<p>quickrunを用います。もし<code>clj</code>というコマンドを持っていれば、ファイルタイプがclojureであるバッファに対してquickrunは無設定で動作します。</p>
 
 <p><a href="https://github.com/thinca/vim-quickrun">https://github.com/thinca/vim-quickrun</a></p>
 
@@ -58,7 +60,8 @@ author: ujihisa
 
 <p>Jarkをインストールしたら、まずはJarkサーバを立ち上げましょう。vimshellなどで</p>
 
-<pre class="prettyprint"><code>0</code></pre>
+<pre class="prettyprint"><code>$ jark vm start
+</code></pre>
 
 <p>として事前にJarkサーバを立ち上げ、そしてquickrunします。OSを終了するときまで、すなわちVimを終了するときまで、Jarkサーバを終了する必要はありません。</p>
 
@@ -66,20 +69,23 @@ author: ujihisa
 
 <p>以下に感動的なベンチマーク結果を載せます。</p>
 
-<pre class="prettyprint"><code>0</code></pre>
+<pre class="prettyprint"><code>(println "hello")
+</code></pre>
 
-<p>とだけ書いたコードを<code>0</code>と<code>0</code>のそれぞれで<code>0</code>コマンドで比較してみたところ、それぞれ</p>
+<p>とだけ書いたコードを<code>clj</code>と<code>jark</code>のそれぞれで<code>time</code>コマンドで比較してみたところ、それぞれ</p>
 
 <ul>
 <li>
 <p>clj</p>
 
-<pre class="prettyprint"><code>0</code></pre>
+<pre class="prettyprint"><code>  1.40 real         2.09 user         0.15 sys
+</code></pre>
 </li>
 <li>
 <p>jark</p>
 
-<pre class="prettyprint"><code>0</code></pre>
+<pre class="prettyprint"><code>  0.19 real         0.11 user         0.06 sys
+</code></pre>
 </li>
 </ul>
 

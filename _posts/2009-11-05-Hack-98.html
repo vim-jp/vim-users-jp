@@ -12,7 +12,9 @@ author: Shougo
 				乱数を生成するためには、次のようなVimScriptを用います。
 </p>
 
-<pre class="prettyprint"><code>0</code></pre>
+<pre class="prettyprint"><code>let l:match_end = matchend(reltimestr(reltime()), '\d\+\.') + 1
+let l:rand = reltimestr(reltime())[l:match_end : ] % (n + 1)
+</code></pre>
 
 <p>
 <code class="lang-vim">reltimestr(reltime())</code>の部分で、3939190.694889のようにVimが起動してからの時間をマイクロ秒単位で取得します。

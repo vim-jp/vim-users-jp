@@ -16,9 +16,10 @@ author: ujihisa
 
 <p>capslock.vim <a href="http://www.vim.org/scripts/script.php?script_id=1725">http://www.vim.org/scripts/script.php?script_id=1725</a></p>
 
-<p>以下の設定を<code>0</code>に記述します。</p>
+<p>以下の設定を<code>~/.vimrc</code>に記述します。</p>
 
-<pre class="prettyprint"><code>0</code></pre>
+<pre class="prettyprint"><code>imap &lt;C-a&gt; &lt;C-O&gt;&lt;Plug&gt;CapsLockToggle
+</code></pre>
 
 <p>これで、今後挿入モードで<kbd>&lt;C-a&gt;</kbd>と打鍵するとCapsLockされ、もう一度打鍵すると元に戻ります。
 				OSなどが提供するCapsLockと同様、アルファベットは大文字になり、数字はそのまま出力されます。</p>

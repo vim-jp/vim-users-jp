@@ -19,22 +19,24 @@ author: kana
 <h3>解決方法1</h3>
 
 <p>Vimには
-				クリップボードを表す仮想的なレジスタ<code>0</code>があるため、
+				クリップボードを表す仮想的なレジスタ<code>&lt;em&gt;"*&lt;/em&gt;</code>があるため、
 				コピー/ペーストする際にそのレジスタを使用するよう指定します。
 				例えばクリップボードへ1行分のテキストをコピーする場合は
 				以下のコマンドを入力します:</p>
 
-<pre class="prettyprint"><code>0</code></pre>
+<pre class="prettyprint"><code>"*Y
+</code></pre>
 
 <p>クリップボードからテキストをペーストする場合は
 				以下のコマンドを入力します:</p>
 
-<pre class="prettyprint"><code>0</code></pre>
+<pre class="prettyprint"><code>"*p
+</code></pre>
 
 <h3>問題2</h3>
 
 <p>Vimからクリップボードにアクセスする方法は分かりました。
-				しかし毎回<code>0</code>を指定しなければならず、入力が面倒です。
+				しかし毎回<code>"*</code>を指定しなければならず、入力が面倒です。
 				Vim内でテキストのコピー/ペーストを行なう場合に、
 				何も指定しなくても自動的にクリップボードを利用するようにできないでしょうか。</p>
 
@@ -42,7 +44,8 @@ author: kana
 
 <p>以下のコマンドを実行します:</p>
 
-<pre class="prettyprint"><code class="lang-vim">0</code></pre>
+<pre class="prettyprint"><code class="lang-vim">:set clipboard=unnamed
+</code></pre>
 
 <p>この設定を行なうと、
 				特にレジスタを指定せずにコピー/ペーストを行なった場合は
@@ -52,11 +55,13 @@ author: kana
 				選択されたテキストが自動的にクリップボードへコピーされます。
 				VimのVisual modeでも同様の挙動にしたい場合は以下のコマンドを実行します。</p>
 
-<pre class="prettyprint"><code class="lang-vim">0</code></pre>
+<pre class="prettyprint"><code class="lang-vim">:set clipboard=autoselect
+</code></pre>
 
 <p>もし両方の挙動が必要な場合は以下のように値をコンマ(,)区切りで指定します:</p>
 
-<pre class="prettyprint"><code class="lang-vim">0</code></pre>
+<pre class="prettyprint"><code class="lang-vim">:set clipboard=unnamed,autoselect
+</code></pre>
 
 <h3>問題3</h3>
 
@@ -67,30 +72,30 @@ author: kana
 <p>幸いなことに、
 				一部の環境ではクリップボードにアクセスするためのコマンドがあります。
 				例えばMac OS Xの場合はpbcopy/pbpasteでクリップボードの読み書きができるため、
-<code class="lang-vim">0</code>などとすればクリップボードの内容を取り込むことが
+<code class="lang-vim">:read !pbpaste</code>などとすればクリップボードの内容を取り込むことが
 				できます。</p>
 
 <p>しかしこのようなコマンドは入力が煩雑ですし、
-				何より<code>0</code>/<code>0</code>/<code>0</code>のような
+				何より<code>d</code>/<code>p</code>/<code>y</code>のような
 				Vim本来の操作と比べると不便です。
-				どうにかして<code>0</code>と同様の操作性を実現できないでしょうか。</p>
+				どうにかして<code>"*</code>と同様の操作性を実現できないでしょうか。</p>
 
 <h3>解決方法3</h3>
 
 <p><a href="http://www.vim.org/scripts/script.php?script_id=2098">fakeclip</a>を使います。
 				このプラグインをインストールすると
 				Cygwin、Mac OS X、X Window Systemの非GUI版Vimでも
-<code>0</code>や
-<code>0</code>などの操作ができるようになります
+<code>"*Y</code>や
+<code>"&#42;p</code>などの操作ができるようになります
 				(バージョン0.2.6現在)。</p>
 
 <h3>解説</h3>
 
-<p>Q. なぜ<code>0</code>のようなまどろっこしい操作になっているのですか?</p>
+<p>Q. なぜ<code>"*Y</code>のようなまどろっこしい操作になっているのですか?</p>
 
 <p>A. 祖先のviが生まれた頃にクリップボードなんてものはなかったからです。</p>
 
-<p>Q. なぜ<code class="lang-vim">0</code>がデフォルトでないのですか?</p>
+<p>Q. なぜ<code class="lang-vim">:set clipboard=unnamed</code>がデフォルトでないのですか?</p>
 
 <p>A. Vimのデフォルト設定は可能な限りviライクだからです。
 				そして祖先のviが生まれた頃にクリップボードなんてものはなかったからです。</p>

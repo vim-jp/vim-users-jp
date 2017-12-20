@@ -26,9 +26,10 @@ author: ujihisa
 
 <h2>解決</h2>
 
-<p><code>0</code>に以下の一行を書きます。</p>
+<p><code>~/.vimrc</code>に以下の一行を書きます。</p>
 
-<pre class="prettyprint"><code class="lang-vim">0</code></pre>
+<pre class="prettyprint"><code class="lang-vim">nnoremap O :&lt;C-u&gt;call append(expand('.'), &lt;code class="option"&gt;''&lt;/code&gt;)&lt;Cr&gt;j
+</code></pre>
 
 <p>以後、<kbd>O</kbd>を打鍵するだけでカーソル位置の次の行に空行を挿入します。
 				その際、動作実行後もノーマルモードを維持し、なおかつ必ず無駄な文字が入ることなく空行が挿入されます。</p>
@@ -38,24 +39,29 @@ author: ujihisa
 <p>コメント行で挿入モードで改行した場合、コメントが継続されるよう設定している方は多いと思います。
 				例えばRubyで</p>
 
-<pre class="prettyprint"><code>0</code></pre>
+<pre class="prettyprint"><code>#_
+</code></pre>
 
-<p>という状態で (<code>0</code>はカーソルを示す) 、挿入モードでの<kbd>&lt;Cr&gt;</kbd>やノーマルモードでの<kbd>o</kbd>などで改行文字を挿入すると、</p>
+<p>という状態で (<code>_</code>はカーソルを示す) 、挿入モードでの<kbd>&lt;Cr&gt;</kbd>やノーマルモードでの<kbd>o</kbd>などで改行文字を挿入すると、</p>
 
-<pre class="prettyprint"><code>0</code></pre>
+<pre class="prettyprint"><code>#
+#_
+</code></pre>
 
 <p>となります。
-				上記<code>0</code>への設定では、この自動挿入を避けるため<code>0</code>関数を用いました。</p>
+				上記<code>~/.vimrc</code>への設定では、この自動挿入を避けるため<code>append()</code>関数を用いました。</p>
 
 <p>先ほど紹介した</p>
 
-<pre class="prettyprint"><code class="lang-vim">0</code></pre>
+<pre class="prettyprint"><code class="lang-vim">nnoremap O :&lt;C-u&gt;call append(expand('.'), &lt;code class="option"&gt;''&lt;/code&gt;)&lt;Cr&gt;j
+</code></pre>
 
-<p>はまず<code>0</code>で現在の行<code>0</code>の直後に空文字列<code>0</code></code>だけの行を挿入し、そしてその挿入した行に<code>0</code>で移動するという一連の操作を<kbd>O</kbd>に割り当てています。</p>
+<p>はまず<code>append()</code>で現在の行<code>expand('.')</code>の直後に空文字列<code>&lt;code class="option"&gt;''</code></code>だけの行を挿入し、そしてその挿入した行に<code>j</code>で移動するという一連の操作を<kbd>O</kbd>に割り当てています。</p>
 
 <p>逆に、この自動挿入を行いたい場合は、通常の改行を行なえばよいため</p>
 
-<pre class="prettyprint"><code class="lang-vim">0</code></pre>
+<pre class="prettyprint"><code class="lang-vim">nnoremap O o&lt;Esc&gt;
+</code></pre>
 
 <p>とすることで実現できます。</p>
 

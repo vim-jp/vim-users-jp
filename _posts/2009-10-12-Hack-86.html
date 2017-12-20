@@ -7,16 +7,16 @@ author: kana
 <h3>問題</h3>
 
 <p><a href="/vim-users-jp/2009/09/12/Hack-71.html">Hack #71: 編集操作を繰り返す</a>では
-<code>0</code>コマンドを用いて単純な編集操作を繰り返し行う方法について
-				解説しました。<code>0</code>コマンドを知っているかいないかで
+<code>.</code>コマンドを用いて単純な編集操作を繰り返し行う方法について
+				解説しました。<code>.</code>コマンドを知っているかいないかで
 				テキスト編集の効率は大きく変わります。</p>
 
-<p>ところが<code>0</code>コマンドには欠点があります。
+<p>ところが<code>.</code>コマンドには欠点があります。
 				複数のコマンドから成る複雑な編集操作を繰り返すことができないのです。
 				ちょっとした単語置換程度であれば
-<code class="lang-vim">0</code>で済ませられるのですが、
+<code class="lang-vim">:%s/ujihisa/curry/</code>で済ませられるのですが、
 				より複雑なテキスト、特に複数行に渡るテキストに置き換えようとすると
-<code class="lang-vim">0</code>で行なうことは非常に困難です。</p>
+<code class="lang-vim">:s</code>で行なうことは非常に困難です。</p>
 
 <p>このような場合は
 <a href="/vim-users-jp/2009/06/14/Hack-26.html">Hack #26: 複数のバッファを一度に変更する &#8211; キーボードマクロ編</a>
@@ -24,9 +24,9 @@ author: kana
 				しかし</p>
 
 <ul>
-<li>「<code>0</code>で編集操作を記録開始」</li>
-<li>「<code>0</code>で記録終了」</li>
-<li>「<code>0</code>で記録した編集操作を実行」</li>
+<li>「<code>qm</code>で編集操作を記録開始」</li>
+<li>「<code>q</code>で記録終了」</li>
+<li>「<code>@m</code>で記録した編集操作を実行」</li>
 </ul>
 
 <p>と操作方法を知っても、
@@ -35,14 +35,36 @@ author: kana
 <p>例えば以下のようなテキストがあったとしましょう
 				(行番号は説明のためのもので実際のテキストの一部ではありません):</p>
 
-<pre class="prettyprint"><code>0</code></pre>
+<pre class="prettyprint"><code> 1  " Actions
+ 2
+ 3  above
+ 4  below
+ 5  cancel
+ 6  cd
+ 7  default
+ 8  ...
+ 9
+10  " __END__
+</code></pre>
 
 <p>これの3行目を編集して以下のようなテキストにしたとします:</p>
 
-<pre class="prettyprint"><code class="lang-vim">0</code></pre>
+<pre class="prettyprint"><code class="lang-vim"> 1  " Actions
+ 2
+ 3  function! ku#action#common#above(candidate)
+ 4    return 'FIXME: Not implemented yet'
+ 5  endfunction
+ 6  below
+ 7  cancel
+ 8  cd
+ 9  default
+10  ...
+11
+12  " __END__
+</code></pre>
 
 <p>次にこの編集操作を6行目以降についても繰り返したいとします。
-<code>0</code>などとして以降の操作を半自動化するためには
+<code>100@m</code>などとして以降の操作を半自動化するためには
 				どのようにキーボードマクロを使えばよいのでしょうか。</p>
 
 <h3>解決方法</h3>
@@ -58,32 +80,62 @@ author: kana
 
 <p>例えば先程例示したテキストの場合:</p>
 
-<pre class="prettyprint"><code>0</code></pre>
+<pre class="prettyprint"><code> 1  " Actions
+ 2
+ 3  above
+ 4  below
+ 5  cancel
+ 6  cd
+ 7  default
+ 8  ...
+ 9
+10  " __END__
+</code></pre>
 
 <ol>
-<li>キーボードマクロの記録を開始する前に2行目に移動しておきます(<code>0</code>)。</li>
-<li>キーボードマクロの記録を開始します(<code>0</code>)。</li>
-<li>編集操作を行なう位置(=3行目)に移動します(<code>0</code>)。</li>
-<li>編集操作を行ないます(<code class="lang-vim">0</code>)。</li>
-<li>キーボードマクロの記録を終了します(<code>0</code>)。</li>
+<li>キーボードマクロの記録を開始する前に2行目に移動しておきます(<code>2gg</code>)。</li>
+<li>キーボードマクロの記録を開始します(<code>qm</code>)。</li>
+<li>編集操作を行なう位置(=3行目)に移動します(<code>j</code>)。</li>
+<li>編集操作を行ないます(<code class="lang-vim">Ifunction! ku#action#common#&lt;Esc&gt;A()&lt;Return&gt;return 'FIXME: Not implemented yet'&lt;Return&gt;endfunction&lt;Esc&gt;</code>)。</li>
+<li>キーボードマクロの記録を終了します(<code>q</code>)。</li>
 </ol>
 
 <p>以上の操作により記録したキーボードマクロの実行を繰り返すと以下のようなテキストが得られます:</p>
 
-<pre class="prettyprint"><code class="lang-vim">0</code></pre>
+<pre class="prettyprint"><code class="lang-vim"> 1  " Actions
+ 2
+ 3  function! ku#action#common#above()
+ 4    return 'FIXME: Not implemented yet'
+ 5  endfunction
+ 6  function! ku#action#common#below()
+ 7    return 'FIXME: Not implemented yet'
+ 8  endfunction
+ 9  function! ku#action#common#cancel()
+10    return 'FIXME: Not implemented yet'
+11  endfunction
+12  function! ku#action#common#cd()
+13    return 'FIXME: Not implemented yet'
+14  endfunction
+15  function! ku#action#common#default()
+16    return 'FIXME: Not implemented yet'
+17  endfunction
+18  ...
+19
+20  " __END__
+</code></pre>
 
 <p>例示したステップ1/3/4の内容を実際に行いたい編集作業に合わせて変更すれば、
 				ほとんどの編集作業が半自動化できます。</p>
 
 <p>また、
-				ここでは例を単純化するためにカーソル移動は<code>0</code>などの単純なものを用いましたが、
+				ここでは例を単純化するためにカーソル移動は<code>j</code>などの単純なものを用いましたが、
 				実際にはより複雑な位置調整をするケースもあります。
-				この場合は<code>0</code>や<code>0</code>などのカーソル移動だけでなく、
-<code>0</code>と<code>0</code>を用いて
+				この場合は<code>j</code>や<code>w</code>などのカーソル移動だけでなく、
+<code>/&lt;var&gt;{pattern}&lt;/var&gt;</code>と<code>n</code>を用いて
 				該当箇所を直接指定して移動するとよいでしょう。
 				その際には
 <a href="/vim-users-jp/2009/09/10/Hack-70.html">Hack #70: 正規表現でマッチする範囲を制限する</a>
-				で解説されている<code>0</code>と<code>0</code>を知っておくと
+				で解説されている<code>\zs</code>と<code>\ze</code>を知っておくと
 				より便利にキーボードマクロを使うことができます。</p>
 
 <h3>参考資料</h3>

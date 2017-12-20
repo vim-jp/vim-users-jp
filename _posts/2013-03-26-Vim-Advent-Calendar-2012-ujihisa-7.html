@@ -28,27 +28,35 @@ author: ujihisa
 
 <p>デフォルトの設定ですと、quickrunを発動すると</p>
 
-<pre class="prettyprint"><code>0</code></pre>
+<pre class="prettyprint"><code>$ psql -f 編集中ファイルのファイル名
+</code></pre>
 
 <p>を実行したのと同じような感じになります。これですとリモートのPostgreSQLに接続できませんし、ユーザ名も指定できません。</p>
 
-<p>接続先の指定やユーザ名の指定をそれぞれ個別に管理してもよいのですが、QuickRunはより薄いラッパであるべきです。ここは単にcmdoptを指定しましょう。(詳しくは<code class="lang-vim">0</code>参照のこと。)</p>
+<p>接続先の指定やユーザ名の指定をそれぞれ個別に管理してもよいのですが、QuickRunはより薄いラッパであるべきです。ここは単にcmdoptを指定しましょう。(詳しくは<code class="lang-vim">:h quickrun-option-cmdopt</code>参照のこと。)</p>
 
-<pre class="prettyprint"><code class="lang-vim">0</code></pre>
+<pre class="prettyprint"><code class="lang-vim">:QuickRun -cmdopt '-u postgres -h example.com'
+</code></pre>
 
-<p>一回しか実行しないならばこれがわかりやすいですね。が、同じバッファで何度も実行するかもしれません。そのときは<code>0</code>の出番です。</p>
+<p>一回しか実行しないならばこれがわかりやすいですね。が、同じバッファで何度も実行するかもしれません。そのときは<code>b:quickrun_config</code>の出番です。</p>
 
-<pre class="prettyprint"><code class="lang-vim">0</code></pre>
+<pre class="prettyprint"><code class="lang-vim">:let b:quickrun_config = {'cmdopt': '-u postgres -h example.com'}
+</code></pre>
 
-<p>これで繰り返し使えます。一方、ほとんど常に上記オプションを有効にしたいときは、思い切ってデフォルトにしてしまうのも一つの手です。<code>0</code>に</p>
+<p>これで繰り返し使えます。一方、ほとんど常に上記オプションを有効にしたいときは、思い切ってデフォルトにしてしまうのも一つの手です。<code>~/.vimrc</code>に</p>
 
-<pre class="prettyprint"><code>0</code></pre>
+<pre class="prettyprint"><code>let g:quickrun_config = {} " もしまだよそでg:quickrun_configを設定していないならば。
+let g:quickrun_config.sql = {'cmdopt': '-u postgres -h example.com'}
+</code></pre>
 
 <p>これでよさそうです。</p>
 
 <p>例えば著者はこのような設定をしています</p>
 
-<pre class="prettyprint"><code>0</code></pre>
+<pre class="prettyprint"><code>let g:quickrun_config['sql/postgresql'] = {
+      \ 'cmdopt': '-h 0.0.0.0 mydb postgres'
+      \ }
+</code></pre>
 
 <h2>neosnippetとの連携</h2>
 
@@ -58,7 +66,11 @@ author: ujihisa
 
 <p>cとまで入力すると補完候補に&#8221;CREATE&#95;TABLE&#8221;とでてくるようになります。それを選択すると</p>
 
-<pre class="prettyprint"><code>0</code></pre>
+<pre class="prettyprint"><code>CREATE TABLE &lt;{1:cities}&gt; (
+  &lt;`0:name varchar(80), country_name text`&gt;
+);
+DROP TABLE &lt;|1|&gt;;
+</code></pre>
 
 <p>ここまで展開されます。あとはジャンプしてプレースホルダを埋めるだけです。</p>
 
@@ -68,11 +80,13 @@ author: ujihisa
 
 <p>よくない例</p>
 
-<pre class="prettyprint"><code class="lang-vim">0</code></pre>
+<pre class="prettyprint"><code class="lang-vim">:let b:quickrun_config = {'cmdopt': 'postgres://user:pass@host/db'}
+</code></pre>
 
 <p>よい例</p>
 
-<pre class="prettyprint"><code class="lang-vim">0</code></pre>
+<pre class="prettyprint"><code class="lang-vim">:let b:quickrun_config = {'cmdopt': 'postgres://user:pass\\\@host/db'}
+</code></pre>
 
 <h2>まとめ</h2>
 

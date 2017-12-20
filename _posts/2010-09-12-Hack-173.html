@@ -10,7 +10,7 @@ author: Shougo
 
 <p>まず、どのようなときにタイマー機能が必要なのでしょうか。例えば処理のポーリングです。Vimと外部プロセスが通信をした場合、Vimがプロセスの終了を待っていると、その間はVimの動作がストップしてしまいます。これでは他の作業ができなくなるので、大きなストレスとなります。そして残念ながらVimでは割り込みが使えません(#1)。そこでタイマーを使って時々通信をしながら処理の完了を待つという方法を通常取ります。</p>
 
-<p>1: <code>0</code>という機能を使えばできないこともありませんが、ここでは触れません。</p>
+<p>1: <code>vim-server</code>という機能を使えばできないこともありませんが、ここでは触れません。</p>
 
 <h2>Emacsのタイマー機能</h2>
 
@@ -20,10 +20,25 @@ author: Shougo
 
 <p>タイマー機能の模倣はInsert modeとNormal modeで微妙に方法が異なります。
 				基本的にはCursorHold, CursorHoldIのautocmdに関数の呼び出しのイベントを設定します。
-				CursorHoldI, CursorHoldは新たにキーが押されない限り連続して発生することがないので、処理の後にダミーの<code>0</code>を呼び出し、関数が連続して呼ばれるようにします。
+				CursorHoldI, CursorHoldは新たにキーが押されない限り連続して発生することがないので、処理の後にダミーの<code>feedkeys()</code>を呼び出し、関数が連続して呼ばれるようにします。
 				任意の時間でイベントを発生させるためには、&#8217;updatetime&#8217;を保存・復元する必要があります。</p>
 
-<pre class="prettyprint"><code class="lang-vim">0</code></pre>
+<pre class="prettyprint"><code class="lang-vim">autocmd CursorHold &lt;buffer&gt; call s:foo()
+
+function s:foo()
+  "  何か処理をする
+
+  call feedkeys("g\&lt;ESC&gt;", 'n')
+endfunction
+
+autocmd CursorHoldI &lt;buffer&gt; call s:bar()
+
+function s:bar()
+  "  何か処理をする
+
+  call feedkeys("\&lt;C-r&gt;\&lt;ESC&gt;", 'n')
+endfunction
+</code></pre>
 
 <h2>疑似タイマーの欠点</h2>
 
@@ -41,7 +56,7 @@ author: Shougo
 
 <h3>CursorHoldIを連続して発生させるのが難しい</h3>
 
-<p><code>0</code>ではキー操作が発生するので副作用があります。<code>0</code>を呼んですぐにキーが押される訳ではないので、タイミングによっては動作しないこともあるようです。せめて、<code>0</code>が使えるといいのですが、これではCursorHoldIは発生しません。</p>
+<p><code>call feedkeys("\&lt;C-r&gt;", 'n')</code>ではキー操作が発生するので副作用があります。<code>feedkeys()</code>を呼んですぐにキーが押される訳ではないので、タイミングによっては動作しないこともあるようです。せめて、<code>call feedkeys("\&lt;NOP&gt;")</code>が使えるといいのですが、これではCursorHoldIは発生しません。</p>
 
 <h3>マルチスレッドを使っても問題は解決しない</h3>
 
@@ -51,8 +66,8 @@ author: Shougo
 
 <p>理想的なタイマーとは次のようなものです。</p>
 
-<p><code class="lang-vim">0</code>
-<code>0</code>というのがイベントの実行時間を表します。単位はms。CursorHoldI, CursorHoldでのみ有効なオプションです。
+<p><code class="lang-vim">autocmd CursorHoldI &lt;timer=1000&gt; call foo()</code>
+<code>&lt;timer=xxx&gt;</code>というのがイベントの実行時間を表します。単位はms。CursorHoldI, CursorHoldでのみ有効なオプションです。
 				省略されると今までと同様にholdtimeかupdatetimeを使います。当然、ポップアップメニューが消えても動作します。
 <a href="/vim-users-jp/real-vim-hacks-project/">Real Vim Hacksプロジェクト</a>でどうにか実現したいものです。</p>
 

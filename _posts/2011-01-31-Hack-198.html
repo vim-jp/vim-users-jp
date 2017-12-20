@@ -4,13 +4,17 @@ title: "Hack #198: ウィンドウを開く方向を指定する"
 date: 2011-01-31
 author: thinca
 ---
-<p><code class="lang-vim">0</code> や <code class="lang-vim">0</code> などのコマンドで新しいウィンドウを開くことができます。この時、水平分割なら上か下に、垂直分割なら左か右にそれぞれ新しいウィンドウが開かれることになります。</p>
+<p><code class="lang-vim">:new</code> や <code class="lang-vim">:vsplit</code> などのコマンドで新しいウィンドウを開くことができます。この時、水平分割なら上か下に、垂直分割なら左か右にそれぞれ新しいウィンドウが開かれることになります。</p>
 
 <h3>デフォルトの挙動を設定する</h3>
 
 <p>デフォルトでは、新しいウィンドウは上か左に開かれます。この挙動を変更するには、<code class="option">'splitbelow'</code> オプションや <code class="option">'splitright'</code> オプションを設定します。それぞれウィンドウを下、右に開くようにするオプションです。</p>
 
-<pre class="prettyprint"><code>0</code></pre>
+<pre class="prettyprint"><code>" 新しいウィンドウを下に開く
+set splitbelow
+" 新しいウィンドウを右に開く
+set splitright
+</code></pre>
 
 <h3>その場で指定して開く</h3>
 
@@ -19,7 +23,7 @@ author: thinca
 
 <dl>
 <dt>:vertical {cmd}</dt>
-<dd>垂直分割をするようにします。例えば、<code class="lang-vim">0</code> は <code class="lang-vim">0</code> のような動作になります。</dd>
+<dd>垂直分割をするようにします。例えば、<code class="lang-vim">:vertical split</code> は <code class="lang-vim">:vsplit</code> のような動作になります。</dd>
 <dt>:leftabove {cmd} :aboveleft {cmd}</dt>
 <dd>水平分割なら上に、垂直分割なら左に新しいウィンドウを作ります。</dd>
 <dt>:rightbelow {cmd} :belowright {cmd}</dt>
@@ -31,8 +35,10 @@ author: thinca
 </dl>
 
 <p>これらのコマンドで分割方法が指定されていた場合、<code class="option">'splitbelow'</code> <code class="option">'splitright'</code> オプションは上書きされます。
-				{cmd} は分割コマンドが直接指定される必要があります。<code class="lang-vim">0</code> を使ったり、呼んだ関数内で分割コマンドが実行されても効果はありません。ただし、これらの修飾コマンドは複数指定することができます。</p>
+				{cmd} は分割コマンドが直接指定される必要があります。<code class="lang-vim">:execute</code> を使ったり、呼んだ関数内で分割コマンドが実行されても効果はありません。ただし、これらの修飾コマンドは複数指定することができます。</p>
 
-<pre class="prettyprint"><code>0</code></pre>
+<pre class="prettyprint"><code>" 画面の一番左に新しいウィンドウを開く
+:vertical topleft new
+</code></pre>
 
 <address class="hack-author">thinca</address>

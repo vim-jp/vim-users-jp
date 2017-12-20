@@ -31,8 +31,8 @@ autocmd CursorHoldI *  wall</pre>
 <p>前者については<code class="option">'autowrite'</code>を有効にすることで対応できます。
 				また<code class="option">'autowrite'</code>では一部のコマンドについては自動保存を行わないのですが、<code class="option">'autowriteall'</code>を有効にすることでそのようなコマンドに対しても自動保存が行われるようになります。ただしそのようなコマンドはうっかり自動保存されては困るケースが考えられるためオプションが分離されています。有効にする場合は<code class="lang-vim">:help</code>を読んで効果をよく理解してからにしましょう。</p>
 
-<p>後者については<code>0</code>/<code>0</code>というイベントがあり、ユーザーが暫く操作を行わなかったときに発行されます。これを利用して変更されている全てのバッファを保存すれば対応できます。
-				なお<code>0</code>/<code>0</code>の発行タイミングは<code class="option">'updatecount'</code>で指定できます。</p>
+<p>後者については<code>CursorHold</code>/<code>CursorHoldI</code>というイベントがあり、ユーザーが暫く操作を行わなかったときに発行されます。これを利用して変更されている全てのバッファを保存すれば対応できます。
+				なお<code>CursorHold</code>/<code>CursorHoldI</code>の発行タイミングは<code class="option">'updatecount'</code>で指定できます。</p>
 
 <h3>参考資料</h3>
 

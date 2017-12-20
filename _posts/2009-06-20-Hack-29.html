@@ -65,7 +65,27 @@ author: Shougo
 
 <dl>
 <dt>補完関数のサンプル:</dt>
-<pre class="prettyprint"><code class="lang-vim">0</code></pre>
+<pre class="prettyprint"><code class="lang-vim">command! -nargs=+ -complete=customlist,CompletionGitCommands Git call GitCommand(&lt;q-args&gt;)
+function! CompletionGitCommands(ArgLead, CmdLine, CusorPos)
+    let l:cmd = split(a:CmdLine)
+    let l:len_cmd = len(l:cmd)
+
+    if l:len_cmd &lt;= 1
+        " Commands name completion.
+        let l:filter_cmd = printf('v:val =~ "^%s"', a:ArgLead)
+        return filter(['add', 'bisect', 'branch', 'checkout', 'clone', 'commit', 'diff', 'fetch',
+                    \'grep', 'init', 'log', 'merge', 'mv', 'pull', 'push', 'rebase', 'reset', 'rm',
+                    \'show', 'status', 'tag'], l:filter_cmd)
+    else
+        " Commands argments completion.
+        let l:cmdname = l:cmd[1]
+        if l:cmdname == 'add' || l:cmdname == 'mv' || l:cmdname == 'rm'
+            let l:arg = get(l:cmd, 2, '')
+            return split(glob(l:arg.'*'), '\n')
+        else
+            return []
+endfunction
+</code></pre>
 <dd>最後にまとめとして、補完関数のサンプルを紹介しておきます。gitのコマンドを補完するサンプルです。それだけでは面白くないので、第二引数に'mv'や'add', 'rm'といったコマンド名が与えられるとファイル名を補完するようになっています。</dd>
 </dl>
 

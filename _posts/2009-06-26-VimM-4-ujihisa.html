@@ -17,16 +17,16 @@ author:
 
 <ul>
 <li>+clientserverが必要</li>
-<li><code>0</code></li>
-<li><code>0</code></li>
+<li><code>vim --servername FOO --remote temp</code></li>
+<li><code>--remote-expr "getline(2) #=&gt; ...</code></li>
 </ul>
 
 <p>VimをWEBサーバにする</p>
 
 <ul>
-<li>listenできない <code>0</code> proxy作れば解決 (perl)</li>
+<li>listenできない <code>-&gt;</code> proxy作れば解決 (perl)</li>
 <li>vimにリクエストが来るので、その場でhtmlを書いて返す</li>
-<li><code class="lang-vim">0</code>して<code class="lang-vim">0</code>するとレスポンスがくる
+<li><code class="lang-vim">:w</code>して<code class="lang-vim">:bd</code>するとレスポンスがくる
 
 <ul>
 <li>非常に柔軟</li>
@@ -39,7 +39,7 @@ author:
 
 <ul>
 <li>Windowsとプリンタ</li>
-<li><code class="lang-vim">0</code></li>
+<li><code class="lang-vim">:help printing</code></li>
 <li>コード印刷 (highlight)
 
 <ul>
@@ -47,7 +47,7 @@ author:
 </ul></li>
 <li>白黒印刷はcolorschemeによっては読めない</li>
 <li>VM上のWinでデモ (香り屋gvim)</li>
-<li>範囲指定して<code class="lang-vim">0</code></li>
+<li>範囲指定して<code class="lang-vim">:hardcopy</code></li>
 </ul>
 
 <h2>人類の絶滅 with ssig33</h2>

@@ -14,20 +14,24 @@ author: thinca
 <p>差分の直下の行、というのは、反対側のバッファで追加されている行の場合、現在のバッファには行が存在せずカーソルを置くことができないためです。その場合差分の直下の行で操作を実行します。
 				バッファの最終行の下にこのような差分があった場合は、特別にカーソルが最終行にあった場合にその下の差分を操作できます。</p>
 
-<h3><code class="lang-vim">0</code> <code class="lang-vim">0</code></h3>
+<h3><code class="lang-vim">:diffget</code> <code class="lang-vim">:diffput</code></h3>
 
-<p>高機能なコマンド版の操作もあります。実際、<kbd>do</kbd> と <kbd>dp</kbd> はそれぞれ <code class="lang-vim">0</code> と <code class="lang-vim">0</code> を引数なしで呼び出した場合と同じ動作になります。</p>
+<p>高機能なコマンド版の操作もあります。実際、<kbd>do</kbd> と <kbd>dp</kbd> はそれぞれ <code class="lang-vim">:diffget</code> と <code class="lang-vim">:diffput</code> を引数なしで呼び出した場合と同じ動作になります。</p>
 
 <p>コマンド版では範囲(range)を与えることができ、これによりチャンクを分割したマージが可能です。</p>
 
-<pre class="prettyprint"><code>0</code></pre>
+<pre class="prettyprint"><code>" Visual-mode で範囲を選択した後に、その範囲を反対側のバッファへ適用する
+:'&lt;,'&gt;diffput
+</code></pre>
 
 <p>また、Vim では 3 ファイル以上の差分の比較も可能になっていますが、その場合引数でバッファを指定することで差分をやりとりするバッファを指定することができます。バッファはバッファ番号かバッファ名のパターンや一部で指定します。</p>
 
-<pre class="prettyprint"><code>0</code></pre>
+<pre class="prettyprint"><code>" バッファ名に "BASE" を含むバッファを対象にする
+:diffget BASE
+</code></pre>
 
-<h3><code class="lang-vim">0</code></h3>
+<h3><code class="lang-vim">:diffupdate</code></h3>
 
-<p>バッファを更新していると、差分のハイライトが徐々におかしくなることもあります。その場合は、<code class="lang-vim">0</code> コマンドを実行すれば差分情報を更新することができます。</p>
+<p>バッファを更新していると、差分のハイライトが徐々におかしくなることもあります。その場合は、<code class="lang-vim">:diffupdate</code> コマンドを実行すれば差分情報を更新することができます。</p>
 
 <address class="hack-author">thinca</address>

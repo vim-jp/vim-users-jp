@@ -7,29 +7,30 @@ author: ujihisa
 <h2>問題</h2>
 
 <p>Vimで表を記述するとき、整形のため自分でスペースを追加する必要があるシーンがあります。
-				また、<code>0</code>や<code>0</code>など一部の言語では<code>0</code>などの記号を区切りとしてソースコードを縦に美しく揃える必要がある場合があります。</p>
+				また、<code>yacc</code>や<code>Haskell</code>など一部の言語では<code>|</code>などの記号を区切りとしてソースコードを縦に美しく揃える必要がある場合があります。</p>
 
 <h2>解決 &#8212; Align.vim</h2>
 
-<p>Align.vimをインストールし、さらに<code>0</code>に以下を記述します。</p>
+<p>Align.vimをインストールし、さらに<code>.vimrc</code>に以下を記述します。</p>
 
-<pre class="prettyprint"><code>0</code></pre>
+<pre class="prettyprint"><code>let g:Align_xstrlen=3
+</code></pre>
 
 <p>この設定は日本語など幅広文字に対応するためです。</p>
 
-<p>以後、<code class="lang-vim">0</code>で指定した範囲を縦に整形することができます。</p>
+<p>以後、<code class="lang-vim">:[range]Align {separators}</code>で指定した範囲を縦に整形することができます。</p>
 
 <h2>具体例</h2>
 
-<p><code>0</code>を指定する方法は様々ありますが、例としてVisualモードで選択した範囲を対象として<code>0</code>という文字を区切り文字にして縦に整形してみましょう。</p>
+<p><code>[range]</code>を指定する方法は様々ありますが、例としてVisualモードで選択した範囲を対象として<code>|</code>という文字を区切り文字にして縦に整形してみましょう。</p>
 
 <p><img src="/vim-users-jp/assets/images/453f10766853c22b53a6a1b8c60fcd18.png" alt="1" /></p>
 
-<p>まずは範囲を選択。<kbd>V</kbd>して<code>0</code>と移動していき、</p>
+<p>まずは範囲を選択。<kbd>V</kbd>して<code>jjj</code>と移動していき、</p>
 
 <p><img src="/vim-users-jp/assets/images/ba2ba175e9fded883f974b6d4ddf2699.png" alt="2" /></p>
 
-<p>ここで<kbd>:</kbd>を打鍵すると<code class="lang-vim">0</code>まで勝手に入力されるので、続いてそのまま<code>0</code>と入力、</p>
+<p>ここで<kbd>:</kbd>を打鍵すると<code class="lang-vim">:'&lt;,'&gt;</code>まで勝手に入力されるので、続いてそのまま<code>Align |</code>と入力、</p>
 
 <p><img src="/vim-users-jp/assets/images/40bd3fe5ad1e39663cfbbd7db2eebadb.png" alt="3" /></p>
 
@@ -41,16 +42,16 @@ author: ujihisa
 
 <h2>議論</h2>
 
-<p>先ほど紹介した<code class="lang-vim">0</code>以外に様々なインタフェースが提供されています。詳しくは<code class="lang-vim">0</code>を参照ください。</p>
+<p>先ほど紹介した<code class="lang-vim">:[range]Align</code>以外に様々なインタフェースが提供されています。詳しくは<code class="lang-vim">:h align</code>を参照ください。</p>
 
-<p>なお、2009年9月24日現在の最新版のAlign.vim version 35では、<code class="lang-vim">0</code>を実行するとカーソルが全く異なる場所に飛ばされてしまうというバグがあります。
+<p>なお、2009年9月24日現在の最新版のAlign.vim version 35では、<code class="lang-vim">:[range]Align</code>を実行するとカーソルが全く異なる場所に飛ばされてしまうというバグがあります。
 				しかも、<kbd>&lt;C-o&gt;</kbd>で元の場所に戻ることができません。
 				最もてっとりばやい解決方法は、<kbd>u</kbd>でAlign操作を取り消した上で元の位置に戻り、そのまま<kbd>&lt;C-r&gt;</kbd>で再実行することです。この場合なぜかカーソルは移動しません。</p>
 
 <h2>参考</h2>
 
 <ul>
-<li><code class="lang-vim">0</code></li>
+<li><code class="lang-vim">:h align</code></li>
 <li>Align.vim <a href="http://www.vim.org/scripts/script.php?script_id=294">http://www.vim.org/scripts/script.php?script_id=294</a></li>
 </ul>
 

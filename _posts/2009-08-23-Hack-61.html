@@ -18,38 +18,38 @@ author: kana
 
 <h3>解決方法</h3>
 
-<p>Normal modeで<code>0</code>をタイプします。
-<code>0</code>はGo to Fileの略です。
+<p>Normal modeで<code>gf</code>をタイプします。
+<code>gf</code>はGo to Fileの略です。
 				これはカーソル下(あるいはカーソル近傍)のファイル名に対応するファイルを開きます。</p>
 
-<p>また<code>0</code>というコマンドもあります。
-				これは<code>0</code>と同様ですが、
+<p>また<code>&lt;C-w&gt;f</code>というコマンドもあります。
+				これは<code>gf</code>と同様ですが、
 				新しいウィンドウを開き、そこで該当ファイルを開きます。</p>
 
 <p>これらのコマンドを使うことでより効率的に作業を行なうことができます。</p>
 
 <h3>応用例</h3>
 
-<p><code>0</code>は単純にカーソル下のファイル名に対応するファイルだけを
+<p><code>gf</code>は単純にカーソル下のファイル名に対応するファイルだけを
 				調べるだけではありません。</p>
 
 <ul>
 <li>該当ファイルが特定のディレクトリ下に存在するかどうかも調べます
 				(<code class="option">'path'</code>)。
-				例えばCのソースコードには通常<code>0</code>の
+				例えばCのソースコードには通常<code>#include &lt;stdio.h&gt;</code>の
 				ような形でヘッダファイルの参照が記述されますが、
 <code class="option">'path'</code>を正しく設定すれば
-				このような場合でも<code>0</code>で開くことができます。</li>
+				このような場合でも<code>gf</code>で開くことができます。</li>
 <li>該当ファイル名に特定の拡張子を付加したものが存在するかどうかも調べます
 				(<code class="option">'suffixesadd'</code>)。
-				例えばPythonのモジュール<code>0</code>に
-				対応するファイルは(大抵は)<code>0</code>ですが、
+				例えばPythonのモジュール<code>spam</code>に
+				対応するファイルは(大抵は)<code>spam.py</code>ですが、
 <code class="option">'suffixesadd'</code>を正しく設定すれば
 				そのようなモジュール名に対応するファイルを
-<code>0</code>で開くことができます。</li>
+<code>gf</code>で開くことができます。</li>
 </ul>
 
-<p>他にも<code>0</code>に関連するオプションがありますが、詳細は省略します。</p>
+<p>他にも<code>gf</code>に関連するオプションがありますが、詳細は省略します。</p>
 
 <h3>参考資料</h3>
 

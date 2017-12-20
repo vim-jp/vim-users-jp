@@ -6,7 +6,7 @@ author: tyru
 ---
 <p>たとえば、Vimでインサートモードに移り、テキストを入力します。
 				そしてインサートモードを抜けます。
-				間違った部分があったので<code>0</code>を押します。
+				間違った部分があったので<code>u</code>を押します。
 				するとVimはインサートモード中に入力した全てのテキストを削除してしまいます。
 				これはインサートモードで入力した文字はまとめてundoされるというVimの仕様で、
 				Emacsではundoした場合20文字ごとにテキストが削除されます。
@@ -16,9 +16,32 @@ author: tyru
 
 <p>以下のコードをvimrcに貼り付けます。
 				するとEmacsと同じく20文字ごとに文字が削除されます。
-				(<code>0</code>というコマンドを使っています。詳しくは<code class="lang-vim">0</code>を参照してください)</p>
+				(<code>&lt;C-g&gt;u</code>というコマンドを使っています。詳しくは<code class="lang-vim">:help i_CTRL-g_u</code>を参照してください)</p>
 
-<pre class="prettyprint"><code class="lang-vim">0</code></pre>
+<pre class="prettyprint"><code class="lang-vim">function! s:is_changed() "&#123;&#123;&#123;
+    try
+        " When no `b:vimrc_changedtick` variable
+        " (first time), not changed.
+        return exists('b:vimrc_changedtick')
+        \   &amp;&amp; b:vimrc_changedtick &lt; b:changedtick
+    finally
+        let b:vimrc_changedtick = b:changedtick
+    endtry
+endfunction "&#125;&#125;&#125;
+autocmd vimrc CursorMovedI * if s:is_changed() | doautocmd User changed-text | endif
+
+let s:current_changed_times = 0
+let s:max_changed_times = 20
+function! s:changed_text() "&#123;&#123;&#123;
+    if s:current_changed_times &gt;= s:max_changed_times - 1
+        call feedkeys("\&lt;C-g&gt;u", 'n')
+        let s:current_changed_times = 0
+    else
+        let s:current_changed_times += 1
+    endif
+endfunction "&#125;&#125;&#125;
+autocmd vimrc User changed-text call s:changed_text()
+</code></pre>
 
 <p>Vimではモードがあり、dやv、テキストオブジェクトを組み合わせた
 				高い編集能力があるのであまり問題とされていないのでしょう。

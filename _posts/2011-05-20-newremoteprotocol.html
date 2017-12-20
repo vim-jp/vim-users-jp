@@ -9,9 +9,14 @@ author:
 <p>vimには複数のインスタンス間でコマンドや式がやりとりできるremote機能があります。</p>
 
 <p>
-<pre class="prettyprint"><code>0</code></pre>
+<pre class="prettyprint"><code># vim --servername GVIM --remote-send file.txt
+
+</code></pre>
 <p>こんな感じに別のvimにファイルを開かせたり</p>
-<pre class="prettyprint"><code>0</code></pre>
+<pre class="prettyprint"><code># vim --remote-expr 1+2
+3
+
+</code></pre>
 <p>難しい計算をやってもらったり出来ます。またvimscriptからも扱えます。Windowsではウィンドウメッセージを使ってプロセス間通信が行われており、gvim.exeでもvim.exeでもやりとりが出来る様になっています。ただしLinuxではX11を使ったイベント通信が使われており、X11を入れていない、またはX11が起動していない場合にはこの素晴らしい機能を使う事が出来ませんでした。</p>
 <p>またvimはperlやruby、pythonといったスクリプト言語を補助言語として扱う事が出来ますが、これらの言語で処理をバックグラウンドで起動させておきながら編集中にイベントを発生させるといった事が簡単に出来ませんでした。例えば、vimから<a href="http://lingr.com/">Lingr</a>のchatが出来る<a href="https://github.com/tsukkee/lingr-vim">lingr.vim</a>がありますが、あれはバックエンドとしてpythonを使っており、発言があった場合にvimのインタフェースを呼び出しています。しかしながらvimはスレッドセーフではありません。インタフェースを呼び出した瞬間にvimが処理中であった場合には問答無用でクラッシュしてしまいます。これはvimにキーを送りつけるfeedkeys()を使っても同じです。</p>
 <p>これまでvimhacker達はこれを回避する為に、カーソルが一定時間停止した際に発生するCursorHoldイベントを駆使してそれっぽいvimscriptを書いて来ましたが、このCursorHoldはキーが連続で押下された場合には発生しませんし、イベントが発生するまでの時間を設定出来るupdatetimeオプションはグローバルオプションである為、異なるvimscript同士が干渉しあう事もありえます。</p>
@@ -21,7 +26,9 @@ author:
 <p>ところが、この問題を解決してくれるであろうプロジェクトがひっそりと始まりました。古参ユーザなら知ってる人もいるであろう<a href="https://sites.google.com/site/yukihironakadaira/">Yukihiro Nakadaira</a>さんです。</p>
 <p>これまでunixがX11で通信していた部分をunix domainソケットで、windowsがウィンドウメッセージで通信していた部分を名前付きパイプで実装を書き直しています。これにより、Xが起動していなくても、またWindowsではtelnetでログインしていたとしてもバックグラウンドから安全にメッセージを受信出きるようになるのです。</p>
 <p>現在まだテスト中ですが、基本的な動作は既に実装済みでVIM1からVIM2へ</p>
-<pre class="prettyprint"><code>0</code></pre>
+<pre class="prettyprint"><code>:echo remote_expr("VIM2", 'remote_expr("VIM1", "1+2")')
+
+</code></pre>
 <p>といったオウム返しも実行出来ます。すばらしいですね。</p>
 <p>現在、おそらくテスターは僕と中平さんだけだと思いますが、皆さんがテストに参加して頂ければこのあと開発フォーラムへのプッシュも楽になると思っています。</p>
 <p>ぜひテストに参加してみて下さい。</p>

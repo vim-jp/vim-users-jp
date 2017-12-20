@@ -15,23 +15,31 @@ author:
 
 <p>例:</p>
 
-<pre class="prettyprint"><code>0</code></pre>
+<pre class="prettyprint"><code>(1..20).each do |i|
+  sleep 0.2
+  puts i
+  STDOUT.flush
+end
+</code></pre>
 
 <p>という内容に対し</p>
 
-<pre class="prettyprint"><code class="lang-vim">0</code></pre>
+<pre class="prettyprint"><code class="lang-vim">:QuickRun -runner vimproc:100
+</code></pre>
 
 <p>のように実行させると、ちょっとずつ結果が出ます。(*1)</p>
 
 <h2>変更点2 モジュール化</h2>
 
-<p>ところで先ほど<code>0</code>という新しい記法がでていました。これはquickrunのモジュール化に密接に関わってくるオプションです。</p>
+<p>ところで先ほど<code>-runner</code>という新しい記法がでていました。これはquickrunのモジュール化に密接に関わってくるオプションです。</p>
 
 <p>quickrun 0.5.0では、実行部分と出力部分をモジュール化しました。</p>
 
-<pre class="prettyprint"><code>0</code></pre>
+<pre class="prettyprint"><code>runmode =&gt; runner
+output =&gt; outputter
+</code></pre>
 
-<p>名前なども変わっております。詳しくは <code class="lang-vim">0</code> を見てください。</p>
+<p>名前なども変わっております。詳しくは <code class="lang-vim">:help quickrun</code> を見てください。</p>
 
 <p>モジュール一覧:</p>
 
@@ -59,7 +67,7 @@ author:
 
 <h2>変更点3 式展開記法</h2>
 
-<p>quickrun-syntax-option で <code>0</code> が式展開になっていたものが、<code>0</code> に変更されました。多くの人は <code>0</code> の変更が必要になります。これは大事なところなので、ぜひ一日三回はtweetしてください。</p>
+<p>quickrun-syntax-option で <code>{}</code> が式展開になっていたものが、<code>%{}</code> に変更されました。多くの人は <code>~/.vimrc</code> の変更が必要になります。これは大事なところなので、ぜひ一日三回はtweetしてください。</p>
 
 <h2>参考文献</h2>
 

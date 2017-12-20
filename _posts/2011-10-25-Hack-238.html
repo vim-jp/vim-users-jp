@@ -29,9 +29,9 @@ author: Shougo
 <h3>コマンド名が改善されている</h3>
 
 <p>VundleはBundleを意識して付けられたコマンド名になっているため、コマンド名とプラグイン名が対応していません。
-				例えば、プラグインをインストールするコマンド名は<code class="lang-vim">0</code>ではなく、<code class="lang-vim">0</code>です。
+				例えば、プラグインをインストールするコマンド名は<code class="lang-vim">:VundleInstall</code>ではなく、<code class="lang-vim">:BundleInstall</code>です。
 				この辺りは、議論がされているようですが、まだ結論は出ていません。
-				neobundle.vimはプラグイン名をプレフィクスとした、<code class="lang-vim">0</code>となっています。
+				neobundle.vimはプラグイン名をプレフィクスとした、<code class="lang-vim">:NeoBundleInstall</code>となっています。
 				BundleをNeoBundleに改名するだけで、基本的に使用することができます。</p>
 
 <h3>vital化されている</h3>
@@ -41,9 +41,9 @@ author: Shougo
 
 <h3>shellslashがオンでも動作する</h3>
 
-<p><code>0</code>を使用していますが、shellslashオプションがオンの場合、クオートが&#8221;になってしまうという問題があります。
+<p><code>shellescape()</code>を使用していますが、shellslashオプションがオンの場合、クオートが&#8221;になってしまうという問題があります。
 				つまりWindows環境で、cmd.exeをshellとして使用している場合、shellslashを有効にしていると動きません。
-				neobundle.vimでは<code>0</code>を使用していません。</p>
+				neobundle.vimでは<code>shellescape()</code>を使用していません。</p>
 
 <h3>vimprocに対応している</h3>
 
@@ -65,7 +65,7 @@ author: Shougo
 
 <h3>リビジョン指定</h3>
 
-<p><code class="lang-vim">0</code>という構文でリビジョン指定ができます。まだ実験段階の機能です。
+<p><code class="lang-vim">:NeoBundle {repository} {revision}</code>という構文でリビジョン指定ができます。まだ実験段階の機能です。
 				不具合のあるプラグインのバージョンを固定する時に便利だと思います。</p>
 
 <h2>neobundle.vimの導入</h2>
@@ -73,20 +73,42 @@ author: Shougo
 <p>neobundle.vimの開発は、github上で行われています。<a href="https://github.com/Shougo/neobundle.vim">https://github.com/Shougo/neobundle.vim</a>
 				導入する場合、~/.vimにリポジトリをcloneすると楽でしょう。</p>
 
-<pre class="prettyprint"><code>0</code></pre>
+<pre class="prettyprint"><code>$ git clone https://github.com/Shougo/neobundle.vim ~/.vim/neobundle.vim.git
+</code></pre>
 
 <h2>plugin の管理</h2>
 
-<p>plugin の管理は以下の様に .vimrc に <code class="lang-vim">0</code> と記述することで行います。
-				極端な話、<code class="lang-vim">0</code>を<code class="lang-vim">0</code>に変更するだけです。</p>
+<p>plugin の管理は以下の様に .vimrc に <code class="lang-vim">NeoBundle 'plugin name'</code> と記述することで行います。
+				極端な話、<code class="lang-vim">Bundle</code>を<code class="lang-vim">NeoBundle</code>に変更するだけです。</p>
 
-<pre class="prettyprint"><code class="lang-vim">0</code></pre>
+<pre class="prettyprint"><code class="lang-vim">set nocompatible
+filetype off
+
+if has('vim_starting')
+  set runtimepath+='path to neobundle directory'
+
+  call neobundle#rc(expand('~/.bundle'))
+endif
+
+NeoBundle 'git://github.com/Shougo/clang_complete.git'
+NeoBundle 'git://github.com/Shougo/echodoc.git'
+NeoBundle 'git://github.com/Shougo/neocomplcache.git'
+NeoBundle 'git://github.com/Shougo/neobundle.vim.git'
+NeoBundle 'git://github.com/Shougo/unite.vim.git'
+NeoBundle 'git://github.com/Shougo/vim-vcs.git'
+NeoBundle 'git://github.com/Shougo/vimfiler.git'
+NeoBundle 'git://github.com/Shougo/vimshell.git'
+NeoBundle 'git://github.com/Shougo/vinarise.git'
+
+filetype plugin on
+filetype indent on
+</code></pre>
 
 <p>Vundleと同様、先にfiletypeをoffにしてから、neobundle.vimの設定を行います。
-				最初、neobudle.vimの関数を呼べるよう、neobundle.vimのパスを<code>0</code>に追加します。
-				そして<code>0</code>で初期化します。
-<code>0</code>の引数はプラグインをインストールする基準となるパスです。
-<code class="lang-vim">0</code>コマンドで設定をしたあと、最後にfiletype pluginをオンにします。</p>
+				最初、neobudle.vimの関数を呼べるよう、neobundle.vimのパスを<code>&amp;runtimepath</code>に追加します。
+				そして<code>neobundle#rc(expand('~/.bundle'))</code>で初期化します。
+<code>neobudle#rc()</code>の引数はプラグインをインストールする基準となるパスです。
+<code class="lang-vim">NeoBundle</code>コマンドで設定をしたあと、最後にfiletype pluginをオンにします。</p>
 
 <h2>NeoBundle コマンドの使い方</h2>
 
@@ -94,48 +116,58 @@ author: Shougo
 
 <h4>Github 上のリポジトリから取得する</h4>
 
-<pre class="prettyprint"><code class="lang-vim">0</code></pre>
+<pre class="prettyprint"><code class="lang-vim">NeoBundle 'user_name/repository_name'
+</code></pre>
 
 <h4>vim-scripts 上のリポジトリから取得する</h4>
 
-<pre class="prettyprint"><code class="lang-vim">0</code></pre>
+<pre class="prettyprint"><code class="lang-vim">NeoBundle 'script_name'
+</code></pre>
 
 <h4>それ以外のリポジトリから取得する</h4>
 
-<pre class="prettyprint"><code class="lang-vim">0</code></pre>
+<pre class="prettyprint"><code class="lang-vim">NeoBundle 'git://repository_url'
+NeoBundle 'http://svn.macports.org/repository/macports/contrib/mpvim/'
+NeoBundle 'https://bitbucket.org/ns9tks/vim-fuzzyfinder'
+</code></pre>
 
 <p>Gitリポジトリのフルパスを指定します。
 				MercurialやSubversionにも試験的に対応しています。</p>
 
 <h2>pluginの管理</h2>
 
-<p>plugin のインストールには、<code class="lang-vim">0</code> コマンドを使用します。
+<p>plugin のインストールには、<code class="lang-vim">:NeoBundleInstall</code> コマンドを使用します。
 				.vimrcで設定したplugin が自動的に取得され、インストールまで行われます。
 				ただし、アップデートしたプラグインを使用するには、Vimを再起動したほうが良いです。</p>
 
-<pre class="prettyprint"><code class="lang-vim">0</code></pre>
+<pre class="prettyprint"><code class="lang-vim">:NeoBundleInstall
+</code></pre>
 
-<p>既にインストールされている plugin をアップデートするには、 <code class="lang-vim">0</code> コマンドを利用します。
-				通常の<code>0</code>では、アップデートが行われないからです。</p>
+<p>既にインストールされている plugin をアップデートするには、 <code class="lang-vim">:NeoBundleInstall!</code> コマンドを利用します。
+				通常の<code>NeoBundleInstall</code>では、アップデートが行われないからです。</p>
 
-<pre class="prettyprint"><code class="lang-vim">0</code></pre>
+<pre class="prettyprint"><code class="lang-vim">:NeoBundleInstall!
+</code></pre>
 
-<p>不要になったプラグインを削除するには、<code class="lang-vim">0</code>の設定を.vimrcから削除した後、
-<code class="lang-vim">0</code>コマンドを実行します。</p>
+<p>不要になったプラグインを削除するには、<code class="lang-vim">:NeoBundle</code>の設定を.vimrcから削除した後、
+<code class="lang-vim">:NeoBundleClean</code>コマンドを実行します。</p>
 
 <p>neobundle.vimはplugin検索には対応していません。</p>
 
 <p>neobudle.vimはneobundle/install sourceを使用することで、
 				unite.vimインタフェースによりアップデートを行うことができます。
 				アップデートは非同期に行われます。
-				neobundle/install sourceの引数に!を与えると、<code class="lang-vim">0</code>相当になります。
+				neobundle/install sourceの引数に!を与えると、<code class="lang-vim">:NeoBundleInstall!</code>相当になります。
 				プラグイン名を引数に与えることで、個別にアップデートをすることも可能です。</p>
 
-<pre class="prettyprint"><code class="lang-vim">0</code></pre>
+<pre class="prettyprint"><code class="lang-vim">:Unite neobundle/install:!
+:Unite neobundle/install:neocomplcache
+:Unite neobundle/install:neocomplcache:unite.vim
+</code></pre>
 
 <h2>ドキュメントの更新</h2>
 
-<p>プラグインのインストール時に、自動的に<code class="lang-vim">0</code>コマンドが実行されるため、
+<p>プラグインのインストール時に、自動的に<code class="lang-vim">:helptags</code>コマンドが実行されるため、
 				ユーザーは何もする必要がありません。</p>
 
 <h2>参考</h2>

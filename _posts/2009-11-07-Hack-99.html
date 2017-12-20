@@ -12,11 +12,13 @@ author: thinca
 <p>
 				Vim 7.2.269 から &#8211;startuptime と言う起動時のプロファイルを簡単に行うためのコマンドライン引数が追加されました。
 </p>
-<pre class="prettyprint"><code>0</code></pre>
+<pre class="prettyprint"><code>vim --startuptime=&lt;var&gt;result.txt&lt;/var&gt;
+</code></pre>
 <p>
 				7.2.286 からは引数の形式が変更されています。
 </p>
-<pre class="prettyprint"><code>0</code></pre>
+<pre class="prettyprint"><code>vim --startuptime &lt;var&gt;result.txt&lt;/var&gt;
+</code></pre>
 <p>
 				このようにすることで、Huge版でなくても手軽にプロファイルを行う事が出来ます。
 </p>
@@ -35,13 +37,15 @@ author: thinca
 
 <p>以下のようにして vim を起動します。</p>
 
-<pre class="prettyprint"><code>0</code></pre>
+<pre class="prettyprint"><code>vim --cmd &quot;profile start result.txt&quot; --cmd &quot;profile file */plugin/*.vim&quot; -c quit
+</code></pre>
 
 <p>このコマンドを実行すると、特にエラーが発生しない限り vim はすぐに終了します。そしてプロファイル結果が result.txt に出力されます。</p>
 
 <p>また、ついでに自分の vimrc も確認したい、という場合は &#8211;cmd を増やせば大丈夫です。</p>
 
-<pre class="prettyprint"><code>0</code></pre>
+<pre class="prettyprint"><code>vim --cmd &quot;profile start result.txt&quot; --cmd &quot;profile file */plugin/*.vim&quot; --cmd &quot;profile file .vimrc&quot; -c quit
+</code></pre>
 
 <p>ファイル名は適時変更してください。また、コマンドの実行タイミングにより $MYVIMRC は使えません。</p>
 
@@ -50,7 +54,15 @@ author: thinca
 <p>プロファイル結果の概要を知るために結果のファイルを加工してみます。
 				以下のような vim スクリプトを作成し、結果ファイルを開いてから作成したスクリプトを <code class="lang-vim">:source</code> します。</p>
 
-<pre class="prettyprint"><code>0</code></pre>
+<pre class="prettyprint"><code>let s:list = []
+global/^SCRIPT/
+\ call add(s:list, printf(&quot;%s\t%s&quot;,
+\                         matchstr(getline(line('.')+2), '\d\+\.\d\+'),
+\                         matchstr(getline('.'), 'SCRIPT\s*\zs.*$')))
+new
+put =reverse(sort(s:list))
+1 delete _
+</code></pre>
 
 <p>これを実行すると新しいバッファが開かれて、そこに実行時間とスクリプトのファイル名が時間のかかった順に表示されます。
 				もっと細かい結果が知りたい場合はプロファイル結果を直接眺めたり別の方法で加工すると良いでしょう。

@@ -18,12 +18,16 @@ author: tyru
 
 <h2>:AllMaps</h2>
 
-<p><code class="lang-vim">0</code>を使います。<br />
+<p><code class="lang-vim">:AllMaps</code>を使います。<br />
 				次のコードを.vimrcに貼り付けましょう。</p>
 
-<pre class="prettyprint"><code>0</code></pre>
+<pre class="prettyprint"><code>command!
+\   -nargs=* -complete=mapping
+\   AllMaps
+\   map &lt;args&gt; | map! &lt;args&gt; | lmap &lt;args&gt;
+</code></pre>
 
-<p>kana氏の.vimrcに定義されていた<code class="lang-vim">0</code>にインスパイアされたのでそちらも興味があれば参照してください。</p>
+<p>kana氏の.vimrcに定義されていた<code class="lang-vim">:Allmap</code>にインスパイアされたのでそちらも興味があれば参照してください。</p>
 
 <ul>
 <li><a href="https://github.com/kana/config">kana/config &#8211; Github</a></li>
@@ -32,38 +36,69 @@ author: tyru
 
 <h2>使い方</h2>
 
-<pre class="prettyprint"><code>0</code></pre>
+<pre class="prettyprint"><code>" 全てのマッピングを表示
+:AllMaps
+" 冒頭で言った1のケースのように現在のバッファで定義されたマッピングのみ表示
+:AllMaps &lt;buffer&gt;
+" どのスクリプトで定義されたかの情報も含め表示
+:verbose AllMaps &lt;buffer&gt;
+</code></pre>
 
 <p>短くシンプルながらも他のExコマンドと組み合わせることで効果を無限大に発揮できるExコマンドです。</p>
 
 <h2>:Capture</h2>
 
-<p>また作者が作った<code class="lang-vim">0</code>というExコマンドがあります。<br />
+<p>また作者が作った<code class="lang-vim">:Capture</code>というExコマンドがあります。<br />
 				引数に指定したExコマンドを実行し、<br />
 				コマンドラインへの出力をバッファに表示するというものです。<br />
 				出力から検索したい場合などに便利です。<br />
 				(<a href="http://d.hatena.ne.jp/tyru/20100427/vim_capture_command">筆者のブログの記事</a>も参照してください)</p>
 
-<pre class="prettyprint"><code class="lang-vim">0</code></pre>
+<pre class="prettyprint"><code class="lang-vim">command!
+\   -nargs=+ -complete=command
+\   Capture
+\   call s:cmd_capture(&lt;q-args&gt;)
+
+function! s:cmd_capture(q_args) "&#123;&#123;&#123;
+    redir =&gt; output
+    silent execute a:q_args
+    redir END
+    let output = substitute(output, '^\n\+', '', '')
+
+    belowright new
+
+    silent file `=printf('[Capture: %s]', a:q_args)`
+    setlocal buftype=nofile bufhidden=unload noswapfile nobuflisted
+    call setline(1, split(output, '\n'))
+endfunction "&#125;&#125;&#125;
+</code></pre>
 
 <p>このExコマンドを使えば次のようにしてバッファに出力を書き込むことができます。</p>
 
-<pre class="prettyprint"><code>0</code></pre>
+<pre class="prettyprint"><code>" 全てのマッピングをバッファに書き込む (/コマンドで検索できる)
+:Capture AllMaps &lt;buffer&gt;
+</code></pre>
 
 <h2>もう少し:Captureについて (vimshell)</h2>
 
-<p>vimshellではコマンドラインでの入力で先頭に<code class="lang-vim">0</code>をつけるとVimスクリプトのExコマンドだと解釈してくれます。<br />
-				これは<code>0</code>という内部コマンドを使っているので興味があればそちらも参照してください。<br />
-				(以下<code>0</code>がvimshellのプロンプトだとします)</p>
+<p>vimshellではコマンドラインでの入力で先頭に<code class="lang-vim">:</code>をつけるとVimスクリプトのExコマンドだと解釈してくれます。<br />
+				これは<code>vexe</code>という内部コマンドを使っているので興味があればそちらも参照してください。<br />
+				(以下<code>$</code>がvimshellのプロンプトだとします)</p>
 
-<pre class="prettyprint"><code>0</code></pre>
+<pre class="prettyprint"><code>$ cd    # ホームディレクトリに移動
+$ ls    # /bin/lsを実行 (実際にはlsは内部コマンドで、それが/bin/lsを呼び出しているようです)
+bin git
+$ :ls   # :lsを実行。バッファリストを表示
+1  a   "~/memo/todo.txt"      line 0
+3  a   "~/.vimrc"             line 0
+</code></pre>
 
 <p>とても便利でクールですね。</p>
 
 <h2>unite.vimで:Capture</h2>
 
-<p>unite.vimのunite-outputというsource(<code class="lang-vim">0</code>)を使えば<br />
+<p>unite.vimのunite-outputというsource(<code class="lang-vim">:help unite-sources</code>)を使えば<br />
 				Vimスクリプトの出力をuniteバッファに取り込み、絞り込むことができます。<br />
-				詳しくは<code class="lang-vim">0</code>を参照してください。</p>
+				詳しくは<code class="lang-vim">:help unite-source-output</code>を参照してください。</p>
 
 <address class="hack-author">tyru</address>

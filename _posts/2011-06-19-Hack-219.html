@@ -60,7 +60,16 @@ author: Sixeight
 
 <p>筆者は以下のように mapping して利用しています。</p>
 
-<pre class="prettyprint"><code class="lang-vim">0</code></pre>
+<pre class="prettyprint"><code class="lang-vim">" for Fugitive &#123;&#123;&#123;
+nnoremap &lt;Space&gt;gd :&lt;C-u&gt;Gdiff&lt;Enter&gt;
+nnoremap &lt;Space&gt;gs :&lt;C-u&gt;Gstatus&lt;Enter&gt;
+nnoremap &lt;Space&gt;gl :&lt;C-u&gt;Glog&lt;Enter&gt;
+nnoremap &lt;Space&gt;ga :&lt;C-u&gt;Gwrite&lt;Enter&gt;
+nnoremap &lt;Space&gt;gc :&lt;C-u&gt;Gcommit&lt;Enter&gt;
+nnoremap &lt;Space&gt;gC :&lt;C-u&gt;Git commit --amend&lt;Enter&gt;
+nnoremap &lt;Space&gt;gb :&lt;C-u&gt;Gblame&lt;Enter&gt;
+" &#125;&#125;&#125;
+</code></pre>
 
 <h2>参照資料</h2>
 

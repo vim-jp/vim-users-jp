@@ -8,7 +8,7 @@ author: ujihisa
 
 <h2>概要</h2>
 
-<p>Vimでは多くの操作が「何を行うか決め、その後候補を指定する」というものになっています。たとえばファイル<code>0</code>を別のバッファに開くならば、<code class="lang-vim">0</code>などというコマンドを実行することになります。まず先に<code class="lang-vim">0</code>を打鍵し、つまり「別のバッファに開く」という動作を決め、その後対象となるファイルを入力します。このとき、Vim組み込みの補完は、<code class="lang-vim">0</code>という先立つ入力をもとに、後に入力されるものはファイル名と分かりきっていることから、ファイル名のための補完を行ってくれます。かゆいところに手が届く支援もあり、また無駄な操作が存在せず、非常に効率的かつ快適です。</p>
+<p>Vimでは多くの操作が「何を行うか決め、その後候補を指定する」というものになっています。たとえばファイル<code>a.txt</code>を別のバッファに開くならば、<code class="lang-vim">:new a.txt</code>などというコマンドを実行することになります。まず先に<code class="lang-vim">:new</code>を打鍵し、つまり「別のバッファに開く」という動作を決め、その後対象となるファイルを入力します。このとき、Vim組み込みの補完は、<code class="lang-vim">:new</code>という先立つ入力をもとに、後に入力されるものはファイル名と分かりきっていることから、ファイル名のための補完を行ってくれます。かゆいところに手が届く支援もあり、また無駄な操作が存在せず、非常に効率的かつ快適です。</p>
 
 <p>一方、近年Vim業界で幅を利かせつつある<a href="http://github.com/shougo/unite.vim">unite</a>というプラギンが存在します。全てを統合し破壊するフレームワークなどと呼ばれていて、なんのことかよくわからずとりあえず見送っている方も多いのではないでしょうか。</p>
 
@@ -22,39 +22,41 @@ author: ujihisa
 
 <p>標準添付のunite-fileというプラギンがあります。</p>
 
-<pre class="prettyprint"><code class="lang-vim">0</code></pre>
+<pre class="prettyprint"><code class="lang-vim">:edit a.txt
+</code></pre>
 
 <p>のかわりに、まず以下のコマンドでunite窓を開きます。</p>
 
-<pre class="prettyprint"><code class="lang-vim">0</code></pre>
+<pre class="prettyprint"><code class="lang-vim">:Unite file
+</code></pre>
 
 <p>カレントディレクトリのファイル一覧がでてきます。</p>
 
 <p><img src="/vim-users-jp/assets/images/9b9a9cb261ed8b219dbcfb3023af2dd8.png" alt="" /></p>
 
-<p>つづいて、<code>0</code>や<code>0</code>で項目間を移動し、今回対象として取り扱いたい<code>0</code>のところにカーソルを移動します。つづいて、<kbd>&lt;tab&gt;</kbd>を打鍵します。</p>
+<p>つづいて、<code>j</code>や<code>k</code>で項目間を移動し、今回対象として取り扱いたい<code>a.txt</code>のところにカーソルを移動します。つづいて、<kbd>&lt;tab&gt;</kbd>を打鍵します。</p>
 
 <p><img src="/vim-users-jp/assets/images/c5c000170f28926aaf83d0c47bc5fcbb.png" alt="" /></p>
 
-<p>そのファイルに対して「何ができるか」の一覧がでてきました。今回行いたいのはそのファイルを開くことですので、openと打鍵して<kbd>&lt;cr&gt;</kbd>します。なお、他のコマンドとかぶらない程度に省略することができます。<code>0</code>で十分です。</p>
+<p>そのファイルに対して「何ができるか」の一覧がでてきました。今回行いたいのはそのファイルを開くことですので、openと打鍵して<kbd>&lt;cr&gt;</kbd>します。なお、他のコマンドとかぶらない程度に省略することができます。<code>o</code>で十分です。</p>
 
 <p>以上でunite上でファイルの操作を行うことができることがわかりました。この説明だけを聞くと、「単に手順が増えただけじゃないか」と思うかもしれません。著者もそうでした。</p>
 
-<p>また、<code>0</code>, <code>0</code>で項目間を移動するだけでなく、<code>0</code>を打鍵してInsert mode(*1)に入ってから適当な文字列を入力することで、その文字列で候補を絞り込むことができます。今回対象は<code>0</code>と<code>0</code>の二つのみですので、<code>0</code>と一文字打鍵するだけで候補が完全に<code>0</code>のみに絞られます。</p>
+<p>また、<code>j</code>, <code>k</code>で項目間を移動するだけでなく、<code>i</code>を打鍵してInsert mode(*1)に入ってから適当な文字列を入力することで、その文字列で候補を絞り込むことができます。今回対象は<code>a.txt</code>と<code>b.txt</code>の二つのみですので、<code>a</code>と一文字打鍵するだけで候補が完全に<code>a.txt</code>のみに絞られます。</p>
 
-<p>カレントディレクトリにあるファイルを<code class="lang-vim">0</code>で開くだけならば、<code class="lang-vim">0</code>の方が良いでしょう。しかし、もうすこし複雑な例になると、uniteの優位性がじわじわと上回ってきます。</p>
+<p>カレントディレクトリにあるファイルを<code class="lang-vim">:Unite file</code>で開くだけならば、<code class="lang-vim">:edit</code>の方が良いでしょう。しかし、もうすこし複雑な例になると、uniteの優位性がじわじわと上回ってきます。</p>
 
 <p>標準添付にunite-file_recというプラギンがあります。これはカレントディレクトリ以下のファイルを再帰的にすべて探索するという点を除いてunite-fileとほぼ全く同等です。</p>
 
-<p>unite-file_recはかなり強力で、筆者は一日に少なくとも1000回は使用しています。<code class="lang-vim">0</code>でいちいち深いディレクトリをもぐってファイルを開く必要はありません。また、カレントディレクトリ以下のファイル数が非常に多くとも、探索が非同期で行われるため、Vimが固まることはありません。</p>
+<p>unite-file_recはかなり強力で、筆者は一日に少なくとも1000回は使用しています。<code class="lang-vim">:edit</code>でいちいち深いディレクトリをもぐってファイルを開く必要はありません。また、カレントディレクトリ以下のファイル数が非常に多くとも、探索が非同期で行われるため、Vimが固まることはありません。</p>
 
-<p>さらに、previewモードというものが存在します。<code class="lang-vim">0</code>コマンド時に<code>0</code>というオプションを指定すると、カーソルを移動するたびにunite窓の少ししたに小さなウインドウが現れ、そこにファイルの中身の一部が表示されます。</p>
+<p>さらに、previewモードというものが存在します。<code class="lang-vim">:Unite</code>コマンド時に<code>-auto-preview</code>というオプションを指定すると、カーソルを移動するたびにunite窓の少ししたに小さなウインドウが現れ、そこにファイルの中身の一部が表示されます。</p>
 
 <h2>ファイル以外のものを操作するuniteプラギン</h2>
 
-<p>筆者が頻繁に使うものの例は<code>0</code>です。これについて詳しくは <a href="/vim-users-jp/2011/01/21/Hack-196.html">Hack #196: カラースキームは開発支援ツール</a> を参照ください。なお、<code>0</code>オプション付きで起動することにより、カーソル移動するたびに実際にそのVimのcolorschemeがチラチラ変わります。(キャンセルすると元のcolorschemeに戻ります)</p>
+<p>筆者が頻繁に使うものの例は<code>unite-colorscheme</code>です。これについて詳しくは <a href="/vim-users-jp/2011/01/21/Hack-196.html">Hack #196: カラースキームは開発支援ツール</a> を参照ください。なお、<code>-auto-preview</code>オプション付きで起動することにより、カーソル移動するたびに実際にそのVimのcolorschemeがチラチラ変わります。(キャンセルすると元のcolorschemeに戻ります)</p>
 
-<p>また、unite-refを用いることで、ruby, haskell, perl, python, php, erlang, clojureのドキュメントをひくことができます。英和辞書、manもついていてお買い得です(*2)。これは<a href="https://github.com/thinca/vim-ref">ref.vim</a>というVimプラギンが既に存在し、そのプラギンがuniteで利用可能になっているという構造になっています。以下の図は例としてrefで<code>0</code>で検索してみたところです。Haskellの例がいくつか見つかっていますね。</p>
+<p>また、unite-refを用いることで、ruby, haskell, perl, python, php, erlang, clojureのドキュメントをひくことができます。英和辞書、manもついていてお買い得です(*2)。これは<a href="https://github.com/thinca/vim-ref">ref.vim</a>というVimプラギンが既に存在し、そのプラギンがuniteで利用可能になっているという構造になっています。以下の図は例としてrefで<code>&gt;&gt;=</code>で検索してみたところです。Haskellの例がいくつか見つかっていますね。</p>
 
 <p><img src="/vim-users-jp/assets/images/4f1a7c4c48beee85371dc1695ccbde41.png" alt="" /></p>
 
@@ -63,7 +65,7 @@ author: ujihisa
 <ul>
 <li>unite-help <a href="/vim-users-jp/2011/02/05/Hack-199.html">Hack #199: :helpに慣れ親しむ</a>
 <ul>
-<li><code class="lang-vim">0</code>コマンドの説明をしていますが、<code class="lang-vim">0</code>そのものを使わずとも、unite-helpで気楽にhelpをひきましょう。</li>
+<li><code class="lang-vim">:help</code>コマンドの説明をしていますが、<code class="lang-vim">:help</code>そのものを使わずとも、unite-helpで気楽にhelpをひきましょう。</li>
 </ul>
 </li>
 </ul>

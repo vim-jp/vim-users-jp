@@ -9,11 +9,12 @@ author: thinca
 <h3>設定方法</h3>
 
 <p><code class="option">'foldmethod'</code> が &#8220;expr&#8221; の場合、<code class="option">'foldexpr'</code> オプションに折り畳みレベルを計算するための式を設定します。
-				この式の中では <code>0</code> に行番号が格納されているので、その行の折り畳みレベルを計算します。</p>
+				この式の中では <code>v:lnum</code> に行番号が格納されているので、その行の折り畳みレベルを計算します。</p>
 
 <p>大抵の場合、関数を定義してその関数を呼び出すような式を設定します。</p>
 
-<pre class="prettyprint"><code>0</code></pre>
+<pre class="prettyprint"><code>setlocal foldexpr=MyFold(v:lnum)
+</code></pre>
 
 <h3>式の返す値</h3>
 
@@ -67,7 +68,23 @@ author: thinca
 
 <p>ここでは簡単な具体例を紹介します。</p>
 
-<pre class="prettyprint"><code class="lang-vim">0</code></pre>
+<pre class="prettyprint"><code class="lang-vim">setlocal foldmethod=expr foldexpr=MyHelpFold(v:lnum)
+
+function! MyHelpFold(lnum)
+  let line = getline(a:lnum)
+  let next = getline(a:lnum + 1)
+  if line =~ '^=\{78}$'
+    return 1
+  elseif next =~ '^=\{78}$'
+    return '&lt;1'
+  elseif line =~ '^-\{78}$'
+    return 2
+  elseif next =~ '^-\{78}$'
+    return '&lt;2'
+  endif
+  return '='
+endfunction
+</code></pre>
 
 <p>これは Vim の help を折り畳む設定の例です。</p>
 

@@ -14,7 +14,8 @@ author:
 
 <p>以下のコマンドで編集中バッファ内に現れる全ての数値を1加算します。</p>
 
-<pre class="prettyprint"><code class="lang-vim">0</code></pre>
+<pre class="prettyprint"><code class="lang-vim">:%s/[0-9]\+/\=submatch(0)+1/g
+</code></pre>
 
 <p>また、Visual modeで範囲を選択してから上記コマンドを入力すると、選択範囲の行に現れる全ての数値を1加算します。</p>
 
@@ -25,14 +26,14 @@ author:
 
 <p><kbd>&lt;C-a&gt;</kbd>はmotionを受け取って範囲を指定して一気に処理するという機能が標準で提供されているわけではないので、上記のような別の方法が必要となります。</p>
 
-<p>多くの場合<code class="lang-vim">0</code>の<code>0</code>部分には置き換え文字列を記述しますが、この部分を<code>0</code>で始めることにより、任意の式を用いて記述することができます。<kbd>&lt;C-a&gt;</kbd>ではなくVimの式の<code>0</code>を用いて加算しています。これは<code class="lang-vim">0</code>などで使われる<code>0</code>です。</p>
+<p>多くの場合<code class="lang-vim">:s[ubstitute]/{pattern}/{string}/[flags]</code>の<code>{string}</code>部分には置き換え文字列を記述しますが、この部分を<code>\=</code>で始めることにより、任意の式を用いて記述することができます。<kbd>&lt;C-a&gt;</kbd>ではなくVimの式の<code>+</code>を用いて加算しています。これは<code class="lang-vim">:echo 1+2</code>などで使われる<code>+</code>です。</p>
 
-<p>なお、同様に数値を減らすには<kbd>&lt;C-a&gt;</kbd>のかわりに<kbd>&lt;C-x&gt;</kbd>を、あるいは<code class="lang-vim">0</code>を用います。</p>
+<p>なお、同様に数値を減らすには<kbd>&lt;C-a&gt;</kbd>のかわりに<kbd>&lt;C-x&gt;</kbd>を、あるいは<code class="lang-vim">:%s/[0-9]\+/\=submatch(0)-1/g</code>を用います。</p>
 
 <h2>参考</h2>
 
 <ul>
-<li><code class="lang-vim">0</code></li>
+<li><code class="lang-vim">:h sub-replace-expression</code></li>
 </ul>
 
 <p><author>ujihisa</author></p>

@@ -28,15 +28,24 @@ author: from_kyushu
 
 <p>設定は Config::Pit の ppit コマンドや pit の pit コマンドから設定することが可能です。デフォルトのプロファイル名は vimrc ですが、変更することも可能です。</p>
 
-<pre class="prettyprint"><code>0</code></pre>
+<pre class="prettyprint"><code>pit set vimrc </code></pre>
 
 <p>設定はYAMLとして記述します。例として blogger.vim の設定方法を記述します。</p>
 
-<pre class="prettyprint"><code>0</code></pre>
+<pre class="prettyprint"><code>---
+blogger_blogid = 7772225564702673313
+blogger_email = blogger.vim@gmail.com
+blogger_pass = bloggervimvim
+</code></pre>
 
 <p>また、 Vim の Command Mode から以下の要領で設定を行うこともできます。例として blogger.vim の設定方法を記述します。</p>
 
-<pre class="prettyprint"><code>0</code></pre>
+<pre class="prettyprint"><code>:let g:blogger_blogid = 7772225564702673313
+:let g:blogger_email = "blogger.vim@gmail.com"
+:let g:blogger_pass = "bloggervimvim"
+:PitAdd g:blogger_blogid g:blogger_email g:blogger_pass
+:PitSave
+</code></pre>
 
 <h4>デフォルトプロファイル名の設定</h4>
 

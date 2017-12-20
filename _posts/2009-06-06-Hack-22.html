@@ -12,9 +12,13 @@ author:
 
 <h2>解決</h2>
 
-<p><code>0</code>ファイルに以下の設定を記述します。</p>
+<p><code>vimrc</code>ファイルに以下の設定を記述します。</p>
 
-<pre class="prettyprint"><code class="lang-vim">0</code></pre>
+<pre class="prettyprint"><code class="lang-vim">augroup MyXML
+  autocmd!
+  autocmd Filetype xml inoremap &lt;buffer&gt; &lt;/ &lt;/&lt;C-x&gt;&lt;C-o&gt;
+augroup END
+</code></pre>
 
 <p>これでXMLファイル編集時に<kbd>&lt;/</kbd>と入力するだけで自動的に以下のように補完されます。</p>
 
@@ -26,33 +30,45 @@ author:
 
 <p>事前に特別な設定をすることなく、Vimが標準で提供している機能でXMLの閉じタグが補完できます。XMLファイルを編集時に、</p>
 
-<pre class="prettyprint"><code>0</code></pre>
+<pre class="prettyprint"><code>&lt;aaa&gt;&lt;bbb&gt;&lt;/bbb&gt;&lt;/
+</code></pre>
 
 <p>まで入力している状態で、挿入モードのままで<kbd>&lt;C-x&gt;&lt;C-o&gt;</kbd>とタイプすると、</p>
 
-<pre class="prettyprint"><code>0</code></pre>
+<pre class="prettyprint"><code>&lt;aaa&gt;&lt;bbb&gt;&lt;/bbb&gt;&lt;/aaa&gt;
+</code></pre>
 
-<p>のように対応する<code>0</code>タグが自動的に閉じられます。ここで用いた<kbd>&lt;C-x&gt;&lt;C-o&gt;</kbd>は <em>filetypeに応じた補完を行なう</em> 機能です。
-				XMLのための<kbd>&lt;C-x&gt;&lt;C-o&gt;</kbd>の<code>0</code>関数は<code>0</code>で定義されています。
+<p>のように対応する<code>&lt;aaa&gt;</code>タグが自動的に閉じられます。ここで用いた<kbd>&lt;C-x&gt;&lt;C-o&gt;</kbd>は <em>filetypeに応じた補完を行なう</em> 機能です。
+				XMLのための<kbd>&lt;C-x&gt;&lt;C-o&gt;</kbd>の<code>omnifunc</code>関数は<code>$VIMRUNTIME/autoload/xmlcomplete.vim</code>で定義されています。
 				詳細は<a href="/vim-users-jp/2009/05/01/Hack-4.html">Hack #4: Insert mode補完　導入編</a>を参照してください。</p>
 
 <p>しかし、<kbd>&lt;C-x&gt;&lt;C-o&gt;</kbd>は非常に入力しづらいキーシーケンスです。また、XMLを編集中に<kbd>&lt;/</kbd>と入力した後は、必ず対応するタグを示す文字列を入力することになり、これに例外はまずありません。従って、<kbd>&lt;/</kbd>と入力すると即座に自動的に閉じタグが展開されることが望まれます。</p>
 
-<p>以下の一行を<code>0</code>ファイルに記述することで、<kbd>&lt;/</kbd>と入力すると即座にオムニ補完が実行されます。</p>
+<p>以下の一行を<code>vimrc</code>ファイルに記述することで、<kbd>&lt;/</kbd>と入力すると即座にオムニ補完が実行されます。</p>
 
-<pre class="prettyprint"><code>0</code></pre>
+<pre class="prettyprint"><code>inoremap &lt;/ &lt;/&lt;C-x&gt;&lt;C-o&gt;
+</code></pre>
 
-<p>しかしXML以外のファイルを編集中に上記補完が勝手に実行されてはたまりません。また、<kbd>&lt;/</kbd>とまでタイプすることはなくとも、<kbd>&lt;</kbd>のタイプがバッファに即反映されないのは若干のストレスを感じてしまいます。ここで上記特徴をXMLファイル編集時に限定するために、<code class="lang-vim">0</code>と組み合わせて以下のように設定する必要があります。</p>
+<p>しかしXML以外のファイルを編集中に上記補完が勝手に実行されてはたまりません。また、<kbd>&lt;/</kbd>とまでタイプすることはなくとも、<kbd>&lt;</kbd>のタイプがバッファに即反映されないのは若干のストレスを感じてしまいます。ここで上記特徴をXMLファイル編集時に限定するために、<code class="lang-vim">autocmd</code>と組み合わせて以下のように設定する必要があります。</p>
 
-<pre class="prettyprint"><code class="lang-vim">0</code></pre>
+<pre class="prettyprint"><code class="lang-vim">augroup MyXML
+  autocmd!
+  autocmd Filetype xml inoremap &lt;buffer&gt; &lt;/ &lt;/&lt;C-x&gt;&lt;C-o&gt;
+augroup END
+</code></pre>
 
 <p>ここで、XMLだけでなくHTMLに関する設定の行も追加するとなおよろしいでしょう。</p>
 
-<pre class="prettyprint"><code class="lang-vim">0</code></pre>
+<pre class="prettyprint"><code class="lang-vim">augroup MyXML
+  autocmd!
+  autocmd Filetype xml inoremap &lt;buffer&gt; &lt;/ &lt;/&lt;C-x&gt;&lt;C-o&gt;
+  autocmd Filetype html inoremap &lt;buffer&gt; &lt;/ &lt;/&lt;C-x&gt;&lt;C-o&gt;
+augroup END
+</code></pre>
 
-<p><code class="lang-vim">0</code>について詳しくは<a href="/vim-users-jp/2009/05/19/Hack-13.html">Hack #13: autocmdを使用して自動的に処理を実行する</a>を参照ください。</p>
+<p><code class="lang-vim">autocmd</code>について詳しくは<a href="/vim-users-jp/2009/05/19/Hack-13.html">Hack #13: autocmdを使用して自動的に処理を実行する</a>を参照ください。</p>
 
-<p>今回は<code>0</code>を用いて<kbd>&lt;/</kbd>という入力キーシーケンス自体を上書きするというアプローチを採用しました。他にも、<code>0</code>や<code>0</code>などの自動補完プラグインを用いるというアプローチもあります。詳細は<a href="/vim-users-jp/2009/07/30/Hack-49.html">Hack #49: 自動補完を活用する　後編</a>を
+<p>今回は<code>inoremap</code>を用いて<kbd>&lt;/</kbd>という入力キーシーケンス自体を上書きするというアプローチを採用しました。他にも、<code>autocomplpop.vim</code>や<code>neocomplecache.vim</code>などの自動補完プラグインを用いるというアプローチもあります。詳細は<a href="/vim-users-jp/2009/07/30/Hack-49.html">Hack #49: 自動補完を活用する　後編</a>を
 				参照ください。</p>
 
 <p><author>ujihisa</author></p>

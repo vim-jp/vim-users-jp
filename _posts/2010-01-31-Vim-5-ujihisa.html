@@ -27,7 +27,7 @@ author:
 <li>Lv5 他のアプリケーション使用時にescやiを打鍵してしまい、イラっとする日々を送る</li>
 <li>Lv6 シェルは当然vimshell。ネオコンなど大規模プラギンのバグを発見し、パッチ付きで報告する</li>
 <li>Lv7 Vim本体のソースコードを読み、あまりの魔界に発狂する</li>
-<li>Lv8 他言語インタフェース<code>0</code>を作り、<code>0</code>に投稿する。当然採用されない</li>
+<li>Lv8 他言語インタフェース<code>if_***</code>を作り、<code>vim_dev</code>に投稿する。当然採用されない</li>
 <li>Lv9 Vim本体の開発への貢献が日常になる。投稿し採用されたパッチ数が10を越える</li>
 <li>Lv10 神になる</li>
 </ul>
@@ -54,43 +54,44 @@ author:
 
 <p>VimをインストールしてVimtutorを全部やる。25~30分。</p>
 
-<pre class="prettyprint"><code>0</code></pre>
+<pre class="prettyprint"><code>$ vimtutor
+</code></pre>
 
 <h2>Lv1の重要な点</h2>
 
 <ul>
-<li><code>0</code>
+<li><code>u</code>
 
 <ul>
 <li>undo。無制限</li>
 <li>Vimは終了しない</li>
-<li>キャンセルは<code>0</code></li>
+<li>キャンセルは<code>&lt;C-r&gt;</code></li>
 </ul></li>
-<li><code>0</code>
+<li><code>A</code>
 
 <ul>
 <li>その行の行末から文字入力開始!</li>
 </ul></li>
-<li><code>0</code>
+<li><code>dw</code>
 
 <ul>
-<li><code>0</code></li>
+<li><code>(delete 'word)</code></li>
 <li>カーソル位置からその単語の終わりまでまとめて削除!</li>
 </ul></li>
-<li><code>0</code>
+<li><code>d$</code>
 
 <ul>
 <li>カーソル位置から行末まで削除!</li>
 </ul></li>
-<li><code>0</code>
+<li><code>dd</code>
 
 <ul>
 <li>その行を削除</li>
 </ul></li>
-<li><code>0</code>, <code>0</code>
+<li><code>p</code>, <code>P</code>
 
 <ul>
-<li>消した文字を貼付け。<code>0</code>だとVim以外のソフトのペーストのような挙動</li>
+<li>消した文字を貼付け。<code>P</code>だとVim以外のソフトのペーストのような挙動</li>
 </ul></li>
 <li><code>0</code>
 
@@ -102,24 +103,24 @@ author:
 <h3>ビジュアルモード</h3>
 
 <ul>
-<li><code>0</code>
+<li><code>v</code>
 
 <ul>
 <li>一文字単位のビジュアルモード</li>
 </ul></li>
-<li><code>0</code>
+<li><code>V</code>
 
 <ul>
 <li>行単位のビジュアルモード</li>
 </ul></li>
-<li><code>0</code>
+<li><code>&lt;C-v&gt;</code>
 
 <ul>
 <li>矩形選択</li>
 </ul></li>
 </ul>
 
-<p><code>0</code>して<code>0</code>でヤンク、あるいは<code>0</code>で削除できる!</p>
+<p><code>v</code>して<code>y</code>でヤンク、あるいは<code>d</code>で削除できる!</p>
 
 <h2>Be Lv2</h2>
 
@@ -131,35 +132,47 @@ author:
 
 <p>値x に対して、 引数2 で、 関数f を実行する</p>
 
-<pre class="prettyprint"><code>0</code></pre>
+<pre class="prettyprint"><code>f(x, 2)
+</code></pre>
 
 <h3>オブジェクト指向言語</h3>
 
 <p>値x に対して、 引数2 で、 関数f を実行する</p>
 
-<pre class="prettyprint"><code>0</code></pre>
+<pre class="prettyprint"><code># f(x, 2)
+x.f(2)
+</code></pre>
 
 <h3>Vimのビジュアルモード</h3>
 
 <p>範囲x に対して、 引数2 で、 操作f を実行する</p>
 
-<pre class="prettyprint"><code>0</code></pre>
+<pre class="prettyprint"><code># f(x, 2)
+# x.f(2)
+x2f
+</code></pre>
 
 <h3>Vimの非ビジュアルモード</h3>
 
 <p>範囲x に対して、 引数2 で、 操作f を実行する</p>
 
-<pre class="prettyprint"><code>0</code></pre>
+<pre class="prettyprint"><code># f(x, 2)
+# x.f(2)
+# x2f
+2fx
+</code></pre>
 
 <h3>例: 次の空行まで削除</h3>
 
 <p>ビジュアルモード</p>
 
-<pre class="prettyprint"><code>0</code></pre>
+<pre class="prettyprint"><code>v}d
+</code></pre>
 
 <p>非ビジュアルモード</p>
 
-<pre class="prettyprint"><code>0</code></pre>
+<pre class="prettyprint"><code>d}
+</code></pre>
 
 <h3>非ビジュアルモードの薦め</h3>
 
@@ -272,8 +285,8 @@ author:
 <ol>
 <li>Vimを使いまくる</li>
 <li>こんな機能があればラクなのになあと思う</li>
-<li>Vim標準でその機能があるか調べる <code class="lang-vim">0</code></li>
-<li><code>0</code>にそのスクリプトがあるか調べる</li>
+<li>Vim標準でその機能があるか調べる <code class="lang-vim">:h</code></li>
+<li><code>www.vim.org</code>にそのスクリプトがあるか調べる</li>
 </ol>
 
 <h2>#</h2>

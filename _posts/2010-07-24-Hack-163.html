@@ -7,14 +7,19 @@ author: tyru
 <p>viの前身であるedは、シェルスクリプトなどで文字列置き換えのために使うことができます。
 				(fileというファイルの中身を全行逆転させる例です)</p>
 
-<pre class="prettyprint"><code>0</code></pre>
+<pre class="prettyprint"><code>ed - file &lt;&lt;EOS
+g/^/m0
+write
+qall!
+EOS
+</code></pre>
 
-<p><code>0</code>は<code>0</code>にマッチする行に対して<code class="lang-vim">0</code>という操作を適用するコマンドです。
-<code class="lang-vim">0</code>は分かりやすく書くと<code class="lang-vim">0</code>で、引数の行の下に現在の行を持っていくという動作をします。
-<code>0</code>はどの行にもマッチするので、<code class="lang-vim">0</code>で全部の行に対して上からマッチした順に1行目に持っていきます。
+<p><code>g/^/m0</code>は<code>^</code>にマッチする行に対して<code class="lang-vim">:m0</code>という操作を適用するコマンドです。
+<code class="lang-vim">:m0</code>は分かりやすく書くと<code class="lang-vim">:move 0</code>で、引数の行の下に現在の行を持っていくという動作をします。
+<code>^</code>はどの行にもマッチするので、<code class="lang-vim">:m0</code>で全部の行に対して上からマッチした順に1行目に持っていきます。
 				操作が終わると全行が逆になっているというわけです。</p>
 
-<p>また<code class="lang-vim">0</code>と<code class="lang-vim">0</code>は全行逆になったバッファを<code>0</code>に書き込むために必要です。</p>
+<p>また<code class="lang-vim">:write</code>と<code class="lang-vim">:qall!</code>は全行逆になったバッファを<code>file</code>に書き込むために必要です。</p>
 
 <p>VimについてくるexというコマンドはedのVim版とも言えるものですのでもちろん上のようなことができます。
 				しかしデフォルトでは.vimrcやプラグインなども読み込んでしまうため、
@@ -22,16 +27,22 @@ author: tyru
 				さらにVimmerとしてはVimの機能が使えず戸惑わないように「-N」も指定する必要があります。
 				よってexをVimスクリプトインタプリタとして使うには以下のように起動すればできそうです。</p>
 
-<pre class="prettyprint"><code>0</code></pre>
+<pre class="prettyprint"><code>ex -N -u NORC --noplugin
+</code></pre>
 
 <p>冒頭の例のex版はこのようになります。</p>
 
-<pre class="prettyprint"><code>0</code></pre>
+<pre class="prettyprint"><code>ex -N -u NORC --noplugin file &lt;&lt;EOS
+g/^/m0
+write
+qall!
+EOS
+</code></pre>
 
 <p>デフォルトでもこのようにVimスクリプトインタプリタのように使えなくはないのですが、以下のような難点があります。</p>
 
 <ol>
-<li>ファイルに対して実行するには末尾に必ず<code class="lang-vim">0</code>と<code class="lang-vim">0</code>をつけなければならず面倒</li>
+<li>ファイルに対して実行するには末尾に必ず<code class="lang-vim">:write</code>と<code class="lang-vim">:qall!</code>をつけなければならず面倒</li>
 <li>ファイルに対して実行する際に元のデータを壊してしまう</li>
 <li>いくつかの定型的なオプションを付けるのが面倒</li>
 <li>標準入力からスクリプトを読み込むのでファイルを標準入力から読み込めない</li>
@@ -42,9 +53,16 @@ author: tyru
 <p><a href="http://github.com/tyru/iex">iex</a>を使います。
 				これはVimスクリプトをPerl、Ruby、Pythonなどの多くのLLのインタプリタと同じ感覚でVimスクリプトを実行させることができる優れ物です。</p>
 
-<pre class="prettyprint"><code>0</code></pre>
+<pre class="prettyprint"><code>$ echo 'g/^/m0' &gt;reverse.vim
+$ cat ~/.vimrc | iex reverse.vim -
 
-<p>詳しくは<code>0</code>を見てください。</p>
+# -eオプションで指定することも可能
+$ cat ~/.vimrc | iex -e 'g/^/m0' -
+
+$ iex    # /bin/exが開く
+</code></pre>
+
+<p>詳しくは<code>iex -h</code>を見てください。</p>
 
 <h2>いくつかのVimスクリプト</h2>
 
@@ -52,29 +70,45 @@ author: tyru
 
 <h3>tac</h3>
 
-<pre class="prettyprint"><code>0</code></pre>
+<pre class="prettyprint"><code>$ cat tac.vim
+g/^/m0
+$ iex tac.vim file
+</code></pre>
 
 <h3>sort</h3>
 
-<pre class="prettyprint"><code>0</code></pre>
+<pre class="prettyprint"><code>$ cat sort.vim
+sort
+$ iex sort.vim file
+</code></pre>
 
 <h3>sort -u (sort | uniq)</h3>
 
-<pre class="prettyprint"><code>0</code></pre>
+<pre class="prettyprint"><code>$ cat uniq.vim
+sort u
+$ iex uniq.vim file
+</code></pre>
 
 <h3>grep</h3>
 
-<pre class="prettyprint"><code>0</code></pre>
+<pre class="prettyprint"><code>$ cat grep.vim
+edit `=ARGS[1]`
+execute 'v/' . ARGS[2] . '/d'
+$ iex -s grep.vim ~/.vimrc vim
 
-<p>また<code>0</code>オプションを使ったやり方を示すと</p>
+("vim"のみを含んだ行が表示される)
+</code></pre>
 
-<pre class="prettyprint"><code>0</code></pre>
+<p>また<code>-e</code>オプションを使ったやり方を示すと</p>
+
+<pre class="prettyprint"><code>$ iex -s -e 'edit `=ARGS[1]' -e 'execute "v/" . ARGS[2] . "/d"' ~/.vimrc vim
+</code></pre>
 
 <p>のようになります。<br />
 				これは一般のLLインタプリタと同じようにワンライナーのようなものを書くのに適しています。</p>
 
-<p>また<code>0</code>を与えることで引数の扱いを変えています。<br />
-<code>0</code>を与えると中身を読み込まずに<code>0</code>というListに代入するだけにします。<br />
-				その他細かい違いなどは<code>0</code>を見てください。</p>
+<p>また<code>-s</code>を与えることで引数の扱いを変えています。<br />
+<code>-s</code>を与えると中身を読み込まずに<code>g:ARGS</code>というListに代入するだけにします。<br />
+				その他細かい違いなどは<code>iex -h</code>を見てください。</p>
 
 <address class="hack-author">tyru</address>

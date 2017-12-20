@@ -11,7 +11,11 @@ author: Sixeight
 <p>source の定義に最低限必要なのは、名前と、辞書変数のリストを返す関数を持ったオブジュクトです
 				例えば以下の様に書きます</p>
 
-<pre class="prettyprint"><code class="lang-vim">0</code></pre>
+<pre class="prettyprint"><code class="lang-vim">let s:unite_hacks = {'name': 'hacks'}
+function! s:unite_hacks.gather_candidates(args, context)
+  # 辞書変数のリストを返す処理
+endfunction
+</code></pre>
 
 <p>あとはこれを登録する必要があります。</p>
 
@@ -22,13 +26,17 @@ author: Sixeight
 <p>1つ目の方法は unite#define_source を使用する方法です。
 				先程の source を登録するには以下の様にします。</p>
 
-<pre class="prettyprint"><code>0</code></pre>
+<pre class="prettyprint"><code>call unite#define_source(s:unite_hacks)
+</code></pre>
 
 <p>2つ目の方法は autoload/unite/sources/ に配置する方法です。
 				例えば先程の sources を登録するには、 hacks.vim と言う名前で上記ディレクトリに保存します。
 				そして以下のコードを hacks.vim に加えます。</p>
 
-<pre class="prettyprint"><code class="lang-vim">0</code></pre>
+<pre class="prettyprint"><code class="lang-vim">function! unite#sources#hacks#define() "&#123;&#123;&#123;
+  return s:unite_hacks
+endfunction "&#125;&#125;&#125;
+</code></pre>
 
 <h2>candidate のリストって何</h2>
 
@@ -50,13 +58,20 @@ author: Sixeight
 
 <p>具体的には以下のように書きます。</p>
 
-<pre class="prettyprint"><code class="lang-vim">0</code></pre>
+<pre class="prettyprint"><code class="lang-vim">function! s:unite_hacks.gather_candidates(args, context)
+    return [
+    \   { 'word': 'Hack#1', 'source': 'hacks', 'kind': 'word' },
+    \   { 'word': 'Hack#2', 'source': 'hacks', 'kind': 'word' },
+    \ ]
+endfunction
+</code></pre>
 
 <h2>使う</h2>
 
 <p>作成した source は</p>
 
-<pre class="prettyprint"><code class="lang-vim">0</code></pre>
+<pre class="prettyprint"><code class="lang-vim">:Unite hacks
+</code></pre>
 
 <p>として標準添付の source と同様に使用出来ます。l</p>
 

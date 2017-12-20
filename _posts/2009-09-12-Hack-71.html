@@ -9,14 +9,16 @@ author: kana
 <p>バッファ中のある単語FOOを別の単語BARに置換するとしましょう。
 				これには</p>
 
-<pre class="prettyprint"><code class="lang-vim">0</code></pre>
+<pre class="prettyprint"><code class="lang-vim">:%s/FOO/BAR/g
+</code></pre>
 
 <p>というコマンドでできるのですが、これはバッファ中の全てのFOOをBARに置換します。
 				全てではなく一部のFOOのみを置換したい場合はどうすれば良いでしょうか。</p>
 
 <p>単純な方法は、該当する単語を</p>
 
-<pre class="prettyprint"><code>0</code></pre>
+<pre class="prettyprint"><code>ciwBAR&lt;Esc&gt;
+</code></pre>
 
 <p>のようにして置換することですが、置換したい箇所で毎回このコマンドを入力するのは
 				苦痛です。どうにかして簡単にできないでしょうか。</p>
@@ -26,40 +28,45 @@ author: kana
 <p>Vimでは最後に行なわれた編集操作を繰り返すことができます。
 				繰り返しを行うにはNormal modeで</p>
 
-<pre class="prettyprint"><code>0</code></pre>
+<pre class="prettyprint"><code>.
+</code></pre>
 
 <p>を入力します。例えば最初に挙げた</p>
 
-<pre class="prettyprint"><code>0</code></pre>
+<pre class="prettyprint"><code>ciwBAR&lt;Esc&gt;
+</code></pre>
 
-<p>を行なった後は<code>0</code>を入力するだけで同じ操作を行うことができます。</p>
+<p>を行なった後は<code>.</code>を入力するだけで同じ操作を行うことができます。</p>
 
 <h3>応用例</h3>
 
-<p><code>0</code>による繰り返しは<code>0</code>だけでなく、
+<p><code>.</code>による繰り返しは<code>c</code>だけでなく、
 				Normal modeから実行できるコマンドであればほぼ全てを繰り返すことができます。</p>
 
 <p>なお、最初に挙げた単語置換を行なう場合、
-				予め置換したい単語を<code>0</code>などで検索しておけば、</p>
+				予め置換したい単語を<code>/FOO</code>などで検索しておけば、</p>
 
-<pre class="prettyprint"><code>0</code></pre>
+<pre class="prettyprint"><code>n.n.n.
+</code></pre>
 
 <p>などとすることで次々と単語置換を行うことができます。</p>
 
-<pre class="prettyprint"><code class="lang-vim">0</code></pre>
+<pre class="prettyprint"><code class="lang-vim">:%s/FOO/BAR/gc
+</code></pre>
 
 <p>とすれば各箇所で置換を行うかどうかを対話的に指定できるのですが、
 				単語の出現箇所が多く置換する箇所がまばらな場合には
-<code>0</code>の方が便利です。</p>
+<code>n.n.n.</code>の方が便利です。</p>
 
-<p>また、置換したいテキストが「FOOBARのBARの部分」(<code>0</code>)
+<p>また、置換したいテキストが「FOOBARのBARの部分」(<code>/FOO\zsBAR</code>)
 				のように特定の単語ではない複雑なパターンの場合、
 <a href="http://www.vim.org/scripts/script.php?script_id=2355">textobj-lastpat</a>
 				プラグインをインストールしておくと</p>
 
-<pre class="prettyprint"><code>0</code></pre>
+<pre class="prettyprint"><code>ci/XXX&lt;Esc&gt;
+</code></pre>
 
-<p>のように<code>0</code>で検索にマッチしている箇所を選択することができ、
+<p>のように<code>i/</code>で検索にマッチしている箇所を選択することができ、
 				便利です。</p>
 
 <h3>参考資料</h3>
