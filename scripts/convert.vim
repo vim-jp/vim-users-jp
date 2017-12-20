@@ -179,7 +179,10 @@ function! s:lang(str) abort
       return '<code class="' . s:langmap[k] . '">' . a:str . '</code>'
     endif
   endfor
-  return '<code>' . a:str . '</code>'
+  let str = a:str
+  let str = substitute(str, '<', '&lt;', 'g')
+  let str = substitute(str, '>', '&gt;', 'g')
+  return '<code>' . str . '</code>'
 endfunction
 
 function! s:convert(f) abort
@@ -215,6 +218,21 @@ function! s:convert(f) abort
   let text = substitute(text, '<code>\(.\{-}\)</code>', '\=s:lang(submatch(1))', 'g')
   let text = substitute(text, '\(<code[^>]*>\)\n', '\1', 'g')
   let text = substitute(text, '/web/[0-9]\+/', '', 'g')
+  let text = substitute(text, 'http://farm[0-9]\.static\.flickr\.com/[^"]\+/\([^/]\+\)\.jpg', '/vim-users-jp/assets/images/\1.jpg', 'g')
+  let text = substitute(text, 'http://farm[0-9]\.staticflickr\.com/[^"]\+/\([^/]\+\)\.jpg', '/vim-users-jp/assets/images/\1.jpg', 'g')
+  let text = substitute(text, 'http://gyazo\.com/\([^/]\+\)\.png', '/vim-users-jp/assets/images/\1.png', 'g')
+  let text = substitute(text, 'http://cache\.gyazo\.com/\([^/]\+\)\.png', '/vim-users-jp/assets/images/\1.png', 'g')
+  let text = substitute(text, 'http://img\.skitch\.com/\([^/]\+\)\.jpg', '/vim-users-jp/assets/images/\1.jpg', 'g')
+  let text = substitute(text, 'http://www\.cse\.iitm\.ac\.in/\~osslab/joomla/images/stories/vim-editor_logo\.png', '/vim-users-jp/assets/images/Vim-editor_logo.png', 'g')
+  let text = substitute(text, 'http://www\.wayfaring\.info/wp-content/uploads/2007/03/miami-winter-music-conference.jpg', '/vim-users-jp/assets/images/miami-winter-music-conference.jpg', 'g')
+
+  let text = substitute(text, 'http://www\.jmorganmarketing\.com/wp-content/uploads/2008/06/\(long-line\.jpg\)', '/vim-users-jp/assets/images/\1', 'g')
+  let text = substitute(text, 'http://www\.yougottabehere\.com/media/resampled/articleElement/1026/\(resampled_Jan_11_2010_amtrak_cascades_train_600\.jpg\)', '/vim-users-jp/assets/images/\1', 'g')
+  let text = substitute(text, 'http://vaidehiparikh\.files\.wordpress\.com/2012/08/\(full-20earth2\.jpg\)', '/vim-users-jp/assets/images/\1', 'g')
+  let text = substitute(text, 'http://images\.paraorkut\.com/img/pics/images/a/\(airplane-13372\.jpg\)', '/vim-users-jp/assets/images/\1', 'g')
+  let text = substitute(text, 'http://bbs50\.meiwasuisan\.com/bbs/kaiki/img/\(13265275940001\.jpg\)', '/vim-users-jp/assets/images/\1', 'g')
+  let text = substitute(text, 'http://www\.gentoo\.org/images/\(glogo-small\.png\)', '/vim-users-jp/assets/images/\1', 'g')
+
   for k in keys(s:urlmap)
     let v = s:urlmap[k]
     let l = len(k)
