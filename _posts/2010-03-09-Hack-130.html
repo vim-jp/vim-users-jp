@@ -7,23 +7,23 @@ author: kana
 <h3>問題</h3>
 
 <p><a href="/vim-users-jp/2010/03/05/Hack-129.html">Hack #129: 複数のファイルから検索する</a>
-				では<code>:grep</code>について紹介しました。
+				では<code class="lang-vim">:grep</code>について紹介しました。
 				色々と便利なコマンドなのですが、頻繁に使っていると次のような不満が出てきます:</p>
 
-<p><code>:grep</code>の引数は基本的に</p>
+<p><code class="lang-vim">:grep</code>の引数は基本的に</p>
 
-<pre class="prettyprint"><code>:grep {pattern} {file} ...
+<pre class="prettyprint"><code class="lang-vim">:grep {pattern} {file} ...
 </code></pre>
 
-<p>なのですが、同じファイル郡に対して異なるパターンで<code>:grep</code>する
+<p>なのですが、同じファイル郡に対して異なるパターンで<code class="lang-vim">:grep</code>する
 				というケースは少なくありません。例えば</p>
 
-<pre class="prettyprint"><code>:grep rebase *.[ch]
+<pre class="prettyprint"><code class="lang-vim">:grep rebase *.[ch]
 </code></pre>
 
 <p>で検索した後で</p>
 
-<pre class="prettyprint"><code>:grep rebase_cmd *.[ch]
+<pre class="prettyprint"><code class="lang-vim">:grep rebase_cmd *.[ch]
 </code></pre>
 
 <p>と検索しなおすとしましょう。全てのコマンドを入力しなおすと面倒ですから、
@@ -47,13 +47,13 @@ function! s:grep(args)
 endfunction
 </code></pre>
 
-<p>これにより<code>:grep</code>の代わりに
-				以下のような<code>:Grep</code>コマンドが使えるようになります:</p>
+<p>これにより<code class="lang-vim">:grep</code>の代わりに
+				以下のような<code class="lang-vim">:Grep</code>コマンドが使えるようになります:</p>
 
-<pre class="prettyprint"><code>:Grep {file} ... {pattern}
+<pre class="prettyprint"><code class="lang-vim">:Grep {file} ... {pattern}
 </code></pre>
 
-<p><code>:grep</code>での煩雑さは最初の引数が<var>{pattern}</var>であることが
+<p><code class="lang-vim">:grep</code>での煩雑さは最初の引数が<var>{pattern}</var>であることが
 				原因なので、その逆で最後の引数が<var>{pattern}</var>であるコマンドがあれば
 				パターンの修正は<kbd>&lt;Up&gt;&lt;C-w&gt;&lt;C-w&gt;...</kbd>だけで済みます。</p>
 

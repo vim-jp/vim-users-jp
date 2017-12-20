@@ -29,9 +29,9 @@ author: Shougo
 <h3>コマンド名が改善されている</h3>
 
 <p>VundleはBundleを意識して付けられたコマンド名になっているため、コマンド名とプラグイン名が対応していません。
-				例えば、プラグインをインストールするコマンド名は<code>:VundleInstall</code>ではなく、<code>:BundleInstall</code>です。
+				例えば、プラグインをインストールするコマンド名は<code class="lang-vim">:VundleInstall</code>ではなく、<code class="lang-vim">:BundleInstall</code>です。
 				この辺りは、議論がされているようですが、まだ結論は出ていません。
-				neobundle.vimはプラグイン名をプレフィクスとした、<code>:NeoBundleInstall</code>となっています。
+				neobundle.vimはプラグイン名をプレフィクスとした、<code class="lang-vim">:NeoBundleInstall</code>となっています。
 				BundleをNeoBundleに改名するだけで、基本的に使用することができます。</p>
 
 <h3>vital化されている</h3>
@@ -136,38 +136,38 @@ NeoBundle 'https://bitbucket.org/ns9tks/vim-fuzzyfinder'
 
 <h2>pluginの管理</h2>
 
-<p>plugin のインストールには、<code>:NeoBundleInstall</code> コマンドを使用します。
+<p>plugin のインストールには、<code class="lang-vim">:NeoBundleInstall</code> コマンドを使用します。
 				.vimrcで設定したplugin が自動的に取得され、インストールまで行われます。
 				ただし、アップデートしたプラグインを使用するには、Vimを再起動したほうが良いです。</p>
 
-<pre class="prettyprint"><code>:NeoBundleInstall
+<pre class="prettyprint"><code class="lang-vim">:NeoBundleInstall
 </code></pre>
 
-<p>既にインストールされている plugin をアップデートするには、 <code>:NeoBundleInstall!</code> コマンドを利用します。
+<p>既にインストールされている plugin をアップデートするには、 <code class="lang-vim">:NeoBundleInstall!</code> コマンドを利用します。
 				通常の<code>NeoBundleInstall</code>では、アップデートが行われないからです。</p>
 
-<pre class="prettyprint"><code>:NeoBundleInstall!
+<pre class="prettyprint"><code class="lang-vim">:NeoBundleInstall!
 </code></pre>
 
 <p>不要になったプラグインを削除するには、<code class="lang-vim">:NeoBundle</code>の設定を.vimrcから削除した後、
-<code>:NeoBundleClean</code>コマンドを実行します。</p>
+<code class="lang-vim">:NeoBundleClean</code>コマンドを実行します。</p>
 
 <p>neobundle.vimはplugin検索には対応していません。</p>
 
 <p>neobudle.vimはneobundle/install sourceを使用することで、
 				unite.vimインタフェースによりアップデートを行うことができます。
 				アップデートは非同期に行われます。
-				neobundle/install sourceの引数に!を与えると、<code>:NeoBundleInstall!</code>相当になります。
+				neobundle/install sourceの引数に!を与えると、<code class="lang-vim">:NeoBundleInstall!</code>相当になります。
 				プラグイン名を引数に与えることで、個別にアップデートをすることも可能です。</p>
 
-<pre class="prettyprint"><code>:Unite neobundle/install:!
+<pre class="prettyprint"><code class="lang-vim">:Unite neobundle/install:!
 :Unite neobundle/install:neocomplcache
 :Unite neobundle/install:neocomplcache:unite.vim
 </code></pre>
 
 <h2>ドキュメントの更新</h2>
 
-<p>プラグインのインストール時に、自動的に<code>:helptags</code>コマンドが実行されるため、
+<p>プラグインのインストール時に、自動的に<code class="lang-vim">:helptags</code>コマンドが実行されるため、
 				ユーザーは何もする必要がありません。</p>
 
 <h2>参考</h2>

@@ -23,12 +23,12 @@ author: ujihisa
 
 <p>バッファ内全体からカーソル下のキーワードをbbbという文字列に置換するには、以下のコマンドを実行します。</p>
 
-<pre class="prettyprint"><code>:exe '%s/\&lt;' . expand('&lt;cword&gt;') . '\&gt;/bbb/g'
+<pre class="prettyprint"><code class="lang-vim">:exe '%s/\&lt;' . expand('&lt;cword&gt;') . '\&gt;/bbb/g'
 </code></pre>
 
 <p>これは以下の略称です</p>
 
-<pre class="prettyprint"><code>:execute '%substitute/\&lt;' . expand('&lt;cword&gt;') . '\&gt;/bbb/g'
+<pre class="prettyprint"><code class="lang-vim">:execute '%substitute/\&lt;' . expand('&lt;cword&gt;') . '\&gt;/bbb/g'
 </code></pre>
 
 <p>もっとも、これを毎回打鍵するのは酷です。

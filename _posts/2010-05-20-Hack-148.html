@@ -10,9 +10,9 @@ author: thinca
 
 <h3>:map コマンド</h3>
 
-<p><code>:map</code> 系のコマンドは Key mapping を定義するコマンドですが、設定の確認にも使えます。引数なしで実行すると、コマンドに対応するモードで定義されている Key mapping の一覧が表示されます。例えば、</p>
+<p><code class="lang-vim">:map</code> 系のコマンドは Key mapping を定義するコマンドですが、設定の確認にも使えます。引数なしで実行すると、コマンドに対応するモードで定義されている Key mapping の一覧が表示されます。例えば、</p>
 
-<pre class="prettyprint"><code>:imap
+<pre class="prettyprint"><code class="lang-vim">:imap
 </code></pre>
 
 <p>を実行すると Insert mode で定義されている Key mapping の一覧が表示されます。</p>
@@ -47,13 +47,13 @@ author: thinca
 
 <h3>特定のキーの設定を調べる</h3>
 
-<p><code>:map</code> 系のコマンドに 1 つだけ引数を与えると、そのキーシーケンスで始まる Key mapping のみを表示します。</p>
+<p><code class="lang-vim">:map</code> 系のコマンドに 1 つだけ引数を与えると、そのキーシーケンスで始まる Key mapping のみを表示します。</p>
 
 <h3>定義された場所を調べる</h3>
 
-<p><code>:verbose</code> 付きで <code>:map</code> コマンドを実行すると、その設定を定義したファイルが確認できます。例えば以下のように表示されます。</p>
+<p><code class="lang-vim">:verbose</code> 付きで <code class="lang-vim">:map</code> コマンドを実行すると、その設定を定義したファイルが確認できます。例えば以下のように表示されます。</p>
 
-<pre class="prettyprint"><code>:verbose map gj
+<pre class="prettyprint"><code class="lang-vim">:verbose map gj
    gj          * j
         Last set from ~/.vimrc
 </code></pre>

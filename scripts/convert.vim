@@ -171,9 +171,14 @@ endfunction
 let s:langmap = {
 \  '\<endfunction\>\|\<Bundle\>\|\<NeoBundle\>\|\<nnoremap\>\|\<augroup\>\|\<autocmd\>\|\<cursorcolumn\>\|:highlight\|:silent': 'lang-vim',
 \  '^set ': 'lang-vim',
+\  '^:': 'lang-vim',
 \}
 
-function! s:lang(str) abort
+function! s:pre(str) abort
+  return '<pre class="prettyprint">' . s:code(a:str) . '</pre>'
+endfunction
+
+function! s:code(str) abort
   for k in keys(s:langmap)
     if a:str =~# k
       return '<code class="' . s:langmap[k] . '">' . a:str . '</code>'
@@ -213,9 +218,9 @@ function! s:convert(f) abort
   let text = substitute(text, '\Vhttp://rst.gsfc.nasa.gov/Sect16/full-20earth2.jpg', 'http://vaidehiparikh.files.wordpress.com/2012/08/full-20earth2.jpg', 'g')
   let text = substitute(text, '<code class="vim-script">', '<code class="lang-vim">', 'g')
   let text = substitute(text, '\Vもう少し:Captureについて (unite.vim)', 'unite.vimで:Capture', 'g')
-  let text = substitute(text, '<pre>\s*\(<code[^>]*>.\{-}</code>\s*\)</pre>', '<pre class="prettyprint">\1</pre>', 'g')
-  let text = substitute(text, '<pre>\s*\([^<].\{-}\)</pre>', '<pre class="prettyprint"><code>\1</code></pre>', 'g')
-  let text = substitute(text, '<code>\(.\{-}\)</code>', '\=s:lang(submatch(1))', 'g')
+  let text = substitute(text, '<pre>\s*<code[^>]*>\(.\{-}\)</code>\s*</pre>', '\=s:pre(submatch(1))', 'g')
+  let text = substitute(text, '<pre>\s*\([^<].\{-}\)</pre>', '\=s:pre(submatch(1))', 'g')
+  let text = substitute(text, '<code>\(.\{-}\)</code>', '\=s:code(submatch(1))', 'g')
   let text = substitute(text, '\(<code[^>]*>\)\n', '\1', 'g')
   let text = substitute(text, '/web/[0-9]\+/', '', 'g')
   let text = substitute(text, 'http://farm[0-9]\.static\.flickr\.com/[^"]\+/\([^/]\+\)\.jpg', '/vim-users-jp/assets/images/\1.jpg', 'g')

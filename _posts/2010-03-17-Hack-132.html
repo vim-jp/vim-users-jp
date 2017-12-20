@@ -28,7 +28,7 @@ author: tsukkee
 
 <p>以下のコマンドで1が返ればOKです。</p>
 
-<pre class="prettyprint"><code>:echo has('python')</code></pre>
+<pre class="prettyprint"><code class="lang-vim">:echo has('python')</code></pre>
 
 <h2>VimScriptからPythonを呼ぶ</h2>
 
@@ -81,11 +81,11 @@ vim.command('let val = "fuga"')</code></pre>
 color_name = vim.eval('g:color_name')
 bufnum, lnum, col, off = vim.eval('getpos(".")') # 例えば、("0", "3", "10", "0")のようになる&lt;/pre&gt;
 
-&lt;p&gt;</code></p>
+&lt;p&gt;&lt;/code&gt;&lt;/p&gt;
 
-<p>また，Vimのバッファを表すオブジェクトとしてvim.bufferが提供されています。vim.buffersが全てのバッファが入った配列で、vim.current.bufferが現在表示しているバッファになります。:help pythonにもありますが、おおよその使い方は以下の通りです。</p>
+&lt;p&gt;また，Vimのバッファを表すオブジェクトとしてvim.bufferが提供されています。vim.buffersが全てのバッファが入った配列で、vim.current.bufferが現在表示しているバッファになります。:help pythonにもありますが、おおよその使い方は以下の通りです。&lt;/p&gt;
 
-<pre><code># Python
+&lt;pre&gt;&lt;code&gt;# Python
 import vim
 b = vim.current.buffer # 現在のバッファ
 print b.name           # バッファ名

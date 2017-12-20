@@ -33,14 +33,14 @@ author: ujihisa
 
 <p>を実行したのと同じような感じになります。これですとリモートのPostgreSQLに接続できませんし、ユーザ名も指定できません。</p>
 
-<p>接続先の指定やユーザ名の指定をそれぞれ個別に管理してもよいのですが、QuickRunはより薄いラッパであるべきです。ここは単にcmdoptを指定しましょう。(詳しくは<code>:h quickrun-option-cmdopt</code>参照のこと。)</p>
+<p>接続先の指定やユーザ名の指定をそれぞれ個別に管理してもよいのですが、QuickRunはより薄いラッパであるべきです。ここは単にcmdoptを指定しましょう。(詳しくは<code class="lang-vim">:h quickrun-option-cmdopt</code>参照のこと。)</p>
 
-<pre class="prettyprint"><code>:QuickRun -cmdopt '-u postgres -h example.com'
+<pre class="prettyprint"><code class="lang-vim">:QuickRun -cmdopt '-u postgres -h example.com'
 </code></pre>
 
 <p>一回しか実行しないならばこれがわかりやすいですね。が、同じバッファで何度も実行するかもしれません。そのときは<code>b:quickrun_config</code>の出番です。</p>
 
-<pre class="prettyprint"><code>:let b:quickrun_config = {'cmdopt': '-u postgres -h example.com'}
+<pre class="prettyprint"><code class="lang-vim">:let b:quickrun_config = {'cmdopt': '-u postgres -h example.com'}
 </code></pre>
 
 <p>これで繰り返し使えます。一方、ほとんど常に上記オプションを有効にしたいときは、思い切ってデフォルトにしてしまうのも一つの手です。<code>~/.vimrc</code>に</p>
@@ -80,12 +80,12 @@ DROP TABLE &lt;|1|&gt;;
 
 <p>よくない例</p>
 
-<pre class="prettyprint"><code>:let b:quickrun_config = {'cmdopt': 'postgres://user:pass@host/db'}
+<pre class="prettyprint"><code class="lang-vim">:let b:quickrun_config = {'cmdopt': 'postgres://user:pass@host/db'}
 </code></pre>
 
 <p>よい例</p>
 
-<pre class="prettyprint"><code>:let b:quickrun_config = {'cmdopt': 'postgres://user:pass\\\@host/db'}
+<pre class="prettyprint"><code class="lang-vim">:let b:quickrun_config = {'cmdopt': 'postgres://user:pass\\\@host/db'}
 </code></pre>
 
 <h2>まとめ</h2>

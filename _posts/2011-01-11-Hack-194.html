@@ -14,9 +14,9 @@ author: thinca
 <p>差分の直下の行、というのは、反対側のバッファで追加されている行の場合、現在のバッファには行が存在せずカーソルを置くことができないためです。その場合差分の直下の行で操作を実行します。
 				バッファの最終行の下にこのような差分があった場合は、特別にカーソルが最終行にあった場合にその下の差分を操作できます。</p>
 
-<h3><code>:diffget</code> <code>:diffput</code></h3>
+<h3><code class="lang-vim">:diffget</code> <code class="lang-vim">:diffput</code></h3>
 
-<p>高機能なコマンド版の操作もあります。実際、<kbd>do</kbd> と <kbd>dp</kbd> はそれぞれ <code>:diffget</code> と <code>:diffput</code> を引数なしで呼び出した場合と同じ動作になります。</p>
+<p>高機能なコマンド版の操作もあります。実際、<kbd>do</kbd> と <kbd>dp</kbd> はそれぞれ <code class="lang-vim">:diffget</code> と <code class="lang-vim">:diffput</code> を引数なしで呼び出した場合と同じ動作になります。</p>
 
 <p>コマンド版では範囲(range)を与えることができ、これによりチャンクを分割したマージが可能です。</p>
 
@@ -30,8 +30,8 @@ author: thinca
 :diffget BASE
 </code></pre>
 
-<h3><code>:diffupdate</code></h3>
+<h3><code class="lang-vim">:diffupdate</code></h3>
 
-<p>バッファを更新していると、差分のハイライトが徐々におかしくなることもあります。その場合は、<code>:diffupdate</code> コマンドを実行すれば差分情報を更新することができます。</p>
+<p>バッファを更新していると、差分のハイライトが徐々におかしくなることもあります。その場合は、<code class="lang-vim">:diffupdate</code> コマンドを実行すれば差分情報を更新することができます。</p>
 
 <address class="hack-author">thinca</address>

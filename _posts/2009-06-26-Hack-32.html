@@ -8,7 +8,7 @@ author: ujihisa
 
 <p>Vimは編集中ファイルと同じディレクトリにスワップファイルをまき散らします。
 				例えば<code>aaa.txt</code>というファイルを編集するとき、<code>.aaa.txt.swp</code>というファイル名のスワップファイルを生成します。
-				これはVimを終了するか、<code>aaa.txt</code>を編集しているバッファを<code>:q</code>ではなく<code>:q!</code>で閉じると削除されます。</p>
+				これはVimを終了するか、<code>aaa.txt</code>を編集しているバッファを<code class="lang-vim">:q</code>ではなく<code class="lang-vim">:q!</code>で閉じると削除されます。</p>
 
 <p>意図しないOSの再起動などで、Vimが強制終了されることがあります。その際、Vimで編集しているファイルのスワップファイルが散らかったまま残り続けることになります。
 				過去に生成したスワップファイルがある状態で、そのファイルを新しく起動したVimで開くと、以下のようなエラーが表示されます。</p>
@@ -40,7 +40,7 @@ author: ujihisa
 
 <p>スワップファイル生成場所の候補は、例えばMac OS Xでユーザ名がujihisaの場合、
 				規定値は<code>.,/Users/ujihisa/tmp,/var/tmp,/tmp</code>となっています。コンマで区切られた先頭の指定が優先されます。
-<code>:set-=</code>を使って<code>.</code>の要素を削除すると、<code>/Users/ujihisa/tmp</code>が先頭にくることによって、今後そこにスワップファイルが
+<code class="lang-vim">:set-=</code>を使って<code>.</code>の要素を削除すると、<code>/Users/ujihisa/tmp</code>が先頭にくることによって、今後そこにスワップファイルが
 				生成されるようになります。
 				このことで、システム強制終了時などにスワップファイルをまとめて削除することを容易にします。</p>
 

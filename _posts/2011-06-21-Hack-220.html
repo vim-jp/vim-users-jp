@@ -5,8 +5,8 @@ date: 2011-06-21
 author: tyru
 ---
 <p>コマンドラインに何か赤いハイライトで出力されたけど
-				見えなくなってしまった場合、<code>:messages</code>あるいは
-				短縮形である<code>:mes</code>と入力すれば見ることができます。
+				見えなくなってしまった場合、<code class="lang-vim">:messages</code>あるいは
+				短縮形である<code class="lang-vim">:mes</code>と入力すれば見ることができます。
 				しかしそのエラーを何か別の場所(twitter,gist,&#8230;)に
 				コピペするにはどうすればいいのでしょうか？</p>
 
@@ -14,15 +14,15 @@ author: tyru
 
 <p>gvimでのみ使える技です。</p>
 
-<p><code>:mes</code>と入力したあと、
+<p><code class="lang-vim">:mes</code>と入力したあと、
 				図のようにマウスで選択して<code>&lt;C-y&gt;</code>を押します。
 <a href="/vim-users-jp/assets/images/selected.png"><img src="/vim-users-jp/assets/images/selected.png" alt="something wrong" title="selected" width="954" height="699" class="alignnone size-full wp-image-2452" /></a></p>
 
-<h2>解決策2: <code>:redir &gt; {file}</code>を使う</h2>
+<h2>解決策2: <code class="lang-vim">:redir &gt; {file}</code>を使う</h2>
 
 <p>gvimでも端末版vimでも使えます。</p>
 
-<p><code>:redir</code>というExコマンドを使うと、
+<p><code class="lang-vim">:redir</code>というExコマンドを使うと、
 				Exコマンドの出力をキャプチャーし、
 				ファイルや変数に保存できます。</p>
 
@@ -32,7 +32,7 @@ author: tyru
 </code></pre>
 
 <p>これで<code>messages</code>というファイルに出力結果が保存されます。
-<code class="lang-vim">:silent</code>はつけると<code>:messages</code>の出力をコマンドラインに出力しません。
+<code class="lang-vim">:silent</code>はつけると<code class="lang-vim">:messages</code>の出力をコマンドラインに出力しません。
 				つけなくてもファイルの中身に変わりはありませんが、
 				今回はコマンドラインに出力されてもうっとうしいだけなので付けただけです。</p>
 

@@ -8,7 +8,7 @@ author: Shougo
 
 <h2>Vimのコマンド実行の欠点</h2>
 
-<p>Vimは<code>system()</code>や<code>:read</code>を用いて外部コマンドを実行し、その結果を得ることができます。これは非常に便利なのですが、Vimが起動した外部コマンドの終了を待ち合わせるため、Vimが停止してしまうという欠点があります。これは特にquickrunや<code>:make</code>を実行しているときに問題となります。プログラムをバックグラウンドで実行すれば、終了を待ち合わせずにすみますが、それでは結果がとれません。さらにWindows上のGVimの場合、外部コマンドを実行するたびにDOS窓が開いて煩わしいです。
+<p>Vimは<code>system()</code>や<code class="lang-vim">:read</code>を用いて外部コマンドを実行し、その結果を得ることができます。これは非常に便利なのですが、Vimが起動した外部コマンドの終了を待ち合わせるため、Vimが停止してしまうという欠点があります。これは特にquickrunや<code class="lang-vim">:make</code>を実行しているときに問題となります。プログラムをバックグラウンドで実行すれば、終了を待ち合わせずにすみますが、それでは結果がとれません。さらにWindows上のGVimの場合、外部コマンドを実行するたびにDOS窓が開いて煩わしいです。
 				処理内容がシェルに依存するという欠点もあります。たとえば、Windowsでプログラムを起動するためには適切にエスケープしなければいけません。</p>
 
 <h2>Emacsとの比較</h2>
@@ -55,6 +55,6 @@ author: Shougo
 <h2>clientserver機能を使う</h2>
 
 <p>Vimのclientserver機能を用いると、処理が完了した際に機能を呼び出すコールバック機能を実装することが可能です。
-				ただし、X環境が必要になります。Windows上でも使用できますが、あらかじめ別のVimを用意しておく必要があります。詳しくは<code>:help clientserver</code>を参照してください。</p>
+				ただし、X環境が必要になります。Windows上でも使用できますが、あらかじめ別のVimを用意しておく必要があります。詳しくは<code class="lang-vim">:help clientserver</code>を参照してください。</p>
 
 <address class="hack-author">Shougo</address>

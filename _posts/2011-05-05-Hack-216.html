@@ -4,11 +4,11 @@ title: "Hack #216: 消してしまった直前のメッセージを再表示す�
 date: 2011-05-05
 author: thinca
 ---
-<p>Vim でプラグインなどが下部に表示されたメッセージを読まずに消してしまった場合はどうすればいいでしょう。<code>:echomsg</code> で表示されていた場合は履歴に記録されているので、<code>:messages</code> を実行すれば表示できます。しかし、常に <code>:echomsg</code> が使われているとは限りません。</p>
+<p>Vim でプラグインなどが下部に表示されたメッセージを読まずに消してしまった場合はどうすればいいでしょう。<code class="lang-vim">:echomsg</code> で表示されていた場合は履歴に記録されているので、<code class="lang-vim">:messages</code> を実行すれば表示できます。しかし、常に <code class="lang-vim">:echomsg</code> が使われているとは限りません。</p>
 
 <h3><kbd>g&lt;</kbd></h3>
 
-<p><kbd>g&lt;</kbd> を使うことで、最後に表示されたメッセージを再表示させることができます。ただし、本当に最後に表示されたものしか表示できないので注意してください。例えば、<code>:messages</code> を1度実行してしまうと、<kbd>g&lt;</kbd> を押しても <code>:messages</code> の結果が表示されてしまいます。</p>
+<p><kbd>g&lt;</kbd> を使うことで、最後に表示されたメッセージを再表示させることができます。ただし、本当に最後に表示されたものしか表示できないので注意してください。例えば、<code class="lang-vim">:messages</code> を1度実行してしまうと、<kbd>g&lt;</kbd> を押しても <code class="lang-vim">:messages</code> の結果が表示されてしまいます。</p>
 
 <p>また、メッセージを途中で <kbd>q</kbd> で閉じていた場合は、<kbd>g&lt;</kbd> を使っても表示されたところまでしか表示されません。</p>
 

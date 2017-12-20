@@ -14,12 +14,12 @@ author: ujihisa
 
 <p>二つの方法があります。</p>
 
-<pre class="prettyprint"><code>:colorscheme
+<pre class="prettyprint"><code class="lang-vim">:colorscheme
 </code></pre>
 
 <p>あるいは</p>
 
-<pre class="prettyprint"><code>:echo g:colors_name
+<pre class="prettyprint"><code class="lang-vim">:echo g:colors_name
 </code></pre>
 
 <p>前者は画面にColorScheme名を表示する専用のコマンド、後者はColorScheme名が入っている変数を得てそれを表示しているわけですので、対話的に使用するときは前者を、Vim scriptから値を使用するときは後者を使うと自然になります。</p>
@@ -28,9 +28,9 @@ author: ujihisa
 
 <p>必ずしも上記方法で現在使用中のColorSchemeが得られる<em>とは限りません</em>。ColorScheme開発者には、そのColorScheme名を<code>g:colors_name</code>というグローバル変数に格納することが<em>推奨</em>されていますが、自動的に行われるわけではありません。</p>
 
-<p>上記のような場合、<code>:colorscheme</code>は無条件に<code>default</code>と出力します。また、<code>g:colors_name</code>にアクセスするとエラーを吐き出します。</p>
+<p>上記のような場合、<code class="lang-vim">:colorscheme</code>は無条件に<code>default</code>と出力します。また、<code>g:colors_name</code>にアクセスするとエラーを吐き出します。</p>
 
-<p>悪評高いColorSchemeの例として<code>leo</code>があります。<code>:colorscheme leo</code>して<code>:echo g:colors_name</code>ないし<code>:colorscheme</code>して、絶望しましょう。</p>
+<p>悪評高いColorSchemeの例として<code>leo</code>があります。<code class="lang-vim">:colorscheme leo</code>して<code class="lang-vim">:echo g:colors_name</code>ないし<code class="lang-vim">:colorscheme</code>して、絶望しましょう。</p>
 
 <p>そして、<a href="https://github.com/vim-jp/issues">パッチを投げましょう。</a></p>
 

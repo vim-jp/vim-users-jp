@@ -44,7 +44,7 @@ author: kana
 
 <p>以下のコマンドを実行します:</p>
 
-<pre class="prettyprint"><code>:set clipboard=unnamed
+<pre class="prettyprint"><code class="lang-vim">:set clipboard=unnamed
 </code></pre>
 
 <p>この設定を行なうと、
@@ -55,12 +55,12 @@ author: kana
 				選択されたテキストが自動的にクリップボードへコピーされます。
 				VimのVisual modeでも同様の挙動にしたい場合は以下のコマンドを実行します。</p>
 
-<pre class="prettyprint"><code>:set clipboard=autoselect
+<pre class="prettyprint"><code class="lang-vim">:set clipboard=autoselect
 </code></pre>
 
 <p>もし両方の挙動が必要な場合は以下のように値をコンマ(,)区切りで指定します:</p>
 
-<pre class="prettyprint"><code>:set clipboard=unnamed,autoselect
+<pre class="prettyprint"><code class="lang-vim">:set clipboard=unnamed,autoselect
 </code></pre>
 
 <h3>問題3</h3>
@@ -72,7 +72,7 @@ author: kana
 <p>幸いなことに、
 				一部の環境ではクリップボードにアクセスするためのコマンドがあります。
 				例えばMac OS Xの場合はpbcopy/pbpasteでクリップボードの読み書きができるため、
-<code>:read !pbpaste</code>などとすればクリップボードの内容を取り込むことが
+<code class="lang-vim">:read !pbpaste</code>などとすればクリップボードの内容を取り込むことが
 				できます。</p>
 
 <p>しかしこのようなコマンドは入力が煩雑ですし、
@@ -95,7 +95,7 @@ author: kana
 
 <p>A. 祖先のviが生まれた頃にクリップボードなんてものはなかったからです。</p>
 
-<p>Q. なぜ<code>:set clipboard=unnamed</code>がデフォルトでないのですか?</p>
+<p>Q. なぜ<code class="lang-vim">:set clipboard=unnamed</code>がデフォルトでないのですか?</p>
 
 <p>A. Vimのデフォルト設定は可能な限りviライクだからです。
 				そして祖先のviが生まれた頃にクリップボードなんてものはなかったからです。</p>

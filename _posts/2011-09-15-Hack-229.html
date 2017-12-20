@@ -18,7 +18,7 @@ author: ujihisa
 
 <p><code>vim-ruby</code>は、<code>+ruby</code>であるVim環境(*1)における補完機能を提供します。
 				Ruby組み込み定数・クラス・グローバル関数(*2)などが補完できます。
-				詳しくは<code>:h ft-ruby-omni</code>を参照してください(*3)。
+				詳しくは<code class="lang-vim">:h ft-ruby-omni</code>を参照してください(*3)。
 				補完関数はオムニ補完として定義されているので、デフォルトの設定では、挿入モードで<code>&lt;C-x&gt;&lt;C-o&gt;</code>と打鍵することで補完機能を実行することができます。</p>
 
 <p><code>vim-ruby</code>が諦めた部分は</p>
@@ -93,7 +93,7 @@ a.
 <p>脚注</p>
 
 <ul>
-<li>*1 <code>:version</code>して<code>+ruby</code>があるかどうか調べてみてください。まあ、不必要です。</li>
+<li>*1 <code class="lang-vim">:version</code>して<code>+ruby</code>があるかどうか調べてみてください。まあ、不必要です。</li>
 <li>*2 本記事の読者がRuby使いには限らないことを考慮して”グローバル関数”と記述しましたが、実際にはRubyに関数は存在しません。<code>Kernel</code>などに定義されている<code>p</code>などのメソッドを便宜的にそのように読んでみました。</li>
 <li>*3 なお、ドキュメントに書かれているからといって実際に動作するとは限りません。私の環境では実際に試してみると動作しないものがたくさんありました…。</li>
 <li>*4 <code>g:rubycomplete_buffer_loading</code>や<code>g:rubycomplete_classes_in_global</code>を設定し、かつ<code>+ruby</code>な環境であればそれらにも対応しているとドキュメントに書かれています。お試しください。常用するのはかなり難しいようです。</li>

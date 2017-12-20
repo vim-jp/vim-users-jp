@@ -10,7 +10,7 @@ author: thinca
 
 <p>開いたファイルが文字化けしていて、かつ正しいエンコーディングがわかっている場合は次のようにすることでエンコーディングを指定してファイルを開き直すことができます。</p>
 
-<pre class="prettyprint"><code>:edit ++enc=&lt;var&gt;{encoding-name}&lt;/var&gt;
+<pre class="prettyprint"><code class="lang-vim">:edit ++enc=<var>{encoding-name}</var>
 </code></pre>
 
 <p><var>{encoding-name}</var> にはエンコーディング名が入ります。日本語だと、&quot;utf-8&quot; &quot;cp932&quot;(≒Shift_JIS) &quot;euc-jp&quot; &quot;iso-2022-jp&quot; などがあります。</p>
@@ -19,7 +19,7 @@ author: thinca
 
 <p>現在編集しているファイル(バッファ)のエンコーディングは <code class="option">'fileencoding'</code> オプションで決まります。ファイルを保存する際にこのエンコーディングに変換して保存されます。つまり、この値を変更すれば保存するファイルのエンコーディングを変更できます。</p>
 
-<pre class="prettyprint"><code>:setlocal fileencoding=&lt;var&gt;{encoding-name}&lt;/var&gt;
+<pre class="prettyprint"><code class="lang-vim">:setlocal fileencoding=<var>{encoding-name}</var>
 </code></pre>
 
 <p><var>{encoding-name}</var> は ++enc= に設定するのと同じものです。

@@ -21,7 +21,7 @@ author: thinca
 
 <h3>置換</h3>
 
-<pre class="prettyprint"><code>:s/function\s\+(\zs.*\ze)//g
+<pre class="prettyprint"><code class="lang-vim">:s/function\s\+(\zs.*\ze)//g
 </code></pre>
 
 <p>この置換ではマッチした対象を削除しますが、実際にマッチする対象を制限しているのでその部分だけ削除されます。よってこの置換では、&quot;function&quot; に続く括弧内の文字列が削除されます。</p>
@@ -35,7 +35,7 @@ author: thinca
 <pre class="prettyprint"><code>let match = matchstr(targetstr, 'function\s\+(\zs.*\ze)')
 
 let list = matchlist(targetstr, 'function\s+(\(.*\))')
-let match = empty(list) ? &lt;code class="option"&gt;''</code> : list[1]
+let match = empty(list) ? &lt;code class="option"&gt;''&lt;/code&gt; : list[1]
 </code></pre>
 
 <h3>split()</h3>

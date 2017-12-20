@@ -14,7 +14,7 @@ author: kana
 				で特定のブランチのファイルを出力できるので、
 				Vimからは</p>
 
-<pre class="prettyprint"><code>:new
+<pre class="prettyprint"><code class="lang-vim">:new
 :read !git show {branch}:{path-to-a-file}
 </code></pre>
 
@@ -30,11 +30,11 @@ author: kana
 
 <p>例えば「あるブランチのファイル」は以下のようにして参照することができます。</p>
 
-<pre class="prettyprint"><code>:edit git:{branch}:{path-to-a-file}
+<pre class="prettyprint"><code class="lang-vim">:edit git:{branch}:{path-to-a-file}
 </code></pre>
 
-<p><code>:edit</code>だけでなく、
-<code>:read</code>や<code>:source</code>といった
+<p><code class="lang-vim">:edit</code>だけでなく、
+<code class="lang-vim">:read</code>や<code class="lang-vim">:source</code>といった
 				ファイル名を引数として取るコマンドならば
 				同様にして内容を参照することができます。</p>
 
@@ -44,7 +44,7 @@ author: kana
 				これと同様に「あるブランチのディレクトリの内容」も参照することができます。
 				これには以下のようなパスを用います。</p>
 
-<pre class="prettyprint"><code>:edit git:{branch}:{path-to-a-directory}
+<pre class="prettyprint"><code class="lang-vim">:edit git:{branch}:{path-to-a-directory}
 </code></pre>
 
 <p><img src="/vim-users-jp/assets/images/2f1ee7baaded9c958027907abd3b0274.png" alt="git:{branch}:{path-to-a-directory}の使用例" /></p>
@@ -53,7 +53,7 @@ author: kana
 				gitリポジトリ内に存在するブランチも参照することができます。
 				これには以下のようなパスを用います。</p>
 
-<pre class="prettyprint"><code>:edit git:
+<pre class="prettyprint"><code class="lang-vim">:edit git:
 </code></pre>
 
 <p><img src="/vim-users-jp/assets/images/fba6db5e373de2ade18a0cd9f31c5fe4.png" alt="git:の使用例" /></p>

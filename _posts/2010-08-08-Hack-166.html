@@ -30,7 +30,7 @@ author: thinca
 <p>もっと複雑な変換を行いたい場合もあるでしょう。正規表現で置換する際、結果の大文字/小文字を指定することができます。
 				置換後のパターンに u があると、次の文字は大文字になります。l があると小文字になります。</p>
 
-<pre class="prettyprint"><code>:s/\w\+/\u\0/g
+<pre class="prettyprint"><code class="lang-vim">:s/\w\+/\u\0/g
 &quot;bram moolenaar&quot; → &quot;Bram Moolenaar&quot;
 </code></pre>
 

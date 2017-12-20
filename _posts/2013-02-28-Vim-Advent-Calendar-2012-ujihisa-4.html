@@ -16,7 +16,7 @@ author: ujihisa
 
 <h2>:VimShellSendString</h2>
 
-<p>VimShellの<code>iexe</code>ならびに<code>:VimShellInteractive</code>で立ち上げた外部プロセスにメッセージを投げる便利な方法として<code>:VimShellSendString</code>コマンドがあります。これは引数として与えられた文字列または選択範囲を&#8221;background buffer&#8221;に投げます。</p>
+<p>VimShellの<code>iexe</code>ならびに<code class="lang-vim">:VimShellInteractive</code>で立ち上げた外部プロセスにメッセージを投げる便利な方法として<code class="lang-vim">:VimShellSendString</code>コマンドがあります。これは引数として与えられた文字列または選択範囲を&#8221;background buffer&#8221;に投げます。</p>
 
 <p>たとえばfiletypeがscalaであるファイルを編集中は、</p>
 
@@ -84,7 +84,7 @@ augroup vimrc_scala
 augroup END
 </code></pre>
 
-<p>上記のように<code>~/.vimrc</code>に記述し、scalaのファイルを編集するときに<code>iexe sbt</code>や<code>:VimShellInteractive sbt</code>のかわりに<code>:StartSBT</code>コマンドを使います。以後、コンパイルなど行いたいときには<code>&lt;Space&gt;m</code>を打鍵します。なお<code>compile</code>以外のコマンドにも対応するため、<code>t:sbt_cmds</code>という変数を用意しています。ここに実行させたいコマンド列を指定します。なお初回起動などでそのタブにこの変数がセットされていないときは、入力を求められます。</p>
+<p>上記のように<code>~/.vimrc</code>に記述し、scalaのファイルを編集するときに<code>iexe sbt</code>や<code class="lang-vim">:VimShellInteractive sbt</code>のかわりに<code class="lang-vim">:StartSBT</code>コマンドを使います。以後、コンパイルなど行いたいときには<code>&lt;Space&gt;m</code>を打鍵します。なお<code>compile</code>以外のコマンドにも対応するため、<code>t:sbt_cmds</code>という変数を用意しています。ここに実行させたいコマンド列を指定します。なお初回起動などでそのタブにこの変数がセットされていないときは、入力を求められます。</p>
 
 <p>これで<code>&lt;Space&gt;m</code>を打鍵するだけでファイルの保存・コンパイルができ、しかも30倍高速化しました。Scalaにおける開発がはかどります。</p>
 

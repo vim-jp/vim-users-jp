@@ -18,7 +18,7 @@ author: ujihisa
 
 <p>この設定は日本語など幅広文字に対応するためです。</p>
 
-<p>以後、<code>:[range]Align {separators}</code>で指定した範囲を縦に整形することができます。</p>
+<p>以後、<code class="lang-vim">:[range]Align {separators}</code>で指定した範囲を縦に整形することができます。</p>
 
 <h2>具体例</h2>
 
@@ -30,7 +30,7 @@ author: ujihisa
 
 <p><img src="/vim-users-jp/assets/images/ba2ba175e9fded883f974b6d4ddf2699.png" alt="2" /></p>
 
-<p>ここで<kbd>:</kbd>を打鍵すると<code>:'&lt;,'&gt;</code>まで勝手に入力されるので、続いてそのまま<code>Align |</code>と入力、</p>
+<p>ここで<kbd>:</kbd>を打鍵すると<code class="lang-vim">:'&lt;,'&gt;</code>まで勝手に入力されるので、続いてそのまま<code>Align |</code>と入力、</p>
 
 <p><img src="/vim-users-jp/assets/images/40bd3fe5ad1e39663cfbbd7db2eebadb.png" alt="3" /></p>
 
@@ -42,16 +42,16 @@ author: ujihisa
 
 <h2>議論</h2>
 
-<p>先ほど紹介した<code>:[range]Align</code>以外に様々なインタフェースが提供されています。詳しくは<code>:h align</code>を参照ください。</p>
+<p>先ほど紹介した<code class="lang-vim">:[range]Align</code>以外に様々なインタフェースが提供されています。詳しくは<code class="lang-vim">:h align</code>を参照ください。</p>
 
-<p>なお、2009年9月24日現在の最新版のAlign.vim version 35では、<code>:[range]Align</code>を実行するとカーソルが全く異なる場所に飛ばされてしまうというバグがあります。
+<p>なお、2009年9月24日現在の最新版のAlign.vim version 35では、<code class="lang-vim">:[range]Align</code>を実行するとカーソルが全く異なる場所に飛ばされてしまうというバグがあります。
 				しかも、<kbd>&lt;C-o&gt;</kbd>で元の場所に戻ることができません。
 				最もてっとりばやい解決方法は、<kbd>u</kbd>でAlign操作を取り消した上で元の位置に戻り、そのまま<kbd>&lt;C-r&gt;</kbd>で再実行することです。この場合なぜかカーソルは移動しません。</p>
 
 <h2>参考</h2>
 
 <ul>
-<li><code>:h align</code></li>
+<li><code class="lang-vim">:h align</code></li>
 <li>Align.vim <a href="http://www.vim.org/scripts/script.php?script_id=294">http://www.vim.org/scripts/script.php?script_id=294</a></li>
 </ul>
 

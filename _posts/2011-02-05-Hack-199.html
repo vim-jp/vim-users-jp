@@ -39,7 +39,7 @@ author: tyru
 <h2>実践的な例</h2>
 
 <p>さてこの記事では少し進んだ実践的な例を出すことにしましょう。
-				例えば<code>:help v_&lt;</code>という項目は</p>
+				例えば<code class="lang-vim">:help v_&lt;</code>という項目は</p>
 
 <ol>
 <li>ヴィジュアルモードの(v)</li>
@@ -48,7 +48,7 @@ author: tyru
 
 <p>で実行されるコマンドということです。</p>
 
-<p>また、<code>:help i_CTRL-R_=</code>という項目は</p>
+<p>また、<code class="lang-vim">:help i_CTRL-R_=</code>という項目は</p>
 
 <ol>
 <li>インサートモードの(i)</li>
@@ -65,14 +65,14 @@ author: tyru
 
 <h3>「buf」を含む関数</h3>
 
-<pre class="prettyprint"><code>:help *buf*()&lt;Tab&gt;
+<pre class="prettyprint"><code class="lang-vim">:help *buf*()&lt;Tab&gt;
 </code></pre>
 
 <p>関数は「()」を末尾に持つタグを持っています。</p>
 
 <h3>「wild」を含むオプション</h3>
 
-<pre class="prettyprint"><code>:help '*wild*'&lt;Tab&gt;
+<pre class="prettyprint"><code class="lang-vim">:help '*wild*'&lt;Tab&gt;
 </code></pre>
 
 <p>前のと同じですね。
@@ -80,7 +80,7 @@ author: tyru
 
 <h3>頭が「:Neo」で始まるExコマンドを日本語版helpのみから</h3>
 
-<pre class="prettyprint"><code>:help :Neo*@ja&lt;Tab&gt;
+<pre class="prettyprint"><code class="lang-vim">:help :Neo*@ja&lt;Tab&gt;
 </code></pre>
 
 <p>Exコマンドは先頭に「:(コロン)」を持つタグを持っています。
@@ -111,12 +111,12 @@ author: tyru
 <p>ちなみにこの<code>&lt;C-d&gt;</code>のタグ名は、
 				ここまで読まれた方なら分かると思いますが</p>
 
-<pre class="prettyprint"><code>:help c_CTRL-d
+<pre class="prettyprint"><code class="lang-vim">:help c_CTRL-d
 </code></pre>
 
 <p>です。<a href="http://www.kaoriya.net/vimdoc_j/">Vim日本語ドキュメント</a>がインストールされている場合その項目名は？</p>
 
-<pre class="prettyprint"><code>:help c_CTRL-d@ja
+<pre class="prettyprint"><code class="lang-vim">:help c_CTRL-d@ja
 </code></pre>
 
 <p>です。
@@ -125,8 +125,8 @@ author: tyru
 
 <h2>注意点</h2>
 
-<p>ワイルドカードは使えないので、カーソル下の単語を探すコマンド<code>*</code>の項目は<code>:help star</code>です。
-				また、このコマンドはノーマルモードのものなので<code>:help n_star</code>じゃないか？と思われた方もいるかもしれません。
+<p>ワイルドカードは使えないので、カーソル下の単語を探すコマンド<code>*</code>の項目は<code class="lang-vim">:help star</code>です。
+				また、このコマンドはノーマルモードのものなので<code class="lang-vim">:help n_star</code>じゃないか？と思われた方もいるかもしれません。
 				このようにノーマルモードの項目は先頭に<code>n_</code>と付きません。
 				なので冒頭で言った次のような規則は嘘でした。</p>
 
@@ -142,16 +142,16 @@ author: tyru
 
 <h2>:helpgrep</h2>
 
-<p><a href="/vim-users-jp/2009/07/22/Hack-45.html">Hack #45</a>にもありますが、<code>:helpgrep</code>はhelpを全文検索するExコマンドです。
-<code>:grep</code>や<code>:vimgrep</code>などと同じインターフェースで使えます。</p>
+<p><a href="/vim-users-jp/2009/07/22/Hack-45.html">Hack #45</a>にもありますが、<code class="lang-vim">:helpgrep</code>はhelpを全文検索するExコマンドです。
+<code class="lang-vim">:grep</code>や<code class="lang-vim">:vimgrep</code>などと同じインターフェースで使えます。</p>
 
 <h2>unite-help</h2>
 
 <p>またunite.vimというプラグインのunite-helpというプラグインがあります。
 				これは限られたコマンドラインでワイルドカードを駆使して探すことなく
 				helpを全文インクリメンタル検索することができるので、
-				初心者でも手軽に、また<code>:help</code>よりもより素早く項目を探すことができます。
-<code>:helpgrep</code>のインクリメンタル検索版というとわかりやすいでしょうか。
+				初心者でも手軽に、また<code class="lang-vim">:help</code>よりもより素早く項目を探すことができます。
+<code class="lang-vim">:helpgrep</code>のインクリメンタル検索版というとわかりやすいでしょうか。
 				まさにunite.vimの真価を発揮するプラグインと言えるでしょう。</p>
 
 <h2>ref.vim</h2>
@@ -160,6 +160,6 @@ author: tyru
 				ref.vimというmanやperldocやpydocやrefeなど
 				その他いろんなマニュアルを引けるプラグインが存在します。
 				これをインストールすることで、デフォルトの<code>K</code>の挙動が
-				Vimの<code>:help</code>を引くだけでなく、perlスクリプトでperldocを引くようになったりと大幅に拡張されます。</p>
+				Vimの<code class="lang-vim">:help</code>を引くだけでなく、perlスクリプトでperldocを引くようになったりと大幅に拡張されます。</p>
 
 <address class="hack-author">tyru</address>

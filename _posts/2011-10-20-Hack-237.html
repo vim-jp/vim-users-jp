@@ -4,20 +4,20 @@ title: "Hack #237: 古い quickfix を参照する"
 date: 2011-10-20
 author: thinca
 ---
-<p>quickfix は <code>:grep</code> や <code>:make</code> の結果として使われたり、時にはプラグインが何かの結果を表示するのに使ったりと、様々な状況で使用されます。</p>
+<p>quickfix は <code class="lang-vim">:grep</code> や <code class="lang-vim">:make</code> の結果として使われたり、時にはプラグインが何かの結果を表示するのに使ったりと、様々な状況で使用されます。</p>
 
 <p>それだけ便利なものですが、時には、以前の内容をまだ見たいのにうっかり新しい内容を quickfix へ出力してしまうことがあります。</p>
 
-<h3><code>:colder</code> <code>:cnewer</code> コマンド</h3>
+<h3><code class="lang-vim">:colder</code> <code class="lang-vim">:cnewer</code> コマンド</h3>
 
-<p>実は、quickfix は過去のリストを10個まで保持しています。これは <code>:colder</code> <code>:cnewer</code> コマンドで切り替えられます。</p>
+<p>実は、quickfix は過去のリストを10個まで保持しています。これは <code class="lang-vim">:colder</code> <code class="lang-vim">:cnewer</code> コマンドで切り替えられます。</p>
 
-<pre class="prettyprint"><code>:colder [count]
+<pre class="prettyprint"><code class="lang-vim">:colder [count]
 :cnewer [count]
 </code></pre>
 
-<p><code>:colder</code> で <code>[count]</code> 個分古い quickfix へ移動します。<code>:cnewer</code> で <code>[count]</code> 個分新しい quickfix へ移動します。</p>
+<p><code class="lang-vim">:colder</code> で <code>[count]</code> 個分古い quickfix へ移動します。<code class="lang-vim">:cnewer</code> で <code>[count]</code> 個分新しい quickfix へ移動します。</p>
 
-<p>もし誤って quickfix を上書きしてしまった場合でも、慌てず騒がず <code>:colder</code> すれば安心です。</p>
+<p>もし誤って quickfix を上書きしてしまった場合でも、慌てず騒がず <code class="lang-vim">:colder</code> すれば安心です。</p>
 
 <address class="hack-author">thinca</address>

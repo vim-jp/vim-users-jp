@@ -18,7 +18,7 @@ author: tyru
 
 <h2>:AllMaps</h2>
 
-<p><code>:AllMaps</code>を使います。<br />
+<p><code class="lang-vim">:AllMaps</code>を使います。<br />
 				次のコードを.vimrcに貼り付けましょう。</p>
 
 <pre class="prettyprint"><code>command!
@@ -27,7 +27,7 @@ author: tyru
 \   map &lt;args&gt; | map! &lt;args&gt; | lmap &lt;args&gt;
 </code></pre>
 
-<p>kana氏の.vimrcに定義されていた<code>:Allmap</code>にインスパイアされたのでそちらも興味があれば参照してください。</p>
+<p>kana氏の.vimrcに定義されていた<code class="lang-vim">:Allmap</code>にインスパイアされたのでそちらも興味があれば参照してください。</p>
 
 <ul>
 <li><a href="https://github.com/kana/config">kana/config &#8211; Github</a></li>
@@ -48,7 +48,7 @@ author: tyru
 
 <h2>:Capture</h2>
 
-<p>また作者が作った<code>:Capture</code>というExコマンドがあります。<br />
+<p>また作者が作った<code class="lang-vim">:Capture</code>というExコマンドがあります。<br />
 				引数に指定したExコマンドを実行し、<br />
 				コマンドラインへの出力をバッファに表示するというものです。<br />
 				出力から検索したい場合などに便利です。<br />
@@ -81,7 +81,7 @@ endfunction "&#125;&#125;&#125;
 
 <h2>もう少し:Captureについて (vimshell)</h2>
 
-<p>vimshellではコマンドラインでの入力で先頭に<code>:</code>をつけるとVimスクリプトのExコマンドだと解釈してくれます。<br />
+<p>vimshellではコマンドラインでの入力で先頭に<code class="lang-vim">:</code>をつけるとVimスクリプトのExコマンドだと解釈してくれます。<br />
 				これは<code>vexe</code>という内部コマンドを使っているので興味があればそちらも参照してください。<br />
 				(以下<code>$</code>がvimshellのプロンプトだとします)</p>
 
@@ -97,8 +97,8 @@ $ :ls   # :lsを実行。バッファリストを表示
 
 <h2>unite.vimで:Capture</h2>
 
-<p>unite.vimのunite-outputというsource(<code>:help unite-sources</code>)を使えば<br />
+<p>unite.vimのunite-outputというsource(<code class="lang-vim">:help unite-sources</code>)を使えば<br />
 				Vimスクリプトの出力をuniteバッファに取り込み、絞り込むことができます。<br />
-				詳しくは<code>:help unite-source-output</code>を参照してください。</p>
+				詳しくは<code class="lang-vim">:help unite-source-output</code>を参照してください。</p>
 
 <address class="hack-author">tyru</address>

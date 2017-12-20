@@ -14,12 +14,12 @@ qall!
 EOS
 </code></pre>
 
-<p><code>g/^/m0</code>は<code>^</code>にマッチする行に対して<code>:m0</code>という操作を適用するコマンドです。
-<code>:m0</code>は分かりやすく書くと<code>:move 0</code>で、引数の行の下に現在の行を持っていくという動作をします。
-<code>^</code>はどの行にもマッチするので、<code>:m0</code>で全部の行に対して上からマッチした順に1行目に持っていきます。
+<p><code>g/^/m0</code>は<code>^</code>にマッチする行に対して<code class="lang-vim">:m0</code>という操作を適用するコマンドです。
+<code class="lang-vim">:m0</code>は分かりやすく書くと<code class="lang-vim">:move 0</code>で、引数の行の下に現在の行を持っていくという動作をします。
+<code>^</code>はどの行にもマッチするので、<code class="lang-vim">:m0</code>で全部の行に対して上からマッチした順に1行目に持っていきます。
 				操作が終わると全行が逆になっているというわけです。</p>
 
-<p>また<code>:write</code>と<code>:qall!</code>は全行逆になったバッファを<code>file</code>に書き込むために必要です。</p>
+<p>また<code class="lang-vim">:write</code>と<code class="lang-vim">:qall!</code>は全行逆になったバッファを<code>file</code>に書き込むために必要です。</p>
 
 <p>VimについてくるexというコマンドはedのVim版とも言えるものですのでもちろん上のようなことができます。
 				しかしデフォルトでは.vimrcやプラグインなども読み込んでしまうため、
@@ -42,7 +42,7 @@ EOS
 <p>デフォルトでもこのようにVimスクリプトインタプリタのように使えなくはないのですが、以下のような難点があります。</p>
 
 <ol>
-<li>ファイルに対して実行するには末尾に必ず<code>:write</code>と<code>:qall!</code>をつけなければならず面倒</li>
+<li>ファイルに対して実行するには末尾に必ず<code class="lang-vim">:write</code>と<code class="lang-vim">:qall!</code>をつけなければならず面倒</li>
 <li>ファイルに対して実行する際に元のデータを壊してしまう</li>
 <li>いくつかの定型的なオプションを付けるのが面倒</li>
 <li>標準入力からスクリプトを読み込むのでファイルを標準入力から読み込めない</li>

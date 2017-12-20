@@ -13,10 +13,10 @@ author: t9md
 <ul>
 <li>tcpdump の ログファイルを vim で閲覧していて特定の MACアドレス、IPアドレスを目立たせたい。</li>
 <li>ソースコードを編集していて、特定のキーワードの出現を(ハイライトさせて)意識しつつ編集を進めたい。</li>
-<li><a href="https://github.com/tpope/vim-fugitive">fugitive.vim</a> の  <kbd><code>:Gblame</code></kbd> コマンド(git blame)で特定の author を目立たせたい。</li>
+<li><a href="https://github.com/tpope/vim-fugitive">fugitive.vim</a> の  <kbd><code class="lang-vim">:Gblame</code></kbd> コマンド(git blame)で特定の author を目立たせたい。</li>
 </ul>
 
-<p>もちろん、 <kbd><code>:Unite line</code></kbd>  、あるいは <kbd><code>/</code></kbd>  で検索してハイライトして目立たせる事は可能ですが、<br />
+<p>もちろん、 <kbd><code class="lang-vim">:Unite line</code></kbd>  、あるいは <kbd><code>/</code></kbd>  で検索してハイライトして目立たせる事は可能ですが、<br />
 				複数の単語をハイライトさせたい場合は、 <kbd><code>/</code></kbd> では対応できません。</p>
 
 <h2>対処</h2>
@@ -40,7 +40,7 @@ author: t9md
 
 <p>Vundle を使用している場合は下記のコマンドでインストールできます。</p>
 
-<pre class="prettyprint"><code>:BundleInstall quickhl.vim
+<pre class="prettyprint"><code class="lang-vim">:BundleInstall quickhl.vim
 </code></pre>
 
 <h2>設定</h2>
@@ -61,7 +61,7 @@ nmap &lt;Space&gt;j &lt;Plug&gt;(quickhl-match)
 
 <p>またビジュアルモードでテキストを選択して、 <kbd><code>&lt;Space&gt;m</code></kbd> を押すと、選択したテキストがハイライトされます。<br />
 				複数行のテキストブロックのハイライトには対応していません。<br />
-				ハイライトの追加削除は  <kbd><code>:QuickhlAdd</code></kbd> , <kbd><code>:QuickhlDel</code></kbd> でも可能ですが、<strong>ハイライトしたい欲望は突然やってくる</strong>ので、キーマップを設定して備えておくのがいいでしょう。</p>
+				ハイライトの追加削除は  <kbd><code class="lang-vim">:QuickhlAdd</code></kbd> , <kbd><code class="lang-vim">:QuickhlDel</code></kbd> でも可能ですが、<strong>ハイライトしたい欲望は突然やってくる</strong>ので、キーマップを設定して備えておくのがいいでしょう。</p>
 
 <p>特定の単語を常にハイライトしたい場合は、 <kbd><code>g:quickhl_keywords</code></kbd> にキーワードを設定します。<br />
 				例えば <kbd><code>.vimrc</code></kbd> に以下の様に設定します。</p>
@@ -76,7 +76,7 @@ nmap &lt;Space&gt;j &lt;Plug&gt;(quickhl-match)
     \ ]
 </code></pre>
 
-<p>その他、一時的に特定のバッファでハイライトを無効(Lock)する、 <kbd><code>:QuickhlLock</code></kbd> コマンド等も用意されています。<br />
-				詳しくは <kbd><code>:help quickhl</code></kbd> で確認して下さい。</p>
+<p>その他、一時的に特定のバッファでハイライトを無効(Lock)する、 <kbd><code class="lang-vim">:QuickhlLock</code></kbd> コマンド等も用意されています。<br />
+				詳しくは <kbd><code class="lang-vim">:help quickhl</code></kbd> で確認して下さい。</p>
 
 <address class="hack-author">t9md</address>

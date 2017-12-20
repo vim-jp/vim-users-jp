@@ -11,7 +11,7 @@ author: thinca
 <p>Visual mode での * は Normal mode と同様カーソル下の単語を検索して次の単語出現位置にカーソルを動かしますが、選択範囲の文字列で検索をしてくれた方がNormal modeでの動作と対比して直感的でしょう。このキーに検索を行う機能を割り当てることで、Visual mode で選択中のテキストを検索することができます。
 				割り当てる方法はいくつかありますが、ここではなるべくシンプルなものを紹介します。</p>
 
-<pre class="prettyprint"><code>vnoremap &lt;silent&gt; * &quot;vy/\V&lt;C-r&gt;=substitute(escape(@v,'\/'),&quot;\n&quot;,'\\n',&lt;code class="option"&gt;'g'</code>)&lt;CR&gt;&lt;CR&gt;
+<pre class="prettyprint"><code>vnoremap &lt;silent&gt; * &quot;vy/\V&lt;C-r&gt;=substitute(escape(@v,'\/'),&quot;\n&quot;,'\\n',&lt;code class="option"&gt;'g'&lt;/code&gt;)&lt;CR&gt;&lt;CR&gt;
 </code></pre>
 
 <p>この設定では選択中のテキストを取得するために v レジスタを使用しています。もっとちゃんとやるにはレジスタの中身の退避などが必要ですが、長くなってしまうのでここでは割愛します。</p>
@@ -41,7 +41,7 @@ author: thinca
 
 <p>@v には先ほどヤンクした選択範囲のテキストが入っています。この文字列で検索したいのですが、\ と / はそのままでは別の意味になってしまうので escape() を用いてエスケープしています。</p>
 
-<pre class="prettyprint"><code>substitute(escape(@v, '\/'),&quot;\n&quot;,'\\n',&lt;code class="option"&gt;'g'</code>)
+<pre class="prettyprint"><code>substitute(escape(@v, '\/'),&quot;\n&quot;,'\\n',&lt;code class="option"&gt;'g'&lt;/code&gt;)
 </code></pre>
 
 <p>さらに改行文字を検索で使えるリテラルに置換しています。これは複数行を検索したい場合に必要な処理です。</p>

@@ -76,7 +76,7 @@ author: thinca
 				まずは対象をどのように目立たせるかを設定します。今回は不可視文字を目立たせるのが目的なので、対象の背景色を変更するようにします。
 </p>
 
-<pre class="prettyprint"><code class="lang-vim">highlight IdeographicSpace term=underline ctermbg=DarkGreen guibg=DarkGreen
+<pre class="prettyprint"><code>highlight IdeographicSpace term=underline ctermbg=DarkGreen guibg=DarkGreen
 </code></pre>
 
 <p>
@@ -105,7 +105,7 @@ author: thinca
 <code class="lang-vim">:match</code> コマンドは以下の様に使用します(厳密なコマンドの書式の解説は省きます)。
 </p>
 
-<pre class="prettyprint"><code class="lang-vim">match IdeographicSpace /　/
+<pre class="prettyprint"><code>match IdeographicSpace /　/
 </code></pre>
 
 <p>
@@ -126,7 +126,7 @@ author: thinca
 				コマンドを Vim スクリプトに記述する場合、スクリプト内にマルチバイト文字を記述することになるので該当コマンドを実行するより前に <code class="lang-vim">:scriptencoding</code> でスクリプトファイルのエンコーディングを指定しておく必要があります。
 </p>
 
-<pre class="prettyprint"><code class="lang-vim">scriptencoding utf-8
+<pre class="prettyprint"><code>scriptencoding utf-8
 </code></pre>
 
 <p>

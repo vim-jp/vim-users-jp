@@ -8,7 +8,7 @@ author: Shougo
 
 <h2>Vimのバージョンをチェックする方法</h2>
 
-<p>Vimのバージョンをチェックするには、<code>v:version</code>変数をチェックすればよいです。百の位がVimのメジャーバージョン、十の位と一の位がマイナーバージョンを表します。例えばVim 7.2で<code>:echo v:version</code>すると、<code>702</code>が表示されます。<code>720</code>ではありません。Vimがバージョン7以上であることをチェックするには次のようにします。</p>
+<p>Vimのバージョンをチェックするには、<code>v:version</code>変数をチェックすればよいです。百の位がVimのメジャーバージョン、十の位と一の位がマイナーバージョンを表します。例えばVim 7.2で<code class="lang-vim">:echo v:version</code>すると、<code>702</code>が表示されます。<code>720</code>ではありません。Vimがバージョン7以上であることをチェックするには次のようにします。</p>
 
 <pre class="prettyprint"><code>if v:version &lt; 700
     echoerr 'Does not work this version of Vim "' . v:version . '".'
@@ -16,11 +16,11 @@ author: Shougo
 endif
 </code></pre>
 
-<p>ちなみに、パッチレベルは<code>has('patch100')</code>などでチェックします。詳しくは、<code>:help has-patch</code>を参照してください。</p>
+<p>ちなみに、パッチレベルは<code>has('patch100')</code>などでチェックします。詳しくは、<code class="lang-vim">:help has-patch</code>を参照してください。</p>
 
 <h2>有効になっている拡張機能をチェックする方法</h2>
 
-<p>自分のVimがどのような拡張機能を持っているかは、<code>:version</code>を実行するのが早いですが、
+<p>自分のVimがどのような拡張機能を持っているかは、<code class="lang-vim">:version</code>を実行するのが早いですが、
 				プラグインがチェックする場合には使えません。スクリプトでチェックするには、<code>has()</code>を用います。
 				たとえば、Windowsかどうかをチェックするには、</p>
 

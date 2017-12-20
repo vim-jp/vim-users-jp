@@ -8,7 +8,7 @@ author: thinca
 
 <h3>undo-persistence</h3>
 
-<p>現在開発中の Vim 7.3 から、新しく undo-persistence (<code>:help undo-persistence</code>) と言う機能が追加されました。これを使うと undo の情報をファイルに保存し、Vim を終了しても次に起動したときに undo の履歴を復元してくれるようになります。</p>
+<p>現在開発中の Vim 7.3 から、新しく undo-persistence (<code class="lang-vim">:help undo-persistence</code>) と言う機能が追加されました。これを使うと undo の情報をファイルに保存し、Vim を終了しても次に起動したときに undo の履歴を復元してくれるようになります。</p>
 
 <h3>設定</h3>
 
@@ -28,7 +28,7 @@ author: thinca
 
 <p>これはバッファローカルなオプションで、これが on のバッファはバッファの保存時に undo 履歴をファイルに保存します。また、読み込み時に undo 履歴を復元します。</p>
 
-<p>全てのファイルで有効にしたい場合は単に <code>:set undofile</code> とすれば良いでしょう。特定のファイル、例えばホームディレクトリ以下のファイルのみで設定したい場合は以下のようにします。</p>
+<p>全てのファイルで有効にしたい場合は単に <code class="lang-vim">:set undofile</code> とすれば良いでしょう。特定のファイル、例えばホームディレクトリ以下のファイルのみで設定したい場合は以下のようにします。</p>
 
 <pre class="prettyprint"><code class="lang-vim">augroup vimrc-undofile
   autocmd!

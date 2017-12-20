@@ -36,7 +36,7 @@ author: ujihisa
 
 <p>もしも<code>$PATH</code>に上記のコマンドがあれば、それを用いて変換します。優先順位はこの一覧と同じです。</p>
 
-<p>したがって<code>'filetype'</code>が<code>markdown</code>であるようなバッファを編集中に<code>:QuickRun</code>すると、上記コマンドのいずれかが呼ばれ、そして編集中バッファをhtmlに変換したものをquickrunウインドウに表示します。なので、この出力先をbufferではなくbrowserにすればそれで問題が解決されます。</p>
+<p>したがって<code>'filetype'</code>が<code>markdown</code>であるようなバッファを編集中に<code class="lang-vim">:QuickRun</code>すると、上記コマンドのいずれかが呼ばれ、そして編集中バッファをhtmlに変換したものをquickrunウインドウに表示します。なので、この出力先をbufferではなくbrowserにすればそれで問題が解決されます。</p>
 
 <p><code>~/.vimrc</code>に以下の設定を記述します。</p>
 
@@ -52,7 +52,7 @@ author: ujihisa
 
 <p>続いて<a href="https://github.com/tyru/open-browser.vim">open-browser.vim</a>がインストール済みかどうか確認します。インストールしていなければ、すぐにいれましょう。</p>
 
-<p>これで<code>'filetype'</code>が<code>markdown</code>なバッファから<code>:QuickRun</code> (あるいはデフォルトのキーマッピングである<kbd>\r</kbd>の打鍵) で、新しいウインドウが分割されてHTMLが出力されるかわりに、ブラウザが立ち上がってそちらにHTMLがきれいに表示されるはずです。</p>
+<p>これで<code>'filetype'</code>が<code>markdown</code>なバッファから<code class="lang-vim">:QuickRun</code> (あるいはデフォルトのキーマッピングである<kbd>\r</kbd>の打鍵) で、新しいウインドウが分割されてHTMLが出力されるかわりに、ブラウザが立ち上がってそちらにHTMLがきれいに表示されるはずです。</p>
 
 <h2>解決 (2/2)</h2>
 
@@ -75,7 +75,7 @@ author: ujihisa
       \ }
 </code></pre>
 
-<p>実はこのあたりは詳しくはquickrun公式ヘルプに掲載されています。詳しくは<code>:h quickrun-examples</code>をご覧ください。</p>
+<p>実はこのあたりは詳しくはquickrun公式ヘルプに掲載されています。詳しくは<code class="lang-vim">:h quickrun-examples</code>をご覧ください。</p>
 
 <h2>補足</h2>
 

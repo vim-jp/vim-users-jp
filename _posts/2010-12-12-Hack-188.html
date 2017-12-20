@@ -6,14 +6,14 @@ author: ujihisa
 ---
 <p>VimにはColorSchemeという概念があり、端末で利用可能な色のうちどの色をどの構文要素に割り当てるかのセットを取り扱うことができます。さらにGUIのVim実装であるgVimやMacVimでは、端末の制約を超えて256もの膨大な数の色を駆使することができ、編集対象のテキストの配色を大幅に変更することができます。</p>
 
-<pre class="prettyprint"><code>:colorscheme dessert
+<pre class="prettyprint"><code class="lang-vim">:colorscheme dessert
 </code></pre>
 
 <p>人気のあるcolorschemeは<a href="http://www.google.ca/images?q=vim+dessert&amp;um=1&amp;ie=UTF-8&amp;source=og&amp;sa=N&amp;hl=en&amp;tab=wi&amp;biw=1015&amp;bih=745">dessert</a>, <a href="http://www.google.ca/images?um=1&amp;hl=en&amp;biw=1015&amp;bih=745&amp;tbs=isch:1&amp;sa=1&amp;q=vim+mrkn256&amp;aq=f&amp;aqi=&amp;aql=&amp;oq=&amp;gs_rfai=">mrkn256</a>, <a href="http://www.google.ca/images?um=1&amp;hl=en&amp;biw=1015&amp;bih=745&amp;tbs=isch:1&amp;sa=1&amp;q=vim+zenburn&amp;aq=f&amp;aqi=&amp;aql=&amp;oq=&amp;gs_rfai=">zenburn</a>などでしょう。筆者のイチオシは<a href="http://www.google.ca/images?um=1&amp;hl=en&amp;biw=1015&amp;bih=745&amp;tbs=isch:1&amp;sa=1&amp;q=vim+lucius&amp;aq=f&amp;aqi=&amp;aql=&amp;oq=&amp;gs_rfai=">lucius</a>です。</p>
 
 <p>また、GUI版に限定されるが、Vimが使用するフォントを動的に変更することも可能です。</p>
 
-<pre class="prettyprint"><code>:set guifont=Inconsolata:h20
+<pre class="prettyprint"><code class="lang-vim">:set guifont=Inconsolata:h20
 </code></pre>
 
 <blockquote>
@@ -26,7 +26,7 @@ author: ujihisa
 
 <h2>問題</h2>
 
-<p><code>:colorscheme</code>コマンドは引数の補完ができません。そのため、ColorSchemeを変更する以前から、あなたがどのようなColorSchemeを持っているかすべて把握している必要があります。</p>
+<p><code class="lang-vim">:colorscheme</code>コマンドは引数の補完ができません。そのため、ColorSchemeを変更する以前から、あなたがどのようなColorSchemeを持っているかすべて把握している必要があります。</p>
 
 <p><code>'guifont'</code>の指定に関しても同様で、フォントを変更する以前から、あなたがどのようなフォントを持っているか把握すること、またその正式名を完全に暗記することは非常に困難です。さらにつけくわえるならば、フォント名に空白を含んでいるときに空白文字をエスケープする必要があり、かなり煩雑です。</p>
 
@@ -38,14 +38,14 @@ author: ujihisa
 
 <p>インストール後、以下のコマンドを実行することで、容易にColorSchemeを変更できるようになります。</p>
 
-<pre class="prettyprint"><code>:Unite colorscheme
+<pre class="prettyprint"><code class="lang-vim">:Unite colorscheme
 </code></pre>
 
 <p><img src="/vim-users-jp/assets/images/0f5924c6b930b2354e8544c0752a9e35.png" alt="colorscheme" /></p>
 
 <p>同様に、以下のコマンドでFontを変更できるようになります。</p>
 
-<pre class="prettyprint"><code>:Unite font
+<pre class="prettyprint"><code class="lang-vim">:Unite font
 </code></pre>
 
 <p><img src="/vim-users-jp/assets/images/0b68d3b73dd806277b8b723a9d67bf9c.png" alt="font" /></p>
@@ -65,7 +65,7 @@ endif
 <li><code>g:unite_enable_start_insert</code>: Uniteを挿入モードで開始します</li>
 <li><code>g:unite_enable_split_vertically</code>: Uniteを縦分割で開始します</li>
 <li><code>if</code>の行: unite.vimがインストールされているときのみ以下のキーマッピングを行う</li>
-<li><code class="lang-vim">nnoremap</code>の行: <code>sc</code>で<code>:Unite colorscheme font</code>を実行するようにします。このように、<code>:Unite</code>コマンドには複数のsourceを指定することができます</li>
+<li><code class="lang-vim">nnoremap</code>の行: <code>sc</code>で<code class="lang-vim">:Unite colorscheme font</code>を実行するようにします。このように、<code class="lang-vim">:Unite</code>コマンドには複数のsourceを指定することができます</li>
 </ul>
 
 <h2>参考</h2>

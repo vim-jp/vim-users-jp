@@ -39,14 +39,14 @@ author: ujihisa
 
 <h2>じわじわ出力する</h2>
 
-<p>quickrunは非同期で実行できるとはいえ、計算が終了するまで<code>:-)</code>のままquickrun outputは変化せず、計算が終了した時点ですべての出力を同時に表示します。
+<p>quickrunは非同期で実行できるとはいえ、計算が終了するまで<code class="lang-vim">:-)</code>のままquickrun outputは変化せず、計算が終了した時点ですべての出力を同時に表示します。
 				RSpecの実行に時間がかかるとき、specの実行結果を少しずつ出力して作業の合間に確認したいという方も多くいらっしゃることだと思います。</p>
 
 <p>解決策として、例えばquickrunを避けるということが挙げられます。</p>
 
-<p><a href="http://github.com/Shougo/vimshell">vimshell</a>の<code>:VimShellExecute</code>を用います。まず編集中のspecファイルを保存し、以下のコマンドを呼び出します。</p>
+<p><a href="http://github.com/Shougo/vimshell">vimshell</a>の<code class="lang-vim">:VimShellExecute</code>を用います。まず編集中のspecファイルを保存し、以下のコマンドを呼び出します。</p>
 
-<pre class="prettyprint"><code>:VimShellExecute spec {the file name}
+<pre class="prettyprint"><code class="lang-vim">:VimShellExecute spec {the file name}
 </code></pre>
 
 <p>注意: filename-modifiersの<code>%</code>は使えません。</p>
@@ -54,7 +54,7 @@ author: ujihisa
 <h2>参考</h2>
 
 <ul>
-<li><code>:h line()</code></li>
+<li><code class="lang-vim">:h line()</code></li>
 <li><a href="/vim-users-jp/2010/09/07/Hack-172.html">Hack #176: RSpecをquickrunする (1/2)</a></li>
 </ul>
 

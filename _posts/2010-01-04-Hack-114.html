@@ -4,8 +4,8 @@ title: "Hack #114: Vimを再起動することなくロードパス$PATHを書�
 date: 2010-01-04
 author: ujihisa
 ---
-<p>Vimとそれ以外のソフトウェアを組み合わせて使うにあたって、<code>:!</code>と<code>:r!</code>が非常に重要な役割を果たしています。
-				このとき、<code>:!ls</code>とすることで<code>/bin/ls</code>が呼ばれるのは、<code>$PATH</code>に<code>/bin</code>が含まれているためです。
+<p>Vimとそれ以外のソフトウェアを組み合わせて使うにあたって、<code class="lang-vim">:!</code>と<code class="lang-vim">:r!</code>が非常に重要な役割を果たしています。
+				このとき、<code class="lang-vim">:!ls</code>とすることで<code>/bin/ls</code>が呼ばれるのは、<code>$PATH</code>に<code>/bin</code>が含まれているためです。
 <code>$PATH</code>はVimを起動したシェルから与えられます。シェルの<code>$PATH</code>を上書きしても、既に起動したVimの<code>$PATH</code>は変化しません。
 				Vimを起動したまま<code>$PATH</code>に新たなロードパスを追加するにはどうすればいいのでしょうか。</p>
 
@@ -28,7 +28,7 @@ author: ujihisa
 <pre class="prettyprint"><code class="lang-vim">set path=&quot;/the/new/path,.&quot;
 </code></pre>
 
-<p>というのもありますが、これは<code>:!</code>用ではなく、<kbd>gf</kbd>などのためです。詳しくは<code>:h &lt;code class="option"&gt;'path'</code></code>をご覧ください。</p>
+<p>というのもありますが、これは<code class="lang-vim">:!</code>用ではなく、<kbd>gf</kbd>などのためです。詳しくは<code class="lang-vim">:h <code class="option">'path'</code></code>をご覧ください。</p>
 
 <h2>謝辞</h2>
 

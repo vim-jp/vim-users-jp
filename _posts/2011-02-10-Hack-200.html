@@ -8,7 +8,7 @@ author: ujihisa
 
 <h2>概要</h2>
 
-<p>Vimでは多くの操作が「何を行うか決め、その後候補を指定する」というものになっています。たとえばファイル<code>a.txt</code>を別のバッファに開くならば、<code>:new a.txt</code>などというコマンドを実行することになります。まず先に<code>:new</code>を打鍵し、つまり「別のバッファに開く」という動作を決め、その後対象となるファイルを入力します。このとき、Vim組み込みの補完は、<code>:new</code>という先立つ入力をもとに、後に入力されるものはファイル名と分かりきっていることから、ファイル名のための補完を行ってくれます。かゆいところに手が届く支援もあり、また無駄な操作が存在せず、非常に効率的かつ快適です。</p>
+<p>Vimでは多くの操作が「何を行うか決め、その後候補を指定する」というものになっています。たとえばファイル<code>a.txt</code>を別のバッファに開くならば、<code class="lang-vim">:new a.txt</code>などというコマンドを実行することになります。まず先に<code class="lang-vim">:new</code>を打鍵し、つまり「別のバッファに開く」という動作を決め、その後対象となるファイルを入力します。このとき、Vim組み込みの補完は、<code class="lang-vim">:new</code>という先立つ入力をもとに、後に入力されるものはファイル名と分かりきっていることから、ファイル名のための補完を行ってくれます。かゆいところに手が届く支援もあり、また無駄な操作が存在せず、非常に効率的かつ快適です。</p>
 
 <p>一方、近年Vim業界で幅を利かせつつある<a href="http://github.com/shougo/unite.vim">unite</a>というプラギンが存在します。全てを統合し破壊するフレームワークなどと呼ばれていて、なんのことかよくわからずとりあえず見送っている方も多いのではないでしょうか。</p>
 
@@ -22,12 +22,12 @@ author: ujihisa
 
 <p>標準添付のunite-fileというプラギンがあります。</p>
 
-<pre class="prettyprint"><code>:edit a.txt
+<pre class="prettyprint"><code class="lang-vim">:edit a.txt
 </code></pre>
 
 <p>のかわりに、まず以下のコマンドでunite窓を開きます。</p>
 
-<pre class="prettyprint"><code>:Unite file
+<pre class="prettyprint"><code class="lang-vim">:Unite file
 </code></pre>
 
 <p>カレントディレクトリのファイル一覧がでてきます。</p>
@@ -44,13 +44,13 @@ author: ujihisa
 
 <p>また、<code>j</code>, <code>k</code>で項目間を移動するだけでなく、<code>i</code>を打鍵してInsert mode(*1)に入ってから適当な文字列を入力することで、その文字列で候補を絞り込むことができます。今回対象は<code>a.txt</code>と<code>b.txt</code>の二つのみですので、<code>a</code>と一文字打鍵するだけで候補が完全に<code>a.txt</code>のみに絞られます。</p>
 
-<p>カレントディレクトリにあるファイルを<code>:Unite file</code>で開くだけならば、<code>:edit</code>の方が良いでしょう。しかし、もうすこし複雑な例になると、uniteの優位性がじわじわと上回ってきます。</p>
+<p>カレントディレクトリにあるファイルを<code class="lang-vim">:Unite file</code>で開くだけならば、<code class="lang-vim">:edit</code>の方が良いでしょう。しかし、もうすこし複雑な例になると、uniteの優位性がじわじわと上回ってきます。</p>
 
 <p>標準添付にunite-file_recというプラギンがあります。これはカレントディレクトリ以下のファイルを再帰的にすべて探索するという点を除いてunite-fileとほぼ全く同等です。</p>
 
-<p>unite-file_recはかなり強力で、筆者は一日に少なくとも1000回は使用しています。<code>:edit</code>でいちいち深いディレクトリをもぐってファイルを開く必要はありません。また、カレントディレクトリ以下のファイル数が非常に多くとも、探索が非同期で行われるため、Vimが固まることはありません。</p>
+<p>unite-file_recはかなり強力で、筆者は一日に少なくとも1000回は使用しています。<code class="lang-vim">:edit</code>でいちいち深いディレクトリをもぐってファイルを開く必要はありません。また、カレントディレクトリ以下のファイル数が非常に多くとも、探索が非同期で行われるため、Vimが固まることはありません。</p>
 
-<p>さらに、previewモードというものが存在します。<code>:Unite</code>コマンド時に<code>-auto-preview</code>というオプションを指定すると、カーソルを移動するたびにunite窓の少ししたに小さなウインドウが現れ、そこにファイルの中身の一部が表示されます。</p>
+<p>さらに、previewモードというものが存在します。<code class="lang-vim">:Unite</code>コマンド時に<code>-auto-preview</code>というオプションを指定すると、カーソルを移動するたびにunite窓の少ししたに小さなウインドウが現れ、そこにファイルの中身の一部が表示されます。</p>
 
 <h2>ファイル以外のものを操作するuniteプラギン</h2>
 
@@ -65,7 +65,7 @@ author: ujihisa
 <ul>
 <li>unite-help <a href="/vim-users-jp/2011/02/05/Hack-199.html">Hack #199: :helpに慣れ親しむ</a>
 <ul>
-<li><code>:help</code>コマンドの説明をしていますが、<code>:help</code>そのものを使わずとも、unite-helpで気楽にhelpをひきましょう。</li>
+<li><code class="lang-vim">:help</code>コマンドの説明をしていますが、<code class="lang-vim">:help</code>そのものを使わずとも、unite-helpで気楽にhelpをひきましょう。</li>
 </ul>
 </li>
 </ul>

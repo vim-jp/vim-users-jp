@@ -28,13 +28,13 @@ Yi        Don Stewart        2005          Free GPL              Yes
 <p>この中から
 				「19XX年にリリースされたエディタ(に対応する行)を削除する」
 				としましょう。
-				これは<code>:global</code>を利用して行うことができます
-				(<code>:g/\&lt;19\d\d&#62;/d</code>)。</p>
+				これは<code class="lang-vim">:global</code>を利用して行うことができます
+				(<code class="lang-vim">:g/\&lt;19\d\d&#62;/d</code>)。</p>
 
 <p>では
 				「19XX年にリリースされたエディタ(に対応する行)をヤンクする」
 				としたらどうでしょうか。
-				すぐに思いつくのは<code>:g/\&lt;19\d\d&#62;/y</code>ですが、
+				すぐに思いつくのは<code class="lang-vim">:g/\&lt;19\d\d&#62;/y</code>ですが、
 				これはマッチする行で毎回ヤンクを行うため、
 				レジスタに残るのは最後にマッチした行のテキストだけになります。
 				つまり、ヤンクしたいテキストは以下の通りなのですが、</p>
@@ -66,14 +66,14 @@ Vim       Bram Moolenaar     1991          Free GPL - compatible Yes
 				レジスタに追加するようにします。
 				これには<code>"A</code>-<code>"Z</code>などの大文字のレジスタを使います。</p>
 
-<p>例えば<code>:g/{pattern}/y A</code>とすると、
+<p>例えば<code class="lang-vim">:g/{pattern}/y A</code>とすると、
 <code>"a</code>レジスタにマッチする各行のテキストが追記されるので、
 <code>"ap</code> (操作直後であれば<code>p</code>だけ)で
 				各行のテキストを一度にペーストできます。</p>
 
 <p>ところが既に<code>"a</code>に何か別のテキストが入っていた場合、
 				それに対してテキストが追加されていくため、
-				実際には<code>:let @a = ''</code>などとして
+				実際には<code class="lang-vim">:let @a = ''</code>などとして
 				操作前にレジスタの内容を空にする必要があります。
 				これは結構面倒です。</p>
 
@@ -83,10 +83,10 @@ Vim       Bram Moolenaar     1991          Free GPL - compatible Yes
 
 <p>例えば特定パターンにマッチする行をまとめて削除する場合、
 <code>/\&lt;19\d\d&#62;</code>などとしてマッチするかどうかを確認した後、
-<code>:Gred</code>で行うことができます。
-				ヤンクであれば<code>:Grey</code>で行うことができます。</p>
+<code class="lang-vim">:Gred</code>で行うことができます。
+				ヤンクであれば<code class="lang-vim">:Grey</code>で行うことができます。</p>
 
-<p>なお、各コマンドは<code>:g/{pattern}/[cmd]</code>と
+<p>なお、各コマンドは<code class="lang-vim">:g/{pattern}/[cmd]</code>と
 				同様の形式では実行できません。
 				これは通常の操作では
 				検索パターンを含むコマンドを一度に入力して実行することはなく、

@@ -5,7 +5,7 @@ date: 2010-11-22
 author: 
 ---
 <p><a href="/vim-users-jp/2010/07/14/Hack-161.html">Hack #161: Command-line windowを使いこなす</a>
-				という記事を参考に、<code>:</code>キーに<code>q:</code>相当の機能を割り当てた人が相当数いると思います。
+				という記事を参考に、<code class="lang-vim">:</code>キーに<code>q:</code>相当の機能を割り当てた人が相当数いると思います。
 				しかし、この設定はMacVim上でうまく動作しません。</p>
 
 <p>MacVimはGUIで動作するVimとして最も評判が悪いものですが、しかしながらMac OS X上で最も高速で動作するVimであり、泣く泣く使用し続ける方も多くいらっしゃることだと思います。(*1)</p>
@@ -24,7 +24,7 @@ author:
 
 <h2>解決</h2>
 
-<p>Command-line windowでの<kbd>&lt;Cr&gt;</kbd>キーの挙動を上書きし、(1) 一旦入力コマンドを別のところに保存し、(2) Command-line windowを閉じ、(3) 通常の<code>:</code>を打鍵、(4) 先ほど入力したコマンドを展開、(5) 実行、という手順をとることにします。</p>
+<p>Command-line windowでの<kbd>&lt;Cr&gt;</kbd>キーの挙動を上書きし、(1) 一旦入力コマンドを別のところに保存し、(2) Command-line windowを閉じ、(3) 通常の<code class="lang-vim">:</code>を打鍵、(4) 先ほど入力したコマンドを展開、(5) 実行、という手順をとることにします。</p>
 
 <p>前提として、<a href="/vim-users-jp/2010/07/14/Hack-161.html">Hack #161の設定</a> が既になされているものとします。その上で、以下のコードを<code>~/.vimrc</code>に記述します。</p>
 

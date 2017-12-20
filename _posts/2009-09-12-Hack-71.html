@@ -9,7 +9,7 @@ author: kana
 <p>バッファ中のある単語FOOを別の単語BARに置換するとしましょう。
 				これには</p>
 
-<pre class="prettyprint"><code>:%s/FOO/BAR/g
+<pre class="prettyprint"><code class="lang-vim">:%s/FOO/BAR/g
 </code></pre>
 
 <p>というコマンドでできるのですが、これはバッファ中の全てのFOOをBARに置換します。
@@ -51,7 +51,7 @@ author: kana
 
 <p>などとすることで次々と単語置換を行うことができます。</p>
 
-<pre class="prettyprint"><code>:%s/FOO/BAR/gc
+<pre class="prettyprint"><code class="lang-vim">:%s/FOO/BAR/gc
 </code></pre>
 
 <p>とすれば各箇所で置換を行うかどうかを対話的に指定できるのですが、

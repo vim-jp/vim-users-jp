@@ -103,12 +103,12 @@ cond.end:                                         ; preds = %cond.false.lr.ph, %
 
 <p>これらのような事実が実際に目で確認できることがわかりました。しかし毎回gccやclangコマンドをvimshellから入力するのは大変です。それどころか、さきほど記述したCのコードにファイル名を与えて保存することは大変で、そんなことをしていると学習以前に一年が過ぎてしまい、次の元旦を迎えてしまいます。このような事態に陥ったとき、訓練されたVim使いは「そうだquickrun、使おう」となります。</p>
 
-<pre class="prettyprint"><code>:QuickRun -type c/gcc  -exec '%c %o %s -S -o -' -cmdopt '-m32 -O2'
+<pre class="prettyprint"><code class="lang-vim">:QuickRun -type c/gcc  -exec '%c %o %s -S -o -' -cmdopt '-m32 -O2'
 </code></pre>
 
 <p>これで動作することが分かるので、よし、<code>~/.vimrc</code>を開いて<code>g:quickrun_config</code>に・・・おっと、それだとclangの例を試せません。</p>
 
-<pre class="prettyprint"><code>:QuickRun -type c/clang  -exec '%c %o %s -S -emit-llvm -o -' -cmdopt '-O3'
+<pre class="prettyprint"><code class="lang-vim">:QuickRun -type c/clang  -exec '%c %o %s -S -emit-llvm -o -' -cmdopt '-O3'
 </code></pre>
 
 <p>複数の候補から選択したい。<a href="/vim-users-jp/2011/02/10/Hack-200.html">Hack #200: 候補を選択し、実行する</a>にあるように、これはunite.vimの出番です。</p>
@@ -161,7 +161,7 @@ cond.end:                                         ; preds = %cond.false.lr.ph, %
 
 <p>quicklearnは</p>
 
-<pre class="prettyprint"><code>:Unite quicklearn -immediately
+<pre class="prettyprint"><code class="lang-vim">:Unite quicklearn -immediately
 </code></pre>
 
 <p>のようにして実行できます。筆者は</p>
