@@ -79,13 +79,13 @@ vim.command('let val = "fuga"')</code></pre>
 
 <pre class="prettyprint"><code># Python
 color_name = vim.eval('g:color_name')
-bufnum, lnum, col, off = vim.eval('getpos(".")') # 例えば、("0", "3", "10", "0")のようになる&lt;/pre&gt;
+bufnum, lnum, col, off = vim.eval('getpos(".")') # 例えば、("0", "3", "10", "0")のようになる</pre&gt;
 
-&lt;p&gt;&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;</code></p&gt;
 
-&lt;p&gt;また，Vimのバッファを表すオブジェクトとしてvim.bufferが提供されています。vim.buffersが全てのバッファが入った配列で、vim.current.bufferが現在表示しているバッファになります。:help pythonにもありますが、おおよその使い方は以下の通りです。&lt;/p&gt;
+&lt;p&gt;また，Vimのバッファを表すオブジェクトとしてvim.bufferが提供されています。vim.buffersが全てのバッファが入った配列で、vim.current.bufferが現在表示しているバッファになります。:help pythonにもありますが、おおよその使い方は以下の通りです。</p&gt;
 
-&lt;pre&gt;&lt;code&gt;# Python
+&lt;pre&gt;<code># Python
 import vim
 b = vim.current.buffer # 現在のバッファ
 print b.name           # バッファ名

@@ -176,8 +176,8 @@ let s:langmap = {
 
 function! s:html_escape(str)
   let str = a:str
-  let str = substitute(str, '<', '\&lt;', 'g')
-  let str = substitute(str, '>', '\&gt;', 'g')
+  let str = substitute(str, '<\%(code\|var\|/\)\@!', '\&lt;', 'g')
+  let str = substitute(str, '\%(code\|"\|var\)\@<!>', '\&gt;', 'g')
   return str
 endfunction
 

@@ -36,30 +36,30 @@ function! s:move_window_into_tab_page(target_tabpagenr)
     return
   endif
   let original_tabnr = tabpagenr()
-  let target_bufnr = bufnr(&lt;code class="option"&gt;''&lt;/code&gt;)
+  let target_bufnr = bufnr(<code class="option">''</code>)
   let window_view = winsaveview()
 
   if a:target_tabpagenr == 0
     tabnew
     tabmove  &quot; Move new tabpage at the last.
-    execute target_bufnr &lt;code class="option"&gt;'buffer'&lt;/code&gt;
+    execute target_bufnr <code class="option">'buffer'</code>
     let target_tabpagenr = tabpagenr()
   else
-    execute a:target_tabpagenr &lt;code class="option"&gt;'tabnext'&lt;/code&gt;
+    execute a:target_tabpagenr <code class="option">'tabnext'</code>
     let target_tabpagenr = a:target_tabpagenr
     topleft new  &quot; FIXME: be customizable?
-    execute target_bufnr &lt;code class="option"&gt;'buffer'&lt;/code&gt;
+    execute target_bufnr <code class="option">'buffer'</code>
   endif
   call winrestview(window_view)
 
-  execute original_tabnr &lt;code class="option"&gt;'tabnext'&lt;/code&gt;
+  execute original_tabnr <code class="option">'tabnext'</code>
   if 1 &lt; winnr('$')
     close
   else
     enew
   endif
 
-  execute target_tabpagenr &lt;code class="option"&gt;'tabnext'&lt;/code&gt;
+  execute target_tabpagenr <code class="option">'tabnext'</code>
 endfunction &quot; &#125;&#125;&#125;
 
 &quot; &lt;space&gt;ao move current buffer into a new tab.
