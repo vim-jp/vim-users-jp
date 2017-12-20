@@ -4,37 +4,31 @@ title: "Hack #138: ファイルタイプのエイリアスを作る"
 date: 2010-04-10
 author: tyru
 ---
-<pre class="prettyprint"><code class="lang-vim">set filetype=c
-</code></pre>
+<pre class="prettyprint"><code class="lang-vim">0</code></pre>
 
 <p>と入力すると現在のバッファにシンタックスハイライトやftpluginなどの設定をロードすることができます。<br />
-				また<code class="lang-vim">:setfiletype</code>というコマンドも用意されていて、これを使うと前述のファイルタイプがいくらか楽に指定できます。</p>
+				また<code class="lang-vim">0</code>というコマンドも用意されていて、これを使うと前述のファイルタイプがいくらか楽に指定できます。</p>
 
-<pre class="prettyprint"><code class="lang-vim">:setf c
-</code></pre>
+<pre class="prettyprint"><code class="lang-vim">0</code></pre>
 
 <p>ただファイルタイプの中には「javascript」などといった長い名前のものがしばしばあります。<br />
 				そこでautocmdを使い</p>
 
-<pre class="prettyprint"><code class="lang-vim">autocmd FileType js setlocal ft=javascript
-</code></pre>
+<pre class="prettyprint"><code class="lang-vim">0</code></pre>
 
 <p>とすると</p>
 
-<pre class="prettyprint"><code>setf js
-</code></pre>
+<pre class="prettyprint"><code>0</code></pre>
 
 <p>のように少ないタイプ数でファイルタイプの設定ができます。</p>
 
 <p>他にも<a href="http://www.vim.org/scripts/script.php?script_id=2675">altercmd.vim</a>を使って更に短いsetfiletypeのエイリアスを作ったり</p>
 
-<pre class="prettyprint"><code>AlterCommand sf setf
-</code></pre>
+<pre class="prettyprint"><code>0</code></pre>
 
 <p>マッピングで:setfを入力してしまうのもいいでしょう。</p>
 
-<pre class="prettyprint"><code class="lang-vim">nnoremap gs :&lt;C-u&gt;setf&lt;Space&gt;
-</code></pre>
+<pre class="prettyprint"><code class="lang-vim">0</code></pre>
 
 <p>ファイルタイプの指定はコードを書く作業に取りかかる上でとても重要です。<br />
 				素早くファイルタイプの指定ができるとコードを書く意欲が上がります。</p>

@@ -58,8 +58,8 @@ author: thinca
 				また、<code class="option">'foldexpr'</code> を使っている場合は各行の折り畳みレベルが再計算されます。</dd>
 <dt><kbd>zx</kbd></dt>
 <dd>zX を実行してから zv を行います。</dd>
-<dt><code class="lang-vim">:[range]foldopen[!]</code></dt>
-<dt><code class="lang-vim">:[range]foldclose[!]</code></dt>
+<dt><code class="lang-vim">0</code></dt>
+<dt><code class="lang-vim">0</code></dt>
 <dd>範囲にある折り畳みを開く、もしくは閉じます。! が与えられた場合は全ての深さの折り畳みが開閉されます。範囲が省略された場合は現在行が対象になります。</dd>
 </dl>
 
@@ -71,7 +71,7 @@ author: thinca
 <dt><kbd>zf{motion}</kbd></dt>
 <dt><kbd>{Visual}zf</kbd></dt>
 <dt><kbd>[count]zF</kbd></dt>
-<dt><code class="lang-vim">:{range}fold</code></dt>
+<dt><code class="lang-vim">0</code></dt>
 <dd>対象の範囲に新しく折り畳みを作成します。</dd>
 <dt><kbd>zd</kbd></dt>
 <dd>カーソル位置にある折り畳みを 1 つ削除します。</dd>
@@ -119,9 +119,9 @@ author: thinca
 <p>折り畳まれている、もしくは開かれている各行に対してコマンドを実行することができます。</p>
 
 <dl>
-<dt><code class="lang-vim">:[range]folddoopen {cmd}</code></dt>
-<dt><code class="lang-vim">:[range]folddoclose {cmd}</code></dt>
-<dd>バッファ全体、もしくは指定した範囲にある、折り畳まれていない、もしくは折り畳まれている行に対して {cmd} を実行します。これは <code class="lang-vim">:global</code> に似ていて、実行する行を正規表現ではなく折り畳みの状態で指定しているのとほぼ同じです。
+<dt><code class="lang-vim">0</code></dt>
+<dt><code class="lang-vim">0</code></dt>
+<dd>バッファ全体、もしくは指定した範囲にある、折り畳まれていない、もしくは折り畳まれている行に対して {cmd} を実行します。これは <code class="lang-vim">0</code> に似ていて、実行する行を正規表現ではなく折り畳みの状態で指定しているのとほぼ同じです。
 				折り畳まれていない行には、折り畳み自体が存在しない行も含みます。</dd>
 </dl>
 

@@ -9,8 +9,7 @@ author: kana
 <p><a href="/vim-users-jp/2009/11/29/Hack-105.html">Hack #105: surroundをより便利に使う</a>
 				では、surroundの設定例として以下のものを取り上げました:</p>
 
-<pre class="prettyprint"><code>let g:surround_{char2nr('j')} = "「\r」"
-</code></pre>
+<pre class="prettyprint"><code>0</code></pre>
 
 <p>Hack #105では本筋でないのため軽く流しましたが、
 				よくよく確認してみると変数名の記述が変態的なものになっています。
@@ -19,35 +18,31 @@ author: kana
 <h3>解説</h3>
 
 <p>Vimでは変数名(および関数名)の中に任意の式を
-<code>{&lt;var&gt;expr&lt;/var&gt;}</code>の形で埋め込むことができます。
-				変数名中に<code>{&lt;var&gt;expr&lt;/var&gt;}</code>が含まれる場合、
-				実行時に<code>{}</code>中の式<var>expr</var>が評価され、
-				その結果で<code>{&lt;var&gt;expr&lt;/var&gt;}</code>が置き換えられます。
-				最終的には<code>{&lt;var&gt;expr&lt;/var&gt;}</code>が置き換えられた
+<code>0</code>の形で埋め込むことができます。
+				変数名中に<code>0</code>が含まれる場合、
+				実行時に<code>0</code>中の式<var>expr</var>が評価され、
+				その結果で<code>0</code>が置き換えられます。
+				最終的には<code>0</code>が置き換えられた
 				変数名が参照されることになります。</p>
 
-<p>例えば<code>g:surround_{char2nr('j')}</code>の場合、
-				式<code>char2nr('j')</code>を評価した結果(= 106)で
-<code>{char2nr('j')}</code>が置き換えられ、
-				最終的に<code>g:surround_106</code>が参照されることになります。
+<p>例えば<code>0</code>の場合、
+				式<code>0</code>を評価した結果(= 106)で
+<code>0</code>が置き換えられ、
+				最終的に<code>0</code>が参照されることになります。
 				ですから、</p>
 
-<pre class="prettyprint"><code>let g:surround_{char2nr('j')} = "「\r」"
-</code></pre>
+<pre class="prettyprint"><code>0</code></pre>
 
 <p>は</p>
 
-<pre class="prettyprint"><code>let g:surround_106 = "「\r」"
-</code></pre>
+<pre class="prettyprint"><code>0</code></pre>
 
 <p>と等価です。
-				ただ<code>{expr}</code>による表記の方が意図するところが分かり易くなります。</p>
+				ただ<code>0</code>による表記の方が意図するところが分かり易くなります。</p>
 
 <p>現代的なVim scriptならば</p>
 
-<pre class="prettyprint"><code>let g:surround = {}
-let g:surround['j'] = "「\r」"
-</code></pre>
+<pre class="prettyprint"><code>0</code></pre>
 
 <p>のような形で記述するところですが、
 				surroundの場合は過去のバージョン(6.x)のVimでも動作するように記述されており、
@@ -55,7 +50,7 @@ let g:surround['j'] = "「\r」"
 				このようになっています。</p>
 
 <p>言い換えると、Vim scriptにはつい最近まで配列すら存在しなかったのです。
-<code>var{ia}ble</code>表記が導入された理由の一つは、
+<code>0</code>表記が導入された理由の一つは、
 				値として数値と文字列しか存在しなかった時代に、
 				なんとかして配列を実現するための手段としてです。</p>
 

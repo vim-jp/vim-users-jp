@@ -30,8 +30,7 @@ author: thinca
 				範囲は行単位で指定します。つまり、ある行からある行まで、ということです。最も単純な例を示します。
 </p>
 
-<pre class="prettyprint"><code>:10,20&lt;var&gt;command&lt;/var&gt;
-</code></pre>
+<pre class="prettyprint"><code>0</code></pre>
 
 <p>
 				これは 10 行目から 20 行目の間の範囲に対して <var>command</var> を実行する、という意味です。ここで、10 や 20 の部分を行指定子と呼びます。行指定子には具体的な数字以外にも以下のものが使用できます。
@@ -53,8 +52,7 @@ author: thinca
 
 <p>例: 現在行から最終行を html にしてファイルに出力(参考: <a class="hack" href="/vim-users-jp/2009/06/08/Hack-23.html">Hack #23: Vimでハイライト表示させたコードを見た目そのままにHTML出力させる</a>)</p>
 
-<pre class="prettyprint"><code>:.,$TOhtml
-</code></pre>
+<pre class="prettyprint"><code>0</code></pre>
 
 <h4>行指定子を指定する数</h4>
 
@@ -76,8 +74,7 @@ author: thinca
 
 <p>例: 次の &#8220;class&#8221; で始まる行から、その行より下にある次の &#8220;end&#8221; で始まる行までを削除</p>
 
-<pre class="prettyprint"><code>:/^class/;/^end/delete
-</code></pre>
+<pre class="prettyprint"><code>0</code></pre>
 
 <p>
 				この例をカンマで区切った場合、現在の行から &#8220;class&#8221; より近い位置に &#8220;end&#8221; があった場合、予期しない結果になるでしょう。
@@ -92,8 +89,7 @@ author: thinca
 
 <p>例: 次の &#8220;class&#8221; で始まる行の次の行から、その行より下にある次の &#8220;end&#8221; で始まる行の前の行までを削除</p>
 
-<pre class="prettyprint"><code>:/^class/+1;/^end/-1delete
-</code></pre>
+<pre class="prettyprint"><code>0</code></pre>
 
 <h4>検索系の行指定子の指定</h4>
 
@@ -103,8 +99,7 @@ author: thinca
 
 <p>例: カーソルを移動せずに、次の &#8220;class&#8221; で始まる行から、その行より下にある次の &#8220;end&#8221; で始まる行までを削除</p>
 
-<pre class="prettyprint"><code>:/^class/,/^class//^end/delete
-</code></pre>
+<pre class="prettyprint"><code>0</code></pre>
 
 <p>
 				先ほどのセミコロンで区切った場合と違い、カーソルが移動することはありません。
@@ -118,8 +113,7 @@ author: thinca
 				Visual mode から Command-line mode に入ると、プロンプトに以下のような文字列が自動的に挿入されます。
 </p>
 
-<pre class="prettyprint"><code>:'&lt;,'&gt;
-</code></pre>
+<pre class="prettyprint"><code>0</code></pre>
 
 <p>
 				ここで、&#8217;&lt; は Visual mode 最後に選択した範囲の最初の行、&#8217;&gt; は最後の行を表すマークです。つまり、Visual mode から Command-line mode に入ると自動的に今選択していた範囲を対象にコマンドを実行することができます。
@@ -131,8 +125,7 @@ author: thinca
 				Normal mode で数字を入力してから Command-line mode に入ると、プロンプトに以下のような文字列が自動的に挿入されます。
 </p>
 
-<pre class="prettyprint"><code>:.,.+&lt;var&gt;(count - 1)&lt;/var&gt;
-</code></pre>
+<pre class="prettyprint"><code>0</code></pre>
 
 <p>
 				例えば、<kbd>5:</kbd> と入力すると <code class="lang-vim">:.,.+4</code> と入力された状態になります。これはつまり、現在の行から 5 行分という意味です。

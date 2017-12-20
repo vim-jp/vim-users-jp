@@ -18,32 +18,31 @@ author: ujihisa
 
 <h2>解決</h2>
 
-<p><code>~/.vimrc</code>に以下を記述します。</p>
+<p><code>0</code>に以下を記述します。</p>
 
-<pre class="prettyprint"><code class="lang-vim">nnoremap Y y$
-</code></pre>
+<pre class="prettyprint"><code class="lang-vim">0</code></pre>
 
 <p>これで、<kbd>Y</kbd>の挙動が<kbd>D</kbd>や<kbd>C</kbd>と同様に、「カーソル位置から行末までヤンクする」になります。
-				一貫性がとれる上に、<code>$</code>というとても人間には入力不可能な記号の入力を省略することができ、開発効率の大幅な向上が期待されます。</p>
+				一貫性がとれる上に、<code>0</code>というとても人間には入力不可能な記号の入力を省略することができ、開発効率の大幅な向上が期待されます。</p>
 
 <h2>解説</h2>
 
-<p>なお、ヘルプ <code class="lang-vim">:h Y</code> を引くと以下のように説明されています。</p>
+<p>なお、ヘルプ <code class="lang-vim">0</code> を引くと以下のように説明されています。</p>
 
 <blockquote>
-<p><code>[&quot;x]Y</code> yank <code>[count]</code> lines <code>[into register x]</code> (synonym for
-<code>yy, |linewise|</code>). If you like <code>&quot;Y&quot;</code> to work from the
+<p><code>0</code> yank <code>0</code> lines <code>0</code> (synonym for
+<code>0</code>). If you like <code>0</code> to work from the
 				cursor to the end of line (which is more logical,
-				 but not Vi-compatible) use <code>&quot;:map Y y$&quot;</code>.</p>
+				 but not Vi-compatible) use <code>0</code>.</p>
 </blockquote>
 
 <p>しかし、このやりかたは2点留意事項があります。</p>
 
 <ul>
-<li>ヘルプに書いている方法ですと、<kbd>y</kbd>や<kbd>$</kbd>の挙動が上書きされているときに、上書きされた側の挙動で今回定義した<kbd>Y</kbd>が実行されます。多くの場合それは意図した挙動ではないため、本Hackでは<code>map</code>ではなく<code>noremap</code>としました</li>
-<li>ビジュアルモードなどでは今回の<kbd>Y</kbd>は関係ないため、<code>map</code>ではなく<code>nmap</code>がより好ましいです</li>
+<li>ヘルプに書いている方法ですと、<kbd>y</kbd>や<kbd>$</kbd>の挙動が上書きされているときに、上書きされた側の挙動で今回定義した<kbd>Y</kbd>が実行されます。多くの場合それは意図した挙動ではないため、本Hackでは<code>0</code>ではなく<code>0</code>としました</li>
+<li>ビジュアルモードなどでは今回の<kbd>Y</kbd>は関係ないため、<code>0</code>ではなく<code>0</code>がより好ましいです</li>
 </ul>
 
-<p>組み合わせて、本Hackでは<code class="lang-vim">nnoremap</code>としました。</p>
+<p>組み合わせて、本Hackでは<code class="lang-vim">0</code>としました。</p>
 
 <address class="hack-author">ujihisa</address>

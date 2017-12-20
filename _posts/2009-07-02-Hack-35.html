@@ -14,8 +14,7 @@ author: thinca
 				Vim のキーマッピングは、定義した通りのキーシーケンスを発生させます。つまり、実際にコマンドを打つときと同じような定義をすればコマンドを実行させることができます。
 </p>
 
-<pre class="prettyprint"><code class="lang-vim">nnoremap &lt;Space&gt;n :setlocal number! number?&lt;CR&gt;
-</code></pre>
+<pre class="prettyprint"><code class="lang-vim">0</code></pre>
 
 <p>
 				最初の <kbd>:</kbd> で Command-line mode に入り、コマンドを入力した後、最後に <kbd>&lt;CR&gt;</kbd> でコマンドを実行します。最後の <kbd>&lt;CR&gt;</kbd> は <kbd>&lt;Return&gt;</kbd> や <kbd>&lt;Enter&gt;</kbd> などの別名も用意されているので、これらを使っても構いません。この例では、行番号の表示の on/off を切り替えてその結果を表示しています。
@@ -32,23 +31,20 @@ author: thinca
 				例えば、以下のようなキーマッピングを設定していたとします。
 </p>
 
-<pre class="prettyprint"><code class="lang-vim">nnoremap &lt;Space&gt;w :write&lt;CR&gt;
-</code></pre>
+<pre class="prettyprint"><code class="lang-vim">0</code></pre>
 
 <p>
 				これは <kbd>&lt;Space&gt;w</kbd> でファイルを保存するものですが、誤って事前に数字 (ここでは例として 3) を入力してしまうと、以下のようなコマンドが実行されてしまいます。
 </p>
 
-<pre class="prettyprint"><code>:.,.+2write
-</code></pre>
+<pre class="prettyprint"><code>0</code></pre>
 
 <p>
 				数値を前置したため、範囲指定が自動で挿入されてしまいます。こうなるとこれは指定範囲のみを保存しようとするコマンドになり、(実際には ! を付けない限り実行されませんが、)実行した場合指定範囲外の部分は消えてしまうため非常に危険です。
 				これを防ぐためには、Command-line mode に入った際に自動入力される部分を削除する必要があります。以下のようにします。
 </p>
 
-<pre class="prettyprint"><code class="lang-vim">nnoremap &lt;Space&gt;w :&lt;C-u&gt;write&lt;CR&gt;
-</code></pre>
+<pre class="prettyprint"><code class="lang-vim">0</code></pre>
 
 <p>
 				Command-line mode での <kbd>&lt;C-u&gt;</kbd> は、カーソル位置までの入力を削除します。一般的に数値の前置による範囲指定が必要になることはほとんどないので、キーマッピングから ex コマンドを実行させる場合は <kbd>&lt;C-u&gt;</kbd> で範囲指定を削除しておく方が安全です。

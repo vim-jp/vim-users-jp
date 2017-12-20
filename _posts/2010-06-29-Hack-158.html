@@ -8,14 +8,13 @@ author: thinca
 
 <h3>定義方法</h3>
 
-<p><code class="lang-vim">:command</code> コマンドを使用します。書式は以下のようになります。</p>
+<p><code class="lang-vim">0</code> コマンドを使用します。書式は以下のようになります。</p>
 
-<pre class="prettyprint"><code class="lang-vim">:command[!] [{属性}...] {コマンド名} {実行するコマンド}
-</code></pre>
+<pre class="prettyprint"><code class="lang-vim">0</code></pre>
 
 <p>これを見てわかるように、コマンドを定義すると言うことは誤解を恐れずに言うと別のコマンドに対するショートカットを定義しているに過ぎません。
 				複雑なことをしたい場合、ここは大抵関数の呼び出しになります。
-<code class="lang-vim">:command</code> 自体に ! を付けた場合、同名のコマンドが定義済みだった場合に上書きします。通常はエラーになります。</p>
+<code class="lang-vim">0</code> 自体に ! を付けた場合、同名のコマンドが定義済みだった場合に上書きします。通常はエラーになります。</p>
 
 <h4>コマンド名</h4>
 
@@ -23,7 +22,7 @@ author: thinca
 
 <h4>属性</h4>
 
-<p>属性は、<code>-{属性名}</code> もしくは <code>-{属性名}={引数}</code> の形式で指定します。詳細な説明は :help に譲るとして、ここでは概要を紹介します。
+<p>属性は、<code>0</code> もしくは <code>0</code> の形式で指定します。詳細な説明は :help に譲るとして、ここでは概要を紹介します。
 <dl>
 <dt>-nargs</dt>
 <dd>
@@ -66,7 +65,7 @@ author: thinca
 </dd>
 <dt>-range</dt>
 <dd>
-				コマンドに範囲(<code class="lang-vim">:[range]Command</code>)を指定できるようにします。この属性がない場合、範囲の指定はできません。属性の引数で無指定時の初期値を指定します。
+				コマンドに範囲(<code class="lang-vim">0</code>)を指定できるようにします。この属性がない場合、範囲の指定はできません。属性の引数で無指定時の初期値を指定します。
 <table>
 <tr><td>-range</td><td>範囲指定。無指定時は現在行</td></tr>
 <tr><td>-range=%</td><td>範囲指定。無指定時はファイル全体(1,$)</td></tr>
@@ -75,7 +74,7 @@ author: thinca
 </dd>
 <dt>-count</dt>
 <dd>
-				コマンドにカウント(<code class="lang-vim">:[N]Command [N]</code>) を指定できるようにします。この属性がない場合、カウントの指定はできません。属性の引数で無指定時の初期値を指定します。
+				コマンドにカウント(<code class="lang-vim">0</code>) を指定できるようにします。この属性がない場合、カウントの指定はできません。属性の引数で無指定時の初期値を指定します。
 <table>
 <tr><td>-count</td><td>カウント指定。無指定時は 0</td></tr>
 <tr><td>-count=N</td><td>カウント指定。無指定時は任意の数字 N</td></tr>
@@ -88,10 +87,10 @@ author: thinca
 <dd>
 				コマンドの後ろに | を付けることで別のコマンドを実行することができます。また、&quot; はコメントの開始になります。
 				コマンドの引数に | や &quot; を含めたい場合は、| や &quot; とします。
-				別の言い方をすると、普通に定義したコマンドの引数は <code class="lang-vim">:map</code> 系のコマンドのように扱われますが、-bar を付けることでその他のコマンドのような扱いになります。
+				別の言い方をすると、普通に定義したコマンドの引数は <code class="lang-vim">0</code> 系のコマンドのように扱われますが、-bar を付けることでその他のコマンドのような扱いになります。
 </dd>
 <dt>-register</dt>
-<dd><code class="lang-vim">:delete</code> や <code class="lang-vim">:yank</code> のように、1つ目の引数にレジスタ名を指定できます。</dd>
+<dd><code class="lang-vim">0</code> や <code class="lang-vim">0</code> のように、1つ目の引数にレジスタ名を指定できます。</dd>
 <dt>-buffer</dt>
 <dd>バッファローカルなコマンドになります。</dd>
 </dl></p>

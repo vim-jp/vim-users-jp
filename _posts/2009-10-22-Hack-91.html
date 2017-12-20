@@ -6,16 +6,16 @@ author: kana
 ---
 <h3>問題</h3>
 
-<p><code>/{pattern}</code>による検索ですが、
+<p><code>0</code>による検索ですが、
 				実は検索パターンに「/」をそのまま含めることができません。
 				Vimには<a href="http://vimdoc.sourceforge.net/htmldoc/pattern.html#search-offset">search-offset</a>という機能があり、
-				その記法が<code>/{pattern}/{offset}</code>となっているためです。</p>
+				その記法が<code>0</code>となっているためです。</p>
 
-<p>例えば「/usr/local」を検索しようと<code>//usr/local</code>を入力しても
+<p>例えば「/usr/local」を検索しようと<code>0</code>を入力しても
 				期待通りの結果は得られません。
 				そのため「/」を検索文字列に含めたい場合は
 				「\/」とエスケープしなければなりません。
-<code>?{pattern}</code>による検索についても同様の問題があり、
+<code>0</code>による検索についても同様の問題があり、
 				「?」を検索したければ「\?」とエスケープしなければなりません。</p>
 
 <p>しかしsearch-offsetの利用頻度は
@@ -27,13 +27,11 @@ author: kana
 
 <p>これには以下の内容をvimrcに追加します。</p>
 
-<pre class="prettyprint"><code>cnoremap &lt;expr&gt; /  getcmdtype() == '/' ? '\/' : '/'
-cnoremap &lt;expr&gt; ?  getcmdtype() == '?' ? '\?' : '?'
-</code></pre>
+<pre class="prettyprint"><code>0</code></pre>
 
 <p>これにより、
-<code>/{pattern}</code>の入力中は「/」をタイプすると自動で「\/」が、
-<code>?{pattern}</code>の入力中は「?」をタイプすると自動で「\?」が
+<code>0</code>の入力中は「/」をタイプすると自動で「\/」が、
+<code>0</code>の入力中は「?」をタイプすると自動で「\?」が
 				入力されるようになり、検索パターンの入力の手間を軽減することができます。</p>
 
 <h3>参考資料</h3>

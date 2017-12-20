@@ -23,11 +23,7 @@ author: Shougo
 <p>
 				これは有名な設定ですが、一応書いておきます。GVim上でしか動作しないので注意してください。
 				この他に、&lt;ESC&gt;をKey-mappingするという方法もあります。
-<pre class="prettyprint"><code class="lang-vim">augroup MyAutoCmd
-    autocmd!
-augroup END
-autocmd MyAutoCmd InsertLeave * set iminsert=0 imsearch=0
-</code></pre>
+<pre class="prettyprint"><code class="lang-vim">0</code></pre>
 </p>
 
 <h2>ATOK X3をGVim上で使用する</h2>
@@ -36,30 +32,22 @@ autocmd MyAutoCmd InsertLeave * set iminsert=0 imsearch=0
 <p>
 				ATOK X3をGVim上で使用する場合は注意が必要です。次のような設定を.gvimrcに書いていないと変換時にフリーズします。
 </p>
-<pre class="prettyprint"><code>let $GTK_IM_MODULE='xim'
-set imactivatekey=C-space
-</code></pre>
+<pre class="prettyprint"><code>0</code></pre>
 <p>
 				Shift-SpaceでATOK X3をONにする設定にしている場合、次のように設定します。
 </p>
-<pre class="prettyprint"><code>let $GTK_IM_MODULE='xim'
-set imactivatekey=S-space
-</code></pre>
+<pre class="prettyprint"><code>0</code></pre>
 <p>
 				UIMにおいても同様な設定をする必要があるので、uim-anthy用の設定もおいておきます。
 </p>
-<pre class="prettyprint"><code>let $GTK_IM_MODULE='uim-anthy'
-set imactivatekey=C-space
-</code></pre>
+<pre class="prettyprint"><code>0</code></pre>
 </p>
 
 <h2>使用上の注意</h2>
 
 <p>
 				GVimの場合、VimからATOK X3やUIMを制御できるのですが、プラグインによっては勝手にATOKやUIMがONになってしまうことがあります。特にautocomplpopでは自動補完が暴走し、使い物になりません。neocomplcacheでは対策をしていますが、注意してください。なぜこのような動作になるのかというと、GVimがIMの状態を上手く取得できず、勝手にIMをONにしようとするためです。一種のバグであるため、いつかは修正されることと思いますが、今はプラグイン内で対策するほかありません。対策する場合にはIMがONになるコードの後で、次の処理を入れます。Insert modeからの関数呼び出しにおいて、問題が起こりやすいようです。ちなみに、autocomplpopで問題が発生するのは、&lt;C-r&lt;=で関数を呼び出している部分です。
-<pre class="prettyprint"><code>let &amp;l:iminsert = 0
-let &amp;l:imsearch = 0
-</code></pre>
+<pre class="prettyprint"><code>0</code></pre>
 </p>
 
 <address class="hack-author">Shougo</address>

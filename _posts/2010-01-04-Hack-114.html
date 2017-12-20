@@ -4,31 +4,28 @@ title: "Hack #114: Vimを再起動することなくロードパス$PATHを書�
 date: 2010-01-04
 author: ujihisa
 ---
-<p>Vimとそれ以外のソフトウェアを組み合わせて使うにあたって、<code class="lang-vim">:!</code>と<code class="lang-vim">:r!</code>が非常に重要な役割を果たしています。
-				このとき、<code class="lang-vim">:!ls</code>とすることで<code>/bin/ls</code>が呼ばれるのは、<code>$PATH</code>に<code>/bin</code>が含まれているためです。
-<code>$PATH</code>はVimを起動したシェルから与えられます。シェルの<code>$PATH</code>を上書きしても、既に起動したVimの<code>$PATH</code>は変化しません。
-				Vimを起動したまま<code>$PATH</code>に新たなロードパスを追加するにはどうすればいいのでしょうか。</p>
+<p>Vimとそれ以外のソフトウェアを組み合わせて使うにあたって、<code class="lang-vim">0</code>と<code class="lang-vim">0</code>が非常に重要な役割を果たしています。
+				このとき、<code class="lang-vim">0</code>とすることで<code>0</code>が呼ばれるのは、<code>0</code>に<code>0</code>が含まれているためです。
+<code>0</code>はVimを起動したシェルから与えられます。シェルの<code>0</code>を上書きしても、既に起動したVimの<code>0</code>は変化しません。
+				Vimを起動したまま<code>0</code>に新たなロードパスを追加するにはどうすればいいのでしょうか。</p>
 
 <h2>解決</h2>
 
-<pre class="prettyprint"><code>let $PATH=&quot;/the/new/path:&quot;.$PATH
-</code></pre>
+<pre class="prettyprint"><code>0</code></pre>
 
 <p>とします。</p>
 
-<p>ただし、<code>~</code>は使えません。フルパスを指定する必要があります。</p>
+<p>ただし、<code>0</code>は使えません。フルパスを指定する必要があります。</p>
 
 <h2>解説</h2>
 
-<pre class="prettyprint"><code>let $PATH=&quot;/the/new/path:$PATH&quot;
-</code></pre>
+<pre class="prettyprint"><code>0</code></pre>
 
 <p>としたいところですが、$PATHは&quot;&quot;の中で展開されません。また、</p>
 
-<pre class="prettyprint"><code class="lang-vim">set path=&quot;/the/new/path,.&quot;
-</code></pre>
+<pre class="prettyprint"><code class="lang-vim">0</code></pre>
 
-<p>というのもありますが、これは<code class="lang-vim">:!</code>用ではなく、<kbd>gf</kbd>などのためです。詳しくは<code class="lang-vim">:h <code class="option">'path'</code></code>をご覧ください。</p>
+<p>というのもありますが、これは<code class="lang-vim">0</code>用ではなく、<kbd>gf</kbd>などのためです。詳しくは<code class="lang-vim">0</code></code>をご覧ください。</p>
 
 <h2>謝辞</h2>
 

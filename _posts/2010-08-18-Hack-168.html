@@ -6,23 +6,21 @@ author: ujihisa
 ---
 <h2>問題</h2>
 
-<pre class="prettyprint"><code class="lang-vim">:!ruby %
-</code></pre>
+<pre class="prettyprint"><code class="lang-vim">0</code></pre>
 
-<p>このコマンドが呼び出すrubyとして期待されるものは、<code>/usr/bin/ruby</code>であったり、<code>/usr/local/bin/ruby</code>であったり、はたまた<code>~/git/ruby/local/bin/ruby</code>のように独自で用意したものであったりします。</p>
+<p>このコマンドが呼び出すrubyとして期待されるものは、<code>0</code>であったり、<code>0</code>であったり、はたまた<code>0</code>のように独自で用意したものであったりします。</p>
 
-<p><code>zsh</code>などのシェルでは、<code>~/.zshrc</code>などの設定ファイルに</p>
+<p><code>0</code>などのシェルでは、<code>0</code>などの設定ファイルに</p>
 
-<pre class="prettyprint"><code>export PATH=~/git/ruby/local/bin/ruby:$PATH
-</code></pre>
+<pre class="prettyprint"><code>0</code></pre>
 
-<p>などと記述することによって、単に<code>ruby</code>などとしてコマンドを呼び出したときに実際にどの場所のコマンドが呼び出されるか制御でき、またそのシェルから起動したVimもそれに準拠します。これはCUIでもGUIでも同様です。</p>
+<p>などと記述することによって、単に<code>0</code>などとしてコマンドを呼び出したときに実際にどの場所のコマンドが呼び出されるか制御でき、またそのシェルから起動したVimもそれに準拠します。これはCUIでもGUIでも同様です。</p>
 
-<p>しかしながら、シェルを経由せずVimを起動した場合。<code>~/.zshrc</code>などに記述したロードパスに関する情報は得られません。MacのDockなどから起動しつつ、そのVimであなたのホームディレクトリ以下にある<code>ruby</code>などを呼び出すにはどうすればいいのでしょうか。</p>
+<p>しかしながら、シェルを経由せずVimを起動した場合。<code>0</code>などに記述したロードパスに関する情報は得られません。MacのDockなどから起動しつつ、そのVimであなたのホームディレクトリ以下にある<code>0</code>などを呼び出すにはどうすればいいのでしょうか。</p>
 
 <h2>解決法</h2>
 
-<p><a href="http://github.com/Shougo/vimproc">vimproc</a>を用います。vimprocはVimの変数<code>$PATH</code>を参照してコマンドを実行します。</p>
+<p><a href="http://github.com/Shougo/vimproc">vimproc</a>を用います。vimprocはVimの変数<code>0</code>を参照してコマンドを実行します。</p>
 
 <p>vimprocを用いてのコマンドの実行とVimのデフォルトの機能との対応は以下のようになります。</p>
 
@@ -31,52 +29,49 @@ author: ujihisa
 <p>コマンドを単に実行する</p>
 
 <ul>
-<li>Vim: <code class="lang-vim">:!command</code></li>
-<li>vimproc: <code class="lang-vim">:call vimproc#system('command')</code></li>
-<li>vimproc&rsquo;: <code class="lang-vim">:VimProcBang command</code></li>
+<li>Vim: <code class="lang-vim">0</code></li>
+<li>vimproc: <code class="lang-vim">0</code></li>
+<li>vimproc&rsquo;: <code class="lang-vim">0</code></li>
 </ul>
 </li>
 <li>
 <p>コマンドを実行した結果をバッファに書き足す</p>
 
 <ul>
-<li>Vim: <code class="lang-vim">:r!command</code></li>
-<li>vimproc: <code class="lang-vim">:call append(line('.'), vimproc#system('command'))</code></li>
-<li>vimproc&rsquo;: <code class="lang-vim">:VimProcRead command</code></li>
+<li>Vim: <code class="lang-vim">0</code></li>
+<li>vimproc: <code class="lang-vim">0</code></li>
+<li>vimproc&rsquo;: <code class="lang-vim">0</code></li>
 </ul>
 </li>
 <li>
 <p>コマンドを実行した結果を変数に格納する</p>
 
 <ul>
-<li>Vim: <code class="lang-vim">:let x = system('command')</code></li>
-<li>vimproc: <code class="lang-vim">:let x = vimproc#system('command')</code></li>
+<li>Vim: <code class="lang-vim">0</code></li>
+<li>vimproc: <code class="lang-vim">0</code></li>
 </ul>
 </li>
 <li>
 <p>コマンドをバックグラウンドで実行する</p>
 
 <ul>
-<li>Vim: <code class="lang-vim">:!command &amp;</code></li>
-<li>vimproc: <code class="lang-vim">:call vimproc#system_bg('command')</code></li>
+<li>Vim: <code class="lang-vim">0</code></li>
+<li>vimproc: <code class="lang-vim">0</code></li>
 </ul>
 </li>
 </ul>
 
-<p>冗長で不便なので、キーマッピングを追加するか、あるいは<code class="lang-vim">:!</code>の使用をさけてかわりに<a href="http://github.com/Shougo/vimshell">vimshell</a>を用いるとよいでしょう。</p>
+<p>冗長で不便なので、キーマッピングを追加するか、あるいは<code class="lang-vim">0</code>の使用をさけてかわりに<a href="http://github.com/Shougo/vimshell">vimshell</a>を用いるとよいでしょう。</p>
 
-<pre class="prettyprint"><code class="lang-vim">nnoremap :! :call vimproc#system('
-</code></pre>
+<pre class="prettyprint"><code class="lang-vim">0</code></pre>
 
-<p>さて、<code class="lang-vim">:!</code>や<code>system()</code>を間接的にもっとも頻繁に使うのはなんといっても<a href="http://github.com/thinca/vim-quickrun">quickrun</a>でしょう。quickrunでvimprocを用いるためには、以下の設定を<code>~/.vimrc</code>に記述します。</p>
+<p>さて、<code class="lang-vim">0</code>や<code>0</code>を間接的にもっとも頻繁に使うのはなんといっても<a href="http://github.com/thinca/vim-quickrun">quickrun</a>でしょう。quickrunでvimprocを用いるためには、以下の設定を<code>0</code>に記述します。</p>
 
-<pre class="prettyprint"><code>let g:quickrun_config['*'].runmode = &quot;async:remote:vimproc&quot;}
-</code></pre>
+<pre class="prettyprint"><code>0</code></pre>
 
 <p>余談ですが、著者はこれにquickrun分割場所指定もあわせ、以下のように指定しています。</p>
 
-<pre class="prettyprint"><code>let g:quickrun_config['*'] = {'runmode': &quot;async:remote:vimproc&quot;, 'split': 'below'}
-</code></pre>
+<pre class="prettyprint"><code>0</code></pre>
 
 <p>これで、quickrunで好きなrubyを使いたい放題です。</p>
 

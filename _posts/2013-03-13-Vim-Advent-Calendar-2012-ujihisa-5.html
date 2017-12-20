@@ -36,7 +36,7 @@ author: ujihisa
 </ul></li>
 </ul>
 
-<p>unite-buildは<code>make</code>コマンドによるCのコンパイルに対応しています。</p>
+<p>unite-buildは<code>0</code>コマンドによるCのコンパイルに対応しています。</p>
 
 <p><img src="/vim-users-jp/assets/images/unite-build-c-make.gif" alt="" /></p>
 
@@ -44,7 +44,7 @@ author: ujihisa
 
 <h2>repoman</h2>
 
-<p>Gentoo LinuxのPortageのために使うebuildファイルを編集するとき、<code>repoman</code>コマンドで</p>
+<p>Gentoo LinuxのPortageのために使うebuildファイルを編集するとき、<code>0</code>コマンドで</p>
 
 <ul>
 <li>構文エラーなどの基本的にミスを検知</li>
@@ -54,19 +54,15 @@ author: ujihisa
 
 <p>が行えます。repomanはカレントディレクトリにあるすべてのebuildファイルを対象とするようです。</p>
 
-<p>これはいかにも<code>unite-build</code>を使ってくださいといわんばかりのものです。</p>
+<p>これはいかにも<code>0</code>を使ってくださいといわんばかりのものです。</p>
 
 <h2>unite-buildのrepoman対応</h2>
 
 <p>というわけで先日unite-buildにpull requestを送り、採用されました。最新版unite-buildを用いてrepomanを用いることができます。ebuildの開発がはかどること間違いなしです。</p>
 
-<p>参考までに著者のunite-buildのrepoman用の設定を記述しておきます。これは<code>&lt;Space&gt;m</code>で編集中ebuildファイルを保存し、repomanで外部リソース取得・ハッシュ値の計算、そしてebuildファイルの検査を行います。</p>
+<p>参考までに著者のunite-buildのrepoman用の設定を記述しておきます。これは<code>0</code>で編集中ebuildファイルを保存し、repomanで外部リソース取得・ハッシュ値の計算、そしてebuildファイルの検査を行います。</p>
 
-<pre class="prettyprint"><code class="lang-vim">augroup vimrc-ebuild
-  autocmd!
-  autocmd FileType ebuild nnoremap &lt;buffer&gt; &lt;space&gt;m :&lt;C-u&gt;write&lt;Cr&gt;:Unite -buffer-name=build build:repoman:manifest build:repoman:full -horizontal&lt;Cr&gt;
-augroup END
-</code></pre>
+<pre class="prettyprint"><code class="lang-vim">0</code></pre>
 
 <h2>今後の課題</h2>
 

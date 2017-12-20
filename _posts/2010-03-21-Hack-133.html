@@ -19,31 +19,11 @@ author: thinca
 
 <p>以下のファイルを ~/.vim/ftplugin/xxd.vim (Windows の場合は ~/vimfiles/ftplugin/xxd.vim) に置きます。</p>
 
-<pre class="prettyprint"><code class="lang-vim">if !executable('xxd')
-  finish
-endif
-
-let b:undo_ftplugin = (exists('b:undo_ftplugin') ? b:undo_ftplugin . ' | ' : '')
-\ . 'setl bin&lt; eol&lt; | execute &quot;au! ftplugin-xxd * &lt;buffer&gt;&quot; | execute &quot;silent %!xxd -r&quot;'
-
-setlocal binary noendofline
-silent %!xxd -g 1
-%s/\r$//e
-augroup ftplugin-xxd
-  autocmd! * &lt;buffer&gt;
-  autocmd BufWritePre &lt;buffer&gt; let b:xxd_cursor = getpos('.')
-  autocmd BufWritePre &lt;buffer&gt; silent %!xxd -r
-  autocmd BufWritePost &lt;buffer&gt; silent %!xxd -g 1
-  autocmd BufWritePost &lt;buffer&gt; %s/\r$//
-  autocmd BufWritePost &lt;buffer&gt; setlocal nomodified
-  autocmd BufWritePost &lt;buffer&gt; call setpos('.', b:xxd_cursor) | unlet b:xxd_cursor
-augroup END
-</code></pre>
+<pre class="prettyprint"><code class="lang-vim">0</code></pre>
 
 <p>特定の拡張子に対して自動でバイナリ編集モードにしたい場合は、~/.vim/ftdetect/xxd.vim (Windows の場合は ~/vimfiles/ftdetect/xxd.vim) に以下のように書きます。</p>
 
-<pre class="prettyprint"><code class="lang-vim">autocmd BufReadPost,BufNewFile *.bin,*.exe,*.dll setlocal filetype=xxd
-</code></pre>
+<pre class="prettyprint"><code class="lang-vim">0</code></pre>
 
 <p>この例では、bin, exe, dll の拡張子のファイルを開いた際にバイナリ編集モードになります。</p>
 
@@ -58,17 +38,12 @@ augroup END
 
 <p>この方法の利点は、どんなファイルでも開いた後から</p>
 
-<pre class="prettyprint"><code class="lang-vim">:setf xxd
-</code></pre>
+<pre class="prettyprint"><code class="lang-vim">0</code></pre>
 
 <p>とするだけでバイナリ編集モードへ移行できることです。ファイルタイプを設定するだけなので、特定のファイルをバイナリ編集モードに対応させるのも簡単です。</p>
 
 <p>例えば、バイナリモードのファイル(vim -b file で開いた場合など)を自動的にバイナリ編集モードにするには vimrc で以下のようにします。</p>
 
-<pre class="prettyprint"><code class="lang-vim">augroup xxd
-  autocmd!
-  autocmd BufReadPost * if &amp;l:binary | setlocal filetype=xxd | endif
-augroup END
-</code></pre>
+<pre class="prettyprint"><code class="lang-vim">0</code></pre>
 
 <address class="hack-author">thinca</address>

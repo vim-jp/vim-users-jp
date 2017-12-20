@@ -12,18 +12,17 @@ author: kana
 <p>ユーザー独自の
 <a href="http://kana.github.com/config/vim/surround.html#surround-replacements">replacements</a>
 				が定義できるものの、
-				それを利用できるのは<code>ys</code>などの「追加」操作のみで、
-<code>cs</code>や<code>ds</code>などの
+				それを利用できるのは<code>0</code>などの「追加」操作のみで、
+<code>0</code>や<code>0</code>などの
 <a href="http://kana.github.com/config/vim/surround.html#surround-targets">targets</a>
 				には利用できません。
 				例えば以下の設定を行なった場合、</p>
 
-<pre class="prettyprint"><code>let g:surround_{char2nr('j')} = "「\r」"
-</code></pre>
+<pre class="prettyprint"><code>0</code></pre>
 
-<p><code>ysiwj</code>などとして「」を追加することはできるのですが、
-<code>dsj</code>で「」を削除したり、
-<code>csjb</code>で「」を別のものに置き換えることはできません。</p>
+<p><code>0</code>などとして「」を追加することはできるのですが、
+<code>0</code>で「」を削除したり、
+<code>0</code>で「」を別のものに置き換えることはできません。</p>
 
 <p>また、ユーザー定義のreplacementsには2キー以上のストロークを割り当てることができません。
 				上記では設定例として「」を挙げましたが、
@@ -46,25 +45,13 @@ author: kana
 				2キー以上のものを割り当てることができます
 				(<a href="http://kana.github.com/config/vim/surround.html#surrounding-customizing-difference">実装の都合でオリジナルとは設定方法が異なります</a>):</p>
 
-<pre class="prettyprint"><code>call SurroundRegister('g', 'jk', "「\r」")
-call SurroundRegister('g', 'jK', "『\r』")
-call SurroundRegister('g', 'js', "【\r】")
-</code></pre>
+<pre class="prettyprint"><code>0</code></pre>
 
 <p>また、ユーザー定義のreplacementsもtargetsとして扱えます。
 				例えば上記の設定をしておいた場合、
 				以下のように標準のものと同様に各種操作を行なうことができます:</p>
 
-<pre class="prettyprint"><code>ujihisa
-    ↓         ysjk
-「ujihisa」
-    ↓         csjkjK
-『ujihisa』
-    ↓         csjKjs
-【ujihisa】
-    ↓         dsjs
-ujihisa
-</code></pre>
+<pre class="prettyprint"><code>0</code></pre>
 
 <h3>参考資料</h3>
 

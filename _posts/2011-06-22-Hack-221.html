@@ -12,17 +12,15 @@ author: ujihisa
 
 <p><img src="/vim-users-jp/assets/images/6794da8ba22eda299bc38167d39853f6.png" alt="transpacent vim" /></p>
 
-<p>MacVimの場合、半透明具合は<code>'transparency'</code>で調整できます。0が不透明、100が完全に透明です。例えば20%の透明具合にするには、</p>
+<p>MacVimの場合、半透明具合は<code>0</code>で調整できます。0が不透明、100が完全に透明です。例えば20%の透明具合にするには、</p>
 
-<pre class="prettyprint"><code class="lang-vim">:set transparency=20
-</code></pre>
+<pre class="prettyprint"><code class="lang-vim">0</code></pre>
 
 <p>とします。これは</p>
 
-<pre class="prettyprint"><code class="lang-vim">:let &amp;transparency = 20
-</code></pre>
+<pre class="prettyprint"><code class="lang-vim">0</code></pre>
 
-<p>としても同様の結果が得られます。現在の透明度の値を得たければ、変数<code>&amp;transparency</code>を参照してください。</p>
+<p>としても同様の結果が得られます。現在の透明度の値を得たければ、変数<code>0</code>を参照してください。</p>
 
 <p>MacVimにおける半透明処理はまだExperimentalで、Preferencesから以下のような設定を行う必要があります。</p>
 
@@ -36,51 +34,40 @@ author: ujihisa
 
 <h2>対処</h2>
 
-<p>実は、オプション値<code>'transparency'</code>がいつのまにか勝手に書き変わっています。これを再び書き換えて<kbd>&lt;C-l&gt;</kbd>を打鍵するだけで、うまく再描画されます。</p>
+<p>実は、オプション値<code>0</code>がいつのまにか勝手に書き変わっています。これを再び書き換えて<kbd>&lt;C-l&gt;</kbd>を打鍵するだけで、うまく再描画されます。</p>
 
-<pre class="prettyprint"><code class="lang-vim">:set transparency=10
-</code></pre>
+<pre class="prettyprint"><code class="lang-vim">0</code></pre>
 
-<p>ただ、それ描画が狂う時点の前にどんな<code>'transparency'</code>を設定していたかその具体的な忘れている場合がほとんどでしょう。普段から<code class="lang-vim">set transparency</code>するときに常に同時に<code>g:transparency</code>などの変数にその値を格納しておき、そしてその値に戻ることができるようにKey mappingを設定するのがよいでしょう。</p>
+<p>ただ、それ描画が狂う時点の前にどんな<code>0</code>を設定していたかその具体的な忘れている場合がほとんどでしょう。普段から<code class="lang-vim">0</code>するときに常に同時に<code>0</code>などの変数にその値を格納しておき、そしてその値に戻ることができるようにKey mappingを設定するのがよいでしょう。</p>
 
-<p>例として、筆者は半透明度の変更と、半透明再描画をそれぞれ以下のように割り当てています。すべて、<code>~/.vimrc</code>ではなく<code>~/.gvimrc</code>です。</p>
+<p>例として、筆者は半透明度の変更と、半透明再描画をそれぞれ以下のように割り当てています。すべて、<code>0</code>ではなく<code>0</code>です。</p>
 
 <ul>
 <li>
 <p>より透明にする: ↑</p>
 
-<pre class="prettyprint"><code class="lang-vim">  nnoremap &lt;up&gt; :&lt;C-u&gt;call &lt;SID&gt;relative_tranparency(5)&lt;Cr&gt;
-  inoremap &lt;up&gt; &lt;C-o&gt;:call &lt;SID&gt;relative_tranparency(5)&lt;Cr&gt;
-</code></pre>
+<pre class="prettyprint"><code class="lang-vim">0</code></pre>
 </li>
 <li>
 <p>より不透明にする: ↓</p>
 
-<pre class="prettyprint"><code class="lang-vim">  nnoremap &lt;down&gt; :&lt;C-u&gt;call &lt;SID&gt;relative_tranparency(-5)&lt;Cr&gt;
-  inoremap &lt;down&gt; &lt;C-o&gt;:call &lt;SID&gt;relative_tranparency(-5)&lt;Cr&gt;
-</code></pre>
+<pre class="prettyprint"><code class="lang-vim">0</code></pre>
 </li>
 <li>
 <p>再描画: <kbd>&lt;esc&gt;&lt;esc</kbd></p>
 
-<pre class="prettyprint"><code class="lang-vim">  nnoremap &lt;Esc&gt;&lt;Esc&gt; :&lt;C-u&gt;let &amp;transparency = g:transparency&lt;Cr&gt;&lt;C-l&gt;
-</code></pre>
+<pre class="prettyprint"><code class="lang-vim">0</code></pre>
 </li>
 </ul>
 
 <p>ただし以下の関数を同じファイル内で定義しておくものとします。</p>
 
-<pre class="prettyprint"><code class="lang-vim">function! s:relative_tranparency(diff)
-  let &amp;transparency = a:diff + &amp;transparency
-  let g:transparency = &amp;transparency
-endfunction
-</code></pre>
+<pre class="prettyprint"><code class="lang-vim">0</code></pre>
 
 <h2>補足</h2>
 
-<p>筆者はもともと<kbd>&lt;esc&gt;&lt;esc&gt;</kbd>に<code class="lang-vim">:set nohlsearch</code>の副作用を持たせるkey mappingをしていました。これを組み合わせため、筆者の設定は以下のようになっています。</p>
+<p>筆者はもともと<kbd>&lt;esc&gt;&lt;esc&gt;</kbd>に<code class="lang-vim">0</code>の副作用を持たせるkey mappingをしていました。これを組み合わせため、筆者の設定は以下のようになっています。</p>
 
-<pre class="prettyprint"><code class="lang-vim">    nnoremap &lt;Esc&gt;&lt;Esc&gt; :&lt;C-u&gt;set nohlsearch&lt;Cr&gt;:let &amp;transparency = g:transparency&lt;Cr&gt;&lt;C-l&gt;
-</code></pre>
+<pre class="prettyprint"><code class="lang-vim">0</code></pre>
 
 <address class="hack-author">ujihisa</address>

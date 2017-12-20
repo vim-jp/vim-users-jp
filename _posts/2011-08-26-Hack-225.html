@@ -8,7 +8,7 @@ author: tyru
 
 <p>Vimで文書を開いているとしばしばURLが記載されていて、
 				その度にURLをクリップボードにヤンクしてブラウザのアドレスバーにペーストして&#8230;と、とても面倒です。
-				ファイルパスなら<code>gf</code>や<code>&lt;C-w&gt;f</code>で開けますが、
+				ファイルパスなら<code>0</code>や<code>0</code>で開けますが、
 				URLを開くマッピングは用意されていません。
 				どうすればいいでしょうか。</p>
 
@@ -17,13 +17,10 @@ author: tyru
 <p><a href="https://github.com/tyru/open-browser.vim">open-browser.vim</a>を使います。
 				まずプラグインをインストールし、次の設定を.vimrcに書きます。</p>
 
-<pre class="prettyprint"><code>let g:netrw_nogx = 1 " disable netrw's gx mapping.
-nmap gx &lt;Plug&gt;(openbrowser-smart-search)
-vmap gx &lt;Plug&gt;(openbrowser-smart-search)
-</code></pre>
+<pre class="prettyprint"><code>0</code></pre>
 
-<p>そしてURLの上にカーソルをのせて<code>gx</code>をタイプするとそのURLをブラウザで開けます。
+<p>そしてURLの上にカーソルをのせて<code>0</code>をタイプするとそのURLをブラウザで開けます。
 				またgxが思った通りのURLを開いてくれない場合、ヴィジュアルモードでそのURLを選択してからgxをタイプすると選択した通りのURLが開けます。
-				詳しくは<code class="lang-vim">:help open-browser</code>を参照してください。</p>
+				詳しくは<code class="lang-vim">0</code>を参照してください。</p>
 
 <address class="hack-author">tyru</address>

@@ -24,7 +24,7 @@ author: tyru
 
 <p>など単語検索でできることは実に様々です。</p>
 
-<p>自分は普通にコードを書いている時でも<code>/</code>コマンドをよく使います。
+<p>自分は普通にコードを書いている時でも<code>0</code>コマンドをよく使います。
 				移動の80%はこれといっていいかもしれません。
 				言い過ぎだとしても70割かもしれません。
 				それほど汎用的なコマンドなのです。</p>
@@ -54,21 +54,20 @@ author: tyru
 
 <h2>ダブルクリックへのマッピング</h2>
 
-<p>ダブルクリックへのマッピングは<code>&lt;2-LeftMouse&gt;</code>を使えばできます。</p>
+<p>ダブルクリックへのマッピングは<code>0</code>を使えばできます。</p>
 
-<pre class="prettyprint"><code class="lang-vim">nnoremap &lt;2-LeftMouse&gt; g*
-</code></pre>
+<pre class="prettyprint"><code class="lang-vim">0</code></pre>
 
 <p>これで終わりでしょうか？いいえ、<!-- こだまです -->まだです。</p>
 
 <p>これだとダブルクリックをしようとした時、
-				シングルクリック(<code>&lt;LeftMouse&gt;</code>)の時点で<code>&lt;LeftMouse&gt;</code>本来の操作、
+				シングルクリック(<code>0</code>)の時点で<code>0</code>本来の操作、
 				つまりクリックした場所にカーソルを移動、が実行されてしまうのです。
 				カーソルが移動するのは多いに結構なのですが、
-				問題は<code>'scrolloff'</code>の設定も効いてしまうことです。</p>
+				問題は<code>0</code>の設定も効いてしまうことです。</p>
 
-<p><code>'scrolloff'</code>は正の値をセットするとカーソルの上部か下部が
-				常に<code>'scrolloff'</code>分の行だけ表示されるようになるという非常に便利なオプションですが、
+<p><code>0</code>は正の値をセットするとカーソルの上部か下部が
+				常に<code>0</code>分の行だけ表示されるようになるという非常に便利なオプションですが、
 				これがマウスのシングルクリックの時に効いてしまうと</p>
 
 <ol>
@@ -94,108 +93,35 @@ author: tyru
 <!-- これはひどい。いやマジで -->
 <!-- あれ？これ&lt;2-LeftMouseが&lt;LeftMouse&gt;&lt;LeftMouse&gt;だったらよかったんじゃね？ --></p>
 
-<h2><code>'scrolloff'</code>の再実装 &#12316;yak shaving&#12316;</h2>
+<h2><code>0</code>の再実装 &#12316;yak shaving&#12316;</h2>
 
-<p>これを解決するには、つまりシングルクリック(<code>&lt;LeftMouse&gt;</code>)時の移動を抑制すればいい訳です。
-				しかし<code>'scrolloff'</code>は設定しておきたい。
-				ならば<code>'scrolloff'</code>がやることをVimスクリプトで再実装して制御可能にし、一時的に無効にすればいい訳です。
-				以下がその<code>'scrolloff'</code>の実装です。
-<code>'scrolloff'</code>オプションの代わりに<code>g:scrolloff</code>グローバル変数で指定するようになっています。</p>
+<p>これを解決するには、つまりシングルクリック(<code>0</code>)時の移動を抑制すればいい訳です。
+				しかし<code>0</code>は設定しておきたい。
+				ならば<code>0</code>がやることをVimスクリプトで再実装して制御可能にし、一時的に無効にすればいい訳です。
+				以下がその<code>0</code>の実装です。
+<code>0</code>オプションの代わりに<code>0</code>グローバル変数で指定するようになっています。</p>
 
-<pre class="prettyprint"><code class="lang-vim">set scrolloff=0
-let g:scrolloff = 15
+<pre class="prettyprint"><code class="lang-vim">0</code></pre>
 
-" Hack for &lt;LeftMouse&gt; not to adjust ('scrolloff') when single-clicking.
-" Implement 'scrolloff' by auto-command to control the fire.
-autocmd vimrc CursorMoved * call s:reinventing_scrolloff()
-let s:last_lnum = -1
-function! s:reinventing_scrolloff()
-    if s:last_lnum &gt; 0 &amp;&amp; line('.') ==# s:last_lnum
-        return
-    endif
-    let s:last_lnum = line('.')
-    let winline     = winline()
-    let winheight   = winheight(0)
-    let middle      = winheight / 2
-    let upside      = (winheight / winline) &gt;= 2
-    " If upside is true, add winlines to above the cursor.
-    " If upside is false, add winlines to under the cursor.
-    if upside
-        let up_num = g:scrolloff - winline + 1
-        let up_num = winline + up_num &gt; middle ? middle - winline : up_num
-        if up_num &gt; 0
-            execute 'normal!' up_num."\&lt;C-y&gt;"
-        endif
-    else
-        let down_num = g:scrolloff - (winheight - winline)
-        let down_num = winline - down_num &lt; middle ? winline - middle : down_num
-        if down_num &gt; 0
-            execute 'normal!' down_num."\&lt;C-e&gt;"
-        endif
-    endif
-endfunction
-</code></pre>
-
-<p>そしてこれは<code class="lang-vim">:autocmd</code>を使って実装されているので
-				以下のように<code>'eventignore'</code>オプションという
+<p>そしてこれは<code class="lang-vim">0</code>を使って実装されているので
+				以下のように<code>0</code>オプションという
 				Vimスクリプトを書いているような人しか知らないオプションを使って
 				一時的に無効にできます。</p>
 
-<pre class="prettyprint"><code class="lang-vim">nnoremap &lt;silent&gt; &lt;LeftMouse&gt; &lt;Esc&gt;:set eventignore=all&lt;CR&gt;&lt;LeftMouse&gt;:set eventignore=&lt;CR&gt;
-</code></pre>
+<pre class="prettyprint"><code class="lang-vim">0</code></pre>
 
 <h2>visualstar.vim</h2>
 
 <p>ここまででも十分ですが、マウスで選択し、クリックで検索できたらどんなに良い事でしょうか。
 <a href="https://github.com/thinca/vim-visualstar">visualstar.vim</a>を使えばそれができます。</p>
 
-<pre class="prettyprint"><code>vmap &lt;LeftMouse&gt; &lt;Plug&gt;(visualstar-g*)
-</code></pre>
+<pre class="prettyprint"><code>0</code></pre>
 
 <h2>まとめ</h2>
 
 <p>ここまでのまとめとして、以下を.vimrcに貼り付ければ完了です。</p>
 
-<pre class="prettyprint"><code class="lang-vim">set scrolloff=0
-let g:scrolloff = 15
-
-" Hack for &lt;LeftMouse&gt; not to adjust ('scrolloff') when single-clicking.
-" Implement 'scrolloff' by auto-command to control the fire.
-autocmd vimrc CursorMoved * call s:reinventing_scrolloff()
-let s:last_lnum = -1
-function! s:reinventing_scrolloff()
-    if s:last_lnum &gt; 0 &amp;&amp; line('.') ==# s:last_lnum
-        return
-    endif
-    let s:last_lnum = line('.')
-    let winline     = winline()
-    let winheight   = winheight(0)
-    let middle      = winheight / 2
-    let upside      = (winheight / winline) &gt;= 2
-    " If upside is true, add winlines to above the cursor.
-    " If upside is false, add winlines to under the cursor.
-    if upside
-        let up_num = g:scrolloff - winline + 1
-        let up_num = winline + up_num &gt; middle ? middle - winline : up_num
-        if up_num &gt; 0
-            execute 'normal!' up_num."\&lt;C-y&gt;"
-        endif
-    else
-        let down_num = g:scrolloff - (winheight - winline)
-        let down_num = winline - down_num &lt; middle ? winline - middle : down_num
-        if down_num &gt; 0
-            execute 'normal!' down_num."\&lt;C-e&gt;"
-        endif
-    endif
-endfunction
-
-" Do not adjust current scroll position (do not fire 'scrolloff') on single-click.
-nnoremap &lt;silent&gt; &lt;LeftMouse&gt;   &lt;Esc&gt;:set eventignore=all&lt;CR&gt;&lt;LeftMouse&gt;:set eventignore=&lt;CR&gt;
-" Double-click for searching the word under the cursor.
-nnoremap          &lt;2-LeftMouse&gt; g*
-" Single-click for searching the word selected in visual-mode.
-vmap              &lt;LeftMouse&gt; &lt;Plug&gt;(visualstar-g*)
-</code></pre>
+<pre class="prettyprint"><code class="lang-vim">0</code></pre>
 
 <!--
 				キーボードだってマウスだって声だって使える。

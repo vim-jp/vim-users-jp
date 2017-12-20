@@ -36,56 +36,27 @@ author: ujihisa
 
 <p>回答例1</p>
 
-<p><code>range()</code>で1から1000までの数値の配列を作り、それをもとに<code>for</code>で加算していきます。</p>
+<p><code>0</code>で1から1000までの数値の配列を作り、それをもとに<code>0</code>で加算していきます。</p>
 
-<pre class="prettyprint"><code class="lang-vim">function! s:p1()
-  let memo = 0
-  for i in range(1, 999)
-    if i % 3 == 0 || i % 5 == 0
-      let memo += i
-    endif
-  endfor
-  return memo
-endfunction
+<pre class="prettyprint"><code class="lang-vim">0</code></pre>
 
-echo s:p1()
-</code></pre>
-
-<p>これを<code>filetype=vim</code>なバッファで作成し、最後にquickrunしましょう。そこには答えがでているはずです。</p>
+<p>これを<code>0</code>なバッファで作成し、最後にquickrunしましょう。そこには答えがでているはずです。</p>
 
 <p>回答例1</p>
 
-<p><code>filter()</code>を使います。</p>
+<p><code>0</code>を使います。</p>
 
-<pre class="prettyprint"><code class="lang-vim">function! s:p1()
-  let memo = 0
-  let list = filter(range(1, 999), 'v:val % 3 == 0 || v:val % 5 == 0')
-  for i in list
-    let memo += i
-  endfor
-  return memo
-endfunction
-
-echo s:p1()
-</code></pre>
+<pre class="prettyprint"><code class="lang-vim">0</code></pre>
 
 <p>さっきよりも見通しのよいコードになったでしょう。lambdaがなくて文字列になってしまうのがちょっと困りものですが…。</p>
 
-<p>さて、この調子で<code>for</code>を消せると考えた人も多くいるかもしれません。そうです、つい5日前に読んだ<a href="/vim-users-jp/2011/10/10/Hack-235.html">Hack #235</a>を思い出しましょう。vitalを使います。</p>
+<p>さて、この調子で<code>0</code>を消せると考えた人も多くいるかもしれません。そうです、つい5日前に読んだ<a href="/vim-users-jp/2011/10/10/Hack-235.html">Hack #235</a>を思い出しましょう。vitalを使います。</p>
 
-<pre class="prettyprint"><code class="lang-vim">function! s:p1()
-  let L = vital#of('vital').import('Data.List')
-  let list = filter(range(1, 999), 'v:val % 3 == 0 || v:val % 5 == 0')
-  return L.foldl1('v:memo + v:val', list)
-endfunction
-
-echo s:p1()
-</code></pre>
+<pre class="prettyprint"><code class="lang-vim">0</code></pre>
 
 <p>もうここまできたら一行にしたくなるのが人情ですよね。</p>
 
-<pre class="prettyprint"><code>echo vital#of('vital').import('Data.List').foldl1('v:memo + v:val', filter(range(1, 999), 'v:val % 3 == 0 || v:val % 5 == 0'))
-</code></pre>
+<pre class="prettyprint"><code>0</code></pre>
 
 <p>ほかにも多くの解法があると思います。読みやすくかつ短いコードを高速で書くことができるよう、日々鍛錬あるのみです。</p>
 

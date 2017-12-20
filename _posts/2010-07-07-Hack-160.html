@@ -11,28 +11,23 @@ author: ujihisa
 <ol>
 <li><p>インデントがおかしい</p>
 
-<pre class="prettyprint"><code>var a = {
-  a_
-</code></pre>
+<pre class="prettyprint"><code>0</code></pre>
 
-<p>この状態で<code class="lang-vim">:</code>を打鍵しますと、</p>
+<p>この状態で<code class="lang-vim">0</code>を打鍵しますと、</p>
 
-<pre class="prettyprint"><code>var a = {
-a:_
-</code></pre>
+<pre class="prettyprint"><code>0</code></pre>
 
 <p>のようにインデントが一つもどってしまいます。</p></li>
 <li><p>キーワードがおかしい</p>
 
 <p>jQuery時代、$ではじまる変数名を使う機会が増えています。</p>
 
-<pre class="prettyprint"><code>var $a = 1;
-</code></pre>
+<pre class="prettyprint"><code>0</code></pre>
 
-<p>この<code>a</code>の位置から<kbd>*</kbd>を打鍵しますと、<code>$a</code>ではなく<code>a</code>という単語だけを検索対象にしてしまいます。</p></li>
-<li><p>予約語<code>function</code>が長い</p>
+<p>この<code>0</code>の位置から<kbd>*</kbd>を打鍵しますと、<code>0</code>ではなく<code>0</code>という単語だけを検索対象にしてしまいます。</p></li>
+<li><p>予約語<code>0</code>が長い</p>
 
-<p>JavaScriptでは関数定義時だけでなく無名関数を用いるときにも<code>function</code>という長い予約語を打鍵する必要があります。</p></li>
+<p>JavaScriptでは関数定義時だけでなく無名関数を用いるときにも<code>0</code>という長い予約語を打鍵する必要があります。</p></li>
 </ol>
 
 <h2>解決法</h2>
@@ -47,15 +42,11 @@ a:_
 
 <p><a href="http://www.vim.org/scripts/script.php?script_id=1840">http://www.vim.org/scripts/script.php?script_id=1840</a></p>
 
-<pre class="prettyprint"><code>var a = {
-  a_
-</code></pre>
+<pre class="prettyprint"><code>0</code></pre>
 
-<p>この状態で<code class="lang-vim">:</code>を打鍵しますと、</p>
+<p>この状態で<code class="lang-vim">0</code>を打鍵しますと、</p>
 
-<pre class="prettyprint"><code>var a = {
-  a:
-</code></pre>
+<pre class="prettyprint"><code>0</code></pre>
 
 <p>のようになります。</p>
 
@@ -66,33 +57,26 @@ a:_
 
 <p>たとえばプログラミング言語Haskellでは、無名関数を作成するにあたってバックスラッシュを使用します。</p>
 
-<pre class="prettyprint"><code>map (\x -&gt; f (x * 2)) [1, 2, 3]
-</code></pre>
+<pre class="prettyprint"><code>0</code></pre>
 
 <p>これはJavaScriptでは, jQueryを用いると</p>
 
-<pre class="prettyprint"><code>$.map([1, 2, 3], function(x) { return f(x * 2); });
-</code></pre>
+<pre class="prettyprint"><code>0</code></pre>
 
-<p>となります。このことから類推すると、<code>\</code>と打鍵することで<code>function(</code>と入力されることが望ましいことが分かるのですが、
-				文字列リテラル内で<code>\</code>を入力するときに<code>function(</code>と展開されてしまうと開発に大きな支障をきたしてしまいます。</p>
+<p>となります。このことから類推すると、<code>0</code>と打鍵することで<code>0</code>と入力されることが望ましいことが分かるのですが、
+				文字列リテラル内で<code>0</code>を入力するときに<code>0</code>と展開されてしまうと開発に大きな支障をきたしてしまいます。</p>
 
-<p>文脈に応じて<code>\</code>キーの意味を動的に変更させるという解決方法もありますが、もっと単純にsmartchr.vimを用いて、<code>\</code>一回打鍵すると<code>function(</code>に展開し、その状態でもう一度<code>\</code>を打鍵すると<code>\</code>になるという挙動をとるようにすれば、シンプルにして必要十分な解決策となりうるのでないかと筆者は思っています。</p>
+<p>文脈に応じて<code>0</code>キーの意味を動的に変更させるという解決方法もありますが、もっと単純にsmartchr.vimを用いて、<code>0</code>一回打鍵すると<code>0</code>に展開し、その状態でもう一度<code>0</code>を打鍵すると<code>0</code>になるという挙動をとるようにすれば、シンプルにして必要十分な解決策となりうるのでないかと筆者は思っています。</p>
 
 <p>smartchr.vimについて詳しくは<a href="/vim-users-jp/2010/03/13/Hack-131.html">Hack #131: Rubyで#{をラクに入力する</a>をご覧ください。</p>
 
-<p>smartchr.vim導入後、以下の設定を<code>~/.vimrc</code>に記述しましょう。</p>
+<p>smartchr.vim導入後、以下の設定を<code>0</code>に記述しましょう。</p>
 
-<pre class="prettyprint"><code class="lang-vim">augroup Ujihisa &quot; &#123;&#123;&#123;
-  autocmd!
-  autocmd FileType javascript inoremap &lt;buffer&gt; &lt;expr&gt; \  smartchr#one_of('function(', '\')
-augroup END
-</code></pre>
+<pre class="prettyprint"><code class="lang-vim">0</code></pre>
 
-<p>あるいは、以下の設定を<code>~/.vim/ftplugin/javascript/ujihisa.vim</code>に記述しましょう。</p>
+<p>あるいは、以下の設定を<code>0</code>に記述しましょう。</p>
 
-<pre class="prettyprint"><code>inoremap &lt;buffer&gt; &lt;expr&gt; \  smartchr#one_of('function(', '\')
-</code></pre></li>
+<pre class="prettyprint"><code>0</code></pre></li>
 </ol>
 
 <h2>補足</h2>

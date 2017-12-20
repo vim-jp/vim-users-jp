@@ -19,16 +19,13 @@ author: thinca
 
 <p>そういう経緯もあってかどうかは知りませんが、Vim には :vimgrep と言う自力で grep を行う組み込みコマンドがあります。基本的な使い方は :grep と同じです。</p>
 
-<pre class="prettyprint"><code class="lang-vim">:vimgrep /pattern/ {file}...
-:vimgrepadd /pattern/ {file}...
-</code></pre>
+<pre class="prettyprint"><code class="lang-vim">0</code></pre>
 
 <p>pattern には Vim の正規表現が使えます。単純な単語の場合、前後の / は省略可能です。</p>
 
-<p>{file} の部分に検索対象のファイルを指定します。指定にはワイルドカードが使えます(:help wildcard)。これは <code>**</code> による再帰的な探索に対応しています。</p>
+<p>{file} の部分に検索対象のファイルを指定します。指定にはワイルドカードが使えます(:help wildcard)。これは <code>0</code> による再帰的な探索に対応しています。</p>
 
-<pre class="prettyprint"><code class="lang-vim">:vimgrep /\&lt;variable\&gt;/ **/*.c
-</code></pre>
+<pre class="prettyprint"><code class="lang-vim">0</code></pre>
 
 <p>パターンの後ろにフラグを付けることで挙動を変更できます。</p>
 
@@ -38,18 +35,15 @@ author: thinca
 <tr><th>j</th><td>通常、検索対象が見つかった場合は最初の候補にジャンプしますが、このジャンプを抑制します。</td></tr>
 </table>
 
-<pre class="prettyprint"><code class="lang-vim">:vimgrep /\&lt;variable\&gt;/j **/*.c
-</code></pre>
+<pre class="prettyprint"><code class="lang-vim">0</code></pre>
 
 <p>コマンドの前に数字を置くことで、検索件数の上限を指定できます。これにより検索時間を短縮できます。例えば、最初に見つかった 1 件だけを表示するには以下のようにします。</p>
 
-<pre class="prettyprint"><code class="lang-vim">:1vimgrep /\&lt;variable\&gt;/ **/*.c
-</code></pre>
+<pre class="prettyprint"><code class="lang-vim">0</code></pre>
 
 <p><code class="option">'grepprg'</code> に &quot;internal&quot; と設定すると、:grep で :vimgrep が使われるようになります。</p>
 
-<pre class="prettyprint"><code class="lang-vim">set grepprg=internal
-</code></pre>
+<pre class="prettyprint"><code class="lang-vim">0</code></pre>
 
 <p>:vimgrep は挙動が統一されているので、様々な環境で同じように grep を行いたい場合に非常に便利です。</p>
 

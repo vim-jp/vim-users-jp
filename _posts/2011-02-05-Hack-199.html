@@ -12,9 +12,9 @@ author: tyru
 				オプションは「&#8217;(シングルクォート)」で囲まれたタグを持っています。<br />
 				Exコマンドは先頭に「:(コロン)」を持つタグを持っています。</p>
 
-<p>また英語版以外のhelpが用意されている場合はタグ名に続けて「@ja」のように<code>@ + {各言語特有の2文字の文字列}</code> が続きます。
+<p>また英語版以外のhelpが用意されている場合はタグ名に続けて「@ja」のように<code>0</code> が続きます。
 				しかし英語版とその他の言語といったように両方存在した場合は
-				英語版のタグにも<code>@en</code>という文字列が末尾につきます。</p>
+				英語版のタグにも<code>0</code>という文字列が末尾につきます。</p>
 
 <p>ちなみにこの2文字は「help.jax」だったら「ja」、
 				「help.frx」だったら「@fr」のように
@@ -23,36 +23,31 @@ author: tyru
 
 <p>コマンド(!= Exコマンド)はだいたい次のような規則になっています。</p>
 
-<pre class="prettyprint"><code>{モード}_[CTRL-]{キー}
-</code></pre>
+<pre class="prettyprint"><code>0</code></pre>
 
-<p>またさらに<code>{キー}</code>の部分は次のようになっています。</p>
+<p>またさらに<code>0</code>の部分は次のようになっています。</p>
 
-<pre class="prettyprint"><code>{キー1}
-{キー1}_{キー2}
-{キー1}_{キー2}_{キー3}
-...
-</code></pre>
+<pre class="prettyprint"><code>0</code></pre>
 
 <p>のように押すキーの数だけ以下続いていきます。</p>
 
 <h2>実践的な例</h2>
 
 <p>さてこの記事では少し進んだ実践的な例を出すことにしましょう。
-				例えば<code class="lang-vim">:help v_&lt;</code>という項目は</p>
+				例えば<code class="lang-vim">0</code>という項目は</p>
 
 <ol>
 <li>ヴィジュアルモードの(v)</li>
-<li><code>&lt;</code>というキー</li>
+<li><code>0</code>というキー</li>
 </ol>
 
 <p>で実行されるコマンドということです。</p>
 
-<p>また、<code class="lang-vim">:help i_CTRL-R_=</code>という項目は</p>
+<p>また、<code class="lang-vim">0</code>という項目は</p>
 
 <ol>
 <li>インサートモードの(i)</li>
-<li><code>&lt;C-r&gt;=</code>というキー</li>
+<li><code>0</code>というキー</li>
 </ol>
 
 <p>で実行されるコマンドということです。
@@ -60,64 +55,59 @@ author: tyru
 				また2個以上キーが続く場合はこのように「&#95;(アンダーバー)」で区切られます。</p>
 
 <p>コマンドラインではワイルドカードを使うことができ、
-<code>&lt;Tab&gt;</code>を押した時点でマッチする候補をリストアップしてくれます。<br />
-<span style="color:red;">(この際の挙動は<code>'wildchar'</code>, <code>'wildmode'</code>、<code>'wildmenu'</code>の値に強く依存します。以下この記事では<code>'wildchar'</code>が<code>&lt;Tab&gt;</code>、<code>'wildmode'</code>が<code>"full"</code>、<code>'wildmenu'</code>がオンだと仮定します)</span></p>
+<code>0</code>を押した時点でマッチする候補をリストアップしてくれます。<br />
+<span style="color:red;">(この際の挙動は<code>0</code>, <code>0</code>、<code>0</code>の値に強く依存します。以下この記事では<code>0</code>が<code>0</code>、<code>0</code>が<code>0</code>、<code>0</code>がオンだと仮定します)</span></p>
 
 <h3>「buf」を含む関数</h3>
 
-<pre class="prettyprint"><code class="lang-vim">:help *buf*()&lt;Tab&gt;
-</code></pre>
+<pre class="prettyprint"><code class="lang-vim">0</code></pre>
 
 <p>関数は「()」を末尾に持つタグを持っています。</p>
 
 <h3>「wild」を含むオプション</h3>
 
-<pre class="prettyprint"><code class="lang-vim">:help '*wild*'&lt;Tab&gt;
-</code></pre>
+<pre class="prettyprint"><code class="lang-vim">0</code></pre>
 
 <p>前のと同じですね。
 				オプションは「&#8217;(シングルクォート)」で囲まれたタグを持っています。</p>
 
 <h3>頭が「:Neo」で始まるExコマンドを日本語版helpのみから</h3>
 
-<pre class="prettyprint"><code class="lang-vim">:help :Neo*@ja&lt;Tab&gt;
-</code></pre>
+<pre class="prettyprint"><code class="lang-vim">0</code></pre>
 
 <p>Exコマンドは先頭に「:(コロン)」を持つタグを持っています。
-<code>@ + 2文字の文字列</code>を末尾に持ちます。</p>
+<code>0</code>を末尾に持ちます。</p>
 
-<h2><code>&lt;C-d&gt;</code></h2>
+<h2><code>0</code></h2>
 
-<p>コマンドラインで<code>&lt;Tab&gt;</code>の代わりに<code>&lt;C-d&gt;</code>を押すと
+<p>コマンドラインで<code>0</code>の代わりに<code>0</code>を押すと
 				カーソルより前のパターンに一致する名前を
 				コマンドラインに一覧表示してくれます。
 				例えば前述の頭が「:Neo」で始まるExコマンドを日本語版helpのみから探し出そうとした場合、
-<code>&lt;Tab&gt;</code>と<code>&lt;C-d&gt;</code>では以下のような違いがあります。</p>
+<code>0</code>と<code>0</code>では以下のような違いがあります。</p>
 
 <h3>最初の状態</h3>
 
 <p><a href="/vim-users-jp/assets/images/neo-cmdline-compl_begin.png"><img src="/vim-users-jp/assets/images/neo-cmdline-compl_begin.png" alt="" title="neo-cmdline-compl_begin" width="112" height="24" class="alignnone size-full wp-image-2191" /></a></p>
 
-<h3><code>&lt;Tab&gt;</code></h3>
+<h3><code>0</code></h3>
 
 <p><a href="/vim-users-jp/assets/images/neo-cmdline-compl_tab.png"><img src="/vim-users-jp/assets/images/neo-cmdline-compl_tab.png" alt="" title="neo-cmdline-compl_tab" width="620" height="40" class="alignnone size-full wp-image-2190" /></a></p>
 
-<h3><code>&lt;C-d&gt;</code></h3>
+<h3><code>0</code></h3>
 
 <p><a href="/vim-users-jp/assets/images/neo-cmdline-compl_ctrl-d.png"><img src="/vim-users-jp/assets/images/neo-cmdline-compl_ctrl-d.png" alt="" title="neo-cmdline-compl_ctrl-d" width="531" height="855" class="alignnone size-full wp-image-2192" /></a></p>
 
-<h2><code>&lt;C-d&gt;</code> =&gt; 項目名は？</h2>
+<h2><code>0</code> =&gt; 項目名は？</h2>
 
-<p>ちなみにこの<code>&lt;C-d&gt;</code>のタグ名は、
+<p>ちなみにこの<code>0</code>のタグ名は、
 				ここまで読まれた方なら分かると思いますが</p>
 
-<pre class="prettyprint"><code class="lang-vim">:help c_CTRL-d
-</code></pre>
+<pre class="prettyprint"><code class="lang-vim">0</code></pre>
 
 <p>です。<a href="http://www.kaoriya.net/vimdoc_j/">Vim日本語ドキュメント</a>がインストールされている場合その項目名は？</p>
 
-<pre class="prettyprint"><code class="lang-vim">:help c_CTRL-d@ja
-</code></pre>
+<pre class="prettyprint"><code class="lang-vim">0</code></pre>
 
 <p>です。
 				少し慣れましたでしょうか。
@@ -125,33 +115,31 @@ author: tyru
 
 <h2>注意点</h2>
 
-<p>ワイルドカードは使えないので、カーソル下の単語を探すコマンド<code>*</code>の項目は<code class="lang-vim">:help star</code>です。
-				また、このコマンドはノーマルモードのものなので<code class="lang-vim">:help n_star</code>じゃないか？と思われた方もいるかもしれません。
-				このようにノーマルモードの項目は先頭に<code>n_</code>と付きません。
+<p>ワイルドカードは使えないので、カーソル下の単語を探すコマンド<code>0</code>の項目は<code class="lang-vim">0</code>です。
+				また、このコマンドはノーマルモードのものなので<code class="lang-vim">0</code>じゃないか？と思われた方もいるかもしれません。
+				このようにノーマルモードの項目は先頭に<code>0</code>と付きません。
 				なので冒頭で言った次のような規則は嘘でした。</p>
 
-<pre class="prettyprint"><code>{モード}_[CTRL-]{キー}
-</code></pre>
+<pre class="prettyprint"><code>0</code></pre>
 
 <p>正確に言えばノーマルモードの場合のみ</p>
 
-<pre class="prettyprint"><code>[CTRL-]{キー}
-</code></pre>
+<pre class="prettyprint"><code>0</code></pre>
 
 <p>になります。</p>
 
 <h2>:helpgrep</h2>
 
-<p><a href="/vim-users-jp/2009/07/22/Hack-45.html">Hack #45</a>にもありますが、<code class="lang-vim">:helpgrep</code>はhelpを全文検索するExコマンドです。
-<code class="lang-vim">:grep</code>や<code class="lang-vim">:vimgrep</code>などと同じインターフェースで使えます。</p>
+<p><a href="/vim-users-jp/2009/07/22/Hack-45.html">Hack #45</a>にもありますが、<code class="lang-vim">0</code>はhelpを全文検索するExコマンドです。
+<code class="lang-vim">0</code>や<code class="lang-vim">0</code>などと同じインターフェースで使えます。</p>
 
 <h2>unite-help</h2>
 
 <p>またunite.vimというプラグインのunite-helpというプラグインがあります。
 				これは限られたコマンドラインでワイルドカードを駆使して探すことなく
 				helpを全文インクリメンタル検索することができるので、
-				初心者でも手軽に、また<code class="lang-vim">:help</code>よりもより素早く項目を探すことができます。
-<code class="lang-vim">:helpgrep</code>のインクリメンタル検索版というとわかりやすいでしょうか。
+				初心者でも手軽に、また<code class="lang-vim">0</code>よりもより素早く項目を探すことができます。
+<code class="lang-vim">0</code>のインクリメンタル検索版というとわかりやすいでしょうか。
 				まさにunite.vimの真価を発揮するプラグインと言えるでしょう。</p>
 
 <h2>ref.vim</h2>
@@ -159,7 +147,7 @@ author: tyru
 <p>また直接は関係がないのですが、
 				ref.vimというmanやperldocやpydocやrefeなど
 				その他いろんなマニュアルを引けるプラグインが存在します。
-				これをインストールすることで、デフォルトの<code>K</code>の挙動が
-				Vimの<code class="lang-vim">:help</code>を引くだけでなく、perlスクリプトでperldocを引くようになったりと大幅に拡張されます。</p>
+				これをインストールすることで、デフォルトの<code>0</code>の挙動が
+				Vimの<code class="lang-vim">0</code>を引くだけでなく、perlスクリプトでperldocを引くようになったりと大幅に拡張されます。</p>
 
 <address class="hack-author">tyru</address>

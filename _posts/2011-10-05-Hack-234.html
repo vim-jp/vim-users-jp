@@ -12,19 +12,12 @@ author: ujihisa
 
 <h2>解決</h2>
 
-<p>Vimには<code>FocusGained</code>と<code>FocusLost</code>というイベントがあります。これを用いてVimの透明度を変更すると、とてもいい感じになります。
-				参考までに、著者のMacVimのための設定を以下に掲載します。<code>~/.vimrc</code>ではなく<code>~/.gvimrc</code>に記述してください。</p>
+<p>Vimには<code>0</code>と<code>0</code>というイベントがあります。これを用いてVimの透明度を変更すると、とてもいい感じになります。
+				参考までに、著者のMacVimのための設定を以下に掲載します。<code>0</code>ではなく<code>0</code>に記述してください。</p>
 
-<pre class="prettyprint"><code class="lang-vim">augroup hack234
-  autocmd!
-  if has('mac')
-    autocmd FocusGained * set transparency=10
-    autocmd FocusLost * set transparency=50
-  endif
-augroup END
-</code></pre>
+<pre class="prettyprint"><code class="lang-vim">0</code></pre>
 
-<p>普段は透明度10 (ほとんど不透明)にしており、focusがないときは透明度50 (かなり透明) にしています。筆者のGentoo上のGVimは<code>'transparency'</code>をサポートしていないため、<code>if has('mac')</code>で条件分岐しています。</p>
+<p>普段は透明度10 (ほとんど不透明)にしており、focusがないときは透明度50 (かなり透明) にしています。筆者のGentoo上のGVimは<code>0</code>をサポートしていないため、<code>0</code>で条件分岐しています。</p>
 
 <p><img src="/vim-users-jp/assets/images/1024f68ab4fee85b5399de675c11cd08.png" alt="ふだん" /></p>
 

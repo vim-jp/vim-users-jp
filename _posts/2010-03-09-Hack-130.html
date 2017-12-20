@@ -7,24 +7,21 @@ author: kana
 <h3>問題</h3>
 
 <p><a href="/vim-users-jp/2010/03/05/Hack-129.html">Hack #129: 複数のファイルから検索する</a>
-				では<code class="lang-vim">:grep</code>について紹介しました。
+				では<code class="lang-vim">0</code>について紹介しました。
 				色々と便利なコマンドなのですが、頻繁に使っていると次のような不満が出てきます:</p>
 
-<p><code class="lang-vim">:grep</code>の引数は基本的に</p>
+<p><code class="lang-vim">0</code>の引数は基本的に</p>
 
-<pre class="prettyprint"><code class="lang-vim">:grep {pattern} {file} ...
-</code></pre>
+<pre class="prettyprint"><code class="lang-vim">0</code></pre>
 
-<p>なのですが、同じファイル郡に対して異なるパターンで<code class="lang-vim">:grep</code>する
+<p>なのですが、同じファイル郡に対して異なるパターンで<code class="lang-vim">0</code>する
 				というケースは少なくありません。例えば</p>
 
-<pre class="prettyprint"><code class="lang-vim">:grep rebase *.[ch]
-</code></pre>
+<pre class="prettyprint"><code class="lang-vim">0</code></pre>
 
 <p>で検索した後で</p>
 
-<pre class="prettyprint"><code class="lang-vim">:grep rebase_cmd *.[ch]
-</code></pre>
+<pre class="prettyprint"><code class="lang-vim">0</code></pre>
 
 <p>と検索しなおすとしましょう。全てのコマンドを入力しなおすと面倒ですから、
 				通常は入力履歴を<kbd>&lt;Up&gt;</kbd>/<kbd>&lt;Down&gt;</kbd>で参照して以前入力した
@@ -34,26 +31,21 @@ author: kana
 				パターンを修正するところが問題です。
 				修正するためには<kbd>&lt;Left&gt;&lt;Left&gt;&lt;Left&gt;...</kbd>などとしてパターンの箇所まで
 				カーソルを移動しなければならないのですが、これが面倒です。
-				特に<code>{file} ...</code>の指定が長くなると面倒さが倍増します。
+				特に<code>0</code>の指定が長くなると面倒さが倍増します。
 				どうにかして簡単に修正することはできないでしょうか。</p>
 
 <h3>解決方法</h3>
 
 <p>以下の内容をvimrcに追加します:</p>
 
-<pre class="prettyprint"><code class="lang-vim">command! -complete=file -nargs=+ Grep  call s:grep([&lt;f-args&gt;])
-function! s:grep(args)
-  execute 'vimgrep' '/'.a:args[-1].'/' join(a:args[:-2])
-endfunction
-</code></pre>
+<pre class="prettyprint"><code class="lang-vim">0</code></pre>
 
-<p>これにより<code class="lang-vim">:grep</code>の代わりに
-				以下のような<code class="lang-vim">:Grep</code>コマンドが使えるようになります:</p>
+<p>これにより<code class="lang-vim">0</code>の代わりに
+				以下のような<code class="lang-vim">0</code>コマンドが使えるようになります:</p>
 
-<pre class="prettyprint"><code class="lang-vim">:Grep {file} ... {pattern}
-</code></pre>
+<pre class="prettyprint"><code class="lang-vim">0</code></pre>
 
-<p><code class="lang-vim">:grep</code>での煩雑さは最初の引数が<var>{pattern}</var>であることが
+<p><code class="lang-vim">0</code>での煩雑さは最初の引数が<var>{pattern}</var>であることが
 				原因なので、その逆で最後の引数が<var>{pattern}</var>であるコマンドがあれば
 				パターンの修正は<kbd>&lt;Up&gt;&lt;C-w&gt;&lt;C-w&gt;...</kbd>だけで済みます。</p>
 

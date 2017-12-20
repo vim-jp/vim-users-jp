@@ -30,86 +30,33 @@ author:
 
 <p>大抵のC言語コンパイラは末尾再帰最適化を行なっているということは、低レイヤにあまり慣れ親しんでいない人でも、耳にしたことがあるのではないでしょうか。さて、最適化が行なわれたか否かを実際に確かめるには、実際にアセンブラを確認するとよいでしょう。</p>
 
-<pre class="prettyprint"><code>int f(int acc, int n)
-{
-  return n &lt; 0 ? acc : f(acc + n, n - 1);
-}
-</code></pre>
+<pre class="prettyprint"><code>0</code></pre>
 
 <p>0からnまでの和を得る末尾再帰の関数です。f(0, 10) == 55です。</p>
 
-<pre class="prettyprint"><code>$ gcc a.c -S -m32 -O2 -o -
-
-_f:
-  pushl %ebp
-  movl  %esp, %ebp
-  movl  8(%ebp), %eax
-  movl  12(%ebp), %edx
-  testl %edx, %edx
-  jns   L7
-  jmp   L3
-  .align 4,0x90
-L9:
-  movl  %ecx, %edx
-L7:
-  leal  -1(%edx), %ecx
-  addl  %edx, %eax
-  cmpl  $-1, %ecx
-  jne   L9
-L3:
-  leave
-  ret
-</code></pre>
+<pre class="prettyprint"><code>0</code></pre>
 
 <p>詳しい解説は省略しますが、ようするに再帰的に関数呼び出しを行なうかわりに、単なるループに変換されています。</p>
 
 <p>これはGCCでx86アセンブリ言語に変換するよりもClangでLLVM IRに変換する方が直感的で読みやすいでしょう。</p>
 
-<pre class="prettyprint"><code>$ clang -O3 a.c -S -emit-llvm -o -
-define i32 @f(i32 %acc, i32 %n) nounwind uwtable readnone ssp {
-entry:
-  %cmp1 = icmp slt i32 %n, 0
-  br i1 %cmp1, label %cond.end, label %cond.false.lr.ph
-
-cond.false.lr.ph:                                 ; preds = %entry
-  %0 = mul i32 %n, %n
-  %1 = zext i32 %n to i33
-  %2 = add i32 %n, -1
-  %3 = zext i32 %2 to i33
-  %4 = mul i33 %1, %3
-  %5 = lshr i33 %4, 1
-  %6 = trunc i33 %5 to i32
-  %7 = add i32 %0, %acc
-  %8 = sub i32 %7, %6
-  br label %cond.end
-
-cond.end:                                         ; preds = %cond.false.lr.ph, %entry
-  %acc.tr.lcssa = phi i32 [ %8, %cond.false.lr.ph ], [ %acc, %entry ]
-  ret i32 %acc.tr.lcssa
-}
-</code></pre>
+<pre class="prettyprint"><code>0</code></pre>
 
 <p>要するにループに変換されています。</p>
 
 <p>つづいて、末尾再帰ではない形でも確認してみましょう。</p>
 
-<pre class="prettyprint"><code>int f(int n)
-{
-  return n &lt; 0 ? 0 : n + f(n - 1);
-}
-</code></pre>
+<pre class="prettyprint"><code>0</code></pre>
 
 <p>実はこれでも先ほどとほとんど同じ結果が得られます。わざわざ人間が末尾再帰の形に変形する必要はないのでした。</p>
 
 <p>これらのような事実が実際に目で確認できることがわかりました。しかし毎回gccやclangコマンドをvimshellから入力するのは大変です。それどころか、さきほど記述したCのコードにファイル名を与えて保存することは大変で、そんなことをしていると学習以前に一年が過ぎてしまい、次の元旦を迎えてしまいます。このような事態に陥ったとき、訓練されたVim使いは「そうだquickrun、使おう」となります。</p>
 
-<pre class="prettyprint"><code class="lang-vim">:QuickRun -type c/gcc  -exec '%c %o %s -S -o -' -cmdopt '-m32 -O2'
-</code></pre>
+<pre class="prettyprint"><code class="lang-vim">0</code></pre>
 
-<p>これで動作することが分かるので、よし、<code>~/.vimrc</code>を開いて<code>g:quickrun_config</code>に・・・おっと、それだとclangの例を試せません。</p>
+<p>これで動作することが分かるので、よし、<code>0</code>を開いて<code>0</code>に・・・おっと、それだとclangの例を試せません。</p>
 
-<pre class="prettyprint"><code class="lang-vim">:QuickRun -type c/clang  -exec '%c %o %s -S -emit-llvm -o -' -cmdopt '-O3'
-</code></pre>
+<pre class="prettyprint"><code class="lang-vim">0</code></pre>
 
 <p>複数の候補から選択したい。<a href="/vim-users-jp/2011/02/10/Hack-200.html">Hack #200: 候補を選択し、実行する</a>にあるように、これはunite.vimの出番です。</p>
 
@@ -161,17 +108,15 @@ cond.end:                                         ; preds = %cond.false.lr.ph, %
 
 <p>quicklearnは</p>
 
-<pre class="prettyprint"><code class="lang-vim">:Unite quicklearn -immediately
-</code></pre>
+<pre class="prettyprint"><code class="lang-vim">0</code></pre>
 
 <p>のようにして実行できます。筆者は</p>
 
-<pre class="prettyprint"><code class="lang-vim">nnoremap &lt;space&gt;R :&lt;C-u&gt;Unite quicklearn -immediately&lt;Cr&gt;
-</code></pre>
+<pre class="prettyprint"><code class="lang-vim">0</code></pre>
 
-<p>と<code>~/.vimrc</code>で設定し、<kbd>&lt;space&gt;R</kbd>で実行できるようにしています。なお、quickrunは<kbd>&lt;space&gt;r</kbd>にしています。</p>
+<p>と<code>0</code>で設定し、<kbd>&lt;space&gt;R</kbd>で実行できるようにしています。なお、quickrunは<kbd>&lt;space&gt;r</kbd>にしています。</p>
 
-<p><code>-immediately</code>オプションがとても便利です。</p>
+<p><code>0</code>オプションがとても便利です。</p>
 
 <p>なお、quickrunはアセンブリ言語やLLVM IRをサポートしています。つまり、quicklearnによって生成させたアセンブリ言語やLLVM IRのバッファでさらにquickrunを行なうことで、それを実行することができ、とても便利です。</p>
 
@@ -181,105 +126,7 @@ cond.end:                                         ; preds = %cond.false.lr.ph, %
 
 <p>autoload/unite/sources/quicklearn.vim</p>
 
-<pre class="prettyprint"><code class="lang-vim">let s:save_cpo = &amp;cpo
-set cpo&amp;vim
-
-" fmap([a, b, c], f) =&gt; [f(a), f(b), f(c)]
-" fmap(a, f) =&gt; [f(a)]
-function! s:fmap(xs, f)
-  if type(a:xs) == type([])
-    return map(a:xs, a:f)
-  else
-    return map([a:xs], a:f)
-  endif
-endfunction
-
-let g:quicklearn_gcc_remote_url = get(g:, 'quicklearn_gcc_remote_url', 'localhost')
-
-let s:quicklearn = {}
-let s:source = {
-      \ 'name': 'quicklearn',
-      \ }
-let s:quicklearn['c/clang/intermediate'] = {
-      \ 'meta': {
-      \   'parent': 'c/clang'},
-      \ 'exec': '%c %o %s -S -emit-llvm -o -'}
-let s:quicklearn['c/clang-O3/intermediate'] = {
-      \ 'meta': {
-      \   'parent': 'c/clang'},
-      \ 'cmdopt': '-O3',
-      \ 'exec': '%c %o %s -S -emit-llvm -o -'}
-let s:quicklearn['c/gcc/intermediate'] = {
-      \ 'meta': {
-      \   'parent': 'c/gcc'},
-      \ 'exec': '%c %o %s -S -o -'}
-let s:quicklearn['c/gcc-32/intermediate'] = {
-      \ 'meta': {
-      \   'parent': 'c/gcc'},
-      \ 'cmdopt': '-m32',
-      \ 'exec': '%c %o %s -S -o -'}
-let s:quicklearn['c/gcc-remote/intermediate'] = {
-      \ 'meta': {
-      \   'parent': 'c/gcc'},
-      \ 'exec': 'ssh ' . g:quicklearn_gcc_remote_url . ' %c %o %s -S -o -'}
-let s:quicklearn['haskell/ghc/intermediate'] = {
-      \ 'meta': {
-      \   'parent': 'haskell/ghc'},
-      \ 'exec': [
-      \   '%c %o -ddump-simpl -dsuppress-coercions %s',
-      \   'rm %s:p:r %s:p:r.o %s:p:r.hi'],
-      \ 'cmdopt': '-v0 --make'}
-let s:quicklearn['coffee/intermediate'] = {
-      \ 'meta': {
-      \   'parent': '_'},
-      \ 'exec': ['%c %o -cbp %s %a']}
-let s:quicklearn['ruby/intermediate'] = {
-      \ 'meta': {
-      \   'parent': 'ruby'},
-      \ 'cmdopt': '--dump=insns'}
-
-" inheritance
-for k in keys(s:quicklearn)
-  let v = s:quicklearn[k]
-  for item in ['command', 'exec', 'cmdopt', 'tempfile', 'eval_template']
-    let ofParent = get(g:quickrun#default_config[v.meta.parent], item)
-    if type(ofParent) != type(0) || ofParent != 0
-      let s:quicklearn[k][item] = get(v, item, ofParent)
-    endif
-    unlet ofParent
-  endfor
-endfor
-
-" build quickrun command
-for k in keys(s:quicklearn)
-  let v = s:quicklearn[k]
-  let s:quicklearn[k].quickrun_command = printf(
-        \ 'QuickRun %s %s %s -cmdopt %s',
-        \ v.meta.parent == '_' ? '' : '-type ' . v.meta.parent,
-        \ get(v, 'command') ? '-command ' . string(v.command) : '',
-        \ join(s:fmap(get(v, 'exec', []), '"-exec " . string(v:val)'), ' '),
-        \ string(get(v, 'cmdopt', '')))
-endfor
-lockvar s:quicklearn
-
-function! unite#sources#quicklearn#define()
-  return s:source
-endfunction
-
-function! s:source.gather_candidates(args, context)
-  let configs = filter(copy(s:quicklearn), 'v:key =~ "^" . &amp;filetype . "/"')
-
-  return values(map(configs, '{
-        \ "word": substitute(v:key, "/intermediate$", "", ""),
-        \ "source": s:source.name,
-        \ "kind": ["command"],
-        \ "action__command": v:val.quickrun_command,
-        \ }'))
-        "\ "action__type": ": ",
-endfunction
-
-let &amp;cpo = s:save_cpo
-</code></pre>
+<pre class="prettyprint"><code class="lang-vim">0</code></pre>
 
 <p>適当な辞書を事前に作っておき、uniteから実際に実行させたいコマンド文字列を事前に生成しておきます。それを対応するfiletypeごとにs:source.gather_candidatesで適切な辞書の配列を返すことによって行なっています。uniteのkindはcommandです。</p>
 

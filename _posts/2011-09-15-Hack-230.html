@@ -27,55 +27,42 @@ author: ujihisa
 <p>quickrun 0.5.0はデフォルトで4種類のmarkdown変換機をサポートしています。</p>
 
 <ul>
-<li>Markdown.pl (Perl. <code>cpan install Markdown</code>かな?)</li>
-<li>kramdown (Ruby. <code>gem install kramdown</code>)</li>
-<li>bluecloth (Ruby. <code>gem install bluecloth</code>)</li>
+<li>Markdown.pl (Perl. <code>0</code>かな?)</li>
+<li>kramdown (Ruby. <code>0</code>)</li>
+<li>bluecloth (Ruby. <code>0</code>)</li>
 <li>redcarpet (GitHubなどで使われている悪評高いMarkdownエンジン)</li>
-<li>pandoc (Haskell. <code>cabal install pandoc</code>)</li>
+<li>pandoc (Haskell. <code>0</code>)</li>
 </ul>
 
-<p>もしも<code>$PATH</code>に上記のコマンドがあれば、それを用いて変換します。優先順位はこの一覧と同じです。</p>
+<p>もしも<code>0</code>に上記のコマンドがあれば、それを用いて変換します。優先順位はこの一覧と同じです。</p>
 
-<p>したがって<code>'filetype'</code>が<code>markdown</code>であるようなバッファを編集中に<code class="lang-vim">:QuickRun</code>すると、上記コマンドのいずれかが呼ばれ、そして編集中バッファをhtmlに変換したものをquickrunウインドウに表示します。なので、この出力先をbufferではなくbrowserにすればそれで問題が解決されます。</p>
+<p>したがって<code>0</code>が<code>0</code>であるようなバッファを編集中に<code class="lang-vim">0</code>すると、上記コマンドのいずれかが呼ばれ、そして編集中バッファをhtmlに変換したものをquickrunウインドウに表示します。なので、この出力先をbufferではなくbrowserにすればそれで問題が解決されます。</p>
 
-<p><code>~/.vimrc</code>に以下の設定を記述します。</p>
+<p><code>0</code>に以下の設定を記述します。</p>
 
-<pre class="prettyprint"><code>let g:quickrun_config['markdown'] = {
-      \ 'outputter': 'browser'
-      \ }
-</code></pre>
+<pre class="prettyprint"><code>0</code></pre>
 
-<p>ただし、もしもこれまで<code>g:quickrun_config</code>を全く使った事がない自信があるならば、以下の行をその前に記述してください。</p>
+<p>ただし、もしもこれまで<code>0</code>を全く使った事がない自信があるならば、以下の行をその前に記述してください。</p>
 
-<pre class="prettyprint"><code>let g:quickrun_config = {}
-</code></pre>
+<pre class="prettyprint"><code>0</code></pre>
 
 <p>続いて<a href="https://github.com/tyru/open-browser.vim">open-browser.vim</a>がインストール済みかどうか確認します。インストールしていなければ、すぐにいれましょう。</p>
 
-<p>これで<code>'filetype'</code>が<code>markdown</code>なバッファから<code class="lang-vim">:QuickRun</code> (あるいはデフォルトのキーマッピングである<kbd>\r</kbd>の打鍵) で、新しいウインドウが分割されてHTMLが出力されるかわりに、ブラウザが立ち上がってそちらにHTMLがきれいに表示されるはずです。</p>
+<p>これで<code>0</code>が<code>0</code>なバッファから<code class="lang-vim">0</code> (あるいはデフォルトのキーマッピングである<kbd>\r</kbd>の打鍵) で、新しいウインドウが分割されてHTMLが出力されるかわりに、ブラウザが立ち上がってそちらにHTMLがきれいに表示されるはずです。</p>
 
 <h2>解決 (2/2)</h2>
 
-<p>大抵の方は(1/2)の時点で大丈夫なのですが、しかしASCIIの範囲内に収まらない文書を書く一部の人は、<code>pandoc</code>でMarkdownをHTMLに変換した後に、文字化けしたHTMLを見てしまったのではないでしょうか。</p>
+<p>大抵の方は(1/2)の時点で大丈夫なのですが、しかしASCIIの範囲内に収まらない文書を書く一部の人は、<code>0</code>でMarkdownをHTMLに変換した後に、文字化けしたHTMLを見てしまったのではないでしょうか。</p>
 
 <p>この場合はpandocの-sオプションを用います。</p>
 
-<pre class="prettyprint"><code>let g:quickrun_config['markdown'] = {
-      \ 'outputter': 'browser',
-      \ 'cmdopt': '-s'
-      \ }
-</code></pre>
+<pre class="prettyprint"><code>0</code></pre>
 
-<p>おっとしかしpandoc以外でも-sを使われると困ります。間違って<code>redcarpet</code>などをインストールしてしまうと、なぜかそちらの方が高い優先度をもっているため、そちらを使われてしまうのです。ここはpandocを使用するよう強制してみましょう。</p>
+<p>おっとしかしpandoc以外でも-sを使われると困ります。間違って<code>0</code>などをインストールしてしまうと、なぜかそちらの方が高い優先度をもっているため、そちらを使われてしまうのです。ここはpandocを使用するよう強制してみましょう。</p>
 
-<pre class="prettyprint"><code>let g:quickrun_config['markdown'] = {
-      \ 'type': 'markdown/pandoc',
-      \ 'outputter': 'browser',
-      \ 'cmdopt': '-s'
-      \ }
-</code></pre>
+<pre class="prettyprint"><code>0</code></pre>
 
-<p>実はこのあたりは詳しくはquickrun公式ヘルプに掲載されています。詳しくは<code class="lang-vim">:h quickrun-examples</code>をご覧ください。</p>
+<p>実はこのあたりは詳しくはquickrun公式ヘルプに掲載されています。詳しくは<code class="lang-vim">0</code>をご覧ください。</p>
 
 <h2>補足</h2>
 

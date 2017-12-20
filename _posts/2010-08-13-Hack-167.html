@@ -6,37 +6,11 @@ author: tyru
 ---
 <h2>無名関数</h2>
 
-<pre class="prettyprint"><code class="lang-vim">function! s:foo()
-    let foo = {}
-    function foo.funcall() dict
-        echo 'lambda'
-    endfunction
-    return foo
-endfunction
-
-call s:foo().funcall()
-</code></pre>
+<pre class="prettyprint"><code class="lang-vim">0</code></pre>
 
 <h2>クロージャ</h2>
 
-<pre class="prettyprint"><code class="lang-vim">function! s:foo(num)
-    let foo = {'i': a:num}
-    function foo.funcall() dict
-        let self.i += 1
-        return self.i
-    endfunction
-    return foo
-endfunction
-
-echo s:foo(1).funcall()
-let s:clos = s:foo(5)
-" 6
-echo s:clos.funcall()
-" 7
-echo s:clos.funcall()
-" 8
-echo s:clos.funcall()
-</code></pre>
+<pre class="prettyprint"><code class="lang-vim">0</code></pre>
 
 <h2>説明</h2>
 

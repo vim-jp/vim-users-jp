@@ -16,97 +16,19 @@ author: ujihisa
 
 <p>まず、MacVimを入手します。</p>
 
-<pre class="prettyprint"><code>$ git clone git://repo.or.cz/MacVim.git MacVimUjihisa
-$ cd MacVimUjihisa/src
-$ ./configure --enable-gui=macvim
-$ make
-</code></pre>
+<pre class="prettyprint"><code>0</code></pre>
 
 <p>次に、以下のパッチを適用します。</p>
 
-<pre class="prettyprint"><code>diff --git a/src/MacVim/MMTextStorage.m b/src/MacVim/MMTextStorage.m
-index 0d272b2..0327a8f 100644
---- a/src/MacVim/MMTextStorage.m
-+++ b/src/MacVim/MMTextStorage.m
-@@ -656,12 +656,8 @@ static NSString *MMWideCharacterAttributeName = @&quot;MMWideChar&quot;;
-         cellSize.width = ceilf(em * cellWidthMultiplier);
-
-         float pointSize = [newFont pointSize];
--        NSDictionary *dict = [NSDictionary
--            dictionaryWithObject:[NSNumber numberWithFloat:cellSize.width]
--                          forKey:NSFontFixedAdvanceAttribute];
-
-         NSFontDescriptor *desc = [newFont fontDescriptor];
--        desc = [desc fontDescriptorByAddingAttributes:dict];
-         font = [NSFont fontWithDescriptor:desc size:pointSize];
-         [font retain];
-
-@@ -680,21 +676,18 @@ static NSString *MMWideCharacterAttributeName = @&quot;MMWideChar&quot;;
-         boldFont = [[NSFontManager sharedFontManager]
-             convertFont:font toHaveTrait:NSBoldFontMask];
-         desc = [boldFont fontDescriptor];
--        desc = [desc fontDescriptorByAddingAttributes:dict];
-         boldFont = [NSFont fontWithDescriptor:desc size:pointSize];
-         [boldFont retain];
-
-         italicFont = [[NSFontManager sharedFontManager]
-             convertFont:font toHaveTrait:NSItalicFontMask];
-         desc = [italicFont fontDescriptor];
--        desc = [desc fontDescriptorByAddingAttributes:dict];
-         italicFont = [NSFont fontWithDescriptor:desc size:pointSize];
-         [italicFont retain];
-
-         boldItalicFont = [[NSFontManager sharedFontManager]
-             convertFont:italicFont toHaveTrait:NSBoldFontMask];
-         desc = [boldItalicFont fontDescriptor];
--        desc = [desc fontDescriptorByAddingAttributes:dict];
-         boldItalicFont = [NSFont fontWithDescriptor:desc size:pointSize];
-         [boldItalicFont retain];
-     }
-@@ -714,32 +707,25 @@ static NSString *MMWideCharacterAttributeName = @&quot;MMWideChar&quot;;
-
-         float pointSize = [newFont pointSize];
-         NSFontDescriptor *desc = [newFont fontDescriptor];
--        NSDictionary *dictWide = [NSDictionary
--            dictionaryWithObject:[NSNumber numberWithFloat:2*cellSize.width]
--                          forKey:NSFontFixedAdvanceAttribute];
-
--        desc = [desc fontDescriptorByAddingAttributes:dictWide];
-         fontWide = [NSFont fontWithDescriptor:desc size:pointSize];
-         [fontWide retain];
-
-         boldFontWide = [[NSFontManager sharedFontManager]
-             convertFont:fontWide toHaveTrait:NSBoldFontMask];
-         desc = [boldFontWide fontDescriptor];
--        desc = [desc fontDescriptorByAddingAttributes:dictWide];
-         boldFontWide = [NSFont fontWithDescriptor:desc size:pointSize];
-         [boldFontWide retain];
-
-         italicFontWide = [[NSFontManager sharedFontManager]
-             convertFont:fontWide toHaveTrait:NSItalicFontMask];
-         desc = [italicFontWide fontDescriptor];
--        desc = [desc fontDescriptorByAddingAttributes:dictWide];
-         italicFontWide = [NSFont fontWithDescriptor:desc size:pointSize];
-         [italicFontWide retain];
-
-         boldItalicFontWide = [[NSFontManager sharedFontManager]
-             convertFont:italicFontWide toHaveTrait:NSBoldFontMask];
-         desc = [boldItalicFontWide fontDescriptor];
--        desc = [desc fontDescriptorByAddingAttributes:dictWide];
-         boldItalicFontWide = [NSFont fontWithDescriptor:desc size:pointSize];
-         [boldItalicFontWide retain];
-   }
-</code></pre>
+<pre class="prettyprint"><code>0</code></pre>
 
 <p>そしてビルドします。</p>
 
-<pre class="prettyprint"><code>$ xcodebuild
-</code></pre>
+<pre class="prettyprint"><code>0</code></pre>
 
 <p>走らせてみましょう。</p>
 
-<pre class="prettyprint"><code>$ open build/Release/MacVim.app
-</code></pre>
+<pre class="prettyprint"><code>0</code></pre>
 
 <h2>既知の問題</h2>
 
@@ -121,7 +43,7 @@ index 0d272b2..0327a8f 100644
 <ul>
 <li><img src="/vim-users-jp/assets/images/875cad1e77c7a3a5a4cf5b69e8031492.png" alt="b" /></li>
 </ul></li>
-<li><p><code>&lt;code class="option"&gt;'screenwidth'</code></code>の扱いがうまくいきません。奇妙な位置で<code>wrap</code>を行ないます。</p></li>
+<li><p><code>0</code></code>の扱いがうまくいきません。奇妙な位置で<code>0</code>を行ないます。</p></li>
 </ul>
 
 <h2>参考</h2>

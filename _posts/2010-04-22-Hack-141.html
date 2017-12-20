@@ -8,94 +8,38 @@ author: ujihisa
 
 <p>いくつかのプログラミング言語における関数呼び出しないしメソッド呼び出しは、以下のような書き方をすることが多いです。</p>
 
-<pre class="prettyprint"><code>aaa(bbb, ccc)
-</code></pre>
+<pre class="prettyprint"><code>0</code></pre>
 
 <p>引数部分に大抵の式を書くことができ、</p>
 
-<pre class="prettyprint"><code>aaa(bbb(ccc, ddd), eee())
-</code></pre>
+<pre class="prettyprint"><code>0</code></pre>
 
 <p>のように書くことができる場合も多いです。</p>
 
 <p>さて、上記関数aaaに与える引数の順序が実は間違っていたことに気づいたとします。どのように引数の順序を入れ替えるのがラクでなおかつ確実でしょうか。</p>
 
-<pre class="prettyprint"><code>aaa(bbb(ccc, ddd), eee())
-</code></pre>
+<pre class="prettyprint"><code>0</code></pre>
 
-<p>まず<code>0f(</code>などで引数のリストの手前の括弧に飛び、<code>df,</code>で削除…、おっとコンマは既に途中で使われていました。<code>df)</code>ならば今回はうまくいきますが、しかしこれも汎用的ではありません。<code>%</code>を使うにも、うまく個別の引数を指定できません。</p>
+<p>まず<code>0</code>などで引数のリストの手前の括弧に飛び、<code>0</code>で削除…、おっとコンマは既に途中で使われていました。<code>0</code>ならば今回はうまくいきますが、しかしこれも汎用的ではありません。<code>0</code>を使うにも、うまく個別の引数を指定できません。</p>
 
 <h2>解決法</h2>
 
 <p>flipperというスクリプトを使います。</p>
 
-<p>まず、以下のスクリプトを環境変数<code>$PATH</code>の通った位置に配置し、実行権限を与えます。</p>
+<p>まず、以下のスクリプトを環境変数<code>0</code>の通った位置に配置し、実行権限を与えます。</p>
 
-<pre class="prettyprint"><code>#!/usr/bin/env ruby
-# flip('(aaa, bbb)') #=&gt; '(bbb, aaa)'
-def flip(str)
-  stack = []
-  tmp = ''
-  tokens = []
-  str.each_char.to_a[1..-2].each do |c|
-    case c
-    when '('
-      stack &lt;&lt; ')'
-    when ')'
-      stack.pop == ')' or abort 'Syntax Error'
-    when '&quot;'
-      if stack.last == '&quot;'
-        stack.pop
-      else
-        stack &lt;&lt; '&quot;'
-      end
-    when &quot;'&quot;
-      if stack.last == &quot;'&quot;
-        stack.pop
-      else
-        stack &lt;&lt; &quot;'&quot;
-      end
-    when ','
-      if stack.empty?
-        tokens &lt;&lt; tmp
-        tmp = ''
-        next
-      end
-    when ' '
-      if tmp.empty?
-        next
-      end
-    end
-    tmp &lt;&lt; c
-  end
-  tokens &lt;&lt; tmp
-  '(' + tokens.reverse.join(', ') + ')'
-end
+<pre class="prettyprint"><code>0</code></pre>
 
-if __FILE__ == $0
-  puts flip(ARGV.shift)
-end
-</code></pre>
+<p>つづいて、<code>0</code>に以下を記述します。</p>
 
-<p>つづいて、<code>~/.vimrc</code>に以下を記述します。</p>
+<pre class="prettyprint"><code class="lang-vim">0</code></pre>
 
-<pre class="prettyprint"><code class="lang-vim">&quot; Flip Arguments &#123;&#123;&#123;
-&quot;   f(a, b) to f(b, a) when your cursol is on '('.
-function! FlipArguments()
-  normal! y%
-  let @&quot; = split(system('flipper &quot;' . @&quot; . '&quot;'), &quot;\n&quot;)[0]
-  execute &quot;normal! %p\&lt;C-o&gt;d%&quot;
-endfunction
-&quot; &#125;&#125;&#125;
-</code></pre>
-
-<p>これで、<code class="lang-vim">:call FlipArguments()</code>とすることでカーソル位置の引数リストの順番を逆順にすることができます。</p>
+<p>これで、<code class="lang-vim">0</code>とすることでカーソル位置の引数リストの順番を逆順にすることができます。</p>
 
 <p>入力を楽にするために、例えば以下のような設定をします。</p>
 
-<pre class="prettyprint"><code class="lang-vim">nnoremap &lt;space&gt;flip :&lt;C-u&gt;call FlipArguments()&lt;Cr&gt;
-</code></pre>
+<pre class="prettyprint"><code class="lang-vim">0</code></pre>
 
-<p><code>&lt;space&gt;flip</code>で同様の処理ができます。この作業はそれほど頻繁に行なうわけではないので、多少長いキーストロークでも問題ないのではないかと思います。</p>
+<p><code>0</code>で同様の処理ができます。この作業はそれほど頻繁に行なうわけではないので、多少長いキーストロークでも問題ないのではないかと思います。</p>
 
 <address class="hack-author">ujihisa</address>

@@ -4,7 +4,7 @@ title: "Vim 7.3の新機能まとめ"
 date: 2010-07-23
 author: 
 ---
-<p>とりあえず自分も今調べている最中なので<code class="lang-vim">:help version7.3</code>をそのまま紹介する形にします。<br />
+<p>とりあえず自分も今調べている最中なので<code class="lang-vim">0</code>をそのまま紹介する形にします。<br />
 				他にもこれは紹介するべきというものや間違い等があったらどんどん追加/修正お願いします。 >Vim Hacksのメンバー</p>
 
 <h2>Persistent undo</h2>
@@ -19,34 +19,32 @@ author:
 <h2>conceal</h2>
 
 <p>シンタックスハイライトで特定のハイライトグループを見た目「消す」ことができます。<br />
-				すでに最新版のVimをインストールすると、<code>syntax/help.vim</code>がこの機能を使っていて単語を囲んでいる<code>*</code>や<code>|</code>などの文字が消えています。</p>
+				すでに最新版のVimをインストールすると、<code>0</code>がこの機能を使っていて単語を囲んでいる<code>0</code>や<code>0</code>などの文字が消えています。</p>
 
 <p>シンタックスハイライトで文字を隠すことができるようになったわけで、いろいろと応用できそうです。<br />
 				プラグイン開発者にとって見逃せない新機能となっています。</p>
 
 <p>例としてすでにsyntax/markdown.vimでこの機能を使い</p>
 
-<pre class="prettyprint"><code>[リンク](URL)
-</code></pre>
+<pre class="prettyprint"><code>0</code></pre>
 
 <p>というmarkdownの記法を</p>
 
-<pre class="prettyprint"><code>リンク
-</code></pre>
+<pre class="prettyprint"><code>0</code></pre>
 
 <p>に見た目を変えてしまうパッチが<a href="http://groups.google.com/group/vim_dev/browse_thread/thread/eb05308417b17a5b/">メーリングリストに投げられました</a>。</p>
 
-<p>またオプションとして<code>conceallevel</code>が加えられています。</p>
+<p>またオプションとして<code>0</code>が加えられています。</p>
 
 <h2>Luaインターフェース</h2>
 
 <p>LuaでVimプラグインが書けるようになりました。<br />
-				詳しくは<code class="lang-vim">:help lua</code>を。</p>
+				詳しくは<code class="lang-vim">0</code>を。</p>
 
 <h2>Python3インターフェース</h2>
 
 <p>Pythonインターフェースに加えPython3インターフェースが加えられたようです。<br />
-				両者はコマンドが分かれていて、それぞれ<code class="lang-vim">:python</code>, <code class="lang-vim">:python3</code>となっています。</p>
+				両者はコマンドが分かれていて、それぞれ<code class="lang-vim">0</code>, <code class="lang-vim">0</code>となっています。</p>
 
 <h2>&#8216;encoding&#8217;をmodelineで変更することの禁止</h2>
 
@@ -59,19 +57,13 @@ author:
 				このオプションがセットされたとき&#8217;number&#8217;の値はリセットされます。<br />
 				この機能は、jkに数値を付けて移動する場合(13jなど)のために追加されました。</p>
 
-<p>詳しくは<code class="lang-vim">:help 'relativenumber'</code>を。</p>
+<p>詳しくは<code class="lang-vim">0</code>を。</p>
 
 <h2>いくつかの関数追加</h2>
 
-<pre class="prettyprint"><code>More floating point functions: |acos()|, |asin()|, |atan2()|, |cosh()|,
-|exp()|, |fmod()|, |log()|, |sinh()|, |tan()|, |tanh()|.  (Bill McCarthy)
+<pre class="prettyprint"><code>0</code></pre>
 
-Added the |gettabvar()| and |settabvar()| functions. (Yegappan Lakshmanan)
-
-Added the |strchars()|, |strwidth()| and |strdisplaywidth()| functions.
-</code></pre>
-
-<p>詳しくは<code class="lang-vim">:help added-7.3</code>を。</p>
+<p>詳しくは<code class="lang-vim">0</code>を。</p>
 
 <h2>新機能の解説</h2>
 

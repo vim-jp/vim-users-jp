@@ -12,10 +12,9 @@ author: ujihisa
 
 <h2>解決</h2>
 
-<p><code>~/.vimrc</code>に以下を記述します。</p>
+<p><code>0</code>に以下を記述します。</p>
 
-<pre class="prettyprint"><code class="lang-vim">nnoremap &lt;expr&gt; s* ':%substitute/\&lt;' . expand('&lt;cword&gt;') . '\&gt;/'
-</code></pre>
+<pre class="prettyprint"><code class="lang-vim">0</code></pre>
 
 <p>以後、<kbd>s*</kbd>と打鍵したあと置き換え文字列と<kbd>/g&lt;Cr&gt;</kbd>などを打鍵すると置換が行なわれます。</p>
 
@@ -23,17 +22,15 @@ author: ujihisa
 
 <p>バッファ内全体からカーソル下のキーワードをbbbという文字列に置換するには、以下のコマンドを実行します。</p>
 
-<pre class="prettyprint"><code class="lang-vim">:exe '%s/\&lt;' . expand('&lt;cword&gt;') . '\&gt;/bbb/g'
-</code></pre>
+<pre class="prettyprint"><code class="lang-vim">0</code></pre>
 
 <p>これは以下の略称です</p>
 
-<pre class="prettyprint"><code class="lang-vim">:execute '%substitute/\&lt;' . expand('&lt;cword&gt;') . '\&gt;/bbb/g'
-</code></pre>
+<pre class="prettyprint"><code class="lang-vim">0</code></pre>
 
 <p>もっとも、これを毎回打鍵するのは酷です。
-				今回は<code>~/.vimrc</code>ファイルに上記コマンドの途中までに該当するものを入力してくれるキーマッピングを新たに定義することで、
+				今回は<code>0</code>ファイルに上記コマンドの途中までに該当するものを入力してくれるキーマッピングを新たに定義することで、
 				問題を解決しました。
-				他にも<code>cnoreabbrev</code>を用いる解決方法が考えられます。</p>
+				他にも<code>0</code>を用いる解決方法が考えられます。</p>
 
 <address class="hack-author">ujihisa</address>

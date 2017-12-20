@@ -11,31 +11,12 @@ author: thinca
 
 <p>ファイルを開いた際にディレクトリを作成する設定もありますが、そうすると試しに開いて結局保存しなかった場合にディレクトリだけ残ってしまいます。ここでは、保存する際に同時にディレクトリを作成する設定を紹介します。</p>
 
-<pre class="prettyprint"><code class="lang-vim">augroup vimrc-auto-mkdir  " &#123;&#123;&#123;
-  autocmd!
-  autocmd BufWritePre * call s:auto_mkdir(expand('&lt;afile&gt;:p:h'))
-  function! s:auto_mkdir(dir)  " &#123;&#123;&#123;
-    if !isdirectory(a:dir)
-      call mkdir(iconv(a:dir, &amp;encoding, &amp;termencoding), 'p')
-    endif
-  endfunction  " &#125;&#125;&#125;
-augroup END  " &#125;&#125;&#125;
-</code></pre>
+<pre class="prettyprint"><code class="lang-vim">0</code></pre>
 
 <p>保存直前に、ファイルを保存すべきディレクトリがあるかをチェックして、ない場合に作成しています。</p>
 
 <p>これだと、すでにあるディレクトリ名と間違えてファイルを開いていた場合でも気付かないうちに生成されてしまう場合があります。ディレクトリを作るかどうか確認する処理を入れることも可能です。</p>
 
-<pre class="prettyprint"><code class="lang-vim">augroup vimrc-auto-mkdir  " &#123;&#123;&#123;
-  autocmd!
-  autocmd BufWritePre * call s:auto_mkdir(expand('&lt;afile&gt;:p:h'), v:cmdbang)
-  function! s:auto_mkdir(dir, force)  " &#123;&#123;&#123;
-    if !isdirectory(a:dir) &amp;&amp; (a:force ||
-    \    input(printf('"%s" does not exist. Create? [y/N]', a:dir)) =~? '^y\%[es]$')
-      call mkdir(iconv(a:dir, &amp;encoding, &amp;termencoding), 'p')
-    endif
-  endfunction  " &#125;&#125;&#125;
-augroup END  " &#125;&#125;&#125;
-</code></pre>
+<pre class="prettyprint"><code class="lang-vim">0</code></pre>
 
 <address class="hack-author">thinca</address>

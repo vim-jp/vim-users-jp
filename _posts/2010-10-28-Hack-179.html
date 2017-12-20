@@ -11,34 +11,24 @@ author: tyru
 <p>さて、タイトルの&#8217;cpoptions&#8217;と&#8217;compatible&#8217;についてですが、<br />
 				理由もわからず</p>
 
-<pre class="prettyprint"><code class="lang-vim">set nocompatible
-
-" 以下は省略形
-set nocp
-</code></pre>
+<pre class="prettyprint"><code class="lang-vim">0</code></pre>
 
 <p>と.vimrcに書いている方も多いことでしょう。<br />
 				また</p>
 
-<pre class="prettyprint"><code class="lang-vim">set cpoptions&amp;vim
-
-" 以下は省略形
-set cpo&amp;vim
-</code></pre>
+<pre class="prettyprint"><code class="lang-vim">0</code></pre>
 
 <p>というような行かもしれません。<br />
 				しかしこの一行は実は必要ありません。</p>
 
-<p><code class="lang-vim">:help compatible</code>するとこのように書かれています。(<a href="http://www.kaoriya.net/vimdoc_j/">日本語版</a>の記述です)</p>
+<p><code class="lang-vim">0</code>するとこのように書かれています。(<a href="http://www.kaoriya.net/vimdoc_j/">日本語版</a>の記述です)</p>
 
-<pre class="prettyprint"><code>(既定では オン、ファイル|vimrc|または
-                |gvimrc|が発見されたらオフ)
-</code></pre>
+<pre class="prettyprint"><code>0</code></pre>
 
 <p>つまり、.vimrcか.gvimrcをVimが見つけられていればこの値は自動的にオフになるのです。<br />
-				なので.vimrcで<code class="lang-vim">set nocompatible</code>しても意味がありません。<br />
-				しかもこのオプションがオフの時は<code>'cpoptions'</code>は自動的にVim互換の値になるので<br />
-<code class="lang-vim">set cpo&amp;vim</code>とする必要もありません。<br />
+				なので.vimrcで<code class="lang-vim">0</code>しても意味がありません。<br />
+				しかもこのオプションがオフの時は<code>0</code>は自動的にVim互換の値になるので<br />
+<code class="lang-vim">0</code>とする必要もありません。<br />
 				ようするにユーザがこの値をいじる必要はありません。</p>
 
 <p>また、この2つのオプションを変える際は<br />

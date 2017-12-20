@@ -18,8 +18,7 @@ author: Sixeight
 
 <p>導入は以下の様に ~/.vim にリポジトリを clone すると完了します。</p>
 
-<pre class="prettyprint"><code>$ git clone http://github.com/gmarik/vundle.git ~/.vim/vundle.git
-</code></pre>
+<pre class="prettyprint"><code>0</code></pre>
 
 <p>ドットファイルを git で管理されている方は、submodule として取り込んで下さい。</p>
 
@@ -27,23 +26,7 @@ author: Sixeight
 
 <p>plugin の管理は以下の様に .vimrc に Bundle &#8216;plugin name&#8217; と記述することで行います。</p>
 
-<pre class="prettyprint"><code class="lang-vim">set nocompatible
-filetype off                   " (1)
-
-set rtp+=~/.vim/vundle.git/    " (2)
-call vundle#rc()               " (3)
-
-" original repos on github
-Bundle 'tpope/vim-fugitive'
-
-" vim-scripts repos
-Bundle 'rails.vim'
-
-" non github repos
-Bundle 'git://git.wincent.com/command-t.git'
-
-filetype plugin indent on     " (5)
-</code></pre>
+<pre class="prettyprint"><code class="lang-vim">0</code></pre>
 
 <p>特徴的なのは (1) で filetype を一度 off にしている点です。
 				Vundle の処理が終り次第、(5) で ftplugin と indent を読み込むように指定しています。</p>
@@ -54,22 +37,19 @@ filetype plugin indent on     " (5)
 
 <h4>Github 上のリポジトリから取得する場合</h4>
 
-<pre class="prettyprint"><code class="lang-vim">Bundle 'user_name/repository_name'
-</code></pre>
+<pre class="prettyprint"><code class="lang-vim">0</code></pre>
 
 <p>の様に、Github のユーザ名とリポジトリ名を指定します。</p>
 
 <h4>vim-scripts 上のリポジトリから取得する場合</h4>
 
-<pre class="prettyprint"><code class="lang-vim">Bundle 'script_name'
-</code></pre>
+<pre class="prettyprint"><code class="lang-vim">0</code></pre>
 
 <p>の様に、plugin の名前を指定します。</p>
 
 <h4>それ以外の git リポジトリから取得する場合</h4>
 
-<pre class="prettyprint"><code class="lang-vim">Bundle 'git://repository_url'
-</code></pre>
+<pre class="prettyprint"><code class="lang-vim">0</code></pre>
 
 <p>の様に、Git リポジトリ のフルパスを指定します。</p>
 
@@ -78,18 +58,15 @@ filetype plugin indent on     " (5)
 <p>plugin のインストールには、:BundleInstall コマンドを使用します。
 				先程、.vimrc に Bundle &#8216;name&#8217; と記述した plugin が自動的に取得され、インストールまで行われます。</p>
 
-<pre class="prettyprint"><code class="lang-vim">:BundleInstall
-</code></pre>
+<pre class="prettyprint"><code class="lang-vim">0</code></pre>
 
 <p>また、既にインストールされている plugin をアップデートするには、 :BundleInstall! コマンドを利用します。</p>
 
-<pre class="prettyprint"><code class="lang-vim">:BundleInstall!
-</code></pre>
+<pre class="prettyprint"><code class="lang-vim">0</code></pre>
 
 <p>plugin を検索して、インタラクティブに管理することも出来ます。</p>
 
-<pre class="prettyprint"><code class="lang-vim">:Bundles unite
-</code></pre>
+<pre class="prettyprint"><code class="lang-vim">0</code></pre>
 
 <p>上記のコマンドを実行すると、検索結果が split されて表示されます。リストから目的の plugin を選択し、インストール、削除などが行えます。</p>
 
@@ -97,13 +74,11 @@ filetype plugin indent on     " (5)
 
 <p>以下のようにしてヘルプを生成します。</p>
 
-<pre class="prettyprint"><code class="lang-vim">:helptags ~/.vim/vundle.git/doc
-</code></pre>
+<pre class="prettyprint"><code class="lang-vim">0</code></pre>
 
 <p>生成したヘルプは通常通り以下のように引くことが出来ます</p>
 
-<pre class="prettyprint"><code class="lang-vim">:help vundle
-</code></pre>
+<pre class="prettyprint"><code class="lang-vim">0</code></pre>
 
 <h2>参照</h2>
 

@@ -12,7 +12,7 @@ author: Shougo
 
 <dt><kbd>&lt;C-x&gt;&lt;C-p&gt;</kbd>または<kbd>&lt;C-x&gt;&lt;C-n&gt;</kbd>: カレントバッファからのキーワード補完</dt>
 <dd>カーソルより前の文字列と一致するキーワードを補完候補とします。ここで「キーワード」とはオプション<code class="option">'iskeyword'</code>で指定された文字が2個以上連続する文字列です。EmacsにおけるDynamic Abbrev Expansion (動的略語展開)と同等の機能です。</dd>
-<dd><code class="option">'iskeyword'</code>の値はバッファ毎にカスタマイズでき、編集するファイルの種類に応じて適宜設定されます。例えばLisp系言語では多くの文字が識別子として利用可能なため、<code class="option">'iskeyword'</code>には<code>-</code>、<code>+</code>、<code>?</code>、<code>!</code>なども含まれています。</dd>
+<dd><code class="option">'iskeyword'</code>の値はバッファ毎にカスタマイズでき、編集するファイルの種類に応じて適宜設定されます。例えばLisp系言語では多くの文字が識別子として利用可能なため、<code class="option">'iskeyword'</code>には<code>0</code>、<code>0</code>、<code>0</code>、<code>0</code>なども含まれています。</dd>
 <dd>他の補完と比較しても高速ですが、補完候補が大量にある場合、補完候補の表示に時間がかかります。</dd>
 
 <dt><kbd>&lt;C-x&gt;&lt;C-f&gt;</kbd>: ファイル名補完</dt>
@@ -36,10 +36,10 @@ author: Shougo
 <dd>オプション<code class="option">'tags'</code>で指定された場所にあるタグファイルからキーワードを検索し、補完を行います。この補完を利用するためには予めctagsなどのツールを用いてタグファイルを作成しておく必要があります。</dd>
 
 <dt><kbd>&lt;C-x&gt;&lt;C-i&gt;</kbd>: インクルードファイルからのキーワード補完</dt>
-<dd>カレントバッファに加えインクルードファイルからもキーワードを検索し、補完を行います。例えばC言語では<code>#include</code>で他のファイルの内容を取り込むことができますが、「インクルードファイル」とはそのような記述により参照されている外部ファイルのことです。Perlでは<code>use</code>や<code>require</code>、Rubyでは<code>require</code>や<code>load</code>などを認識します。インクルードファイルについては<code class="option">'include'</code>で指定することができます。</dd>
+<dd>カレントバッファに加えインクルードファイルからもキーワードを検索し、補完を行います。例えばC言語では<code>0</code>で他のファイルの内容を取り込むことができますが、「インクルードファイル」とはそのような記述により参照されている外部ファイルのことです。Perlでは<code>0</code>や<code>0</code>、Rubyでは<code>0</code>や<code>0</code>などを認識します。インクルードファイルについては<code class="option">'include'</code>で指定することができます。</dd>
 
 <dt><kbd>&lt;C-x&gt;&lt;C-d&gt;</kbd>: 定義/マクロ名補完</dt>
-<dd>カレントバッファとインクルードファイルからマクロ名などの各種定義を補完します。例えばC言語では<code>#define</code>によりマクロを定義することができますが、そのような記述で定義されたものを補完することができます。</dd>
+<dd>カレントバッファとインクルードファイルからマクロ名などの各種定義を補完します。例えばC言語では<code>0</code>によりマクロを定義することができますが、そのような記述で定義されたものを補完することができます。</dd>
 
 <dt><kbd>&lt;C-x&gt;&lt;C-t&gt;</kbd>: シソーラス補完</dt>
 <dd>オプション<code class="option">'thesaurus'</code>で指定された辞書ファイルから単語を補完します。辞書補完とは異なり、カーソル付近の文字列にマッチする単語だけではなく、その類義語も補完することができます。</dd>

@@ -10,7 +10,7 @@ author: ujihisa
 
 <p>Haskellを書いていて、長いソースコードの末尾の方にて、急にとあるモジュールのとある関数を使いたい、そんなときはよくあります。ありがちなのがApplicativeの演算子いくつかと、Data.Function.onと、Data.Listのアレとコレと・・・。いくらでもあります。</p>
 
-<p>Haskellでは一般的に、モジュールのimportはソースコードのかなりはじめの方にまとめて記述します。importしたい関数を一度しか使わず、しかもソースコードの末尾の方に位置していようと、おかまい無しです。このとき、<kbd>gg</kbd>などでソースコード上部まで移動し、<a href="/vim-users-jp/2011/04/06/Hack-211.html">neco-ghc</a>などを駆使してmoduleとその関数を的確にimportし、そして<kbd>&lt;C-o&gt;</kbd>などでもといた場所に戻ることになると思います。<code class="lang-vim">:sp</code>などで画面分割してから行ったり、あるいはmarkをつけるという方法もありますが、いずれにせよこれらの作業のため脳内の作業メモリがスタックオーバーフローするのは明らかでしょう。</p>
+<p>Haskellでは一般的に、モジュールのimportはソースコードのかなりはじめの方にまとめて記述します。importしたい関数を一度しか使わず、しかもソースコードの末尾の方に位置していようと、おかまい無しです。このとき、<kbd>gg</kbd>などでソースコード上部まで移動し、<a href="/vim-users-jp/2011/04/06/Hack-211.html">neco-ghc</a>などを駆使してmoduleとその関数を的確にimportし、そして<kbd>&lt;C-o&gt;</kbd>などでもといた場所に戻ることになると思います。<code class="lang-vim">0</code>などで画面分割してから行ったり、あるいはmarkをつけるという方法もありますが、いずれにせよこれらの作業のため脳内の作業メモリがスタックオーバーフローするのは明らかでしょう。</p>
 
 <h2>解決</h2>
 
@@ -18,21 +18,17 @@ author: ujihisa
 
 <p><a href="https://github.com/ujihisa/unite-haskellimport">https://github.com/ujihisa/unite-haskellimport</a></p>
 
-<p>まずは上記プラギンをインストールします。依存プラギンはunite.vim、依存ツールは<code>hoogle</code>です。</p>
+<p>まずは上記プラギンをインストールします。依存プラギンはunite.vim、依存ツールは<code>0</code>です。</p>
 
-<pre class="prettyprint"><code>$ cabal update &amp;&amp; cabal install hoogle &amp;&amp; hoogle data
-</code></pre>
+<pre class="prettyprint"><code>0</code></pre>
 
-<p>たとえば急に<code>==&gt;</code>という関数を使いたくなったとしましょう。</p>
+<p>たとえば急に<code>0</code>という関数を使いたくなったとしましょう。</p>
 
-<pre class="prettyprint"><code class="lang-vim">:Unite haskellimport
-</code></pre>
+<pre class="prettyprint"><code class="lang-vim">0</code></pre>
 
-<p>としてunite窓を開き、<code>==&gt;</code>と打鍵しましょう。</p>
+<p>としてunite窓を開き、<code>0</code>と打鍵しましょう。</p>
 
-<pre class="prettyprint"><code>Test.QuickCheck.Property (==&gt;) :: Testable prop =&gt; Bool -&gt; prop -&gt; Property
-Test.QuickCheck (==&gt;) :: Testable prop =&gt; Bool -&gt; prop -&gt; Property
-</code></pre>
+<pre class="prettyprint"><code>0</code></pre>
 
 <p>インストールしているcabalパッケージにもよりますが、たとえば上記のような項目が選択肢にでてくることでしょう。実際にimportしたい側を選択します。</p>
 
@@ -40,27 +36,18 @@ Test.QuickCheck (==&gt;) :: Testable prop =&gt; Bool -&gt; prop -&gt; Property
 
 <p>Before</p>
 
-<pre class="prettyprint"><code>import qualified Data.Text as T
-
-f x = ...
-</code></pre>
+<pre class="prettyprint"><code>0</code></pre>
 
 <p>After</p>
 
-<pre class="prettyprint"><code>import qualified Data.Text as T
-import Test.QuickCheck ((==&gt;))
+<pre class="prettyprint"><code>0</code></pre>
 
-f x = ...
-</code></pre>
+<p>今回importしたのは記号からなる関数でした。が、もしも記号ではない関数、つまりVimの<code>0</code>になるようなものならば、<code class="lang-vim">0</code>のかわりに</p>
 
-<p>今回importしたのは記号からなる関数でした。が、もしも記号ではない関数、つまりVimの<code>&lt;cword&gt;</code>になるようなものならば、<code class="lang-vim">:Unite</code>のかわりに</p>
+<pre class="prettyprint"><code class="lang-vim">0</code></pre>
 
-<pre class="prettyprint"><code class="lang-vim">:UniteWithCursorWord haskellimport
-</code></pre>
+<p>とするとよいでしょう。これを頻繁に行うようならば、適切なキーにマッピングしておくべきです。たとえば以下を <code>0</code>に記述すると、<kbd>&lt;space&gt;I</kbd>と打鍵するだけでカーソル以下にある単語の関数をimportしてくれます。</p>
 
-<p>とするとよいでしょう。これを頻繁に行うようならば、適切なキーにマッピングしておくべきです。たとえば以下を <code>~/.vim/ftplugin/haskell.vim</code>に記述すると、<kbd>&lt;space&gt;I</kbd>と打鍵するだけでカーソル以下にある単語の関数をimportしてくれます。</p>
-
-<pre class="prettyprint"><code class="lang-vim">nnoremap &lt;buffer&gt; &lt;space&gt;I :&lt;C-u&gt;UniteWithCursorWord haskellimport&lt;Cr&gt;
-</code></pre>
+<pre class="prettyprint"><code class="lang-vim">0</code></pre>
 
 <address class="hack-author">ujihisa</address>

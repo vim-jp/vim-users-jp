@@ -10,108 +10,47 @@ author: tsukkee
 
 <p>VimScriptからPythonを起動するとき、Pythonは呼ばれたVimScriptのコンテキストで実行されます。なので、以下の例のようにしてVimScriptとPython間で変数をやりとりすることができます。</p>
 
-<pre class="prettyprint"><code class="lang-vim">" VimScript
-let s:hoge = "s:hoge"
+<pre class="prettyprint"><code class="lang-vim">0</code></pre>
 
-function Hoge(hoge)
-    let hoge = "l:hoge"
-    python &lt;&lt;EOM
-print vim.eval('s:hoge') # s:hogeと表示
-print vim.eval('a:hoge') # a:hogeと表示
-print vim.eval('hoge')   # l:hogeと表示
+<p>注意点としては、前回vim.eval()のところでも述べたようにVimScriptの内容は全て文字列になるので数値で欲しい場合は、Python側で<code>0</code>などとキャストする必要があるところです。他にもPythonにはboolean型がありますがVimScriptにはないなど微妙に落とし穴があるので、Python側のif文などでVimScriptの値を参照する際は気を付ける必要があります。また、:pyfileで読み込んだ外部ファイルの中でもこのコンテキストの扱いは有効です。例えば以下の通りです。</p>
 
-vim.command('let s:hoge = "s:fuga"')
-vim.command('let hoge = "l:fuga"')
-EOM
-    return hoge
-endfunction
+<pre class="prettyprint"><code>0</code></pre>
 
-echo Hoge('a:hoge') " l:fugaと表示
-echo s:hoge         " s:fugaと表示</code></pre>
-
-<p>注意点としては、前回vim.eval()のところでも述べたようにVimScriptの内容は全て文字列になるので数値で欲しい場合は、Python側で<code>int(vim.eval("line('.')"))</code>などとキャストする必要があるところです。他にもPythonにはboolean型がありますがVimScriptにはないなど微妙に落とし穴があるので、Python側のif文などでVimScriptの値を参照する際は気を付ける必要があります。また、:pyfileで読み込んだ外部ファイルの中でもこのコンテキストの扱いは有効です。例えば以下の通りです。</p>
-
-<pre class="prettyprint"><code>" VimScript
-pyfile hoge.py
-let s:fuga = 's:fuga'
-python hoge("hoge")</code></pre>
-
-<pre class="prettyprint"><code>" hoge.pyとする
-def hoge(str):
-    print vim.eval('s:fuga') + str # s:fugahogeと表示</code></pre>
+<pre class="prettyprint"><code>0</code></pre>
 
 <p>また:pythonコマンドで生成したPythonの変数は全てグローバル変数となり、Vimの起動から終了まで全て同じコンテキストとなります。</p>
 
-<pre class="prettyprint"><code>" VimScript
-python &lt;&lt;EOM
-hoge = "hoge"
-EOM
-
-python &lt;&lt;EOM
-print hoge # hogeと表示される
-EOM
-</code></pre>
+<pre class="prettyprint"><code>0</code></pre>
 
 <h2>ユニコード文字の扱い</h2>
 
-<p>Pythonはスクリプト自体のエンコードを指定する方法としてマジックコメントを使うことができます。これは、スクリプトファイルの1行目か2行目に、<code>coding:utf-8</code>や<code>coding=utf-8</code>などのように<code>/coding[:=]文字コード名/</code>で表される表現があればエンコードとして認識されるというものです。<a href="http://www.python.org/dev/peps/pep-0263/">PEP 0263</a>には.pyファイルをVimで編集する場合は、Vimのモードラインとしても有効になるように以下のように書く例が掲載されています。</p>
+<p>Pythonはスクリプト自体のエンコードを指定する方法としてマジックコメントを使うことができます。これは、スクリプトファイルの1行目か2行目に、<code>0</code>や<code>0</code>などのように<code>0</code>で表される表現があればエンコードとして認識されるというものです。<a href="http://www.python.org/dev/peps/pep-0263/">PEP 0263</a>には.pyファイルをVimで編集する場合は、Vimのモードラインとしても有効になるように以下のように書く例が掲載されています。</p>
 
-<pre class="prettyprint"><code># vim:set fileencoding=utf-8:</code></pre>
+<pre class="prettyprint"><code>0</code></pre>
 
-<p>しかしモードラインで<code>'fileencoding'</code>は指定すべきでないので単に、</p>
+<p>しかしモードラインで<code>0</code>は指定すべきでないので単に、</p>
 
-<pre class="prettyprint"><code># coding=utf-8</code></pre>
+<pre class="prettyprint"><code>0</code></pre>
 
 <p>などと書くべきです。VimScript内の:pythonコマンドではヒアドキュメント風の書き方を使った場合にだけこのマジックコメントを使うことができます。また、マジックコメントは各コマンドごとに書く必要があります。</p>
 
-<pre class="prettyprint"><code>" utf-8で保存されたVimScript、'encoding'がutf-8の環境
-python &lt;&lt;EOM
-print u"あいうえお".encode('utf-8') # スクリプトがasciiで書かれていると解釈され文字化けする
-EOM
-
-python &lt;&lt;EOM
-# coding=utf-8
-print u"あいうえお".encode('utf-8') # スクリプトがutf-8で書かれていると解釈されて文字化けしない
-EOM
-
-python &lt;&lt;EOM
-print u"あいうえお".encode('utf-8') # 前のブロックのマジックコメントは反映されず文字化けする
-EOM</code></pre>
+<pre class="prettyprint"><code>0</code></pre>
 
 <p>ということなので、マルチバイト文字をやりとりする必要がある場合は基本的に:pythonコマンドで一行でスクリプトを渡す形式を使うことはできず、ヒアドキュメント風の使い方をすることになります。また、より汎用的にするには以下のように書くと良いでしょう。</p>
 
-<pre class="prettyprint"><code>" utf-8で保存されたVimScript、'encoding'は不明
-python &lt;&lt;EOM
-# coding=utf-8
-VIM_ENCODING = vim.eval('&#038;encoding')
-print u"あいうえお".encode(VIM_ENCODING)
-EOM</code></pre>
+<pre class="prettyprint"><code>0</code></pre>
 
 <p>Vimから入力を受け取ってPythonに渡すときも同様にしてdecodeすれば文字化けせずにユニコード文字列を渡すことができます。</p>
 
 <h2>Pythonのimport</h2>
 
-<p>例えば、Pythonインタフェースを作ったプラグインを作っていて、Python部分が長くなるので外部に.pyファイルとして出しておきたい場合を考えます。そんなときは、通常は:pyfileを使えば良いのですが、これはグローバル空間でファイルの中身を実行するので、<code>from module import *</code>したときと同様に外部ファイルの関数や変数を全てグローバル空間に展開してしまいます。これを避けるための方法を考えてみます。</p>
+<p>例えば、Pythonインタフェースを作ったプラグインを作っていて、Python部分が長くなるので外部に.pyファイルとして出しておきたい場合を考えます。そんなときは、通常は:pyfileを使えば良いのですが、これはグローバル空間でファイルの中身を実行するので、<code>0</code>したときと同様に外部ファイルの関数や変数を全てグローバル空間に展開してしまいます。これを避けるための方法を考えてみます。</p>
 
-<pre class="prettyprint"><code> " pytest.py
-def func():
-    print "hoge"</code></pre>
+<pre class="prettyprint"><code>0</code></pre>
 
-<pre class="prettyprint"><code> " VimScript (:pyfileを使った例）
-pyfile pytest.py
-python &lt;&lt;EOM
-func() # hogeと表示される
-EOM</code></pre>
+<pre class="prettyprint"><code>0</code></pre>
 
-<pre class="prettyprint"><code> " VimScript（:pyfileを使わない例）
-let path = expand('%:p:h')
-python &lt;&lt;EOM
-import vim, sys
-sys.path.append(vim.eval('path'))
-
-import pytest # この.vimファイルと同じディレクトリにpytest.pyを置いておく
-pytest.func() # hogeと表示される
-EOM</code></pre>
+<pre class="prettyprint"><code>0</code></pre>
 
 <p>このように、VimScript側でスクリプトの置いてあるディレクトリを取得し、sys.pathにパスを追加しておくことで、所望の.pyファイルをimportすることができます。</p>
 

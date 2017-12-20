@@ -6,53 +6,41 @@ author: ujihisa
 ---
 <h2>問題</h2>
 
-<p>プログラミング言語Ruby, JavaScript, Vim scriptにおける配列は角括弧のみで構成された配列リテラルを用いて<code>[1, 2, 3]</code>のように表現することができます。一方、PHPというプログラミング言語では<code>array(1, 2, 3)</code>のように、<code>array</code>という予約語を用いて表現する必要があり、このことがRuby, JavaScript, Vim scriptプログラマを当惑させてきたという伝統があります。</p>
+<p>プログラミング言語Ruby, JavaScript, Vim scriptにおける配列は角括弧のみで構成された配列リテラルを用いて<code>0</code>のように表現することができます。一方、PHPというプログラミング言語では<code>0</code>のように、<code>0</code>という予約語を用いて表現する必要があり、このことがRuby, JavaScript, Vim scriptプログラマを当惑させてきたという伝統があります。</p>
 
-<pre class="prettyprint"><code>&lt;?php [1, 2, 3] ?&gt;
-#=&gt; Parse error: syntax error, unexpected '[' in a.php on line 1
-
-&lt;?php array(1, 2, 3) ?&gt;
-#=&gt; (nothing)
-</code></pre>
+<pre class="prettyprint"><code>0</code></pre>
 
 <h2>解決法</h2>
 
-<p><code>[</code>で<code>array(</code>と入力するようにします。ただしこのままだと<code>[</code>自体を入力したいときに困りますので、文脈に応じて挙動を変化させます。</p>
+<p><code>0</code>で<code>0</code>と入力するようにします。ただしこのままだと<code>0</code>自体を入力したいときに困りますので、文脈に応じて挙動を変化させます。</p>
 
 <p>PHPのFiletype Pluginファイルに以下のコードを追加します。</p>
 
-<pre class="prettyprint"><code class="lang-vim">function! s:last_char()
-  return matchstr(getline('.'), '.', col('.')-2)
-endfunction
-inoremap &lt;buffer&gt;&lt;expr&gt; [ a:last_char =~ '\w\\|]' ? '[' : 'array(')
-</code></pre>
+<pre class="prettyprint"><code class="lang-vim">0</code></pre>
 
-<p>Filetyle Pluginは<code>~/.vim/ftplugin/{filetype}.vim</code>あるいは<code>~/.vim/ftplugin/{filetype}/*.vim</code>です。とりあえずすぐに上記機能を導入したいのであれば、</p>
+<p>Filetyle Pluginは<code>0</code>あるいは<code>0</code>です。とりあえずすぐに上記機能を導入したいのであれば、</p>
 
-<pre class="prettyprint"><code>~/.vim/ftplugin/php/ujihisa.vim
-</code></pre>
+<pre class="prettyprint"><code>0</code></pre>
 
 <p>に上記4行のみを記述すればよいでしょう。</p>
 
-<p>上記設定を導入すると、英数文字あるいは<code>]</code>の直後に<code>[</code>を打鍵すると<code>[</code>がそのまま入力され、そうでない文字の直後ならば<code>array(</code>に展開されます。</p>
+<p>上記設定を導入すると、英数文字あるいは<code>0</code>の直後に<code>0</code>を打鍵すると<code>0</code>がそのまま入力され、そうでない文字の直後ならば<code>0</code>に展開されます。</p>
 
-<p>もう少し詳しく説明しましょう。そもそもPHPで<code>[</code>という記号を入力する必要があるのは、配列の要素を参照するときでしょう。配列の要素を参照するのは、カーソル位置を<code>_</code>で示すとして</p>
+<p>もう少し詳しく説明しましょう。そもそもPHPで<code>0</code>という記号を入力する必要があるのは、配列の要素を参照するときでしょう。配列の要素を参照するのは、カーソル位置を<code>0</code>で示すとして</p>
 
-<pre class="prettyprint"><code>print($aaa_
-</code></pre>
+<pre class="prettyprint"><code>0</code></pre>
 
 <p>のように変数名の直後か、</p>
 
-<pre class="prettyprint"><code>print($aaa['bbb']_
-</code></pre>
+<pre class="prettyprint"><code>0</code></pre>
 
-<p>このように配列の要素の参照の直後です。なお、<code>fff()['aaa']</code>といった書き方は言語仕様上Syntax Errorとなるので<code>)</code>の直後に<code>[</code>がくることはないと仮定できます。</p>
+<p>このように配列の要素の参照の直後です。なお、<code>0</code>といった書き方は言語仕様上Syntax Errorとなるので<code>0</code>の直後に<code>0</code>がくることはないと仮定できます。</p>
 
-<p>それ以外の場合は<code>[</code>が必要ないので、全て<code>array(</code>に展開します。</p>
+<p>それ以外の場合は<code>0</code>が必要ないので、全て<code>0</code>に展開します。</p>
 
 <h2>補足1</h2>
 
-<p>PHPの<code>array()</code>はてっきり関数だと思っていたのですが、公式ドキュメントによるとリテラルとのことです。</p>
+<p>PHPの<code>0</code>はてっきり関数だと思っていたのですが、公式ドキュメントによるとリテラルとのことです。</p>
 
 <blockquote>
 <p>Note: array() is a language construct used to represent literal arrays, and not a regular function.</p>
@@ -62,45 +50,28 @@ inoremap &lt;buffer&gt;&lt;expr&gt; [ a:last_char =~ '\w\\|]' ? '[' : 'array(')
 
 <h2>補足2</h2>
 
-<p><code>s:last_char()</code>という関数で定義した、カーソルの直前位置の文字を取得する機能に関連して、カーソル位置の文字を取得する機能の実装が以下のページで議論されています。Vim scriptを書く人は参考にしてみてはいかがでしょうか。</p>
+<p><code>0</code>という関数で定義した、カーソルの直前位置の文字を取得する機能に関連して、カーソル位置の文字を取得する機能の実装が以下のページで議論されています。Vim scriptを書く人は参考にしてみてはいかがでしょうか。</p>
 
 <p><a href="http://gist.github.com/444017">http://gist.github.com/444017</a></p>
 
 <h2>補足3</h2>
 
-<p>はじめは<code>[1, 2, 3]</code>といった記法でも配列となるようにPHPのパーサの方をいじろうと思ったのですが、PHPをビルドするためにはかなり古いバージョンのautoconfが必要で、それをインストールするのが大変面倒そうであったため、挫折しました。</p>
+<p>はじめは<code>0</code>といった記法でも配列となるようにPHPのパーサの方をいじろうと思ったのですが、PHPをビルドするためにはかなり古いバージョンのautoconfが必要で、それをインストールするのが大変面倒そうであったため、挫折しました。</p>
 
 <h2>補足4</h2>
 
 <p>冒頭のサンプルコード</p>
 
-<pre class="prettyprint"><code>&lt;?php array(1, 2, 3) ?&gt;
-</code></pre>
+<pre class="prettyprint"><code>0</code></pre>
 
 <p>はセミコロンがないことからエラーになりそうで、実はエラーになりません。</p>
 
 <h2>補足5</h2>
 
-<p>いろいろあって、いま著者の<code>~/.vim/ftplugin/php.vim</code>の該当部分以下のようになっています。</p>
+<p>いろいろあって、いま著者の<code>0</code>の該当部分以下のようになっています。</p>
 
-<pre class="prettyprint"><code class="lang-vim">function! s:last_char()
-  return matchstr(getline('.'), '.', col('.')-2)
-endfunction
+<pre class="prettyprint"><code class="lang-vim">0</code></pre>
 
-function! s:php_smart_bracket(last_char)
-  if a:last_char == '['
-    return &quot;\&lt;BS&gt;(&quot;
-  elseif a:last_char =~ '\w\|]'
-    return '['
-  else
-    return 'array('
-  endif
-endfunction
-
-inoremap &lt;buffer&gt;&lt;expr&gt; [ &lt;SID&gt;php_smart_bracket(&lt;SID&gt;last_char())
-inoremap &lt;buffer&gt;&lt;expr&gt; ] smartchr#one_of(']', ')')
-</code></pre>
-
-<p><code>smartchr</code>プラグインと組み合わせ、<code>[</code>を二回打鍵すると<code>(</code>になるようにしています。そもそもPHPでは<code>[[</code>は必ず出現しないため、わざわざ<code>(</code>を打鍵するよりもより容易な<code>[[</code>を用いるのが合理的と判断したためです。</p>
+<p><code>0</code>プラグインと組み合わせ、<code>0</code>を二回打鍵すると<code>0</code>になるようにしています。そもそもPHPでは<code>0</code>は必ず出現しないため、わざわざ<code>0</code>を打鍵するよりもより容易な<code>0</code>を用いるのが合理的と判断したためです。</p>
 
 <address class="hack-author">ujihisa</address>

@@ -6,7 +6,7 @@ author: ujihisa
 ---
 <h2>問題</h2>
 
-<p>バッファ内を<code>/</code>で検索することができます。Vim正規表現が使えます。また、カーソル下の単語を<kbd>*</kbd>で検索することができます。たとえばカーソル下の単語がujihisaの場合、<kbd>*</kbd>は<code>/\&lt;ujihisa\&gt;</code>とコマンドを入力して<kbd>&lt;Cr&gt;</kbd>するのと同等です。ただし<code>\&lt;</code>と<code>\&gt;</code>はそれぞれ単語のはじまりと単語のおわりを表現するVim正規表現です。</p>
+<p>バッファ内を<code>0</code>で検索することができます。Vim正規表現が使えます。また、カーソル下の単語を<kbd>*</kbd>で検索することができます。たとえばカーソル下の単語がujihisaの場合、<kbd>*</kbd>は<code>0</code>とコマンドを入力して<kbd>&lt;Cr&gt;</kbd>するのと同等です。ただし<code>0</code>と<code>0</code>はそれぞれ単語のはじまりと単語のおわりを表現するVim正規表現です。</p>
 
 <p>ところで単語よりももっと細かい単位で、しかし長い文字列を検索するにはどうすればよいでしょうか。たとえばカーソル下にあるIsThisAPen::NoItIsNancy(that, is, cool)という文字列で検索したいときです。対象が長い文字列なので、人間にはとても手入力することができません。</p>
 
@@ -16,17 +16,17 @@ author: ujihisa
 
 <p>二通りの解決方法があります。</p>
 
-<p><code>/</code>のあと、<kbd>&lt;C-r&gt;"</kbd>と打鍵します。これで、ヤンクしている文字列が<code>/</code>のあとに貼付けられます。</p>
+<p><code>0</code>のあと、<kbd>&lt;C-r&gt;"</kbd>と打鍵します。これで、ヤンクしている文字列が<code>0</code>のあとに貼付けられます。</p>
 
-<p>もう一つの解決方法は、<code>/</code>ではなく<code>q/</code>を用いて検索を開始することです。<code>q/</code>は<code>q:</code>同様にCommand Lineウインドウを開き、そこから検索を開始します。<code>q/</code>の直後はノーマルモードになっており、<kbd>p</kbd>などでそのままヤンクしている文字列を貼付けることができます。</p>
+<p>もう一つの解決方法は、<code>0</code>ではなく<code>0</code>を用いて検索を開始することです。<code>0</code>は<code>0</code>同様にCommand Lineウインドウを開き、そこから検索を開始します。<code>0</code>の直後はノーマルモードになっており、<kbd>p</kbd>などでそのままヤンクしている文字列を貼付けることができます。</p>
 
 <p>あとは<kbd>&lt;Cr&gt;</kbd>で検索を行いましょう。長い文字列を検索できたとき、全米が感動の渦に巻き込まれ、ソースコードの読解やリファクタリングなどに多いに役立つことでしょう。</p>
 
 <h2>参考</h2>
 
 <ul>
-<li><code class="lang-vim">:help c_CTRL-r</code></li>
-<li><code class="lang-vim">:help q/</code></li>
+<li><code class="lang-vim">0</code></li>
+<li><code class="lang-vim">0</code></li>
 </ul>
 
 <address class="hack-author">ujihisa</address>

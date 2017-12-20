@@ -11,18 +11,14 @@ author: tyru
 <h2>解決</h2>
 
 <p><a href="http://www.vim.org/scripts/script.php?script_id=2576">winmove.vim</a>を使います。<br />
-				インストールした後は<code>&lt;Left&gt;</code>, <code>&lt;Up&gt;</code>, <code>&lt;Down&gt;</code>, <code>&lt;Right&gt;</code>でウインドウを動かせます。<br />
+				インストールした後は<code>0</code>, <code>0</code>, <code>0</code>, <code>0</code>でウインドウを動かせます。<br />
 				それぞれ</p>
 
-<pre class="prettyprint"><code>let g:wm_move_down  = '&lt;C-M-j&gt;'
-let g:wm_move_up    = '&lt;C-M-k&gt;'
-let g:wm_move_left  = '&lt;C-M-h&gt;'
-let g:wm_move_right = '&lt;C-M-l&gt;'
-</code></pre>
+<pre class="prettyprint"><code>0</code></pre>
 
 <p>のようにして変更できます。</p>
 
-<p>これは<code>Ctrl + Alt + [hjkl]</code>でウインドウを動かす設定です。<br />
+<p>これは<code>0</code>でウインドウを動かす設定です。<br />
 				これらのキーは端末の制約上、GVimでしか扱えないマッピングの一つです。</p>
 
 <p>しかしwinmove.vimはもともと端末版のVimにはいらないプラグインのため、無視して構いません。</p>

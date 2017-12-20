@@ -12,12 +12,7 @@ author: Shougo
 				パスを設定すれば、ファイルを開いたときに自動的に読み込まれます。
 				例えば、私は次のように設定しています。defaultはファイルタイプに関係なく参照される辞書ファイルです。</p>
 
-<pre class="prettyprint"><code>let g:NeoComplCache_DictionaryFileTypeLists = {
-            \ 'default' : '',
-            \ 'vimshell' : $HOME.'/.vimshell_hist',
-            \ 'scheme' : $HOME.'/.gosh_completions'
-            \ }
-</code></pre>
+<pre class="prettyprint"><code>0</code></pre>
 
 <p></p></p>
 
@@ -35,9 +30,7 @@ author: Shougo
 				スニペットのトリガーを補完するか直接入力してから、割り当てたスニペットの展開キーを押すことで展開されます。
 				展開キーを連打すると、プレースホルダの移動になります。</p>
 
-<pre class="prettyprint"><code>imap &lt;silent&gt;L     &lt;Plug&gt;(neocomplcache_snippets_expand)
-smap &lt;silent&gt;L     &lt;Plug&gt;(neocomplcache_snippets_expand)
-</code></pre>
+<pre class="prettyprint"><code>0</code></pre>
 
 <h2>オムニ補完が重い</h2>
 
@@ -45,8 +38,7 @@ smap &lt;silent&gt;L     &lt;Plug&gt;(neocomplcache_snippets_expand)
 				ファイルタイプをキーとしているので、無効にしたいファイルタイプの正規表現を空にするとオムニ補完が呼ばれなくなります。
 				例えば、htmlのオムニ補完を無効にするためには、次のようにします。</p>
 
-<pre class="prettyprint"><code>let g:NeoComplCache_OmniPatterns['html'] = ''
-</code></pre>
+<pre class="prettyprint"><code>0</code></pre>
 
 <h2>他のプログラミング言語にも対応させたい</h2>
 
@@ -58,9 +50,7 @@ smap &lt;silent&gt;L     &lt;Plug&gt;(neocomplcache_snippets_expand)
 <p>neocomplcacheに組み込まれているファイル名補完やオムニ補完は、クイックマッチや補完スキップに対応するなど、細かな部分で改良されています。
 				Vim標準の補完呼び出しを置き換えるためには、次のようにKey-mappingを定義します。</p>
 
-<pre class="prettyprint"><code>inoremap &lt;expr&gt;&lt;C-x&gt;&lt;C-f&gt;  neocomplcache#manual_filename_complete()
-inoremap &lt;expr&gt; &lt;C-j&gt;  &amp;filetype == 'vim' ? "\&lt;C-x&gt;\&lt;C-v&gt;\&lt;C-p&gt;" : neocomplcache#manual_omni_complete()
-</code></pre>
+<pre class="prettyprint"><code>0</code></pre>
 
 <h2>Vimで巨大なファイルを開くと、キャッシュ生成で待たされる</h2>
 

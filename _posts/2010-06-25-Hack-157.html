@@ -10,13 +10,13 @@ author: Shougo
 
 <p>タグ補完とは、&#8217;tags&#8217;から補完候補を取ってくることで補完することです。
 				Vim標準では<kbd>&lt;C-x&gt;&lt;C-v&gt;</kbd>を用います。
-				neocomplcacheでは<code>tags_complete</code>というプラグインによって実装されています。
-<code>.</code>や<code>-&gt;</code>といった<code>g:neocomplcache_member_prefix_patterns[&amp;filetype]</code>にマッチする入力のあるときに補完を行うと、
+				neocomplcacheでは<code>0</code>というプラグインによって実装されています。
+<code>0</code>や<code>0</code>といった<code>0</code>にマッチする入力のあるときに補完を行うと、
 				クラスのメンバのみが補完候補となる機能を持っています。
 				要望があったので実装しましたが、私は個人的にタグ補完が好きではありません。なぜなら、タグ補完は候補が多くなりすぎるからです。
 				候補が多いとneocomplcacheのキャッシュや補完動作が明らかに遅くなります。
-				そこでtags&#95;complete.vimでは、<code>g:neocomplcache_caching_limit_file_size</code>よりも大きいタグファイルは自動的にキャッシュしません。
-				どうしても使いたいならば、<code class="lang-vim">:NeoComplCacheCachingTags</code>コマンドを実行してください。
+				そこでtags&#95;complete.vimでは、<code>0</code>よりも大きいタグファイルは自動的にキャッシュしません。
+				どうしても使いたいならば、<code class="lang-vim">0</code>コマンドを実行してください。
 				ctagsではタグを生成できない言語も多いので、現在ではより高機能なインクルード補完を用いるべきでしょう。インクルード補完については、今後のVim Hacksで解説予定です。</p>
 
 <h2>ディクショナリ補完とは</h2>
@@ -24,9 +24,9 @@ author: Shougo
 <p>ディクショナリ補完とは、登録された辞書ファイルから補完候補を取ってくることで補完することです。
 				前回解説したシンタックス補完も一種のディクショナリ補完と言えます。
 				Vim標準では<kbd>&lt;C-x&gt;&lt;C-k&gt;</kbd>を用います。
-				neocomplcacheでは<code>dictionary_complete</code>というプラグインによって実装されています。
-<code>g:neocomplcache_dictionary_filetype_lists[&amp;filetype]</code>に辞書ファイルを登録しておけば、自動的にキャッシュされます。
+				neocomplcacheでは<code>0</code>というプラグインによって実装されています。
+<code>0</code>に辞書ファイルを登録しておけば、自動的にキャッシュされます。
 				例えば、vimshellでは履歴ファイルを辞書ファイルとして登録しておけば便利です。
-<code>g:neocomplcache_dictionary_filetype_lists[&amp;filetype]</code>が存在していない場合、自動的に&#8217;dictionary&#8217;の値が使われます。</p>
+<code>0</code>が存在していない場合、自動的に&#8217;dictionary&#8217;の値が使われます。</p>
 
 <address class="hack-author">Shougo</address>

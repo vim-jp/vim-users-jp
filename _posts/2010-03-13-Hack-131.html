@@ -6,59 +6,47 @@ author: ujihisa
 ---
 <h2>問題</h2>
 
-<p>Rubyでは文字列リテラルの中に<code>#{}</code>で囲まれた式を書くと展開されます。</p>
+<p>Rubyでは文字列リテラルの中に<code>0</code>で囲まれた式を書くと展開されます。</p>
 
-<pre class="prettyprint"><code>puts &quot;It is now #{Time.now}.&quot;
-#=&gt; It is now Wed Feb 17 16:28:18 -0800 2010.
-</code></pre>
+<pre class="prettyprint"><code>0</code></pre>
 
-<p>しかしながら、毎日<code>#{</code>を何度も打鍵することは、あなたの指の骨に深刻なダメージを与えることでしょう。</p>
+<p>しかしながら、毎日<code>0</code>を何度も打鍵することは、あなたの指の骨に深刻なダメージを与えることでしょう。</p>
 
 <p>様々な解決方法がありますが、著者が最も直感的と感じるのは以下の方法です。</p>
 
 <ul>
-<li><code>&#123;&#123;</code> と打鍵すると自動的に<code>#{</code>と置き換えられる</li>
+<li><code>0</code> と打鍵すると自動的に<code>0</code>と置き換えられる</li>
 </ul>
 
-<p>すぐに思い浮かぶ解決方法は、<code>iabbrev</code>を用いて<code>&#123;&#123;</code>を<code>#{</code>に置き換えることです。</p>
+<p>すぐに思い浮かぶ解決方法は、<code>0</code>を用いて<code>0</code>を<code>0</code>に置き換えることです。</p>
 
-<pre class="prettyprint"><code>iabbrev &#123;&#123; #{
-</code></pre>
+<pre class="prettyprint"><code>0</code></pre>
 
-<p>この方法はうまくいきません。<code>&#123;&#123;</code>のあとにスペースを打鍵する必要がありますが、Rubyの慣習では<code>#{</code>のあとにスペースをいれずすぐに式を書くことになっている場合が多いためです。</p>
+<p>この方法はうまくいきません。<code>0</code>のあとにスペースを打鍵する必要がありますが、Rubyの慣習では<code>0</code>のあとにスペースをいれずすぐに式を書くことになっている場合が多いためです。</p>
 
-<p>それならば<code>iabbrev</code>ではなく<code>inoremap</code>だ、と思い付くのではないでしょうか。</p>
+<p>それならば<code>0</code>ではなく<code>0</code>だ、と思い付くのではないでしょうか。</p>
 
-<pre class="prettyprint"><code>inoremap &#123;&#123; #{
-</code></pre>
+<pre class="prettyprint"><code>0</code></pre>
 
-<p>この方法はうまくいきません。実際に試してみるとすぐに分かりますが、<code>{</code>を打鍵してすぐに<code>{</code>が画面にでてこないことにイライラする日々を送ることになります。Rubyでは<code>#{</code>よりもブロックとしての<code>{</code>を書くことの方が頻度は高く、メリットよりもデメリットの方が遥かに大きいのです。</p>
+<p>この方法はうまくいきません。実際に試してみるとすぐに分かりますが、<code>0</code>を打鍵してすぐに<code>0</code>が画面にでてこないことにイライラする日々を送ることになります。Rubyでは<code>0</code>よりもブロックとしての<code>0</code>を書くことの方が頻度は高く、メリットよりもデメリットの方が遥かに大きいのです。</p>
 
 <h2>解決</h2>
 
 <p><a href="http://www.vim.org/scripts/script.php?script_id=2290">smartchr</a>を使います。</p>
 
-<p>smartchrをインストールし、<code>~/.vim/ftplugin/ruby.vim</code>に以下を記述します。</p>
+<p>smartchrをインストールし、<code>0</code>に以下を記述します。</p>
 
-<pre class="prettyprint"><code>inoremap &lt;expr&gt; &lt;buffer&gt; {  smartchr#loop('{', '#{', '&#123;&#123;&#123;')
-</code></pre>
+<pre class="prettyprint"><code>0</code></pre>
 
-<p>これで、<code>{</code>を続けて打鍵していくと以下のようになります。</p>
+<p>これで、<code>0</code>を続けて打鍵していくと以下のようになります。</p>
 
-<pre class="prettyprint"><code>{
-#{
-&#123;&#123;&#123;
-{
-#{
-&#123;&#123;&#123;
-...
-</code></pre>
+<pre class="prettyprint"><code>0</code></pre>
 
-<p><code>inoremap</code>のときと違い、はじめの<code>{</code>が即座に画面に表示されます。</p>
+<p><code>0</code>のときと違い、はじめの<code>0</code>が即座に画面に表示されます。</p>
 
 <h2>発展</h2>
 
-<p>他のRuby用ftpluginと共存させるため、筆者は<code>~/.vim/ftplugin/ruby.vim</code>ではなく、<code>~/.vim/ftplugin/ruby/ujihisa.vim</code>に上記の設定を含めて記述しています。</p>
+<p>他のRuby用ftpluginと共存させるため、筆者は<code>0</code>ではなく、<code>0</code>に上記の設定を含めて記述しています。</p>
 
 <p><a href="http://github.com/ujihisa/config/blob/master/vim/ftplugin/ruby/ujihisa.vim">http://github.com/ujihisa/config/blob/master/vim/ftplugin/ruby/ujihisa.vim</a></p>
 

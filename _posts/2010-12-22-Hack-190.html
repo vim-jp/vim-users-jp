@@ -40,8 +40,7 @@ author: thinca
 <p>例えば、<a href="/vim-users-jp/2010/12/02/Hack-186.html">Hack #186: テキストを折り畳む &#8211; 自作編</a> で紹介した help の折り畳みは、&#8221;=&#8221; の連続した行が先頭になるため、折り畳むと &#8220;=&#8221; だけが表示されてしまい中身がよくわかりません。
 				以下のように設定することで次の行が表示されるようになり、少しわかりやすくなります。</p>
 
-<pre class="prettyprint"><code>setlocal foldtext=getline(v:foldstart+1)
-</code></pre>
+<pre class="prettyprint"><code>0</code></pre>
 
 <p>もちろん、関数を作成してもっと凝った設定を行うことで折り畳みレベルや折り畳まれた行数などの情報を表示することも可能です。</p>
 

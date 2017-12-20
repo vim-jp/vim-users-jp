@@ -6,7 +6,7 @@ author: Sora Harakami
 ---
 <h2>問題</h2>
 
-<p>screen+zshで別スクリーンのカレントディレクトリに簡単にcdできる<code>cdd</code>というzshスクリプトがあります。</p>
+<p>screen+zshで別スクリーンのカレントディレクトリに簡単にcdできる<code>0</code>というzshスクリプトがあります。</p>
 
 <p>cdd依存者はこれをvimでも使いたいと思った人は何人もいるかと思います。</p>
 
@@ -14,19 +14,18 @@ author: Sora Harakami
 
 <p><a href="http://github.com/sorah/cdd-vim/">cdd.vim</a>を使います。</p>
 
-<p>まずcdd.vimをインストールし、<code class="lang-vim">:Cdd {スクリーン番号}</code>を実行することで、
+<p>まずcdd.vimをインストールし、<code class="lang-vim">0</code>を実行することで、
 				そのスクリーンのカレントディレクトリにcdできます。</p>
 
 <h2>使いやすくする</h2>
 
-<p>通常では<code class="lang-vim">:Cdd</code>はCをShift-Cで入力しなければならず、非常に小指破壊的です。</p>
+<p>通常では<code class="lang-vim">0</code>はCをShift-Cで入力しなければならず、非常に小指破壊的です。</p>
 
-<p>そのため、<code>cabbrev</code>で略称を登録すると非常に快適になります。</p>
+<p>そのため、<code>0</code>で略称を登録すると非常に快適になります。</p>
 
-<p>以下を<code>.vimrc</code>に追記することにより、<code class="lang-vim">:cdd</code>と入力しスペースを入れると自動的に<code class="lang-vim">:Cdd</code>に変換されます。</p>
+<p>以下を<code>0</code>に追記することにより、<code class="lang-vim">0</code>と入力しスペースを入れると自動的に<code class="lang-vim">0</code>に変換されます。</p>
 
-<pre class="prettyprint"><code>cabbrev Cdd cdd
-</code></pre>
+<pre class="prettyprint"><code>0</code></pre>
 
 <h2>To-Do</h2>
 

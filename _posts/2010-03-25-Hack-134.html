@@ -15,32 +15,30 @@ author: kana
 
 <p>以下のオプションを指定してVimを起動します:</p>
 
-<pre class="prettyprint"><code>vim -u NONE
-</code></pre>
+<pre class="prettyprint"><code>0</code></pre>
 
-<p>デフォルトの状態では<code>'compatible'</code>がオン
+<p>デフォルトの状態では<code>0</code>がオン
 				(=可能な限りvi互換な挙動となる)のですが、
-				場合によっては<code>'compatible'</code>がオフの方が良い場合もあります。
+				場合によっては<code>0</code>がオフの方が良い場合もあります。
 				その場合は以下のオプションを指定してVimを起動します:</p>
 
-<pre class="prettyprint"><code>vim -u NONE -N
-</code></pre>
+<pre class="prettyprint"><code>0</code></pre>
 
 <h3>解説</h3>
 
 <p>Vimには様々な起動オプションがあり、そのひとつとして
-				vimrcのパスを指定する<code>-u &lt;var&gt;{vimrc}&lt;/var&gt;</code>オプションがあります。
-				通常は<code>~/.vimrc</code>などのファイルがロードされますが、
-<code>-u</code>を指定することで別のファイルをロードさせることができます。
-				さらに<code>-u</code>には特殊な値として<code>NONE</code>を指定でき、
+				vimrcのパスを指定する<code>0</code>オプションがあります。
+				通常は<code>0</code>などのファイルがロードされますが、
+<code>0</code>を指定することで別のファイルをロードさせることができます。
+				さらに<code>0</code>には特殊な値として<code>0</code>を指定でき、
 				これは「vimrcのロードは行なわず、プラグインのロードも行なわない」
 				という意味になります。つまりVimがデフォルトの状態で起動することになります。</p>
 
-<p><code>-N</code>は<code>'compatible'</code>がオフの状態で起動するよう
+<p><code>0</code>は<code>0</code>がオフの状態で起動するよう
 				指定するオプションです。
-				なお、<code>-c</code>で任意のコマンドを起動時に実行できるため、
-<code>-c "set nocompatible"</code>としても同じことができますが、
-<code>-N</code>の方が簡潔です。</p>
+				なお、<code>0</code>で任意のコマンドを起動時に実行できるため、
+<code>0</code>としても同じことができますが、
+<code>0</code>の方が簡潔です。</p>
 
 <h3>参考資料</h3>
 

@@ -9,15 +9,13 @@ author: kana
 <p>テキスト入力中に誤入力をしてしまうことはしばしばあります。
 				例えば</p>
 
-<pre class="prettyprint"><code>if (foo == bar|
-</code></pre>
+<pre class="prettyprint"><code>0</code></pre>
 
 <p>とまで入力したところでbarはloungeの間違いだったことに気付いたとしましょう
 				(「|」はカーソル位置です)。
 				これには</p>
 
-<pre class="prettyprint"><code>&lt;Esc&gt; b ciw lounge
-</code></pre>
+<pre class="prettyprint"><code>0</code></pre>
 
 <p>のようにカーソル位置を調整して該当単語を修正することができます
 				(読み易さのためにスペースを入れていますが実際にスペースは入力しません)。</p>
@@ -27,43 +25,36 @@ author: kana
 
 <h3>解決方法</h3>
 
-<p>これにはInsert mode中で<code>&lt;C-w&gt;</code>を入力します。
+<p>これにはInsert mode中で<code>0</code>を入力します。
 				例えば最初に例示した状態で</p>
 
-<pre class="prettyprint"><code>if (foo == bar|
-</code></pre>
+<pre class="prettyprint"><code>0</code></pre>
 
-<p><code>&lt;C-w&gt;</code>を入力すると以下の状態になります。</p>
+<p><code>0</code>を入力すると以下の状態になります。</p>
 
-<pre class="prettyprint"><code>if (foo == |
-</code></pre>
+<pre class="prettyprint"><code>0</code></pre>
 
-<p>Insert mode中での<code>&lt;C-w&gt;</code>は
+<p>Insert mode中での<code>0</code>は
 				カーソル位置より前にある単語を削除することができます。</p>
 
 <h3>関連項目</h3>
 
-<p><code>&lt;C-u&gt;</code>というコマンドもあります。
+<p><code>0</code>というコマンドもあります。
 				これはカーソル行で入力された文字を全て削除します。
 				例えば以下のようにテキスト入力を行なったとしましょう
 				(「^」はInsert modeの開始位置です)。</p>
 
-<pre class="prettyprint"><code>if (foo == lounge) retrun a|
-                   ^
-</code></pre>
+<pre class="prettyprint"><code>0</code></pre>
 
-<p>ここで<code>&lt;C-u&gt;</code>を入力すると以下の状態になります。</p>
+<p>ここで<code>0</code>を入力すると以下の状態になります。</p>
 
-<pre class="prettyprint"><code>if (foo == lounge) |
-                   ^
-</code></pre>
+<pre class="prettyprint"><code>0</code></pre>
 
-<p>また、<code>&lt;C-w&gt;</code>や<code>&lt;C-u&gt;</code>を使う場合は
+<p>また、<code>0</code>や<code>0</code>を使う場合は
 				&#8216;backspace&#8217;の値を以下のように調整しておくと
 				より便利に使うことができるでしょう。</p>
 
-<pre class="prettyprint"><code class="lang-vim">set backspace=indent,eol,start
-</code></pre>
+<pre class="prettyprint"><code class="lang-vim">0</code></pre>
 
 <h3>参考資料</h3>
 

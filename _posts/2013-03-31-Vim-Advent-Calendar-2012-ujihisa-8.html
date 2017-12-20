@@ -16,11 +16,9 @@ author: ujihisa
 
 <h2>ゴール</h2>
 
-<pre class="prettyprint"><code>s:calc('1 + 2 * (3 + 4)')
-#=&gt; 15
-</code></pre>
+<pre class="prettyprint"><code>0</code></pre>
 
-<p>となるような関数<code>s:calc</code>を持つファイル<code>calc.vim</code>を作ります。足し算より掛け算の方が演算子結合順序が強く、また括弧もあるというものです。</p>
+<p>となるような関数<code>0</code>を持つファイル<code>0</code>を作ります。足し算より掛け算の方が演算子結合順序が強く、また括弧もあるというものです。</p>
 
 <p>一旦トークン列に分解し、その後パースしつつ各ノードを評価してひとつの値に畳み込む、という一般的かつ簡単な方法でやっていくことにしましょう。</p>
 
@@ -30,36 +28,23 @@ author: ujihisa
 
 <p><a href="http://qiita.com/items/a5ead41d4a1d4cbaeb74">http://qiita.com/items/a5ead41d4a1d4cbaeb74</a></p>
 
-<p>rbtnnさんが作成したVital.Lexerを用います。vitalを用いるので、まずは開発用に<code>&amp;rtp</code>に入っているvitalをそのまま<code>vital#of('vital')</code>を通して利用しましょう。</p>
+<p>rbtnnさんが作成したVital.Lexerを用います。vitalを用いるので、まずは開発用に<code>0</code>に入っているvitalをそのまま<code>0</code>を通して利用しましょう。</p>
 
-<p><code>lexer.vim</code></p>
+<p><code>0</code></p>
 
-<pre class="prettyprint"><code class="lang-vim">let s:L = vital#of('vital').import('Text.Lexer')
-let s:rule = [
-      \ ['id','\d\+'], ['whitespace','\s\+'],
-      \ ['pls', '+'], ['ast', '*'],
-      \ ['l_pare', '('], ['r_pare', ')']]
-function! s:lex(str)
-  return s:L.lexer(s:rule).parse(a:str)
-endfunction
-</code></pre>
+<pre class="prettyprint"><code class="lang-vim">0</code></pre>
 
 <p>かなり短くかつ宣言的に記述することができました。</p>
 
-<pre class="prettyprint"><code>echo s:lex('1 + 2 * (3 + 4)')
-</code></pre>
+<pre class="prettyprint"><code>0</code></pre>
 
 <p>を行うと</p>
 
-<pre class="prettyprint"><code>[{'label': 'id', 'col': 0, 'matched_text': '1'},
- {'label': 'whitespace', 'col': 1, 'matched_text': ' '},
- {'label': 'pls', 'col': 2, 'matched_text': '+'},
- ... ]
-</code></pre>
+<pre class="prettyprint"><code>0</code></pre>
 
 <p>といった辞書のリストが得られます。無事字句解析ができているようです。</p>
 
-<p>さて、読者皆様は<code>parse()</code>関数の突然の登場に面食らったのではないでしょうか。この関数は構文解析器とは何の関係もありません。この名前が非常にまぎらわしいとのことで、vitalのissueにチケットを作成しておきました。
+<p>さて、読者皆様は<code>0</code>関数の突然の登場に面食らったのではないでしょうか。この関数は構文解析器とは何の関係もありません。この名前が非常にまぎらわしいとのことで、vitalのissueにチケットを作成しておきました。
 <a href="https://github.com/vim-jp/vital.vim/issues/48">https://github.com/vim-jp/vital.vim/issues/48</a></p>
 
 <h2>Parser</h2>
@@ -68,7 +53,7 @@ endfunction
 
 <p><a href="http://uwanosora.hatenablog.jp/entry/2013/03/28/000633">http://uwanosora.hatenablog.jp/entry/2013/03/28/000633</a></p>
 
-<p>uwanosoraさんが作成した<code>kp19pp</code>はC++で記述されており、<code>g++</code>と<code>make</code>があればビルドできます。実際に必要なのは生成される<code>kp19pp</code>コマンドです。</p>
+<p>uwanosoraさんが作成した<code>0</code>はC++で記述されており、<code>0</code>と<code>0</code>があればビルドできます。実際に必要なのは生成される<code>0</code>コマンドです。</p>
 
 <p>自分でインストールしてPATHを通すのが面倒に感じた読者の方もいらっしゃることでしょう。そんなこともあろうかと、Gentoo用にパッケージ化しておきました。ぜひご利用ください。</p>
 
@@ -76,10 +61,9 @@ endfunction
 
 <p>このoverlayを追加して</p>
 
-<pre class="prettyprint"><code>$ sudo emerge kp19pp
-</code></pre>
+<pre class="prettyprint"><code>0</code></pre>
 
-<p>すると<code>/usr/bin/kp19pp</code>が利用可能になります。</p>
+<p>すると<code>0</code>が利用可能になります。</p>
 
 <p>kp19ppは独自の言語です。kp19pp用の簡単なsyntax / indent / ftdetect / ftpluginをセットにしたプラギンを作っておきました。これを用いることでパーサを簡単に記述できるようになります。</p>
 
@@ -87,55 +71,17 @@ endfunction
 
 <p>さあ早速パーサを記述しましょう。</p>
 
-<p><code>parser.vim.kpg</code></p>
+<p><code>0</code></p>
 
-<pre class="prettyprint"><code>&lt;token_desc&gt; token{
-    &lt;left&gt;{
-        ast;
-        pls;
-    }
-    l_pare, r_pare;
-    id&lt;type_expr&gt;;
-}
-
-&lt;grammar&gt; grammar{
-    E&lt;type_expr&gt;
-        : [make_pls] E(0) pls E(1)
-        | [make_mlt] E(0) ast E(1)
-        | [make_exp] l_pare E(0) r_pare
-        | [make_id]  id(0)
-        ;
-}
-</code></pre>
+<pre class="prettyprint"><code>0</code></pre>
 
 <p>Advent Calendarの該当記事からそのままもってきました。さあこれからVim scriptを生成しましょう。</p>
 
-<pre class="prettyprint"><code>$ kp19pp -vimscript parser.vim.kpg parser.vim
-</code></pre>
+<pre class="prettyprint"><code>0</code></pre>
 
-<p>これでVim scriptの<code>parser.vim</code>ファイルが生成されました。つづいて各アクション<code>make_pls</code>などを記述しましょう。</p>
+<p>これでVim scriptの<code>0</code>ファイルが生成されました。つづいて各アクション<code>0</code>などを記述しましょう。</p>
 
-<pre class="prettyprint"><code class="lang-vim">let s:semantic_action = {}
-function! s:semantic_action.make_mlt(arg_0, arg_1)
-    return a:arg_0 * a:arg_1
-endfunction
-
-function! s:semantic_action.make_pls(arg_0, arg_1)
-    return a:arg_0 + a:arg_1
-endfunction
-
-function! s:semantic_action.make_id(arg_0)
-    return a:arg_0
-endfunction
-
-function! s:semantic_action.make_exp(arg_0)
-    return a:arg_0
-endfunction
-
-function! s:semantic_action.syntax_error()
-    echo 'error!'
-endfunction
-</code></pre>
+<pre class="prettyprint"><code class="lang-vim">0</code></pre>
 
 <p>これで構文解析器と評価器は完成です。</p>
 
@@ -143,29 +89,15 @@ endfunction
 
 <p>Vital.Lexerを用いて作成した字句解析器とkp19ppを用いて作成した構文解析器とそれに適用するよう作成した評価機のすべてを組み合わせましょう。</p>
 
-<pre class="prettyprint"><code>$ cat lexer.vim parser.vim &gt; calc.vim
-</code></pre>
+<pre class="prettyprint"><code>0</code></pre>
 
 <p>つづいてメイン処理です。</p>
 
-<pre class="prettyprint"><code>let s:p = copy(s:parser)
-call s:p.ctor(s:semantic_action)
+<pre class="prettyprint"><code>0</code></pre>
 
-let xs = s:lex('1 + 2 * (3 + 4)')
-call filter(xs, 'v:val.label !=# "whitespace"')
-for x in xs
-  call s:p.post(s:token[x.label], x.matched_text)
-endfor
-call s:p.post(s:token.token_0, 0)
+<p>(逐次パーサにトークン列をひとつずつ渡すより前に<code>0</code>で空白文字を削除しています。これは別に<code>0</code>の中で条件分岐しても良いです。)</p>
 
-if s:p.accept()
-  echo s:p.accepted_value
-endif
-</code></pre>
-
-<p>(逐次パーサにトークン列をひとつずつ渡すより前に<code>filter()</code>で空白文字を削除しています。これは別に<code>for</code>の中で条件分岐しても良いです。)</p>
-
-<p>あとは実行すると正しい計算結果が得られるはずです。<code class="lang-vim">:source calc.vim</code>で実行できます。</p>
+<p>あとは実行すると正しい計算結果が得られるはずです。<code class="lang-vim">0</code>で実行できます。</p>
 
 <p>で、gif動画作ってみました。それなりの長さですので、気を引き締めてお楽しみください。</p>
 

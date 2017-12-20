@@ -21,47 +21,7 @@ author: Sixeight
 <p>また <a href="http://vim.wikia.com/wiki/Commenting_with_opfunc">Tip 1570 Commenting with opfunc</a> で紹介されているスクリプトを利用する方法もあります。
 				オリジナルは Ruby に対応していなかったため、一部修正を加えています。</p>
 
-<pre class="prettyprint"><code class="lang-vim">" Comment or uncomment lines from mark a to mark b.
-function! CommentMark(docomment, a, b)
-  if !exists('b:comment')
-    let b:comment = CommentStr() . ' '
-  endif
-  if a:docomment
-    exe "normal! '" . a:a . "_\&lt;C-V&gt;'" . a:b . 'I' . b:comment
-  else
-    exe "'".a:a.",'".a:b . 's/^\(\s*\)' . escape(b:comment,'/') . '/\1/e'
-  endif
-endfunction
-
-" Comment lines in marks set by g@ operator.
-function! DoCommentOp(type)
-  call CommentMark(1, '[', ']')
-endfunction
-
-" Uncomment lines in marks set by g@ operator.
-function! UnCommentOp(type)
-  call CommentMark(0, '[', ']')
-endfunction
-
-" Return string used to comment line for current filetype.
-function! CommentStr()
-  if &amp;ft == 'cpp' || &amp;ft == 'java' || &amp;ft == 'javascript'
-    return '//'
-  elseif &amp;ft == 'vim'
-    return '"'
-  elseif &amp;ft == 'python' || &amp;ft == 'perl' || &amp;ft == 'sh' || &amp;ft == 'R' || &amp;ft == 'ruby'
-    return '#'
-  elseif &amp;ft == 'lisp'
-    return ';'
-  endif
-  return ''
-endfunction
-
-nnoremap &lt;Leader&gt;c &lt;Esc&gt;:set opfunc=DoCommentOp&lt;CR&gt;g@
-nnoremap &lt;Leader&gt;C &lt;Esc&gt;:set opfunc=UnCommentOp&lt;CR&gt;g@
-vnoremap &lt;Leader&gt;c &lt;Esc&gt;:call CommentMark(1,'&lt;','&gt;')&lt;CR&gt;
-vnoremap &lt;Leader&gt;C &lt;Esc&gt;:call CommentMark(0,'&lt;','&gt;')&lt;CR&gt;
-</code></pre>
+<pre class="prettyprint"><code class="lang-vim">0</code></pre>
 
 <p>コメントアウトしたい箇所を Visual mode で選択し、<kbd>&lt;leader&gt;c</kbd> を打鍵することで Filetype に沿ってコメントアウトされます。
 				逆に、コメントアウトされた箇所を Visual mode で選択し <kbd>&lt;leader&gt;C</kbd> を打鍵することでコメントを外すことも出来ます。</p>

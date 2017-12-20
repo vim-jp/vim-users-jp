@@ -8,14 +8,14 @@ author: Shougo
 
 <h2>シンタックス補完とは</h2>
 
-<p>シンタックス補完とは、標準添付プラグインの<code>autoload/syntaxComplete.vim</code>をさらに汎用的にし、neocomplcacheのプラグインとして独自実装したものです。
-				内部動作としては<code class="lang-vim">:syn list</code>の結果を解析し、キーワードを補完候補に加えます。
+<p>シンタックス補完とは、標準添付プラグインの<code>0</code>をさらに汎用的にし、neocomplcacheのプラグインとして独自実装したものです。
+				内部動作としては<code class="lang-vim">0</code>の結果を解析し、キーワードを補完候補に加えます。
 				１度目は候補をキャッシュするので、若干時間がかかりますが、その後は高速に動作します。
 				Vimの豊富なシンタックスキーワードを有効活用するので、辞書を別途用意する必要はなく、非常に便利です。</p>
 
 <h2>autoload/syntaxComplete.vimとの比較</h2>
 
-<p><code>autoload/syntaxComplete.vim</code>はキーワード文字列しか解析できませんが、neocomplcacheのシンタックス補完は正規表現のパターンも解析するので、HaskellやTeXといったファイルタイプでもシンタックス補完が使えます。
+<p><code>0</code>はキーワード文字列しか解析できませんが、neocomplcacheのシンタックス補完は正規表現のパターンも解析するので、HaskellやTeXといったファイルタイプでもシンタックス補完が使えます。
 				ただし&#40;&#41;や[]を使った複雑な正規表現では、上手くパースできないことがあります。
 				ご了承下さい。</p>
 
@@ -29,7 +29,7 @@ author: Shougo
 
 <p>Action scriptやVim Scriptのautocmdを補完するとき、シンタックスの補完候補が小文字になってしまうことがあります。
 				これはシンタックスファイルの
-<code>syn case ignore</code>
+<code>0</code>
 				が悪さをしているせいです。プラグイン側では対処しようがないので、気になるようだったら直接シンタックスファイルを修正してください。</p>
 
 <address class="hack-author">Shougo</address>

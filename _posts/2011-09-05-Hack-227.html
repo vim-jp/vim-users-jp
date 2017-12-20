@@ -9,7 +9,7 @@ author: t9md
 <p>テキストを好きな文字列で&#8221;囲む&#8221;ことに特化したプラグインとして、<a href="http://www.vim.org/scripts/script.php?script_id=1697">surround.vim</a> があります。<br />
 				定番プラグインなので使用している方も多いでしょう。</p>
 
-<p>デフォルトで、テキストを括弧( <kbd><code>[([{</code></kbd> 等)や、HTMLタグで囲んだりする事が出来ます。</p>
+<p>デフォルトで、テキストを括弧( <kbd><code>0</code></kbd> 等)や、HTMLタグで囲んだりする事が出来ます。</p>
 
 <p>surround.vim は囲むルール( 以降 surrounding rule と記載 )を拡張する機能を用意しており、ユーザーが独自に surrounding rule を追加することが出来ます。</p>
 
@@ -17,33 +17,29 @@ author: t9md
 
 <p>例えば下記のような設定は</p>
 
-<pre class="prettyprint"><code class="lang-vim">autocmd FileType ruby let b:surround_45 = "&lt;% \r %&gt;"
-</code></pre>
+<pre class="prettyprint"><code class="lang-vim">0</code></pre>
 
-<p><code>&amp;filetype</code> が ruby 場合に <code>let b:surround_45 = "&lt;% \r %&gt;"</code> を設定しています。</p>
+<p><code>0</code> が ruby 場合に <code>0</code> を設定しています。</p>
 
 <ul>
-<li><kbd><code>b:surround_45</code></kbd> の  <kbd><code>45</code></kbd> は  <kbd><code>-</code></kbd> の ASCII コード番号です。</li>
-<li><kbd><code>\r</code></kbd> は囲まれるテキストが入るプレースホルダです。</li>
+<li><kbd><code>0</code></kbd> の  <kbd><code>0</code></kbd> は  <kbd><code>0</code></kbd> の ASCII コード番号です。</li>
+<li><kbd><code>0</code></kbd> は囲まれるテキストが入るプレースホルダです。</li>
 </ul>
 
 <p>上記のように設定すると、</p>
 
-<pre class="prettyprint"><code>puts "Hello world!"
-</code></pre>
+<pre class="prettyprint"><code>0</code></pre>
 
-<p>の行にカーソルを合わせ、ノーマルモードで  <kbd><code>yss-</code></kbd> と入力すると、下記のように eruby のコードとして囲む事ができます。</p>
+<p>の行にカーソルを合わせ、ノーマルモードで  <kbd><code>0</code></kbd> と入力すると、下記のように eruby のコードとして囲む事ができます。</p>
 
-<pre class="prettyprint"><code>&lt;% puts "Hello world!" %&gt;
-</code></pre>
+<pre class="prettyprint"><code>0</code></pre>
 
-<p>しかし、毎回 ASCII コードを確認して設定するのは面倒なので、 <kbd><code>char2nr()</code></kbd> を使用し、下記のように設定する方が分かりやすいでしょう。<br />
-				以下の設定は <kbd><code>E</code></kbd> で囲まれるテキストをヒアドキュメント化します。</p>
+<p>しかし、毎回 ASCII コードを確認して設定するのは面倒なので、 <kbd><code>0</code></kbd> を使用し、下記のように設定する方が分かりやすいでしょう。<br />
+				以下の設定は <kbd><code>0</code></kbd> で囲まれるテキストをヒアドキュメント化します。</p>
 
-<pre class="prettyprint"><code>let b:surround_{char2nr("E")} = "&lt;&lt;EOS \r EOS"
-</code></pre>
+<pre class="prettyprint"><code>0</code></pre>
 
-<p>surrounding rule のより詳細な説明は <kbd><code class="lang-vim">:help surround-customizing</code></kbd> を参考にして下さい。</p>
+<p>surrounding rule のより詳細な説明は <kbd><code class="lang-vim">0</code></kbd> を参考にして下さい。</p>
 
 <h2>さらに簡単に surrounding rule を拡張する</h2>
 
@@ -58,33 +54,23 @@ author: t9md
 
 <p>Vundle を使用している場合以下のコマンドでインストール出来ます。</p>
 
-<pre class="prettyprint"><code class="lang-vim">:BundleInstall t9md/vim-surround_custom_mapping
-</code></pre>
+<pre class="prettyprint"><code class="lang-vim">0</code></pre>
 
 <h2>設定</h2>
 
-<p><kbd><code>g:surround_custom_mapping</code></kbd> ディクショナリを設定します。<br />
-				キー に surrounding rule が設定される <kbd><code>&amp;filetype</code></kbd> 、値には surrounding rule をディクショナリとして設定します。<br />
-				キー <kbd><code>_</code></kbd>(アンダースコア)は特殊なキーで、ここに設定された surrounding rule は全てのファイルタイプで利用できるようになります。</p>
+<p><kbd><code>0</code></kbd> ディクショナリを設定します。<br />
+				キー に surrounding rule が設定される <kbd><code>0</code></kbd> 、値には surrounding rule をディクショナリとして設定します。<br />
+				キー <kbd><code>0</code></kbd>(アンダースコア)は特殊なキーで、ここに設定された surrounding rule は全てのファイルタイプで利用できるようになります。</p>
 
 <p>例えば下記の様に設定すると</p>
 
-<pre class="prettyprint"><code>let g:surround_custom_mapping = {}
-let g:surround_custom_mapping._ = {
-            \ 'p':  "&lt;pre&gt; \r &lt;/pre&gt;",
-            \ 'w':  "%w(\r)",
-            \ }
-let g:surround_custom_mapping.ruby = {
-            \ '-':  "&lt;% \r %&gt;",
-            \ '=':  "&lt;%= \r %&gt;",
-            \ }
-</code></pre>
+<pre class="prettyprint"><code>0</code></pre>
 
 <ul>
-<li><kbd><code>p</code></kbd> で <code>pre</code> タグで囲む(全てのファイルタイプで有効)</li>
-<li><kbd><code>w</code></kbd> で <code>%w(</code> と <code>)</code> で囲む(全てのファイルタイプで有効)</li>
-<li><kbd><code>-</code></kbd> で <code>%&lt;</code> と <code>%&gt;</code> で囲む(ruby ファイルのみ)</li>
-<li><kbd><code>=</code></kbd> で <code>%&lt;=</code> と <code>%&gt;</code> で囲む(ruby ファイルのみ)</li>
+<li><kbd><code>0</code></kbd> で <code>0</code> タグで囲む(全てのファイルタイプで有効)</li>
+<li><kbd><code>0</code></kbd> で <code>0</code> と <code>0</code> で囲む(全てのファイルタイプで有効)</li>
+<li><kbd><code>0</code></kbd> で <code>0</code> と <code>0</code> で囲む(ruby ファイルのみ)</li>
+<li><kbd><code>0</code></kbd> で <code>0</code> と <code>0</code> で囲む(ruby ファイルのみ)</li>
 </ul>
 
 <p>という意味になります。</p>
@@ -99,21 +85,11 @@ let g:surround_custom_mapping.ruby = {
 <li>vim のヘルプを編集していようが</li>
 </ul>
 
-<p><kbd><code>p</code></kbd> で整形済みテキストとして囲むというように、<strong>似た様な意味(=整形済みテキスト)で囲む場合は、指運動を同じにしたかった</strong> からです。<br />
+<p><kbd><code>0</code></kbd> で整形済みテキストとして囲むというように、<strong>似た様な意味(=整形済みテキスト)で囲む場合は、指運動を同じにしたかった</strong> からです。<br />
 				意味に対応する指運動(=運指)が別だと覚えるのが大変です。<br />
 				上記を実現する設定は下記になります。</p>
 
-<pre class="prettyprint"><code>let g:surround_custom_mapping = {}
-let g:surround_custom_mapping.help = {
-            \ 'p':  "&gt; \r &lt;",
-            \ }
-let g:surround_custom_mapping.textile = {
-            \ 'p':  "&lt;pre&gt; \r &lt;/pre&gt;",
-            \ }
-let g:surround_custom_mapping.html = {
-            \ 'p':  "&lt;pre&gt; \r &lt;/pre&gt;",
-            \ }
-</code></pre>
+<pre class="prettyprint"><code>0</code></pre>
 
 <h2>最後に</h2>
 

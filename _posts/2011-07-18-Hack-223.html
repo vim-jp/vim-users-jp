@@ -20,60 +20,46 @@ author: t9md
 
 <p>また Vundle でもインストール可能です。</p>
 
-<pre class="prettyprint"><code class="lang-vim">:BundleInstall t9md/vim-textmanip
-</code></pre>
+<pre class="prettyprint"><code class="lang-vim">0</code></pre>
 
 <h2>設定</h2>
 
 <p>textmanip.vim はデフォルトのキーマップを自動で設定しませんのでユーザーが設定する必要があります。<br />
-				筆者オススメのキーマップは下記です。<code>vimrc</code> に設定します。</p>
+				筆者オススメのキーマップは下記です。<code>0</code> に設定します。</p>
 
-<pre class="prettyprint"><code>" 選択したテキストの移動
-vmap &lt;C-j&gt; &lt;Plug&gt;(Textmanip.move_selection_down)
-vmap &lt;C-k&gt; &lt;Plug&gt;(Textmanip.move_selection_up)
-vmap &lt;C-h&gt; &lt;Plug&gt;(Textmanip.move_selection_left)
-vmap &lt;C-l&gt; &lt;Plug&gt;(Textmanip.move_selection_right)
-
-" 行の複製
-vmap &lt;M-d&gt; &lt;Plug&gt;(Textmanip.duplicate_selection_v)
-nmap &lt;M-d&gt; &lt;Plug&gt;(Textmanip.duplicate_selection_n)
-</code></pre>
+<pre class="prettyprint"><code>0</code></pre>
 
 <p>その後なんでもいいので、テキストをビジュアルモードで選択し、コントロールキーを押したまま, hjlk を入力してみて下さい。</p>
 
 <p>モノのように移動できましたよね？楽ですよね？便利ですよね？</p>
 
-<p><kbd><code>&lt;M-d&gt;</code></kbd> を押すと、選択したテキストが下方向に複製されます。<br />
-				ノーマルモードで <kbd><code>&lt;M-d&gt;</code></kbd> を入力すると、カーソルのある行が複製されます。<br />
-<kbd><code>&lt;M-d&gt;</code></kbd> は <kbd><code>Altキー</code></kbd> を押しながら <kbd><code>d</code></kbd> です。<br />
-				Mac ユーザーの人は <kbd><code>D-d</code></kbd> として、 <kbd><code>COMMANDキー</code></kbd> を押しながら <kbd><code>d</code></kbd> に設定するといいかもしれません。</p>
+<p><kbd><code>0</code></kbd> を押すと、選択したテキストが下方向に複製されます。<br />
+				ノーマルモードで <kbd><code>0</code></kbd> を入力すると、カーソルのある行が複製されます。<br />
+<kbd><code>0</code></kbd> は <kbd><code>0</code></kbd> を押しながら <kbd><code>0</code></kbd> です。<br />
+				Mac ユーザーの人は <kbd><code>0</code></kbd> として、 <kbd><code>0</code></kbd> を押しながら <kbd><code>0</code></kbd> に設定するといいかもしれません。</p>
 
-<p>※ 本当は <kbd><code>C-d</code></kbd> を使いたかったのですが、ノーマルモードでの半ページスクロールとキーが被ってしまいます。<br />
-				※ ビジュアルモードのみ <kbd><code>vmap &lt;C-d&gt; &lt;Plug&gt;(Textmanip.duplicate_selection_v)</code></kbd> と設定するのも一つの手です。</p>
+<p>※ 本当は <kbd><code>0</code></kbd> を使いたかったのですが、ノーマルモードでの半ページスクロールとキーが被ってしまいます。<br />
+				※ ビジュアルモードのみ <kbd><code>0</code></kbd> と設定するのも一つの手です。</p>
 
 <h2>ユースケース１</h2>
 
 <p>Markdown では整形済みテキスト(preブロック)をインデントで表現しますので、複数行をインデントする事がよくあります。</p>
 
-<p>インデントしたいテキストを選択して、<kbd><code>&lt;C-l&gt;</code></kbd>を数回押して、右にずらします。</p>
+<p>インデントしたいテキストを選択して、<kbd><code>0</code></kbd>を数回押して、右にずらします。</p>
 
 <h2>ユースケース２</h2>
 
 <p>メソッド or 関数を別の引数で複数回呼び出すコードを書く場合を考えます。<br />
 				例えば次のような関数呼出しがあり、</p>
 
-<pre class="prettyprint"><code>some_method("a", 1000)
-</code></pre>
+<pre class="prettyprint"><code>0</code></pre>
 
 <p>下記のように引数を変えて複数回呼び出したいとします。</p>
 
-<pre class="prettyprint"><code>some_method("a", 1000)
-some_method("b", 2000)
-some_method("c", 3000)
-</code></pre>
+<pre class="prettyprint"><code>0</code></pre>
 
-<p>まず、<code>some_method("a", 1000)</code>の行にカーソルを合わせます。<br />
-<kbd><code>&lt;M-d&gt;</code></kbd>を２回押して、行を複製します。<br />
+<p>まず、<code>0</code>の行にカーソルを合わせます。<br />
+<kbd><code>0</code></kbd>を２回押して、行を複製します。<br />
 				あとは引数を微修正すれば完了です。</p>
 
 <address class="hack-author">t9md</address>

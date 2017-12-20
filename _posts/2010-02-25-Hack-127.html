@@ -6,12 +6,9 @@ author: ujihisa
 ---
 <h2>問題</h2>
 
-<p>UNIXの<code>echo</code>コマンドで&quot;hello!&quot;と表示させる必要があるとします。Vimの<code class="lang-vim">:!</code>を使えば出来そうな気がします。試してみましょう。</p>
+<p>UNIXの<code>0</code>コマンドで&quot;hello!&quot;と表示させる必要があるとします。Vimの<code class="lang-vim">0</code>を使えば出来そうな気がします。試してみましょう。</p>
 
-<pre class="prettyprint"><code class="lang-vim">:!echo helloecho 'echo echo 1'
-[No write since last change]
-helloecho echo echo 1
-</code></pre>
+<pre class="prettyprint"><code class="lang-vim">0</code></pre>
 
 <p>なにやら狂ったような返答がきました。これは一体…。</p>
 
@@ -19,12 +16,9 @@ helloecho echo echo 1
 
 <h2>解決</h2>
 
-<p>次のようにして<code>!</code>をエスケープします。</p>
+<p>次のようにして<code>0</code>をエスケープします。</p>
 
-<pre class="prettyprint"><code class="lang-vim">:!echo hello\!
-[No write since last change]
-hello!
-</code></pre>
+<pre class="prettyprint"><code class="lang-vim">0</code></pre>
 
 <p>次のようにしても、エスケープされませんのでご注意ください。</p>
 
@@ -32,9 +26,9 @@ hello!
 
 <h2>解説</h2>
 
-<p>ヘルプ<code class="lang-vim">:h :!</code>によると、<code class="lang-vim">:!</code>の中での<code>!</code>は前回実行した<code class="lang-vim">:!</code>の引数になるそうです。
-				迷惑でしかない恐ろしい仕様です。(<code>&lt;code class="option"&gt;'cpoptions'</code></code>に依存するようです)</p>
+<p>ヘルプ<code class="lang-vim">0</code>によると、<code class="lang-vim">0</code>の中での<code>0</code>は前回実行した<code class="lang-vim">0</code>の引数になるそうです。
+				迷惑でしかない恐ろしい仕様です。(<code>0</code></code>に依存するようです)</p>
 
-<p>プラギンを作るときにハマる仕様です。<code class="lang-vim">:!</code>を使うときによくわからない挙動があれば、まずは<code>!</code>のエスケープ漏れがないか確認してみましょう。</p>
+<p>プラギンを作るときにハマる仕様です。<code class="lang-vim">0</code>を使うときによくわからない挙動があれば、まずは<code>0</code>のエスケープ漏れがないか確認してみましょう。</p>
 
 <address class="hack-author">ujihisa</address>

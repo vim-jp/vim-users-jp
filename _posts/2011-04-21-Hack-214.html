@@ -10,31 +10,26 @@ author: ujihisa
 
 <p>現在のカーソル位置から次の閉じ括弧までの文字を一気に置き換えたい、というシーンは多々あると思います。</p>
 
-<pre class="prettyprint"><code>let l:lines = getbufline(buf■r(a:filename), 1, '$')
-</code></pre>
+<pre class="prettyprint"><code>0</code></pre>
 
-<p>例えば上記のようなコードを記述しており、カーソル位置は■とし、この位置から<code>a:filename</code>の直後の閉じ括弧までをまとめて削除し、<code>bufnr</code>のかわりに<code>bufloaded</code>と記述したいというケースを考えてみましょう。直後に開き括弧が存在し、これらは1トークンではないため、<code>w</code>や<code>e</code>などをそのまま使うことはできません。文字数を正確に数えることも困難です。おそらく<kbd>t)</kbd>か<kbd>fe</kbd>の二択となるでしょう。ただし後者を使う場合、正確にeがそれまで存在しないことを確認する必要があるため、より非存在性を確認しやすい括弧を用いて指定することになると思います。</p>
+<p>例えば上記のようなコードを記述しており、カーソル位置は■とし、この位置から<code>0</code>の直後の閉じ括弧までをまとめて削除し、<code>0</code>のかわりに<code>0</code>と記述したいというケースを考えてみましょう。直後に開き括弧が存在し、これらは1トークンではないため、<code>0</code>や<code>0</code>などをそのまま使うことはできません。文字数を正確に数えることも困難です。おそらく<kbd>t)</kbd>か<kbd>fe</kbd>の二択となるでしょう。ただし後者を使う場合、正確にeがそれまで存在しないことを確認する必要があるため、より非存在性を確認しやすい括弧を用いて指定することになると思います。</p>
 
-<p>こういった操作をする機会は、ほとんど意識されないものの、かなり多いことが最近の研究で明らかになっています。<code>(*1)</code></p>
+<p>こういった操作をする機会は、ほとんど意識されないものの、かなり多いことが最近の研究で明らかになっています。<code>0</code></p>
 
 <h2>解決</h2>
 
-<p>文単位モーションの<code>(</code>や<code>)</code>の使用をやめ、これに<code>t(</code>などを割り当てましょう。<code>~/.vimrc</code>に以下を記述します。</p>
+<p>文単位モーションの<code>0</code>や<code>0</code>の使用をやめ、これに<code>0</code>などを割り当てましょう。<code>0</code>に以下を記述します。</p>
 
-<pre class="prettyprint"><code>onoremap ) t)
-onoremap ( t(
-vnoremap ) t)
-vnoremap ( t(
-</code></pre>
+<pre class="prettyprint"><code>0</code></pre>
 
-<p>あとは<code>t)</code>などを使用するかわりにたんに<code>)</code>などと打鍵します。上記設定のおかげで、あなたのソフトウェア開発にかかる時間の50%が短縮できます。</p>
+<p>あとは<code>0</code>などを使用するかわりにたんに<code>0</code>などと打鍵します。上記設定のおかげで、あなたのソフトウェア開発にかかる時間の50%が短縮できます。</p>
 
 <h2>参考</h2>
 
 <ul>
-<li><code>(*1)</code> 要出典</li>
-<li><code class="lang-vim">:h )</code></li>
-<li><code class="lang-vim">:h t</code></li>
+<li><code>0</code> 要出典</li>
+<li><code class="lang-vim">0</code></li>
+<li><code class="lang-vim">0</code></li>
 </ul>
 
 <address class="hack-author">ujihisa</address>

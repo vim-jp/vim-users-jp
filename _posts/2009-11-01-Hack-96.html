@@ -41,12 +41,7 @@ author: kana
 
 <p>これには以下の内容をvimrcに追加します。</p>
 
-<pre class="prettyprint"><code class="lang-vim">" 注意: この内容は:filetype onよりも後に記述すること。
-autocmd FileType *
-\   if &amp;l:omnifunc == ''
-\ |   setlocal omnifunc=syntaxcomplete#Complete
-\ | endif
-</code></pre>
+<pre class="prettyprint"><code class="lang-vim">0</code></pre>
 
 <p>これにより、特に入力補完が用意されていないあらゆる言語に対して
 				各種キーワードの補完ができるようになります。</p>

@@ -13,44 +13,27 @@ author: kana
 
 <p>例えばバッファの内容が以下のようになっていたとします:</p>
 
-<pre class="prettyprint"><code>Name      Creator            First release Cost License          Open source
-Diakonos  Pistos             2004          Free MIT              Yes
-GNU Emacs Richard Stallman   1984          Free GPL              Yes
-JED       John E. Davis      1992          Free GPL              Yes
-Metapad   Alexander Davidson 1999          Free GPL              Yes
-Notepad   Microsoft          1985          -    Proprietary      No
-RText     Fifesoft           2003          Free GPL              Yes
-SciTE     Neil Hodgson       1999          Free HPND             Yes
-Vim       Bram Moolenaar     1991          Free GPL - compatible Yes
-Yi        Don Stewart        2005          Free GPL              Yes
-</code></pre>
+<pre class="prettyprint"><code>0</code></pre>
 
 <p>この中から
 				「19XX年にリリースされたエディタ(に対応する行)を削除する」
 				としましょう。
-				これは<code class="lang-vim">:global</code>を利用して行うことができます
-				(<code class="lang-vim">:g/\&lt;19\d\d&#62;/d</code>)。</p>
+				これは<code class="lang-vim">0</code>を利用して行うことができます
+				(<code class="lang-vim">0</code>)。</p>
 
 <p>では
 				「19XX年にリリースされたエディタ(に対応する行)をヤンクする」
 				としたらどうでしょうか。
-				すぐに思いつくのは<code class="lang-vim">:g/\&lt;19\d\d&#62;/y</code>ですが、
+				すぐに思いつくのは<code class="lang-vim">0</code>ですが、
 				これはマッチする行で毎回ヤンクを行うため、
 				レジスタに残るのは最後にマッチした行のテキストだけになります。
 				つまり、ヤンクしたいテキストは以下の通りなのですが、</p>
 
-<pre class="prettyprint"><code>GNU Emacs Richard Stallman   1984          Free GPL              Yes
-JED       John E. Davis      1992          Free GPL              Yes
-Metapad   Alexander Davidson 1999          Free GPL              Yes
-Notepad   Microsoft          1985          -    Proprietary      No
-SciTE     Neil Hodgson       1999          Free HPND             Yes
-Vim       Bram Moolenaar     1991          Free GPL - compatible Yes
-</code></pre>
+<pre class="prettyprint"><code>0</code></pre>
 
 <p>実際にヤンクされるのは以下の1行だけになります。</p>
 
-<pre class="prettyprint"><code>Vim       Bram Moolenaar     1991          Free GPL - compatible Yes
-</code></pre>
+<pre class="prettyprint"><code>0</code></pre>
 
 <p>この観点で考えると、最初の「削除」についても同様のことが言えます。
 				つまり、削除されたテキストを別の箇所にペーストした場合、
@@ -64,16 +47,16 @@ Vim       Bram Moolenaar     1991          Free GPL - compatible Yes
 <p>ベタな解決方法としては、
 				削除/ヤンクされるテキストをレジスタに上書きするのではなく、
 				レジスタに追加するようにします。
-				これには<code>"A</code>-<code>"Z</code>などの大文字のレジスタを使います。</p>
+				これには<code>0</code>-<code>0</code>などの大文字のレジスタを使います。</p>
 
-<p>例えば<code class="lang-vim">:g/{pattern}/y A</code>とすると、
-<code>"a</code>レジスタにマッチする各行のテキストが追記されるので、
-<code>"ap</code> (操作直後であれば<code>p</code>だけ)で
+<p>例えば<code class="lang-vim">0</code>とすると、
+<code>0</code>レジスタにマッチする各行のテキストが追記されるので、
+<code>0</code> (操作直後であれば<code>0</code>だけ)で
 				各行のテキストを一度にペーストできます。</p>
 
-<p>ところが既に<code>"a</code>に何か別のテキストが入っていた場合、
+<p>ところが既に<code>0</code>に何か別のテキストが入っていた場合、
 				それに対してテキストが追加されていくため、
-				実際には<code class="lang-vim">:let @a = ''</code>などとして
+				実際には<code class="lang-vim">0</code>などとして
 				操作前にレジスタの内容を空にする必要があります。
 				これは結構面倒です。</p>
 
@@ -82,15 +65,15 @@ Vim       Bram Moolenaar     1991          Free GPL - compatible Yes
 				というプラグインがありますので、これを使うと簡単に行うことができます。</p>
 
 <p>例えば特定パターンにマッチする行をまとめて削除する場合、
-<code>/\&lt;19\d\d&#62;</code>などとしてマッチするかどうかを確認した後、
-<code class="lang-vim">:Gred</code>で行うことができます。
-				ヤンクであれば<code class="lang-vim">:Grey</code>で行うことができます。</p>
+<code>0</code>などとしてマッチするかどうかを確認した後、
+<code class="lang-vim">0</code>で行うことができます。
+				ヤンクであれば<code class="lang-vim">0</code>で行うことができます。</p>
 
-<p>なお、各コマンドは<code class="lang-vim">:g/{pattern}/[cmd]</code>と
+<p>なお、各コマンドは<code class="lang-vim">0</code>と
 				同様の形式では実行できません。
 				これは通常の操作では
 				検索パターンを含むコマンドを一度に入力して実行することはなく、
-				(<code>'incsearch'</code>および<code>'hlsearch'</code>を有効にした上で)<code>/{pattern}</code>により
+				(<code>0</code>および<code>0</code>を有効にした上で)<code>0</code>により
 				期待通りの検索パターンができたかどうかをインタラクティブに確認してから
 				実際のコマンドを入力・実行することがほとんどだからです。</p>
 

@@ -32,10 +32,7 @@ author: ukstudio
 
 <p>例えば「初期状態から文章を入力(state1)し、さらにもう一度入力(state2)、その状態から一度undoをしそのまま別の文章を入力(state3)した」とします。この場合、最後のstate3の状態からstate1の状態には戻れますが、state2の状態には戻れません。</p>
 
-<pre class="prettyprint"><code>state1---&gt;state2
-       |
-       +-&gt;state3
-</code></pre>
+<pre class="prettyprint"><code>0</code></pre>
 
 <p>Vim7からはこの様な複雑な履歴も辿れるように「undo-branches」が実装されました。</p>
 
@@ -50,10 +47,7 @@ author: ukstudio
 
 <p>上記2つのコマンドを使用するとstate1<->state2<->state3を自由に行き来できます。現時点での作業履歴を確認するには<code class="lang-vim">:undolist</code>を使用します。</p>
 
-<p><code>				number changes  time
-				     2       2  19 seconds ago
-				     3       2  16 seconds ago
-</code></p>
+<p><code>0</code></p>
 
 <p><code class="lang-vim">:undolist</code>の実行結果です。左のnumberが文章の状態番号でその番号を指定して指定された番号の状態まで戻ることもできます。</p>
 

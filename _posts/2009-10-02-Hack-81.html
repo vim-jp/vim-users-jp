@@ -9,23 +9,20 @@ author: kana
 <p><a href="/vim-users-jp/2009/09/22/Hack-76.html">Hack #76: Insert mode中で単語単位/行単位の削除を行なう</a>
 				ではInsert mode中でのちょっとした誤入力を簡単に訂正できる方法を紹介しました。</p>
 
-<p>しかし調子に乗って<code>&lt;C-u&gt;</code>や<code>&lt;C-w&gt;</code>を連打していると不便なことがあります。
+<p>しかし調子に乗って<code>0</code>や<code>0</code>を連打していると不便なことがあります。
 				例えばInsert modeを開始してから以下のようなテキストを入力したとしましょう(「|」はカーソル位置です):</p>
 
-<pre class="prettyprint"><code>I am the Lord your God, who brought you out of Egypt,|
-</code></pre>
+<pre class="prettyprint"><code>0</code></pre>
 
-<p>ここで<code>&lt;C-u&gt;</code>を押下すると以下の状態まで削除されます:</p>
+<p>ここで<code>0</code>を押下すると以下の状態まで削除されます:</p>
 
-<pre class="prettyprint"><code>|
-</code></pre>
+<pre class="prettyprint"><code>0</code></pre>
 
 <p>続いて以下のようなテキストを入力したとしましょう:</p>
 
-<pre class="prettyprint"><code>Eye for eye, tooth for tooth, hand for hand, foot for foot.|
-</code></pre>
+<pre class="prettyprint"><code>0</code></pre>
 
-<p>ここで<code>&lt;C-u&gt;</code>での削除前のテキストに戻そうと思っても戻すことができません。
+<p>ここで<code>0</code>での削除前のテキストに戻そうと思っても戻すことができません。
 				Insert mode中での変更はInsert modeから抜けるまでがアンドゥ可能な1単位として扱われるためです。
 				とはいえこのようなケースでもアンドゥしたいことはしばしばあります。
 				どうすればよいでしょうか。</p>
@@ -34,13 +31,11 @@ author: kana
 
 <p>以下の内容をvimrcに追加します:</p>
 
-<pre class="prettyprint"><code>inoremap &lt;C-u&gt;  &lt;C-g&gt;u&lt;C-u&gt;
-inoremap &lt;C-w&gt;  &lt;C-g&gt;u&lt;C-w&gt;
-</code></pre>
+<pre class="prettyprint"><code>0</code></pre>
 
-<p>上記の設定は<code>&lt;C-u&gt;</code>や<code>&lt;C-w&gt;</code>での削除をアンドゥ可能にします。
-				右辺(<var>{rhs}</var>)に含まれる<code>&lt;C-g&gt;u</code>はInsert modeでの変更に区切りを付けるコマンドです。
-				これにより<code>&lt;C-g&gt;u</code>実行後の操作から<code>&lt;C-g&gt;u</code>実行前の状態にアンドゥできるようになります。</p>
+<p>上記の設定は<code>0</code>や<code>0</code>での削除をアンドゥ可能にします。
+				右辺(<var>{rhs}</var>)に含まれる<code>0</code>はInsert modeでの変更に区切りを付けるコマンドです。
+				これにより<code>0</code>実行後の操作から<code>0</code>実行前の状態にアンドゥできるようになります。</p>
 
 <h3>参考資料</h3>
 

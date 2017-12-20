@@ -6,15 +6,13 @@ author: ujihisa
 ---
 <p>多くの方は<kbd>Tab</kbd>キーを補完のために使うため、以下のような設定をしていると思います。</p>
 
-<pre class="prettyprint"><code>inoremap &lt;Tab&gt; &lt;C-n&gt;
-</code></pre>
+<pre class="prettyprint"><code>0</code></pre>
 
 <p><kbd>Tab</kbd>キーを打鍵し続けると、左手小指が破壊されます。公平のため、右手小指も使うべきではないでしょうか。<kbd>Tab</kbd>キーと対称な位置にあるキーは<kbd>[</kbd>または<kbd>]</kbd>です。後述する理由のため、<kbd>]</kbd>を<kbd>Tab</kbd>キーのかわりに補完用のキーに設定してみましょう。</p>
 
 <p>まずは素直に、先ほどの<kbd>Tab</kbd>キーと同様の方法で設定します。</p>
 
-<pre class="prettyprint"><code>inoremap ] &lt;C-n&gt;
-</code></pre>
+<pre class="prettyprint"><code>0</code></pre>
 
 <p>これは便利なのですが、本当に<kbd>]</kbd>を入力したいときに、<kbd>&lt;C-v&gt;]</kbd>と打鍵しなければならないのがつらいです。</p>
 
@@ -22,8 +20,7 @@ author: ujihisa
 
 <p>そもそも<kbd>]</kbd>を入力しないで済むように、自動で入力するようにします。</p>
 
-<pre class="prettyprint"><code>inoremap [ []&lt;Left&gt;
-</code></pre>
+<pre class="prettyprint"><code>0</code></pre>
 
 <p><kbd>[</kbd>を入力した時点で自動的に<kbd>]</kbd>が入力されるので、<kbd>]</kbd>を手動で入力する必要がなくなります。
 				大抵の場合は<kbd>]</kbd>は対応する<kbd>[</kbd>があってこそ意味があるので、この解決方法でうまくいくことでしょう。</p>
@@ -38,48 +35,37 @@ author: ujihisa
 <li>カーソル位置より手前に閉じていない<kbd>[</kbd>があれば、<kbd>]</kbd>は<kbd>]</kbd>として動作する</li>
 </ol>
 
-<p>これを実現するには、<code>~/.vimrc</code>に以下を記述します。</p>
+<p>これを実現するには、<code>0</code>に以下を記述します。</p>
 
-<pre class="prettyprint"><code>inoremap &lt;expr&gt; ] searchpair('\[', '', '\]', 'nbW', 'synIDattr(synID(line(&quot;.&quot;), col(&quot;.&quot;), 1), &quot;name&quot;) =~? &quot;String&quot;') ? ']' : &quot;\&lt;C-n&gt;&quot;
-</code></pre>
+<pre class="prettyprint"><code>0</code></pre>
 
 <p>ちょっとややこしいので、具体例で動作を説明します。</p>
 
 <p>カーソル位置を<kbd>_</kbd>とします。まず、</p>
 
-<pre class="prettyprint"><code>aaa[bbb_
-</code></pre>
+<pre class="prettyprint"><code>0</code></pre>
 
 <p>この状態で<kbd>]</kbd>を打鍵すると、</p>
 
-<pre class="prettyprint"><code>aaa[bbb]_
-</code></pre>
+<pre class="prettyprint"><code>0</code></pre>
 
 <p>となります。いっぽう、</p>
 
-<pre class="prettyprint"><code>aaa bbb_
-</code></pre>
+<pre class="prettyprint"><code>0</code></pre>
 
 <p>この状態で<kbd>]</kbd>を打鍵すると、</p>
 
-<pre class="prettyprint"><code>aaa bbba
-   |bbbb|
-   |bbbc|
-   |bbbd|
-   +----+
-</code></pre>
+<pre class="prettyprint"><code>0</code></pre>
 
 <p>このように補完のポップアップメニューが出てきます。</p>
 
 <p>また、&quot;&quot;で囲まれた部分は無視します。</p>
 
-<pre class="prettyprint"><code>&quot;[&quot;.t_
-</code></pre>
+<pre class="prettyprint"><code>0</code></pre>
 
 <p>この状態で<kbd>]</kbd>を打鍵すると、</p>
 
-<pre class="prettyprint"><code>&quot;[&quot;.t]_
-</code></pre>
+<pre class="prettyprint"><code>0</code></pre>
 
 <p>ではなく、補完がはじまります。</p>
 

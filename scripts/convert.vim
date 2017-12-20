@@ -174,6 +174,12 @@ let s:langmap = {
 \  '^:': 'lang-vim',
 \}
 
+function! s:html_escape(str)
+  let str = a:str
+  let str = substitute(str, '<', '\&lt;', 'g')
+  let str = substitute(str, '>', '\&gt;', 'g')
+endfunction
+
 function! s:pre(str) abort
   return '<pre class="prettyprint">' . s:code(a:str) . '</pre>'
 endfunction
@@ -181,13 +187,10 @@ endfunction
 function! s:code(str) abort
   for k in keys(s:langmap)
     if a:str =~# k
-      return '<code class="' . s:langmap[k] . '">' . a:str . '</code>'
+      return '<code class="' . s:langmap[k] . '">' . s:html_escape(a:str) . '</code>'
     endif
   endfor
-  let str = a:str
-  let str = substitute(str, '<', '\&lt;', 'g')
-  let str = substitute(str, '>', '\&gt;', 'g')
-  return '<code>' . str . '</code>'
+  return '<code>' . s:html_escape(a:str) . '</code>'
 endfunction
 
 function! s:convert(f) abort

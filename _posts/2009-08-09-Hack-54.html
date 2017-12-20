@@ -16,33 +16,7 @@ author: Shougo
 
 <p>
 <dd>基本的に、キーマッピングの.vimrcに設定をするだけです。一つずつ設定すると煩雑になるので、配列を使って評価するようにすると簡単でしょう。私は次のように設定し、Insert mode, Command-line mode, Select modeでSticky Shiftが有効になるようにしています。これは英語キーボード用の設定です。日本語キーボードを使用している場合、適時設定を変更してください。</dd>
-<pre class="prettyprint"><code class="lang-vim">inoremap &lt;expr&gt; ;  &lt;SID&gt;sticky_func()
-cnoremap &lt;expr&gt; ;  &lt;SID&gt;sticky_func()
-snoremap &lt;expr&gt; ;  &lt;SID&gt;sticky_func()
-
-function! s:sticky_func()
-    let l:sticky_table = {
-                \',' : '&lt;', '.' : '&gt;', '/' : '?',
-                \'1' : '!', '2' : '@', '3' : '#', '4' : '$', '5' : '%',
-                \'6' : '^', '7' : '&#038;', '8' : '*', '9' : '(', '0' : ')', '-' : '_', '=' : '+',
-                \';' : ':', '[' : '{', ']' : '}', '`' : '~', "'" : "\"", '\' : '|',
-                \}
-    let l:special_table = {
-                \"\&lt;ESC&gt;" : "\&lt;ESC&gt;", "\&lt;Space&gt;" : ';', "\&lt;CR&gt;" : ";\&lt;CR&gt;"
-                \}
-
-    let l:key = getchar()
-    if nr2char(l:key) =~ '\l'
-        return toupper(nr2char(l:key))
-    elseif has_key(l:sticky_table, nr2char(l:key))
-        return l:sticky_table[nr2char(l:key)]
-    elseif has_key(l:special_table, nr2char(l:key))
-        return l:special_table[nr2char(l:key)]
-    else
-        return ''
-    endif
-endfunction
-</code></pre>
+<pre class="prettyprint"><code class="lang-vim">0</code></pre>
 <dd>私の場合、<kbd>;</kbd>をShiftのための修飾キーとして使い、;そのものを入力したいときは<kbd>;&lt;Space&gt;</kbd>を使用するようにしています。</dd>
 <dd>追記：thincaさんのアイデアにより、&lt;expr&gt;を使うようにしました。マッピングも減って、すっきりしますね。</dd>
 <dd>慣れるととても便利なSticky Shiftですが、デメリットもあります。なんといっても大きいのは、Sticky Shiftが設定されていないアプリケーションがほぼ使用不能になることです。特に普通のシェルが使いにくくなってしまいます。シェルでもSticky Shiftが使えると良いのですが、キーバインドを設定するのはなかなか大変です。プラグイン等を駆使して、Vimを使用する時間を増やすしかないでしょう。</dd>
