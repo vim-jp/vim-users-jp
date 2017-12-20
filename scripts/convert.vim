@@ -180,8 +180,8 @@ function! s:lang(str) abort
     endif
   endfor
   let str = a:str
-  let str = substitute(str, '<', '&lt;', 'g')
-  let str = substitute(str, '>', '&gt;', 'g')
+  let str = substitute(str, '<', '\&lt;', 'g')
+  let str = substitute(str, '>', '\&gt;', 'g')
   return '<code>' . str . '</code>'
 endfunction
 
