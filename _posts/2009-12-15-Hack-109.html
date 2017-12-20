@@ -19,11 +19,11 @@ author: kana
 <h3>解説</h3>
 
 <p>Vimでは変数名(および関数名)の中に任意の式を
-<code>{<lt;var>gt;expr<lt;/var>gt;}</code>の形で埋め込むことができます。
-				変数名中に<code>{<lt;var>gt;expr<lt;/var>gt;}</code>が含まれる場合、
+<code>{&lt;var&gt;expr&lt;/var&gt;}</code>の形で埋め込むことができます。
+				変数名中に<code>{&lt;var&gt;expr&lt;/var&gt;}</code>が含まれる場合、
 				実行時に<code>{}</code>中の式<var>expr</var>が評価され、
-				その結果で<code>{<lt;var>gt;expr<lt;/var>gt;}</code>が置き換えられます。
-				最終的には<code>{<lt;var>gt;expr<lt;/var>gt;}</code>が置き換えられた
+				その結果で<code>{&lt;var&gt;expr&lt;/var&gt;}</code>が置き換えられます。
+				最終的には<code>{&lt;var&gt;expr&lt;/var&gt;}</code>が置き換えられた
 				変数名が参照されることになります。</p>
 
 <p>例えば<code>g:surround_{char2nr('j')}</code>の場合、
