@@ -36,7 +36,7 @@ function! s:move_window_into_tab_page(target_tabpagenr)
     return
   endif
   let original_tabnr = tabpagenr()
-  let target_bufnr = bufnr(<code class="option">''</code>)
+  let target_bufnr = bufnr(<lt;code class="option">gt;''</code>)
   let window_view = winsaveview()
 
   if a:target_tabpagenr == 0

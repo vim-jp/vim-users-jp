@@ -32,9 +32,9 @@ author: ukstudio
 
 <p>例えば「初期状態から文章を入力(state1)し、さらにもう一度入力(state2)、その状態から一度undoをしそのまま別の文章を入力(state3)した」とします。この場合、最後のstate3の状態からstate1の状態には戻れますが、state2の状態には戻れません。</p>
 
-<pre class="prettyprint"><code>state1--->state2
+<pre class="prettyprint"><code>state1--->gt;state2
        |
-       +->state3
+       +->gt;state3
 </code></pre>
 
 <p>Vim7からはこの様な複雑な履歴も辿れるように「undo-branches」が実装されました。</p>

@@ -56,7 +56,7 @@ author: ujihisa
 <pre class="prettyprint"><code class="lang-vim">nnoremap O :&lt;C-u&gt;call append(expand('.'), <code class="option">''</code>)&lt;Cr&gt;j
 </code></pre>
 
-<p>はまず<code>append()</code>で現在の行<code>expand('.')</code>の直後に空文字列<code><code class="option">''</code></code>だけの行を挿入し、そしてその挿入した行に<code>j</code>で移動するという一連の操作を<kbd>O</kbd>に割り当てています。</p>
+<p>はまず<code>append()</code>で現在の行<code>expand('.')</code>の直後に空文字列<code><lt;code class="option">gt;''</code></code>だけの行を挿入し、そしてその挿入した行に<code>j</code>で移動するという一連の操作を<kbd>O</kbd>に割り当てています。</p>
 
 <p>逆に、この自動挿入を行いたい場合は、通常の改行を行なえばよいため</p>
 

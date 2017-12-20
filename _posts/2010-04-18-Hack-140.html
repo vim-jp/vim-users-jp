@@ -18,7 +18,7 @@ author: kana
 
 <h3>解決方法</h3>
 
-<p><code>-c <var>{command}</var></code>オプションを指定してVimを起動します。
+<p><code>-c <lt;var>gt;{command}<lt;/var>gt;</code>オプションを指定してVimを起動します。
 <var>{command}</var>はVimの起動後に実行されます。</p>
 
 <p>例えばファイルのインデントを修正する場合、
@@ -46,8 +46,8 @@ $ cat hidoi.html
 </code></pre>
 
 <p>指定するコマンド数が多くなる場合は別のファイルにまとめて記述しておき、
-<code>-c 'source <var>{file}</var>'</code>あるいは
-<code>-S <var>{file}</var></code>で実行することもできます。</p>
+<code>-c 'source <lt;var>gt;{file}<lt;/var>gt;'</code>あるいは
+<code>-S <lt;var>gt;{file}<lt;/var>gt;</code>で実行することもできます。</p>
 
 <pre class="prettyprint"><code>$ cat reindent.vim
 normal! gg=G
@@ -67,8 +67,8 @@ $ vim -S reindent.vim hidoi.html
 
 <ul>
 <li><code>-u</code>と<code>-N</code>については<a href="/vim-users-jp/2010/03/25/Hack-134.html">Hack #134: Vimをデフォルトの状態で起動する</a>を参照してください。</li>
-<li><code>-i <var>{file}</var></code>はviminfoファイルのパスを指定します。<code>NONE</code>はviminfoファイルを利用しないという意味です。viminfoはレジスタの内容やコマンドラインの履歴といった情報を保存しておくファイルなのですが、これを無効にしておかないとレジスタの内容を変更するような処理を実行した場合に後で困る可能性があります。</li>
-<li><code>--cmd <var>{command}</var></code>は<code>-c</code>と似ていますが、実行されるタイミングが違います。<code>--cmd</code>はファイルの読み込みなどに先立って実行され、<code>-c</code>はファイルの読み込みが完了した後に実行されます。ファイルの種類に応じたインデントを行なうにはVimがファイルの種類を自動認識するよう設定する必要があるのですが、それはファイルの読み込み前に行なわなければなりません。</li>
+<li><code>-i <lt;var>gt;{file}<lt;/var>gt;</code>はviminfoファイルのパスを指定します。<code>NONE</code>はviminfoファイルを利用しないという意味です。viminfoはレジスタの内容やコマンドラインの履歴といった情報を保存しておくファイルなのですが、これを無効にしておかないとレジスタの内容を変更するような処理を実行した場合に後で困る可能性があります。</li>
+<li><code>--cmd <lt;var>gt;{command}<lt;/var>gt;</code>は<code>-c</code>と似ていますが、実行されるタイミングが違います。<code>--cmd</code>はファイルの読み込みなどに先立って実行され、<code>-c</code>はファイルの読み込みが完了した後に実行されます。ファイルの種類に応じたインデントを行なうにはVimがファイルの種類を自動認識するよう設定する必要があるのですが、それはファイルの読み込み前に行なわなければなりません。</li>
 </ul>
 
 <h3>応用例</h3>
