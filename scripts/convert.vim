@@ -243,6 +243,7 @@ function! s:convert(f) abort
   let text = substitute(text, 'http://bbs50\.meiwasuisan\.com/bbs/kaiki/img/\(13265275940001\.jpg\)', '/vim-users-jp/assets/images/\1', 'g')
   let text = substitute(text, 'http://www\.gentoo\.org/images/\(glogo-small\.png\)', '/vim-users-jp/assets/images/\1', 'g')
   let text = substitute(text, ':help</code> j', ':help j</code>', 'g')
+  let text = substitute(text, 'とすることでファイル名を変更することができます。</p>\zs', "\n\n<p><font color=\"red\">[UPDATED 2018-03-08] ファイルの保存に失敗しても削除します。かなり危険なので、上記commandは設定しない方がよいです。(コメント欄を参照されたし)</font></p>", 'g')
 
   for k in keys(s:urlmap)
     let v = s:urlmap[k]
