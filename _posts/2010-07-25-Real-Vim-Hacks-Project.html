@@ -1,0 +1,216 @@
+---
+layout: post
+title: "Real Vim Hacks Project"
+date: 2010-07-25
+author: Shougo
+---
+<p>Vim 7.3が今年の夏に出るという今、Vim 7.4 or Vim 8.0に必要な機能を議論し、あわよくばパッチまで書いてVim本体に取り込んでもらおうという企画です。自由に編集してください。ただしVimをシェルやIDE化するという、Vim本体でやるべきではない機能についてはReal Vim Hacksでは対象外とします。あくまで、Vimを拡張しやすくする方向で考えてください。できることなら、新機能のパッチをまとめて、Windowsユーザーでも気軽に試せるような環境を整えたいと考えています。皆さんの協力をお待ちしています。</p>
+
+<h2>我々はなぜパッチを書かなければならないか</h2>
+
+<p>それはVimの作者でありメンテナであるBramさんがVimの安定化に尽力していて、「パッチが出たら精査して取り込む。自分の方からは積極的に新機能を追加しない」という姿勢だからです。つまりどんなに欲しい機能を妄想したとしても、誰かがパッチを書かないと一生実装されません。幸いなことに、Vimはオープンソースなので誰もがパッチを書くことができます。ソースコードの解読は難しいですが、先人たちの残した資料があります。皆さんもVimを使いやすくするために協力しようではありませんか！</p>
+
+<h2>Vimに欲しい機能</h2>
+
+<h3>関数によるsidの参照</h3>
+
+<p>現在はs:GetSID()などをユーザー側で定義しなければなりません。
+				これは面倒なので、標準で欲しいところです。</p>
+
+<h3>無名関数やバッファローカル関数</h3>
+
+<p>スクリプト内関数のように、名前をランダムなものにしてエミュレーションすればできるような気がします。</p>
+
+<h3>タイマー機能</h3>
+
+<p>CursorHoldIで代用するのはさすがにひどいので……。
+				コマンドごとにタイマーを定義できるといいのですが。
+				あと、CursorHoldIはポップアップメニューが出てくると動作しないなど、仕様がひどいです。
+				せめてCursorMovedI並に、ポップアップメニューの候補が無くなったらイベントが発生して欲しい。</p>
+
+<p>あと、<code>call feedkeys("\&lt;NOP&gt;")</code>でCursorHold, CursorHoldIが発生して欲しいです。
+				todoにもありますが、holdtimeを作って、updatetimeとは分離するべきでしょう。</p>
+
+<p>理想的な仕様は、次のようなものです。</p>
+
+<pre class="prettyprint"><code class="lang-vim">autocmd CursorHoldI &lt;timer=1000&gt; call foo()
+</code></pre>
+
+<p><code>&lt;timer=xxx&gt;</code>というのがイベントの実行時間を表します。単位はms。CursorHoldI, CursorHoldでのみ有効。
+				省略されると今までと同様にholdtimeかupdatetimeを使います。</p>
+
+<h3>非同期実行機能</h3>
+
+<p>スレッドまで作れればいいのですが、制御が面倒そう。
+				デバッグの手間も考えると、かなりの議論が必要です。</p>
+
+<h3>setbufline(), appendbufline(), deletebufline()</h3>
+
+<p>なぜないんだ！</p>
+
+<h3>copyfile(from, to), rmdir()</h3>
+
+<p>なぜないんだ！</p>
+
+<h3>libcall()の多引数化, libcallext()</h3>
+
+<p><a href="https://web.archive.orghttp://github.com/mattn/libcallex-vim">最近mattnさんがやっていました。</a>これは標準で欲しいですね。
+				libcallext()はコールバック関数として使えるようです。C側からvimをいじれるということ？　ちょっとこれは難しそう。</p>
+
+<h3>オブジェクト指向のサポート</h3>
+
+<p><a href="https://web.archive.orghttp://d.hatena.ne.jp/thinca/20100115/1263567486">thincaさんがやっていたもの</a>とか。</p>
+
+<h3>ビット演算</h3>
+
+<p>あれば便利そうですが、まぁ無くても困らないかな。普通の人は。
+				tyruさんによると、Cとのやりとりを効率的に行う際に必要、だとのことです。
+				しかし、パーサ関係を書き直すのは大変そうですね。</p>
+
+<h3>組み込み補完をVim Scriptから利用する</h3>
+
+<p>これがないから、neocomplcacheは自前で補完を実装することになってしまいました。いい加減どうにかして欲しいですね。</p>
+
+<h3>ポップアップ補完モード</h3>
+
+<p>pnoremapとか。既存の機能との互換性をどう付けるか……。</p>
+
+<h3>ポップアップ補完時のautocmd</h3>
+
+<p>この辺りが欲しい</p>
+
+<ul>
+<li>PopUpSelect <code>&lt;C-y&gt;</code> や入力を続けて補完が確定したときに発生 。<code>&lt;aword&gt;</code>が確定したキーワード。</li>
+<li>PopUpNarrow 絞り込み時に発生。<code>&lt;aword&gt;</code>で絞り込んだキーワードを取得できる。</li>
+</ul>
+
+<h3>deleteでディレクトリも消せるように</h3>
+
+<p>これは本来当たり前の機能のはず……。</p>
+
+<h3>パッケージマネージャ</h3>
+
+<p>地味に一番重要な機能です。
+				Vimには独自のパッケージマネージャが乱立している上に、
+				マルチプラットフォームでインストールしやすい決定的なものは登場していません。
+				できればVim Scriptレベルで解決したいところですが、
+				簡単にインストールできるならば他のインタプリタで実装しても良いです。</p>
+
+<h3>Bool型の追加</h3>
+
+<p>地味ですが、重要な機能です。Vim Scriptには真偽値型が存在しないために、現在はスクリプト毎にtrue/falseを定義しているような状態です。新しい型を導入するのが大変ならば、v:true/v:falseを実装して代用するという手があります。</p>
+
+<h3>ツールチップ機能</h3>
+
+<p>Emacsにはあるのに……。auto-completeではツールチップを使用してヘルプを表示できたりするので、previewの代わりになるといいですね。ただし、GVim限定でしょう。</p>
+
+<h3>組み込み補完へのアクセス</h3>
+
+<p>completelist({completion} [, {expr}])で、taglist()のように、{expr}にマッチする組み込み補完の候補リストを取得できるようにすることを考えています。Vim 7.3がリリースされる前になんとしても実装したいところです。ソースコードを見たところ、if (parse_compl_arg(xp_name, xp_namelen, &amp;xp_type, &amp;argt,
+				&amp;xp_arg) == FAIL)というようにコマンドラインをパースしているので、これが使えそうな気がしています。</p>
+
+<h2>ソースコード解釈のためのTips</h2>
+
+<h3>オプション変数はoption.cにp_{オプションの短い名前}で置いてある</h3>
+
+<p>tyruさん情報。</p>
+
+<h3>get_tv_string_buf*() の第2引数はもし数値だった場合に変換された文字列を保存するためのバッファ</h3>
+
+<p>tyruさん情報。</p>
+
+<h2>tyruさんのReal Vim Hacks Project</h2>
+
+<h3><a href="https://web.archive.orghttp://github.com/tyru/vim">Real Vim Hacksリポジトリ</a></h3>
+
+<p>この企画に賛同してくれたtyruさんのリポジトリ。</p>
+
+<h3><a href="https://web.archive.orghttp://d.hatena.ne.jp/tyru/20100526/my_real_vim_hacks_project">My Real Vim Hacks Project</a></h3>
+
+<p>mbstrlen()のパッチを書いたらしいです。本家のMLに投げるらしいので、期待。</p>
+
+<h3><a href="https://web.archive.orghttp://d.hatena.ne.jp/tyru/20100529/vim_script_bindfn">Vimスクリプトでlambda-like Funcref</a></h3>
+
+<p>Vim Scriptにlambda式を追加しようという構想。</p>
+
+<h3><a href="https://web.archive.orghttp://d.hatena.ne.jp/tyru/20100527/vim_hack_adding_function_wcwidth">Real Vim Hacksリポジトリ</a></h3>
+
+<p><strike>wcwidth()追加したという話とmbyte.cの内部構造まとめ。</strike></p>
+
+<p>tyruさんがパッチを投げたところ、必要性が認められてVim 7.3に次の三種類の関数が追加されました！</p>
+
+<h4>strchars(): 文字数を数える</h4>
+
+<h4>strwidth(): 文字幅を数える</h4>
+
+<h4>strdisplaywidth(): スクリーン上の文字幅を数える</h4>
+
+<h3><a href="https://web.archive.orghttp://d.hatena.ne.jp/tyru/20100606/real_vim_hacks_excmds">Exコマンドに対応する関数が知りたい場合</a></h3>
+
+<p>VimのExコマンドに対応する関数の探し方に関するTips。</p>
+
+<h2>参考記事</h2>
+
+<h3><a href="https://web.archive.orghttp://whileimautomaton.net/2008/01/16053200">Vim Hack: 組み込み関数の追加手順</a></h3>
+
+<h3><a href="https://web.archive.orghttp://whileimautomaton.net/2008/09/15012330">Vim: Gauche interface</a></h3>
+
+<p>参考になります。</p>
+
+<h3><a href="https://web.archive.orghttp://whileimautomaton.net/2008/09/08233755">VimM#2前後の行動記録</a></h3>
+
+<p>libcall祭り。</p>
+
+<h3><a href="https://web.archive.orghttp://whileimautomaton.net/2008/02/14002600">Vimのダメなところ: Vim Scriptがアレ</a></h3>
+
+<p>まぁ、Vim Scriptがあれなのは今に始まったことでは……。</p>
+
+<h3><a href="https://web.archive.orghttp://whileimautomaton.net/2008/02/12234700">Metaobject Protocol on Vim Script</a></h3>
+
+<p>いつかはこのレベルにいきたいですね。</p>
+
+<h3><a href="https://web.archive.orghttp://whileimautomaton.net/2008/01/31002500">Vim: curryingもどき</a></h3>
+
+<p>うーむ。カリー化か……。</p>
+
+<h3><a href="https://web.archive.orghttp://whileimautomaton.net/2008/01/vim-tabvar-func.patch">kanaさんのsettabvar()パッチ</a></h3>
+
+<h3><a href="https://web.archive.orghttp://nicht.jottit.com/vim/hack/tabvar-func">kanaさんのVim Hack格闘記録</a></h3>
+
+<p>パッチ作りの参考になりそう。</p>
+
+<h3><a href="https://web.archive.orghttp://www.k3.dion.ne.jp/~jod/vimhack.html">Vimプチハックのメモ</a></h3>
+
+<p>非常に有用な資料でしたが、サイト閉鎖。</p>
+
+<h3><a href="https://web.archive.orghttp://www.kaoriya.net/">Kaoriya版のVim</a></h3>
+
+<h3><a href="https://web.archive.orghttp://d.hatena.ne.jp/thinca/20090619/1245338963">kaoriya版特有の機能まとめ</a></h3>
+
+<p>こちらの機能も本家にマージできるものはやっておきたいですね。</p>
+
+<h3><a href="https://web.archive.orghttp://github.com/tyru/syslib.vim">syslib.vim</a></h3>
+
+<p>Vimに足りないシステム操作系の関数を追加しよう、というプロジェクト。ただ、そこまでやるなら本体にマージした方がよさそうです。</p>
+
+<h3><a href="https://web.archive.orghttp://www.geocities.co.jp/SiliconValley-Bay/9285/ELISP-JA/elisp_610.html">GNU Emacs Lispリファレンスマニュアル: Timers</a></h3>
+
+<p>Emacsのタイマーの仕様。Vimにもこのレベルは欲しいです。Emacs 24では、並列化のサポートが提案されているので、今後の行く末に注目しています。</p>
+
+<h3><a href="https://web.archive.orghttp://vimdoc.sourceforge.net/htmldoc/todo.html">todo.txt</a></h3>
+
+<p>大量にあるVimのToDo List。なかなか魅力的な妄想的機能がそろっていますが、誰かが実装しなければ実現することはありません。</p>
+
+<h3><a href="https://web.archive.orghttp://github.com/kana/vim">kanaさんのVimリポジトリ</a></h3>
+
+<p>独自のパッチが当てられています。本家にマージできそうならマージしたいですね。</p>
+
+<h3><a href="https://web.archive.orghttp://github.com/b4winckler/vim">Vimのgitリポジトリ</a></h3>
+
+<p>Mercurialリポジトリのミラー。github上にあるので、forkするのに便利です。本家からもリンクが張られる予定。</p>
+
+<h3><a href="https://web.archive.orghttp://d.hatena.ne.jp/thinca/20100710/1278708702">Windows で Vim をソースコードからビルドする</a></h3>
+
+<p>Windows上でVimをソースコードからビルドするのは大変骨が折れる作業です。そんなときは、thincaさんの秀逸なこの記事を参考にしましょう。これでWindowsでもReal Vim Hacksができます。</p>
+
+<address class="hack-author">Shougo</address>

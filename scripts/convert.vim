@@ -317,7 +317,7 @@ function! s:scan() abort
   for f in split(glob("_posts/*.html"), "\n")
     call delete(f)
   endfor
-  for f in sort(split(glob("_original/http_*"), "\n"))
+  for f in sort(split(glob("_original/http_*"), "\n")+split(glob("_original/https_*"), "\n"))
     try
       call s:convert(f)
     catch
