@@ -242,6 +242,7 @@ function! s:convert(f) abort
   let text = substitute(text, 'http://images\.paraorkut\.com/img/pics/images/a/\(airplane-13372\.jpg\)', '/vim-users-jp/assets/images/\1', 'g')
   let text = substitute(text, 'http://bbs50\.meiwasuisan\.com/bbs/kaiki/img/\(13265275940001\.jpg\)', '/vim-users-jp/assets/images/\1', 'g')
   let text = substitute(text, 'http://www\.gentoo\.org/images/\(glogo-small\.png\)', '/vim-users-jp/assets/images/\1', 'g')
+  let text = substitute(text, ':help</code> j', ':help j</code>', 'g')
 
   for k in keys(s:urlmap)
     let v = s:urlmap[k]
@@ -344,17 +345,7 @@ function! s:clean()
   endfor
 endfunction
 
-function! s:patch()
-  let patches = [
-  \ 'https://github.com/vim-jp/vim-users-jp/commit/3ca5b3a054e24b383ed7b4d300619084879a3746.diff'
-  \]
-  for patch in patches
-    call system(printf('curl -s "%s" | patch -p1', patch))
-  endfor
-endfunction
-
 call s:scan()
-call s:patch()
 
 function! s:sortcmp(lhs, rhs)
   return (0+a:lhs["hack"]) > (0+a:rhs["hack"])
