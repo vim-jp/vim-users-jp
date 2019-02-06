@@ -210,6 +210,8 @@ function! s:convert(f) abort
   let text = substitute(text, '\(src\|href\)=''\([^'']\+\)''', '\1="\2"', 'g')
   let text = substitute(text, '\(src\|href\)="/web/[^"]\+/\(http://[^"]\+\)"', '\1="\2"', 'g')
   let text = substitute(text, '\(src\|href\)="/web/[^"]\+/\(https://[^"]\+\)"', '\1="\2"', 'g')
+  let text = substitute(text, '\(src\|href\)="https://web\.archive\.org/web/[^"]\+/\(http://[^"]\+\)"', '\1="\2"', 'g')
+  let text = substitute(text, '\(src\|href\)="https://web\.archive\.org/web/[^"]\+/\(https://[^"]\+\)"', '\1="\2"', 'g')
   let text = substitute(text, '{{{', '\&#123;\&#123;\&#123;', 'g')
   let text = substitute(text, '{{', '\&#123;\&#123;', 'g')
   let text = substitute(text, '}}}', '\&#125;\&#125;\&#125;', 'g')
