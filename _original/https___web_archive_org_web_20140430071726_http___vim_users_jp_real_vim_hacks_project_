@@ -1,0 +1,697 @@
+
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<link rel="alternate" type="application/rss+xml" title="Vim-users.jp » Real Vim Hacks Project のコメントのフィード" href="https://web.archive.org/web/20140430071726/http://vim-users.jp/real-vim-hacks-project/feed/"/>
+<link rel="stylesheet" id="openid-css" href="https://web.archive.org/web/20140430071726cs_/http://vim-users.jp/wp-content/plugins/openid/f/openid.css?ver=519" type="text/css" media="all"/>
+<script src="//archive.org/includes/analytics.js?v=cf34f82" type="text/javascript"></script>
+<script type="text/javascript">window.addEventListener('DOMContentLoaded',function(){var v=archive_analytics.values;v.service='wb';v.server_name='wwwb-app57.us.archive.org';v.server_ms=210;archive_analytics.send_pageview({});});</script>
+<script type="text/javascript" src="/static/js/ait-client-rewrite.js?v=1548381079" charset="utf-8"></script>
+<script type="text/javascript">
+WB_wombat_Init('https://web.archive.org/web', '20140430071726', 'vim-users.jp');
+</script>
+<script type="text/javascript" src="/static/js/wbhack.js?v=1548381079" charset="utf-8"></script>
+<script type="text/javascript">
+__wbhack.init('https://web.archive.org/web');
+</script>
+<link rel="stylesheet" type="text/css" href="/static/css/banner-styles.css?v=1548381079" />
+<link rel="stylesheet" type="text/css" href="/static/css/iconochive.css?v=1548381079" />
+<!-- End Wayback Rewrite JS Include -->
+<script type="text/javascript" src="https://web.archive.org/web/20140430071726js_/http://vim-users.jp/wp-includes/js/jquery/jquery.js?ver=1.7.1"></script>
+<script type="text/javascript" src="https://web.archive.org/web/20140430071726js_/http://vim-users.jp/wp-content/plugins/google-analyticator/external-tracking.min.js?ver=6.4.1"></script>
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="http://vim-users.jp/xmlrpc.php?rsd"/>
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="http://vim-users.jp/wp-includes/wlwmanifest.xml"/> 
+<link rel="prev" title="vim-users.jp official lingr chat room." href="https://web.archive.org/web/20140430071726/http://vim-users.jp/vim-users-jp-official-lingr-chat-room/"/>
+<link rel="next" title="修正しました" href="https://web.archive.org/web/20140430071726/http://vim-users.jp/%e4%bf%ae%e6%ad%a3%e3%81%97%e3%81%be%e3%81%97%e3%81%9f/"/>
+<meta name="generator" content="WordPress 3.3.1"/>
+<link rel="canonical" href="https://web.archive.org/web/20140430071726/http://vim-users.jp/real-vim-hacks-project/"/>
+	<link href="https://web.archive.org/web/20140430071726cs_/http://vim-users.jp/wp-content/plugins/google-syntax-highlighter/Styles/SyntaxHighlighter.css" type="text/css" rel="stylesheet"/>
+	<meta http-equiv="X-XRDS-Location" content="http://vim-users.jp/?xrds"/>
+<meta http-equiv="X-Yadis-Location" content="http://vim-users.jp/?xrds"/>
+<!-- BEGIN: WP Social Bookmarking Light -->
+<style type="text/css">
+.wp_social_bookmarking_light{
+    border: 0 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+}
+.wp_social_bookmarking_light div{
+    float: left !important;
+    border: 0 !important;
+    padding: 0 !important;
+    margin: 0 5px 0px 0 !important;
+    height: 23px !important;
+    text-indent: 0 !important;
+}
+.wp_social_bookmarking_light img{
+    border: 0 !important;
+    padding: 0;
+    margin: 0;
+    vertical-align: top !important;
+}
+.wp_social_bookmarking_light_clear{
+    clear: both !important;
+}
+.wsbl_twitter{
+    width: 100px;
+}</style>
+<!-- END: WP Social Bookmarking Light -->
+<!-- Google Analytics Tracking by Google Analyticator 6.4.1: http://www.videousermanuals.com/google-analyticator/ -->
+<script type="text/javascript">window.google_analytics_uacct = "pub-4444897972419065";</script>
+<script type="text/javascript">
+	var analyticsFileTypes = [''];
+	var analyticsEventTracking = 'enabled';
+</script>
+<script type="text/javascript">
+	var _gaq = _gaq || [];
+	_gaq.push(['_setAccount', 'UA-2159054-3']);
+        _gaq.push(['_addDevId', 'i9k95']); // Google Analyticator App ID with Google 
+        
+	_gaq.push(['_trackPageview']);
+
+	(function() {
+		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? 'https://web.archive.org/web/20140430071726/https://ssl/' : 'https://web.archive.org/web/20140430071726/http://www/') + '.google-analytics.com/ga.js';
+		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	})();
+</script>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ja" xml:lang="ja">
+<head profile="http://purl.org/net/ns/metaprof">
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+	<meta http-equiv="Content-Script-Type" content="text/javascript"/>
+	<meta name="generator" content="WordPress 3.3.1"/>
+	<meta name="author" content="Vim-users.jp"/>
+	<link rel="alternate" type="application/rss+xml" href="https://web.archive.org/web/20140430071726/http://vim-users.jp/feed/" title="RSS 2.0"/>
+	<link rel="alternate" type="application/atom+xml" href="https://web.archive.org/web/20140430071726/http://vim-users.jp/feed/atom/" title="Atom cite contents"/>
+	<link rel="start" href="http://vim-users.jp" title="Vim-users.jp Home"/>
+	<link rel="stylesheet" type="text/css" href="https://web.archive.org/web/20140430071726cs_/http://vim-users.jp/wp-content/themes/wp.vicuna/style.css"/>
+	<meta name="description" content="日本の Vim ユーザのためのハブサイト"/>
+	<link rel="pingback" href="http://vim-users.jp/xmlrpc.php"/>
+	<script type="text/javascript" charset="utf-8" src="https://web.archive.org/web/20140430071726js_/http://vim-users.jp/wp-content/themes/wp.vicuna/script.js"></script>
+<link rel="alternate" type="application/rss+xml" title="Vim-users.jp » Real Vim Hacks Project のコメントのフィード" href="https://web.archive.org/web/20140430071726/http://vim-users.jp/real-vim-hacks-project/feed/"/>
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="http://vim-users.jp/xmlrpc.php?rsd"/>
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="http://vim-users.jp/wp-includes/wlwmanifest.xml"/> 
+<link rel="prev" title="vim-users.jp official lingr chat room." href="https://web.archive.org/web/20140430071726/http://vim-users.jp/vim-users-jp-official-lingr-chat-room/"/>
+<link rel="next" title="修正しました" href="https://web.archive.org/web/20140430071726/http://vim-users.jp/%e4%bf%ae%e6%ad%a3%e3%81%97%e3%81%be%e3%81%97%e3%81%9f/"/>
+<meta name="generator" content="WordPress 3.3.1"/>
+<link rel="canonical" href="https://web.archive.org/web/20140430071726/http://vim-users.jp/real-vim-hacks-project/"/>
+	<link href="https://web.archive.org/web/20140430071726cs_/http://vim-users.jp/wp-content/plugins/google-syntax-highlighter/Styles/SyntaxHighlighter.css" type="text/css" rel="stylesheet"/>
+	<meta http-equiv="X-XRDS-Location" content="http://vim-users.jp/?xrds"/>
+<meta http-equiv="X-Yadis-Location" content="http://vim-users.jp/?xrds"/>
+<!-- BEGIN: WP Social Bookmarking Light -->
+<style type="text/css">
+.wp_social_bookmarking_light{
+    border: 0 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+}
+.wp_social_bookmarking_light div{
+    float: left !important;
+    border: 0 !important;
+    padding: 0 !important;
+    margin: 0 5px 0px 0 !important;
+    height: 23px !important;
+    text-indent: 0 !important;
+}
+.wp_social_bookmarking_light img{
+    border: 0 !important;
+    padding: 0;
+    margin: 0;
+    vertical-align: top !important;
+}
+.wp_social_bookmarking_light_clear{
+    clear: both !important;
+}
+.wsbl_twitter{
+    width: 100px;
+}</style>
+<!-- END: WP Social Bookmarking Light -->
+<!-- Google Analytics Tracking by Google Analyticator 6.4.1: http://www.videousermanuals.com/google-analyticator/ -->
+<script type="text/javascript">window.google_analytics_uacct = "pub-4444897972419065";</script>
+<script type="text/javascript">
+	var analyticsFileTypes = [''];
+	var analyticsEventTracking = 'enabled';
+</script>
+<script type="text/javascript">
+	var _gaq = _gaq || [];
+	_gaq.push(['_setAccount', 'UA-2159054-3']);
+        _gaq.push(['_addDevId', 'i9k95']); // Google Analyticator App ID with Google 
+        
+	_gaq.push(['_trackPageview']);
+
+	(function() {
+		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? 'https://web.archive.org/web/20140430071726/https://ssl/' : 'https://web.archive.org/web/20140430071726/http://www/') + '.google-analytics.com/ga.js';
+		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	})();
+</script>
+	<title>Vim-users.jp - Real Vim Hacks Project</title>
+</head>
+<body class="individual single" id="entry1658"><div align="center"><a href="https://web.archive.org/web/20140430071726/http://www.xrea.com/" target="_blank"><img src="https://web.archive.org/web/20140430071726im_/http://imgj.xrea.com/banner_top_1.gif" width="468" height="9" border="0"></a><br><iframe height="60" width="468" frameborder="0" marginheight="0" marginwidth="0" scrolling="no" allowtransparency="true" src="https://web.archive.org/web/20140430071726if_/http://imgj.xrea.com/ad_iframe.html"><a href="https://web.archive.org/web/20140430071726/http://img.xrea.com/ad_click.fcg" target="_blank"><img src="https://web.archive.org/web/20140430071726im_/http://img.xrea.com/ad_img.fcg" border="0"></a></iframe></div>
+<div id="header">
+	<p class="siteName"><a href="https://web.archive.org/web/20140430071726/http://vim-users.jp/" title="Vim-users.jp Indexへ戻る"><img src="https://web.archive.org/web/20140430071726im_/http://vim-users.jp/images/logo.gif" alt="Vim-users.jp" border="0"></a></p>
+	<p class="description">日本の Vim ユーザのためのハブサイト</p></div>
+
+<div id="content">
+	<div id="main">
+		<p class="topicPath"><a href="https://web.archive.org/web/20140430071726/http://vim-users.jp/">Home</a> &gt; <span class="current">Real Vim Hacks Project</span></p>
+		<h1>Real Vim Hacks Project</h1>
+		<div class="entry">
+			<ul class="info">
+				<li class="date">2010-07-25 (日) 10:55</li>
+							</ul>
+			<div class="textBody">
+				<p>Vim 7.3が今年の夏に出るという今、Vim 7.4 or Vim 8.0に必要な機能を議論し、あわよくばパッチまで書いてVim本体に取り込んでもらおうという企画です。自由に編集してください。ただしVimをシェルやIDE化するという、Vim本体でやるべきではない機能についてはReal Vim Hacksでは対象外とします。あくまで、Vimを拡張しやすくする方向で考えてください。できることなら、新機能のパッチをまとめて、Windowsユーザーでも気軽に試せるような環境を整えたいと考えています。皆さんの協力をお待ちしています。</p>
+				
+				<h2>我々はなぜパッチを書かなければならないか</h2>
+				
+				<p>それはVimの作者でありメンテナであるBramさんがVimの安定化に尽力していて、「パッチが出たら精査して取り込む。自分の方からは積極的に新機能を追加しない」という姿勢だからです。つまりどんなに欲しい機能を妄想したとしても、誰かがパッチを書かないと一生実装されません。幸いなことに、Vimはオープンソースなので誰もがパッチを書くことができます。ソースコードの解読は難しいですが、先人たちの残した資料があります。皆さんもVimを使いやすくするために協力しようではありませんか！</p>
+				
+				<h2>Vimに欲しい機能</h2>
+				
+				<h3>関数によるsidの参照</h3>
+				
+				<p>現在はs:GetSID()などをユーザー側で定義しなければなりません。
+				これは面倒なので、標準で欲しいところです。</p>
+				
+				<h3>無名関数やバッファローカル関数</h3>
+				
+				<p>スクリプト内関数のように、名前をランダムなものにしてエミュレーションすればできるような気がします。</p>
+				
+				<h3>タイマー機能</h3>
+				
+				<p>CursorHoldIで代用するのはさすがにひどいので……。
+				コマンドごとにタイマーを定義できるといいのですが。
+				あと、CursorHoldIはポップアップメニューが出てくると動作しないなど、仕様がひどいです。
+				せめてCursorMovedI並に、ポップアップメニューの候補が無くなったらイベントが発生して欲しい。</p>
+				
+				<p>あと、<code>call feedkeys("\&lt;NOP&gt;")</code>でCursorHold, CursorHoldIが発生して欲しいです。
+				todoにもありますが、holdtimeを作って、updatetimeとは分離するべきでしょう。</p>
+				
+				<p>理想的な仕様は、次のようなものです。</p>
+				
+				<pre><code>autocmd CursorHoldI &lt;timer=1000&gt; call foo()
+</code></pre>
+				
+				<p><code>&lt;timer=xxx&gt;</code>というのがイベントの実行時間を表します。単位はms。CursorHoldI, CursorHoldでのみ有効。
+				省略されると今までと同様にholdtimeかupdatetimeを使います。</p>
+				
+				<h3>非同期実行機能</h3>
+				
+				<p>スレッドまで作れればいいのですが、制御が面倒そう。
+				デバッグの手間も考えると、かなりの議論が必要です。</p>
+				
+				<h3>setbufline(), appendbufline(), deletebufline()</h3>
+				
+				<p>なぜないんだ！</p>
+				
+				<h3>copyfile(from, to), rmdir()</h3>
+				
+				<p>なぜないんだ！</p>
+				
+				<h3>libcall()の多引数化, libcallext()</h3>
+				
+				<p><a href="https://web.archive.org/web/20140430071726/http://github.com/mattn/libcallex-vim">最近mattnさんがやっていました。</a>これは標準で欲しいですね。
+				libcallext()はコールバック関数として使えるようです。C側からvimをいじれるということ？　ちょっとこれは難しそう。</p>
+				
+				<h3>オブジェクト指向のサポート</h3>
+				
+				<p><a href="https://web.archive.org/web/20140430071726/http://d.hatena.ne.jp/thinca/20100115/1263567486">thincaさんがやっていたもの</a>とか。</p>
+				
+				<h3>ビット演算</h3>
+				
+				<p>あれば便利そうですが、まぁ無くても困らないかな。普通の人は。
+				tyruさんによると、Cとのやりとりを効率的に行う際に必要、だとのことです。
+				しかし、パーサ関係を書き直すのは大変そうですね。</p>
+				
+				<h3>組み込み補完をVim Scriptから利用する</h3>
+				
+				<p>これがないから、neocomplcacheは自前で補完を実装することになってしまいました。いい加減どうにかして欲しいですね。</p>
+				
+				<h3>ポップアップ補完モード</h3>
+				
+				<p>pnoremapとか。既存の機能との互換性をどう付けるか……。</p>
+				
+				<h3>ポップアップ補完時のautocmd</h3>
+				
+				<p>この辺りが欲しい</p>
+				
+				<ul>
+				<li>PopUpSelect <code>&lt;C-y&gt;</code> や入力を続けて補完が確定したときに発生 。<code>&lt;aword&gt;</code>が確定したキーワード。</li>
+				<li>PopUpNarrow 絞り込み時に発生。<code>&lt;aword&gt;</code>で絞り込んだキーワードを取得できる。</li>
+				</ul>
+				
+				<h3>deleteでディレクトリも消せるように</h3>
+				
+				<p>これは本来当たり前の機能のはず……。</p>
+				
+				<h3>パッケージマネージャ</h3>
+				
+				<p>地味に一番重要な機能です。
+				Vimには独自のパッケージマネージャが乱立している上に、
+				マルチプラットフォームでインストールしやすい決定的なものは登場していません。
+				できればVim Scriptレベルで解決したいところですが、
+				簡単にインストールできるならば他のインタプリタで実装しても良いです。</p>
+				
+				<h3>Bool型の追加</h3>
+				
+				<p>地味ですが、重要な機能です。Vim Scriptには真偽値型が存在しないために、現在はスクリプト毎にtrue/falseを定義しているような状態です。新しい型を導入するのが大変ならば、v:true/v:falseを実装して代用するという手があります。</p>
+				
+				<h3>ツールチップ機能</h3>
+				
+				<p>Emacsにはあるのに……。auto-completeではツールチップを使用してヘルプを表示できたりするので、previewの代わりになるといいですね。ただし、GVim限定でしょう。</p>
+				
+				<h3>組み込み補完へのアクセス</h3>
+				
+				<p>completelist({completion} [, {expr}])で、taglist()のように、{expr}にマッチする組み込み補完の候補リストを取得できるようにすることを考えています。Vim 7.3がリリースされる前になんとしても実装したいところです。ソースコードを見たところ、if (parse_compl_arg(xp_name, xp_namelen, &amp;xp_type, &amp;argt,
+				&amp;xp_arg) == FAIL)というようにコマンドラインをパースしているので、これが使えそうな気がしています。</p>
+				
+				<h2>ソースコード解釈のためのTips</h2>
+				
+				<h3>オプション変数はoption.cにp_{オプションの短い名前}で置いてある</h3>
+				
+				<p>tyruさん情報。</p>
+				
+				<h3>get_tv_string_buf*() の第2引数はもし数値だった場合に変換された文字列を保存するためのバッファ</h3>
+				
+				<p>tyruさん情報。</p>
+				
+				<h2>tyruさんのReal Vim Hacks Project</h2>
+				
+				<h3><a href="https://web.archive.org/web/20140430071726/http://github.com/tyru/vim">Real Vim Hacksリポジトリ</a></h3>
+				
+				<p>この企画に賛同してくれたtyruさんのリポジトリ。</p>
+				
+				<h3><a href="https://web.archive.org/web/20140430071726/http://d.hatena.ne.jp/tyru/20100526/my_real_vim_hacks_project">My Real Vim Hacks Project</a></h3>
+				
+				<p>mbstrlen()のパッチを書いたらしいです。本家のMLに投げるらしいので、期待。</p>
+				
+				<h3><a href="https://web.archive.org/web/20140430071726/http://d.hatena.ne.jp/tyru/20100529/vim_script_bindfn">Vimスクリプトでlambda-like Funcref</a></h3>
+				
+				<p>Vim Scriptにlambda式を追加しようという構想。</p>
+				
+				<h3><a href="https://web.archive.org/web/20140430071726/http://d.hatena.ne.jp/tyru/20100527/vim_hack_adding_function_wcwidth">Real Vim Hacksリポジトリ</a></h3>
+				
+				<p><strike>wcwidth()追加したという話とmbyte.cの内部構造まとめ。</strike></p>
+				
+				<p>tyruさんがパッチを投げたところ、必要性が認められてVim 7.3に次の三種類の関数が追加されました！</p>
+				
+				<h4>strchars(): 文字数を数える</h4>
+				
+				<h4>strwidth(): 文字幅を数える</h4>
+				
+				<h4>strdisplaywidth(): スクリーン上の文字幅を数える</h4>
+				
+				<h3><a href="https://web.archive.org/web/20140430071726/http://d.hatena.ne.jp/tyru/20100606/real_vim_hacks_excmds">Exコマンドに対応する関数が知りたい場合</a></h3>
+				
+				<p>VimのExコマンドに対応する関数の探し方に関するTips。</p>
+				
+				<h2>参考記事</h2>
+				
+				<h3><a href="https://web.archive.org/web/20140430071726/http://whileimautomaton.net/2008/01/16053200">Vim Hack: 組み込み関数の追加手順</a></h3>
+				
+				<h3><a href="https://web.archive.org/web/20140430071726/http://whileimautomaton.net/2008/09/15012330">Vim: Gauche interface</a></h3>
+				
+				<p>参考になります。</p>
+				
+				<h3><a href="https://web.archive.org/web/20140430071726/http://whileimautomaton.net/2008/09/08233755">VimM#2前後の行動記録</a></h3>
+				
+				<p>libcall祭り。</p>
+				
+				<h3><a href="https://web.archive.org/web/20140430071726/http://whileimautomaton.net/2008/02/14002600">Vimのダメなところ: Vim Scriptがアレ</a></h3>
+				
+				<p>まぁ、Vim Scriptがあれなのは今に始まったことでは……。</p>
+				
+				<h3><a href="https://web.archive.org/web/20140430071726/http://whileimautomaton.net/2008/02/12234700">Metaobject Protocol on Vim Script</a></h3>
+				
+				<p>いつかはこのレベルにいきたいですね。</p>
+				
+				<h3><a href="https://web.archive.org/web/20140430071726/http://whileimautomaton.net/2008/01/31002500">Vim: curryingもどき</a></h3>
+				
+				<p>うーむ。カリー化か……。</p>
+				
+				<h3><a href="https://web.archive.org/web/20140430071726/http://whileimautomaton.net/2008/01/vim-tabvar-func.patch">kanaさんのsettabvar()パッチ</a></h3>
+				
+				<h3><a href="https://web.archive.org/web/20140430071726/http://nicht.jottit.com/vim/hack/tabvar-func">kanaさんのVim Hack格闘記録</a></h3>
+				
+				<p>パッチ作りの参考になりそう。</p>
+				
+				<h3><a href="https://web.archive.org/web/20140430071726/http://www.k3.dion.ne.jp/~jod/vimhack.html">Vimプチハックのメモ</a></h3>
+				
+				<p>非常に有用な資料でしたが、サイト閉鎖。</p>
+				
+				<h3><a href="https://web.archive.org/web/20140430071726/http://www.kaoriya.net/">Kaoriya版のVim</a></h3>
+				
+				<h3><a href="https://web.archive.org/web/20140430071726/http://d.hatena.ne.jp/thinca/20090619/1245338963">kaoriya版特有の機能まとめ</a></h3>
+				
+				<p>こちらの機能も本家にマージできるものはやっておきたいですね。</p>
+				
+				<h3><a href="https://web.archive.org/web/20140430071726/http://github.com/tyru/syslib.vim">syslib.vim</a></h3>
+				
+				<p>Vimに足りないシステム操作系の関数を追加しよう、というプロジェクト。ただ、そこまでやるなら本体にマージした方がよさそうです。</p>
+				
+				<h3><a href="https://web.archive.org/web/20140430071726/http://www.geocities.co.jp/SiliconValley-Bay/9285/ELISP-JA/elisp_610.html">GNU Emacs Lispリファレンスマニュアル: Timers</a></h3>
+				
+				<p>Emacsのタイマーの仕様。Vimにもこのレベルは欲しいです。Emacs 24では、並列化のサポートが提案されているので、今後の行く末に注目しています。</p>
+				
+				<h3><a href="https://web.archive.org/web/20140430071726/http://vimdoc.sourceforge.net/htmldoc/todo.html">todo.txt</a></h3>
+				
+				<p>大量にあるVimのToDo List。なかなか魅力的な妄想的機能がそろっていますが、誰かが実装しなければ実現することはありません。</p>
+				
+				<h3><a href="https://web.archive.org/web/20140430071726/http://github.com/kana/vim">kanaさんのVimリポジトリ</a></h3>
+				
+				<p>独自のパッチが当てられています。本家にマージできそうならマージしたいですね。</p>
+				
+				<h3><a href="https://web.archive.org/web/20140430071726/http://github.com/b4winckler/vim">Vimのgitリポジトリ</a></h3>
+				
+				<p>Mercurialリポジトリのミラー。github上にあるので、forkするのに便利です。本家からもリンクが張られる予定。</p>
+				
+				<h3><a href="https://web.archive.org/web/20140430071726/http://d.hatena.ne.jp/thinca/20100710/1278708702">Windows で Vim をソースコードからビルドする</a></h3>
+				
+				<p>Windows上でVimをソースコードからビルドするのは大変骨が折れる作業です。そんなときは、thincaさんの秀逸なこの記事を参考にしましょう。これでWindowsでもReal Vim Hacksができます。</p>
+				
+				<address class="hack-author">Shougo</address>
+				<div class="wp_social_bookmarking_light"><div class="wsbl_hatena"><a href="https://web.archive.org/web/20140430071726/http://b.hatena.ne.jp/add?mode=confirm&amp;url=http%3A%2F%2Fvim-users.jp%2Freal-vim-hacks-project%2F&amp;title=Real%20Vim%20Hacks%20Project" title="このエントリーをはてなブックマークに追加" rel="nofollow" class="wp_social_bookmarking_light_a" target="_blank"><img src="https://web.archive.org/web/20140430071726im_/http://vim-users.jp/wp-content/plugins/wp-social-bookmarking-light/images/hatena.gif" alt="このエントリーをはてなブックマークに追加" title="このエントリーをはてなブックマークに追加" width="16" height="12" class="wp_social_bookmarking_light_img"/></a></div><div class="wsbl_hatena_users"><a href="https://web.archive.org/web/20140430071726/http://b.hatena.ne.jp/entry/http://vim-users.jp/real-vim-hacks-project/" title="はてなブックマーク - Real Vim Hacks Project" rel="nofollow" class="wp_social_bookmarking_light_a" target="_blank"><img src="https://web.archive.org/web/20140430071726im_/http://b.hatena.ne.jp/entry/image/http://vim-users.jp/real-vim-hacks-project/" alt="はてなブックマーク - Real Vim Hacks Project" title="はてなブックマーク - Real Vim Hacks Project" class="wp_social_bookmarking_light_img"/></a></div><div class="wsbl_facebook"><a href="https://web.archive.org/web/20140430071726/http://www.facebook.com/share.php?u=http%3A%2F%2Fvim-users.jp%2Freal-vim-hacks-project%2F&amp;t=Real%20Vim%20Hacks%20Project" title="Share on Facebook" rel="nofollow" class="wp_social_bookmarking_light_a" target="_blank"><img src="https://web.archive.org/web/20140430071726im_/http://vim-users.jp/wp-content/plugins/wp-social-bookmarking-light/images/facebook.png" alt="Share on Facebook" title="Share on Facebook" width="16" height="16" class="wp_social_bookmarking_light_img"/></a></div><div class="wsbl_google_buzz"><a href="https://web.archive.org/web/20140430071726/http://www.google.com/buzz/post?url=http%3A%2F%2Fvim-users.jp%2Freal-vim-hacks-project%2F&amp;message=Real%20Vim%20Hacks%20Project" title="Post to Google Buzz" rel="nofollow" class="wp_social_bookmarking_light_a" target="_blank"><img src="https://web.archive.org/web/20140430071726im_/http://vim-users.jp/wp-content/plugins/wp-social-bookmarking-light/images/google-buzz.png" alt="Post to Google Buzz" title="Post to Google Buzz" width="16" height="16" class="wp_social_bookmarking_light_img"/></a></div><div class="wsbl_google"><a href="https://web.archive.org/web/20140430071726/http://www.google.com/bookmarks/mark?op=add&amp;bkmk=http%3A%2F%2Fvim-users.jp%2Freal-vim-hacks-project%2F&amp;title=Real%20Vim%20Hacks%20Project" title="Bookmark this on Google Bookmarks" rel="nofollow" class="wp_social_bookmarking_light_a" target="_blank"><img src="https://web.archive.org/web/20140430071726im_/http://vim-users.jp/wp-content/plugins/wp-social-bookmarking-light/images/google.png" alt="Bookmark this on Google Bookmarks" title="Bookmark this on Google Bookmarks" width="16" height="16" class="wp_social_bookmarking_light_img"/></a></div><div class="wsbl_yahoo"><a href="https://web.archive.org/web/20140430071726/http://bookmarks.yahoo.co.jp/bookmarklet/showpopup?t=Real%20Vim%20Hacks%20Project&amp;u=http%3A%2F%2Fvim-users.jp%2Freal-vim-hacks-project%2F&amp;ei=UTF-8" title="Bookmark this on Yahoo Bookmark" rel="nofollow" class="wp_social_bookmarking_light_a" target="_blank"><img src="https://web.archive.org/web/20140430071726im_/http://vim-users.jp/wp-content/plugins/wp-social-bookmarking-light/images/yahoo.gif" alt="Bookmark this on Yahoo Bookmark" title="Bookmark this on Yahoo Bookmark" width="16" height="16" class="wp_social_bookmarking_light_img"/></a></div><div class="wsbl_livedoor"><a href="https://web.archive.org/web/20140430071726/http://clip.livedoor.com/redirect?link=http%3A%2F%2Fvim-users.jp%2Freal-vim-hacks-project%2F&amp;title=Vim-users.jp%20-%20Real%20Vim%20Hacks%20Project&amp;ie=utf-8" title="Bookmark this on Livedoor Clip" rel="nofollow" class="wp_social_bookmarking_light_a" target="_blank"><img src="https://web.archive.org/web/20140430071726im_/http://vim-users.jp/wp-content/plugins/wp-social-bookmarking-light/images/livedoor.gif" alt="Bookmark this on Livedoor Clip" title="Bookmark this on Livedoor Clip" width="16" height="16" class="wp_social_bookmarking_light_img"/></a></div><div class="wsbl_friendfeed"><a href="https://web.archive.org/web/20140430071726/http://friendfeed.com/?url=http%3A%2F%2Fvim-users.jp%2Freal-vim-hacks-project%2F&amp;title=Real%20Vim%20Hacks%20Project" title="Share on FriendFeed" rel="nofollow" class="wp_social_bookmarking_light_a" target="_blank"><img src="https://web.archive.org/web/20140430071726im_/http://vim-users.jp/wp-content/plugins/wp-social-bookmarking-light/images/friendfeed.png" alt="Share on FriendFeed" title="Share on FriendFeed" width="16" height="16" class="wp_social_bookmarking_light_img"/></a></div><div class="wsbl_tweetmeme"><script type="text/javascript">tweetmeme_style = 'compact';tweetmeme_url='https://web.archive.org/web/20140430071726/http://vim-users.jp/real-vim-hacks-project/';</script><script type="text/javascript" src="https://web.archive.org/web/20140430071726js_/http://tweetmeme.com/i/scripts/button.js"></script></div></div><br class="wp_social_bookmarking_light_clear"/><p style="text-align: center;"><script type="text/javascript"><!--
+				google_ad_client = "pub-4444897972419065";
+				/* vim-users.jp 個別エントリ用 728x90 */
+				google_ad_slot = "5341751190";
+				google_ad_width = 728;
+				google_ad_height = 90;
+				//-->
+				</script>
+				<script type="text/javascript" src="https://web.archive.org/web/20140430071726js_/http://pagead2.googlesyndication.com/pagead/show_ads.js">
+				</script></p>
+			</div>
+
+			<div class="section" id="comments">
+				<h2>Comments:<span class="count">0</span></h2>
+				<form class="post" method="post" action="https://web.archive.org/web/20140430071726/http://vim-users.jp/wp-comments-post.php" id="commentsForm" onsubmit="if (this.bakecookie[0].checked) rememberMe(this)">
+					<fieldset>
+					<legend>Comment Form</legend>
+					<div>
+						<input type="hidden" name="comment_post_ID" value="1658"/>
+					</div>
+					<dl id="name-email">
+						<dt><label for="comment-author">Name (必須)</label></dt>
+						<dd><input type="text" class="inputField" id="comment-author" name="author" size="20" value=""/></dd>
+						<dt><label for="comment-email">Mail address (非公開) (必須)</label></dt>
+						<dd><input type="text" class="inputField" size="20" id="comment-email" name="email" value=""/></dd>
+					</dl>
+					<dl>
+						<dt><label for="comment-url"><abbr title="Uniform Resource Identifer">URI</abbr></label></dt>
+						<dd><input type="text" class="inputField" id="comment-url" name="url" size="20" value="http://"/></dd>
+						<dt>Remember personal info</dt>
+						<dd><input type="radio" class="radio" id="bakecookie" name="bakecookie"/> <label for="bakecookie">Yes</label><input type="radio" class="radio" id="forget" name="bakecookie" onclick="forgetMe(this.form)" onkeypress="forgetMe(this.form)" value="Forget Info"/> <label for="forget">No</label></dd>
+						<dt><label for="comment-text">Comment<span>スタイル指定用の一部の <abbr title="Hyper Text Markup Language">HTML</abbr>タグが使用できます。</span></label></dt>
+						<dd><textarea id="comment-text" name="comment" rows="8" cols="50" onfocus="if (this.value == 'Add Your Comment') this.value = '';" onblur="if (this.value == '') this.value = 'Add Your Comment';">Add Your Comment</textarea></dd>
+					</dl>
+					<div class="action">
+						<input type="submit" class="submit post" id="comment-post" name="post" value="Post"/>
+					</div>
+					</fieldset>
+					<script type="text/javascript">
+						applyCookie('comments_form', '/', 'vim-users.jp');
+					</script>
+				</form>
+			</div><!-- end div#comment -->
+			<div class="section" id="trackback">
+				<h2>Trackbacks:<span class="count">0</span></h2>
+				<dl class="info">
+				<dt>Trackback URL for this entry</dt>
+				<dd class="URL">http://vim-users.jp/real-vim-hacks-project/trackback/</dd>
+				<dt>Listed below are links to weblogs that reference</dt>
+				<dd><a href="https://web.archive.org/web/20140430071726/http://vim-users.jp/real-vim-hacks-project/">Real Vim Hacks Project</a> from <a href="https://web.archive.org/web/20140430071726/http://vim-users.jp/">Vim-users.jp</a></dd>
+				</dl>
+			</div><!-- end div#trackback -->
+
+		</div><!--end entry-->
+		<p class="topicPath"><a href="https://web.archive.org/web/20140430071726/http://vim-users.jp/">Home</a> &gt; <span class="current">Real Vim Hacks Project</span></p>
+	</div><!-- end main-->
+
+<div id="utilities">
+	<dl class="navi">
+
+		<dt>Pages</dt>
+		<dd>
+			<ul class="pages">
+<li class="page_item page-item-2"><a href="https://web.archive.org/web/20140430071726/http://vim-users.jp/about/">このサイトについて</a></li>
+<li class="page_item page-item-34"><a href="https://web.archive.org/web/20140430071726/http://vim-users.jp/announce_vim_community/">Vimコミュニティ等を運営されている方々へ</a></li>
+<li class="page_item page-item-54"><a href="https://web.archive.org/web/20140430071726/http://vim-users.jp/mail_address/">vim-users.jp ドメインのメールアドレス発行について</a></li>
+<li class="page_item page-item-67"><a href="https://web.archive.org/web/20140430071726/http://vim-users.jp/vim-hacks-project/">Vim Hacks Project</a></li>
+<li class="page_item page-item-194"><a href="https://web.archive.org/web/20140430071726/http://vim-users.jp/irc-channel/">IRC channel(test)</a></li>
+<li class="page_item page-item-1084"><a href="https://web.archive.org/web/20140430071726/http://vim-users.jp/vim-users-jp-official-lingr-chat-room/">vim-users.jp official lingr chat room.</a></li>
+<li class="page_item page-item-1658 current_page_item"><a href="https://web.archive.org/web/20140430071726/http://vim-users.jp/real-vim-hacks-project/">Real Vim Hacks Project</a></li>
+<li class="page_item page-item-2636"><a href="https://web.archive.org/web/20140430071726/http://vim-users.jp/%e4%bf%ae%e6%ad%a3%e3%81%97%e3%81%be%e3%81%97%e3%81%9f/">修正しました</a></li>
+			</ul>
+		</dd>
+
+		<dt>Recent Entries</dt>
+		<dd>
+			<ul class="recentEntries">
+	<li><a href="https://web.archive.org/web/20140430071726/http://vim-users.jp/2013/03/vim-advent-calendar-2012-ujihisa-8/" title="Vim Advent Calendar 2012 ujihisa 8">Vim Advent Calendar 2012 ujihisa 8</a></li>
+	<li><a href="https://web.archive.org/web/20140430071726/http://vim-users.jp/2013/03/vim-advent-calendar-2012-ujihisa-7/" title="Vim Advent Calendar 2012 ujihisa 7">Vim Advent Calendar 2012 ujihisa 7</a></li>
+	<li><a href="https://web.archive.org/web/20140430071726/http://vim-users.jp/2013/03/wanted-vim-advent-calendar-2012/" title="Vim Advent Calendar 2012は執筆者を募集しています">Vim Advent Calendar 2012は執筆者を募集しています</a></li>
+	<li><a href="https://web.archive.org/web/20140430071726/http://vim-users.jp/2013/03/vim-advent-calendar-2012-ujihisa-6/" title="Vim Advent Calendar 2012 ujihisa 6">Vim Advent Calendar 2012 ujihisa 6</a></li>
+	<li><a href="https://web.archive.org/web/20140430071726/http://vim-users.jp/2013/03/vim-advent-calendar-2012-ujihisa-5/" title="Vim Advent Calendar 2012 ujihisa 5">Vim Advent Calendar 2012 ujihisa 5</a></li>
+			</ul>
+		</dd>
+		<dt>Categories</dt>
+		<dd>
+			<ul class="category">
+	<li class="cat-item cat-item-19"><a href="https://web.archive.org/web/20140430071726/http://vim-users.jp/category/vim-hacks/" title="Vim Hacks に含まれる投稿をすべて表示">Vim Hacks</a>
+</li>
+	<li class="cat-item cat-item-16"><a href="https://web.archive.org/web/20140430071726/http://vim-users.jp/category/vimscript/" title="Vim script に含まれる投稿をすべて表示">Vim script</a>
+</li>
+	<li class="cat-item cat-item-1"><a href="https://web.archive.org/web/20140430071726/http://vim-users.jp/category/etc/" title="その他 に含まれる投稿をすべて表示">その他</a>
+</li>
+	<li class="cat-item cat-item-5"><a href="https://web.archive.org/web/20140430071726/http://vim-users.jp/category/event/" title="イベント に含まれる投稿をすべて表示">イベント</a>
+</li>
+	<li class="cat-item cat-item-6"><a href="https://web.archive.org/web/20140430071726/http://vim-users.jp/category/announce/" title="告知 に含まれる投稿をすべて表示">告知</a>
+</li>
+			</ul>
+		</dd>
+
+		<dt>Archives</dt>
+		<dd>
+			<ul class="archive">
+	<li><a href="https://web.archive.org/web/20140430071726/http://vim-users.jp/2013/03/" title="5" rel="nofollow">2013-03</a></li>
+	<li><a href="https://web.archive.org/web/20140430071726/http://vim-users.jp/2013/02/" title="2" rel="nofollow">2013-02</a></li>
+	<li><a href="https://web.archive.org/web/20140430071726/http://vim-users.jp/2013/01/" title="1" rel="nofollow">2013-01</a></li>
+	<li><a href="https://web.archive.org/web/20140430071726/http://vim-users.jp/2012/12/" title="2" rel="nofollow">2012-12</a></li>
+	<li><a href="https://web.archive.org/web/20140430071726/http://vim-users.jp/2012/11/" title="2" rel="nofollow">2012-11</a></li>
+	<li><a href="https://web.archive.org/web/20140430071726/http://vim-users.jp/2012/10/" title="1" rel="nofollow">2012-10</a></li>
+	<li><a href="https://web.archive.org/web/20140430071726/http://vim-users.jp/2012/09/" title="1" rel="nofollow">2012-09</a></li>
+	<li><a href="https://web.archive.org/web/20140430071726/http://vim-users.jp/2012/02/" title="1" rel="nofollow">2012-02</a></li>
+	<li><a href="https://web.archive.org/web/20140430071726/http://vim-users.jp/2012/01/" title="1" rel="nofollow">2012-01</a></li>
+	<li><a href="https://web.archive.org/web/20140430071726/http://vim-users.jp/2011/12/" title="2" rel="nofollow">2011-12</a></li>
+	<li><a href="https://web.archive.org/web/20140430071726/http://vim-users.jp/2011/11/" title="1" rel="nofollow">2011-11</a></li>
+	<li><a href="https://web.archive.org/web/20140430071726/http://vim-users.jp/2011/10/" title="6" rel="nofollow">2011-10</a></li>
+	<li><a href="https://web.archive.org/web/20140430071726/http://vim-users.jp/2011/09/" title="8" rel="nofollow">2011-09</a></li>
+	<li><a href="https://web.archive.org/web/20140430071726/http://vim-users.jp/2011/08/" title="4" rel="nofollow">2011-08</a></li>
+	<li><a href="https://web.archive.org/web/20140430071726/http://vim-users.jp/2011/07/" title="4" rel="nofollow">2011-07</a></li>
+	<li><a href="https://web.archive.org/web/20140430071726/http://vim-users.jp/2011/06/" title="4" rel="nofollow">2011-06</a></li>
+	<li><a href="https://web.archive.org/web/20140430071726/http://vim-users.jp/2011/05/" title="6" rel="nofollow">2011-05</a></li>
+	<li><a href="https://web.archive.org/web/20140430071726/http://vim-users.jp/2011/04/" title="6" rel="nofollow">2011-04</a></li>
+	<li><a href="https://web.archive.org/web/20140430071726/http://vim-users.jp/2011/03/" title="7" rel="nofollow">2011-03</a></li>
+	<li><a href="https://web.archive.org/web/20140430071726/http://vim-users.jp/2011/02/" title="5" rel="nofollow">2011-02</a></li>
+	<li><a href="https://web.archive.org/web/20140430071726/http://vim-users.jp/2011/01/" title="7" rel="nofollow">2011-01</a></li>
+	<li><a href="https://web.archive.org/web/20140430071726/http://vim-users.jp/2010/12/" title="6" rel="nofollow">2010-12</a></li>
+	<li><a href="https://web.archive.org/web/20140430071726/http://vim-users.jp/2010/11/" title="6" rel="nofollow">2010-11</a></li>
+	<li><a href="https://web.archive.org/web/20140430071726/http://vim-users.jp/2010/10/" title="6" rel="nofollow">2010-10</a></li>
+	<li><a href="https://web.archive.org/web/20140430071726/http://vim-users.jp/2010/09/" title="4" rel="nofollow">2010-09</a></li>
+	<li><a href="https://web.archive.org/web/20140430071726/http://vim-users.jp/2010/08/" title="9" rel="nofollow">2010-08</a></li>
+	<li><a href="https://web.archive.org/web/20140430071726/http://vim-users.jp/2010/07/" title="7" rel="nofollow">2010-07</a></li>
+	<li><a href="https://web.archive.org/web/20140430071726/http://vim-users.jp/2010/06/" title="8" rel="nofollow">2010-06</a></li>
+	<li><a href="https://web.archive.org/web/20140430071726/http://vim-users.jp/2010/05/" title="5" rel="nofollow">2010-05</a></li>
+	<li><a href="https://web.archive.org/web/20140430071726/http://vim-users.jp/2010/04/" title="8" rel="nofollow">2010-04</a></li>
+	<li><a href="https://web.archive.org/web/20140430071726/http://vim-users.jp/2010/03/" title="8" rel="nofollow">2010-03</a></li>
+	<li><a href="https://web.archive.org/web/20140430071726/http://vim-users.jp/2010/02/" title="7" rel="nofollow">2010-02</a></li>
+	<li><a href="https://web.archive.org/web/20140430071726/http://vim-users.jp/2010/01/" title="13" rel="nofollow">2010-01</a></li>
+	<li><a href="https://web.archive.org/web/20140430071726/http://vim-users.jp/2009/12/" title="9" rel="nofollow">2009-12</a></li>
+	<li><a href="https://web.archive.org/web/20140430071726/http://vim-users.jp/2009/11/" title="10" rel="nofollow">2009-11</a></li>
+	<li><a href="https://web.archive.org/web/20140430071726/http://vim-users.jp/2009/10/" title="15" rel="nofollow">2009-10</a></li>
+	<li><a href="https://web.archive.org/web/20140430071726/http://vim-users.jp/2009/09/" title="16" rel="nofollow">2009-09</a></li>
+	<li><a href="https://web.archive.org/web/20140430071726/http://vim-users.jp/2009/08/" title="17" rel="nofollow">2009-08</a></li>
+	<li><a href="https://web.archive.org/web/20140430071726/http://vim-users.jp/2009/07/" title="16" rel="nofollow">2009-07</a></li>
+	<li><a href="https://web.archive.org/web/20140430071726/http://vim-users.jp/2009/06/" title="19" rel="nofollow">2009-06</a></li>
+	<li><a href="https://web.archive.org/web/20140430071726/http://vim-users.jp/2009/05/" title="17" rel="nofollow">2009-05</a></li>
+	<li><a href="https://web.archive.org/web/20140430071726/http://vim-users.jp/2009/04/" title="4" rel="nofollow">2009-04</a></li>
+	<li><a href="https://web.archive.org/web/20140430071726/http://vim-users.jp/2009/03/" title="1" rel="nofollow">2009-03</a></li>
+	<li><a href="https://web.archive.org/web/20140430071726/http://vim-users.jp/2008/11/" title="1" rel="nofollow">2008-11</a></li>
+	<li><a href="https://web.archive.org/web/20140430071726/http://vim-users.jp/2008/10/" title="2" rel="nofollow">2008-10</a></li>
+	<li><a href="https://web.archive.org/web/20140430071726/http://vim-users.jp/2008/09/" title="1" rel="nofollow">2008-09</a></li>
+	<li><a href="https://web.archive.org/web/20140430071726/http://vim-users.jp/2008/08/" title="4" rel="nofollow">2008-08</a></li>
+			</ul>
+		</dd>
+		<dt>Tag Cloud</dt>
+		<dd>
+<ul class="tagCloud">
+	<li class="level6"><a href="https://web.archive.org/web/20140430071726/http://vim-users.jp/tag/%e3%82%a4%e3%83%99%e3%83%b3%e3%83%88/" title="11 Entries" rel="tag">イベント</a></li>
+	<li class="level6"><a href="https://web.archive.org/web/20140430071726/http://vim-users.jp/tag/link/" title="1 Entries" rel="tag">リンク</a></li>
+	<li class="level6"><a href="https://web.archive.org/web/20140430071726/http://vim-users.jp/tag/%e5%ad%90%e3%83%8d%e3%82%bf/" title="1 Entries" rel="tag">子ネタ</a></li>
+	<li class="level6"><a href="https://web.archive.org/web/20140430071726/http://vim-users.jp/tag/announcement/" title="3 Entries" rel="tag">announcement</a></li>
+	<li class="level6"><a href="https://web.archive.org/web/20140430071726/http://vim-users.jp/tag/book/" title="2 Entries" rel="tag">book</a></li>
+	<li class="level6"><a href="https://web.archive.org/web/20140430071726/http://vim-users.jp/tag/iex/" title="1 Entries" rel="tag">iex</a></li>
+	<li class="level6"><a href="https://web.archive.org/web/20140430071726/http://vim-users.jp/tag/jishin/" title="1 Entries" rel="tag">jishin</a></li>
+	<li class="level4"><a href="https://web.archive.org/web/20140430071726/http://vim-users.jp/tag/lv1/" title="98 Entries" rel="tag">lv1</a></li>
+	<li class="level4"><a href="https://web.archive.org/web/20140430071726/http://vim-users.jp/tag/lv2/" title="113 Entries" rel="tag">lv2</a></li>
+	<li class="level6"><a href="https://web.archive.org/web/20140430071726/http://vim-users.jp/tag/lv3/" title="29 Entries" rel="tag">lv3</a></li>
+	<li class="level6"><a href="https://web.archive.org/web/20140430071726/http://vim-users.jp/tag/neobundle-vim/" title="1 Entries" rel="tag">neobundle.vim</a></li>
+	<li class="level6"><a href="https://web.archive.org/web/20140430071726/http://vim-users.jp/tag/neocomplcache/" title="13 Entries" rel="tag">neocomplcache</a></li>
+	<li class="level6"><a href="https://web.archive.org/web/20140430071726/http://vim-users.jp/tag/plugin/" title="8 Entries" rel="tag">plugin</a></li>
+	<li class="level6"><a href="https://web.archive.org/web/20140430071726/http://vim-users.jp/tag/python/" title="2 Entries" rel="tag">Python</a></li>
+	<li class="level6"><a href="https://web.archive.org/web/20140430071726/http://vim-users.jp/tag/quickrun/" title="2 Entries" rel="tag">quickrun</a></li>
+	<li class="level6"><a href="https://web.archive.org/web/20140430071726/http://vim-users.jp/tag/remote_expr/" title="1 Entries" rel="tag">remote_expr</a></li>
+	<li class="level6"><a href="https://web.archive.org/web/20140430071726/http://vim-users.jp/tag/ujihisa/" title="5 Entries" rel="tag">ujihisa</a></li>
+	<li class="level6"><a href="https://web.archive.org/web/20140430071726/http://vim-users.jp/tag/unite/" title="3 Entries" rel="tag">unite</a></li>
+	<li class="level6"><a href="https://web.archive.org/web/20140430071726/http://vim-users.jp/tag/vim/" title="1 Entries" rel="tag">vim</a></li>
+	<li class="level6"><a href="https://web.archive.org/web/20140430071726/http://vim-users.jp/tag/vim%e3%83%86%e3%82%af%e3%83%8b%e3%83%83%e3%82%af%e3%83%90%e3%82%a4%e3%83%96%e3%83%ab/" title="1 Entries" rel="tag">Vimテクニックバイブル</a></li>
+	<li class="level6"><a href="https://web.archive.org/web/20140430071726/http://vim-users.jp/tag/vim-advent-calendar/" title="1 Entries" rel="tag">Vim&nbsp;Advent&nbsp;Calendar</a></li>
+	<li class="level1"><a href="https://web.archive.org/web/20140430071726/http://vim-users.jp/tag/vim-hacks/" title="232 Entries" rel="tag">Vim&nbsp;Hacks</a></li>
+	<li class="level6"><a href="https://web.archive.org/web/20140430071726/http://vim-users.jp/tag/vimm/" title="7 Entries" rel="tag">VimM</a></li>
+	<li class="level6"><a href="https://web.archive.org/web/20140430071726/http://vim-users.jp/tag/vimproc/" title="3 Entries" rel="tag">vimproc</a></li>
+	<li class="level6"><a href="https://web.archive.org/web/20140430071726/http://vim-users.jp/tag/vimscript/" title="5 Entries" rel="tag">Vim&nbsp;script</a></li>
+	<li class="level6"><a href="https://web.archive.org/web/20140430071726/http://vim-users.jp/tag/vimshell/" title="4 Entries" rel="tag">vimshell</a></li>
+	<li class="level6"><a href="https://web.archive.org/web/20140430071726/http://vim-users.jp/tag/vundle/" title="1 Entries" rel="tag">Vundle</a></li>
+	<li class="level6"><a href="https://web.archive.org/web/20140430071726/http://vim-users.jp/tag/vws/" title="1 Entries" rel="tag">vws</a></li>
+	<li class="level6"><a href="https://web.archive.org/web/20140430071726/http://vim-users.jp/tag/zsh/" title="1 Entries" rel="tag">zsh</a></li>
+</ul>
+		</dd>
+	</dl><!--end navi-->
+	<dl class="others">
+		<dt>Search</dt>
+		<dd>
+			<form method="get" action="https://web.archive.org/web/20140430071726/http://vim-users.jp/">
+				<fieldset>
+					<legend><label for="searchKeyword">Vim-users.jp内の検索</label></legend>
+					<div>
+						<input type="text" class="inputField" id="searchKeyword" name="s" size="10" onfocus="if (this.value == 'Keyword(s)') this.value = '';" onblur="if (this.value == '') this.value = 'Keyword(s)';" value="Keyword(s)"/>
+						<input type="submit" class="submit" id="submit" value="Search"/>
+					</div>
+				</fieldset>
+			</form>
+		</dd>
+		<dt>Feeds</dt>
+		<dd>
+			<ul class="feeds">
+				<li class="rss"><a href="https://web.archive.org/web/20140430071726/http://vim-users.jp/feed/">All Entries(RSS2.0)</a></li>
+				<li class="atom"><a href="https://web.archive.org/web/20140430071726/http://vim-users.jp/feed/atom/">All Entries(Atom)</a></li>
+				<li class="rss"><a href="https://web.archive.org/web/20140430071726/http://vim-users.jp/comments/feed/">All Comments(RSS2.0)</a></li>
+			</ul>
+		</dd>
+		<dt>Links</dt>
+	    <li id="linkcat-2" class="linkcat">公式
+	<ul class="xoxo blogroll">
+<li><a href="https://web.archive.org/web/20140430071726/http://github.com/ujihisa/mdv" title="Extended Markdown for Vim Hacks">mdv</a></li>
+<li><a href="https://web.archive.org/web/20140430071726/http://ujihisa.blogspot.com/2009/06/draft-extended-markdown-for-vim-hacks.html">mdvの解説 (英語)</a></li>
+<li><a href="https://web.archive.org/web/20140430071726/http://ujihisa.blogspot.com/">Standards</a></li>
+<li><a href="https://web.archive.org/web/20140430071726/http://vim-jp.org/vimdoc-ja/">Vim日本語ドキュメント (help)</a></li>
+<li><a href="https://web.archive.org/web/20140430071726/http://www.vim.org/">welcome home: vim online</a></li>
+
+	</ul>
+</li>
+<li id="linkcat-11" class="linkcat">勉強会
+	<ul class="xoxo blogroll">
+<li><a href="https://web.archive.org/web/20140430071726/http://wiki.livedoor.jp/biowithit/">VimM (Vim Movement)</a></li>
+
+	</ul>
+</li>
+<li id="linkcat-12" class="linkcat">情報
+	<ul class="xoxo blogroll">
+<li><a href="https://web.archive.org/web/20140430071726/http://vimwiki.net/">VimWiki</a></li>
+<li><a href="https://web.archive.org/web/20140430071726/http://nanasi.jp/">名無しのvim使い</a></li>
+<li><a href="https://web.archive.org/web/20140430071726/http://vim-users-jp.tumblr.com/" target="_blank">名言集</a></li>
+
+	</ul>
+</li>
+<li id="linkcat-13" class="linkcat">コミュニティ
+	<ul class="xoxo blogroll">
+<li><a href="https://web.archive.org/web/20140430071726/http://lingr.com/room/vim">vim-users.jp (at Lingr)</a></li>
+<li><a href="https://web.archive.org/web/20140430071726/http://vim.g.hatena.ne.jp/">vimグループ</a></li>
+<li><a href="https://web.archive.org/web/20140430071726/http://vim-users-jp.tumblr.com/" target="_blank">名言集</a></li>
+
+	</ul>
+</li>
+		<dd>
+      <!--
+			<ul>
+        <li><a href="http://www.vim.org/" title="welcome home: vim online" >welcome home: vim online</a></li>
+        <li><a href="http://www.kaoriya.net/" title="KaoriYa.net" >KaoriYa.net</a></li>
+        <li><a href="http://ujihisa.nowa.jp/tag/vim" title="rubyneko" >rubyneko</a></li>
+        <li><a href="http://nanasi.jp/" title="名無しのvim使い" >名無しのvim使い</a></li>
+        <li><a href="http://vimwiki.net" title="VimWiki" >VimWiki</a></li>
+        <li><a href="http://wiki.livedoor.jp/biowithit/" title="VimM (Vim Movement)">VimM (Vim Movement)</a></li>
+        <li><a href="http://nagasaki.vim-users.jp/" title="nagasaki.vim">nagasaki.vim -Vim勉強会@長崎</a></li>
+        <li><a href="http://kansai.vim-users.jp/" title="nagasaki.vim">Vim勉強会@関西</a></li>
+        <li><a href="http://www.lingr.com/room/vim-users.jp" title="vim-users.jp (at Lingr)">vim-users.jp (at Lingr)</a></li>
+			</ul>
+      -->
+		</dd>
+		<dt>Meta</dt>
+		<dd>
+			<ul class="meta">
+				<li><a href="https://web.archive.org/web/20140430071726/http://validator.w3.org/check/referer" title="This page validates as XHTML 1.0 Strict" rel="nofollow">Valid <abbr title="eXtensible HyperText Markup Language">XHTML</abbr></a></li>
+				<li><a href="https://web.archive.org/web/20140430071726/http://vim-users.jp/wp-login.php">ログイン</a></li>
+      </ul>
+    </dd>
+    <dt>Etc</dt>
+    <dd>
+      <div>
+        <a href="https://web.archive.org/web/20140430071726/http://creativecommons.org/licenses/by/2.1/jp/"><img alt="Creative Commons License" src="https://web.archive.org/web/20140430071726im_/http://i.creativecommons.org/l/by/2.1/jp/88x31.png" border="0"></a><br>
+        This blog is licensed under a <a href="https://web.archive.org/web/20140430071726/http://creativecommons.org/licenses/by/2.1/jp/">Creative Commons License</a>.
+      </div>
+    </dd>
+	</dl><!--end others-->
+</div><!--end utilities-->
+
+	<p class="return"><a href="#header">Return to page top</a></p>
+</div><!--end content-->
+
+<div id="footer">
+	<ul class="support">
+		<li>Powered by <a href="https://web.archive.org/web/20140430071726/http://wordpress.org/">WordPress 3.3.1</a></li>
+		<li class="template"><a href="https://web.archive.org/web/20140430071726/http://vicuna.jp/">vicuna CMS</a> - <a href="https://web.archive.org/web/20140430071726/http://wp.vicuna.jp/" title="ver.1.5.8">WordPress Theme</a></li>
+	</ul>
+	<address>This blog is licensed under a <a href="https://web.archive.org/web/20140430071726/http://creativecommons.org/licenses/by/2.1/jp/">Creative Commons License</a>.</address>
+</div>
+<script class="javascript" src="https://web.archive.org/web/20140430071726js_/http://vim-users.jp/wp-content/plugins/google-syntax-highlighter/Scripts/shCore.js"></script>
+<script class="javascript" src="https://web.archive.org/web/20140430071726js_/http://vim-users.jp/wp-content/plugins/google-syntax-highlighter/Scripts/shBrushCSharp.js"></script>
+<script class="javascript" src="https://web.archive.org/web/20140430071726js_/http://vim-users.jp/wp-content/plugins/google-syntax-highlighter/Scripts/shBrushPhp.js"></script>
+<script class="javascript" src="https://web.archive.org/web/20140430071726js_/http://vim-users.jp/wp-content/plugins/google-syntax-highlighter/Scripts/shBrushJScript.js"></script>
+<script class="javascript" src="https://web.archive.org/web/20140430071726js_/http://vim-users.jp/wp-content/plugins/google-syntax-highlighter/Scripts/shBrushJava.js"></script>
+<script class="javascript" src="https://web.archive.org/web/20140430071726js_/http://vim-users.jp/wp-content/plugins/google-syntax-highlighter/Scripts/shBrushVb.js"></script>
+<script class="javascript" src="https://web.archive.org/web/20140430071726js_/http://vim-users.jp/wp-content/plugins/google-syntax-highlighter/Scripts/shBrushSql.js"></script>
+<script class="javascript" src="https://web.archive.org/web/20140430071726js_/http://vim-users.jp/wp-content/plugins/google-syntax-highlighter/Scripts/shBrushXml.js"></script>
+<script class="javascript" src="https://web.archive.org/web/20140430071726js_/http://vim-users.jp/wp-content/plugins/google-syntax-highlighter/Scripts/shBrushDelphi.js"></script>
+<script class="javascript" src="https://web.archive.org/web/20140430071726js_/http://vim-users.jp/wp-content/plugins/google-syntax-highlighter/Scripts/shBrushPython.js"></script>
+<script class="javascript" src="https://web.archive.org/web/20140430071726js_/http://vim-users.jp/wp-content/plugins/google-syntax-highlighter/Scripts/shBrushRuby.js"></script>
+<script class="javascript" src="https://web.archive.org/web/20140430071726js_/http://vim-users.jp/wp-content/plugins/google-syntax-highlighter/Scripts/shBrushCss.js"></script>
+<script class="javascript" src="https://web.archive.org/web/20140430071726js_/http://vim-users.jp/wp-content/plugins/google-syntax-highlighter/Scripts/shBrushCpp.js"></script>
+<script class="javascript">
+dp.SyntaxHighlighter.ClipboardSwf = 'https://web.archive.org/web/20140430071726/http://vim-users.jp/wp-content/plugins/google-syntax-highlighter/Scripts/clipboard.swf';
+dp.SyntaxHighlighter.HighlightAll('code');
+</script>
+<!-- BEGIN: WP Social Bookmarking Light -->
+<!-- END: WP Social Bookmarking Light -->
+</body>
+</html>
+<!--
+     FILE ARCHIVED ON 07:17:26 Apr 30, 2014 AND RETRIEVED FROM THE
+     INTERNET ARCHIVE ON 06:21:42 Jan 28, 2019.
+     JAVASCRIPT APPENDED BY WAYBACK MACHINE, COPYRIGHT INTERNET ARCHIVE.
+
+     ALL OTHER CONTENT MAY ALSO BE PROTECTED BY COPYRIGHT (17 U.S.C.
+     SECTION 108(a)(3)).
+-->
+<!--
+playback timings (ms):
+  LoadShardBlock: 138.774 (3)
+  esindex: 0.005
+  captures_list: 156.422
+  CDXLines.iter: 12.811 (3)
+  PetaboxLoader3.datanode: 156.509 (4)
+  exclusion.robots: 0.125
+  exclusion.robots.policy: 0.115
+  RedisCDXSource: 1.54
+  PetaboxLoader3.resolve: 17.118
+  load_resource: 42.284
+-->

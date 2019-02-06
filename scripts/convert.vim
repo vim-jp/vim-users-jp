@@ -82,6 +82,7 @@ let s:urlmap = {
 \  '/vim-users-jp/2011/04/hack211/': '/vim-users-jp/2011/04/06/Hack-211.html',
 \  '/vim-users-jp/2009/05/hack5/': '/vim-users-jp/2009/05/03/Hack-5.html',
 \  '/vim-users-jp/2009/03/mtl_vim/': '/vim-users-jp/2009/03/30/MTL-Vim.html',
+\  '/vim-users-jp/real-vim-hacks-project/': '/vim-users-jp/real-vim-hacks-project.html',
 \}
 
 let s:fmap = {}
@@ -343,7 +344,17 @@ function! s:clean()
   endfor
 endfunction
 
+function! s:patch()
+  let patches = [
+  \ 'https://github.com/vim-jp/vim-users-jp/commit/3ca5b3a054e24b383ed7b4d300619084879a3746.diff'
+  \]
+  for patch in patches
+    call system(printf('curl -s "%s" | patch -p1', patch))
+  endfor
+endfunction
+
 call s:scan()
+call s:patch()
 
 function! s:sortcmp(lhs, rhs)
   return (0+a:lhs["hack"]) > (0+a:rhs["hack"])
